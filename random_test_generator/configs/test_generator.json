@@ -1,0 +1,30 @@
+ 
+{
+    "GENERAL": {
+      "CHANNEL"             : 5,
+      "DEPTH"               : 5,
+      "WIDTH"               : 32,
+      "DESIGN_NAME"         : "reg_mem_5_11_2",
+      "config_tcl"          : false
+    },
+    "BENCHMARKS": {
+        "encoder": {
+            "design_top":"encoder"
+        },
+        "invertion": {
+            "design_top":"invertion"
+        },
+        "large_adder": {
+            "design_top":"large_adder"
+        },
+        "large_mux": {
+            "design_top":"large_mux"
+        },
+        "memory_cntrl": {
+            "design_top":"memory_cntrl"
+        },
+        "register": {
+            "design_top":"register"
+        }
+    }
+}

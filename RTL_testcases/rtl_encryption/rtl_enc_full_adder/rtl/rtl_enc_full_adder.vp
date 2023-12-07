@@ -1,0 +1,30 @@
+`pragma protect begin_protected
+`pragma protect author = "Verific"
+`pragma protect author_info = "Verific Corporation"
+`pragma protect key_method = "rsa"
+`pragma protect data_method = "aes128-cbc"
+`pragma protect key_keyowner = "Verific"
+`pragma protect key_keyname = "key1"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+IE+JHyZkwUiu1MJK4ZH1/CI/+M8DZfv7umfmKsFlTfryQGnUfIO+42ui2O9VQptP
+uqHCe+ivwZogW2/gNCAy+C2jglFqO9tnuLHi34chDWvJoLqEiakCGiOu97969FiE
+unk7AEeKkvt6HkzoD9XZDuJLOJTACjs/X9Brnmhatcw=
+`pragma protect version = 1
+`pragma protect encrypt_agent = "VCS"
+`pragma protect encrypt_agent_info = "S-2021.09-SP2 Build Date Feb 24 2022 20:42:21"
+`pragma protect key_keyowner = "Synopsys"
+`pragma protect key_keyname = "SNPS-VCS-RSA-2"
+`pragma protect key_method = "rsa"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+NHQ+qOIoltkhs55PwU6+g7W59DwQXFbozwvoay75mlT6iPPkqxFhmPQdXLqMNWRc
+Hgs6oSXwyPTEogmwCfgL8E1HI/qccR8CxhsI+ymXHYFaDOGEyf9IICmDg5JO8Jsu
+LNyvQ/eKzpFKLydTmE9GFK2+nFE12cm9eySYQGMxTNw=
+
+`pragma protect data_method="aes128-cbc"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 192)
+`pragma protect data_block
+adZ3bhMjiYoszIl8qAFwDBYT/MLtxUH9b5VlkPZk+Hay/oFJ8brMKzk+QMempcbz
+lOAO8PfVPjmgrDgQlJ4ZrWWJxc30GXp4i2dFFoyyyNRiLLmuAaXQk/jWPqBHWtEt
+gvNbKHaNE8I5onczQkLfeFCCKvHldXfzhiS63qZ2gDKQ9InsdMtwa9v/q+rcqesO
+sex+pLy2LmNZsIA0I3+tBRlZOfNYpmh+Ax2Gp493SY4cxKnRbVUOpQC8MagxrjDZ
+`pragma protect end_protected

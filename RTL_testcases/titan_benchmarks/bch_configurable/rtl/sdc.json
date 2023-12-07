@@ -1,0 +1,140 @@
+{
+	"openfpga": {
+		"default": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	},
+	"raptor": {
+		"default": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	},
+	"vivado": {
+		"default": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	},
+	"quartus": {
+		"default": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	},
+	"diamond": {
+		"default": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	},
+	"General": {
+		"default": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"area": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		},
+		"performance": {
+			"I_clk": {
+				"frequency":null,
+				"input_delay":null,
+				"output_delay":null
+			}
+		}
+	}
+}

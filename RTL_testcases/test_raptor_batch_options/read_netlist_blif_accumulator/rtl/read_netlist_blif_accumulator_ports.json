@@ -1,0 +1,312 @@
+[
+  {
+	"ports": [
+	  {
+		"direction": "input",
+		"name": "clk",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "reset",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "subtract_i",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[19]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[18]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[17]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[16]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[15]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[14]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[13]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[12]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[11]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[10]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[9]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[8]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[7]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[6]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[5]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[4]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[3]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[2]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[1]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "input",
+		"name": "A[0]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[37]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[36]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[35]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[34]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[33]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[32]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[31]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[30]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[29]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[28]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[27]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[26]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[25]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[24]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[23]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[22]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[21]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[20]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[19]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[18]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[17]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[16]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[15]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[14]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[13]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[12]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[11]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[10]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[9]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[8]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[7]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[6]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[5]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[4]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[3]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[2]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[1]",
+		"type": "WIRE"
+	  },
+	  {
+		"direction": "output",
+		"name": "P[0]",
+		"type": "WIRE"
+	  }
+	],
+	"topModule": "read_netlist_blif_accumulator"
+  }
+]

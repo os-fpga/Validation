@@ -1,0 +1,40 @@
+`pragma protect begin_protected
+`pragma protect author = "Verific"
+`pragma protect author_info = "Verific Corporation"
+`pragma protect key_method = "rsa"
+`pragma protect data_method = "aes128-cbc"
+`pragma protect key_keyowner = "Verific"
+`pragma protect key_keyname = "key1"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+HTG/9V/42ADFwZ6xqQpjXLt5aPRnAFhl0tAAAC6FKhC5eJ7mDNViAcim+OesYh/z
+r77qcLE7W5CkeVEkVVYO015OsY9rA35PdN7EitMGBMiQXkmfBOqEOP0iuQiVfN7f
+6JPGhHnLEs1iroFxgYNUweJYBB8qVhBRC4jvSSr56WU=
+`pragma protect version = 1
+`pragma protect encrypt_agent = "VCS"
+`pragma protect encrypt_agent_info = "S-2021.09-SP2 Build Date Feb 24 2022 20:42:21"
+`pragma protect key_keyowner = "Synopsys"
+`pragma protect key_keyname = "SNPS-VCS-RSA-2"
+`pragma protect key_method = "rsa"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+dFddlDboAse+2jALEMoDaoX+w5lVQQ+Ec4DHy31iFbCQ7saKMY2iEAYwCYA6/OVV
+vz/mk8HfkvZLA/7CFhs02A/KoIRDtY89wKGMkjjIxaATLPbr1DbKwCgOfxqJtpUf
+FRwwVWnm5kCWYGTVojRgoRRpNrsNyaCHG+uyuwx26fs=
+
+`pragma protect data_method="aes128-cbc"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 672)
+`pragma protect data_block
+adZ3bhMjiYoszIl8qAFwDFzjXPWIcsx8Ku3Q4bUILfcqNsQj8XRxV8xHyrOOoEqm
+5zYeQ3li/gPzevv7diOrsLGqX7O7+mo1dOOdPmr+QEbrSAvlfgOvUSg4xbCBs+Mb
++gvWfB1Kp1jRPMIvs+a6tQwwONb1QtpQp4hJsjQpCPHjjlo89VeKLJoGINRSeA2p
+1gYGFN85Yh46PrCLvO7Q+VNkm5IC1fBiepw35OzGxv9aCxh1qHQaV+J1iGdRxHx9
+k8DtvhdHhnGPvoq40Fh7c+2oiEHjeX4Yo9pTioBG4tOpyfsVuBHpPQV9nBFSo2K6
+6SSBJXOytHxCr1Auoxzp15PsFhN/yMZo8nyG8WZm4gep7g2oe6MISdQtCeEl4Ei5
+glbCS3eSeFoRPplXfjFvWZ5ogz1E5RPvgDU4iBUdfYsj8AmDGlSshYun85pnVl6v
+S8ySqfisDE1YJCjwx12wXjaipf5EMR7TTgvedD+I/Ny9LHCgyh5JoQAdGtRib/iT
+9xBHeiV5k68XZ9D0O8Rx6HX0LZd95P2nqaZhrXC21+cZ1M8JjfKTop9y84rFfRYB
+aYcAfR0N+ki4qOUbgBEQi2P9/viDAt4w0T1gFWxiT3FheUKFBABiXg7O9pApWWXY
+dagsjrqTuD/6cOv51tfIKA3zZi2kA2RBcYAMqQOabVcrf8m5qUx3isyNfNkLYCOQ
+uoPAK49epEyFxIJZfqmxeDoWKw4RFT7FHJvU9QkQv1ZgrUVopnq59grkFNs9+2Lw
+DHH96+y0G2yQFBC84TLpckeaoZEbnG4uwNwdkQVTd0I9g9di8mKYTiwW7o5BD6yD
+MKmHusEfHWjDZXA8VuJA9MsNifXoaH8w6GdL9J9HkWbQFP2A8l/oUEdCcSr8QfxJ
+`pragma protect end_protected

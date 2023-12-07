@@ -1,0 +1,21 @@
+set_pin_loc clk HR_1_0_0P g2f_rx_in[0]_A
+set_pin_loc empty HR_1_14_7P f2g_tx_out[0]_A
+set_pin_loc full HR_1_12_6P f2g_tx_out[0]_A
+set_pin_loc read_cmd HR_1_4_2P g2f_rx_in[0]_A
+set_pin_loc read_data[0] HR_1_CC_10_5P f2g_tx_out[3]_A
+set_pin_loc read_data[1] HR_1_CC_10_5P f2g_tx_out[2]_A
+set_pin_loc read_data[2] HR_1_CC_10_5P f2g_tx_out[1]_A
+set_pin_loc read_data[3] HR_1_CC_10_5P f2g_tx_out[0]_A
+set_pin_loc reset HR_1_2_1P g2f_rx_in[0]_A
+set_pin_loc write_cmd HR_1_4_2P g2f_rx_in[1]_A
+set_pin_loc write_data[0] HR_1_8_4P g2f_rx_in[3]_A
+set_pin_loc write_data[1] HR_1_8_4P g2f_rx_in[2]_A
+set_pin_loc write_data[2] HR_1_8_4P g2f_rx_in[1]_A
+set_pin_loc write_data[3] HR_1_8_4P g2f_rx_in[0]_A
+set_mode MODE_BP_SDR_A_RX HR_1_0_0P
+set_mode MODE_BP_SDR_A_TX HR_1_12_6P
+set_mode MODE_BP_SDR_A_TX HR_1_14_7P
+set_mode MODE_BP_SDR_A_RX HR_1_2_1P
+set_mode MODE_BP_DDR_A_RX HR_1_4_2P
+set_mode MODE_RATE_4_A_RX HR_1_8_4P
+set_mode MODE_RATE_4_A_TX HR_1_CC_10_5P

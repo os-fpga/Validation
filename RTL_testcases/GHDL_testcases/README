@@ -1,0 +1,10 @@
+GHDL Simulator Testcases
+
+You can run GHDL simulator by running 'make run' in terminal
+
+For Simulation GHDL does:
+    1) analysis  -a
+    2) elaborate -e
+    3) run       -r
+    
+For work library, first you have to do analysis for top module and then testbench.

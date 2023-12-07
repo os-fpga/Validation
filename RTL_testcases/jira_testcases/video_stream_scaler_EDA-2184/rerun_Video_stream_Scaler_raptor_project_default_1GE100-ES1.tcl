@@ -1,0 +1,8 @@
+create_design Video_stream_Scaler_raptor_project_default_1GE100-ES1
+target_device 1GE100-ES1
+add_design_file ./Src/scaler.v
+add_design_file ./Src/scaler_sr_top.v
+set_top_module streamScaler_sr_top
+add_constraint_file Video_stream_Scaler_raptor_project_default_1GE100-ES1/constraints.sdc
+analyze
+synthesize 
