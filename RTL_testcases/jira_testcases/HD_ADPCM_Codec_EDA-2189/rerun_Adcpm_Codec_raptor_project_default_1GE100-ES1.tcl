@@ -1,0 +1,6 @@
+create_design Adcpm_Codec_raptor_project_default_1GE100-ES1
+target_device 1GE100-ES1
+add_design_file ./Src/HD_ADPCM_Codec.vhd
+set_top_module HD_ADPCM_Codec
+add_constraint_file Adcpm_Codec_raptor_project_default_1GE100-ES1/constraints.sdc
+analyze

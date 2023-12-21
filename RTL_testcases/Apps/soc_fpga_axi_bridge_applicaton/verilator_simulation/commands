@@ -1,0 +1,5 @@
+ 
+1) Verilator 5.002 2022-10-29 rev v5.002
+2) verilator -Wno-fatal -sc -exe testbench.sv verilog.cpp --timing --timescale 1ns/1ps --trace
+3) make -j -C obj_dir/ -f Vtestbench.mk Vtestbench
+4) obj_dir/Vtestbench

@@ -1,0 +1,39 @@
+`pragma protect begin_protected
+`pragma protect author = "Verific"
+`pragma protect author_info = "Verific Corporation"
+`pragma protect key_method = "rsa"
+`pragma protect data_method = "aes128-cbc"
+`pragma protect key_keyowner = "Verific"
+`pragma protect key_keyname = "key1"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+Crxaxndqdwxk0o8aHyvCfNv94JfdHAA4UGsggwafEscoUChY/zmaCGBRmQldgNPt
+Dx9Js5h5o4Zg8pSQ5oprK695Gp81FYy4hWzdkVxUwSKM+Uz+OSIwvWk+Mr+Ywwdc
+tTyhSY3nkNZSI/wjgJo0snbvByT8mo4zWv6SJorLUgE=
+`pragma protect version = 1
+`pragma protect encrypt_agent = "VCS"
+`pragma protect encrypt_agent_info = "S-2021.09-SP2 Build Date Feb 24 2022 20:42:21"
+`pragma protect key_keyowner = "Synopsys"
+`pragma protect key_keyname = "SNPS-VCS-RSA-2"
+`pragma protect key_method = "rsa"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 128), key_block
+qPI1+9lx+LHJxFiI2gWvJdBjWfIIirM2qYjM/ioKh9vQDIJnjyp+1hoc+2iB5yH/
+jYMiRfCRWVBXYS1JzcgkWhSZHIifGS8XiWByCxSXOPhDxna7UtQU7fZaDIbpGrFs
+lt0URhfntIl4jyM9b7vDM0gRwy2X0tnsTbeD8xnuTiw=
+
+`pragma protect data_method="aes128-cbc"
+`pragma protect encoding = (enctype = "base64", line_length = 64, bytes = 592)
+`pragma protect data_block
+adZ3bhMjiYoszIl8qAFwDFzjXPWIcsx8Ku3Q4bUILfcqNsQj8XRxV8xHyrOOoEqm
+5zYeQ3li/gPzevv7diOrsLGqX7O7+mo1dOOdPmr+QEbrSAvlfgOvUSg4xbCBs+Mb
++gvWfB1Kp1jRPMIvs+a6tQwwONb1QtpQp4hJsjQpCPHjjlo89VeKLJoGINRSeA2p
+1gYGFN85Yh46PrCLvO7Q+VinZeVjBG4/XjPdkWMokQ4i7TeBSFyQqPuFTVBJENT2
+36T3josh9EwaI5htb+0p3SfvccY08DtJU5AQPx/a8qfPHVzBpKgD8eenWf0kbziI
+VjlWJr8YF8zEEFpBtobSmTeyB6MHE7XMnAzbjunjP9v7be8J7GL+vT6TeEgOAVtP
+4ElJkXLG5DmI/ywP8evLzYeNeQ+5xwL/zL41pDwxuSYrd3OKTi2T6rMu7MfBugrQ
+yD6PXtw7RJqchB4AZaOjN4PTe/Z1I26yIzBTnHv1R08Ubi/0JQNMRCn0CtW+Heft
+GIgrNwbeDkGLDYXlNCVWfzJngFZ2hbTiTG736nJuCdntpXGib6MDP6gtTrhU5A3M
+LnFBvJ8s1+/2/bqPh/ZGUkPWarOovonwVdm5rhlNyruI5/MkC0KrG/dZNSYf6YWx
+DnwdjpIa5G9ra4rvg2UsFARsXnsR1zkWQSpg4FI/LAJLP3SdXYdUGtuz0/i8Cgqs
+Dy5PgsVat+qbd4tw92xQLdRXXZ6ZX6oEQfFz40TyKYood7/QqKeIxP+OwtnEpYP9
+P6CYlVZ+2N3cLkVvYv+Ymw==
+`pragma protect end_protected

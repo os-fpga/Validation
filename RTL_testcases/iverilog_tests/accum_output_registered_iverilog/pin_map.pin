@@ -1,0 +1,88 @@
+set_pin_loc a[0] HR_1_2_1P g2f_rx_in[9]_A
+set_pin_loc a[10] HR_1_0_0P g2f_rx_in[9]_A
+set_pin_loc a[11] HR_1_0_0P g2f_rx_in[8]_A
+set_pin_loc a[12] HR_1_0_0P g2f_rx_in[7]_A
+set_pin_loc a[13] HR_1_0_0P g2f_rx_in[6]_A
+set_pin_loc a[14] HR_1_0_0P g2f_rx_in[5]_A
+set_pin_loc a[15] HR_1_0_0P g2f_rx_in[4]_A
+set_pin_loc a[16] HR_1_0_0P g2f_rx_in[3]_A
+set_pin_loc a[17] HR_1_0_0P g2f_rx_in[2]_A
+set_pin_loc a[18] HR_1_0_0P g2f_rx_in[1]_A
+set_pin_loc a[19] HR_1_0_0P g2f_rx_in[0]_A
+set_pin_loc a[1] HR_1_2_1P g2f_rx_in[8]_A
+set_pin_loc a[2] HR_1_2_1P g2f_rx_in[7]_A
+set_pin_loc a[3] HR_1_2_1P g2f_rx_in[6]_A
+set_pin_loc a[4] HR_1_2_1P g2f_rx_in[5]_A
+set_pin_loc a[5] HR_1_2_1P g2f_rx_in[4]_A
+set_pin_loc a[6] HR_1_2_1P g2f_rx_in[3]_A
+set_pin_loc a[7] HR_1_2_1P g2f_rx_in[2]_A
+set_pin_loc a[8] HR_1_2_1P g2f_rx_in[1]_A
+set_pin_loc a[9] HR_1_2_1P g2f_rx_in[0]_A
+set_pin_loc b[0] HR_1_4_2P g2f_rx_in[9]_A
+set_pin_loc b[10] HR_1_6_3P g2f_rx_in[7]_A
+set_pin_loc b[11] HR_1_6_3P g2f_rx_in[6]_A
+set_pin_loc b[12] HR_1_6_3P g2f_rx_in[5]_A
+set_pin_loc b[13] HR_1_6_3P g2f_rx_in[4]_A
+set_pin_loc b[14] HR_1_6_3P g2f_rx_in[3]_A
+set_pin_loc b[15] HR_1_6_3P g2f_rx_in[2]_A
+set_pin_loc b[16] HR_1_6_3P g2f_rx_in[1]_A
+set_pin_loc b[17] HR_1_6_3P g2f_rx_in[0]_A
+set_pin_loc b[1] HR_1_4_2P g2f_rx_in[8]_A
+set_pin_loc b[2] HR_1_4_2P g2f_rx_in[7]_A
+set_pin_loc b[3] HR_1_4_2P g2f_rx_in[6]_A
+set_pin_loc b[4] HR_1_4_2P g2f_rx_in[5]_A
+set_pin_loc b[5] HR_1_4_2P g2f_rx_in[4]_A
+set_pin_loc b[6] HR_1_4_2P g2f_rx_in[3]_A
+set_pin_loc b[7] HR_1_4_2P g2f_rx_in[2]_A
+set_pin_loc b[8] HR_1_4_2P g2f_rx_in[1]_A
+set_pin_loc b[9] HR_1_4_2P g2f_rx_in[0]_A
+set_pin_loc clk HR_1_8_4P g2f_rx_in[0]_A
+set_pin_loc reset HR_5_0_0P g2f_rx_in[0]_A
+set_pin_loc z_out[0] HR_1_38_19P f2g_tx_out[0]_A
+set_pin_loc z_out[10] HR_1_34_17P f2g_tx_out[2]_A
+set_pin_loc z_out[11] HR_1_34_17P f2g_tx_out[3]_A
+set_pin_loc z_out[12] HR_1_34_17P f2g_tx_out[4]_A
+set_pin_loc z_out[13] HR_1_34_17P f2g_tx_out[5]_A
+set_pin_loc z_out[14] HR_1_34_17P f2g_tx_out[6]_A
+set_pin_loc z_out[15] HR_1_34_17P f2g_tx_out[7]_A
+set_pin_loc z_out[16] HR_1_34_17P f2g_tx_out[8]_A
+set_pin_loc z_out[17] HR_1_34_17P f2g_tx_out[9]_A
+set_pin_loc z_out[18] HR_1_36_18P f2g_tx_out[0]_A
+set_pin_loc z_out[19] HR_1_36_18P f2g_tx_out[1]_A
+set_pin_loc z_out[1] HR_1_38_19P f2g_tx_out[1]_A
+set_pin_loc z_out[20] HR_1_36_18P f2g_tx_out[2]_A
+set_pin_loc z_out[21] HR_1_36_18P f2g_tx_out[3]_A
+set_pin_loc z_out[22] HR_1_36_18P f2g_tx_out[4]_A
+set_pin_loc z_out[23] HR_1_36_18P f2g_tx_out[5]_A
+set_pin_loc z_out[24] HR_1_36_18P f2g_tx_out[6]_A
+set_pin_loc z_out[25] HR_1_36_18P f2g_tx_out[7]_A
+set_pin_loc z_out[26] HR_1_36_18P f2g_tx_out[8]_A
+set_pin_loc z_out[27] HR_1_36_18P f2g_tx_out[9]_A
+set_pin_loc z_out[28] HR_1_32_16P f2g_tx_out[0]_A
+set_pin_loc z_out[29] HR_1_32_16P f2g_tx_out[1]_A
+set_pin_loc z_out[2] HR_1_38_19P f2g_tx_out[2]_A
+set_pin_loc z_out[30] HR_1_32_16P f2g_tx_out[2]_A
+set_pin_loc z_out[31] HR_1_32_16P f2g_tx_out[3]_A
+set_pin_loc z_out[32] HR_1_32_16P f2g_tx_out[4]_A
+set_pin_loc z_out[33] HR_1_32_16P f2g_tx_out[5]_A
+set_pin_loc z_out[34] HR_1_32_16P f2g_tx_out[6]_A
+set_pin_loc z_out[35] HR_1_32_16P f2g_tx_out[7]_A
+set_pin_loc z_out[36] HR_1_32_16P f2g_tx_out[8]_A
+set_pin_loc z_out[37] HR_1_32_16P f2g_tx_out[9]_A
+set_pin_loc z_out[3] HR_1_38_19P f2g_tx_out[3]_A
+set_pin_loc z_out[4] HR_1_38_19P f2g_tx_out[4]_A
+set_pin_loc z_out[5] HR_1_38_19P f2g_tx_out[5]_A
+set_pin_loc z_out[6] HR_1_38_19P f2g_tx_out[6]_A
+set_pin_loc z_out[7] HR_1_38_19P f2g_tx_out[7]_A
+set_pin_loc z_out[8] HR_1_34_17P f2g_tx_out[0]_A
+set_pin_loc z_out[9] HR_1_34_17P f2g_tx_out[1]_A
+set_mode MODE_RATE_10_A_RX HR_1_0_0P
+set_mode MODE_RATE_10_A_RX HR_1_2_1P
+set_mode MODE_RATE_10_A_TX HR_1_32_16P
+set_mode MODE_RATE_10_A_TX HR_1_34_17P
+set_mode MODE_RATE_10_A_TX HR_1_36_18P
+set_mode MODE_RATE_8_A_TX HR_1_38_19P
+set_mode MODE_RATE_10_A_RX HR_1_4_2P
+set_mode MODE_RATE_8_A_RX HR_1_6_3P
+set_mode MODE_BP_SDR_A_RX HR_1_8_4P
+set_mode MODE_BP_SDR_A_RX HR_5_0_0P

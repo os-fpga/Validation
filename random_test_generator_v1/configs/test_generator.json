@@ -1,0 +1,72 @@
+ 
+{
+    "GENERAL": {
+      "CHANNEL"             : 50,
+      "DEPTH"               : 55,
+      "WIDTH"               : 32,
+      "DESIGN_NAME"         : "design400_50_55",
+      "config_tcl"          : false
+    },
+    "BENCHMARKS": {
+        "encoder": {
+            "design_top":"encoder"
+        },
+        "invertion": {
+            "design_top":"invertion"
+        },
+        "large_adder": {
+            "design_top":"large_adder"
+        },
+        "large_mux": {
+            "design_top":"large_mux"
+        },
+        "memory_cntrl": {
+            "design_top":"memory_cntrl"
+        },
+        "register": {
+            "design_top":"register"
+        },
+        "full_adder_top": {
+            "design_top":"full_adder_top"
+        },
+        "d_latch_top": {
+            "design_top":"d_latch_top"
+        },
+        "shift_reg_top": {
+            "design_top":"shift_reg_top"
+        },
+        "mod_n_counter": {
+            "design_top":"mod_n_counter"
+        },
+        "decoder_top": {
+            "design_top":"decoder_top"
+        },
+        "paritygenerator_top": {
+            "design_top":"paritygenerator_top"
+        },
+        "single_port_ram_top": {
+            "design_top":"single_port_ram_top"
+        },
+        "addsubb_top": {
+            "design_top":"addsubb_top"
+        },
+        "register_vhd": {
+            "design_top":"register_vhd"
+        },
+        "alu_top_vhd": {
+            "design_top":"alu_top_vhd"
+        },
+        "decoder_top_vhd": {
+            "design_top":"decoder_top_vhd"
+        },
+        "mux_top_vhd": {
+            "design_top":"mux_top_vhd"
+        },
+        "shift_reg_top_vhd": {
+            "design_top":"shift_reg_top_vhd"
+        },
+        "rom_top_vhd": {
+            "design_top":"rom_top_vhd"
+        }
+    }
+}

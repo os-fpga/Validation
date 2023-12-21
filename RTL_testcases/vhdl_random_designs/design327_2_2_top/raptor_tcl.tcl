@@ -1,0 +1,17 @@
+create_design design327_2_2_top
+target_device GEMINI
+add_include_path ./rtl
+add_library_path ./rtl
+add_library_ext .v .sv
+add_design_file ./rtl/design327_2_2_top.v
+add_design_file /nfs_scratch/scratch/CompilerValidation/abdul_hameed/Compiler_Validation/RTL_testcases/vhdl_random_designs/design327_2_2_top/rtl/decoder_top_vhd.vhd /nfs_scratch/scratch/CompilerValidation/abdul_hameed/Compiler_Validation/RTL_testcases/vhdl_random_designs/design327_2_2_top/rtl/rom_top_vhd.vhd /nfs_scratch/scratch/CompilerValidation/abdul_hameed/Compiler_Validation/RTL_testcases/vhdl_random_designs/design327_2_2_top/rtl/alu_top_vhd.vhd /nfs_scratch/scratch/CompilerValidation/abdul_hameed/Compiler_Validation/RTL_testcases/vhdl_random_designs/design327_2_2_top/rtl/mux_top_vhd.vhd 
+set_top_module design327_2_2_top
+synthesize delay
+pnr_options --gen_post_synthesis_netlist on
+packing
+global_placement
+place
+route
+sta
+power
+bitstream 
