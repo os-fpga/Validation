@@ -154,7 +154,7 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo ""
 
-    IP_PATH="./$design/$design.IPs"
+    IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -162,7 +162,7 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pmem_depth=1024 -Pno_of_probes=32 -out_file $IP_PATH/$design.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pmem_depth=1024 -Pno_of_probes=32 -out_file ./$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
@@ -407,7 +407,7 @@ fi
         echo "    return 0;">>tb_$design.cpp
         echo "}">>tb_$design.cpp
         mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
