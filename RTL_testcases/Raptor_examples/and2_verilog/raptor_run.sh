@@ -107,12 +107,14 @@ parse_cga exit; }
 	reg_id="23"
 	timeout="90"
     synth_stage=""
-	if [[ $# -eq 5 ]]; then
+	mute_flag=""
+	if [[ $# -eq 6 ]]; then
 	    reg_id=$1
 	    timeout=$2
 	    post_synth_sim=$3
 	    device=$4
         synth_stage=$5
+	    mute_flag=$6
 	else
 	    if [[ $1 == "load_toolconf" ]]; then
 		    # Load parameters from tool.conf file
@@ -230,7 +232,7 @@ fi
 if cmp --silent -- "../cksums.md5" "../newsum.md5" && [ -d $design ]; then
    echo "Raptor was already compiled"  
 else 
-   timeout $timeout raptor --batch --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
+   timeout $timeout raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
     if [ ${PIPESTATUS[0]} -eq 124 ]; then
         echo -e "\nERROR: TIM: Design Compilation took $timeout. Exiting due to timeout">>raptor.log
         cat raptor.log >> results.log
@@ -268,7 +270,7 @@ parse_cga exit 1; }
     sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/sim_models/verilog/*.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
     latch_sim=`find $library -wholename "*/rapidsilicon/genesis3/llatches_sim.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
     primitive=`find $library -wholename "*/rapidsilicon/genesis3/primitives.v"`

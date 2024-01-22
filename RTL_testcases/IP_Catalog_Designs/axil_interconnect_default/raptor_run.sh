@@ -109,12 +109,14 @@ parse_cga exit; }
 	reg_id="23"
 	timeout="90"
     synth_stage=""
-	if [[ $# -eq 5 ]]; then
+	mute_flag=""
+	if [[ $# -eq 6 ]]; then
 	    reg_id=$1
 	    timeout=$2
 	    post_synth_sim=$3
 	    device=$4
         synth_stage=$5
+	    mute_flag=$6
 	else
 	    if [[ $1 == "load_toolconf" ]]; then
 		    # Load parameters from tool.conf file
@@ -156,7 +158,7 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo "" || echo ""
     
-    IP_PATH="./$design/$design.IPs"
+    IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -164,7 +166,7 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    # echo "set IP_PATH ./$design/$design.IPs">>raptor_tcl.tcl
+    # echo "set IP_PATH ./$design/run_1/IPs">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name\_v1_0 -mod_name $design -Pm_count=4 -Ps_count=4 -Pdata_width=32 -Paddr_width=32 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
@@ -232,7 +234,7 @@ fi
 if cmp --silent -- "../cksums.md5" "../newsum.md5" && [ -d $design ]; then
    echo "Raptor was already compiled"  
 else 
-   timeout $timeout raptor --batch --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
+   timeout $timeout raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
 #    cd $main_path/results_dir/rapidsilicon/ip/$ip_name/v1_0/$design/sim/
 #    make > rtl_sim.log
 #    cd $main_path/results_dir/
@@ -274,8 +276,8 @@ parse_cga exit 1; }
     primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/sim_models/verilog/*.v"`
-    luts=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/LUT/LUT.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
+    luts=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/LUT/LUT.v"`
     compile_opts=$1    
     
 post_synth_netlist_path=`find $main_path -wholename "*/$design\_post_synth.v"`
@@ -526,7 +528,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
         # echo "    return 0;">>tb_$design.cpp
 #         echo "}">>tb_$design.cpp
 #         mv tb_$design.cpp ../../rtl
-#         (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+#         (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 # 		while read line; do
 #                 if [[ $line == *"All Comparison Matched"* ]]
 #                 then
