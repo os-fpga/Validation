@@ -148,7 +148,7 @@ parse_cga exit; }
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
-    luts=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/LUT/LUT.v"`
+    luts=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/LUT/LUT.v"`
 
     echo "# Copyright (c) 2020 Alex Forencich" > Makefile
     echo "#" >> Makefile
@@ -377,7 +377,7 @@ parse_cga exit 1; }
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
-    luts=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/LUT/LUT.v"`
+    luts=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/LUT/LUT.v"`
     compile_opts=$1    
     
 post_synth_netlist_path=`find $main_path -wholename "*/$design\_post_synth.v"`

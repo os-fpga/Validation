@@ -276,8 +276,8 @@ parse_cga exit 1; }
     primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/sim_models/verilog/*.v"`
-    luts=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/LUT/LUT.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
+    luts=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/LUT/LUT.v"`
     compile_opts=$1    
     
 post_synth_netlist_path=`find $main_path -wholename "*/$design\_post_synth.v"`
