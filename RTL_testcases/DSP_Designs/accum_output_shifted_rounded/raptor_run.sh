@@ -106,13 +106,15 @@ parse_cga exit; }
     # Check if parameters were passed as command line arguments
 	reg_id="23"
 	timeout="90"
-    synth_stage="1"
-	if [[ $# -eq 5 ]]; then
+    synth_stage=""
+	mute_flag=""
+	if [[ $# -eq 6 ]]; then
 	    reg_id=$1
 	    timeout=$2
 	    post_synth_sim=$3
 	    device=$4
         synth_stage=$5
+	    mute_flag=$6
 	else
 	    if [[ $1 == "load_toolconf" ]]; then
 		    # Load parameters from tool.conf file
@@ -221,7 +223,7 @@ fi
 if cmp --silent -- "../cksums.md5" "../newsum.md5" && [ -d $design ]; then
    echo "Raptor was already compiled"  
 else 
-   timeout $timeout raptor --batch --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
+   timeout $timeout raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
     if [ ${PIPESTATUS[0]} -eq 124 ]; then
         echo -e "\nERROR: TIM: Design Compilation took $timeout. Exiting due to timeout">>raptor.log
         cat raptor.log >> results.log

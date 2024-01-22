@@ -107,11 +107,15 @@ parse_cga exit; }
     # Check if parameters were passed as command line arguments
 	reg_id="23"
 	timeout="90"
-	if [[ $# -eq 4 ]]; then
+    synth_stage=""
+	mute_flag=""
+	if [[ $# -eq 6 ]]; then
 	    reg_id=$1
 	    timeout=$2
 	    post_synth_sim=$3
 	    device=$4
+        synth_stage=$5
+	    mute_flag=$6
 	else
 	    if [[ $1 == "load_toolconf" ]]; then
 		    # Load parameters from tool.conf file
@@ -186,6 +190,9 @@ parse_cga exit 1; }
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    if [ "$synth_stage" == "1" ]; then 
+		echo "" 
+	else
     [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
     [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
     [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
@@ -218,7 +225,7 @@ fi
 if cmp --silent -- "../cksums.md5" "../newsum.md5" && [ -d $design ]; then
    echo "Raptor was already compiled"  
 else 
-   timeout $timeout raptor --batch --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
+   timeout $timeout raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
     if [ ${PIPESTATUS[0]} -eq 124 ]; then
         echo -e "\nERROR: TIM: Design Compilation took $timeout. Exiting due to timeout">>raptor.log
         cat raptor.log >> results.log
