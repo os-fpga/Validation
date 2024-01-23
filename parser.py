@@ -175,35 +175,59 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 syn_time_line = i
                 break
 
-        for line in lines[bitstream_time_line:]:
-            if "Duration: " in line:  
-                data['bitstream_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                break
-        for line in lines[timinganalysis_time_line:]:
-            if "Duration: " in line:  
-                data['time_analysis_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                break
-        for line in lines[Route_time_line:]:
-            if "Duration: " in line:  
-                data['routing_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                break
+        if bitstream_time_line != -1:
+            for line in lines[bitstream_time_line:]:
+                if "Duration: " in line:  
+                    data['bitstream_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
+                    print("here")
+                    break
+        else:
+            data['bitstream_runtime'] = None  # Set to None if "GenerateBitstream" is not found
+
+        if timinganalysis_time_line != -1:
+            for line in lines[timinganalysis_time_line:]:
+                if "Duration: " in line:  
+                    data['time_analysis_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
+                    break
+        else: 
+            data['time_analysis_runtime'] = None
+
+        if Route_time_line != -1:
+            for line in lines[Route_time_line:]:
+                if "Duration: " in line:  
+                    data['routing_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
+                    break
+        else:
+            data['routing_runtime'] = None
+
         interation_placement=0
         place_time=0
-        for line in lines[place_time_line:]:
-            if "Duration: " in line:  
-                place_time=int(line.split('ms')[0].split('Duration:')[1])+place_time
-                data['placement_runtime'] = place_time
-                interation_placement=interation_placement+1
-                if interation_placement == 2:
+        if place_time_line != -1:
+            for line in lines[place_time_line:]:
+                if "Duration: " in line:  
+                    place_time=int(line.split('ms')[0].split('Duration:')[1])+place_time
+                    data['placement_runtime'] = place_time
+                    interation_placement=interation_placement+1
+                    if interation_placement == 2:
+                        break
+        else:
+            data['placement_runtime'] = None
+
+        if pack_time_line != -1:
+            for line in lines[pack_time_line:]:
+                if "Duration: " in line:  
+                    data['packing_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
                     break
-        for line in lines[pack_time_line:]:
-            if "Duration: " in line:  
-                data['packing_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                break
-        for line in lines[syn_time_line:]:
-            if "Duration: " in line:  
-                data['synthesis_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                break
+        else:
+            data['packing_runtime'] = None
+
+        if syn_time_line != -1:
+            for line in lines[syn_time_line:]:
+                if "Duration: " in line:  
+                    data['synthesis_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
+                    break
+        else:
+            data['synthesis_runtime'] = None
     
     with open(file, 'r') as f:
         # Adding the current file name as a key to the data dictionary and initializing its value as another dictionary
