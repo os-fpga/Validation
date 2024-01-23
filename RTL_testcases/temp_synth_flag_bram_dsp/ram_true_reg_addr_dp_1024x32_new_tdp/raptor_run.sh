@@ -4,7 +4,7 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="apbtoaes128"
+design="ram_true_reg_addr_dp_1024x32_new_tdp"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
@@ -26,7 +26,7 @@ device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="./raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -34,7 +34,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-new_tdp36k"
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -57,7 +57,7 @@ synth_options=""
                         #       late                   : Perform late extraction
                         #       -cec                     : Dump verilog after key phases and use internal equivalence checking (ABC based)
 
-pin_loc_assign_method="free"  #pin_loc_assign_method <Method>: Method choices:
+pin_loc_assign_method=""  #pin_loc_assign_method <Method>: Method choices:
                           #      in_define_order(Default), port order pin assignment
                           #      random , random pin assignment
                           #      free , no automatic pin assignment
@@ -172,23 +172,12 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/aes_core.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/aes_ip.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/control_unit.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/data_swap.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/datapath.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/host_interface.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/key_expander.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/mix_columns.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/sBox.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/sBox_8.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/shift_rows.v">>raptor_tcl.tcl
-    
+    [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
-    echo "set_top_module aes_core">>raptor_tcl.tcl 
+    echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
@@ -203,19 +192,19 @@ parse_cga exit 1; }
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
-        [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
-        [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
-        [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
-        [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
-        [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
-        [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
-        echo "packing">>raptor_tcl.tcl  
-        echo "global_placement">>raptor_tcl.tcl  
-        echo "place">>raptor_tcl.tcl  
-        echo "route">>raptor_tcl.tcl  
-        echo "sta">>raptor_tcl.tcl  
-        echo "power">>raptor_tcl.tcl  
-        echo "bitstream $bitstream">>raptor_tcl.tcl  
+    [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
+    [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
+    [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
+    [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
+    [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
+    [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
+    echo "packing">>raptor_tcl.tcl  
+    echo "global_placement">>raptor_tcl.tcl  
+    echo "place">>raptor_tcl.tcl  
+    echo "route">>raptor_tcl.tcl  
+    echo "sta">>raptor_tcl.tcl  
+    echo "power">>raptor_tcl.tcl  
+    echo "bitstream $bitstream">>raptor_tcl.tcl  
     fi
 
 cd results_dir
@@ -273,7 +262,7 @@ parse_cga exit 1; }
     sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-    lut_map=`find $library -wholename "*/rapidsilicon/genesis3/*/LUT.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
     latch_sim=`find $library -wholename "*/rapidsilicon/genesis3/llatches_sim.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
     compile_opts=$1    
@@ -387,7 +376,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $lut_map $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
@@ -404,14 +393,14 @@ fi
     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
     then
         echo "post_route_sim will be added later"
-        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $lut_map $latch_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
+        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
         # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
     fi
     if [[ $tool_name == "iverilog" ]] && [[ $compile_opts == "post_synth_sim" ]]
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $cell_path $bram_sim $sim_lib $lut_map $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log
@@ -444,7 +433,7 @@ fi
         echo "    return 0;">>tb_$design.cpp
         echo "}">>tb_$design.cpp
         mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $sim_lib $lut_map $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $sim_lib $primitive_sim $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then

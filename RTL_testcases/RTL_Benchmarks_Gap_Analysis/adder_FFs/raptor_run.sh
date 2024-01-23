@@ -174,8 +174,8 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/wrapper_rtl/adder_FFs.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/wrapper_rtl/wrapper_adder_FFs.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/adder_FFs.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/wrapper_adder_FFs.v">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module wrapper_adder_FFs">>raptor_tcl.tcl 
