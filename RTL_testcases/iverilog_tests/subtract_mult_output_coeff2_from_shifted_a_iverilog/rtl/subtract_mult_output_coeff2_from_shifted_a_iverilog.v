@@ -5,7 +5,7 @@ module subtract_mult_output_coeff2_from_shifted_a_iverilog (
     output wire [37:0] z_out,
     input clk, reset
     );
-    parameter [79:0] MODE_BITS = 80'h00000000000001000000;    
+      
     wire [37:0] z_w;
 
 DSP38 #(
