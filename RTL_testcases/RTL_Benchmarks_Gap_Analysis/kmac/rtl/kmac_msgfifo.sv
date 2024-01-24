@@ -122,7 +122,11 @@ module kmac_msgfifo
   // Assign packer wdata and wmask to FIFO struct
   // In contrast to HMAC case, KMAC SHA3 operates in little-endian. MSG fifo is
   // converted into 3-D form so the endianess here is not a problem.
-  assign fifo_wdata.data = packer_wdata;
+  `ifdef VERIFIC
+    assign fifo_wdata.data = packer_wdata;
+  `else
+    assign fifo_wdata.data = u_packer.data_o;
+  `endif
   always_comb begin
     fifo_wdata.strb = '0;
     for (int i = 0 ; i < OutWidth/8 ; i++) begin

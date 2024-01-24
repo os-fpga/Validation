@@ -175,14 +175,18 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
+    echo "add_simulation_file ./sim/testbench.v" >> raptor_tcl.tcl
     ##vary design to design
 
+    echo "set_top_testbench primitive_example_design_12_tb">>raptor_tcl.tcl
     echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
+    echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
+    # echo "simulate rtl icarus">>raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
@@ -262,7 +266,7 @@ parse_cga exit 1; }
     sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/sim_models/verilog/*.v"`
     latch_sim=`find $library -wholename "*/rapidsilicon/genesis3/llatches_sim.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
     compile_opts=$1    
@@ -432,7 +436,7 @@ fi
         echo "    return 0;">>tb_$design.cpp
         echo "}">>tb_$design.cpp
         mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $sim_lib $primitive_sim $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $sim_lib $primitive_sim $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
