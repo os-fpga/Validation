@@ -188,7 +188,7 @@ parse_cga exit 1; }
     
     ##vary design to design
 
-    echo "set_top_module aes_core">>raptor_tcl.tcl 
+    echo "set_top_module aes_ip">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
