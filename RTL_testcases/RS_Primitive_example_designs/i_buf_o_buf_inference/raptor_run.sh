@@ -4,7 +4,7 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="subtract_mult_output_coeff2_from_shifted_a_iverilog"
+design="i_buf_o_buf_inference"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
@@ -26,7 +26,7 @@ device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="constraint.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -172,23 +172,33 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dual_clock_fifo.v">>raptor_tcl.tcl || echo "" 
+    echo "add_simulation_file ./sim/fifo_reader.v" >> raptor_tcl.tcl
+    echo "add_simulation_file ./sim/fifo_writer.v" >> raptor_tcl.tcl
+    echo "add_simulation_file ./sim/fifo_tester.v" >> raptor_tcl.tcl
+    echo "add_simulation_file ./sim/dual_clock_fifo_tb.v" >> raptor_tcl.tcl
     ##vary design to design
 
-    echo "set_top_module $design">>raptor_tcl.tcl 
+    echo "set_top_testbench dual_clock_fifo_tb">>raptor_tcl.tcl
+    echo "set_top_module dual_clock_fifo">>raptor_tcl.tcl 
+    echo "synth_options -inferred_io">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
+    echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
+    echo "simulate rtl icarus">>raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    # echo "simulation_options compilation icarus gate">>raptor_tcl.tcl
+    # echo "simulate gate icarus">>raptor_tcl.tcl
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
@@ -256,12 +266,13 @@ parse_cga exit 1; }
 
     bram_sim=`find $library -wholename "*/rapidsilicon/genesis3/brams_sim.v"`    
     cell_path=`find $library -wholename "*/rapidsilicon/genesis3/cells_sim.v"`
+    dsp_sim=`find $library -wholename "*/rapidsilicon/genesis3/dsp_sim.v"`
     dsp_map=`find $library -wholename "*/rapidsilicon/genesis3/dsp_map.v"`
     dsp_final_map=`find $library -wholename "*/rapidsilicon/genesis3/dsp_final_map.v"`
     sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     TDP18K_FIFO=`find $library -wholename "*/rapidsilicon/genesis3/TDP18K_FIFO.v"`
     ufifo_ctl=`find $library -wholename "*/rapidsilicon/genesis3/ufifo_ctl.v"`
-	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" | grep -v "SOC_FPGA_TEMPERATURE.v"`
+	primitive_sim=`find $library -wholename "*/rapidsilicon/genesis3/RS_PRIMITIVES/sim_models/verilog/*.v"`
     latch_sim=`find $library -wholename "*/rapidsilicon/genesis3/llatches_sim.v"`
     sram1024x18=`find $library -wholename "*/rapidsilicon/genesis3/sram1024x18.v"`
     compile_opts=$1    
@@ -273,7 +284,6 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
 #renaming netlist module name in post synth netlist
     if [[ $compile_opts == "post_synth_sim" ]]
     then
-        string="_post_synth"
         while read line; do
             # for word in $line; do
                 if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design" ]]; 
@@ -432,7 +442,7 @@ fi
         echo "    return 0;">>tb_$design.cpp
         echo "}">>tb_$design.cpp
         mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $cell_path -v $bram_sim -v $sim_lib -v $primitive_sim -v $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $dsp_sim -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $sim_lib $primitive_sim $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
@@ -445,13 +455,6 @@ fi
                 fi
         done < post_synth_sim.log
         cd .. 
-    fi
-    if [[ $tool_name == ghdl ]] && [[ $compile_opts == ghdl_rtl_sim ]]
-    then
-        [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
-        [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../.. && make run) 2>&1 | tee post_synth_sim.log 
-        cd ..
     fi
 }
 
@@ -548,11 +551,6 @@ parse_cga
 	echo -e "\n\n#########Raptor Performance Data#########" >> results.log
 	cat raptor_perf.log >> results.log
 	echo -e "#############################################\n" >> results.log
-    if [[ $ghdl_rtl_sim == true ]] 
-    then
-        echo "Only RTL simulation $PWD"
-        simulate "ghdl_rtl_sim" 
-    fi
     if [[ $post_synth_sim == true ]] 
     then
         echo "post_synth $PWD"
@@ -596,4 +594,3 @@ fi
 
 end_time
 parse_cga
- 

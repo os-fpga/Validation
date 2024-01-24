@@ -2,10 +2,6 @@ module primitive_example_design_12 (
   input pll_en,
   input latch_en1,latch_en2,
   input clk,reset,
-  input clk_out0_en,
-  input clk_out1_en,
-  input clk_out2_en,
-  input clk_out3_en,
   output clk_out0,
   output clk_out1,
   output clk_out2,
@@ -15,26 +11,18 @@ module primitive_example_design_12 (
 );
 
   PLL pll_inst (
-    .PLL_EN(pll_en_w),
-    .CLK_IN(clk),
-    .CLK_OUT0_EN(clk_out0_en_w),
-    .CLK_OUT1_EN(clk_out1_en_w),
-    .CLK_OUT2_EN(clk_out2_en_w),
-    .CLK_OUT3_EN(clk_out3_en_w),
-    .CLK_OUT0(clk_out0_w),
-    .CLK_OUT1(clk_out1_w),
-    .CLK_OUT2(clk_out2_w),
-    .CLK_OUT3(clk_out3_w),
-    .SERDES_FAST_CLK(serdes_fast_clk_w),
-    .LOCK(lock_w)
-  );
+  .PLL_EN(pll_en_w),
+  .CLK_IN(clk),
+  .CLK_OUT(clk_out0_w),
+  .CLK_OUT_DIV2(clk_out1_w),
+  .CLK_OUT_DIV3(clk_out2_w),
+  .CLK_OUT_DIV4(clk_out3_w),
+  .SERDES_FAST_CLK(serdes_fast_clk_w),
+  .LOCK(lock_w)
+);
   
   latch latch_inst (.d(pll_en),.en(latch_en1),.q(pll_en_w));
 
-  register reg_inst1 (.d(clk_out0_en),.clk(clk),.rst(reset),.q(clk_out0_en_w));
-  register reg_inst2 (.d(clk_out1_en),.clk(clk),.rst(reset),.q(clk_out1_en_w));
-  register reg_inst3 (.d(clk_out2_en),.clk(clk),.rst(reset),.q(clk_out2_en_w));
-  register reg_inst4 (.d(clk_out3_en),.clk(clk),.rst(reset),.q(clk_out3_en_w));
   register reg_inst5 (.d(lock_w),.clk(clk),.rst(reset),.q(lock_ww));
 
   assign lock_case = lock_ww ? 1'b0 : 1'b1; 

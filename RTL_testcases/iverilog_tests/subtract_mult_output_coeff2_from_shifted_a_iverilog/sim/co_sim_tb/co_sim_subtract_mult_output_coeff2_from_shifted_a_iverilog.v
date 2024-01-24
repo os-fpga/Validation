@@ -9,18 +9,107 @@ module co_sim_subtract_mult_output_coeff2_from_shifted_a_iverilog;
 
 	integer mismatch=0;
 
+`ifdef PNR
+
+subtract_mult_output_coeff2_from_shifted_a_iverilog netlist( a[0] ,
+    a[1] ,
+    a[2] ,
+    a[3] ,
+    a[4] ,
+    a[5] ,
+    a[6] ,
+    a[7] ,
+    a[8] ,
+    a[9] ,
+    a[10] ,
+    a[11] ,
+    a[12] ,
+    a[13] ,
+    a[14] ,
+    a[15] ,
+    a[16] ,
+    a[17] ,
+    a[18] ,
+    a[19] ,
+    b[0] ,
+    b[1] ,
+    b[2] ,
+    b[3] ,
+    b[4] ,
+    b[5] ,
+    b[6] ,
+    b[7] ,
+    b[8] ,
+    b[9] ,
+    b[10] ,
+    b[11] ,
+    b[12] ,
+    b[13] ,
+    b[14] ,
+    b[15] ,
+    b[16] ,
+    b[17] ,
+	acc_fir[0] ,
+	acc_fir[1] ,
+	acc_fir[2] ,
+	acc_fir[3] ,
+	acc_fir[4] ,
+	acc_fir[5] ,
+    z_out[0] ,
+    z_out[1] ,
+    z_out[2] ,
+    z_out[3] ,
+    z_out[4] ,
+    z_out[5] ,
+    z_out[6] ,
+    z_out[7] ,
+    z_out[8] ,
+    z_out[9] ,
+    z_out[10] ,
+    z_out[11] ,
+    z_out[12] ,
+    z_out[13] ,
+    z_out[14] ,
+    z_out[15] ,
+    z_out[16] ,
+    z_out[17] ,
+    z_out[18] ,
+    z_out[19] ,
+    z_out[20] ,
+    z_out[21] ,
+    z_out[22] ,
+    z_out[23] ,
+    z_out[24] ,
+    z_out[25] ,
+    z_out[26] ,
+    z_out[27] ,
+    z_out[28] ,
+    z_out[29] ,
+    z_out[30] ,
+    z_out[31] ,
+    z_out[32] ,
+    z_out[33] ,
+    z_out[34] ,
+    z_out[35] ,
+    z_out[36] ,
+    z_out[37] ,
+    clk ,
+    reset );
+`else
+
 subtract_mult_output_coeff2_from_shifted_a_iverilog golden(.*);
-subtract_mult_output_coeff2_from_shifted_a_iverilog_post_synth netlist(.*, .z_out(z_out_netlist));
+`endif
+
 //clock initialization
 initial begin
-    clk = 1'b0;
+    clk = 1'b1;
     forever #5 clk = ~clk;
 end
 initial begin
 	
-	{reset, a, b, expected_out, acc_fir} = 'd0;
-	@(negedge clk);
+	{a, b, expected_out, acc_fir} = 'd0;
 	reset = 1;
+	@(negedge clk);
 	$display ("\n\n***Reset Test is applied***\n\n");
 	display_stimulus();
 	@(negedge clk);
@@ -37,7 +126,7 @@ initial begin
 	repeat (600) begin
 		a = $urandom( );
 		b = $urandom( );
-		acc_fir = $urandom( );
+		acc_fir = 1'h1;
 		@(posedge clk);
 		expected_out = (a<<acc_fir) - (16*b);
 		display_stimulus();
@@ -106,13 +195,12 @@ initial begin
 
 task compare();
  	
-  	if ((z_out !== z_out_netlist) || (z_out_netlist !== expected_out) || (z_out !== expected_out)) begin
-    	$display("Data Mismatch. Golden RTL: %0d, Netlist: %0d, Expected output: %0d, Time: %0t", z_out, z_out_netlist, expected_out, $time);
+  	if ((z_out !== expected_out)) begin
+    	$display("Data Mismatch, Netlist: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
     	mismatch = mismatch+1;
  	end
-  	else begin
-  		$display("Data Matched. Golden RTL: %0d, Netlist: %0d,  Expected output: %0d, Time: %0t", z_out, z_out_netlist, expected_out, $time);
-	end
+  	else
+  		$display("Data Matched: Netlist: %0d,  Expected output: %0d, Time: %0t", z_out, expected_out, $time);
 endtask
 
 task display_stimulus();

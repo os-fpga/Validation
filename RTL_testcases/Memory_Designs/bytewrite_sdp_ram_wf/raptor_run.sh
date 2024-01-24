@@ -34,7 +34,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-effort low"
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -159,7 +159,7 @@ parse_cga exit 1; }
 #creating a tcl file to run raptor flow 
     cd ..
     
-    echo "create_design $design">raptor_tcl.tcl 
+    echo "create_design GEMINI_COMPACT_104x68">raptor_tcl.tcl 
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
