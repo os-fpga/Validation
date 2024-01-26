@@ -4,7 +4,7 @@ input clk;
 input we, re;
 input [9:0] addr;
 input [31:0] di;
-output reg [31:0] dout;
+output reg [31:0] dout=0;
 
 reg [31:0] RAM [1023:0];
 // reg [31:0] dout;

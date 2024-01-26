@@ -2,7 +2,7 @@ module ram_true_dp_dc_excl_rw_512x32 (clkA, clkB, weA, weB, reA, reB, addrA, add
     input clkA, clkB, weA, weB, reA, reB;
     input [8:0] addrA, addrB;
     input [31:0] dinA, dinB;
-    output reg [31:0] doutA, doutB;
+    output reg [31:0] doutA=0, doutB=0;
     
     reg [31:0] ram [511:0];
     always @(posedge clkA)

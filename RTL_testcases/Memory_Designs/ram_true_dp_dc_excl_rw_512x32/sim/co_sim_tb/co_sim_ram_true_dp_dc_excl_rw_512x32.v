@@ -30,7 +30,7 @@ module co_sim_ram_true_dp_dc_excl_rw_512x32;
 
     initial begin
 
-    {weA,weB, addrA,addrB, dinA, dinB, cycle, i} = 0;
+    {weA,weB,reA,reB, addrA,addrB, dinA, dinB, cycle, i} = 0;
  
  
     repeat (1) @ (negedge clkA);
