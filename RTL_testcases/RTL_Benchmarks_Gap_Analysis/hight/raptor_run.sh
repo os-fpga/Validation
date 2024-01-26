@@ -178,12 +178,10 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/CRYPTO_PATH.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/HIGHT_CORE_TOP.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/KEY_SCHED.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/README.md">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/RF.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/SKG.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/WF.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/WKG.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/rtl.f">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module HIGHT_CORE_TOP">>raptor_tcl.tcl 
