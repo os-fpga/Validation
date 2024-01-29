@@ -174,6 +174,20 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl/">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl/">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc000.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc001.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc010.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc011.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc100.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc101.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc110.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bmc111.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/ACS.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/tbu.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/mem_8x1024.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/mem_1x1024.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/encoder.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/decoder.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/viterbi_tx_rx.v">>raptor_tcl.tcl
     ##vary design to design
 

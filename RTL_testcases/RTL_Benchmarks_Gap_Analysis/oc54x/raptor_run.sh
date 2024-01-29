@@ -174,6 +174,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl/">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl/">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/oc54_alu_defines.vh">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/timescale.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/oc54_acc.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/oc54_alu.v">>raptor_tcl.tcl
