@@ -242,7 +242,7 @@ module decoder
       if(rst==1'b0)
          rd_mem_counter <= 10'b1111111111;
       else if(enable==1'b0)
-         wr_mem_counter <= 10'd0;
+         rd_mem_counter <= 10'd0;
       else
          rd_mem_counter <= rd_mem_counter - 10'd1;
    end
