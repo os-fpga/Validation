@@ -172,7 +172,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 

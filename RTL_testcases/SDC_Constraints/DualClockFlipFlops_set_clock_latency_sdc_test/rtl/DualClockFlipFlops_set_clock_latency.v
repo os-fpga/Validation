@@ -1,4 +1,4 @@
-module DualClockFlipFlops_set_clock_latency_sdc_test (
+module DualClockFlipFlops_set_clock_latency (
     input wire clk1,
     input wire clk2,
     input wire reset,

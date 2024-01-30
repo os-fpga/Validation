@@ -177,7 +177,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
     echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v" >> raptor_tcl.tcl
-    echo "add_simulation_file carry_chain_sim.v" >> raptor_tcl.tcl
+    echo "add_simulation_file ./sim/co_sim_tb/co_sim_carry_chain_primitive_inst.v" >> raptor_tcl.tcl
     # ./rtl/$design.v 
     ##vary design to design
     echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl
@@ -187,8 +187,8 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
-    echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
-    echo "simulate rtl icarus">>raptor_tcl.tcl
+    # echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
+    # echo "simulate rtl icarus">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
@@ -197,8 +197,8 @@ parse_cga exit 1; }
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
-    echo "simulation_options compilation icarus gate">>raptor_tcl.tcl
-    echo "simulate gate icarus">>raptor_tcl.tcl
+    # echo "simulation_options compilation icarus gate">>raptor_tcl.tcl
+    # echo "simulate gate icarus">>raptor_tcl.tcl
     [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
     [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
     [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl

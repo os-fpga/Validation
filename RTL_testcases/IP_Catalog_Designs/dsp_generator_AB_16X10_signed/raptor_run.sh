@@ -170,7 +170,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
@@ -206,6 +206,7 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
+    fi
 
 cd results_dir
 echo "Device: $device">>results.log

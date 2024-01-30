@@ -1,4 +1,4 @@
-module ahb_master_example_simulation ();
+module ahb_master_example_simulation(resetn,addr,hburst,hprot,hsize,htrans,hwdata,hwwrite,read_data,hresp,hready,clk,we);
     parameter DEPTH = 10;
     parameter WIDTH = 32;
     
@@ -44,7 +44,7 @@ module ahb_master_example_simulation ();
 
 endmodule  
 
-module ram();
+module ram(clk,we,addr,di,dout);
     parameter WIDTH=32;
     parameter DEPTH=10;
 
