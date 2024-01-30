@@ -28,7 +28,7 @@ module dffnre_inst (
 //
 // INSTANTIATIONS
 //
-	dffnre inst(
+	DFFNRE inst(
 		.D(i_D),
 		.R(i_Reset),
 		.E(i_Enable),

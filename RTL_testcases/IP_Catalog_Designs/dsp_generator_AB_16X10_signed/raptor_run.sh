@@ -206,6 +206,7 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
+    fi
 
 cd results_dir
 echo "Device: $device">>results.log

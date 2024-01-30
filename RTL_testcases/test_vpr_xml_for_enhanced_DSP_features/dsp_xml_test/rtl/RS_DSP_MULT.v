@@ -5,4 +5,6 @@ input [2:0] feedback;
 input unsigned_a;
 input unsigned_b;
 output [37:0] z;
+
+assign z = a * b;
 endmodule 
