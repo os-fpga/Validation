@@ -46,6 +46,8 @@ initial begin
 	B = 18'h3ffff;
 	display_stimulus();
 	@(posedge clk);
+	@(posedge clk);
+	@(posedge clk);
 	compare();
 	$display ("\n\n***Directed Functionality Test for P = P [19:0]+ A*B is ended***\n\n");
 
@@ -54,14 +56,16 @@ initial begin
 	B = 18'h20000;
 	display_stimulus();
 	@(posedge clk);
+	@(posedge clk);
+	@(posedge clk);
 	compare();
 	$display ("\n\n***Directed Functionality Test for P = P [19:0]+ A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P [19:0]+ A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	@(posedge clk);
 	repeat (600) begin
+		A = $random( );
+		B = $random( );
+		@(posedge clk);
 		display_stimulus();
 		@(posedge clk);
 		compare();

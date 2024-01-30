@@ -5,7 +5,8 @@ module dsp_add_mul_output_to_accum_20lsb_neg (clk, reset, A, B, P);
 	output reg signed [37:0] P;
 	reg signed [19:0] i1;
 	reg signed [17:0] i2;
-	reg signed [37:0] mul, adder;
+	reg signed [37:0] mul, adder_ = 38'b0;
+	reg signed [37:0] adder;
 	always @(negedge clk) begin
 		if(reset == 1) begin
 			i1 <= 0;
@@ -29,6 +30,6 @@ module dsp_add_mul_output_to_accum_20lsb_neg (clk, reset, A, B, P);
 	end
 
 	always @ (*)  begin
-			adder = adder + mul;
+			adder = adder_ + mul;
 	end
 endmodule

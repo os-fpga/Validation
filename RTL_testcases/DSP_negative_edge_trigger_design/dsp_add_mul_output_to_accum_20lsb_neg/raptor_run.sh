@@ -17,7 +17,7 @@ LiteX_Raptor=false #design_level
 #sub-stages
 LiteX_sim=false #design_level
 ghdl_rtl_sim=false #design_level
-post_synth_sim=false #design_level
+post_synth_sim=true #design_level
 post_route_sim=false #design_level
 hw_test=false #design_level
 
@@ -400,7 +400,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log
