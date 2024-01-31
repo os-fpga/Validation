@@ -179,7 +179,6 @@ def parse_log_files(file,timing_file,log_line_keys_map):
             for line in lines[bitstream_time_line:]:
                 if "Duration: " in line:  
                     data['bitstream_runtime'] = int(line.split('ms')[0].split('Duration:')[1])
-                    print("here")
                     break
         else:
             data['bitstream_runtime'] = None  # Set to None if "GenerateBitstream" is not found
@@ -268,7 +267,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                         temp_string = line.split(log_line_keyword)[1].strip() + " " + temp_string
                         data[log_line_key] = temp_string
                     elif line.split("-")[0] == 'Error':
-                        print (line.split("Error-")[1].strip())
+                        # print (line.split("Error-")[1].strip())
                         data[log_line_key] = temp_string + ",VCS: " + line.split("Error-")[1].strip()
                 if log_line_key == 'status':
                             #the code splits the log line keyword by commas and loops through the resulting list of keywords.
