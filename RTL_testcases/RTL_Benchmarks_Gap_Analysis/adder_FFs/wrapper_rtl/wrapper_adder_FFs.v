@@ -25,7 +25,7 @@ module wrapper_adder_FFs(temp_in_a_or_b, clk, clr, d_out, cout, select_a_or_b);
                         end
             endcase
         end
-    adder_FFs (a, b, clk, clr, d_out, cout);
+    adder_FFs adder_FFs_inst (a, b, clk, clr, d_out, cout);
     endmodule
     
     

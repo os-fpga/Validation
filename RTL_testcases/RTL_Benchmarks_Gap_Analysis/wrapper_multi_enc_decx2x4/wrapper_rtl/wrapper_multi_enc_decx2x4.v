@@ -67,7 +67,7 @@ always @ (select_datain_temp, datain_temp, dataout, dataout1, dataout1_0, dataou
 // Component instances
 //--------------------------------------------------------------------
 
-multi_enc_decx2x4(
+multi_enc_decx2x4 multi_enc_decx2x4_inst (
     clock,
     datain,
     datain1,
