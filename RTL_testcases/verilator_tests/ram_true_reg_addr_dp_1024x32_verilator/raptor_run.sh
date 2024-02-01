@@ -34,7 +34,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-new_tdp36k"
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -195,8 +195,8 @@ parse_cga exit 1; }
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
-    echo "simulation_options compilation verilator gate --timing --build --main --exe">>raptor_tcl.tcl
-    echo "simulate gate verilator">>raptor_tcl.tcl
+    echo "simulation_options compilation icarus gate">>raptor_tcl.tcl
+    echo "simulate gate icarus">>raptor_tcl.tcl
     [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
     [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
     [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
