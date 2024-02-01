@@ -172,9 +172,9 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl/wrapper_rtl/">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_library_path ./rtl/wrapper_rtl/">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_design_file -V_2001 .rtl/wrapper_rtl/wb_conmax_defines.vh">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_library_path ./rtl/wrapper_rtl/">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_defines.vh">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_master_if.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_arb.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_pri_enc.v">>raptor_tcl.tcl
@@ -184,14 +184,6 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_rf.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -SV_2012 ./rtl/wrapper_rtl/wrapper_top.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_master_if.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_arb.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_pri_enc.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_msel.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_pri_dec.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_slave_if.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax_rf.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_conmax.v">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module $design">>raptor_tcl.tcl 

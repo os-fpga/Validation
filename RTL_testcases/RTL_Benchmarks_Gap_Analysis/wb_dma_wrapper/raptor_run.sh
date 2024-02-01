@@ -183,7 +183,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_pri_enc_sub.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_inc30r.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_wb_if.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/dma_wrapper_top.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/dma_wrapper_top.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_wb_slv.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_ch_sel.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file -V_2001 ./rtl/wrapper_rtl/wb_dma_ch_rf.v">>raptor_tcl.tcl
