@@ -236,6 +236,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
 
         run_time_raptor = 0
         temp_string = ""
+        temp_list = []
         previous_error_bfr_sim = False # flag to keep track of previous errors
         for line in lines:
             # Looping through each key and keyword in the log_line_keys_map for this log file
@@ -264,8 +265,10 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                         data[log_line_key] = line.split(log_line_keyword)[1].strip() 
                 if log_line_key == 'error_msg':
                     if log_line_keyword in line:
-                        temp_string = line.split(log_line_keyword)[1].strip() + " " + temp_string
-                        data[log_line_key] = temp_string
+                        # temp_string = line.split(log_line_keyword)[1].strip() + " " + temp_string
+                        # data[log_line_key] = temp_string
+                        temp_list.append(line.split(log_line_keyword)[1].strip())
+                        data[log_line_key] = ' '.join(map(str,temp_list[-3:]))
                     elif line.split("-")[0] == 'Error':
                         # print (line.split("Error-")[1].strip())
                         data[log_line_key] = temp_string + ",VCS: " + line.split("Error-")[1].strip()
