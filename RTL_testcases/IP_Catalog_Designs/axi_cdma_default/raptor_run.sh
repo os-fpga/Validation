@@ -583,7 +583,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
 #     then
 #         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
 #         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-#         (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+#         (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 # 		while read line; do
 #                 if [[ $line == *"All Comparison Matched"* ]]
 #                 then
@@ -600,7 +600,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
 #     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
 #     then
 #         echo "post_route_sim will be added later"
-#         #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
+#         #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $lut_map /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
 #         # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
 #     fi
 #     if [[ $tool_name == "verilator" ]] && [[ $compile_opts == "post_synth_sim" ]]

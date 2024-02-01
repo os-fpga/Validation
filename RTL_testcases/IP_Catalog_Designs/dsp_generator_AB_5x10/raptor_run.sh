@@ -399,7 +399,7 @@ fi
     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
     then
         echo "post_route_sim will be added later"
-        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
+        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
         # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
     fi
     if [[ $tool_name == "verilator" ]] && [[ $compile_opts == "post_synth_sim" ]]

@@ -392,7 +392,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $primitive_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
@@ -409,14 +409,14 @@ fi
     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
     then
         echo "post_route_sim will be added later"
-        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
+        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $primitive_sim $latch_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
         # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
     fi
     if [[ $tool_name == "iverilog" ]] && [[ $compile_opts == "post_synth_sim" ]]
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $cell_path $bram_sim $sim_lib $primitive_sim $latch_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path +incdir+$directory_path -y $directory_path +libext+.v && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log
@@ -449,7 +449,7 @@ fi
        echo "    return 0;">>tb_$design.cpp
        echo "}">>tb_$design.cpp
        mv tb_$design.cpp ../../rtl
-       (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace $primitive_sim $latch_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+       (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace $primitive_sim -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                if [[ $line == *"All Comparison Matched"* ]]
                then
