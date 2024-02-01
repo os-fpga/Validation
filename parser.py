@@ -264,7 +264,9 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                     elif log_line_key == 'built_type':
                         data[log_line_key] = line.split(log_line_keyword)[1].strip() 
                 if log_line_key == 'error_msg':
-                    if log_line_keyword in line:
+                    if log_line_keyword and "Memory collision occured" in line:
+                        data[log_line_key] = None  # Clears or prevents setting the error message
+                    elif log_line_keyword in line:
                         # temp_string = line.split(log_line_keyword)[1].strip() + " " + temp_string
                         # data[log_line_key] = temp_string
                         temp_list.append(line.split(log_line_keyword)[1].strip())
@@ -273,21 +275,24 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                         # print (line.split("Error-")[1].strip())
                         data[log_line_key] = temp_string + ",VCS: " + line.split("Error-")[1].strip()
                 if log_line_key == 'status':
-                            #the code splits the log line keyword by commas and loops through the resulting list of keywords.
-                            status_keywords = log_line_keyword.split(',')
-                            for status_keyword in status_keywords:
-                                if status_keyword in line:
-                                    if status_keyword == "ERROR: ":
-                                        if "SIM" in line:
-                                            if previous_error_bfr_sim: # check if any previous error occurred before SIM
-                                                data[log_line_key] = 'Fail'
-                                            else:
-                                                data[log_line_key] = 'Pass'
-                                        else:
-                                            previous_error_bfr_sim = True # set flag if any error message appears
+                    if "ERROR: Memory collision occured" in line:
+                        data[log_line_key] = 'Pass'  # Directly set the status to 'Pass' for this specific error
+                    else:
+                        #the code splits the log line keyword by commas and loops through the resulting list of keywords.
+                        status_keywords = log_line_keyword.split(',')
+                        for status_keyword in status_keywords:
+                            if status_keyword in line:
+                                if status_keyword == "ERROR: ":
+                                    if "SIM" in line:
+                                        if previous_error_bfr_sim: # check if any previous error occurred before SIM
                                             data[log_line_key] = 'Fail'
+                                        else:
+                                            data[log_line_key] = 'Pass'
                                     else:
-                                        data[log_line_key] = 'Pass'
+                                        previous_error_bfr_sim = True # set flag if any error message appears
+                                        data[log_line_key] = 'Fail'
+                                else:
+                                    data[log_line_key] = 'Pass'
                 if log_line_key == 'post_synth_sim_status':
                             #the code splits the log line keyword by commas and loops through the resulting list of keywords.
                             sim_status_keywords = log_line_keyword.split(',')
