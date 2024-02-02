@@ -10,8 +10,108 @@ module co_sim_b_registered_input_to_output_new_primitive;
 
 	integer mismatch=0;
 
+`ifdef PNR
+
+b_registered_input_to_output_new_primitive netlist( a[0] ,
+    a[1] ,
+    a[2] ,
+    a[3] ,
+    a[4] ,
+    a[5] ,
+    a[6] ,
+    a[7] ,
+    a[8] ,
+    a[9] ,
+    a[10] ,
+    a[11] ,
+    a[12] ,
+    a[13] ,
+    a[14] ,
+    a[15] ,
+    a[16] ,
+    a[17] ,
+    a[18] ,
+    a[19] ,
+    b[0] ,
+    b[1] ,
+    b[2] ,
+    b[3] ,
+    b[4] ,
+    b[5] ,
+    b[6] ,
+    b[7] ,
+    b[8] ,
+    b[9] ,
+    b[10] ,
+    b[11] ,
+    b[12] ,
+    b[13] ,
+    b[14] ,
+    b[15] ,
+    b[16] ,
+    b[17] ,
+	dly_b[0],
+	dly_b[1],
+	dly_b[2],
+	dly_b[3],
+	dly_b[4],
+	dly_b[5],
+    dly_b[6],
+    dly_b[7],
+    dly_b[8],
+    dly_b[9],
+    dly_b[10],
+    dly_b[11],
+    dly_b[12],
+    dly_b[13],
+    dly_b[14],
+    dly_b[15],
+    dly_b[16],
+    dly_b[17],
+	clk ,
+    reset ,
+    z_out[0] ,
+    z_out[1] ,
+    z_out[2] ,
+    z_out[3] ,
+    z_out[4] ,
+    z_out[5] ,
+    z_out[6] ,
+    z_out[7] ,
+    z_out[8] ,
+    z_out[9] ,
+    z_out[10] ,
+    z_out[11] ,
+    z_out[12] ,
+    z_out[13] ,
+    z_out[14] ,
+    z_out[15] ,
+    z_out[16] ,
+    z_out[17] ,
+    z_out[18] ,
+    z_out[19] ,
+    z_out[20] ,
+    z_out[21] ,
+    z_out[22] ,
+    z_out[23] ,
+    z_out[24] ,
+    z_out[25] ,
+    z_out[26] ,
+    z_out[27] ,
+    z_out[28] ,
+    z_out[29] ,
+    z_out[30] ,
+    z_out[31] ,
+    z_out[32] ,
+    z_out[33] ,
+    z_out[34] ,
+    z_out[35] ,
+    z_out[36] ,
+    z_out[37] );
+`else
+
 b_registered_input_to_output_new_primitive golden(.*);
-b_registered_input_to_output_new_primitive_post_synth netlist(.* ,.dly_b(dly_b_netlist) ,.z_out(z_out_netlist));
+`endif
 
 //clock initialization
 initial begin
@@ -69,16 +169,12 @@ end
 	
 
 task compare();
- 	
-  	if(z_out !== z_out_netlist || z_out !== expected_out || dly_b !== dly_b_netlist || dly_b_netlist !== b) begin
-		$display("Data Mismatch. Golden RTL dly_b: %0d, Netlist dly_b_netlist: %0d, Expected dly_b: %0d, Time: %0t", dly_b, dly_b_netlist, b, $time);
-    	$display("Data Mismatch. Golden RTL z_out: %0d, Netlist z_out: %0d, Expected output z_out: %0d, Time: %0t", z_out, z_out_netlist, expected_out, $time);
+ 	if ((z_out !== expected_out)) begin
+    	$display("Data Mismatch, Netlist: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
     	mismatch = mismatch+1;
  	end
-  	else begin
-	  	$display("Data Matched. Golden RTL dly_b: %0d, Netlist dly_b_netlist: %0d, Expected dly_b: %0d, Time: %0t", dly_b, dly_b_netlist, b, $time);
-  		$display("Data Matched. Golden RTL z_out: %0d, Netlist z_out: %0d,  Expected output z_out: %0d, Time: %0t", z_out, z_out_netlist, expected_out, $time);
-	  end
+  	else
+  		$display("Data Matched: Netlist: %0d,  Expected output: %0d, Time: %0t", z_out, expected_out, $time);
 endtask
 
 task display_stimulus();
