@@ -33,7 +33,7 @@ module co_sim_rams_sp_reg_addr_readmem_1024x1;
     if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
-        $display("%0d comparison(s) mismatched\nSimulation Failed", mismatch);
+        $display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
     
 
     repeat (10) @(posedge clk); $finish;

@@ -7,7 +7,7 @@ start=`date +%s`
 design="rams_sp_rf_rst_async_1024x16"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #stages
 only_LiteX=false #design_level
