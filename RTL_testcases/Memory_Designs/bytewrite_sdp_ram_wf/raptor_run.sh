@@ -7,7 +7,7 @@ start=`date +%s`
 design="bytewrite_sdp_ram_wf"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #stages
 only_LiteX=false #design_level

@@ -7,7 +7,7 @@ start=`date +%s`
 design="asym_ram_sdp_wide_async_read"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #stages
 only_LiteX=false #design_level
