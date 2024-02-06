@@ -36,7 +36,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-new_tdp36k "
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -171,7 +171,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v2_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path rapidsilicon/ip/$ip_name/v2_0/$design/src/">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v2_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v2_0/$design/src/$design\_v2_0.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
