@@ -230,7 +230,7 @@ fi
 if cmp --silent -- "../cksums.md5" "../newsum.md5" && [ -d $design ]; then
    echo "Raptor was already compiled"  
 else 
-   timeout $timeout raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
+   timeout 120m raptor --batch $mute_flag --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
     if [ ${PIPESTATUS[0]} -eq 124 ]; then
         echo -e "\nERROR: TIM: Design Compilation took $timeout. Exiting due to timeout">>raptor.log
         cat raptor.log >> results.log

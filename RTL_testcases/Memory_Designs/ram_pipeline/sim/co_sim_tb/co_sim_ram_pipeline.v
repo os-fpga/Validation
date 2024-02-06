@@ -26,11 +26,11 @@ module co_sim_ram_pipeline;
         clk2 = 1'b0;
         forever #5 clk2 = ~clk2;
     end
-    // initial begin
-    //     for(integer i = 0; i<513; i=i+1) begin 
-    //         golden.RAM[i] ='b0;
-    //     end  
-    // end
+    initial begin
+        for(integer i = 0; i<513; i=i+1) begin 
+            golden.RAM[i] ='b0;
+        end  
+    end
     initial begin
         
     {we,en1, en2,addr1, addr2, di, cycle, i} = 0;

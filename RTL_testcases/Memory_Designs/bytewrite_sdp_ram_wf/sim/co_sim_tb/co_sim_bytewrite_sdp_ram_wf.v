@@ -22,11 +22,11 @@ module co_sim_bytewrite_sdp_ram_wf;
 
 
     always #10 clk = ~clk;
-    // initial begin
-    //     for(integer i = 0; i<1024; i=i+1) begin 
-    //         golden.ram[i] ='b0;
-    //     end  
-    // end
+    initial begin
+        for(integer i = 0; i<1024; i=i+1) begin 
+            golden.ram[i] ='b0;
+        end  
+    end
     initial begin
     {clk, ena, we, write_addr, read_addr ,din, cycle, i} = 0;
    
