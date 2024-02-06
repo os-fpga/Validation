@@ -28,11 +28,11 @@ end
 task compare;
  	
   	if(Y_LUT1 !== ~A_LUT1) begin
-    	$display("Data Mismatch. Input : %0b, Golden: %0b, Netlist: %0b, Time: %0t", A_LUT1, Y_LUT1, Y_LUT1_net, $time);
+    	$display("Data Mismatch. Input : %0b, Golden: %0b, expected: %0b, Time: %0t", A_LUT1, Y_LUT1, ~A_LUT1, $time);
     	mismatch = mismatch+1;
  	end
   	else
-  		$display("Data Matched. Input : %0b, Golden: %0b, Netlist: %0b, Time: %0t", A_LUT1 ,Y_LUT1, Y_LUT1_net, $time);
+  		$display("Data Matched. Input : %0b, Golden: %0b, expected: %0b, Time: %0t", A_LUT1 ,Y_LUT1, ~A_LUT1, $time);
 endtask
 
 initial begin

@@ -8,7 +8,6 @@ BOOT_CLOCK_primitive_inst DUT (.*);
 integer mismatch=0;
 
 initial begin
-  expected_clk_output<=0;
   #15
   compare;
   #15
