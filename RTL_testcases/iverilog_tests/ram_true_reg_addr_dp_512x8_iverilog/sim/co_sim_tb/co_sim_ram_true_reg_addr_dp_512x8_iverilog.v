@@ -1,5 +1,5 @@
 
-module co_sim_ram_true_reg_addr_dp_1024x32_iverilog;
+module co_sim_ram_true_reg_addr_dp_512x8_iverilog;
 
     reg clk, weA, weB;
     reg [8:0] addrA, addrB;
@@ -7,8 +7,8 @@ module co_sim_ram_true_reg_addr_dp_1024x32_iverilog;
     wire [7:0] doutA, doutB;
 
 `ifdef PNR
-    // ram_true_reg_addr_dp_1024x32_iverilog golden(.*);
-    ram_true_reg_addr_dp_1024x32_iverilog golden( 
+    // ram_true_reg_addr_dp_512x8_iverilog golden(.*);
+    ram_true_reg_addr_dp_512x8_iverilog golden( 
    clk ,
     weA ,
     weB ,
@@ -63,7 +63,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_iverilog;
     doutB[6] ,
     doutB[7] );
 `else
-     ram_true_reg_addr_dp_1024x32_iverilog golden(.*);
+     ram_true_reg_addr_dp_512x8_iverilog golden(.*);
 `endif
    
 

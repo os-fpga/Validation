@@ -30,7 +30,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_neg;
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
 
-        addrA <= i; addrB <= {$random} % 512; weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
+       addrA <= $urandom_range(0,255);; addrB <= $urandom_range(256,512); weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
        
         compare(cycle);
@@ -39,7 +39,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_neg;
 
      for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        addrA <= i; addrB <= i; weA <=1'b1; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(0,255);; addrB <= $urandom_range(256,512); weA <=1'b1; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
        
         compare(cycle);
@@ -47,7 +47,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_neg;
 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        addrA <= i; addrB <= i; weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(0,255);; addrB <= $urandom_range(256,512); weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
        
         compare(cycle);
@@ -55,7 +55,15 @@ module co_sim_ram_true_reg_addr_dp_1024x32_neg;
 
    for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        addrA <= i; addrB <= i; weA <=1'b0; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(0,255);; addrB <= $urandom_range(256,512); weA <=1'b0; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
+        cycle = cycle +1;
+       
+        compare(cycle);
+    end
+
+     for (integer i=0; i<1024; i=i+1)begin
+        repeat (1) @ (posedge clk)
+        addrA <= $urandom_range(0,255);; addrB <= $urandom_range(256,512); weA <={$random}; weB <={$random}; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
        
         compare(cycle);

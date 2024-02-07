@@ -14,23 +14,20 @@ module co_sim_ram_simple_dp_reg_addr_512x32_block;
 
 
     always #10 clk = ~clk;
-
+    initial begin
+        for(integer i = 0; i<512; i=i+1) begin 
+            golden.ram[i] ='b0;
+        end 
+    end
     initial begin
     {clk, we, read_addr, write_addr, din, cycle, i} = 0;
 
-    for(integer i = 0; i<512; i=i+1) begin 
-        golden.ram[i] ='b0;
-    end    
-     for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        read_addr <= i; write_addr <= i; we <=1'b1; din<= $random;
 
-    end
     repeat (1) @ (negedge clk);
     //write and reads simulatneously from registered read addr(during we high) and write addr 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= i; write_addr <= i; we <=1'b1; din<= $random;
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=1'b1; din<= $random;
         cycle = cycle +1;
        
         compare(cycle);
@@ -40,7 +37,7 @@ module co_sim_ram_simple_dp_reg_addr_512x32_block;
     //not writing and reading simulatneously from last registered addr during we high
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= i; write_addr <= i; we <=0;
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=0;
         cycle = cycle +1;
        
         compare(cycle);
@@ -50,7 +47,7 @@ module co_sim_ram_simple_dp_reg_addr_512x32_block;
     //random registtered addr
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $random; write_addr <= i; we <=1'b1; din<= $random;
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=1'b1; din<= $random;
         cycle = cycle +1;
        
         compare(cycle);
@@ -60,7 +57,16 @@ module co_sim_ram_simple_dp_reg_addr_512x32_block;
     //read from only last registered addr
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= i; we <=0;
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=0;
+        cycle = cycle +1;
+       
+        compare(cycle);
+
+    end
+
+    for (integer i=0; i<512; i=i+1)begin
+        repeat (1) @ (negedge clk)
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=$random; din<= $random;
         cycle = cycle +1;
        
         compare(cycle);

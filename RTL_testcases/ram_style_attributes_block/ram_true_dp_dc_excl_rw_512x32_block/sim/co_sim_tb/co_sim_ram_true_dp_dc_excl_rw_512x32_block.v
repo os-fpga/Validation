@@ -12,7 +12,6 @@ module co_sim_ram_true_dp_dc_excl_rw_512x32_block;
     ram_true_dp_dc_excl_rw_512x32_block_post_synth netlist(.*, .doutA(doutA_net), .doutB(doutB_net));
 
 
-    
     //clock//
     initial begin
         clkA = 1'b0;
@@ -22,15 +21,15 @@ module co_sim_ram_true_dp_dc_excl_rw_512x32_block;
         clkB = 1'b0;
         forever #5 clkB = ~clkB;
     end
-
     initial begin
-        for(integer i = 0; i<513; i=i+1) begin 
+        for(integer i = 0; i<512; i=i+1) begin 
             golden.ram[i] ='b0;
         end 
     end
+
     initial begin
 
-    {weA,weB, addrA,addrB, dinA, dinB, cycle, i} = 0;
+    {weA,weB,reA,reB, addrA,addrB, dinA, dinB, cycle, i} = 0;
  
  
     repeat (1) @ (negedge clkA);

@@ -4,7 +4,7 @@ module ram_simple_dp_reg_addr_512x32_block (clk, we, read_addr, write_addr, din,
     input [31:0] din;
     output [31:0] dout;
     
-    reg [8:0] read_addr_reg;
+    reg [8:0] read_addr_reg=0;
     (* ram_style = "block" *)
     reg [31:0] ram [511:0];
 

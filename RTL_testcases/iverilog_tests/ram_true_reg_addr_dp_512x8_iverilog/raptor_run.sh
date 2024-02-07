@@ -4,7 +4,7 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="ram_true_reg_addr_dp_1024x32_iverilog"
+design="ram_true_reg_addr_dp_512x8_iverilog"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
