@@ -6,7 +6,6 @@ module co_sim_b_registered_input_to_output_new_primitive;
 	wire [17:0] dly_b_netlist;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 
@@ -50,6 +49,8 @@ b_registered_input_to_output_new_primitive netlist( a[0] ,
     b[15] ,
     b[16] ,
     b[17] ,
+	clk ,
+    reset ,
 	dly_b[0],
 	dly_b[1],
 	dly_b[2],
@@ -68,8 +69,6 @@ b_registered_input_to_output_new_primitive netlist( a[0] ,
     dly_b[15],
     dly_b[16],
     dly_b[17],
-	clk ,
-    reset ,
     z_out[0] ,
     z_out[1] ,
     z_out[2] ,

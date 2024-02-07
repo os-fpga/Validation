@@ -4,7 +4,6 @@ module co_sim_registered_in_accum_out_registered_new_primitive;
 	reg clk, reset;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 
@@ -92,8 +91,6 @@ registered_in_accum_out_registered_new_primitive netlist( a[0] ,
 registered_in_accum_out_registered_new_primitive golden(.*);
 `endif
 
-registered_in_accum_out_registered_new_primitive golden(.*);
-registered_in_accum_out_registered_new_primitive_post_synth netlist(.*, .z_out(z_out_netlist));
 
 //clock initialization
 initial begin

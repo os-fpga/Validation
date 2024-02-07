@@ -1,7 +1,7 @@
 module registered_output_mult_new_primitive (
-    input wire clk, reset,
-	input  wire [19:0] a,
+    input  wire [19:0] a,
     input  wire [17:0] b,
+    input wire clk, reset,
     output wire [37:0] z_out
     );
 

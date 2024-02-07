@@ -6,7 +6,6 @@
 	wire [37:0] z_out;
 	reg  [37:0] expected_out;
 	reg  [63:0] expected_out_shifted, expected_out2, mult;
-	//wire [37:0] z_out_netlist;
 
 	integer mismatch=0;
 

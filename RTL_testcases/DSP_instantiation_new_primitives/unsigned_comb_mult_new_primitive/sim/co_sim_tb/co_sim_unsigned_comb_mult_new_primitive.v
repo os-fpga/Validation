@@ -3,7 +3,6 @@ module co_sim_unsigned_comb_mult_new_primitive;
 	reg  [17:0] b;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR

@@ -6,7 +6,6 @@ module co_sim_accum_output_shifted_new_primitive;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
 	reg  [63:0] expected_out2;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 

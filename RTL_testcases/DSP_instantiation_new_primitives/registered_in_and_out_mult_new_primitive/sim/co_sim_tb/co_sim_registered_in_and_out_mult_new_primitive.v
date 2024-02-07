@@ -4,7 +4,6 @@ module co_sim_registered_in_and_out_mult_new_primitive;
 	reg signed [17:0] b;
 	wire signed  [37:0] z_out;
 	reg signed  [37:0] expected_out;
-	wire signed [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR
