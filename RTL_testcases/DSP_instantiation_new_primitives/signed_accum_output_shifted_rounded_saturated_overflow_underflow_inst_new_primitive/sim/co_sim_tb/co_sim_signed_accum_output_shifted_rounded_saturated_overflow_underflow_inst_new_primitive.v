@@ -6,7 +6,7 @@ module co_sim_signed_accum_output_shifted_rounded_saturated_overflow_underflow_i
 	wire signed [37:0] z_out;
 	reg  signed [37:0] expected_out;
 	reg  signed [63:0] expected_out2, mult, expected_out_shifted;
-	wire signed [37:0] z_out_netlist;
+	
 
 	integer mismatch=0;
 

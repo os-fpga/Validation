@@ -5,7 +5,6 @@ module co_sim_add_shifted_a_to_mult_output_accum_out_reg_new_primitive;
 	wire [37:0] z_out;
 	reg  [5:0] acc_fir;
 	reg  [37:0] expected_out;
-	wire [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR
@@ -48,14 +47,14 @@ add_shifted_a_to_mult_output_accum_out_reg_new_primitive netlist( a[0] ,
     b[15] ,
     b[16] ,
     b[17] ,
-	shift_right[0],
-	shift_right[1],
-	shift_right[2],
-	shift_right[3],
-	shift_right[4],
-	shift_right[5],
     clk ,
     reset ,
+	acc_fir[0],
+	acc_fir[1],
+	acc_fir[2],
+	acc_fir[3],
+	acc_fir[4],
+	acc_fir[5],
     z_out[0] ,
     z_out[1] ,
     z_out[2] ,

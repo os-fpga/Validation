@@ -6,7 +6,6 @@ module co_sim_unsigned_accum_output_shifted_rounded_saturated_overflow_inst_new_
 	wire [37:0] z_out;
 	reg  [37:0] expected_out;
 	reg  signed [63:0] expected_out2, mult, expected_out_shifted;
-	wire [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR

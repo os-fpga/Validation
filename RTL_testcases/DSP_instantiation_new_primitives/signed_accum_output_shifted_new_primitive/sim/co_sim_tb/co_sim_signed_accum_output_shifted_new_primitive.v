@@ -6,7 +6,6 @@ module co_sim_signed_accum_output_shifted_new_primitive;
 	wire signed [37:0] z_out;
 	reg signed [37:0] expected_out;
 	reg signed [63:0] expected_out2;
-	wire signed [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR

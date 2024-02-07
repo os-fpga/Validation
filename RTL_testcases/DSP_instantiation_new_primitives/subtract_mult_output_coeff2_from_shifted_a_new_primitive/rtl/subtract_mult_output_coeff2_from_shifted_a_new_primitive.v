@@ -2,9 +2,10 @@ module subtract_mult_output_coeff2_from_shifted_a_new_primitive (
 	input  wire [19:0] a,
     input  wire [17:0] b,
     input  wire [5:0] acc_fir,
-    output wire [37:0] z_out,
-    input clk, reset
+    input clk, reset,
+    output wire [37:0] z_out    
     );
+    
     parameter [79:0] MODE_BITS = 80'h00000000000001000000;    
     wire [37:0] z_w;
 

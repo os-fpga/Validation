@@ -4,7 +4,6 @@ module co_sim_accum_output_not_registered_new_primitive;
 	reg clk, reset;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR
@@ -148,8 +147,7 @@ end
 	
 
 task compare();
- 	
-  	if ((z_out !== expected_out)) begin
+ 	if ((z_out !== expected_out)) begin
     	$display("Data Mismatch, Netlist: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
     	mismatch = mismatch+1;
  	end

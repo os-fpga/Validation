@@ -7,7 +7,6 @@ module co_sim_signed_right_shift_a_input_new_primitive;
 	reg   [37:0] expected_out;
 	reg   [37:0] expected_mult;
 	reg   [63:0] expected_out_acc;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR

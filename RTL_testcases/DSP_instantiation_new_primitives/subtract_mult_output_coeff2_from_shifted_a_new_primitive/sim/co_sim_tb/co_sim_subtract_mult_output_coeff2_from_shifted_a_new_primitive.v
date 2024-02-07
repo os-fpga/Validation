@@ -5,7 +5,6 @@ module co_sim_subtract_mult_output_coeff2_from_shifted_a_new_primitive;
 	reg clk, reset;
 	reg [ 5:0] acc_fir;
 	reg  [37:0] expected_out;
-	wire  [37:0] z_out_netlist;
 
 	integer mismatch=0;
 `ifdef PNR
