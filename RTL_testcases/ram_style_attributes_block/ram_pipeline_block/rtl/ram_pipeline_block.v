@@ -12,7 +12,7 @@ reg [15:0] res1;
 reg [15:0] res2;
 
 (* ram_style = "block" *)
-reg [15:0] RAM [512:0];
+reg [15:0] RAM [511:0];
 reg [15:0] do1;
 reg [15:0] do2;
 

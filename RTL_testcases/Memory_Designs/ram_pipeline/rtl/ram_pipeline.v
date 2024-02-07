@@ -10,7 +10,7 @@ output [15:0] res2;
 
 reg [15:0] res1 = 0;
 reg [15:0] res2 = 0;
-reg [15:0] RAM [512:0];
+reg [15:0] RAM [511:0];
 reg [15:0] do1;
 reg [15:0] do2;
 

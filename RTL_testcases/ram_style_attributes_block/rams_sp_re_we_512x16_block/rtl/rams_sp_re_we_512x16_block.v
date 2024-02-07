@@ -4,7 +4,11 @@ input clk;
 input we, re;
 input [8:0] addr;
 input [15:0] di;
-output reg [15:0] dout=0;
+`ifdef IVERILOG
+    output reg [15:0] dout=0;
+`else
+    output reg [15:0] dout;
+`endif
 
 (* ram_style = "block" *)
 reg [15:0] RAM [511:0];

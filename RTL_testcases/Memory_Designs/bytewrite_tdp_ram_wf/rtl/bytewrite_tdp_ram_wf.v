@@ -30,8 +30,14 @@ module bytewrite_tdp_ram_wf #(
 );
 
   reg [(NB_COL*COL_WIDTH)-1:0] BRAM [RAM_DEPTH-1:0];
-  reg [(NB_COL*COL_WIDTH)-1:0] ram_data_a = {(NB_COL*COL_WIDTH){1'b0}};
-  reg [(NB_COL*COL_WIDTH)-1:0] ram_data_b = {(NB_COL*COL_WIDTH){1'b0}};
+  `ifdef IVERILOG
+    reg [(NB_COL*COL_WIDTH)-1:0] ram_data_a = {(NB_COL*COL_WIDTH){1'b0}};
+    reg [(NB_COL*COL_WIDTH)-1:0] ram_data_b = {(NB_COL*COL_WIDTH){1'b0}};
+  `else
+    reg [(NB_COL*COL_WIDTH)-1:0] ram_data_a;
+    reg [(NB_COL*COL_WIDTH)-1:0] ram_data_b;
+  `endif
+  
 
   // The following code either initializes the memory values to a specified file or to all zeros to match hardware
   // generate

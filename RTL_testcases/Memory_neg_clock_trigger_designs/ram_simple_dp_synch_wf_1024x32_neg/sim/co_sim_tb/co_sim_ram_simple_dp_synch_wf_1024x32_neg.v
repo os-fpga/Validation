@@ -17,14 +17,15 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 
             golden.ram[i] ='b0;
-        end  
+        end 
     end
     initial begin
+    
     {clk, we, re, read_addr, write_addr, din, cycle, i} = 0;
 
-    repeat (1) @ (posedge clk);
+    repeat (1) @ (negedge clk);
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
+        repeat (1) @ (negedge clk)
         read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=1'b1; re<=1'b0; din<= $random;
         cycle = cycle +1;
       
@@ -33,8 +34,8 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
     end
 
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
-        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=0; re<=1'b1;
+        repeat (1) @ (negedge clk)
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=0; re<=1'b1;
         cycle = cycle +1;
       
         compare(cycle);
@@ -42,8 +43,8 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
     end
 
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
-        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=1'b1; re<=1'b0; din<= $random;
+        repeat (1) @ (negedge clk)
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=1'b1; re<=1'b0; din<= $random;
         cycle = cycle +1;
       
         compare(cycle);
@@ -51,7 +52,7 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
     end
 
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
+        repeat (1) @ (negedge clk)
         read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=0; re<=1'b1;
         cycle = cycle +1;
       
@@ -61,8 +62,16 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
 
     //random
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
-        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <={$random};  re <={$random};  din<= {$random}; 
+        repeat (1) @ (negedge clk)
+        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <= {$random}; re <= {$random};  din<= {$random}; 
+        cycle = cycle +1;
+       
+        compare(cycle);
+    end
+     //random
+    for (integer i=0; i<1024; i=i+1)begin
+        repeat (1) @ (negedge clk)
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <= {$random}; re <= {$random};  din<= {$random}; 
         cycle = cycle +1;
        
         compare(cycle);
@@ -74,7 +83,7 @@ module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
         $display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
     
 
-    repeat (10) @(posedge clk); $finish;
+    repeat (10) @(negedge clk); $finish;
     end
 
     task compare(input integer cycle);

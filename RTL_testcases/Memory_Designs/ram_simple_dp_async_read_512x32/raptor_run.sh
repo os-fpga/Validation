@@ -7,7 +7,7 @@ start=`date +%s`
 design="ram_simple_dp_async_read_512x32"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #stages
 only_LiteX=false #design_level

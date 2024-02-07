@@ -6,7 +6,7 @@ module ram_simple_dp_async_reg_read_512x16_block (clk, we, read_addr, write_addr
     
     (* ram_style = "block" *)
     reg [15:0] ram [511:0];
-    reg [8:0] read_addr_reg;
+    reg [8:0] read_addr_reg=0;
 
     always @(posedge clk)
     begin

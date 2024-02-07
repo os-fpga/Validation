@@ -34,7 +34,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-new_tdp36k"
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -407,7 +407,7 @@ fi
             cat $main_path/results_dir/raptor.log >> $main_path/results_dir/results.log
         fi
 		while read line; do
-                if [[ $line == *"All Comparison Matched"* ]]
+                if [[ $line == *"All Comparison Matcshed"* ]]
                 then
                     rm -fr tb.vcd
                 fi

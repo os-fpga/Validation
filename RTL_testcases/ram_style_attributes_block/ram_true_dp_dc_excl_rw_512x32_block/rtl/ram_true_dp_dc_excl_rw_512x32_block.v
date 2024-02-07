@@ -2,9 +2,9 @@ module ram_true_dp_dc_excl_rw_512x32_block (clkA, clkB, weA, weB, reA, reB, addr
     input clkA, clkB, weA, weB, reA, reB;
     input [8:0] addrA, addrB;
     input [31:0] dinA, dinB;
-    output reg [31:0] doutA, doutB;
+    output reg [31:0] doutA=0, doutB=0;
     
-    (* ram_style = "block" *)
+    // (* ram_style = "block" *)
     reg [31:0] ram [511:0];
     always @(posedge clkA)
     begin

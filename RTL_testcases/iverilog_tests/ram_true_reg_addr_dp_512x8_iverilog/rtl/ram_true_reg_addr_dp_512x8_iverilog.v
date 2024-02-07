@@ -1,11 +1,11 @@
-module ram_true_reg_addr_dp_1024x32_iverilog (clk, weA, weB, addrA, addrB, dinA, dinB, doutA, doutB);
+module ram_true_reg_addr_dp_512x8_iverilog (clk, weA, weB, addrA, addrB, dinA, dinB, doutA, doutB);
     input clk, weA, weB;
     input [8:0] addrA, addrB;
     input [7:0] dinA, dinB;
     output [7:0] doutA, doutB;
     
     reg [8:0] reg_addrA, reg_addrB;
-    reg [7:0] ram [512:0];
+    reg [7:0] ram [511:0];
     always @(posedge clk)
     begin
         if (weA)
