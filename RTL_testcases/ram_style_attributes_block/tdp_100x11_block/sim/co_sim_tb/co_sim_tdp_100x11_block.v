@@ -22,7 +22,11 @@ module co_sim_tdp_100x11_block;
         clkB = 1'b0;
         forever #5 clkB = ~clkB;
     end
-
+    initial begin
+        for(integer i = 0; i<11; i=i+1) begin 
+            golden.ram[i] ='b0;
+        end 
+    end
 
     initial begin
     {weA,weB, addrA,addrB, dinA, dinB, cycle, i} = 0;
