@@ -4,7 +4,7 @@ input clk;
 input we, re;
 input [8:0] addr;
 input [15:0] di;
-output reg [15:0] dout;
+output reg [15:0] dout=0;
 
 (* ram_style = "block" *)
 reg [15:0] RAM [511:0];
