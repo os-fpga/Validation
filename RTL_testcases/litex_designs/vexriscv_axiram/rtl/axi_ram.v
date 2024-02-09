@@ -144,7 +144,7 @@ reg s_axi_rlast_pipe_reg = 1'b0;
 reg s_axi_rvalid_pipe_reg = 1'b0;
 
 // (* RAM_STYLE="BLOCK" *)
-reg [DATA_WIDTH-1:0] mem[(65540)-1:0];
+reg [DATA_WIDTH-1:0] mem[((2**VALID_ADDR_WIDTH)-1):0];
 
 wire [VALID_ADDR_WIDTH-1:0] s_axi_awaddr_valid = s_axi_awaddr >> (ADDR_WIDTH - VALID_ADDR_WIDTH);
 wire [VALID_ADDR_WIDTH-1:0] s_axi_araddr_valid = s_axi_araddr >> (ADDR_WIDTH - VALID_ADDR_WIDTH);
@@ -165,15 +165,15 @@ assign s_axi_rvalid = PIPELINE_OUTPUT ? s_axi_rvalid_pipe_reg : s_axi_rvalid_reg
 
 integer i, j;
 
-initial begin
-    // two nested loops for smaller number of iterations per loop
-    // workaround for synthesizer complaints about large loop counts
-    for (i = 0; i < 2**VALID_ADDR_WIDTH; i = i + 2**(VALID_ADDR_WIDTH/2)) begin
-        for (j = i; j < i + 2**(VALID_ADDR_WIDTH/2); j = j + 1) begin
-            mem[j] = 0;
-        end
-    end
-end
+// initial begin
+//     // two nested loops for smaller number of iterations per loop
+//     // workaround for synthesizer complaints about large loop counts
+//     for (i = 0; i < 2**VALID_ADDR_WIDTH; i = i + 2**(VALID_ADDR_WIDTH/2)) begin
+//         for (j = i; j < i + 2**(VALID_ADDR_WIDTH/2); j = j + 1) begin
+//             mem[j] = 0;
+//         end
+//     end
+// end
 
 always @* begin
     write_state_next = WRITE_STATE_IDLE;

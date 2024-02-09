@@ -17,9 +17,9 @@ LiteX_Raptor=false #design_level
 #sub-stages
 LiteX_sim=false #design_level
 ghdl_rtl_sim=false #design_level
-[ -z $3 ] && post_synth_sim=true || post_synth_sim=$3 #design_level
+[ -z $3 ] && post_synth_sim=false || post_synth_sim=$3 #design_level
 post_route_sim=false #design_level
-ip_level=true
+ip_level=false
 hw_test=false #design_level
 
 #raptor options
@@ -35,7 +35,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options=""
+synth_options="-new_tdp36k "
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
