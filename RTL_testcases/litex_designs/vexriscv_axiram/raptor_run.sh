@@ -17,9 +17,9 @@ LiteX_Raptor=false #design_level
 #sub-stages
 LiteX_sim=false #design_level
 ghdl_rtl_sim=false #design_level
-[ -z $3 ] && post_synth_sim=false || post_synth_sim=$3 #design_level
+[ -z $3 ] && post_synth_sim=true || post_synth_sim=$3 #design_level
 post_route_sim=false #design_level
-ip_level=false
+ip_level=true
 hw_test=false #design_level
 
 #raptor options
