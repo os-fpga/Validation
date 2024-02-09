@@ -24,8 +24,8 @@ DSP38 #(
   .ACC_FIR(6'd0), // 6-bit left shift A input
   .Z(z_w), // 38-bit data output
   .DLY_B(dly_b), // 18-bit B registered output
-  .CLK(CLK), // Clock
-  .RESET(RESET), // None
+  .CLK(clk), // Clock
+  .RESET(reset), // None
   .FEEDBACK(3'd1), // 3-bit feedback input selects coefficient
   .LOAD_ACC(1'd0), // Load accumulator input
   .SATURATE(1'b0), // Saturate enable
