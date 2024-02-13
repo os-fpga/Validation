@@ -32,7 +32,7 @@ localparam BYPASS         = 5'b11111;
       .jtag_tms (jtag_tms ),
       .jtag_tdi (jtag_tdi ),
       .jtag_tdo (jtag_tdo ),
-      .s_ahb_aresetn (s_ahb_aresetn ),
+      .s_ahb_aresetn (s_ahb_aresetn )
     );
 
     initial begin
