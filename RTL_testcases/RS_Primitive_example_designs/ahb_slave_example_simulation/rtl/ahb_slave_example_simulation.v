@@ -10,7 +10,6 @@ module ahb_slave_example_simulation ();
 
     wire [WIDTH-1:0] hrdata_w;
     wire hready_w;
-    wire s_ahb_aresetn;
     wire ahb_haddr;
     wire ahb_hburst;
     wire ahb_hmastlock;
@@ -24,7 +23,6 @@ module ahb_slave_example_simulation ();
     wire ahb_hnonsec;
     wire ahb_hwdata;
     wire ahb_hwrite;
-    wire s_ahb_aclk;
     wire m_axi_awvalid;
     wire m_axi_awready;
     wire m_axi_awaddr;
