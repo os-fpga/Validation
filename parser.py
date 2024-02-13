@@ -233,7 +233,32 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         # data = {}
         # Reading all the lines of the log file into a list
         lines = f.readlines()
+        first_pnr_sim_line = -1
+        last_pnr_sim_line = -1
+        # Find first and last occurrence of the target string
+        for i, line in enumerate(lines):
+            if "SPR: Post-PnR simulation for design:" in line:
+                if first_pnr_sim_line == -1:
+                    first_pnr_sim_line = i
+                last_pnr_sim_line = i
+        
+        print(f"First occurrence: {first_pnr_sim_line}, Last occurrence: {last_pnr_sim_line}")
+        
+        # Initialize status, default to None
+        pnr_sim_status = None
+        
+        if first_pnr_sim_line != -1 and last_pnr_sim_line != -1:
+            # Check for simulation status messages between the first and last occurrence
+            for line in lines[first_pnr_sim_line:last_pnr_sim_line + 1]:
+                if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
+                    pnr_sim_status = "Fail"
+                    break  # Prioritize failure detection
+                elif "Simulation Passed" in line:
+                    pnr_sim_status = "Pass"
+                    # Keep looking for fail status until the end, don't break here
 
+        else:
+            print("SPR: Post-PnR simulation for design: not found in the log.")
         run_time_raptor = 0
         temp_string = ""
         temp_list = []
@@ -317,7 +342,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                                     else:
                                         data[log_line_key] = 'Fail'
                 if log_line_key == 'post_route_sim_status':
-                            data[log_line_key] = None               
+                            data[log_line_key] = pnr_sim_status               
                 if log_line_key == 'bitstream_sim_status':
                             data[log_line_key] = None
         start_print_fmax=-1
