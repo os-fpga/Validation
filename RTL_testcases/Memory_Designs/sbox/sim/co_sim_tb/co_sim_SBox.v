@@ -10,7 +10,29 @@ wire [7:0] dout, dout_net;    //SBox output
     reg [6:0] i;
 
     SBox golden(.*);
-    SBox_post_synth netlist(.*, .dout(dout_net));
+    `ifdef PNR
+        SBox_post_route netlist( clk ,
+    reset ,
+    valid_in ,
+    addr[0] ,
+    addr[1] ,
+    addr[2] ,
+    addr[3] ,
+    addr[4] ,
+    addr[5] ,
+    addr[6] ,
+    addr[7] ,
+    dout_net[0] ,
+    dout_net[1] ,
+    dout_net[2] ,
+    dout_net[3] ,
+    dout_net[4] ,
+    dout_net[5] ,
+    dout_net[6] ,
+    dout_net[7] );
+    `else
+        SBox_post_synth netlist(.*, .dout(dout_net));
+    `endif
 
 
     always #10 clk = ~clk;
