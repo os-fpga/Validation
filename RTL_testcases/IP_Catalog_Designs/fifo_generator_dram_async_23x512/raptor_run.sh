@@ -164,7 +164,7 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdata_width=23 -PDEPTH=512 -Psynchronous=0 -Pfull_threshold=1 -Pfull_value=500 -out_file ./$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdata_width=23 -PDEPTH=512 -Pbuiltin_fifo=0 -Psynchronous=0 -Pfull_threshold=1 -Pfull_value=500 -out_file ./$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
