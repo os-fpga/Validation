@@ -4,92 +4,18 @@ module co_sim_rams_sp_re_we_wf_1024x32;
     reg we, re;
     reg [9:0] addr;
     reg [31:0] di;
-    wire [31:0] dout, dout_net;
+    wire [31:0] dout, dout_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     rams_sp_re_we_wf_1024x32 golden(.*);
     `ifdef PNR
-        rams_sp_re_we_wf_1024x32_post_route netlist( clk ,
-    we ,
-    re ,
-    addr[0] ,
-    addr[1] ,
-    addr[2] ,
-    addr[3] ,
-    addr[4] ,
-    addr[5] ,
-    addr[6] ,
-    addr[7] ,
-    addr[8] ,
-    addr[9] ,
-    di[0] ,
-    di[1] ,
-    di[2] ,
-    di[3] ,
-    di[4] ,
-    di[5] ,
-    di[6] ,
-    di[7] ,
-    di[8] ,
-    di[9] ,
-    di[10] ,
-    di[11] ,
-    di[12] ,
-    di[13] ,
-    di[14] ,
-    di[15] ,
-    di[16] ,
-    di[17] ,
-    di[18] ,
-    di[19] ,
-    di[20] ,
-    di[21] ,
-    di[22] ,
-    di[23] ,
-    di[24] ,
-    di[25] ,
-    di[26] ,
-    di[27] ,
-    di[28] ,
-    di[29] ,
-    di[30] ,
-    di[31] ,
-    dout_net[0] ,
-    dout_net[1] ,
-    dout_net[2] ,
-    dout_net[3] ,
-    dout_net[4] ,
-    dout_net[5] ,
-    dout_net[6] ,
-    dout_net[7] ,
-    dout_net[8] ,
-    dout_net[9] ,
-    dout_net[10] ,
-    dout_net[11] ,
-    dout_net[12] ,
-    dout_net[13] ,
-    dout_net[14] ,
-    dout_net[15] ,
-    dout_net[16] ,
-    dout_net[17] ,
-    dout_net[18] ,
-    dout_net[19] ,
-    dout_net[20] ,
-    dout_net[21] ,
-    dout_net[22] ,
-    dout_net[23] ,
-    dout_net[24] ,
-    dout_net[25] ,
-    dout_net[26] ,
-    dout_net[27] ,
-    dout_net[28] ,
-    dout_net[29] ,
-    dout_net[30] ,
-    dout_net[31] );
+        rams_sp_re_we_wf_1024x32_post_route netlist( 
+    
+        );
     `else
-        rams_sp_re_we_wf_1024x32_post_synth netlist(.*, .dout(dout_net));
+        rams_sp_re_we_wf_1024x32_post_synth netlist(.*, .dout(dout_netlist));
     `endif
 
 
@@ -146,8 +72,8 @@ module co_sim_rams_sp_re_we_wf_1024x32;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(dout !== dout_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_net,$time);
+    if(dout !== dout_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
         mismatch = mismatch+1;
     end
     
