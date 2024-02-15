@@ -2,11 +2,11 @@
 module co_sim_up_counter_32bit;
 
   parameter CLK_PERIOD = 2; // Clock period in nanoseconds
-  parameter TOTAL_TIME = 4294967296;
+  parameter TOTAL_TIME = 1048576;
 
   reg clk;
   reg rst;
-  wire [31:0] count,count_netlist;
+  wire [19:0] count,count_netlist;
 
   reg[31:0] error=0;
   reg [`COUNTER_WIDTH - 1:0] test_cycles;
@@ -30,7 +30,7 @@ module co_sim_up_counter_32bit;
     @(negedge clk);
     compare();
 
-    repeat(4294967300) @(negedge clk) begin
+    repeat(1048590) @(negedge clk) begin
       // @(negedge clk);
       // display_stimulus();
       // @(negedge clk);

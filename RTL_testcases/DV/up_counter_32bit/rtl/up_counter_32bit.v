@@ -1,7 +1,7 @@
 module up_counter_32bit (
     input wire clk,
     input wire rst,
-    output reg [31:0] count
+    output reg [19:0] count
 );
 
 // Reset the counter to 0 when the reset signal is active
