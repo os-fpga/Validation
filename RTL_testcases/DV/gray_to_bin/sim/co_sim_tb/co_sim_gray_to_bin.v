@@ -10,8 +10,12 @@ module co_sim_gray_to_bin;
   integer mismatch=0;
 
   gray_to_bin golden (.gray(gray),.binary(binary));
-  gray_to_bin_post_synth netlist (.gray(gray),.binary(binary_netlist));
-
+  `ifdef PNR
+    gray_to_bin_post_route netlist (
+    );
+  `else
+    gray_to_bin_post_synth netlist (.gray(gray),.binary(binary_netlist));
+  `endif 
   // always #1 clk = ~clk;
 
   initial begin

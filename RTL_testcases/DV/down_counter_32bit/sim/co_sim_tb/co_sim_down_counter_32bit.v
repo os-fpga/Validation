@@ -14,7 +14,12 @@ module co_sim_down_counter_32bit;
 	integer mismatch=0;
 
   down_counter_32bit dut (.clk(clk),.rst(rst),.count(count));
-  down_counter_32bit_post_synth  netlist (.clk(clk),.rst(rst),.count(count_netlist));
+  `ifdef PNR
+  down_counter_32bit_post_route netlist (
+  );
+  `else
+    down_counter_32bit_post_synth  netlist (.clk(clk),.rst(rst),.count(count_netlist));
+  `endif 
 
   always #((CLK_PERIOD/2)) clk = ~clk;
 
