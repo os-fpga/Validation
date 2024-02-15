@@ -10,7 +10,7 @@ module down_counter_32bit_tb;
     reg rst;
     
     // Outputs
-    wire [31:0] count;
+    wire [19:0] count;
     
     // Instantiate the down_counter module
     down_counter_32bit dut (
