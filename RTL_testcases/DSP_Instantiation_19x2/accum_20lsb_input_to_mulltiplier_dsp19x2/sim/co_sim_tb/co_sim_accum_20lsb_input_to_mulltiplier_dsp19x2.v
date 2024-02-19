@@ -119,7 +119,7 @@ initial begin
 	b = 18'h3;
 	mult[31:0]  = add_sub_out[9:0] * b[8:0];
 	mult[63:32] = add_sub_out[40:32] * b[17:9]; 
-	@(posedge clk)
+	@(negedge clk)
 	add_sub_in = {{{22'b0, a[19:10]} << 6'd2},{{22'b0, a[9:0]} << 6'd2}};
 	add_sub_out = {{add_sub_in[63:32] - mult[63:32]},{add_sub_in[31:0] - mult[31:0]}};
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
@@ -134,7 +134,7 @@ initial begin
 	b = 18'h1ffff;
 	mult[31:0]  = add_sub_out[9:0] * b[8:0];
 	mult[63:32] = add_sub_out[41:32] * b[17:9]; 
-	@(posedge clk)
+	@(negedge clk)
 	add_sub_in = {{{22'b0, a[19:10]} << 6'd2},{{22'b0, a[9:0]} << 6'd2}};
 	add_sub_out = {{add_sub_in[63:32] - mult[63:32]},{add_sub_in[31:0] - mult[31:0]}};
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
@@ -149,7 +149,7 @@ initial begin
 	b = 18'h20000;
 	mult[31:0]  = add_sub_out[9:0] * b[8:0];
 	mult[63:32] = add_sub_out[41:32] * b[17:9]; 
-	@(posedge clk)
+	@(negedge clk)
 	add_sub_in = {{{22'b0, a[19:10]} << 6'd2},{{22'b0, a[9:0]} << 6'd2}};
 	add_sub_out = {{add_sub_in[63:32] - mult[63:32]},{add_sub_in[31:0] - mult[31:0]}};
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
@@ -164,7 +164,7 @@ initial begin
 	b = 109048;
 	mult[31:0]  = add_sub_out[9:0] * b[8:0];
 	mult[63:32] = add_sub_out[41:32] * b[17:9]; 
-	@(posedge clk)
+	@(negedge clk)
 	add_sub_in = {{{22'b0, a[19:10]} << 6'd2},{{22'b0, a[9:0]} << 6'd2}};
 	add_sub_out = {{add_sub_in[63:32] - mult[63:32]},{add_sub_in[31:0] - mult[31:0]}};
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
@@ -181,7 +181,7 @@ initial begin
 		b = $urandom( );
 		mult[31:0]  = add_sub_out[9:0] * b[8:0];
 		mult[63:32] = add_sub_out[41:32] * b[17:9]; 
-		@(posedge clk)
+		@(negedge clk)
 		add_sub_in = {{{22'b0, a[19:10]} << 6'd2},{{22'b0, a[9:0]} << 6'd2}};
 		add_sub_out = {{add_sub_in[63:32] - mult[63:32]},{add_sub_in[31:0] - mult[31:0]}};
 		expected_out = {add_sub_out[50:32],add_sub_out[18:0]};

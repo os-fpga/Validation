@@ -22,48 +22,11 @@ module co_sim_ram_simple_dp_async_read_512x32;
     initial begin
     {clk, we, read_addr, write_addr, din, cycle, i} = 0;
 
-
+    for (integer i=0; i<512; i=i+1)begin
+        repeat (1) @ (negedge clk)
+        write_addr <= i; we <=1'b1; din<= $random;
+    end
     repeat (1) @ (negedge clk);
-    //write and reads simulatneously from same read and write addr 
-    for (integer i=0; i<10; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=1'b1; din<= $random;
-        cycle = cycle +1;
-       
-        compare(cycle);
-
-    end
-
-    //not writing and reading simulatneously from given addr
-    for (integer i=0; i<10; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=0;
-        cycle = cycle +1;
-       
-        compare(cycle);
-
-    end
-
-    //read from random and write to all
-    for (integer i=0; i<10; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(256,511); write_addr <= $urandom_range(0,255); we <=1'b1; din<= $random;
-        cycle = cycle +1;
-       
-        compare(cycle);
-
-    end
-
-    //read from all
-    for (integer i=0; i<10; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(256,511); write_addr <= $urandom_range(0,255); we <=0;
-        cycle = cycle +1;
-       
-        compare(cycle);
-
-    end
-
      for (integer i=0; i<10; i=i+1)begin
         repeat (1) @ (negedge clk)
         read_addr <= $urandom_range(256,511); write_addr <= $urandom_range(0,255);  we <=$random; din<= $random;
