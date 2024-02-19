@@ -122,7 +122,7 @@ initial begin
 	
 	$display ("\n\n*** Random Functionality Tests for multiplier with unsigned inputs are applied***\n\n");
 	repeat (600) begin
-	        @(posedge clk);
+	        @(negedge clk);
 		a = $urandom( );
 		b = $urandom( );
 		acc_fir = 4'd2;

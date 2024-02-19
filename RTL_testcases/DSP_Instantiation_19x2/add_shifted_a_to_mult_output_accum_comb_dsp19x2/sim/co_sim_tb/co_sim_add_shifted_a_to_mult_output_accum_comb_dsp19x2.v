@@ -105,7 +105,7 @@ end
 
 initial begin
 	{a, b, reset, acc_fir, expected_out, mult1, mult2, mult_out, add_sub_in, add_sub_out} = 0;
-	@(posedge clk);
+	@(negedge clk);
 	reset = 1;
 	$display ("\n\n***Reset Test is applied***\n\n");
 	display_stimulus();
@@ -116,7 +116,7 @@ initial begin
 	reset = 0;
 
 	$display ("\n\n***Directed Functionality Test for multiplier and acc_fir is applied***\n\n");
-	@(posedge clk);
+	@(negedge clk);
 	a = 20'd255;
 	b = 18'd1;
 	acc_fir =5'h1;
@@ -127,7 +127,7 @@ initial begin
 	add_sub_out[63:32] = add_sub_in[63:32] + mult_out[63:32];
 	add_sub_out[31:0] = add_sub_in[31:0] + mult_out[31:0];
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
-	@(posedge clk);
+	@(negedge clk);
 	display_stimulus();
 	compare();
 	$display ("\n\n***Directed Functionality Test for multiplier and acc_fir is ended***\n\n");
@@ -143,7 +143,7 @@ initial begin
 	add_sub_out[63:32] = add_sub_in[63:32] + mult_out[63:32];
 	add_sub_out[31:0] = add_sub_in[31:0] + mult_out[31:0];
 	expected_out = {add_sub_out[50:32],add_sub_out[18:0]};
-	@(posedge clk);
+	@(negedge clk);
 	display_stimulus();
 	compare();
 	$display ("\n\n***Directed Functionality Test for multiplier and acc_fir is ended***\n\n");
@@ -161,7 +161,7 @@ initial begin
 		add_sub_out[63:32] = add_sub_in[63:32] + mult_out[63:32];
 		add_sub_out[31:0] = add_sub_in[31:0] + mult_out[31:0];
 		expected_out = {add_sub_out[50:32],add_sub_out[18:0]};//calculate the result at every negedge
-		@(posedge clk);
+		@(negedge clk);
 		display_stimulus();
 		compare();
 	end

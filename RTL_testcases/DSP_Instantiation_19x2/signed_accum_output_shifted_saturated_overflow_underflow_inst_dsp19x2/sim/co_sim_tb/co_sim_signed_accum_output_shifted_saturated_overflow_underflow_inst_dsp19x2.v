@@ -124,7 +124,7 @@ initial begin
 	shift_right = 5'h0;
 	mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 	mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 	expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 	expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -143,7 +143,7 @@ initial begin
 	shift_right = 5'h3;
 	mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 	mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 	expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 	expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -162,7 +162,7 @@ initial begin
 	shift_right = 5'h1;
 	mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 	mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 	expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 	expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -181,7 +181,7 @@ initial begin
 	shift_right = 5'd15;
 	mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 	mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 	expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 	expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -202,7 +202,7 @@ initial begin
 		shift_right = $urandom( );
 		mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 		mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 		expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 		expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -224,7 +224,7 @@ initial begin
 	repeat (100) begin
 		mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 		mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 		expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 		expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;
@@ -246,7 +246,7 @@ initial begin
 	repeat (100) begin
 		mult[31:0] = $signed(a[9:0])*$signed(b[8:0]);
 		mult[63:32] = $signed(a[19:10])*$signed(b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = expected_out2[31:0] - mult[31:0];
 		expected_out2[63:32] = expected_out2[63:32] - mult[63:32];
 		expected_out_shifted[31:0] = expected_out2[31:0] >>>shift_right;

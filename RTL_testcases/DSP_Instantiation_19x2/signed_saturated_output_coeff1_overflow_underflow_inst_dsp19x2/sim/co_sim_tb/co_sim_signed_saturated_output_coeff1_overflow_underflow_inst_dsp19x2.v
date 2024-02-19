@@ -118,7 +118,7 @@ initial begin
 	$display ("\n\n***Directed Functionality Test is applied***\n\n");
 	a = 20'h7;
 	b = 18'h3;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = $signed(10'h3ff) * $signed(b[8:0]); 
 	mult2 = $signed(10'h3ff) * $signed(b[17:9]); 
 	expected_out_shifted[31:0] = $signed(a[9:0]) << 5'd2;
@@ -138,7 +138,7 @@ initial begin
 	@(negedge clk);
 	a = 20'h7ffff;
 	b = 18'h1ffff;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = $signed(10'h3ff) * $signed(b[8:0]); 
 	mult2 = $signed(10'h3ff) * $signed(b[17:9]); 
 	expected_out_shifted[31:0] = $signed(a[9:0]) << 5'd2;
@@ -159,7 +159,7 @@ initial begin
 	@(negedge clk);
 	a = 20'h80000;
 	b = 18'h20000;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = $signed(10'h3ff) * $signed(b[8:0]); 
 	mult2 = $signed(10'h3ff) * $signed(b[17:9]); 
 	expected_out_shifted[31:0] = $signed(a[9:0]) << 5'd2;
@@ -180,7 +180,7 @@ initial begin
 	//@(negedge clk);
 	a = 417393;
 	b = 109048;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = $signed(10'h3ff) * $signed(b[8:0]); 
 	mult2 = $signed(10'h3ff) * $signed(b[17:9]); 
 	expected_out_shifted[31:0] = $signed(a[9:0]) << 5'd2;
@@ -201,7 +201,7 @@ initial begin
 	repeat (500) begin
 		a = $random( );
 		b = $random( );
-		@(posedge clk);
+		@(negedge clk);
 		mult1 = $signed(10'h3ff) * $signed(b[8:0]); 
 		mult2 = $signed(10'h3ff) * $signed(b[17:9]); 
 		expected_out_shifted[31:0] = $signed(a[9:0]) << 5'd2;
