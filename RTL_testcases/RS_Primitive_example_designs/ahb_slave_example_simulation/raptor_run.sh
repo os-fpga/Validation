@@ -195,8 +195,8 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
-    echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
-    echo "simulate rtl icarus">>raptor_tcl.tcl
+    # echo "simulation_options compilation icarus rtl">>raptor_tcl.tcl
+    # echo "simulate rtl icarus">>raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl

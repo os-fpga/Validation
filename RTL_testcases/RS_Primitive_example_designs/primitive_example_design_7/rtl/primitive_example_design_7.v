@@ -1,4 +1,4 @@
-module primitive_example_design_7();
+module primitive_example_design_7(haddr,burst,prot,size,trans,clk,reset,read_write,clear,addr,data_out,hresp,ready,a,b,hw,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en);
     parameter DEPTH = 10;
     parameter WIDTH = 32;
 

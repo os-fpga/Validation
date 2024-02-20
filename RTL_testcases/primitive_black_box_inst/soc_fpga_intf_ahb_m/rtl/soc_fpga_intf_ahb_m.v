@@ -1,17 +1,17 @@
 module soc_fpga_intf_ahb_m (
 
-    input logic                 S0_HRESETN_I,
-    input logic [         31:0] S0_HADDR,
-    input logic [          2:0] S0_HBURST,
-    input logic [          3:0] S0_HPROT,
-    input logic [          2:0] S0_HSIZE,
-    input logic [          2:0] S0_HTRANS,
-    input logic [         31:0] S0_HWDATA,
-    input logic                 S0_HWWRITE,
-    output logic [        31:0] S0_HRDATA,
-    output logic                S0_HREADY,
-    output logic                S0_HRESP,
-    input logic                 S0_HCLK
+    input                 S0_HRESETN_I,
+    input [         31:0] S0_HADDR,
+    input [          2:0] S0_HBURST,
+    input [          3:0] S0_HPROT,
+    input [          2:0] S0_HSIZE,
+    input [          2:0] S0_HTRANS,
+    input [         31:0] S0_HWDATA,
+    input                 S0_HWWRITE,
+    output [        31:0] S0_HRDATA,
+    output                S0_HREADY,
+    output                S0_HRESP,
+    input                 S0_HCLK
 );
 
 SOC_FPGA_INTF_AHB_M inst (
