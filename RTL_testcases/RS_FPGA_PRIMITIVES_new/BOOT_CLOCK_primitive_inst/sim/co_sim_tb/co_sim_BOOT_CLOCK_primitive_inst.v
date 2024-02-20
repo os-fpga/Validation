@@ -2,12 +2,37 @@
 module co_sim_BOOT_CLOCK_primitive_inst;
   wire O_BOOT_CLOCK ;
 
-  wire expected_clk_output;
+  reg expected_clk_output;
 BOOT_CLOCK_primitive_inst DUT (.*);
 
 integer mismatch=0;
 
 initial begin
+  expected_clk_output <= 0;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
+  #15
+  compare;
   #15
   compare;
   #15

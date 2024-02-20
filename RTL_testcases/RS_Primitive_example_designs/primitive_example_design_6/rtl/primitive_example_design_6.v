@@ -12,15 +12,15 @@ wire [1:0] dffre_out;
 wire [1:0] i_buf_out;
 wire rst_i_buf_out;
 
-I_BUF clk_buf_inst (.I(clk),.OE(ibuf_oe1),.O(clk_buf_out));
+I_BUF clk_buf_inst (.I(clk),.EN(ibuf_oe1),.O(clk_buf_out));
 
 O_DDR iddr_ist1 (.D(i_buf_out),.R(rst),.E(oddr_en),.C(clk_buf_out),.Q(oddr_out));
 
-O_BUFT_DS o_buft_inst1 (.OE(dffre_out),.I(in[0]),.C(clk_buf_out),.O_N(q_n),.O_P(q_p));
+O_BUFT_DS o_buft_inst1 (.I(dffre_out),.O_N(q_n),.O_P(q_p));
 
-I_BUF ibuf_inst1 (.I(in[0]),.OE(ibuf_oe2),.O(i_buf_out[0]));
-I_BUF ibuf_inst2 (.I(in[1]),.OE(ibuf_oe3),.O(i_buf_out[1]));
-I_BUF ibuf_inst4 (.I(rst),.OE(ibuf_oe4),.O(rst_i_buf_out));
+I_BUF ibuf_inst1 (.I(in[0]),.EN(ibuf_oe2),.O(i_buf_out[0]));
+I_BUF ibuf_inst2 (.I(in[1]),.EN(ibuf_oe3),.O(i_buf_out[1]));
+I_BUF ibuf_inst4 (.I(rst),.EN(ibuf_oe4),.O(rst_i_buf_out));
 
 DFFRE ff_inst1 (.D(oddr_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_out),.Q(dffre_out));
 
