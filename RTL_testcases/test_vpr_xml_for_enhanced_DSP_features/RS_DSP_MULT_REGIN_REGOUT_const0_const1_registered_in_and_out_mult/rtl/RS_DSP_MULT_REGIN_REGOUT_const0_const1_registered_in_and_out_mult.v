@@ -18,15 +18,19 @@ module RS_DSP_MULT_REGIN_REGOUT_const0_const1_registered_in_and_out_mult (
 
 	RS_DSP_MULT_REGIN_REGOUT #(
     .MODE_BITS(80'h00000000000000000000)) 
-        inst(.a(a), .b(b), .z(z_w),. clk(clk), .reset(reset) ,. feedback({const0_0, const0_1, const1_0}), .unsigned_a(const0_2), .unsigned_b(const0_3));
+        inst(.a(a), .b(b), .z(z_w), .clk(clk), .lreset(reset) , .feedback({const0_0, const0_1, const1_0}), .unsigned_a(const0_2), .unsigned_b(const0_3));
 	
     assign z_out = z_w;
 
 endmodule
 
 module const1 (
+    input dummy1,
     output const1);
+    assign const1 = dummy1;
 endmodule
 module const0 (
+    input dummy0,
     output const0);
+    assign const0 = dummy0;
 endmodule
