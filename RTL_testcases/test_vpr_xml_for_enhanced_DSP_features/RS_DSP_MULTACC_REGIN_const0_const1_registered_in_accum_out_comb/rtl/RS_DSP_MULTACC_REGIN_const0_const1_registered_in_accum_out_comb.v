@@ -21,15 +21,19 @@ module RS_DSP_MULTACC_REGIN_const0_const1_registered_in_accum_out_comb (
 
 	RS_DSP_MULTACC_REGIN #(
     .MODE_BITS(80'h00000000000000000000)) 
-        inst(.a(a), .b(b), .z(z_w),. clk(clk), .reset(reset),. load_acc(const1_0) ,. feedback({const0_0, const0_1, const0_2}), .unsigned_a(const1_1), .unsigned_b(const1_2),. saturate_enable(1'b0),. shift_right(6'b0),. round(const0_3),.subtract(const0_4));
+        inst(.a(a), .b(b), .z(z_w), .clk(clk), .lreset(reset), .load_acc(const1_0) , .feedback({const0_0, const0_1, const0_2}), .unsigned_a(const1_1), .unsigned_b(const1_2), .saturate_enable(1'b0), .shift_right(6'b0), .round(const0_3), .subtract(const0_4));
 	
     assign z_out = z_w;
 
 endmodule
 
 module const1 (
+    input dummy1,
     output const1);
+    assign const1 = dummy1;
 endmodule
 module const0 (
+    input dummy0,
     output const0);
+    assign const0 = dummy0;
 endmodule
