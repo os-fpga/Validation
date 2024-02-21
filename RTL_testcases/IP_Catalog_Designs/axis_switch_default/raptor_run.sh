@@ -93,8 +93,8 @@ function end_time(){
 parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
+    primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
     
-
     #removing and creating raptor_testcase_files
     #rm -fR $PWD/results_dir
     [ ! -d $PWD/results_dir ] && mkdir $PWD/results_dir
@@ -209,6 +209,16 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
+    echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+    echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
+    echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
+    echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+    echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
+    echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+    echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
+    echo "exec make clear" >> raptor_tcl.tcl
+    echo "exec env POST_SYNTH_SIM=1 make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "cd ../../../../../../" >> raptor_tcl.tcl
     fi
 
 cd results_dir
@@ -278,100 +288,14 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
     then
         mkdir $design\_$tool_name\_post_synth_files
     fi
-    cd rapidsilicon/ip/$ip_name/v1_0/$design/sim 
-    echo "# Copyright (c) 2021 Alex Forencich" > Makefile
-    echo "#" >> Makefile
-    echo "# Permission is hereby granted, free of charge, to any person obtaining a copy" >> Makefile
-    echo "# of this software and associated documentation files (the \"Software\"), to deal" >> Makefile
-    echo "# in the Software without restriction, including without limitation the rights" >> Makefile
-    echo "# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell" >> Makefile
-    echo "# copies of the Software, and to permit persons to whom the Software is" >> Makefile
-    echo "# furnished to do so, subject to the following conditions:" >> Makefile
-    echo "#" >> Makefile
-    echo "# The above copyright notice and this permission notice shall be included in" >> Makefile
-    echo "# all copies or substantial portions of the Software." >> Makefile
-    echo "#" >> Makefile
-    echo "# THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR" >> Makefile
-    echo "# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY" >> Makefile
-    echo "# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE" >> Makefile
-    echo "# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER" >> Makefile
-    echo "# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM," >> Makefile
-    echo "# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN" >> Makefile
-    echo "# THE SOFTWARE." >> Makefile
-    echo "" >> Makefile
-    echo "TOPLEVEL_LANG = verilog" >> Makefile
-    echo "POST_SYNTH ?= no" >> Makefile
-    echo "IP_LEVEL ?= no" >> Makefile
-    echo "" >> Makefile
-    echo "SIM ?= vcs" >> Makefile
-    echo "WAVES ?= 1" >> Makefile
-    echo "COCOTB_HDL_TIMEUNIT = 1ns" >> Makefile
-    echo "COCOTB_HDL_TIMEPRECISION = 1ps" >> Makefile
-    echo "" >> Makefile
-    echo "DUT      = $ip_name" >> Makefile
-    echo "WRAPPER  = $design" >> Makefile
-    echo "TOPLEVEL = \$(WRAPPER)" >> Makefile
-    echo "MODULE   = test_\$(DUT)" >> Makefile
-    echo "" >> Makefile
-    echo "ifeq (\$(SIM), icarus)" >> Makefile
-    echo "	PLUSARGS += -fst" >> Makefile
-    echo "" >> Makefile
-    echo "	ifeq (\$(WAVES), 1)" >> Makefile
-    echo "		VERILOG_SOURCES += iverilog_dump.v" >> Makefile
-    echo "		COMPILE_ARGS += -s iverilog_dump" >> Makefile
-    echo "	endif" >> Makefile
-    echo "else ifeq (\$(SIM), verilator)" >> Makefile
-    echo "	COMPILE_ARGS += -Wno-SELRANGE -Wno-WIDTH -Wno-fatal" >> Makefile
-    echo "" >> Makefile
-    echo "	ifeq (\$(WAVES), 1)" >> Makefile
-    echo "		COMPILE_ARGS += --trace-fst" >> Makefile
-    echo "	endif" >> Makefile
-    echo "endif" >> Makefile
-    echo "" >> Makefile
-    echo "include \$(shell cocotb-config --makefiles)/Makefile.sim" >> Makefile
-    echo "" >> Makefile
-    echo "ifeq (\$(POST_SYNTH), yes)" >> Makefile
-    echo "	library=$library" >> Makefile
-    echo "	VERILOG_SOURCES += ../../../../../../../\$(WRAPPER)/\$(WRAPPER)_post_synth.v" >> Makefile
-    echo "	VERILOG_SOURCES += $bram_sim" >> Makefile
-    echo "	VERILOG_SOURCES += $cell_path" >> Makefile
-    echo "	VERILOG_SOURCES += $dsp_sim" >> Makefile
-    echo "	VERILOG_SOURCES += $dsp_map" >> Makefile
-    echo "	VERILOG_SOURCES += $dsp_final_map" >> Makefile
-    echo "	VERILOG_SOURCES += $primitive_sim" >> Makefile
-    echo "	VERILOG_SOURCES += $TDP18K_FIFO" >> Makefile
-    echo "	VERILOG_SOURCES += $ufifo_ctl" >> Makefile
-    echo "	VERILOG_SOURCES += $sram1024x18" >> Makefile
-    echo "else ifeq (\$(IP_LEVEL), yes)" >> Makefile
-    echo "	VERILOG_SOURCES += ../../src/\$(TOPLEVEL).v" >> Makefile
-    echo "	VERILOG_SOURCES += ../../src/\$(DUT).v" >> Makefile
-    echo "	VERILOG_SOURCES += ../../src/*.v" >> Makefile
-    echo "endif" >> Makefile
-    echo "" >> Makefile
-    echo "iverilog_dump.v:" >> Makefile
-    echo "	echo 'module iverilog_dump();' > \$@" >> Makefile
-    echo "	echo 'initial begin' >> \$@" >> Makefile
-    echo "	echo '    \$\$dumpfile(\"$design.fst\");' >> \$@" >> Makefile
-    echo "	echo '    \$\$dumpvars(0, \$(TOPLEVEL));' >> \$@" >> Makefile
-    echo "	echo 'end' >> \$@" >> Makefile
-    echo "	echo 'endmodule' >> \$@" >> Makefile
-    echo "" >> Makefile
-    echo "clean::" >> Makefile
-    echo "	@rm -rf iverilog_dump.v" >> Makefile
-    echo "	@rm -rf dump.fst \$(TOPLEVEL).fst" >> Makefile
-    echo "	@rm -rf *_wrap_*.v" >> Makefile
-    echo "	@rm -rf rapidsilicon/" >> Makefile
-    echo "	@rm -rf __pycache__ results.log" >> Makefile
-    echo "	@rm -rf results.xml" >> Makefile
-    echo "	@rm -rf __pycache__ sim_build ucli.key" >> Makefile
 #renaming netlist module name in post synth netlist
-    if [[ $compile_opts == "post_synth_sim" ]] && [[ $tool_name == "vcs" ]]
+    if [[ $compile_opts == "post_synth_sim" ]] && [[ $tool_name == "iverilog" ]]
     then
         echo "Post Synth Sim"
-        string="_post_synth"
-        (echo -e "\n" && sed -i '7s/.*/make POST_SYNTH=yes/g' sim.sh && make clean && timeout 4m ./sim.sh) 2>&1 | tee post_synth_sim.log
-        mv post_synth_sim.log ../../../../../../$design\_$tool_name\_post_synth_files
-        cd ../../../../../../
+        # string="_post_synth"
+        # (echo -e "\n" && sed -i '7s/.*/make POST_SYNTH=yes/g' sim.sh && make clean && timeout 4m ./sim.sh) 2>&1 | tee post_synth_sim.log
+        # mv post_synth_sim.log ../../../../../../$design\_$tool_name\_post_synth_files
+        # cd ../../../../../../
     fi
     if [[ $compile_opts == "post_route_sim" ]] && [[ $tool_name == "vcs" ]]
     then
@@ -619,7 +543,7 @@ parse_cga
     then
         echo "post_synth $PWD"
         simulate "post_synth_sim"  
-        cat $PWD/$design\_$tool_name\_post_synth_files/post_synth_sim.log >> results.log
+        cat $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/post_synth_sim.log >> results.log
     fi
 
     if [[ $post_route_sim == true ]]

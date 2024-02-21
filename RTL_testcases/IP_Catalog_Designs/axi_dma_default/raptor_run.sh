@@ -91,7 +91,7 @@ function end_time(){
 parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
-    
+    primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)    
 
     #removing and creating raptor_testcase_files
     #rm -fR $PWD/results_dir
@@ -207,9 +207,17 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
-    fi
-    # echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 
-    # echo "exec make">>raptor_tcl.tcl   
+    echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+    echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
+    echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
+    echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+    echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
+    echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+    echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
+    echo "exec make clear" >> raptor_tcl.tcl
+    echo "exec env POST_SYNTH_SIM=1 make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "cd ../../../../../../" >> raptor_tcl.tcl
+    fi 
 
 cd results_dir
 echo "Device: $device">>results.log
@@ -273,166 +281,165 @@ post_synth_netlist_path=`find $main_path -wholename "*/$design\_post_synth.v"`
 post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
 
 
-#renaming netlist module name in post synth netlist
-    if [[ $compile_opts == "post_synth_sim" ]]
+if [[ $ip_level == true ]]
     then
-        string="_post_synth"
-        while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design" ]]; 
-                then
-                    sed -i "s/module $design/module $design\_post_synth/" $post_synth_netlist_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design$string" ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $post_synth_netlist_path
+        mkdir $design\_$tool_name\_pre_synth_files
+    elif [[ $post_synth_sim == true ]]
+    then
+        mkdir $design\_$tool_name\_post_synth_files
+        # mv rapidsilicon/ip/$ip_name/v1_0/$design/sim/Makefile rapidsilicon/ip/$ip_name/v1_0/$design/
     fi
-    if [[ $compile_opts == "post_route_sim" ]]
+
+
+
+
+#renaming netlist module name in post synth netlist
+    if [[ $compile_opts == "post_synth_sim" ]] && [[ $tool_name == "iverilog" ]]
+    then
+        echo "Post Synth Sim"
+        # string="_post_synth"
+        # # (echo -e "\n" && sed -i '7s/.*/make POST_SYNTH=yes/g' sim.sh && make clean && timeout 4m ./sim.sh) 2>&1 | tee post_synth_sim.log
+        # make clear
+        # make > post_synth_sim.log
+        # mv post_synth_sim.log ../../../../../../$design\_$tool_name\_post_synth_files
+        # cd ../../../../../../
+    fi
+    if [[ $compile_opts == "post_route_sim" ]] && [[ $tool_name == "vcs" ]]
     then
         echo "remaning post route netlist module"
-        while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == "module $design " ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/module $design/module $design\_post_route/" $post_route_netlist_path
-                    break 2
-                fi
-                if [[ $(echo "$word" | cut -d " " -f1)  == $design\_post\_route ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $post_route_netlist_path
+        make clean && make POST_ROUTE=yes
     fi
-    cd ..
-
-
-#finding the co simulation testbench for the design given
-    tb_path=`find $PWD -type f -iname "co_sim_$design.v"`
-    if [ -z "$tb_path" ]
+    if [[ $ip_level == true ]] && [[ $tool_name == "vcs" ]]
     then
-        echo "No such Test Bench for $design"
-        # exit 
-    else 
-        echo -e "Test Bench for this design Found!"
+        echo "ip_level module"
+        (echo -e "\n" && sed -i '7s/.*/make IP_LEVEL=yes/g' sim.sh && make clean && timeout 4m ./sim.sh) 2>&1 | tee pre_synth_sim.log
+        mv pre_synth_sim.log ../../../../../../$design\_$tool_name\_pre_synth_files
+        cd ../../../../../../
     fi
 
 
-#renaming instantiation in testbench
-if [[ $compile_opts == "post_route_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_synth netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_synth/_post_route/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_route ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-if [[ $compile_opts == "post_synth_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_route netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_route/_post_synth/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_synth ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-
-#removing tool files creating in previous flow
-    #rm -fR $PWD/results_dir/$design\_$tool_name\_files
+# #finding the co simulation testbench for the design given
+#     tb_path=`find $PWD -type f -iname "co_sim_$design.v"`
+#     if [ -z "$tb_path" ]
+#     then
+#         echo "No such Test Bench for $design"
+#         # exit 
+#     else 
+#         echo -e "Test Bench for this design Found!"
+#     fi
 
 
-#reading log file of raptor to see is synthesis failed, if not failed staring the simulation
-    while read line; do
-            if [[ $line == *"synthesis fail"* ]]
-            then
-                echo "synthesis failed"
-                # exit 
-            fi
-    done < $PWD/results_dir/raptor.log
+# #renaming instantiation in testbench
+# if [[ $compile_opts == "post_route_sim" ]]
+#     then
+#     while read line; do
+#             # for word in $line; do
+#                 if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_synth netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
+#                 then
+#                     sed -i "s/_post_synth/_post_route/" $tb_path
+#                     break 2
+#                 fi
+#                 if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_route ]]; 
+#                 then
+#                     break 2
+#                 fi
+#             # done
+#         done < $tb_path
+# fi
+# if [[ $compile_opts == "post_synth_sim" ]]
+#     then
+#     while read line; do
+#             # for word in $line; do
+#                 if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_route netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
+#                 then
+#                     sed -i "s/_post_route/_post_synth/" $tb_path
+#                     break 2
+#                 fi
+#                 if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_synth ]]; 
+#                 then
+#                     break 2
+#                 fi
+#             # done
+#         done < $tb_path
+# fi
+
+# #removing tool files creating in previous flow
+#     #rm -fR $PWD/results_dir/$design\_$tool_name\_files
+
+
+# #reading log file of raptor to see is synthesis failed, if not failed staring the simulation
+#     while read line; do
+#             if [[ $line == *"synthesis fail"* ]]
+#             then
+#                 echo "synthesis failed"
+#                 # exit 
+#             fi
+#     done < $PWD/results_dir/raptor.log
            
-    echo "Starting $tool_name simulation"
+#     echo "Starting $tool_name simulation"
 
-    [ -d $PWD/results_dir ] && cd $PWD/results_dir
+#     [ -d $PWD/results_dir ] && cd $PWD/results_dir
     
 
-    if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_synth_sim" ]]
-    then
-        [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
-        [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
-		while read line; do
-                if [[ $line == *"All Comparison Matched"* ]]
-                then
-                    rm -fr tb.vcd
-                fi
-                if [[ $line == *"ERROR: SIM: Simulation Failed"* ]]
-                then
-                    vcd2fst tb.vcd tb.fst --compress
-                    rm -fr tb.vcd
-                fi
-        done < post_synth_sim.log
-        cd ..
-    fi
-    if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
-    then
-        echo "post_route_sim will be added later"
-        #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
-        # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
-    fi
-    if [[ $tool_name == "verilator" ]] && [[ $compile_opts == "post_synth_sim" ]]
-    then
-        [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
-        [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        echo "#include \"obj_dir/Vco_sim_$design.h\"">tb_$design.cpp
-        echo "int sc_main(int argc, char** argv){">>tb_$design.cpp
-        echo "    Verilated::commandArgs(argc,argv);">>tb_$design.cpp
-        echo "    Verilated::traceEverOn(true);">>tb_$design.cpp
-        echo "    Vco_sim_$design* top;">>tb_$design.cpp
-        echo "    top = new Vco_sim_$design(\"top\");">>tb_$design.cpp
-        echo "    while (!Verilated::gotFinish()) { sc_start(400, SC_NS); }">>tb_$design.cpp
-        echo "    return 0;">>tb_$design.cpp
-        echo "}">>tb_$design.cpp
-        mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
-		while read line; do
-                if [[ $line == *"All Comparison Matched"* ]]
-                then
-                    rm -fr tb.vcd
-                fi
-                if [[ $line == *"ERROR: SIM: Simulation Failed"* ]]
-                then
-                    vcd2fst tb.vcd tb.fst --compress
-                    rm -fr tb.vcd
-                fi
-        done < post_synth_sim.log
-        cd ..
-    fi
-    if [[ $tool_name == ghdl ]] && [[ $compile_opts == ghdl_rtl_sim ]]
-    then
-        [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
-        [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../.. && make run) 2>&1 | tee post_synth_sim.log 
-        cd ..
-    fi
+#     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_synth_sim" ]]
+#     then
+#         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
+#         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
+#         (cd ../../rtl && timeout 4m vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim $TDP18K_FIFO $ufifo_ctl $sram1024x18 $dsp_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all -lca -kdb && timeout 5m ./simv && mv simv *.vcd *.key *.log verdi_config_file csrc simv.daidir -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+# 		while read line; do
+#                 if [[ $line == *"All Comparison Matched"* ]]
+#                 then
+#                     rm -fr tb.vcd
+#                 fi
+#                 if [[ $line == *"Error: Simulation Failed"* ]]
+#                 then
+#                     vcd2fst tb.vcd tb.fst --compress
+#                     rm -fr tb.vcd
+#                 fi
+#         done < post_synth_sim.log
+#         cd ..
+#     fi
+#     if [[ $tool_name == "vcs" ]] && [[ $compile_opts == "post_route_sim" ]]
+#     then
+#         echo "post_route_sim will be added later"
+#         #timeout 4m  vcs -sverilog -timescale=1ns/1ps $cell_path $bram_sim $primitive_sim /home/users/abdulhameed.akram/Documents/Compiler_validation_team/accumulator/primitives.v $TDP18K_FIFO $ufifo_ctl $sram1024x18 $design_path $post_route_netlist_path $tb_path -y $directory_path +define+VCS_MODE=1 -full64 -debug_all 2>&1 | tee post_route_sim.log
+#         # timeout 5m ./simv 2>&1 | tee -a post_route_sim.log
+#     fi
+#     if [[ $tool_name == "verilator" ]] && [[ $compile_opts == "post_synth_sim" ]]
+#     then
+#         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
+#         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
+        # echo "#include \"obj_dir/Vco_sim_$design.h\"">tb_$design.cpp
+        # echo "int sc_main(int argc, char** argv){">>tb_$design.cpp
+        # echo "    Verilated::commandArgs(argc,argv);">>tb_$design.cpp
+        # echo "    Verilated::traceEverOn(true);">>tb_$design.cpp
+        # echo "    Vco_sim_$design* top;">>tb_$design.cpp
+        # echo "    top = new Vco_sim_$design(\"top\");">>tb_$design.cpp
+        # echo "    while (!Verilated::gotFinish()) { sc_start(400, SC_NS); }">>tb_$design.cpp
+        # echo "    return 0;">>tb_$design.cpp
+#         echo "}">>tb_$design.cpp
+#         mv tb_$design.cpp ../../rtl
+#         (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+# 		while read line; do
+#                 if [[ $line == *"All Comparison Matched"* ]]
+#                 then
+#                     rm -fr tb.vcd
+#                 fi
+#                 if [[ $line == *"Error: Simulation Failed"* ]]
+#                 then
+#                     vcd2fst tb.vcd tb.fst --compress
+#                     rm -fr tb.vcd
+#                 fi
+#         done < post_synth_sim.log
+#         cd ..
+#     fi
+#     if [[ $tool_name == ghdl ]] && [[ $compile_opts == ghdl_rtl_sim ]]
+#     then
+#         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
+#         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
+#         (cd ../.. && make run) 2>&1 | tee post_synth_sim.log 
+#         cd ..
+#     fi
 }
 
 function litex_gen(){
@@ -537,7 +544,7 @@ parse_cga
     then
         echo "post_synth $PWD"
         simulate "post_synth_sim"  
-        cat $PWD/$design\_$tool_name\_post_synth_files/post_synth_sim.log >> results.log
+        cat $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/post_synth_sim.log >> results.log
     fi
 
     if [[ $post_route_sim == true ]]
