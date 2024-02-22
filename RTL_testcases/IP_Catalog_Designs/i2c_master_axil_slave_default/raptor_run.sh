@@ -217,7 +217,7 @@ parse_cga exit 1; }
     echo "set sed_script {s|iverilog|iverilog -g2012|}" >> raptor_tcl.tcl
     echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
     echo "exec make clean" >> raptor_tcl.tcl
-    echo "exec make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "exec env MODULE_NAME=$design make > post_synth_sim.log" >> raptor_tcl.tcl
     echo "cd ../../../../../../" >> raptor_tcl.tcl
     fi
 

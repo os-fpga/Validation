@@ -218,7 +218,7 @@ parse_cga exit 1; }
     echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
     echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
     echo "exec make clear" >> raptor_tcl.tcl
-    echo "exec env POST_SYNTH_SIM=1 make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "exec env POST_SYNTH_SIM=1 MODULE_NAME=$design make > post_synth_sim.log" >> raptor_tcl.tcl
     echo "cd ../../../../../../" >> raptor_tcl.tcl 
     fi
 
