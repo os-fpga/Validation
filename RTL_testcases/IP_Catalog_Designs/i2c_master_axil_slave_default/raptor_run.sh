@@ -92,7 +92,7 @@ function end_time(){
 parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
-    
+    primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)    
 
     #removing and creating raptor_testcase_files
     #rm -fR $PWD/results_dir
@@ -165,7 +165,7 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdefault_prescale=1 -Pfixed_prescale=0 -Pcmd_fifo=1 -Pcmd_addr_width=5 -Pwrite_fifo=1 -Pwrite_addr_width=5 -Pread_fifo=1 -Pread_addr_width=5 -out_file $IP_PATH/$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdefault_prescale=1 -Pfixed_prescale=0 -Pcmd_fifo=1 -Pcmd_addr_width=5 -Pwrite_fifo=1 -Pwrite_addr_fifo_width=5 -Pread_fifo=1 -Pread_addr_width=5 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     # [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
@@ -208,6 +208,17 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
+    echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+    echo "set sed_script {s|../src/\*\.v|$main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v|g}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
+    echo "exec sed -i {29i\import glob} test_i2c_master_axil.py" >> raptor_tcl.tcl
+    echo "set sed_script {s|srcs = \[\]|srcs = []\nsrcs += glob.glob(\"$primitive_sim_path/*.v\")\nsrcs.remove(\"$primitive_sim_path/SOC_FPGA_TEMPERATURE.v\")|}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
+    echo "set sed_script {s|iverilog|iverilog -g2012|}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
+    echo "exec make clean" >> raptor_tcl.tcl
+    echo "exec make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "cd ../../../../../../" >> raptor_tcl.tcl
     fi
 
 cd results_dir
@@ -553,7 +564,7 @@ parse_cga
     then
         echo "post_synth $PWD"
         simulate "post_synth_sim"  
-        cat $PWD/$design\_$tool_name\_post_synth_files/post_synth_sim.log >> results.log
+        cat $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/post_synth_sim.log >> results.log
     fi
 
     if [[ $post_route_sim == true ]]

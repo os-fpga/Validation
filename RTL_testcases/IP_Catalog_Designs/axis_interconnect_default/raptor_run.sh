@@ -92,8 +92,8 @@ function end_time(){
 parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
+    primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
     
-
     #removing and creating raptor_testcase_files
     #rm -fR $PWD/results_dir
     [ ! -d $PWD/results_dir ] && mkdir $PWD/results_dir
@@ -164,7 +164,7 @@ parse_cga exit 1; }
     echo "create_design $design">raptor_tcl.tcl 
     echo "target_device $device">>raptor_tcl.tcl 
 
-    ##vary design to design
+    #vary design to design
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pm_count=4 -Ps_count=4 -Pdata_width=8 -Plast_en=1 -Pid_en=1 -Pid_width=8 -Pdest_en=1 -Pdest_width=8 -Puser_en=1 -Puser_width=1 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
@@ -177,13 +177,13 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
-    ##vary design to design
+    #vary design to design
 
     echo "set_top_module $design">>raptor_tcl.tcl 
 
-    ##vary design to design
+    #vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
-    ##vary design to design
+    #vary design to design
 	echo "analyze">>raptor_tcl.tcl
     echo "simulate_ip $design">>raptor_tcl.tcl
 
@@ -208,6 +208,17 @@ parse_cga exit 1; }
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
+    echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+    echo "set sed_script {s|../src/\*\.v|$main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v|g}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_axis_crosspoint_4x4.py' >> raptor_tcl.tcl
+    echo "exec sed -i {29i\import glob} test_axis_crosspoint_4x4.py" >> raptor_tcl.tcl
+    echo "set sed_script {s|srcs = \[\]|srcs = []\nsrcs += glob.glob(\"$primitive_sim_path/*.v\")\nsrcs.remove(\"$primitive_sim_path/SOC_FPGA_TEMPERATURE.v\")|}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_axis_crosspoint_4x4.py' >> raptor_tcl.tcl
+    echo "set sed_script {s|iverilog|iverilog -g2012|}" >> raptor_tcl.tcl
+    echo 'exec sed -i [list -e $sed_script] test_axis_crosspoint_4x4.py' >> raptor_tcl.tcl
+    echo "exec make clean" >> raptor_tcl.tcl
+    echo "exec make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "cd ../../../../../../" >> raptor_tcl.tcl
     fi
     # echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 
     # echo "exec make">>raptor_tcl.tcl   
@@ -555,7 +566,7 @@ parse_cga
     then
         echo "post_synth $PWD"
         simulate "post_synth_sim"  
-        cat $PWD/$design\_$tool_name\_post_synth_files/post_synth_sim.log >> results.log
+        cat $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/post_synth_sim.log >> results.log
     fi
 
     if [[ $post_route_sim == true ]]
