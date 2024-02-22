@@ -1,0 +1,10 @@
+{
+   "a_width": 36,
+   "b_width": 36,
+   "feature": "Pipeline",
+   "build_dir": "./dsp_AB_36x36_Pipeline/run_1/IPs",
+   "build_name": "dsp_AB_36x36_Pipeline",
+   "build": true,
+   "json": "dsp_generator_v1_0_dsp_AB_36x36_Pipeline.json",
+   "json_template": false
+}

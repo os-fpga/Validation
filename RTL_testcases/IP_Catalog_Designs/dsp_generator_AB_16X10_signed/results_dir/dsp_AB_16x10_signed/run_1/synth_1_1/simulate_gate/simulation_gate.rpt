@@ -1,0 +1,91 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.02
+Build    : 0.9.42
+Hash     : 7d8d5e2
+Date     : Feb 21 2024
+Type     : Engineering
+Log Time   : Thu Feb 22 10:39:22 2024 GMT
+Icarus Verilog Preprocessor version 13.0 (devel) (s20221226-241-g999bcb6)
+
+Copyright (c) 1999-2023 Stephen Williams (steve@icarus.com)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+Indexing library: ../../../.././dsp_AB_16x10_signed/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_16x10_signed/src/
+Using language generation: IEEE1800-2012,no-specify,xtypes,icarus-misc
+PARSING INPUT
+LOCATING TOP-LEVEL MODULES
+   tb_dsp
+ ... done, ELABORATING DESIGN
+0.02 seconds.
+RUNNING FUNCTORS
+ ... done, 0 seconds.
+ -F cprop ...
+ -F nodangle ...
+ ... Iteration detected 0 optimizations.
+ ... Look for dangling constants
+ ... done
+ ... scan for dangling signal and event nodes. (scomplete=F, ecomplete=F)
+ ... 1 iterations deleted 9 dangling signals and 0 events.
+ ... scan for dangling signal and event nodes. (scomplete=T, ecomplete=F)
+ ... 2 iterations deleted 9 dangling signals and 2 events.
+ ... done
+CALCULATING ISLANDS
+ ... done, 0 seconds.CODE GENERATION
+
+ ... invoking target_design
+STATISTICS
+lex_string: add_count=4393 hit_count=26926
+ ... done, 0.01 seconds.
+Icarus Verilog version 13.0 (devel) (s20221226-241-g999bcb6)
+
+Copyright (c) 2000-2023 Stephen Williams (steve@icarus.com)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along
+  with this program; if not, write to the Free Software Foundation, Inc.,
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
+translate: /nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/bin/HDL_simulator/iverilog/lib/ivl/ivlpp -v -L -F"/tmp/ivrlg271209bd6" -f"/tmp/ivrlg71209bd6" -p"/tmp/ivrli71209bd6" |/nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/bin/HDL_simulator/iverilog/lib/ivl/ivl -v -C"/tmp/ivrlh71209bd6" -C"/nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/bin/HDL_simulator/iverilog/lib/ivl/vvp.conf" -- -
+FST info: dumpfile dsp.vcd opened for output.
+
+**** All Comparison Matched ***
+**** Simulation Passed ****
+/nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp/dsp_generator_AB_16X10_signed/results_dir/dsp_AB_16x10_signed/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_16x10_signed/sim/dsp_test.v:94: $finish called at 20000000 (1ps)

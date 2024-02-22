@@ -1,0 +1,40 @@
+[
+    {
+        "": {
+            "header": [
+                "Design statistics",
+                ""
+            ],
+            "data": [
+                [
+                    "CLB LUT packing percentage",
+                    "0 %"
+                ],
+                [
+                    "CLB Register packing percentage",
+                    "0 %"
+                ],
+                [
+                    "Wires",
+                    "0"
+                ],
+                [
+                    "Max Fanout",
+                    "0"
+                ],
+                [
+                    "Average Fanout",
+                    "0"
+                ],
+                [
+                    "Maximum logic level",
+                    "0"
+                ],
+                [
+                    "Average logic level",
+                    "0"
+                ]
+            ]
+        }
+    }
+]

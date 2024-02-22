@@ -1,0 +1,121 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.02
+Build    : 0.9.42
+Hash     : 7d8d5e2
+Date     : Feb 21 2024
+Type     : Engineering
+Log Time   : Thu Feb 22 10:39:59 2024 GMT
+#Packing pin usage report
+Type: io
+	Input Pin Usage:
+		Max: 1.00 (0.06)
+		Avg: 0.48 (0.03)
+		Min: 0.00 (0.00)
+		Histogram:
+		[        0:      1.8) 54 (100.0%) |************************************************
+		[      1.8:      3.6)  0 (  0.0%) |
+		[      3.6:      5.4)  0 (  0.0%) |
+		[      5.4:      7.2)  0 (  0.0%) |
+		[      7.2:        9)  0 (  0.0%) |
+		[        9:       11)  0 (  0.0%) |
+		[       11:       13)  0 (  0.0%) |
+		[       13:       14)  0 (  0.0%) |
+		[       14:       16)  0 (  0.0%) |
+		[       16:       18)  0 (  0.0%) |
+	Output Pin Usage:
+		Max: 1.00 (0.50)
+		Avg: 0.52 (0.26)
+		Min: 0.00 (0.00)
+		Histogram:
+		[        0:      0.2) 26 ( 48.1%) |*********************************************
+		[      0.2:      0.4)  0 (  0.0%) |
+		[      0.4:      0.6)  0 (  0.0%) |
+		[      0.6:      0.8)  0 (  0.0%) |
+		[      0.8:        1) 28 ( 51.9%) |************************************************
+		[        1:      1.2)  0 (  0.0%) |
+		[      1.2:      1.4)  0 (  0.0%) |
+		[      1.4:      1.6)  0 (  0.0%) |
+		[      1.6:      1.8)  0 (  0.0%) |
+		[      1.8:        2)  0 (  0.0%) |
+
+Type: clb
+	Input Pin Usage:
+		Max: 0.00 (0.00)
+		Avg: 0.00 (0.00)
+		Min: 0.00 (0.00)
+		Histogram:
+		[        0:      7.3) 1 (100.0%) |**************************************************
+		[      7.3:       15) 0 (  0.0%) |
+		[       15:       22) 0 (  0.0%) |
+		[       22:       29) 0 (  0.0%) |
+		[       29:       36) 0 (  0.0%) |
+		[       36:       44) 0 (  0.0%) |
+		[       44:       51) 0 (  0.0%) |
+		[       51:       58) 0 (  0.0%) |
+		[       58:       66) 0 (  0.0%) |
+		[       66:       73) 0 (  0.0%) |
+	Output Pin Usage:
+		Max: 1.00 (0.04)
+		Avg: 1.00 (0.04)
+		Min: 1.00 (0.04)
+		Histogram:
+		[        0:      2.7) 1 (100.0%) |**************************************************
+		[      2.7:      5.4) 0 (  0.0%) |
+		[      5.4:      8.1) 0 (  0.0%) |
+		[      8.1:       11) 0 (  0.0%) |
+		[       11:       14) 0 (  0.0%) |
+		[       14:       16) 0 (  0.0%) |
+		[       16:       19) 0 (  0.0%) |
+		[       19:       22) 0 (  0.0%) |
+		[       22:       24) 0 (  0.0%) |
+		[       24:       27) 0 (  0.0%) |
+
+Type: dsp
+	Input Pin Usage:
+		Max: 35.00 (0.19)
+		Avg: 35.00 (0.19)
+		Min: 35.00 (0.19)
+		Histogram:
+		[        0:       18) 0 (  0.0%) |
+		[       18:       37) 1 (100.0%) |**************************************************
+		[       37:       55) 0 (  0.0%) |
+		[       55:       74) 0 (  0.0%) |
+		[       74:       92) 0 (  0.0%) |
+		[       92:  1.1e+02) 0 (  0.0%) |
+		[  1.1e+02:  1.3e+02) 0 (  0.0%) |
+		[  1.3e+02:  1.5e+02) 0 (  0.0%) |
+		[  1.5e+02:  1.7e+02) 0 (  0.0%) |
+		[  1.7e+02:  1.8e+02) 0 (  0.0%) |
+	Output Pin Usage:
+		Max: 26.00 (0.33)
+		Avg: 26.00 (0.33)
+		Min: 26.00 (0.33)
+		Histogram:
+		[        0:      7.8) 0 (  0.0%) |
+		[      7.8:       16) 0 (  0.0%) |
+		[       16:       23) 0 (  0.0%) |
+		[       23:       31) 1 (100.0%) |**************************************************
+		[       31:       39) 0 (  0.0%) |
+		[       39:       47) 0 (  0.0%) |
+		[       47:       55) 0 (  0.0%) |
+		[       55:       62) 0 (  0.0%) |
+		[       62:       70) 0 (  0.0%) |
+		[       70:       78) 0 (  0.0%) |
+

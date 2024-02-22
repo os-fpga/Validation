@@ -1,0 +1,435 @@
+{
+  "fileIDs": {
+      "1": "/nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/share/raptor/sim_models/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/blackbox_models/cell_sim_blackbox.v",
+      "2": "/nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp_generator_AB_36x36_pipeline/results_dir/./dsp_AB_36x36_Pipeline/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_36x36_Pipeline/src/dsp_AB_36x36_Pipeline_v1_0.v"
+  },
+  "hierTree": [
+      {
+          "file": "2",
+          "internalSignals": [
+              {
+                  "name": "a0",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "a1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "a3",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 18
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "a_1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 35
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "b0",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "b1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "b3",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 18
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "b_1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 35
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "fb",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 2
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "sum",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 2
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "sum_reg",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 2
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "sys_clk",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "sys_rst",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "unsigneda",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "unsignedb",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "z1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 37
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "z2",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 37
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "z3",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 37
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "z_1",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 71
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "name": "z_2",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 71
+                  },
+                  "type": "LOGIC"
+              }
+          ],
+          "language": "SystemVerilog",
+          "line": 23,
+          "moduleInsts": [
+              {
+                   "file": "2",
+                   "instName": "DSP38",
+                   "line": 104,
+                   "module":  "DSP38",
+                   "parameters": []
+              },
+              {
+                   "file": "2",
+                   "instName": "DSP38_1",
+                   "line": 119,
+                   "module":  "DSP38",
+                   "parameters": []
+              },
+              {
+                   "file": "2",
+                   "instName": "DSP38_2",
+                   "line": 139,
+                   "module":  "DSP38",
+                   "parameters": []
+              }
+          ],
+          "parameters": [
+              {
+                  "name": "IP_ID",
+                  "value": 0 
+              },
+              {
+                  "name": "IP_TYPE",
+                  "value": 0 
+              },
+              {
+                  "name": "IP_VERSION",
+                  "value": 0 
+              }
+          ],
+          "ports": [
+              {
+                  "direction": "Input",
+                  "name": "a",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 35
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "b",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 35
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "clk",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "reset",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Output",
+                  "name": "z",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 71
+                  },
+                  "type": "LOGIC"
+              }
+          ],
+          "topModule": "dsp_AB_36x36_Pipeline"
+      }
+  ],
+  "modules": {
+      "DSP38": {
+          "file": "1",
+          "language": "SystemVerilog",
+          "line": 153,
+          "module": "DSP38",
+          "parameters": [
+              {
+                  "name": "COEFF_0",
+                  "value": 0 
+              },
+              {
+                  "name": "COEFF_1",
+                  "value": 0 
+              },
+              {
+                  "name": "COEFF_2",
+                  "value": 0 
+              },
+              {
+                  "name": "COEFF_3",
+                  "value": 0 
+              },
+              {
+                  "name": "DSP_MODE",
+                  "value": 0 
+              },
+              {
+                  "name": "INPUT_REG_EN",
+                  "value": 0 
+              },
+              {
+                  "name": "OUTPUT_REG_EN",
+                  "value": 0 
+              }
+          ],
+          "ports": [
+              {
+                  "direction": "Input",
+                  "name": "A",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 19
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "B",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 17
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "ACC_FIR",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 5
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Output",
+                  "name": "Z",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 37
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Output",
+                  "name": "DLY_B",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 17
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "CLK",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "RESET",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "FEEDBACK",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 2
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "LOAD_ACC",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "SATURATE",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "SHIFT_RIGHT",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 5
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "ROUND",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "SUBTRACT",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "UNSIGNED_A",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "UNSIGNED_B",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              }
+          ]
+      }
+  }
+}

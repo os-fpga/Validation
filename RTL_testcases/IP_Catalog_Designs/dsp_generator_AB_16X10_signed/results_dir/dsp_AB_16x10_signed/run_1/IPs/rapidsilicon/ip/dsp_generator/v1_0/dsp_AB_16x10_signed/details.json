@@ -1,0 +1,8 @@
+{
+    "IP details": {
+        "Name": "DSP Generator",
+        "Version": "V1_0",
+        "Interface": "Native",
+        "Description": "DSP Generator IP is a versatile solution that tailors DSP IPs based on specified parameters. It offers pre-built functions, optimizing performance by allowing the configuration of different multiplicative algorithms suited for custom requirements."
+    }
+}

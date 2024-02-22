@@ -1,0 +1,168 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.02
+Build    : 0.9.42
+Hash     : 7d8d5e2
+Date     : Feb 21 2024
+Type     : Engineering
+Log Time   : Thu Feb 22 10:39:21 2024 GMT
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.02
+Build    : 0.9.42
+Hash     : 7d8d5e2
+Date     : Feb 21 2024
+Type     : Engineering
+Log Time   : Thu Feb 22 10:39:21 2024 GMT
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.18+10 (git sha1 9ae216287, gcc 11.2.1 -fPIC -Os)
+
+
+-- Executing script file `/nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp/dsp_generator_AB_16X10_signed/results_dir/dsp_AB_16x10_signed/run_1/synth_1_1/analysis/dsp_AB_16x10_signed_analyzer.cmd' --
+
+1. Executing Verilog-2005 frontend: /nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/share/raptor/sim_models/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/blackbox_models/cell_sim_blackbox.v
+Parsing SystemVerilog input from `/nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/share/raptor/sim_models/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/blackbox_models/cell_sim_blackbox.v' to AST representation.
+Generating RTLIL representation for module `\BOOT_CLOCK'.
+Generating RTLIL representation for module `\CARRY'.
+Generating RTLIL representation for module `\CARRY_CHAIN'.
+Generating RTLIL representation for module `\CLK_BUF'.
+Generating RTLIL representation for module `\DFFNRE'.
+Generating RTLIL representation for module `\DFFRE'.
+Generating RTLIL representation for module `\DSP19X2'.
+Generating RTLIL representation for module `\DSP38'.
+Generating RTLIL representation for module `\FIFO18KX2'.
+Generating RTLIL representation for module `\FIFO36K'.
+Generating RTLIL representation for module `\I_BUF'.
+Generating RTLIL representation for module `\I_BUF_DS'.
+Generating RTLIL representation for module `\I_DDR'.
+Generating RTLIL representation for module `\I_DELAY'.
+Generating RTLIL representation for module `\I_SERDES'.
+Generating RTLIL representation for module `\LUT1'.
+Generating RTLIL representation for module `\LUT2'.
+Generating RTLIL representation for module `\LUT3'.
+Generating RTLIL representation for module `\LUT4'.
+Generating RTLIL representation for module `\LUT5'.
+Generating RTLIL representation for module `\LUT6'.
+Generating RTLIL representation for module `\O_BUF'.
+Generating RTLIL representation for module `\O_BUFT'.
+Generating RTLIL representation for module `\O_BUFT_DS'.
+Generating RTLIL representation for module `\O_BUF_DS'.
+Generating RTLIL representation for module `\O_DDR'.
+Generating RTLIL representation for module `\O_DELAY'.
+Generating RTLIL representation for module `\O_SERDES'.
+Generating RTLIL representation for module `\O_SERDES_CLK'.
+Generating RTLIL representation for module `\PLL'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_AHB_M'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_AHB_S'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_AXI_M0'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_AXI_M1'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_DMA'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_IRQ'.
+Generating RTLIL representation for module `\SOC_FPGA_INTF_JTAG'.
+Generating RTLIL representation for module `\SOC_FPGA_TEMPERATURE'.
+Generating RTLIL representation for module `\TDP_RAM18KX2'.
+Generating RTLIL representation for module `\TDP_RAM36K'.
+Generating RTLIL representation for module `\LATCH'.
+Generating RTLIL representation for module `\LATCHN'.
+Generating RTLIL representation for module `\LATCHR'.
+Generating RTLIL representation for module `\LATCHS'.
+Generating RTLIL representation for module `\LATCHNR'.
+Generating RTLIL representation for module `\LATCHNS'.
+Generating RTLIL representation for module `\RS_DSP'.
+Generating RTLIL representation for module `\RS_DSP_MULT'.
+Generating RTLIL representation for module `\RS_DSP_MULT_REGIN'.
+Generating RTLIL representation for module `\RS_DSP_MULT_REGOUT'.
+Generating RTLIL representation for module `\RS_DSP_MULT_REGIN_REGOUT'.
+Generating RTLIL representation for module `\RS_DSP_MULTADD'.
+Generating RTLIL representation for module `\RS_DSP_MULTADD_REGIN'.
+Generating RTLIL representation for module `\RS_DSP_MULTADD_REGOUT'.
+Generating RTLIL representation for module `\RS_DSP_MULTADD_REGIN_REGOUT'.
+Generating RTLIL representation for module `\RS_DSP_MULTACC'.
+Generating RTLIL representation for module `\RS_DSP_MULTACC_REGIN'.
+Generating RTLIL representation for module `\RS_DSP_MULTACC_REGOUT'.
+Generating RTLIL representation for module `\RS_DSP_MULTACC_REGIN_REGOUT'.
+Generating RTLIL representation for module `\RS_TDP36K'.
+Generating RTLIL representation for module `\BRAM2x18_TDP'.
+Generating RTLIL representation for module `\BRAM2x18_SDP'.
+Generating RTLIL representation for module `\_$_mem_v2_asymmetric'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp/dsp_generator_AB_16X10_signed/results_dir/./dsp_AB_16x10_signed/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_16x10_signed/src/dsp_AB_16x10_signed_v1_0.v
+Parsing Verilog input from `/nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp/dsp_generator_AB_16X10_signed/results_dir/./dsp_AB_16x10_signed/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_16x10_signed/src/dsp_AB_16x10_signed_v1_0.v' to AST representation.
+Generating RTLIL representation for module `\dsp_AB_16x10_signed'.
+Successfully finished Verilog frontend.
+
+-- Running command `hierarchy -top dsp_AB_16x10_signed' --
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \dsp_AB_16x10_signed
+
+3.2. Analyzing design hierarchy..
+Top module:  \dsp_AB_16x10_signed
+Removed 0 unused modules.
+Warning: Resizing cell port dsp_AB_16x10_signed.DSP38.Z from 26 bits to 38 bits.
+Warning: Resizing cell port dsp_AB_16x10_signed.DSP38.B from 10 bits to 18 bits.
+Warning: Resizing cell port dsp_AB_16x10_signed.DSP38.A from 16 bits to 20 bits.
+
+Dumping file hier_info.json ...
+ Process module "DSP38"
+Dumping file port_info.json ...
+
+Warnings: 3 unique messages, 3 total
+End of script. Logfile hash: 626449e47a, CPU: user 0.04s system 0.01s, MEM: 16.16 MB peak
+Yosys 0.18+10 (git sha1 9ae216287, gcc 11.2.1 -fPIC -Os)
+Time spent: 93% 4x read_verilog (0 sec), 4% 1x analyze (0 sec), ...

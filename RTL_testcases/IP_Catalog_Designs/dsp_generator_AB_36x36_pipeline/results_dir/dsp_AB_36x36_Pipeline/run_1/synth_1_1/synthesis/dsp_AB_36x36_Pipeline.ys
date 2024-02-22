@@ -1,0 +1,21 @@
+ 
+# Yosys synthesis script for dsp_AB_36x36_Pipeline
+# Read source files
+read_verilog -sv /nfs_eda_sw/softwares/Raptor/instl_dir/02_21_2024_09_15_01/share/raptor/sim_models/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/blackbox_models/cell_sim_blackbox.v
+verilog_defines 
+read_verilog  -I../../../../.. -I/nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp_generator_AB_36x36_pipeline/results_dir/./dsp_AB_36x36_Pipeline/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_36x36_Pipeline/src  /nfs_scratch/scratch/litex/sarmad_salman/practice/ep4/Validation/RTL_testcases/IP_Catalog_Designs/dsp_generator_AB_36x36_pipeline/results_dir/./dsp_AB_36x36_Pipeline/run_1/IPs/rapidsilicon/ip/dsp_generator/v1_0/dsp_AB_36x36_Pipeline/src/dsp_AB_36x36_Pipeline_v1_0.v 
+
+
+# Technology mapping
+hierarchy -top dsp_AB_36x36_Pipeline
+
+
+
+plugin -i synth-rs
+
+synth_rs -tech genesis3 -de -goal delay   -effort high -carry auto -no_iobuf  -new_dsp19x2 -new_tdp36k -max_lut 45408 -max_reg 90816 -max_device_dsp 176 -max_device_bram 176 -max_device_carry_length 528 -max_dsp 176 -max_bram 176 -max_carry_length 528  -fsm_encoding onehot   -de_max_threads -1   
+
+write_verilog -noexpr -nodec -v dsp_AB_36x36_Pipeline_post_synth.v
+write_blif -param dsp_AB_36x36_Pipeline_post_synth.eblif
+
+  
