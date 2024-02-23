@@ -4,9 +4,9 @@ module o_buf_primitive_inst (
 );
 
   O_BUF #(
-    .IOSTANDARD("DEFAULT"),     // IO Standard
-    .DRIVE_STRENGTH(2),         // Drive strength in mA for LVCMOS standards
-    .SLEW_RATE("SLOW")          // Transition rate for LVCMOS standards
+    // .IOSTANDARD("DEFAULT"),     // IO Standard
+    // .DRIVE_STRENGTH(2),         // Drive strength in mA for LVCMOS standards
+    // .SLEW_RATE("SLOW")          // Transition rate for LVCMOS standards
   ) o_buf_inst (
     .I(data_input),
     .O(data_output)

@@ -117,11 +117,11 @@ initial begin
 	@(negedge clk);
 	display_stimulus();
 	compare();
-	//@(posedge clk);
+	//@(negedge clk);
 	$display ("\n\n***Reset Test is ended***\n\n");
 
 	reset = 0;
-	@(posedge clk)
+	@(negedge clk)
 
 	$display ("\n\n***Directed Functionality Test is applied forshifted output of z_out = z_out - a*b***\n\n");
 	a = 20'd7;
@@ -129,7 +129,7 @@ initial begin
 	shift_right = 5'd5;
 	mult1 = (a[9:0]*b[8:0]);
 	mult2 = (a[19:10]*b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = 0 - $signed(mult1);
 	expected_out2[63:32] = 0 - $signed(mult2);
 	expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -139,7 +139,7 @@ initial begin
 	expected_out = {expected_out_shifted2[18:0],expected_out_shifted1[18:0]};
 	display_stimulus();
 	compare();
-	@(posedge clk)
+	@(negedge clk)
 	$display ("\n\n***Directed Functionality Test forshifted output of z_out = z_out - a*b is ended***\n\n");
 
 	$display ("\n\n***Directed Functionality Test is applied forshifted output of z_out = z_out - a*b***\n\n");
@@ -150,7 +150,7 @@ initial begin
 	shift_right = 5'h3;
 	mult1 = (a[9:0]*b[8:0]);
 	mult2 = (a[19:10]*b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = 0 - $signed(mult1);
 	expected_out2[63:32] = 0 - $signed(mult2);
 	expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -161,7 +161,7 @@ initial begin
 	//#2;
 	display_stimulus();
 	compare();
-	@(posedge clk)
+	@(negedge clk)
 	$display ("\n\n***Directed Functionality Test forshifted output of z_out = z_out - a*b is ended***\n\n");
 
 	$display ("\n\n***Directed Functionality Test is applied forshifted output of z_out = z_out - a*b***\n\n");
@@ -170,7 +170,7 @@ initial begin
 	shift_right = 5'h1;
 	mult1 = (a[9:0]*b[8:0]);
 	mult2 = (a[19:10]*b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = 0 - $signed(mult1);
 	expected_out2[63:32] = 0 - $signed(mult2);
 	expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -180,7 +180,7 @@ initial begin
 	expected_out = {expected_out_shifted2[18:0],expected_out_shifted1[18:0]};
 	display_stimulus();
 	compare();
-	@(posedge clk)
+	@(negedge clk)
 	$display ("\n\n***Directed Functionality Test forshifted output of z_out = z_out - a*b is ended***\n\n"); 
 
 	$display ("\n\n***Directed Functionality Test is applied forshifted output of z_out = z_out - a*b***\n\n");
@@ -189,7 +189,7 @@ initial begin
 	shift_right = 5'd5; // shift right previous value was 55 simulation failing for 55
 	mult1 = (a[9:0]*b[8:0]);
 	mult2 = (a[19:10]*b[17:9]);
-	@(posedge clk)
+	@(negedge clk)
 	expected_out2[31:0] = 0 - $signed(mult1);
 	expected_out2[63:32] = 0 - $signed(mult2);
 	expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -200,7 +200,7 @@ initial begin
 	//#2;
 	display_stimulus();
 	compare();
-	@(posedge clk)
+	@(negedge clk)
 	$display ("\n\n***Directed Functionality Test forshifted output of z_out = z_out - a*b is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with random inputs are applied forshifted output of z_out = z_out - a*b***\n\n");
@@ -211,7 +211,7 @@ initial begin
 		shift_right = 5'd5; // commented by saad 
 		mult1 = (a[9:0]*b[8:0]);
 		mult2 = (a[19:10]*b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = 0 - $signed(mult1);
 		expected_out2[63:32] = 0 - $signed(mult2);
 		expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -222,7 +222,7 @@ initial begin
 		#2;
 		display_stimulus();
 		compare();
-		@(posedge clk);
+		@(negedge clk);
 	end
 	$display ("\n\n***Random Functionality Tests with random inputs forshifted output of z_out = z_out - a*b are ended***\n\n");
 
@@ -234,7 +234,7 @@ initial begin
 	repeat (100) begin
 		mult1 = (a[9:0]*b[8:0]);
 		mult2 = (a[19:10]*b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = 0 - $signed(mult1);
 		expected_out2[63:32] = 0 - $signed(mult2);
 		expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -245,7 +245,7 @@ initial begin
 		#2;
 		display_stimulus();
 		compare();
-		@(posedge clk);
+		@(negedge clk);
 	end
 	$display ("\n\n***tests for underflow ended***\n\n");
 
@@ -257,7 +257,7 @@ initial begin
 	repeat (100) begin
 		mult1 = (a[9:0]*b[8:0]);
 		mult2 = (a[19:10]*b[17:9]);
-		@(posedge clk)
+		@(negedge clk)
 		expected_out2[31:0] = 0 - $signed(mult1);
 		expected_out2[63:32] = 0 - $signed(mult2);
 		expected_out_shifted1 = expected_out2[31:0]>>>shift_right;
@@ -268,7 +268,7 @@ initial begin
 		#2;
 		display_stimulus();
 		compare();
-		@(posedge clk);
+		@(negedge clk);
 	end
 	$display ("\n\n***tests for overflow ended***\n\n"); 
 

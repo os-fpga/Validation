@@ -117,7 +117,7 @@ initial begin
 	$display ("\n\n***Directed Functionality Test is applied***\n\n");
 	a = 20'h7;
 	b = 18'h3;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = (10'h3ff) * (b[8:0]); 
 	mult2 = (10'h3ff) * (b[17:9]); 
 	expected_out_shifted[31:0] = (a[9:0]) << 5'd2;
@@ -137,7 +137,7 @@ initial begin
 	@(negedge clk);
 	a = 20'h7f;
 	b = 18'h1f;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = (10'h3ff) * (b[8:0]); 
 	mult2 = (10'h3ff) * (b[17:9]); 
 	expected_out_shifted[31:0] = (a[9:0]) << 5'd2;
@@ -158,7 +158,7 @@ initial begin
 	@(negedge clk);
 	a = 417393;
 	b = 109048;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = (10'h3ff) * (b[8:0]); 
 	mult2 = (10'h3ff) * (b[17:9]); 
 	expected_out_shifted[31:0] = (a[9:0]) << 5'd2;
@@ -179,7 +179,7 @@ initial begin
 	repeat (500) begin
 		a = $urandom( );
 		b = $urandom( );
-		@(posedge clk);
+		@(negedge clk);
 		mult1 = (10'h3ff) * (b[8:0]); 
 		mult2 = (10'h3ff) * (b[17:9]); 
 		expected_out_shifted[31:0] = (a[9:0]) << 5'd2;

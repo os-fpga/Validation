@@ -116,7 +116,7 @@ initial begin
 	a = 20'h7ffff;
 	b = 18'h1ffff;
 	display_stimulus();
-	@(posedge clk);
+	@(negedge clk);
 	mult[31:0] = a[9:0]*b[8:0];
 	mult[63:32] = a[19:10]*b[17:9];
 	add_sub_out = {{mult[63:32]+add_sub_out[63:32]},{mult[31:0]+add_sub_out[31:0]}};
@@ -132,7 +132,7 @@ initial begin
 		a = $urandom( );
 		b = $urandom( );
 		display_stimulus();
-	        @(posedge clk);
+	        @(negedge clk);
 	        mult[31:0] = a[9:0]*b[8:0];
 			mult[63:32] = a[19:10]*b[17:9];
 			add_sub_out = {{mult[63:32]+add_sub_out[63:32]},{mult[31:0]+add_sub_out[31:0]}};

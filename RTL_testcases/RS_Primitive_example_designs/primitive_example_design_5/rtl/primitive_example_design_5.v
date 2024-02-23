@@ -4,7 +4,7 @@ module primitive_example_design_5(
     input rst,
     input clk, 
     input ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,
-    input obuft_ds_en1,obuft_ds_en2,obuft_ds_en3;
+    input obuft_ds_en1,obuft_ds_en2,obuft_ds_en3,
     input [2:0] iddr_en,
     output [2:0] q_p,
     output [2:0] q_n

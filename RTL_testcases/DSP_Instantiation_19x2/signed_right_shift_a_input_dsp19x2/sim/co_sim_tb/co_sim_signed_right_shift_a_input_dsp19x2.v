@@ -122,12 +122,12 @@ initial begin
 	@(negedge clk);
 
 	$display ("\n\n***Directed Functionality Test is applied for shifted right output of  z_out = z_out + a*b***\n\n");
-	//@(posedge clk);
-	//@(posedge clk);
+	//@(negedge clk);
+	//@(negedge clk);
 	a = 20'h8;
 	b = 18'h2;
 	shift_right = 5'h2;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -145,7 +145,7 @@ initial begin
 	a = 20'h4;
 	b = 18'h2;
 	shift_right = 5'h1;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -163,7 +163,7 @@ initial begin
 	a = 20'hfffff;
 	b = 18'h20000;
 	shift_right = 5'h3;
-	@(posedge clk);
+	@(negedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -183,7 +183,7 @@ initial begin
 		a = $urandom( );
 		b = $urandom( );
 		shift_right = 5'd4;
-		@(posedge clk);
+		@(negedge clk);
 		mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 		mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 		expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;

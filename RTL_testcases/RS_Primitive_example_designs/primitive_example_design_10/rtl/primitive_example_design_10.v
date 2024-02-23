@@ -295,6 +295,6 @@ module latch #(parameter WIDTH=1) (d,en,q);
     output [WIDTH-1:0] q;
 
     always @(*) begin
-        if (en) assign q = d;
+        if (en) q = d;
     end
 endmodule
