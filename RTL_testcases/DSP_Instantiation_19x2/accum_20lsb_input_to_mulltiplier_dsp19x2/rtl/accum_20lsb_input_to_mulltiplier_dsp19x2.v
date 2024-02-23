@@ -22,13 +22,13 @@ DSP19X2 #(
   .OUTPUT_REG_EN("FALSE"), // Enable output register (TRUE/FALSE)
   .INPUT_REG_EN("TRUE") // Enable input register (TRUE/FALSE)
 ) DSP_inst(
-  .A1(a[9:0]), // Multiplier 1 10-bit data input for multiplier or accumulator loading
-  .B1(b[8:0]), // 9-bit data input for multiplication
-  .Z1(z_out[18:0]), // Multiplier 1 19-bit data output
+  .A1(a[19:10]), // Multiplier 1 10-bit data input for multiplier or accumulator loading
+  .B1(b[17:9]), // 9-bit data input for multiplication
+  .Z1(z_out[37:19]), // Multiplier 1 19-bit data output
   .DLY_B1(DLY_B1), // Multiplier 1 9-bit B registered output
-  .A2(a[19:10]), // Multiplier 2 10-bit data input for multiplier or accumulator loading
-  .B2(b[17:9]), // Multiplier 2 9-bit data input for multiplication
-  .Z2(z_out[37:19]), // Multiplier 2 19-bit data output
+  .A2(a[9:0]), // Multiplier 2 10-bit data input for multiplier or accumulator loading
+  .B2(b[8:0]), // Multiplier 2 9-bit data input for multiplication
+  .Z2(z_out[18:0]), // Multiplier 2 19-bit data output
   .DLY_B2(DLY_B2), // Multiplier 2 9-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // Reset input
