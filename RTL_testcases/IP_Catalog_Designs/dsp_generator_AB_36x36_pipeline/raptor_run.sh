@@ -199,19 +199,19 @@ parse_cga exit 1; }
 	else
     echo "simulation_options compilation -g2012 gate" >> raptor_tcl.tcl
     echo "simulate gate iverilog" >> raptor_tcl.tcl
-    # [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
-    # [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
-    # [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
-    # [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
-    # [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
-    # [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
-    # echo "packing">>raptor_tcl.tcl  
-    # echo "global_placement">>raptor_tcl.tcl  
-    # echo "place">>raptor_tcl.tcl  
-    # echo "route">>raptor_tcl.tcl  
-    # echo "sta">>raptor_tcl.tcl  
-    # echo "power">>raptor_tcl.tcl  
-    # echo "bitstream $bitstream">>raptor_tcl.tcl 
+    [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
+    [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
+    [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
+    [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
+    [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
+    [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
+    echo "packing">>raptor_tcl.tcl  
+    echo "global_placement">>raptor_tcl.tcl  
+    echo "place">>raptor_tcl.tcl  
+    echo "route">>raptor_tcl.tcl  
+    echo "sta">>raptor_tcl.tcl  
+    echo "power">>raptor_tcl.tcl  
+    echo "bitstream $bitstream">>raptor_tcl.tcl 
     fi
     # echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 
     # echo "exec make OUT_DIR=$PWD/results_dir">>raptor_tcl.tcl

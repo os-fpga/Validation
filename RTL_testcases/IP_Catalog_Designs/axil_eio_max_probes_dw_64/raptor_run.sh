@@ -181,6 +181,8 @@ function compile () {
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl #design_level
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
+    echo "simulate_ip $design" >> raptor_tcl.tcl
+    echo "add_simulation_file $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/eio_tb.sv" >> raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
@@ -190,6 +192,8 @@ function compile () {
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
+    echo "simulation_options compilation -g2012 gate" >> raptor_tcl.tcl
+    echo "simulate gate iverilog" >> raptor_tcl.tcl
     [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
     [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
     [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
