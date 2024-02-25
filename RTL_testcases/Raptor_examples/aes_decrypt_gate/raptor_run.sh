@@ -22,7 +22,7 @@ post_route_sim=false #design_level
 hw_test=false #design_level
 
 #raptor options
-device="1GE100-ES1"
+device="1VG28"
 
 strategy="" #(area, delay, mixed, none) 
 
@@ -189,7 +189,6 @@ parse_cga exit 1; }
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
-    # echo "synthesize $strategy">>raptor_tcl.tcl  
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
@@ -198,7 +197,9 @@ parse_cga exit 1; }
     [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
     [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
     [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
-    [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
+    [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl
+    echo "analyze">>raptor_tcl.tcl  
+    echo "synthesize">>raptor_tcl.tcl  
     echo "packing">>raptor_tcl.tcl  
     echo "global_placement">>raptor_tcl.tcl  
     echo "place">>raptor_tcl.tcl  
