@@ -400,7 +400,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && iverilog -g2012 -o $design $primitive_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && iverilog -g2012 -o $design $primitive_sim $simlib $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then
