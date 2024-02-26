@@ -12,7 +12,55 @@ module co_sim_rams_sp_rf_rst_en_async_512x16;
     reg [6:0]cycle, i;
 
     rams_sp_rf_rst_en_async_512x16 golden(.*);
-    rams_sp_rf_rst_en_async_512x16_post_synth netlist(.*, .dout(dout_net));
+    `ifdef PNR
+        rams_sp_rf_rst_en_async_512x16_post_route netlist(  clk ,
+    we ,
+    en ,
+    rst ,
+    addr[0] ,
+    addr[1] ,
+    addr[2] ,
+    addr[3] ,
+    addr[4] ,
+    addr[5] ,
+    addr[6] ,
+    addr[7] ,
+    addr[8] ,
+    di[0] ,
+    di[1] ,
+    di[2] ,
+    di[3] ,
+    di[4] ,
+    di[5] ,
+    di[6] ,
+    di[7] ,
+    di[8] ,
+    di[9] ,
+    di[10] ,
+    di[11] ,
+    di[12] ,
+    di[13] ,
+    di[14] ,
+    di[15] ,
+    dout_net[0] ,
+    dout_net[1] ,
+    dout_net[2] ,
+    dout_net[3] ,
+    dout_net[4] ,
+    dout_net[5] ,
+    dout_net[6] ,
+    dout_net[7] ,
+    dout_net[8] ,
+    dout_net[9] ,
+    dout_net[10] ,
+    dout_net[11] ,
+    dout_net[12] ,
+    dout_net[13] ,
+    dout_net[14] ,
+    dout_net[15] );
+    `else
+        rams_sp_rf_rst_en_async_512x16_post_synth netlist(.*, .dout(dout_net));
+    `endif
 
 
     always #10 clk = ~clk;
