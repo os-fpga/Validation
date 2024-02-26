@@ -11,7 +11,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_readmem;
 
     ram_true_reg_addr_dp_1024x32_readmem golden(.*);
     `ifdef PNR
-        ram_true_reg_addr_dp_1024x32_post_route netlist(  clk ,
+        ram_true_reg_addr_dp_1024x32_readmem_post_route  netlist(  clk ,
     weA ,
     weB ,
     addrA[0] ,
