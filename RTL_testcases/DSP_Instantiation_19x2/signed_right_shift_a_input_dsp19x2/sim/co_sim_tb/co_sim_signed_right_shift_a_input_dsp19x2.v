@@ -127,7 +127,7 @@ initial begin
 	a = 20'h8;
 	b = 18'h2;
 	shift_right = 5'h2;
-	@(negedge clk);
+	@(posedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -145,7 +145,7 @@ initial begin
 	a = 20'h4;
 	b = 18'h2;
 	shift_right = 5'h1;
-	@(negedge clk);
+	@(posedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -163,7 +163,7 @@ initial begin
 	a = 20'hfffff;
 	b = 18'h20000;
 	shift_right = 5'h3;
-	@(negedge clk);
+	@(posedge clk);
 	mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 	mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 	expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;
@@ -183,7 +183,7 @@ initial begin
 		a = $urandom( );
 		b = $urandom( );
 		shift_right = 5'd4;
-		@(negedge clk);
+		@(posedge clk);
 		mult1 = ($signed(a[9:0])*$signed(b[8:0]));
 		mult2 = ($signed(a[19:10])*$signed(b[17:9]));
 		expected_out_acc[31:0] = expected_out_acc[31:0] + mult1;

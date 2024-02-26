@@ -176,8 +176,8 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
-#    echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-#     echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
+    echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v" >> raptor_tcl.tcl
+    echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl
     echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
