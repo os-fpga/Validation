@@ -22,7 +22,7 @@ post_route_sim=false #design_level
 hw_test=false #design_level
 
 #raptor options
-device="1GVTC"
+device="GEMINI_COMPACT_10x8"
 
 strategy="delay" #(area, delay, mixed, none) 
 
@@ -176,9 +176,8 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
-    
-    # echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-    # echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
+    echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v" >> raptor_tcl.tcl
+    echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl
     echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
@@ -224,7 +223,7 @@ parse_cga exit 1; }
     echo "simulate pnr icarus">>raptor_tcl.tcl 
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
-    echo "bitstream $bitstream">>raptor_tcl.tcl  
+    echo "bitstream $bitstream">>raptor_tcl.tcl   
     fi
 
 [ -f rtl/single_port_ram_top.v ] && sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/single_port_ram_top.v
@@ -387,7 +386,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 100m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $simlib $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 200m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log

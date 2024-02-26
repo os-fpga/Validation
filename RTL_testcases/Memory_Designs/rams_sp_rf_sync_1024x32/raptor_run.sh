@@ -176,7 +176,8 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
-
+    echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+    echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
@@ -202,10 +203,27 @@ parse_cga exit 1; }
     echo "global_placement">>raptor_tcl.tcl  
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
+    echo "# Open the input file in read mode">>raptor_tcl.tcl 
+    echo "set input_file [open \"$design/run_1/synth_1_1/impl_1_1_1/routing/$design\_post_route.v\" r]">>raptor_tcl.tcl 
+    echo "# Read the file content">>raptor_tcl.tcl 
+    echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+    echo "# Close the input file after reading">>raptor_tcl.tcl 
+    echo "close \$input_file">>raptor_tcl.tcl 
+    echo "set modified_content [string map {\"$design (\" \"${design}_post_route (\"} \$file_content]">>raptor_tcl.tcl 
+    echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
+    echo "set output_file [open \"$design/run_1/synth_1_1/impl_1_1_1/routing/$design\_post_route.v\" w]">>raptor_tcl.tcl
+    echo "# Write the modified content back to the file">>raptor_tcl.tcl 
+    echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+    echo "# Close the file">>raptor_tcl.tcl 
+    echo "close \$output_file">>raptor_tcl.tcl 
+    echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+    echo "simulation_options compilation icarus -DPNR=1 pnr">>raptor_tcl.tcl 
+    echo "simulate pnr icarus">>raptor_tcl.tcl 
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
     fi
+
 
 cd results_dir
 echo "Device: $device">>results.log
@@ -320,40 +338,6 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
     fi
 
 
-#renaming instantiation in testbench
-if [[ $compile_opts == "post_route_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_synth netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_synth/_post_route/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_route ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-if [[ $compile_opts == "post_synth_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_route netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_route/_post_synth/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_synth ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-
 #removing tool files creating in previous flow
     #rm -fR $PWD/results_dir/$design\_$tool_name\_files
 
@@ -400,7 +384,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $simlib $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log
