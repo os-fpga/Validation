@@ -198,7 +198,7 @@ parse_cga exit 1; }
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
 
-    echo "simulation_options compilation verilator rtl --timing -sc --timescale 1ns/1ps --trace">>raptor_tcl.tcl
+    echo "simulation_options compilation verilator rtl --timing -sc --timescale 1ns/1ps --trace -v $sim_lib -v ">>raptor_tcl.tcl
     echo "simulate rtl verilator">>raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
@@ -420,7 +420,7 @@ fi
     then
         [ ! -d $design\_$tool_name\_post_synth_files ] && mkdir $design\_$tool_name\_post_synth_files
         [ -d $design\_$tool_name\_post_synth_files ] && cd $design\_$tool_name\_post_synth_files
-        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $simlib $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && timeout 10m iverilog -g2012 -o $design $primitive_sim $sim_lib  $design_path $post_synth_netlist_path $tb_path -y $directory_path && timeout 5m vvp ./$design && mv $design tb.vcd -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
         timeout_exit_status=${PIPESTATUS[0]}  # Capturing the exit status of the second `timeout` command
         if [ $timeout_exit_status -eq 124 ]; then
             echo -e "\nERROR: SIM: Simulation Failed, Timeout of 5 minutes occurred in iverilog vvp command.">>$main_path/results_dir/raptor.log
@@ -453,7 +453,7 @@ fi
         echo "    return 0;">>tb_$design.cpp
         echo "}">>tb_$design.cpp
         mv tb_$design.cpp ../../rtl
-        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace $primitive_sim -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+        (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $sim_lib -v  $primitive_sim -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 		while read line; do
                 if [[ $line == *"All Comparison Matched"* ]]
                 then

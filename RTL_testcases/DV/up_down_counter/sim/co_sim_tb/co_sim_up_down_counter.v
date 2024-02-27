@@ -16,8 +16,6 @@ module co_sim_up_down_counter;
 
   up_down_counter  golden (.clock0(clock0),.reset(reset),.dir(dir),.load(load),.counter_input(counter_input),.counter_output(counter_output));
   `ifdef PNR
-    up_down_counter_post_route netlist (
-  );
   `else
     up_down_counter_post_synth  netlist (.clock0(clock0),.reset(reset),.dir(dir),.load(load),.counter_input(counter_input),.counter_output(counter_output_netlist));
   `endif 

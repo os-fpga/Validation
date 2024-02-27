@@ -324,7 +324,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
     echo "	COMPILE_ARGS += -Wno-SELRANGE -Wno-WIDTH -Wno-fatal" >> Makefile
     echo "" >> Makefile
     echo "	ifeq (\$(WAVES), 1)" >> Makefile
-    echo "		COMPILE_ARGS += --trace-fst" >> Makefile
+    echo "		COMPILE_ARGS += --trace -v $sim_lib -v -fst" >> Makefile
     echo "	endif" >> Makefile
     echo "endif" >> Makefile
     echo "" >> Makefile
@@ -488,7 +488,7 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
         # echo "    return 0;">>tb_$design.cpp
 #         echo "}">>tb_$design.cpp
 #         mv tb_$design.cpp ../../rtl
-#         (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
+#         (cd ../../rtl && verilator -Wno-fatal -Wno-BLKANDNBLK -sc -exe $tb_path tb_$design.cpp --timing --timescale 1ps/1ps --trace -v $sim_lib -v  -v $bram_sim -v $primitive_sim -v $TDP18K_FIFO -v $ufifo_ctl -v $sram1024x18 -v $design_path -v $post_synth_netlist_path -y $directory_path +libext+.v+.sv && make -j -C obj_dir -f Vco_sim_$design.mk Vco_sim_$design && obj_dir/Vco_sim_$design && mv obj_dir *.vcd *.cpp -t ../results_dir/$design\_$tool_name\_post_synth_files) 2>&1 | tee post_synth_sim.log
 # 		while read line; do
 #                 if [[ $line == *"All Comparison Matched"* ]]
 #                 then
