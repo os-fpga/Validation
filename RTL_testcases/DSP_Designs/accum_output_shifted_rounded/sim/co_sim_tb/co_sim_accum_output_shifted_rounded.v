@@ -4,13 +4,15 @@ module co_sim_accum_output_shifted_rounded;
 	reg clk, reset, subtract_i, load_acc_i ;
 	reg [5:0] shift_right_i;
 	reg round_i;
-	wire signed [63:0] P;
-	wire signed [63:0] P_netlist;
+	wire signed [63:0] P,P_netlist;
 
 	integer mismatch=0;
 
-accum_output_shifted_rounded golden(.*);
-accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
+	accum_output_shifted_rounded golden(.*);
+	`ifdef PNR
+	`else
+	accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
+	`endif 
 
 //clock initialization
 initial begin
@@ -46,11 +48,12 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for P = P + A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A*B***\n\n");
-	A = $random( );
-	B = $random( );
 	@(negedge clk);
-	repeat (32) begin
+	repeat (100) begin
+		A = $random( );
+		B = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
@@ -72,13 +75,14 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	shift_right_i = $random( );
 	round_i = 1;
 	@(negedge clk);
-	repeat (32) begin
+	repeat (100) begin
+		A = $random( );
+		B = $random( );
+		shift_right_i = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
@@ -87,12 +91,13 @@ initial begin
 	load_acc_i = 0;
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A*B with load_acc_i = 0***\n\n");
-	A = $random( );
-	B = $random( );
 	round_i = 0;
 	@(negedge clk);
-	repeat (32) begin
+	repeat (100) begin
+		A = $random( );
+		B = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
@@ -100,11 +105,12 @@ initial begin
 	subtract_i = 0;
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A*B with load_acc_i = 0***\n\n");
-	A = $random( );
-	B = $random( );
 	@(negedge clk);
-	repeat (32) begin
+	repeat (100) begin
+		A = $random( );
+		B = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
