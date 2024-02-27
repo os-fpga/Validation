@@ -4,13 +4,15 @@ module co_sim_accum_output_shifted_rounded;
 	reg clk, reset, subtract_i, load_acc_i ;
 	reg [5:0] shift_right_i;
 	reg round_i;
-	wire signed [63:0] P;
-	wire signed [63:0] P_netlist;
+	wire signed [63:0] P,P_netlist;
 
 	integer mismatch=0;
 
 accum_output_shifted_rounded golden(.*);
+`ifdef PNR
+`else
 accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
+`endif 
 
 //clock initialization
 initial begin
