@@ -198,7 +198,7 @@ parse_cga exit 1; }
     ##vary design to design
 	echo "analyze">>raptor_tcl.tcl
 
-    echo "simulation_options compilation verilator rtl --timing -sc --timescale 1ns/1ps --trace -v $sim_lib -v ">>raptor_tcl.tcl
+    echo "simulation_options compilation verilator rtl --timing -sc --timescale 1ns/1ps --trace">>raptor_tcl.tcl
     echo "simulate rtl verilator">>raptor_tcl.tcl
 
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
