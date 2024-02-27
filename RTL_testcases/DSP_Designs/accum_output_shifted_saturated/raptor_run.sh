@@ -337,41 +337,6 @@ post_route_netlist_path=`find $main_path -wholename "*/$design\_post_route.v"`
         echo -e "Test Bench for this design Found!"
     fi
 
-
-#renaming instantiation in testbench
-if [[ $compile_opts == "post_route_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_synth netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_synth/_post_route/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_route ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-if [[ $compile_opts == "post_synth_sim" ]]
-    then
-    while read line; do
-            # for word in $line; do
-                if [[ $(echo "$line" | cut -d "(" -f1)  == *"_post_route netlist" ]]; #grep -F "module $design" $post_synth_netlist_path
-                then
-                    sed -i "s/_post_route/_post_synth/" $tb_path
-                    break 2
-                fi
-                if [[ $(echo "$line" | cut -d " " -f1)  == $design\_post\_synth ]]; 
-                then
-                    break 2
-                fi
-            # done
-        done < $tb_path
-fi
-
 #removing tool files creating in previous flow
     #rm -fR $PWD/results_dir/$design\_$tool_name\_files
 
