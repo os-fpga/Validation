@@ -11,9 +11,6 @@ module co_sim_rams_sp_re_we_wf_1024x32;
 
     rams_sp_re_we_wf_1024x32 golden(.*);
     `ifdef PNR
-        rams_sp_re_we_wf_1024x32_post_route netlist( 
-    
-        );
     `else
         rams_sp_re_we_wf_1024x32_post_synth netlist(.*, .dout(dout_netlist));
     `endif

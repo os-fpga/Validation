@@ -11,8 +11,6 @@ module co_sim_gray_to_bin;
 
   gray_to_bin golden (.gray(gray),.binary(binary));
   `ifdef PNR
-    gray_to_bin_post_route netlist (
-    );
   `else
     gray_to_bin_post_synth netlist (.gray(gray),.binary(binary_netlist));
   `endif 
