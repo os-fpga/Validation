@@ -11,6 +11,7 @@ module co_sim_ram_true_reg_addr_dp_1024x32_readmem;
 
     ram_true_reg_addr_dp_1024x32_readmem golden(.*);
     `ifdef PNR
+    `else
         ram_true_reg_addr_dp_1024x32_readmem_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif
     

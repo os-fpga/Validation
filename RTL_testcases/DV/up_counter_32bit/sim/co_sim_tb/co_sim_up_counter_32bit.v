@@ -15,6 +15,7 @@ module co_sim_up_counter_32bit;
 
   up_counter_32bit dut (.clk(clk),.rst(rst),.count(count));
   `ifdef PNR
+  `else
     up_counter_32bit_post_synth  netlist (.clk(clk),.rst(rst),.count(count_netlist));
   `endif 
 

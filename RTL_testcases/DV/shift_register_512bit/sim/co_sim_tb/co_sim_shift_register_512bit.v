@@ -14,6 +14,7 @@ module co_sim_shift_register_512bit;
 
   shift_register_512bit golden (.clk(clk),.reset(reset),.shift_in(shift_in),.out_reg(out_reg));
   `ifdef PNR
+  `else
     shift_register_512bit_post_synth netlist (.clk(clk),.reset(reset),.shift_in(shift_in),.out_reg(out_reg_netlist));
   `endif 
 

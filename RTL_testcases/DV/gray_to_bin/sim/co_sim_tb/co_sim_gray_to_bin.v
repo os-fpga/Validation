@@ -11,6 +11,7 @@ module co_sim_gray_to_bin;
 
   gray_to_bin golden (.gray(gray),.binary(binary));
   `ifdef PNR
+  `else
     gray_to_bin_post_synth netlist (.gray(gray),.binary(binary_netlist));
   `endif 
   // always #1 clk = ~clk;
