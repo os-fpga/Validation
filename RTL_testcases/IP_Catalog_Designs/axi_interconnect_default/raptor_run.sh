@@ -94,6 +94,7 @@ parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
     primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
+    sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
 
 
     #removing and creating raptor_testcase_files
@@ -167,10 +168,10 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pm_count=4 -Ps_count=4 -Pdata_width=32 -Paddr_width=32 -Pid_width=8 -Paw_user_en=0 -Paw_user_width=1 -Pw_user_en=0 -Pw_user_width=1 -Pb_user_en=0 -Pb_user_width=1 -Par_user_en=0 -Par_user_width=1 -Pr_user_en=0 -Pr_user_width=1 -out_file $IP_PATH/$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pm_count=4 -Ps_count=4 -Pdata_width=32 -Paddr_width=32 -Pid_width=8 -Paw_user_en=0 -Paw_user_width=1 -Pw_user_en=0 -Pw_user_width=1 -Pb_user_en=0 -Pb_user_width=1 -Par_user_en=0 -Par_user_width=1 -Pr_user_en=0 -Pr_user_width=1 -out_file  $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
-    # [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     # [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
@@ -214,11 +215,11 @@ parse_cga exit 1; }
     echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
     echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
     echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
-    echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
+    echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v\\\\n\tVERILOG_SOURCES += $sim_lib|g\"" >> raptor_tcl.tcl
     echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
     echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
     echo "exec make clear" >> raptor_tcl.tcl
-    echo "exec env POST_SYNTH_SIM=1 MODULE_NAME=$design make > post_synth_sim.log" >> raptor_tcl.tcl
+    echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design > post_synth_sim.log 2>&1" >> raptor_tcl.tcl
     echo "cd ../../../../../../" >> raptor_tcl.tcl
     fi
     # echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 

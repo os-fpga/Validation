@@ -93,6 +93,7 @@ parse_cga exit; }
     lib_fix_path="${raptor_path:(-11)}"
     library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
     primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
+    sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
     
 
     #removing and creating raptor_testcase_files
@@ -212,8 +213,6 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
     fi
-    echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 
-    echo "exec make OUT_DIR=$PWD/results_dir">>raptor_tcl.tcl 
 
 cd results_dir
 echo "Device: $device">>results.log

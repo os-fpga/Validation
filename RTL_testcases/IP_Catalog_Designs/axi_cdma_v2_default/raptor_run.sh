@@ -158,6 +158,7 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo "" || echo ""
 
+    IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -165,7 +166,7 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v2_0" -mod_name $design -Pid_width=1 -Paxi_addr_width=32 -Paxi_data_width=32 -Paxil_addr_width=5 -Paxil_data_width=32 -out_file ./$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v2_0" -mod_name $design -Pid_width=1 -Paxi_addr_width=32 -Paxi_data_width=32 -Paxil_addr_width=5 -Paxil_data_width=32 -out_file  $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v2_0/$design/src/">>raptor_tcl.tcl

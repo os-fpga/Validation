@@ -212,8 +212,6 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl 
     fi
-    echo "cd rapidsilicon/ip/$ip_name/v1_0/$design/sim/">>raptor_tcl.tcl 
-    echo "exec make OUT_DIR=$PWD/results_dir">>raptor_tcl.tcl 
 
 cd results_dir
 echo "Device: $device">>results.log
