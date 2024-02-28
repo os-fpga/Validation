@@ -7,7 +7,10 @@ module co_sim_dsp_mul_unsigned_comb;
 	integer mismatch=0;
 
 dsp_mul_unsigned_comb golden(.*);
-dsp_mul_unsigned_comb_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_unsigned_comb_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 initial begin
 	A=0;

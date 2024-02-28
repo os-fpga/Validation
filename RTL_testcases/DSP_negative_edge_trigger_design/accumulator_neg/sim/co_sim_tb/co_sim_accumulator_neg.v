@@ -8,7 +8,10 @@ module co_sim_accumulator_neg;
 	integer mismatch=0;
 
 accumulator_neg golden(.*);
-accumulator_neg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    accumulator_neg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

@@ -8,7 +8,10 @@ module co_sim_fsm_encoding_binary #(parameter width = 12);
 	integer mismatch=0;
 	
 	fsm_encoding_binary  rtl (.*);
-	fsm_encoding_binary_post_synth netlist (.* ,.q(q_netlist));
+    `ifdef PNR
+    `else
+    	fsm_encoding_binary_post_synth netlist (.* ,.q(q_netlist));
+    `endif
 		   
 //clock initialization
 initial begin

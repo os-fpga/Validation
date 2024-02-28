@@ -8,7 +8,10 @@ module co_sim_dsp_add_mul_output_to_accum_20lsb_neg;
 	integer mismatch=0;
 
 dsp_add_mul_output_to_accum_20lsb_neg golden(.*);
-dsp_add_mul_output_to_accum_20lsb_neg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_add_mul_output_to_accum_20lsb_neg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

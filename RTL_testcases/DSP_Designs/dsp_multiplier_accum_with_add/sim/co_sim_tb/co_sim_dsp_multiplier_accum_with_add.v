@@ -7,7 +7,10 @@ module co_sim_dsp_multiplier_accum_with_add;
 	integer mismatch=0;
 
 dsp_multiplier_accum_with_add golden(.*);
-dsp_multiplier_accum_with_add_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_multiplier_accum_with_add_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

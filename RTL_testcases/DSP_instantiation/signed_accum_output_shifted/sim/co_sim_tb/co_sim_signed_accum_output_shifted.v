@@ -11,7 +11,10 @@ module co_sim_signed_accum_output_shifted;
 	integer mismatch=0;
 
 signed_accum_output_shifted golden(.*);
-signed_accum_output_shifted_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    signed_accum_output_shifted_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

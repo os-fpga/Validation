@@ -8,7 +8,10 @@ module co_sim_dsp_mul_unsigned_comb;
 	integer mismatch=0;
 
 matrix_mult_3x3 golden(.*);
-matrix_mult_3x3_post_synth netlist(.*, .Result(Result_netlist));
+    `ifdef PNR
+    `else
+    matrix_mult_3x3_post_synth netlist(.*, .Result(Result_netlist));
+    `endif
 
 initial begin
 	A=0;

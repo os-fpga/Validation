@@ -5,11 +5,6 @@ module co_sim_LUT3_primitive_inst;
 
 
 `ifdef PNR
-		LUT3_primitive_inst DUT (
-    A_LUT3[2]
-    A_LUT3[0] ,
-    A_LUT3[1] ,
-    Y_LUT3 );
 `else
    	LUT3_primitive_inst DUT (.*);
 `endif

@@ -8,7 +8,10 @@ module co_sim_dsp_mul_unsigned_reg;
 	integer mismatch=0;
 
 dsp_mul_unsigned_reg golden(.*);
-dsp_mul_unsigned_reg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_unsigned_reg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

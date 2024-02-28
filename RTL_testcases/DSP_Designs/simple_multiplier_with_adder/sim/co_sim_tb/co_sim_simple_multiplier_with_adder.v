@@ -8,7 +8,10 @@ module co_sim_simple_multiplier_with_adder;
 	integer mismatch=0;
 
 simple_multiplier_with_adder golden(.*);
-simple_multiplier_with_adder_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    simple_multiplier_with_adder_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

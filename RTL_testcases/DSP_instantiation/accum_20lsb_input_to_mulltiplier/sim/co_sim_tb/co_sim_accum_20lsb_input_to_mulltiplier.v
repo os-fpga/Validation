@@ -10,7 +10,10 @@ module co_sim_accum_20lsb_input_to_mulltiplier;
 	integer mismatch=0;
 
 accum_20lsb_input_to_mulltiplier golden(.*);
-accum_20lsb_input_to_mulltiplier_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    accum_20lsb_input_to_mulltiplier_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

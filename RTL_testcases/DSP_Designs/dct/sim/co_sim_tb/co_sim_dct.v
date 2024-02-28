@@ -6,7 +6,10 @@ module co_sim_dct ();
 	integer mismatch=0;
 
 dct golden(.*);
-dct_post_synth netlist(.* ,. y(y_netlist));
+    `ifdef PNR
+    `else
+    dct_post_synth netlist(.* ,. y(y_netlist));
+    `endif
 
 initial begin
 

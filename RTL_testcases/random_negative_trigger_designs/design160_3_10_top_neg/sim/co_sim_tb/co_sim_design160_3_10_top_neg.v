@@ -7,7 +7,10 @@ module co_sim_design160_3_10_top_neg #(parameter WIDTH=32, CHANNEL=3);
 	integer mismatch=0;
 
 design160_3_10_top_neg golden (.clk(clk),.rst(reset),.in(inpt),.out(outpt));
-design160_3_10_top_neg_post_synth netlist(.clk(clk),.rst(reset),.in(inpt),.out(out_netlist));
+    `ifdef PNR
+    `else
+    design160_3_10_top_neg_post_synth netlist(.clk(clk),.rst(reset),.in(inpt),.out(out_netlist));
+    `endif
 
 //clock initialization
 initial begin

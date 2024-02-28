@@ -3,13 +3,16 @@ module co_sim_rams_sp_reg_addr_readmem_512x16;
     reg we;
     reg [8:0] addr;
     reg [15:0] di;
-    wire [15:0] dout, dout_net;
+    wire [15:0] dout, dout_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     rams_sp_reg_addr_readmem_512x16 golden(.*);
-    rams_sp_reg_addr_readmem_512x16_post_synth netlist(.*, .dout(dout_net));
+    `ifdef PNR
+    `else
+        rams_sp_reg_addr_readmem_512x16_post_synth netlist(.*, .dout(dout_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -27,7 +30,7 @@ module co_sim_rams_sp_reg_addr_readmem_512x16;
         cycle = cycle +1;
       
         compare(cycle);
-        $display("Initial Values: memory read dout=%h  netlist dout=%h address=%d", golden.dout, dout_net, i);
+        $display("Initial Values: memory read dout=%h  netlist dout=%h address=%d", golden.dout, dout_netlist, i);
     end
 
     if(mismatch == 0)
@@ -41,8 +44,8 @@ module co_sim_rams_sp_reg_addr_readmem_512x16;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(dout !== dout_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_net,$time);
+    if(dout !== dout_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
         mismatch = mismatch+1;
     end
     

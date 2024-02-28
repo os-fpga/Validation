@@ -11,7 +11,10 @@ module co_sim_b_registered_input_to_output;
 	integer mismatch=0;
 
 b_registered_input_to_output golden(.*);
-b_registered_input_to_output_post_synth netlist(.* ,.dly_b(dly_b_netlist) ,.z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    b_registered_input_to_output_post_synth netlist(.* ,.dly_b(dly_b_netlist) ,.z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

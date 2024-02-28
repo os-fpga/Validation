@@ -10,7 +10,10 @@ module co_sim_dsp_fractured_accum_output_shifted_rounded;
 	integer mismatch=0;
 
 dsp_fractured_accum_output_shifted_rounded golden(.*);
-dsp_fractured_accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_fractured_accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

@@ -10,7 +10,10 @@ module co_sim_add_output_of_four_multipliers_neg#(
 	integer mismatch=0;
 
 add_output_of_four_multipliers_neg golden(.*);
-add_output_of_four_multipliers_neg_post_synth netlist(.* ,. y(y_netlist));
+    `ifdef PNR
+    `else
+    add_output_of_four_multipliers_neg_post_synth netlist(.* ,. y(y_netlist));
+    `endif
 
 //clock initialization
 initial begin

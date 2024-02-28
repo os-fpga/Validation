@@ -8,7 +8,10 @@ module co_sim_synth_options_no_simplify;
 	integer mismatch=0;
 
 synth_options_no_simplify golden(.*);
-synth_options_no_simplify_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    synth_options_no_simplify_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

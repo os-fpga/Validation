@@ -10,7 +10,10 @@ module co_sim_unsigned_saturated_output_coeff1_overflow_inst;
 	integer mismatch=0;
 
 unsigned_saturated_output_coeff1_overflow_inst golden(.*);
-unsigned_saturated_output_coeff1_overflow_inst_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    unsigned_saturated_output_coeff1_overflow_inst_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

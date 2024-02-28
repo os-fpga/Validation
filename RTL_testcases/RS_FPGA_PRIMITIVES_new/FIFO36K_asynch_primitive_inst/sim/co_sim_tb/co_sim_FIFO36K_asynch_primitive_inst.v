@@ -26,7 +26,6 @@ reg overflow_expected;
 reg underflow_expected;
 
 `ifdef PNR
-		FIFO36K_asynch_primitive_inst DUT (.*); //add ports later
 `else
    	FIFO36K_asynch_primitive_inst DUT (.*);
 `endif

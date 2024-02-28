@@ -8,7 +8,10 @@ module co_sim_all_synth_options_dsp_mul_signed_reg_with_accum;
 	integer mismatch=0;
 
 all_synth_options_dsp_mul_signed_reg_with_accum golden(.*);
-all_synth_options_dsp_mul_signed_reg_with_accum_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    all_synth_options_dsp_mul_signed_reg_with_accum_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

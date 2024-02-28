@@ -9,7 +9,10 @@ module co_sim_mult_sub_from_accumulator;
 	integer mismatch=0;
 
 mult_sub_from_accumulator golden(.*);
-mult_sub_from_accumulator_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    mult_sub_from_accumulator_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

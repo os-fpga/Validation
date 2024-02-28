@@ -9,22 +9,6 @@ module co_sim_adder_verilator;
   integer mismatch=0;
 
 `ifdef PNR
-		adder_verilator inst(
-		clock ,
-    reset ,
-    b[3] ,
-    b[2] ,
-    b[1] ,
-    b[0] ,
-    a[3] ,
-    a[2] ,
-    a[1] ,
-    a[0] ,
-    sum[4] ,
-    sum[3] ,
-    sum[2] ,
-    sum[1] ,
-    sum[0] );
 `else
    	adder_verilator inst(.*);
 `endif

@@ -9,7 +9,10 @@ module co_sim_simple_unsigned_4tap_fir#(
 	integer mismatch=0;
 
 simple_unsigned_4tap_fir golden(.*);
-simple_unsigned_4tap_fir_post_synth netlist(.* ,. y(y_netlist));
+    `ifdef PNR
+    `else
+    simple_unsigned_4tap_fir_post_synth netlist(.* ,. y(y_netlist));
+    `endif
 
 //clock initialization
 initial begin

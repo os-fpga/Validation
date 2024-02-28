@@ -6,13 +6,16 @@ reg [3:0] write_enable;
 reg [5:0] write_addr;
 reg [7:0] read_addr;
 reg [31:0] write_data;
-wire [7:0] read_data, read_data_net;
+wire [7:0] read_data, read_data_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     asym_ram_sdp_wide_write golden(.*);
-    asym_ram_sdp_wide_write_post_synth netlist(.*, .read_data(read_data_net));
+    `ifdef PNR
+    `else
+        asym_ram_sdp_wide_write_post_synth netlist(.*, .read_data(read_data_netlist));
+    `endif
 
 
      //clock//
@@ -86,8 +89,8 @@ wire [7:0] read_data, read_data_net;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(read_data !== read_data_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", read_data, read_data_net,$time);
+    if(read_data !== read_data_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", read_data, read_data_netlist,$time);
         mismatch = mismatch+1;
     end
     

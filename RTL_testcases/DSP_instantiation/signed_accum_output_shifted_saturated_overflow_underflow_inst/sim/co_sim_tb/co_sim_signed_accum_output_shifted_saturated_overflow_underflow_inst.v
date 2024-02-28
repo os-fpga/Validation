@@ -11,7 +11,10 @@ module co_sim_signed_accum_output_shifted_saturated_overflow_underflow_inst;
 	integer mismatch=0;
 
 signed_accum_output_shifted_saturated_overflow_underflow_inst golden(.*);
-signed_accum_output_shifted_saturated_overflow_underflow_inst_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    signed_accum_output_shifted_saturated_overflow_underflow_inst_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

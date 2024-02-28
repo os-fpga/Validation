@@ -8,7 +8,10 @@ module co_sim_tb;
 	integer mismatch=0;
 
 dsp_mul_signed_reg_output_is_not_reg_neg golden(.*);
-dsp_mul_signed_reg_output_is_not_reg_neg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_signed_reg_output_is_not_reg_neg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

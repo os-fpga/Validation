@@ -4,13 +4,6 @@ module co_sim_LUT5_primitive_inst;
   wire Y_LUT5; // Data Output
 
 `ifdef PNR
-		LUT5_primitive_inst DUT (
-    A_LUT5[0] ,
-    A_LUT5[1] ,  
-    A_LUT5[2] ,
-    A_LUT5[3] ,
-    A_LUT5[4] ,
-    Y_LUT5 );
 `else
    	LUT5_primitive_inst DUT (.*);
 `endif

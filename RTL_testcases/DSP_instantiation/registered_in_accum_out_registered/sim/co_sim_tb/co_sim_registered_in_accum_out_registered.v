@@ -9,7 +9,10 @@ module co_sim_registered_in_accum_out_registered;
 	integer mismatch=0;
 
 registered_in_accum_out_registered golden(.*);
-registered_in_accum_out_registered_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    registered_in_accum_out_registered_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

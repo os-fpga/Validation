@@ -15,13 +15,16 @@ reg enaA, enaB;
 reg [ADDRWIDTHA-1:0] addrA;
 reg [ADDRWIDTHB-1:0] addrB;
 reg [WIDTHA-1:0] diA;
-wire [WIDTHB-1:0] doB, doB_net;
+wire [WIDTHB-1:0] doB, doB_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     asym_ram_sdp_read_wider_dc_logic golden(.*);
-    asym_ram_sdp_read_wider_dc_logic_post_synth netlist(.*, .doB(doB_net));
+    `ifdef PNR
+    `else
+        asym_ram_sdp_read_wider_dc_logic_post_synth netlist(.*, .doB(doB_netlist));
+    `endif
 
 
      //clock//
@@ -97,8 +100,8 @@ wire [WIDTHB-1:0] doB, doB_net;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(doB !== doB_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doB, doB_net,$time);
+    if(doB !== doB_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doB, doB_netlist,$time);
         mismatch = mismatch+1;
     end
     

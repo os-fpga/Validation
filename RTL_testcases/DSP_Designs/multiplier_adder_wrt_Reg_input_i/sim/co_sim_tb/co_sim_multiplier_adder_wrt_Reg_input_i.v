@@ -10,7 +10,10 @@ module co_sim_multiplier_adder_wrt_Reg_input_i;
 	integer mismatch=0;
 
 multiplier_adder_wrt_Reg_input_i golden(.*);
-multiplier_adder_wrt_Reg_input_i_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    multiplier_adder_wrt_Reg_input_i_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

@@ -13,19 +13,22 @@ module co_sim_bytewrite_tdp_ram_nc;
 	reg [NUM_COL-1:0] weA;
 	reg [ADDR_WIDTH-1:0] addrA;
 	reg [DATA_WIDTH-1:0] dinA;
-	wire [DATA_WIDTH-1:0] doutA,doutA_net;
+	wire [DATA_WIDTH-1:0] doutA,doutA_netlist;
 	reg clkB;
 	reg enaB;
 	reg [NUM_COL-1:0] weB;
 	reg [ADDR_WIDTH-1:0] addrB;
 	reg [DATA_WIDTH-1:0] dinB;
-	wire [DATA_WIDTH-1:0] doutB, doutB_net;
+	wire [DATA_WIDTH-1:0] doutB, doutB_netlist;
 
     integer mismatch=0;
     integer cycle, i;
 
     bytewrite_tdp_ram_nc golden(.*);
-    bytewrite_tdp_ram_nc_post_synth netlist(.*, .doutA(doutA_net), .doutB(doutB_net));
+    `ifdef PNR
+    `else
+        bytewrite_tdp_ram_nc_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
+    `endif
 
 
 
@@ -117,12 +120,12 @@ module co_sim_bytewrite_tdp_ram_nc;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(doutA !== doutA_net) begin
-        $display("doutA mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutA, doutA_net,$time);
+    if(doutA !== doutA_netlist) begin
+        $display("doutA mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutA, doutA_netlist,$time);
         mismatch = mismatch+1;
     end
-    if(doutB !== doutB_net) begin
-        $display("doutB mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutB, doutB_net,$time);
+    if(doutB !== doutB_netlist) begin
+        $display("doutB mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutB, doutB_netlist,$time);
         mismatch = mismatch+1;
     end
     

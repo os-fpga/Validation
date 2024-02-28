@@ -8,7 +8,10 @@ module co_sim_dsp_mul_signed_reg_active_low_sync_reset;
 	integer mismatch=0;
 
 dsp_mul_signed_reg_active_low_sync_reset golden(.*);
-dsp_mul_signed_reg_active_low_sync_reset_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_signed_reg_active_low_sync_reset_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

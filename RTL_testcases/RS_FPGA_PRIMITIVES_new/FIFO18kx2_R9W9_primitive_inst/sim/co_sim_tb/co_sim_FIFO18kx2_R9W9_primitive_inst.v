@@ -41,7 +41,6 @@ reg underflow_expected2;
 
 
 `ifdef PNR
-		FIFO18kx2_R9W9_primitive_inst DUT (.*); //add ports later
 `else
    	FIFO18kx2_R9W9_primitive_inst DUT (.*);
 `endif

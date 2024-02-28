@@ -12,7 +12,10 @@ module co_sim_signed_right_shift_a_input;
 	integer mismatch=0;
 
 signed_right_shift_a_input golden(.*);
-signed_right_shift_a_input_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    signed_right_shift_a_input_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

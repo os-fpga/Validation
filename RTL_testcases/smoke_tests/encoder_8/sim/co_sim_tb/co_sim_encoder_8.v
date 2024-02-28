@@ -7,7 +7,10 @@ module co_sim_encoder_8;
 	integer mismatch=0,i=0;
 
 encoder_8 golden(.*);
-encoder_8_post_synth netlist(.*, .data_out(data_out_netlist));
+    `ifdef PNR
+    `else
+    encoder_8_post_synth netlist(.*, .data_out(data_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

@@ -7,7 +7,10 @@ module co_sim_dsp_mul_complex_eq ();
  integer mismatch=0;
 
  dsp_mul_complex_eq rtl(.*);
- dsp_mul_complex_eq_post_synth netlist(.*, .z(z_netlist) ,. z1(z1_netlist) ,. z2(z2_netlist));
+    `ifdef PNR
+    `else
+     dsp_mul_complex_eq_post_synth netlist(.*, .z(z_netlist) ,. z1(z1_netlist) ,. z2(z2_netlist));
+    `endif
 
  initial begin
 

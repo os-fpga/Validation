@@ -10,7 +10,10 @@ module co_sim_subtract_mult_output_coeff2_from_shifted_a;
 	integer mismatch=0;
 
 subtract_mult_output_coeff2_from_shifted_a golden(.*);
-subtract_mult_output_coeff2_from_shifted_a_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    subtract_mult_output_coeff2_from_shifted_a_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 //clock initialization
 initial begin
     clk = 1'b0;
