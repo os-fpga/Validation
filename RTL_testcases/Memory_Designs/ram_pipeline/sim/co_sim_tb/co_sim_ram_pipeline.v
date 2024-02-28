@@ -7,14 +7,17 @@ module co_sim_ram_pipeline;
     reg [8:0] addr1;
     reg [8:0] addr2;
     reg [15:0] di;
-    wire [15:0] res1, res1_net;
-    wire [15:0] res2, res2_net;
+    wire [15:0] res1, res1_netlist;
+    wire [15:0] res2, res2_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     ram_pipeline golden(.*);
-    ram_pipeline_post_synth netlist(.*, .res1(res1_net), .res2(res2_net));
+    `ifdef PNR
+    `else
+        ram_pipeline_post_synth netlist(.*, .res1(res1_netlist), .res2(res2_netlist));
+    `endif
 
 
     //clock//
@@ -92,13 +95,13 @@ module co_sim_ram_pipeline;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(res1 !== res1_net) begin
-        $display("res1 mismatch. Golden: %0h, Netlist: %0h, Time: %0t", res1, res1_net,$time);
+    if(res1 !== res1_netlist) begin
+        $display("res1 mismatch. Golden: %0h, Netlist: %0h, Time: %0t", res1, res1_netlist,$time);
         mismatch = mismatch+1;
     end
 
-     if(res2 !== res2_net) begin
-        $display("res2 mismatch. Golden: %0h, Netlist: %0h, Time: %0t", res2, res2_net,$time);
+     if(res2 !== res2_netlist) begin
+        $display("res2 mismatch. Golden: %0h, Netlist: %0h, Time: %0t", res2, res2_netlist,$time);
         mismatch = mismatch+1;
     end
     

@@ -4,13 +4,16 @@ module co_sim_dual_port_rom
 
     reg [(ADDR_WIDTH-1):0] addr_a, addr_b;
 	reg clk;
-	wire [(DATA_WIDTH-1):0] q_a, q_b, q_a_net, q_b_net;
+	wire [(DATA_WIDTH-1):0] q_a, q_b, q_a_netlist, q_b_netlist;
 
     integer mismatch=0;
     reg [6:0] i;
 
     dual_port_rom golden(.*);
-    dual_port_rom_post_synth netlist(.*, .q_a(q_a_net), .q_b(q_b_net));
+    `ifdef PNR
+    `else
+        dual_port_rom_post_synth netlist(.*, .q_a(q_a_netlist), .q_b(q_b_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -49,12 +52,12 @@ module co_sim_dual_port_rom
     end
 
     task compare();
-    if(q_a !== q_a_net) begin
-        $display("q_a mismatch. Golden: %0h, Netlist: %0h, Time: %0t", q_a, q_a_net,$time);
+    if(q_a !== q_a_netlist) begin
+        $display("q_a mismatch. Golden: %0h, Netlist: %0h, Time: %0t", q_a, q_a_netlist,$time);
         mismatch = mismatch+1;
     end
-    if(q_b !== q_b_net) begin
-        $display("q_b mismatch. Golden: %0h, Netlist: %0h, Time: %0t", q_b, q_b_net,$time);
+    if(q_b !== q_b_netlist) begin
+        $display("q_b mismatch. Golden: %0h, Netlist: %0h, Time: %0t", q_b, q_b_netlist,$time);
     end
     
     endtask

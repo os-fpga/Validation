@@ -8,7 +8,10 @@ module co_sim_dsp_mul_unsigned_parameterized #(parameter A_WIDTH = 64, B_WIDTH =
 	integer mismatch=0;
 
 dsp_mul_unsigned_parameterized golden(.*);
-dsp_mul_unsigned_parameterized_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_unsigned_parameterized_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

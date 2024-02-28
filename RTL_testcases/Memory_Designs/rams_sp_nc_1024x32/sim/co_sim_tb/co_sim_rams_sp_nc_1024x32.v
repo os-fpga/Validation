@@ -4,13 +4,16 @@ module co_sim_rams_sp_nc_1024x32;
     reg we;
     reg [9:0] addr;
     reg [6:0] di;
-    wire [6:0] dout, dout_net;
+    wire [6:0] dout, dout_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     rams_sp_nc_1024x32 golden(.*);
-    rams_sp_nc_1024x32_post_synth netlist(.*, .dout(dout_net));
+    `ifdef PNR
+    `else
+        rams_sp_nc_1024x32_post_synth netlist(.*, .dout(dout_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -62,8 +65,8 @@ module co_sim_rams_sp_nc_1024x32;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(dout !== dout_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t, we=%b", dout, dout_net,$time,golden.we);
+    if(dout !== dout_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t, we=%b", dout, dout_netlist,$time,golden.we);
         mismatch = mismatch+1;
     end
     

@@ -9,7 +9,10 @@ module co_sim_design60_10_18_top #(parameter WIDTH=32, CHANNEL=10);
 	integer mismatch=0;
 
 design60_10_18_top golden (.clk(clk),.rst(reset),.in(inpt),.out(outpt));
-design60_10_18_top_post_synth netlist(.clk(clk),.rst(reset),.in(inpt),.out(out_netlist));
+    `ifdef PNR
+    `else
+    design60_10_18_top_post_synth netlist(.clk(clk),.rst(reset),.in(inpt),.out(out_netlist));
+    `endif
 
 //clock initialization
 initial begin

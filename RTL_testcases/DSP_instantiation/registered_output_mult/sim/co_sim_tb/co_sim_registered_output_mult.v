@@ -9,7 +9,10 @@ module co_sim_registered_output_mult;
 	integer mismatch=0;
 
 registered_output_mult golden(.*);
-registered_output_mult_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    registered_output_mult_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

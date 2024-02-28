@@ -9,7 +9,10 @@ module co_sim_dsp_z_o_wrt_out_select_i;
 	integer mismatch=0;
 
 dsp_z_o_wrt_out_select_i golden(.*);
-dsp_z_o_wrt_out_select_i_post_synth netlist(.*, .z_o(z_o_netlist));
+    `ifdef PNR
+    `else
+    dsp_z_o_wrt_out_select_i_post_synth netlist(.*, .z_o(z_o_netlist));
+    `endif
 
 //clock initialization
 initial begin

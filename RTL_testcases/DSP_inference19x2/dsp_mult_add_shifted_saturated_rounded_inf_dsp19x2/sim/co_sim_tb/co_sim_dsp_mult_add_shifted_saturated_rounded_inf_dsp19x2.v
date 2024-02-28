@@ -9,7 +9,10 @@ module co_sim_dsp_mult_add_shifted_saturated_rounded_inf_dsp19x2;
 	integer mismatch=0;
 
 dsp_mult_add_shifted_saturated_rounded_inf_dsp19x2 golden(.*);
-dsp_mult_add_shifted_saturated_rounded_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mult_add_shifted_saturated_rounded_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

@@ -9,7 +9,10 @@ module co_sim_dsp_fractured_mul_unsigned_reg_with_accum_shifted_output;
 	integer mismatch=0;
 
 dsp_fractured_mul_unsigned_reg_with_accum_shifted_output golden(.*);
-dsp_fractured_mul_unsigned_reg_with_accum_shifted_output_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_fractured_mul_unsigned_reg_with_accum_shifted_output_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

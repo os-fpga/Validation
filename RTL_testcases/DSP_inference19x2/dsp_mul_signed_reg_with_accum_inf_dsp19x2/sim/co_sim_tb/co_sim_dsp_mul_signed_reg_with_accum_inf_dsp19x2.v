@@ -8,7 +8,10 @@ module co_sim_dsp_mul_signed_reg_with_accum_inf_dsp19x2;
 	integer mismatch=0;
 
 dsp_mul_signed_reg_with_accum_inf_dsp19x2 golden(.*);
-dsp_mul_signed_reg_with_accum_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mul_signed_reg_with_accum_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

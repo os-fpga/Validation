@@ -10,7 +10,10 @@ module co_sim_mul_and_reflect_input_B_as_registered_out;
 	integer mismatch=0;
 
 mul_and_reflect_input_B_as_registered_out golden(.*);
-mul_and_reflect_input_B_as_registered_out_post_synth netlist(.*, .P(P_netlist),. DlyB_o(DlyB_o_netlist));
+    `ifdef PNR
+    `else
+    mul_and_reflect_input_B_as_registered_out_post_synth netlist(.*, .P(P_netlist),. DlyB_o(DlyB_o_netlist));
+    `endif
 
 //clock initialization
 initial begin

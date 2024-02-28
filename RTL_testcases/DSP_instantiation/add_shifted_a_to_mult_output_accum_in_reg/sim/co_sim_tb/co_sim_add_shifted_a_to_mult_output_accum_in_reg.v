@@ -10,7 +10,10 @@ module co_sim_add_shifted_a_to_mult_output_accum_in_reg;
 	integer mismatch=0;
 
 add_shifted_a_to_mult_output_accum_in_reg golden(.*);
-add_shifted_a_to_mult_output_accum_in_reg_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    add_shifted_a_to_mult_output_accum_in_reg_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 initial begin
 	clk = 1'b0;

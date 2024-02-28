@@ -7,7 +7,10 @@ module co_sim_register_2;
 	integer mismatch=0,i=0;
 
 register_2 golden(.*);
-register_2_post_synth netlist(.*, .data_out(data_out_netlist));
+    `ifdef PNR
+    `else
+    register_2_post_synth netlist(.*, .data_out(data_out_netlist));
+    `endif
 
 //clock initialization
 initial begin

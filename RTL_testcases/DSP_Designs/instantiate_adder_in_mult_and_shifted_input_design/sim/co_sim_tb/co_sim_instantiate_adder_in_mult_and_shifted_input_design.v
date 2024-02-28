@@ -11,7 +11,10 @@ module co_sim_instantiate_adder_in_mult_and_shifted_input_design;
 	integer mismatch=0;
 
 instantiate_adder_in_mult_and_shifted_input_design golden(.*);
-instantiate_adder_in_mult_and_shifted_input_design_post_synth netlist(.*, .result(result_netlist));
+    `ifdef PNR
+    `else
+    instantiate_adder_in_mult_and_shifted_input_design_post_synth netlist(.*, .result(result_netlist));
+    `endif
 
 //clock initialization
 initial begin

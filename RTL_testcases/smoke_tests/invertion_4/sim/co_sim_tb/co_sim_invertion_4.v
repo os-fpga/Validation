@@ -6,7 +6,10 @@ module co_sim_invertion_4;
 	integer mismatch=0,i=0;
 
 invertion_4 golden(.*);
-invertion_4_post_synth netlist(.*, .data_out(data_out_netlist));
+    `ifdef PNR
+    `else
+    invertion_4_post_synth netlist(.*, .data_out(data_out_netlist));
+    `endif
 
 initial begin
 	

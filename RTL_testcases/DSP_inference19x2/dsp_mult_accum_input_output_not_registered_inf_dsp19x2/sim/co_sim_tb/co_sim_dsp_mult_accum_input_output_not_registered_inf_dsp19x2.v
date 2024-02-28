@@ -9,7 +9,10 @@ module co_sim_dsp_mult_accum_input_output_not_registered_inf_dsp19x2;
 	integer mismatch=0;
 
 dsp_mult_accum_input_output_not_registered_inf_dsp19x2 golden(.*);
-dsp_mult_accum_input_output_not_registered_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_mult_accum_input_output_not_registered_inf_dsp19x2_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

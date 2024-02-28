@@ -4,14 +4,17 @@ module co_sim_ram_multi_port_1024x32;
     input clk, we;
     input [9:0] write_addr, read_addr_a, read_addr_b, read_addr_c;
     input [31:0] din;
-    output [31:0] doutA, doutB, doutC, doutA_net, doutB_net, doutC_net;
+    output [31:0] doutA, doutB, doutC, doutA_netlist, doutB_netlist, doutC_netlist;
     wire [31:0] doutA, doutB,
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     ram_multi_port_1024x32 golden(.*);
-    ram_multi_port_1024x32_post_synth netlist(.*, .doutA(doutA_net), .doutB(doutB_net), .doutC(doutC_net));
+    `ifdef PNR
+    `else
+        ram_multi_port_1024x32_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist), .doutC(doutC_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -58,13 +61,13 @@ module co_sim_ram_multi_port_1024x32;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(doutA !== doutA_net) begin
-        $display("doutA mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutA, doutA_net,$time);
+    if(doutA !== doutA_netlist) begin
+        $display("doutA mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutA, doutA_netlist,$time);
         mismatch = mismatch+1;
     end
 
-     if(doutB !== doutB_net) begin
-        $display("doutB mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutB, doutB_net,$time);
+     if(doutB !== doutB_netlist) begin
+        $display("doutB mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutB, doutB_netlist,$time);
         mismatch = mismatch+1;
     end
     

@@ -13,7 +13,10 @@ module co_sim_synth_options_effort_high_dsp_multiplier_accum_with_add_and_sub;
 	integer mismatch=0;
 
 synth_options_effort_high_dsp_multiplier_accum_with_add_and_sub golden(.*);
-synth_options_effort_high_dsp_multiplier_accum_with_add_and_sub_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    synth_options_effort_high_dsp_multiplier_accum_with_add_and_sub_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

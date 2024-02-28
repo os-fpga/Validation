@@ -8,7 +8,10 @@ module co_sim_dsp_fractured_unsigned_mul_comb;
 	integer mismatch=0;
 
 dsp_fractured_unsigned_mul_comb golden(.*);
-dsp_fractured_unsigned_mul_comb_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    dsp_fractured_unsigned_mul_comb_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 initial begin
 	{A, B, A_fmode, B_fmode} = 'd0;

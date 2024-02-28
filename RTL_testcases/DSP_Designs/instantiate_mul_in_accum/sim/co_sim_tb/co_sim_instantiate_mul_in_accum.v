@@ -8,7 +8,10 @@ module co_sim_instantiate_mul_in_accum;
 	integer mismatch=0;
 
 instantiate_mul_in_accum golden(.*);
-instantiate_mul_in_accum_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    instantiate_mul_in_accum_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

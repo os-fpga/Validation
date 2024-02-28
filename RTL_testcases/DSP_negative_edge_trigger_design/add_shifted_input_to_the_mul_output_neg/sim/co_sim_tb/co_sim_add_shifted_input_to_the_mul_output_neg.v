@@ -10,7 +10,10 @@ module co_sim_add_shifted_input_to_the_mul_output_neg;
 	integer mismatch=0;
 
 add_shifted_input_to_the_mul_output_neg golden(.*);
-add_shifted_input_to_the_mul_output_neg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    add_shifted_input_to_the_mul_output_neg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

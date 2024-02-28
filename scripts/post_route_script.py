@@ -1,6 +1,7 @@
 import re
 import sys
 import os
+import shutil
 
 design_name=sys.argv[1]
 
@@ -43,7 +44,11 @@ def extract_signals(verilog_path):
 def insert_signals_in_testbench(verilog_path, module_name, signals_formatted):
     # Assuming the testbench file is in the same directory but named differently
     testbench_path = f"../sim/co_sim_tb/co_sim_{design_name}.v"
-    
+    testbench_temp_path = f"../sim/co_sim_tb/co_sim_{design_name}_temp.v"  # Temp file with _temp postfix
+
+    # First, copy the original testbench file to a temp file
+    shutil.copy(testbench_path, testbench_temp_path)
+
     # Read the testbench, modify it, and write back
     with open(testbench_path, 'r') as file:
         content = file.readlines()

@@ -10,7 +10,10 @@ module co_sim_accum_output_shifted_rounded_neg;
 	integer mismatch=0;
 
 accum_output_shifted_rounded_neg golden(.*);
-accum_output_shifted_rounded_neg_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    accum_output_shifted_rounded_neg_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

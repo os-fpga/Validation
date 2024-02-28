@@ -17,7 +17,6 @@ reg [31:0] RDATA_A_expected;
 reg [31:0] RDATA_B_expected;
 
 `ifdef PNR
-		TDP_RAM36K_primitive_inst DUT (.*); //add ports later
 `else
    	TDP_RAM36K_primitive_inst DUT (.*);
 `endif

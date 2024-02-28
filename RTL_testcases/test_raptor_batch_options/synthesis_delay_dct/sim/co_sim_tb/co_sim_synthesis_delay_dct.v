@@ -6,7 +6,10 @@ module co_sim_synthesis_delay_dct ();
 	integer mismatch=0;
 
 synthesis_delay_dct golden(.*);
-synthesis_delay_dct_post_synth netlist(.* ,. y(y_netlist));
+    `ifdef PNR
+    `else
+    synthesis_delay_dct_post_synth netlist(.* ,. y(y_netlist));
+    `endif
 
 initial begin
 

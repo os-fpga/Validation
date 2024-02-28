@@ -11,7 +11,10 @@ module co_sim_input_to_adder_and_mul_A_input_wrt_feedback_i;
 	integer mismatch=0;
 
 input_to_adder_and_mul_A_input_wrt_feedback_i golden(.*);
-input_to_adder_and_mul_A_input_wrt_feedback_i_post_synth netlist(.*, .P(P_netlist));
+    `ifdef PNR
+    `else
+    input_to_adder_and_mul_A_input_wrt_feedback_i_post_synth netlist(.*, .P(P_netlist));
+    `endif
 
 //clock initialization
 initial begin

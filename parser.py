@@ -255,10 +255,42 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                     break  # Prioritize failure detection
                 elif "Simulation Passed" in line:
                     pnr_sim_status = "Pass"
-                    # Keep looking for fail status until the end, don't break here
-
+                    break
+                else:
+                    pnr_sim_status = "Fail"
         else:
             print("SPR: Post-PnR simulation for design: not found in the log.")
+
+
+        first_sgt_sim_line = -1
+        last_sgt_sim_line = -1
+        # Find first and last occurrence of the target string
+        for i, line in enumerate(lines):
+            if "SGT: Gate simulation for design:" in line:
+                if first_sgt_sim_line == -1:
+                    first_sgt_sim_line = i
+                last_sgt_sim_line = i
+        
+        print(f"First occurrence: {first_sgt_sim_line}, Last occurrence: {last_sgt_sim_line}")
+        
+        # Initialize status, default to None
+        sgt_sim_status = None
+        
+        if first_sgt_sim_line != -1 and last_sgt_sim_line != -1:
+            # Check for simulation status messages between the first and last occurrence
+            for line in lines[first_sgt_sim_line:last_sgt_sim_line + 1]:
+                if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
+                    sgt_sim_status = "Fail"
+                    break  # Prioritize failure detection
+                elif "Simulation Passed" in line:
+                    sgt_sim_status = "Pass"
+                    break
+                else:
+                    sgt_sim_status = "Fail"
+        else:
+            print("SGT: Gate simulation for design: not found in the log.")
+
+
         run_time_raptor = 0
         temp_string = ""
         temp_list = []
@@ -319,28 +351,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                                 else:
                                     data[log_line_key] = 'Pass'
                 if log_line_key == 'post_synth_sim_status':
-                            #the code splits the log line keyword by commas and loops through the resulting list of keywords.
-                            sim_status_keywords = log_line_keyword.split(',')
-                            for sim_status_keyword in sim_status_keywords:
-                                if sim_status_keyword in line:
-                                    if sim_status_keyword == "Simulation Failed":
-                                        data[log_line_key] = 'Fail'
-                                    elif sim_status_keyword == "Error-":
-                                        data[log_line_key] = 'Fail'
-                                    elif sim_status_keyword == "All Comparison Matched":
-                                        data[log_line_key] = 'Pass'
-                                    elif sim_status_keyword == "comparison(s) mismatched":
-                                        data[log_line_key] = 'Fail'
-                                    elif sim_status_keyword == "Simulation Passed":
-                                        data[log_line_key] = 'Pass'
-                                    elif sim_status_keyword == "FAIL=0 SKIP=0":
-                                        data[log_line_key] = 'Pass'
-                                    elif sim_status_keyword == "PASSED":
-                                        data[log_line_key] = 'Pass'
-                                    elif sim_status_keyword == "SoC Simulation Completed":
-                                        data[log_line_key] = 'Pass'
-                                    else:
-                                        data[log_line_key] = 'Fail'
+                            data[log_line_key] = sgt_sim_status   
                 if log_line_key == 'post_route_sim_status':
                             data[log_line_key] = pnr_sim_status               
                 if log_line_key == 'bitstream_sim_status':

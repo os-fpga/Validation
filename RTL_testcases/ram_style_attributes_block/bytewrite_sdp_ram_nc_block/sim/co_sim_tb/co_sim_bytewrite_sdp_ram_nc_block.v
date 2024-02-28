@@ -12,13 +12,16 @@ module co_sim_bytewrite_sdp_ram_nc_block;
     reg [NUM_COL-1:0] we;
     reg [ADDR_WIDTH-1:0] read_addr,write_addr;
     reg [DATA_WIDTH-1:0] din;
-    wire [DATA_WIDTH-1:0] dout, dout_net;
+    wire [DATA_WIDTH-1:0] dout, dout_netlist;
 
     integer mismatch=0;
     reg [6:0]cycle, i;
 
     bytewrite_sdp_ram_nc_block golden(.*);
-    bytewrite_sdp_ram_nc_block_post_synth netlist(.*, .dout(dout_net));
+    `ifdef PNR
+    `else
+        bytewrite_sdp_ram_nc_block_post_synth netlist(.*, .dout(dout_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -76,12 +79,12 @@ module co_sim_bytewrite_sdp_ram_nc_block;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(dout !== dout_net) begin
-        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_net,$time);
+    if(dout !== dout_netlist) begin
+        $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
         mismatch = mismatch+1;
     end
     else
-        $display("dout Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_net,$time);
+        $display("dout Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
 
     
     endtask

@@ -8,7 +8,10 @@ module co_sim_signed_comb_mult;
 	integer mismatch=0;
 
 signed_comb_mult golden(.*);
-signed_comb_mult_post_synth netlist(.*, .z_out(z_out_netlist));
+    `ifdef PNR
+    `else
+    signed_comb_mult_post_synth netlist(.*, .z_out(z_out_netlist));
+    `endif
 
 initial begin
 	a=0;

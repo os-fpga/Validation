@@ -42,7 +42,6 @@ reg [31:0] RDATA_A1_expected, RDATA_A2_expected;
 reg [31:0] RDATA_B1_expected, RDATA_B2_expected;
 
 `ifdef PNR
-		TDP_RAM18KX2_primitive_inst DUT (.*); //add ports later
 `else
    	TDP_RAM18KX2_primitive_inst DUT (.*);
 `endif

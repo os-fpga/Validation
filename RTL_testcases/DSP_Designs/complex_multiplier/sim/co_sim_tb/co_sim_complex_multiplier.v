@@ -10,7 +10,10 @@ module co_sim_complex_multiplier #(parameter A_WIDTH = 20, B_WIDTH = 18);
 	integer mismatch=0;
 
 complex_multiplier golden(.*);
-complex_multiplier_post_synth netlist(.*, .pr(pr_netlist) ,. pi(pi_netlist));
+    `ifdef PNR
+    `else
+    complex_multiplier_post_synth netlist(.*, .pr(pr_netlist) ,. pi(pi_netlist));
+    `endif
 
 //clock initialization
 initial begin

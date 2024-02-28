@@ -20,8 +20,8 @@ module co_sim_bytewrite_tdp_ram_wf;
   reg rstb;                            // Port B output reset (does not affect memory contents)
   reg regcea;                          // Port A output register enable
   reg regceb;                          // Port B output register enable
-  wire [(NB_COL*COL_WIDTH)-1:0] douta,douta_net; // Port A RAM output data
-  wire [(NB_COL*COL_WIDTH)-1:0] doutb,doutb_net; // Port B RAM output data
+  wire [(NB_COL*COL_WIDTH)-1:0] douta,douta_netlist; // Port A RAM output data
+  wire [(NB_COL*COL_WIDTH)-1:0] doutb,doutb_netlist; // Port B RAM output data
 
 
 
@@ -29,7 +29,10 @@ module co_sim_bytewrite_tdp_ram_wf;
     integer cycle, i;
 
     bytewrite_tdp_ram_wf golden(.*);
-    bytewrite_tdp_ram_wf_post_synth netlist(.*, .douta(douta_net), .doutb(doutb_net));
+    `ifdef PNR
+    `else
+        bytewrite_tdp_ram_wf_post_synth netlist(.*, .douta(douta_netlist), .doutb(doutb_netlist));
+    `endif
 
 
 
@@ -129,12 +132,12 @@ module co_sim_bytewrite_tdp_ram_wf;
 
     task compare(input integer cycle);
     //$display("\n Comparison at cycle %0d", cycle);
-    if(douta !== douta_net) begin
-        $display("douta mismatch. Golden: %0h, Netlist: %0h, Time: %0t", douta, douta_net,$time);
+    if(douta !== douta_netlist) begin
+        $display("douta mismatch. Golden: %0h, Netlist: %0h, Time: %0t", douta, douta_netlist,$time);
         mismatch = mismatch+1;
     end
-    if(doutb !== doutb_net) begin
-        $display("doutb mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutb, doutb_net,$time);
+    if(doutb !== doutb_netlist) begin
+        $display("doutb mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutb, doutb_netlist,$time);
         mismatch = mismatch+1;
     end
     

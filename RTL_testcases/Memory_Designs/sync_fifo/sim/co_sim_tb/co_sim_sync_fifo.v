@@ -5,15 +5,18 @@ module co_sim_sync_fifo;
   reg push;
   reg pop;
   reg [31:0] data_in;
-  wire [31:0] data_out,data_out_net;
-  wire empty,empty_net;
-  wire full,full_net;
+  wire [31:0] data_out,data_out_netlist;
+  wire empty,empty_netlist;
+  wire full,full_netlist;
 
     integer mismatch=0;
     reg [6:0] i;
 
     sync_fifo golden(.*);
-    sync_fifo_post_synth netlist(.*, .data_out(data_out_net), .empty(empty_net), .full(full_net));
+    `ifdef PNR
+    `else
+        sync_fifo_post_synth netlist(.*, .data_out(data_out_netlist), .empty(empty_netlist), .full(full_netlist));
+    `endif
 
 
     always #10 clk = ~clk;
@@ -69,18 +72,18 @@ module co_sim_sync_fifo;
 
     task compare;
     //$display("\n Comparison at cycle %0d", cycle);
-    if(data_out !== data_out_net) begin
-        $display("data_out mismatch. Golden: %0h, Netlist: %0h, Time: %0t", data_out, data_out_net,$time);
+    if(data_out !== data_out_netlist) begin
+        $display("data_out mismatch. Golden: %0h, Netlist: %0h, Time: %0t", data_out, data_out_netlist,$time);
         mismatch = mismatch+1;
     end
 
-    if(empty !== empty_net) begin
-        $display("empty mismatch. Golden: %0h, Netlist: %0h, Time: %0t", empty, empty_net,$time);
+    if(empty !== empty_netlist) begin
+        $display("empty mismatch. Golden: %0h, Netlist: %0h, Time: %0t", empty, empty_netlist,$time);
         mismatch = mismatch+1;
     end
 
-    if(full !== full_net) begin
-        $display("full mismatch. Golden: %0h, Netlist: %0h, Time: %0t", full, full_net,$time);
+    if(full !== full_netlist) begin
+        $display("full mismatch. Golden: %0h, Netlist: %0h, Time: %0t", full, full_netlist,$time);
         mismatch = mismatch+1;
     end
     
