@@ -11,6 +11,7 @@ module co_sim_accum_output_shifted_saturated;
 
 accum_output_shifted_saturated golden(.*);
 `ifdef PNR
+`else
 accum_output_shifted_saturated_post_synth netlist(.*, .P(P_netlist));
 `endif 
 
