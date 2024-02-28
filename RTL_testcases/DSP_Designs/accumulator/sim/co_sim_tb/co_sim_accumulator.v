@@ -8,7 +8,10 @@ module co_sim_accumulator;
 	integer mismatch=0;
 
 accumulator golden(.*);
+`ifdef PNR
+`else
 accumulator_post_synth netlist(.*, .P(P_netlist));
+`endif 
 
 //clock initialization
 initial begin
@@ -39,10 +42,11 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for P = P + A is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A***\n\n");
-	A = $random( );
 	@(negedge clk);
-	repeat (32) begin
+	repeat (1000) begin
+		A = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
@@ -63,10 +67,11 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A***\n\n");
-	A = $random( );
 	@(negedge clk);
 	repeat (1000) begin
+		A = $random( );
 		display_stimulus();
+		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
