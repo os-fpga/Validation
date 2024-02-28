@@ -1,4 +1,4 @@
-module co_sim_tb;
+module co_sim_dsp_mul_signed_reg_output_is_not_reg;
 	reg signed [19:0] A;
 	reg signed [17:0] B;
 	reg clk, reset ;
