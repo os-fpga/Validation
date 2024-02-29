@@ -1,4 +1,4 @@
-module co_sim_dsp_mul_unsigned_comb;
+module co_sim_matrix_mult_3x3;
 	reg [143:0] A;
 	reg [143:0] B;
 	wire [143:0] Result;
