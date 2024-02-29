@@ -6,9 +6,9 @@ module asym_ram_sdp_wide_write (
     input [5:0] write_addr,
     input [7:0] read_addr,
     input [31:0] write_data,
-    output [7:0] read_data    );
+    output reg [7:0] read_data=0    );
 
-reg [7:0] read_data=0;
+
 reg [7:0] mem [0:255];
 
 

@@ -253,7 +253,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
                     pnr_sim_status = "Fail"
                     break  # Prioritize failure detection
-                elif "Simulation Passed" in line:
+                elif "Simulation Passed" in line or "All Comparison Matched" in line:
                     pnr_sim_status = "Pass"
                     break
                 else:
@@ -282,7 +282,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
                     sgt_sim_status = "Fail"
                     break  # Prioritize failure detection
-                elif "Simulation Passed" in line:
+                elif "Simulation Passed" in line or "All Comparison Matched" in line:
                     sgt_sim_status = "Pass"
                     break
                 else:

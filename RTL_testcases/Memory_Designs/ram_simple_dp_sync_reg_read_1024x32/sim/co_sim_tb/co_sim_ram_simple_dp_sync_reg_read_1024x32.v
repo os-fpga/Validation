@@ -13,7 +13,7 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32;
 
 `ifdef PNR
 `else
-   	ram_simple_dp_sync_reg_read_1024x32_post_route netlist(.*, .dout(dout_netlist));
+   	ram_simple_dp_sync_reg_read_1024x32_post_synth netlist(.*, .dout(dout_netlist));
 `endif
     always #10 clk = ~clk;
     initial begin

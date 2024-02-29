@@ -4,9 +4,8 @@ input [1:0] byte_lane,
 input [7:0] write_addr,
 input [5:0] read_addr,
 input [7:0] write_data,
-output [31:0] read_data
+output reg [31:0] read_data=0
 );
-reg [31:0] read_data=0;
 reg [31:0] mem [255:0];
 
 always @(posedge clk) begin

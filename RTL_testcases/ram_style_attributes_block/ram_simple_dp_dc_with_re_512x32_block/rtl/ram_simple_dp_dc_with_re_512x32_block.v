@@ -2,9 +2,8 @@ module ram_simple_dp_dc_with_re_512x32_block(
    input      [31:0] din,
    input     [8:0] read_addr, write_addr,       // two addresses
    input     we,re, read_clock, write_clock, // two clocks
-   output [31:0] dout);
+   output reg [31:0] dout=0);
 
-reg [31:0] dout=0;
 
    (* ram_style = "block" *)
    reg        [31:0] ram[0:512];
