@@ -166,6 +166,7 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo "" || echo ""
 
+IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -173,13 +174,13 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pequation=AxB+CxD -Pa_width=15 -Pb_width=10 -Pc_width=7 -Pd_width=2 -Preg_in=0 -Preg_out=1 -Punsigned=0 -out_file ./$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pequation=AxB+CxD -Pa_width=15 -Pb_width=10 -Pc_width=7 -Pd_width=2 -Preg_in=0 -Preg_out=1 -Punsigned=0 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
-    [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_library_path rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
@@ -193,13 +194,14 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "add_simulation_file $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/dsp_test.v">>raptor_tcl.tcl 
         echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     else
         echo ""
     fi
 
 	echo "analyze">>raptor_tcl.tcl
+    echo "simulate_ip $design">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl

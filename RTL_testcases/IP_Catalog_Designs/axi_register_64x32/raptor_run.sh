@@ -166,7 +166,7 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo "" || echo ""
 
-    IP_PATH="./$design/run_1/IPs"
+IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -177,7 +177,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdata_width=64 -Paddr_width=32 -Pid_width=32 -Paw_user_width=1 -Pw_user_width=1 -Pb_user_width=1 -Par_user_width=1 -Pr_user_width=1 -Paw_reg_type=Simple_Buffer -Pw_reg_type=Simple_Buffer -Pb_reg_type=Simple_Buffer -Par_reg_type=Simple_Buffer -Pr_reg_type=Skid_Buffer -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
-    # [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     # [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl

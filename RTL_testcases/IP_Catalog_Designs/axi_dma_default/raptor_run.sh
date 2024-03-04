@@ -84,7 +84,8 @@ command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 e
 parse_cga exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
-
+primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
+sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
 #removing and creating raptor_testcase_files
 #rm -fR $PWD/results_dir
 [ ! -d $PWD/results_dir ] && mkdir $PWD/results_dir
@@ -165,8 +166,8 @@ function compile () {
 parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo "" || echo ""
+IP_PATH="./$design/run_1/IPs"
 
-    IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -177,7 +178,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Paxi_data_width=32 -Paxi_addr_width=16 -Paxi_id_width=8 -Paxi_max_burst_len=16 -Paxis_last_enable=1 -Paxis_id_enable=0 -Paxis_id_width=8 -Paxis_dest_enable=0 -Paxis_dest_width=8 -Paxis_user_enable=1 -Paxis_user_width=1 -Plen_width=20 -Ptag_width=8 -Penable_sg=0 -Penable_unaligned=0 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
-    # [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     # [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.v">>raptor_tcl.tcl
@@ -201,31 +202,12 @@ parse_cga exit 1; }
     fi
 
 	echo "analyze">>raptor_tcl.tcl
+    echo "simulate_ip $design">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
-    if [ "$post_synth_sim" == true ]; then 
-        echo "# Open the input file in read mode">>raptor_tcl.tcl 
-        echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
-        echo "# Read the file content">>raptor_tcl.tcl 
-        echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
-        echo "# Close the input file after reading">>raptor_tcl.tcl 
-        echo "close \$input_file">>raptor_tcl.tcl 
-        echo "set modified_content [string map {\"$design(\" \"${design}_post_synth(\"} \$file_content]">>raptor_tcl.tcl 
-        echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
-        echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" w]">>raptor_tcl.tcl
-        echo "# Write the modified content back to the file">>raptor_tcl.tcl 
-        echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
-        echo "# Close the file">>raptor_tcl.tcl 
-        echo "close \$output_file">>raptor_tcl.tcl 
-        echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
-        [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
-        [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
@@ -270,6 +252,20 @@ parse_cga exit 1; }
         else
             echo ""
         fi
+    fi
+    if [ "$post_synth_sim" == true ]; then 
+        echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+        echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
+        echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
+        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+        echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
+        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+        echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
+        echo "exec make clear" >> raptor_tcl.tcl
+        echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design > post_synth_sim.log 2>&1" >> raptor_tcl.tcl
+        echo "cd ../../../../../../" >> raptor_tcl.tcl
+    else
+        echo ""
     fi
 
     cd results_dir
