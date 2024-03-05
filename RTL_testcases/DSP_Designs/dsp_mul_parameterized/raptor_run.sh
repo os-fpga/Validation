@@ -7,7 +7,7 @@ start=`date +%s`
 design="dsp_mul_parameterized"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #simulation stages
 post_synth_sim=false 

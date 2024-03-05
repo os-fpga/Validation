@@ -61,7 +61,7 @@
 // altera_virtual_jtag TAP.
 //
 
-`include "PATH/adbg_wb_defines.v"
+`include "adbg_wb_defines.v"
 
 // Top module
 module adbg_wb_biu

@@ -1,5 +1,5 @@
 
-module co_sim_co_sim_mult_16bit_ioreg();
+module co_sim_mult_16bit_ioreg();
 
   reg [15:0] a;
   reg [15:0] b;
@@ -9,7 +9,10 @@ module co_sim_co_sim_mult_16bit_ioreg();
   wire [31:0]result_netlist;
 
 mult_16bit_ioreg golden(.*);
-mult_16bit_ioreg netlist(.* ,. out(result_netlist));
+`ifdef PNR
+`else
+	mult_16bit_ioreg_post_synth netlist(.* ,. out(result_netlist));
+`endif 
 
 	integer mismatch=0;
 

@@ -17,7 +17,7 @@ bitstream_sim=false
 #raptor options
 device="1GE75"
 
-strategy="" #(area, delay, mixed, none) 
+strategy="mixed" #(area, delay, mixed, none) 
 
 add_constraint_file="constraints.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 

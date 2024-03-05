@@ -38,7 +38,7 @@
 //////////////////////////////////////////////////////////////////////
 
 
-`include "PATH/adbg_defines.v"
+`include "adbg_defines.v"
 
 // Module interface
 module adbg_jsp_module (

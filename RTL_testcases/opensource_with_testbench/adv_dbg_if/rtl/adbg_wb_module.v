@@ -57,8 +57,8 @@
 // in the input shift register after e.g. a burst read.
 //
 
-`include "PATH/adbg_defines.v"
-`include "PATH/adbg_wb_defines.v"
+`include "adbg_defines.v"
+`include "adbg_wb_defines.v"
 
 // Top module
 module adbg_wb_module (

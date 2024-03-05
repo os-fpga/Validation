@@ -150,6 +150,11 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         place_time_line=-1
         pack_time_line=-1
         syn_time_line=-1
+        total_time = 0
+        for line in lines:
+            if "Duration: " in line:
+                total_time = int(line.split('ms')[0].split('Duration:')[1]) + total_time
+                data['total_runtime'] = total_time
         for i in range(len(lines) - 1, -1, -1):        
             if "GenerateBitstream has started" in lines[i]:
                 bitstream_time_line = i
@@ -291,7 +296,6 @@ def parse_log_files(file,timing_file,log_line_keys_map):
             print("SGT: Gate simulation for design: not found in the log.")
 
 
-        run_time_raptor = 0
         temp_string = ""
         temp_list = []
         previous_error_bfr_sim = False # flag to keep track of previous errors
@@ -301,10 +305,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 # Checking if the keyword is in the current line
                 if log_line_keyword in line:
                     # Checking the file name and updating the value of the log line key accordingly
-                    if log_line_key == 'total_runtime':
-                        run_time_raptor=int(line.split(log_line_keyword)[1].strip().split('ms.')[0])+run_time_raptor
-                        data[log_line_key] = run_time_raptor
-                    elif log_line_key == 'strategy':
+                    if log_line_key == 'strategy':
                         data[log_line_key] = line.split(log_line_keyword)[1].strip() 
                     elif log_line_key == 'reg_id':
                         data[log_line_key] = line.split(log_line_keyword)[1].strip()
@@ -545,6 +546,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
 
         fmax_list=[]
         indices = []
+        llvl_count = 0
         for log_line_key, log_line_keyword in log_line_keys_map.items():
             if log_line_key == 'total_power':
                 data[log_line_key] = None

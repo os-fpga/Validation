@@ -220,6 +220,8 @@ parse_cga exit 1; }
         echo "# Close the file">>raptor_tcl.tcl 
         echo "close \$output_file">>raptor_tcl.tcl 
         echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+        echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
+        echo "file copy -force $main_path/rtl/mem.init $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
@@ -253,6 +255,8 @@ parse_cga exit 1; }
             echo "close \$output_file">>raptor_tcl.tcl 
             echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
             echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
+            echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl
+            echo "file copy -force $main_path/rtl/mem.init $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else

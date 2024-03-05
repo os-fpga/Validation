@@ -184,15 +184,15 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl/">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl/">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/AsyncMux.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/counter.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/keyupd.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/kody.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/pLayer.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/Reg.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/slayer.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/PresentEnc.vhd">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./trunk/Pure/rtl/vhdl/PresentStateMachine.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/AsyncMux.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/counter.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/keyupd.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/kody.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/pLayer.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/Reg.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/slayer.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/PresentEnc.vhd">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file -VHDL_2008 ./rtl/PresentStateMachine.vhd">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module $design">>raptor_tcl.tcl 

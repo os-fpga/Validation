@@ -62,8 +62,8 @@
 //
 
 
-`include "PATH/adbg_defines.v"
-`include "PATH/adbg_or1k_defines.v"
+`include "adbg_defines.v"
+`include "adbg_or1k_defines.v"
 
 // Module interface
 module adbg_or1k_module (
