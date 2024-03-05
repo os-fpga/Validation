@@ -63,7 +63,7 @@
 // to a single shared FF.
 //
 
-`include "PATH/tap_defines.v"
+`include "tap_defines.v"
 
 // Top module
 module tap_top(

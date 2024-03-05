@@ -204,22 +204,25 @@ parse_cga exit 1; }
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
-    if [ "$post_synth_sim" == true ]; then 
-        echo "# Open the input file in read mode">>raptor_tcl.tcl 
-        echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
-        echo "# Read the file content">>raptor_tcl.tcl 
-        echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
-        echo "# Close the input file after reading">>raptor_tcl.tcl 
-        echo "close \$input_file">>raptor_tcl.tcl 
-        echo "set modified_content [string map {\"$design(\" \"${design}_post_synth(\"} \$file_content]">>raptor_tcl.tcl 
-        echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
-        echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" w]">>raptor_tcl.tcl
-        echo "# Write the modified content back to the file">>raptor_tcl.tcl 
-        echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
-        echo "# Close the file">>raptor_tcl.tcl 
-        echo "close \$output_file">>raptor_tcl.tcl 
-        echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
-        [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
+    if [ "$post_synth_sim" == true ]; then
+          echo "# Open the input file in read mode">>raptor_tcl.tcl 
+          echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
+          echo "# Read the file content">>raptor_tcl.tcl 
+          echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+          echo "# Close the input file after reading">>raptor_tcl.tcl 
+          echo "close \$input_file">>raptor_tcl.tcl 
+          echo "set modified_content [string map {\"$design(\" \"${design}_post_synth(\"} \$file_content]">>raptor_tcl.tcl 
+          echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
+          echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" w]">>raptor_tcl.tcl
+          echo "# Write the modified content back to the file">>raptor_tcl.tcl 
+          echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+          echo "# Close the file">>raptor_tcl.tcl 
+          echo "close \$output_file">>raptor_tcl.tcl 
+          echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+          echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
+          echo "file copy -force $main_path/rtl/mem.init $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl 
+          [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
+          
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
         echo ""
@@ -251,6 +254,8 @@ parse_cga exit 1; }
             echo "# Close the file">>raptor_tcl.tcl 
             echo "close \$output_file">>raptor_tcl.tcl 
             echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+            echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl
+            echo "file copy -force $main_path/rtl/mem.init $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl
             echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 

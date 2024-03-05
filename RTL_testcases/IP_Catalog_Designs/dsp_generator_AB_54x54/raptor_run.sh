@@ -299,7 +299,7 @@ IP_PATH="./$design/run_1/IPs"
             exit
         fi 
     fi 
-    [ -f ../newsum.md5 ] && cp ../newsum.md5 ../cksums.md5
+    # [ -f ../newsum.md5 ] && cp ../newsum.md5 ../cksums.md5
   
 }
 

@@ -58,7 +58,7 @@
 //
 //
 
-`include "PATH/adbg_or1k_defines.v"
+`include "adbg_or1k_defines.v"
 
 module adbg_or1k_status_reg  (
                               data_i, 
