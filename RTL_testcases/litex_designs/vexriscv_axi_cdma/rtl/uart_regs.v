@@ -224,10 +224,10 @@
 //
 
 // synopsys translate_off
-`include "MEM_FILE_PATH/timescale.v"
+`include "timescale.v"
 // synopsys translate_on
 
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 
 `define UART_DL1 7:0
 `define UART_DL2 15:8

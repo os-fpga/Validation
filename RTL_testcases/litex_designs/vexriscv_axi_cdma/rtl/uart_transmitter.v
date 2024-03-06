@@ -150,10 +150,10 @@
 //
 
 // synopsys translate_off
-`include "MEM_FILE_PATH/timescale.v"
+`include "timescale.v"
 // synopsys translate_on
 
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 
 module uart_transmitter (clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable,	stx_pad_o, tstate, tf_count, tx_reset, lsr_mask, tf_overrun);
 

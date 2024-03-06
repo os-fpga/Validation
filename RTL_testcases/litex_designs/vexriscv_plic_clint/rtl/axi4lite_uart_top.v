@@ -16,7 +16,7 @@
 ////                                 ///
 ////  Created:                       ///
 ////////////////////////////////////////
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 
 module axi4lite_uart_top #(
     parameter ADDRESS_WIDTH     = 16,

@@ -33,7 +33,7 @@ module single_port_ram
 	// Variable to hold the registered read address
 	reg [5:0] addr_reg;
 	initial begin
-	   $readmemh("MEM_FILE_PATH/mem_ram.mem",ram);
+	   $readmemh("mem_ram.mem",ram);
 	end
 	always @ (posedge clk)
 	begin
