@@ -140,10 +140,10 @@
 //
 
 // synopsys translate_off
-`include "MEM_FILE_PATH/timescale.v"
+`include "timescale.v"
 // synopsys translate_on
 
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 
 module uart_tfifo (clk, 
 	wb_rst_i, data_in, data_out,

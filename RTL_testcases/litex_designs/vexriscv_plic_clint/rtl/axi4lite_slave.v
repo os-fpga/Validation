@@ -23,7 +23,7 @@
 `define SLERR   2'b10
 `define DECERR  2'b11
 
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 /* verilator lint_off ASSIGNDLY */
 /* verilator lint_off UNUSED */
 module axi4lite_slave #(

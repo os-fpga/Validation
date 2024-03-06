@@ -59,9 +59,9 @@
 // `include "/nfs_eda_sw/softwares/Raptor/instl_dir/latest/share/raptor/sim_models/rapidsilicon/genesis3/simlib.v"
 // `include "/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/bitstream_simulation_new/Compiler_Validation/RTL_testcases/opensource_with_testbench/adv_dbg_if/results_dir/adv_dbg_if/run_1/synth_1_1/synthesis/adv_dbg_if_post_synth.v"
 
-`include "PATH/tap_defines.v"
-`include "PATH/adbg_defines.v"
-`include "PATH/adbg_wb_defines.v"
+`include "tap_defines.v"
+`include "adbg_defines.v"
+`include "adbg_wb_defines.v"
 
 // Polynomial for the CRC calculation
 // Yes, it's backwards.  Yes, this is on purpose.

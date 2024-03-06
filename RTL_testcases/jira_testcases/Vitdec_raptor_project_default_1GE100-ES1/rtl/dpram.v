@@ -45,7 +45,7 @@ assign out = ram[adr];
 always @ (rst, en, clk, frame_rst)
 begin
 	if (!rst)
-		$readmemb("MEM_FILE_PATH/rstmem.txt", ram);
+		$readmemb("rstmem.txt", ram);
 	else if (clk && en && !frame_rst)
 		ram[adw] = in;
 end

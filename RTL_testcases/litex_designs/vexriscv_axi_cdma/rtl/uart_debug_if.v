@@ -84,10 +84,10 @@
 //
 
 // synopsys translate_off
-`include "MEM_FILE_PATH/timescale.v"
+`include "timescale.v"
 // synopsys translate_on
 
-`include "MEM_FILE_PATH/uart_defines.vh"
+`include "uart_defines.vh"
 
 module uart_debug_if (/*AUTOARG*/
 // Outputs
