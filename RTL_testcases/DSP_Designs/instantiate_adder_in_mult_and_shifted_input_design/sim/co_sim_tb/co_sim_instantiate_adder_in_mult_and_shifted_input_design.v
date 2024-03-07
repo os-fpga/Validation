@@ -50,7 +50,7 @@ initial begin
      
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied***\n\n");
 	@(negedge clk);
-	repeat (200) begin
+	repeat (1000) begin
 		@(negedge clk);
 		A = $random( );
 		B = $random( );

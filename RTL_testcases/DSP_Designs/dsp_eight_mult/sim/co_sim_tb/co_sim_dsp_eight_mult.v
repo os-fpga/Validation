@@ -12,7 +12,10 @@ module co_sim_dsp_eight_mult #
 	integer mismatch=0;
 
 dsp_eight_mult golden(.*);
+`ifdef PNR
+`else
 dsp_eight_mult netlist(.* ,. result(result_netlist));
+`endif
 
 //clock initialization
 initial begin
@@ -115,23 +118,23 @@ initial begin
 
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	a0 = $random( );
-    a1 = $random( );
-	a2 = $random( );
-    a3 = $random( );
-	b0 = $random( );
-	b1 = $random( );
-    b2 = $random( );
-	b3 = $random( );
-	a4 = $random( );
-    a5 = $random( );
-    a6 = $random( );
-    a7 = $random( );
-	b4 = $random( );
-	b5 = $random( );
-    b6 = $random( );
-	b7 = $random( );
-	repeat (600) begin
+	repeat (1000) begin
+		a0 = $random( );
+		a1 = $random( );
+		a2 = $random( );
+		a3 = $random( );
+		b0 = $random( );
+		b1 = $random( );
+		b2 = $random( );
+		b3 = $random( );
+		a4 = $random( );
+		a5 = $random( );
+		a6 = $random( );
+		a7 = $random( );
+		b4 = $random( );
+		b5 = $random( );
+		b6 = $random( );
+		b7 = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -139,7 +142,7 @@ initial begin
 	$display ("\n\n***Random Functionality Tests are ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	repeat (600) begin
+	repeat (1000) begin
 		a0 = $random( );
         a1 = $random( );
 	    a2 = $random( );

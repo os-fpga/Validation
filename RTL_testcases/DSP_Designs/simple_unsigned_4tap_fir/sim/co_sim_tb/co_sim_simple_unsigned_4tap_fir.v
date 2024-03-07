@@ -64,8 +64,8 @@ initial begin
 
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	x = $random( );
-	repeat (600) begin
+	repeat (1000) begin
+		x = $random( );
 		display_stimulus();
 		repeat (4) @(negedge clk);
 		compare();
@@ -73,7 +73,7 @@ initial begin
 	$display ("\n\n***Random Functionality Tests are ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	repeat (600) begin
+	repeat (1000) begin
 		x = $random( );
 		display_stimulus();
 		@(negedge clk);

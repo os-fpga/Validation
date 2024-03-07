@@ -34,7 +34,7 @@ initial begin
     @(negedge clk);
 
     $display ("\n\n*** Random Functionality Tests of output P=Bx(A+D)+C with sel_c_or_p=1 are applied***\n\n");
-    repeat (700) begin
+    repeat (1000) begin
 		reset = 0;
 		input_randomized_data();
 		display_stimulus();
@@ -73,7 +73,7 @@ initial begin
     $display ("\n\n***Directed Functionality Test of output P = P + Bx(A+D) with sel_c_or_p=0 is ended***\n\n");
 
 	$display ("\n\n***Random Functionality Tests of output P = P + Bx(A+D) with sel_c_or_p=0 are applied***\n\n");
-	repeat (700) begin
+	repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);

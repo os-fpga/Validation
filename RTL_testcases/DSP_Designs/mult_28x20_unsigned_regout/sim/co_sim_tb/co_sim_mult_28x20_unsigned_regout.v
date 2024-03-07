@@ -11,7 +11,10 @@ module co_sim_mult_28x20_unsigned_regout();
   wire [0:47]result_netlist;
 
 mult_28x20_unsigned_regout golden(.*);
+`ifdef PNR
+`else
 mult_28x20_unsigned_regout netlist(.* ,. Y(result_netlist));
+`endif
 
 	integer mismatch=0;
 
@@ -71,9 +74,10 @@ initial begin
 
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	A = $random( );
-	B = $random( );
-	repeat (600) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		@(negedge clock0);
 		display_stimulus();
 		@(negedge clock0);
 		compare();
@@ -81,9 +85,10 @@ initial begin
 	$display ("\n\n***Random Functionality Tests are ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	repeat (600) begin
+	repeat (1000) begin
 		A = $random( );
         B = $random( );
+		@(negedge clock0);
 		display_stimulus();
 		@(negedge clock0);
 		compare();

@@ -8,7 +8,10 @@ module co_sim_dsp_add_mul_output_to_accum_20lsb;
 	integer mismatch=0;
 
 dsp_add_mul_output_to_accum_20lsb golden(.*);
+`ifdef PNR
+`else
 dsp_add_mul_output_to_accum_20lsb_post_synth netlist(.*, .P(P_netlist));
+`endif
 
 //clock initialization
 initial begin
@@ -56,10 +59,10 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for P = P [19:0]+ A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P [19:0]+ A*B***\n\n");
-	A = $random( );
-	B = $random( );
 	@(negedge clk);
-	repeat (600) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();

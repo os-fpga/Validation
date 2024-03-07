@@ -38,7 +38,7 @@ module co_sim_dsp_mul_complex_eq ();
     #50
     compare();
 
-    repeat (100) begin
+    repeat (1000) begin
         a =  $random( );
         b =  $random( );
         display_stimulus();
