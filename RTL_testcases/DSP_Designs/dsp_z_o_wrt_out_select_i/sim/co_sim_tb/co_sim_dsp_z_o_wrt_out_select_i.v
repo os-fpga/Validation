@@ -58,11 +58,11 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied ***\n\n");
-	A = $random( );
-	B = $random( );
-	out_select_i = $random( );
-	@(negedge clk);
-	repeat (300) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		out_select_i = $random( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -86,11 +86,11 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied ***\n\n");
-	A = $random( );
-	B = $random( );
-	out_select_i = $random( );
-	@(negedge clk);
-	repeat (300) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		out_select_i = $random( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -110,10 +110,11 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for is ended with Reg_input_i=0***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs with Reg_input_i=0***\n\n");
-	A = $random( );
-	B = $random( );
-	out_select_i = $random( );
 	repeat (300) begin
+		A = $random( );
+		B = $random( );
+		out_select_i = $random( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -122,10 +123,11 @@ initial begin
 
 	subtract_i = 1;
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied with Reg_input_i=0***\n\n");
-	A = $random( );
-	B = $random( );
-	out_select_i = $random( );
 	repeat (300) begin
+		A = $random( );
+		B = $random( );
+		out_select_i = $random( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();

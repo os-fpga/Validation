@@ -47,7 +47,7 @@ module co_sim_signed_multiply_accumulate;
     @(negedge clk);
     compare();
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -58,7 +58,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     clear <= 1;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -74,7 +74,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     sload <= 1;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -88,7 +88,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     clken <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -102,7 +102,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     clken <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -118,7 +118,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     sload <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -132,7 +132,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     clken <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -146,7 +146,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     clken <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -162,7 +162,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     sload <= 1;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);
@@ -176,7 +176,7 @@ module co_sim_signed_multiply_accumulate;
     #10;
     sload <= 0;
 
-    repeat(100) @(negedge clk) begin
+    repeat(200) @(negedge clk) begin
       dataa <= $random();
       datab <= $random();
       @(negedge clk);

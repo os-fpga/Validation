@@ -20,12 +20,12 @@ module co_sim_cic_decimator #(parameter width = 12);
     `ifdef PNR
     `else
     	cic_decimator_post_synth netlist(.clk(clk),
-    `endif
 						   .rst(rst),
 						   .decimation_ratio(decimation_ratio),
 						   .d_in(d_in),
 						   .d_out(d_out_netlist),
 						   .d_clk(d_clk_netlist));
+	`endif
 		   
 //clock initialization
 initial begin
@@ -51,7 +51,7 @@ initial begin
 			rst <= 1'b0;
 			compare();
 		repeat(5) @(negedge clk);
-		repeat (100)
+		repeat (500)
 			begin
 				d_in <= $random();
 				@(negedge clk);

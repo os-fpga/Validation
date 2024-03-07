@@ -23,7 +23,8 @@ module co_sim_mac_32;
       .b(b),
       .out(out)
    );
-
+   `ifdef PNR
+   `else
    mac_32 netlist(
       .clock0(clock0),
       .reset(reset),
@@ -32,6 +33,7 @@ module co_sim_mac_32;
       .id(id),
       .out(result_netlist)
    );
+   `endif
 
    // Clock initialization
    initial begin
@@ -77,7 +79,7 @@ module co_sim_mac_32;
       // Add more directed functionality tests as needed
 
       $display ("\n\n*** Random Functionality Tests are applied***\n\n");
-      repeat (600) begin
+      repeat (1000) begin
          a = $random;
          b = $random;
          display_stimulus();

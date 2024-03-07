@@ -70,9 +70,9 @@ initial begin
 
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	a = $random( );
-	b = $random( );
 	repeat (600) begin
+		a = $random( );
+		b = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();

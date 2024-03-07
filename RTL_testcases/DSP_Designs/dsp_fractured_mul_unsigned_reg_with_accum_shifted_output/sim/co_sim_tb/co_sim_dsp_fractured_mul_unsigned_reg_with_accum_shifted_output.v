@@ -69,9 +69,9 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for P = P + A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A*B***\n\n");
-	{A, B, A_fmode, B_fmode, shift_right_i} = $urandom( );
 	@(negedge clk);
-	repeat (600) begin
+	repeat (1000) begin
+		{A, B, A_fmode, B_fmode, shift_right_i} = $urandom( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -94,13 +94,13 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A*B***\n\n");
-	A = $urandom( );
-	B = $urandom( );
-	A_fmode = $urandom( );
-	B_fmode = $urandom( );
-	shift_right_i = $urandom( );
 	@(negedge clk);
-	repeat (600) begin
+	repeat (1000) begin
+		A = $urandom( );
+		B = $urandom( );
+		A_fmode = $urandom( );
+		B_fmode = $urandom( );
+		shift_right_i = $urandom( );
 		display_stimulus();
 		@(negedge clk);
 		compare();

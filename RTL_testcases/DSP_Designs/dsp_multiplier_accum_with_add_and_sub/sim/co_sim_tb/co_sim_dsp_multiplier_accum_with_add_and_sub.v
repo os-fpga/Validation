@@ -43,7 +43,7 @@ initial begin
     @(negedge clk);
 
     $display ("\n\n*** Random Functionality Tests of output P=Bx(A+D)+C with sel_c_or_p = 1, INMODE = 1 and ALUMODE = 1 are applied***\n\n");
-    repeat (200) begin
+    repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -85,8 +85,9 @@ initial begin
     $display ("\n\n***Directed Functionality Test of output P = P - Bx(A+D) with sel_c_or_p = 0, INMODE = 1 and ALUMODE = 1 is ended***\n\n");
 
 	$display ("\n\n***Random Functionality Tests of output P = P + Bx(A+D) with sel_c_or_p = 0, INMODE = 1 and ALUMODE = 1 are applied***\n\n");	
-	repeat (200) begin
+	repeat (1000) begin
 		input_randomized_data();
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
       	compare();
@@ -108,7 +109,7 @@ initial begin
 	INMODE = 0;
 	ALUMODE = 0;
 	$display ("\n\n*** Random Functionality Tests of output P=Bx(A-D)-C with sel_c_or_p = 1, INMODE = 0 and ALUMODE = 0 are applied***\n\n");
-    repeat (200) begin
+    repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -120,7 +121,7 @@ initial begin
 	INMODE = 0;
 	ALUMODE = 1;
 	$display ("\n\n*** Random Functionality Tests of output P=Bx(A-D)+C with sel_c_or_p = 1, INMODE = 0 and ALUMODE = 1 are applied***\n\n");
-    repeat (200) begin
+    repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -132,7 +133,7 @@ initial begin
 	INMODE = 1;
 	ALUMODE = 0;
 	$display ("\n\n*** Random Functionality Tests of output P=Bx(A+D)-C with sel_c_or_p = 1, INMODE = 1 and ALUMODE = 0 are applied***\n\n");
-    repeat (200) begin
+    repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -143,7 +144,7 @@ initial begin
 
 	sel_c_or_p = 0;
 	$display ("\n\n***Random Functionality Tests of output P = P - Bx(A+D) with sel_c_or_p = 0, INMODE = 1 and ALUMODE = 0 are applied***\n\n");	
-	repeat (200) begin
+	repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -154,7 +155,7 @@ initial begin
 	INMODE = 0;
 	ALUMODE = 0;
 	$display ("\n\n***Random Functionality Tests of output P = P - Bx(A-D) with sel_c_or_p = 0, INMODE = 0 and ALUMODE = 0 are applied***\n\n");	
-	repeat (200) begin
+	repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);
@@ -165,7 +166,7 @@ initial begin
 	INMODE = 0;
 	ALUMODE = 1;
 	$display ("\n\n***Random Functionality Tests of output P = P + Bx(A-D) with sel_c_or_p = 0, INMODE = 0 and ALUMODE = 1 are applied***\n\n");	
-	repeat (200) begin
+	repeat (1000) begin
 		input_randomized_data();
 		display_stimulus();
 		@(negedge clk);

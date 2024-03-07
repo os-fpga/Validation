@@ -50,12 +50,12 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for P = P + A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	A_fmode = $random( );
-	B_fmode = $random( );
 	@(negedge clk);
-	repeat (32) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		A_fmode = $random( );
+		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -78,14 +78,14 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	A_fmode = $random( );
-	B_fmode = $random( );
-	shift_right_i = $random( );
 	round_i = 1;
 	@(negedge clk);
-	repeat (32) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		A_fmode = $random( );
+		B_fmode = $random( );
+		shift_right_i = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -95,13 +95,13 @@ initial begin
 	load_acc_i = 0;
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P - A*B with load_acc_i = 0***\n\n");
-	A = $random( );
-	B = $random( );
-	A_fmode = $random( );
-	B_fmode = $random( );
 	round_i = 0;
 	@(negedge clk);
-	repeat (32) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		A_fmode = $random( );
+		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -110,12 +110,12 @@ initial begin
 	subtract_i = 0;
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for P = P + A*B with load_acc_i = 0***\n\n");
-	A = $random( );
-	B = $random( );
-	A_fmode = $random( );
-	B_fmode = $random( );
 	@(negedge clk);
-	repeat (32) begin
+	repeat (1000) begin
+		A = $random( );
+		B = $random( );
+		A_fmode = $random( );
+		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();

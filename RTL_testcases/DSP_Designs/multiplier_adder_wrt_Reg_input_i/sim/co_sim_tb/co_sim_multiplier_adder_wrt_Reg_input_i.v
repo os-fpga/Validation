@@ -67,11 +67,11 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for  P = (A << acc_fir) + A*B is ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for  P = (A << acc_fir) + A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	acc_fir = $urandom( );
-	@(negedge clk);
-	repeat (300) begin
+	repeat (800) begin
+		A = $random( );
+		B = $random( );
+		acc_fir = $urandom( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -94,11 +94,11 @@ initial begin
 	$display ("\n\n***Reset Value is set zero again***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for  P = (A << acc_fir) - A*B***\n\n");
-	A = $random( );
-	B = $random( );
-	acc_fir = $urandom( );
-	@(negedge clk);
-	repeat (300) begin
+	repeat (800) begin
+		A = $random( );
+		B = $random( );
+		acc_fir = $urandom( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -118,10 +118,11 @@ initial begin
 	$display ("\n\n***Directed Functionality Test for  P = (A << acc_fir) + A*B is ended with Reg_input_i=0***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for  P = (A << acc_fir) + A*B  with Reg_input_i=0***\n\n");
-	A = $random( );
-	B = $random( );
-	acc_fir = $urandom( );
 	repeat (300) begin
+		A = $random( );
+		B = $random( );
+		acc_fir = $urandom( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -130,10 +131,11 @@ initial begin
 
 	subtract_i = 1;
 	$display ("\n\n*** Random Functionality Tests with signed inputs are applied for  P = (A << acc_fir) - A*B with Reg_input_i=0***\n\n");
-	A = $random( );
-	B = $random( );
-	acc_fir = $urandom( );
 	repeat (300) begin
+		A = $random( );
+		B = $random( );
+		acc_fir = $urandom( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();

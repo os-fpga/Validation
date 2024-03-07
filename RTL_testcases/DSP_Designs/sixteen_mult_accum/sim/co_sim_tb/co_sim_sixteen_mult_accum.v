@@ -10,7 +10,10 @@ module co_sim_sixteen_mult_accum #
 	integer mismatch=0;
 
 sixteen_mult_accum golden(.*);
+`ifdef PNR
+`else
 sixteen_mult_accum netlist(.* ,. w(w_netlist));
+`endif
 
 //clock initialization
 initial begin
@@ -97,15 +100,16 @@ initial begin
 
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	a0 = $random( );
-    a1 = $random( );
-	a2 = $random( );
-    a3 = $random( );
-	b0 = $random( );
-	b1 = $random( );
-    b2 = $random( );
-	b3 = $random( );
-	repeat (600) begin
+	repeat (1000) begin
+		a0 = $random( );
+		a1 = $random( );
+		a2 = $random( );
+		a3 = $random( );
+		b0 = $random( );
+		b1 = $random( );
+		b2 = $random( );
+		b3 = $random( );
+		@(negedge clk);
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -113,7 +117,7 @@ initial begin
 	$display ("\n\n***Random Functionality Tests are ended***\n\n");
 
 	$display ("\n\n*** Random Functionality Tests are applied***\n\n");
-	repeat (600) begin
+	repeat (1000) begin
 		a0 = $random( );
         a1 = $random( );
 	    a2 = $random( );
