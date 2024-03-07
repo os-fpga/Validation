@@ -169,7 +169,6 @@ parse_cga exit 1; }
 #creating a tcl file to run raptor flow 
     cd ..
     
-    python3 init_path_update.py $design
 
     echo "create_design $design">raptor_tcl.tcl 
     echo "target_device $device">>raptor_tcl.tcl 
