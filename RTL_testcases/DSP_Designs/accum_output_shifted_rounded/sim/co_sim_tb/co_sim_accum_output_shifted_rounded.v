@@ -10,6 +10,7 @@ module co_sim_accum_output_shifted_rounded;
 
 	accum_output_shifted_rounded golden(.*);
 	`ifdef PNR
+	accum_output_shifted_rounded_post_route netlist (.*, .P(P_netlist));
 	`else
 	accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
 	`endif 
