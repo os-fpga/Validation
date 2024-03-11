@@ -11,7 +11,7 @@ tool_name="iverilog"
 
 #simulation stages
 post_synth_sim=false 
-post_route_sim=false 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
