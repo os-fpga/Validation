@@ -12,8 +12,9 @@ module co_sim_mult_28x20_unsigned_regout();
 
 mult_28x20_unsigned_regout golden(.*);
 `ifdef PNR
+mult_28x20_unsigned_regout_post_route netlist(.* ,. Y(result_netlist));
 `else
-mult_28x20_unsigned_regout netlist(.* ,. Y(result_netlist));
+mult_28x20_unsigned_regout_post_synth netlist(.* ,. Y(result_netlist));
 `endif
 
 	integer mismatch=0;

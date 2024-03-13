@@ -10,6 +10,7 @@ module co_sim_dsp_z_o_wrt_out_select_i;
 
 dsp_z_o_wrt_out_select_i golden(.*);
     `ifdef PNR
+dsp_z_o_wrt_out_select_i_post_route netlist(.*, .z_o(z_o_netlist));
     `else
     dsp_z_o_wrt_out_select_i_post_synth netlist(.*, .z_o(z_o_netlist));
     `endif

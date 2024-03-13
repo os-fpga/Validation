@@ -10,6 +10,7 @@ module co_sim_dsp_fractured_mul_unsigned_reg_with_accum_shifted_output;
 
 dsp_fractured_mul_unsigned_reg_with_accum_shifted_output golden(.*);
     `ifdef PNR
+dsp_fractured_mul_unsigned_reg_with_accum_shifted_output_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_fractured_mul_unsigned_reg_with_accum_shifted_output_post_synth netlist(.*, .P(P_netlist));
     `endif

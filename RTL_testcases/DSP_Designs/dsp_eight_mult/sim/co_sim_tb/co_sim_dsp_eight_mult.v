@@ -13,8 +13,9 @@ module co_sim_dsp_eight_mult #
 
 dsp_eight_mult golden(.*);
 `ifdef PNR
+dsp_eight_mult_post_route netlist(.* ,. result(result_netlist));
 `else
-dsp_eight_mult netlist(.* ,. result(result_netlist));
+dsp_eight_mult_post_synth netlist(.* ,. result(result_netlist));
 `endif
 
 //clock initialization

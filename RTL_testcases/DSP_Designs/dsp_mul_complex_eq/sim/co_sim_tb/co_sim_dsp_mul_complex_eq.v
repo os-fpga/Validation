@@ -8,6 +8,7 @@ module co_sim_dsp_mul_complex_eq ();
 
  dsp_mul_complex_eq rtl(.*);
     `ifdef PNR
+ dsp_mul_complex_eq_post_route netlist(.*, .z(z_netlist) ,. z1(z1_netlist) ,. z2(z2_netlist));
     `else
      dsp_mul_complex_eq_post_synth netlist(.*, .z(z_netlist) ,. z1(z1_netlist) ,. z2(z2_netlist));
     `endif

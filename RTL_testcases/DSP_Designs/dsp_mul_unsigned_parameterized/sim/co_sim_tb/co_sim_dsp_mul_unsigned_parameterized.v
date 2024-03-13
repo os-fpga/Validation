@@ -9,6 +9,7 @@ module co_sim_dsp_mul_unsigned_parameterized #(parameter A_WIDTH = 64, B_WIDTH =
 
 dsp_mul_unsigned_parameterized golden(.*);
     `ifdef PNR
+dsp_mul_unsigned_parameterized_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_unsigned_parameterized_post_synth netlist(.*, .P(P_netlist));
     `endif

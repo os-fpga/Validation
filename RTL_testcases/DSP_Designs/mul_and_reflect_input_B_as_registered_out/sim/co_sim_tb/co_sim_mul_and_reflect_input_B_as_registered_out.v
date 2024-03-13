@@ -11,6 +11,7 @@ module co_sim_mul_and_reflect_input_B_as_registered_out;
 
 mul_and_reflect_input_B_as_registered_out golden(.*);
     `ifdef PNR
+mul_and_reflect_input_B_as_registered_out_post_route netlist(.*, .P(P_netlist),. DlyB_o(DlyB_o_netlist));
     `else
     mul_and_reflect_input_B_as_registered_out_post_synth netlist(.*, .P(P_netlist),. DlyB_o(DlyB_o_netlist));
     `endif

@@ -12,6 +12,7 @@ module co_sim_input_to_adder_and_mul_A_input_wrt_feedback_i;
 
 input_to_adder_and_mul_A_input_wrt_feedback_i golden(.*);
     `ifdef PNR
+input_to_adder_and_mul_A_input_wrt_feedback_i_post_route netlist(.*, .P(P_netlist));
     `else
     input_to_adder_and_mul_A_input_wrt_feedback_i_post_synth netlist(.*, .P(P_netlist));
     `endif

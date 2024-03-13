@@ -9,6 +9,7 @@ module co_sim_dsp_fractured_signed_mul_comb;
 
 dsp_fractured_signed_mul_comb golden(.*);
     `ifdef PNR
+dsp_fractured_signed_mul_comb_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_fractured_signed_mul_comb_post_synth netlist(.*, .P(P_netlist));
     `endif

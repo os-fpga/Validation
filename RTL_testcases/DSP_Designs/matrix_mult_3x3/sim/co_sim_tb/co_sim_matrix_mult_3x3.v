@@ -9,6 +9,7 @@ module co_sim_matrix_mult_3x3;
 
 matrix_mult_3x3 golden(.*);
     `ifdef PNR
+matrix_mult_3x3_post_route netlist(.*, .Result(Result_netlist));
     `else
     matrix_mult_3x3_post_synth netlist(.*, .Result(Result_netlist));
     `endif

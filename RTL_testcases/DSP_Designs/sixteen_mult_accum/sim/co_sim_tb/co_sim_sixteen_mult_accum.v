@@ -11,8 +11,9 @@ module co_sim_sixteen_mult_accum #
 
 sixteen_mult_accum golden(.*);
 `ifdef PNR
+sixteen_mult_accum_post_route netlist(.* ,. w(w_netlist));
 `else
-sixteen_mult_accum netlist(.* ,. w(w_netlist));
+sixteen_mult_accum_post_synth netlist(.* ,. w(w_netlist));
 `endif
 
 //clock initialization

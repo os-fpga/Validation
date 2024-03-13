@@ -14,6 +14,7 @@ module co_sim_dsp_multiplier_accum_with_add_and_sub;
 
 dsp_multiplier_accum_with_add_and_sub golden(.*);
     `ifdef PNR
+dsp_multiplier_accum_with_add_and_sub_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_multiplier_accum_with_add_and_sub_post_synth netlist(.*, .P(P_netlist));
     `endif
