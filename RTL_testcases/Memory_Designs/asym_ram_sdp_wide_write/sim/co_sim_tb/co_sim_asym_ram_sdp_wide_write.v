@@ -13,6 +13,7 @@ wire [7:0] read_data, read_data_netlist;
 
     asym_ram_sdp_wide_write golden(.*);
     `ifdef PNR
+        asym_ram_sdp_wide_write_post_route netlist(.*, .read_data(read_data_netlist));
     `else
         asym_ram_sdp_wide_write_post_synth netlist(.*, .read_data(read_data_netlist));
     `endif

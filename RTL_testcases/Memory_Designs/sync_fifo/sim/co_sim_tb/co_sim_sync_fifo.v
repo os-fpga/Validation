@@ -14,6 +14,7 @@ module co_sim_sync_fifo;
 
     sync_fifo golden(.*);
     `ifdef PNR
+        sync_fifo_post_route netlist(.*, .data_out(data_out_netlist), .empty(empty_netlist), .full(full_netlist));
     `else
         sync_fifo_post_synth netlist(.*, .data_out(data_out_netlist), .empty(empty_netlist), .full(full_netlist));
     `endif

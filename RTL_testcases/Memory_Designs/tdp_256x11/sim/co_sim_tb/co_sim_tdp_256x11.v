@@ -10,6 +10,7 @@ module co_sim_tdp_256x11;
 
     tdp_256x11 golden(.*);
     `ifdef PNR
+        tdp_256x11_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `else
         tdp_256x11_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif

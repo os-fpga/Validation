@@ -12,6 +12,7 @@ module co_sim_asym_ram_sdp_wide_async_read;
 
     asym_ram_sdp_wide_async_read golden(.*);
     `ifdef PNR
+        asym_ram_sdp_wide_async_read_post_route netlist(.*, .read_data(read_data_netlist));
     `else
         asym_ram_sdp_wide_async_read_post_synth netlist(.*, .read_data(read_data_netlist));
     `endif

@@ -10,6 +10,7 @@ module co_sim_ram_sdp_async_write_undesired;
 
     ram_sdp_async_write_undesired golden(.*);
     `ifdef PNR
+        ram_sdp_async_write_undesired_post_route netlist(.*, .dout(dout_netlist));
     `else
         ram_sdp_async_write_undesired_post_synth netlist(.*, .dout(dout_netlist));
     `endif

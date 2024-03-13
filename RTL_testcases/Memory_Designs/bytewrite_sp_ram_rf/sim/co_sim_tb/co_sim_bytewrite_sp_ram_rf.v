@@ -19,6 +19,7 @@ module co_sim_bytewrite_sp_ram_rf;
 
     bytewrite_sp_ram_rf golden(.*);
     `ifdef PNR
+        bytewrite_sp_ram_rf_post_route netlist(.*, .dout(dout_netlist));
     `else
         bytewrite_sp_ram_rf_post_synth netlist(.*, .dout(dout_netlist));
     `endif

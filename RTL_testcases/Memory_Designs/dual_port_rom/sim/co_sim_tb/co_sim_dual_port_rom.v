@@ -11,6 +11,7 @@ module co_sim_dual_port_rom
 
     dual_port_rom golden(.*);
     `ifdef PNR
+        dual_port_rom_post_route netlist(.*, .q_a(q_a_netlist), .q_b(q_b_netlist));
     `else
         dual_port_rom_post_synth netlist(.*, .q_a(q_a_netlist), .q_b(q_b_netlist));
     `endif

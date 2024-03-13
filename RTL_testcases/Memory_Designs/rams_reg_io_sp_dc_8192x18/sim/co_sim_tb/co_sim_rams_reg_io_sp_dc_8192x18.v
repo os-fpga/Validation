@@ -12,6 +12,7 @@ module co_sim_rams_reg_io_sp_dc_8192x18;
 
     rams_reg_io_sp_dc_8192x18 golden(.*);
     `ifdef PNR
+        rams_reg_io_sp_dc_8192x18_post_route netlist(.*, .dout(dout_netlist));
     `else
         rams_reg_io_sp_dc_8192x18_post_synth netlist(.*, .dout(dout_netlist));
     `endif

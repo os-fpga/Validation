@@ -11,10 +11,11 @@ module co_sim_rams_sp_reg_addr_1024x32;
 
     rams_sp_reg_addr_1024x32 golden(.*);
 
-`ifdef PNR
-`else
-   	rams_sp_reg_addr_1024x32_post_synth netlist(.*, .dout(dout_netlist));
-`endif
+    `ifdef PNR
+        rams_sp_reg_addr_1024x32_post_route netlist(.*, .dout(dout_netlist));
+    `else
+        rams_sp_reg_addr_1024x32_post_synth netlist(.*, .dout(dout_netlist));
+    `endif
     always #10 clk = ~clk;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 

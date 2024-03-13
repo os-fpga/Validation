@@ -10,7 +10,8 @@ module co_sim_tdp_512x10;
     reg [6:0]cycle, i;
 
     tdp_512x10 golden(.*);
-     `ifdef PNR
+    `ifdef PNR
+        tdp_512x10_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `else
         tdp_512x10_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif
