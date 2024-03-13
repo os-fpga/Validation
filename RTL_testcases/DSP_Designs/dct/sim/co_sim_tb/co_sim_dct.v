@@ -7,6 +7,7 @@ module co_sim_dct ();
 
 dct golden(.*);
     `ifdef PNR
+dct_post_route netlist(.* ,. y(y_netlist));
     `else
     dct_post_synth netlist(.* ,. y(y_netlist));
     `endif

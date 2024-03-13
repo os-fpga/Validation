@@ -18,6 +18,12 @@ module co_sim_cic_decimator #(parameter width = 12);
 						   .d_out(d_out),
 						   .d_clk(d_clk));
     `ifdef PNR
+		cic_decimator_post_route netlist(.clk(clk),
+						  .rst(rst),
+						  .decimation_ratio(decimation_ratio),
+						  .d_in(d_in),
+						  .d_out(d_out_netlist),
+						  .d_clk(d_clk_netlist));
     `else
     	cic_decimator_post_synth netlist(.clk(clk),
 						   .rst(rst),

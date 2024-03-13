@@ -9,6 +9,7 @@ module co_sim_dsp_mul_signed_in_not_reg_out_is_reg;
 
 dsp_mul_signed_in_not_reg_out_is_reg golden(.*);
     `ifdef PNR
+dsp_mul_signed_in_not_reg_out_is_reg_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_signed_in_not_reg_out_is_reg_post_synth netlist(.*, .P(P_netlist));
     `endif

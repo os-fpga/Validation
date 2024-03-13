@@ -11,6 +11,7 @@ module co_sim_add_shifted_input_to_the_mul_output;
 
 add_shifted_input_to_the_mul_output golden(.*);
     `ifdef PNR
+add_shifted_input_to_the_mul_output_post_route netlist(.*, .P(P_netlist));
     `else
     add_shifted_input_to_the_mul_output_post_synth netlist(.*, .P(P_netlist));
     `endif

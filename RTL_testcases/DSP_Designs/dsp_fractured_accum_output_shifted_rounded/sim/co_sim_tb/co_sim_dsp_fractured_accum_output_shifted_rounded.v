@@ -11,6 +11,7 @@ module co_sim_dsp_fractured_accum_output_shifted_rounded;
 
 dsp_fractured_accum_output_shifted_rounded golden(.*);
     `ifdef PNR
+dsp_fractured_accum_output_shifted_rounded_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_fractured_accum_output_shifted_rounded_post_synth netlist(.*, .P(P_netlist));
     `endif

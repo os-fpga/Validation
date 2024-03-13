@@ -8,6 +8,7 @@ module co_sim_dsp_multiplier_accum_with_add;
 
 dsp_multiplier_accum_with_add golden(.*);
     `ifdef PNR
+dsp_multiplier_accum_with_add_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_multiplier_accum_with_add_post_synth netlist(.*, .P(P_netlist));
     `endif

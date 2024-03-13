@@ -11,6 +11,7 @@ module co_sim_complex_multiplier #(parameter A_WIDTH = 20, B_WIDTH = 18);
 
 complex_multiplier golden(.*);
     `ifdef PNR
+complex_multiplier_post_route netlist(.*, .pr(pr_netlist) ,. pi(pi_netlist));
     `else
     complex_multiplier_post_synth netlist(.*, .pr(pr_netlist) ,. pi(pi_netlist));
     `endif

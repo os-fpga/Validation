@@ -24,8 +24,16 @@ module co_sim_mac_32;
       .out(out)
    );
    `ifdef PNR
+   mac_32_post_route netlist(
+      .clock0(clock0),
+      .reset(reset),
+      .a(a),
+      .b(b),
+      .id(id),
+      .out(result_netlist)
+   );
    `else
-   mac_32 netlist(
+   mac_32_post_synth netlist(
       .clock0(clock0),
       .reset(reset),
       .a(a),

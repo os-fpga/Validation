@@ -11,6 +11,7 @@ module co_sim_multiplier_adder_wrt_Reg_input_i;
 
 multiplier_adder_wrt_Reg_input_i golden(.*);
     `ifdef PNR
+multiplier_adder_wrt_Reg_input_i_post_route netlist(.*, .P(P_netlist));
     `else
     multiplier_adder_wrt_Reg_input_i_post_synth netlist(.*, .P(P_netlist));
     `endif

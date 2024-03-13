@@ -9,6 +9,7 @@ module co_sim_dsp_mul_signed_reg_with_accum;
 
 dsp_mul_signed_reg_with_accum golden(.*);
     `ifdef PNR
+dsp_mul_signed_reg_with_accum_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_signed_reg_with_accum_post_synth netlist(.*, .P(P_netlist));
     `endif

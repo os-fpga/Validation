@@ -10,6 +10,7 @@ module co_sim_mult_16bit_outreg();
 
 mult_16bit_outreg golden(.*);
     `ifdef PNR
+mult_16bit_outreg_post_route netlist(.* ,. out(result_netlist));
     `else
 			mult_16bit_outreg_post_synth netlist(.* ,. out(result_netlist));
 		`endif

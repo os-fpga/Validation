@@ -10,6 +10,7 @@ module co_sim_simple_unsigned_4tap_fir#(
 
 simple_unsigned_4tap_fir golden(.*);
     `ifdef PNR
+simple_unsigned_4tap_fir_post_route netlist(.* ,. y(y_netlist));
     `else
     simple_unsigned_4tap_fir_post_synth netlist(.* ,. y(y_netlist));
     `endif

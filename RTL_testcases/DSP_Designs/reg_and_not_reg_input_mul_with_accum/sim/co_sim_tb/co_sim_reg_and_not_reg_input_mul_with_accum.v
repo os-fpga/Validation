@@ -9,6 +9,7 @@ module co_sim_reg_and_not_reg_input_mul_with_accum;
 
 reg_and_not_reg_input_mul_with_accum golden(.*);
     `ifdef PNR
+reg_and_not_reg_input_mul_with_accum_post_route netlist(.*, .P(P_netlist));
     `else
     reg_and_not_reg_input_mul_with_accum_post_synth netlist(.*, .P(P_netlist));
     `endif

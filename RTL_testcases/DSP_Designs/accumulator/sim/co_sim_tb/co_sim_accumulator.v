@@ -9,6 +9,7 @@ module co_sim_accumulator;
 
 accumulator golden(.*);
 `ifdef PNR
+accumulator_post_route netlist(.*, .P(P_netlist));
 `else
 accumulator_post_synth netlist(.*, .P(P_netlist));
 `endif 

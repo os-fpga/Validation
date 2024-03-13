@@ -18,6 +18,7 @@ module co_sim_signed_multiply_accumulate;
 
   signed_multiply_accumulate dut (.clk(clk),.clear(clear),.clken(clken),.sload(sload),.dataa(dataa),.datab(datab),.adder_out(adder_out));
   `ifdef PNR
+  signed_multiply_accumulate_post_route  netlist (.clk(clk),.clear(clear),.clken(clken),.sload(sload),.dataa(dataa),.datab(datab),.adder_out(adder_out_netlist));
   `else
     signed_multiply_accumulate_post_synth  netlist (.clk(clk),.clear(clear),.clken(clken),.sload(sload),.dataa(dataa),.datab(datab),.adder_out(adder_out_netlist));
   `endif 

@@ -9,6 +9,7 @@ module co_sim_dsp_mul_signed_reg_with_accum_parametrized #(parameter A_WIDTH = 3
 
 dsp_mul_signed_reg_with_accum_parametrized golden(.*);
     `ifdef PNR
+dsp_mul_signed_reg_with_accum_parametrized_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_signed_reg_with_accum_parametrized_post_synth netlist(.*, .P(P_netlist));
     `endif

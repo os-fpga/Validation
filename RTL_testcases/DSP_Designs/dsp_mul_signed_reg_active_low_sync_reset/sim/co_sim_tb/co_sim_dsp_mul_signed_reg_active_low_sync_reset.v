@@ -9,6 +9,7 @@ module co_sim_dsp_mul_signed_reg_active_low_sync_reset;
 
 dsp_mul_signed_reg_active_low_sync_reset golden(.*);
     `ifdef PNR
+dsp_mul_signed_reg_active_low_sync_reset_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_signed_reg_active_low_sync_reset_post_synth netlist(.*, .P(P_netlist));
     `endif

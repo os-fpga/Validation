@@ -9,6 +9,7 @@ module co_sim_instantiate_mul_in_accum;
 
 instantiate_mul_in_accum golden(.*);
     `ifdef PNR
+instantiate_mul_in_accum_post_route netlist(.*, .P(P_netlist));
     `else
     instantiate_mul_in_accum_post_synth netlist(.*, .P(P_netlist));
     `endif

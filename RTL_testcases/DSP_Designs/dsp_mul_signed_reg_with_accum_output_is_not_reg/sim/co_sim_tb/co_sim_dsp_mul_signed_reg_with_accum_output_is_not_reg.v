@@ -9,6 +9,7 @@ module co_sim_dsp_mul_signed_reg_with_accum_output_is_not_reg;
 
 dsp_mul_signed_reg_with_accum_output_is_not_reg golden(.*);
     `ifdef PNR
+dsp_mul_signed_reg_with_accum_output_is_not_reg_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_mul_signed_reg_with_accum_output_is_not_reg_post_synth netlist(.*, .P(P_netlist));
     `endif

@@ -9,6 +9,7 @@ module co_sim_simple_multiplier_with_adder;
 
 simple_multiplier_with_adder golden(.*);
     `ifdef PNR
+simple_multiplier_with_adder_post_route netlist(.*, .P(P_netlist));
     `else
     simple_multiplier_with_adder_post_synth netlist(.*, .P(P_netlist));
     `endif

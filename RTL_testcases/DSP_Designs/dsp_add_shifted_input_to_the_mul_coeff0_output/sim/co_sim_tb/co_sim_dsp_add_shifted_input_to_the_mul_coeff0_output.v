@@ -13,6 +13,7 @@ module co_sim_dsp_add_shifted_input_to_the_mul_coeff0_output;
 
 dsp_add_shifted_input_to_the_mul_coeff0_output golden(.*);
     `ifdef PNR
+dsp_add_shifted_input_to_the_mul_coeff0_output_post_route netlist(.*, .P(P_netlist));
     `else
     dsp_add_shifted_input_to_the_mul_coeff0_output_post_synth netlist(.*, .P(P_netlist));
     `endif

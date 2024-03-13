@@ -9,6 +9,7 @@ module co_sim_dsp_add_mul_output_to_accum_20lsb;
 
 dsp_add_mul_output_to_accum_20lsb golden(.*);
 `ifdef PNR
+dsp_add_mul_output_to_accum_20lsb_post_route netlist(.*, .P(P_netlist));
 `else
 dsp_add_mul_output_to_accum_20lsb_post_synth netlist(.*, .P(P_netlist));
 `endif
