@@ -22,32 +22,14 @@ wire [WIDTHB-1:0] doB, doB_netlist;
     integer mismatch=0;
     reg [6:0]cycle, i;
 
-    asym_ram_sdp_read_wider_dc_meminit golden(
-          .addrA (addrA ),
-          .addrB (addrB ),
-          .clkA (clkA ),
-          .clkB (clkB ),
-          .diA (diA ),
-          .doB (doB ),
-          .enaA (enaA ),
-          .enaB (enaB ),
-          .weA  ( weA)
-        );
+    asym_ram_sdp_read_wider_dc_meminit golden(.*);
       
     `ifdef PNR
+        asym_ram_sdp_read_wider_dc_meminit_post_route netlist(.*, .doB(doB_netlist));
     `else
-        asym_ram_sdp_read_wider_dc_meminit_post_synth netlist(
+        asym_ram_sdp_read_wider_dc_meminit_post_synth netlist(.*, .doB(doB_netlist));
     `endif
-        .addrA (addrA ),
-        .addrB (addrB ),
-        .clkA (clkA ),
-        .clkB (clkB ),
-        .diA (diA ),
-        .enaA (enaA ),
-        .enaB (enaB ),
-        .weA  ( weA),
-        .doB(doB_netlist)
-        );
+       
 
 
      //clock//

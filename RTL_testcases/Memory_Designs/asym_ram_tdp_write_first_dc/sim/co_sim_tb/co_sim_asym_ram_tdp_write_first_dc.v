@@ -24,6 +24,7 @@ module co_sim_asym_ram_tdp_write_first_dc;
 
     asym_ram_tdp_write_first_dc golden(.*);
     `ifdef PNR
+        asym_ram_tdp_write_first_dc_post_route netlist(.*, .doA(doA_netlist), .doB(doB_netlist));
     `else
         asym_ram_tdp_write_first_dc_post_synth netlist(.*, .doA(doA_netlist), .doB(doB_netlist));
     `endif

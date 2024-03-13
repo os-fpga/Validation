@@ -11,8 +11,9 @@ module co_sim_ram_simple_dp_synch_undefined_collision_1024x32;
 
      ram_simple_dp_synch_undefined_collision_1024x32 golden(.*);
     `ifdef PNR
+        ram_simple_dp_synch_undefined_collision_1024x32_post_route netlist(.*, .dout(dout_netlist));
     `else
-         ram_simple_dp_synch_undefined_collision_1024x32_post_synth netlist(.*, .dout(dout_netlist));
+        ram_simple_dp_synch_undefined_collision_1024x32_post_synth netlist(.*, .dout(dout_netlist));
     `endif
 
 

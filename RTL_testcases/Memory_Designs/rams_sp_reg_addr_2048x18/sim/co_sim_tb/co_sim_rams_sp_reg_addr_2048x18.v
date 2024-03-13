@@ -11,6 +11,7 @@ module co_sim_rams_sp_reg_addr_2048x18;
 
     rams_sp_reg_addr_2048x18 golden(.*);
     `ifdef PNR
+        rams_sp_reg_addr_2048x18_post_route netlist(.*, .dout(dout_netlist));
     `else
         rams_sp_reg_addr_2048x18_post_synth netlist(.*, .dout(dout_netlist));
     `endif

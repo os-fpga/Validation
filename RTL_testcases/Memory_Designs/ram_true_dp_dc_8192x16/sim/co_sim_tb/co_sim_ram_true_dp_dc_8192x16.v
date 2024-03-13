@@ -10,6 +10,7 @@ module co_sim_ram_true_dp_dc_8192x16;
 
     ram_true_dp_dc_8192x16 golden(.*);
     `ifdef PNR
+        ram_true_dp_dc_8192x16_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `else
         ram_true_dp_dc_8192x16_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif

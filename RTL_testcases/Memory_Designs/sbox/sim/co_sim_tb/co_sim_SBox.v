@@ -11,6 +11,7 @@ wire [7:0] dout, dout_netlist;    //SBox output
 
     SBox golden(.*);
     `ifdef PNR
+        SBox_post_route netlist(.*, .dout(dout_netlist));
     `else
         SBox_post_synth netlist(.*, .dout(dout_netlist));
     `endif

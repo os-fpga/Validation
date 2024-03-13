@@ -22,6 +22,7 @@ wire [WIDTHB-1:0] doB, doB_netlist;
 
     asym_ram_sdp_read_wider_dc golden(.*);
     `ifdef PNR
+        asym_ram_sdp_read_wider_dc_post_route netlist(.*, .doB(doB_netlist));
     `else
         asym_ram_sdp_read_wider_dc_post_synth netlist(.*, .doB(doB_netlist));
     `endif
