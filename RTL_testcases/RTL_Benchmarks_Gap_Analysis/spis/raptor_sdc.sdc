@@ -7,3 +7,5 @@ set_input_delay 0.1 -clock s_avmm_clk [get_ports {*}]
 set_output_delay 0.1 -clock s_avmm_clk [get_ports {*}]
 
 set_clock_groups -exclusive -group {sclk} -group {s_avmm_clk}
+
+set_clock_uncertainty 0.698
