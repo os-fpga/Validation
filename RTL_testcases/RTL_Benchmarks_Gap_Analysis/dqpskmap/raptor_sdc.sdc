@@ -11,3 +11,5 @@ set_input_delay 0 -clock rx_clk_18_KHz [get_ports {*}]
 set_output_delay 0 -clock rx_clk_18_KHz [get_ports {*}]
 
 set_clock_groups -exclusive -group {tx_tetra_clk_36_KHz} -group {tx_tetra_clk_18_KHz} -group {rx_clk_18_KHz}
+
+set_clock_uncertainty 0.698
