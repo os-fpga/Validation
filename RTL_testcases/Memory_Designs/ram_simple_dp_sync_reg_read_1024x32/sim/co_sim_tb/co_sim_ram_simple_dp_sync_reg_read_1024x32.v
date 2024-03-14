@@ -11,10 +11,11 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32;
 
     ram_simple_dp_sync_reg_read_1024x32 golden(.*);
 
-`ifdef PNR
-`else
-   	ram_simple_dp_sync_reg_read_1024x32_post_synth netlist(.*, .dout(dout_netlist));
-`endif
+    `ifdef PNR
+        ram_simple_dp_sync_reg_read_1024x32_post_route netlist(.*, .dout(dout_netlist));
+    `else
+        ram_simple_dp_sync_reg_read_1024x32_post_synth netlist(.*, .dout(dout_netlist));
+    `endif
     always #10 clk = ~clk;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 

@@ -11,6 +11,7 @@ module co_sim_ram_true_dp_rf_wre_512x16;
 
     ram_true_dp_rf_wre_512x16 golden(.*);
     `ifdef PNR
+        ram_true_dp_rf_wre_512x16_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `else
         ram_true_dp_rf_wre_512x16_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif

@@ -11,6 +11,7 @@ module co_sim_ram_simple_dp_async_read_4096x32;
 
     ram_simple_dp_async_read_4096x32 golden(.*);
     `ifdef PNR
+        ram_simple_dp_async_read_4096x32_post_route netlist(.*, .dout(dout_netlist));
     `else
         ram_simple_dp_async_read_4096x32_post_synth netlist(.*, .dout(dout_netlist));
     `endif

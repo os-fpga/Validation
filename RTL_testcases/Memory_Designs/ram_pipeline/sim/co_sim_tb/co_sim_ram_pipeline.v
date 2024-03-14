@@ -15,6 +15,7 @@ module co_sim_ram_pipeline;
 
     ram_pipeline golden(.*);
     `ifdef PNR
+        ram_pipeline_post_route netlist(.*, .res1(res1_netlist), .res2(res2_netlist));
     `else
         ram_pipeline_post_synth netlist(.*, .res1(res1_netlist), .res2(res2_netlist));
     `endif

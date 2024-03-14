@@ -12,6 +12,7 @@ module co_sim_ram_multi_port_1024x32;
 
     ram_multi_port_1024x32 golden(.*);
     `ifdef PNR
+        ram_multi_port_1024x32_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist), .doutC(doutC_netlist));
     `else
         ram_multi_port_1024x32_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist), .doutC(doutC_netlist));
     `endif

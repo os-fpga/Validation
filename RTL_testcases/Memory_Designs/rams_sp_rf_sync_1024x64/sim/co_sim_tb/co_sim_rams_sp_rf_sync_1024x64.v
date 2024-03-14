@@ -11,6 +11,7 @@ module co_sim_rams_sp_rf_sync_1024x64;
 
     rams_sp_rf_sync_1024x64 golden(.*);
     `ifdef PNR
+        rams_sp_rf_sync_1024x64_post_route netlist(.*, .dout(dout_netlist));
     `else
         rams_sp_rf_sync_1024x64_post_synth netlist(.*, .dout(dout_netlist));
     `endif

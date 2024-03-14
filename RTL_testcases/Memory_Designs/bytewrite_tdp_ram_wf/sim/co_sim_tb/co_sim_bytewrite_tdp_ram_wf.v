@@ -30,6 +30,7 @@ module co_sim_bytewrite_tdp_ram_wf;
 
     bytewrite_tdp_ram_wf golden(.*);
     `ifdef PNR
+        bytewrite_tdp_ram_wf_post_route netlist(.*, .douta(douta_netlist), .doutb(doutb_netlist));
     `else
         bytewrite_tdp_ram_wf_post_synth netlist(.*, .douta(douta_netlist), .doutb(doutb_netlist));
     `endif

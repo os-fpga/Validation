@@ -11,6 +11,7 @@ module co_sim_ram_true_reg_addr_dp_dc_1024x32;
 
     ram_true_reg_addr_dp_dc_1024x32 golden(.*);
     `ifdef PNR
+        ram_true_reg_addr_dp_dc_1024x32_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `else
         ram_true_reg_addr_dp_dc_1024x32_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
     `endif
