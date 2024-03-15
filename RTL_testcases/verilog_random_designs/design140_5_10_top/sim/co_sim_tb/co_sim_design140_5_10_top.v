@@ -1,8 +1,8 @@
 module co_sim_design140_5_10_top #(parameter WIDTH=32, CHANNEL=5);
 	reg clk, reset;
-	reg signed [WIDTH-1:0] inpt;
-	wire signed [WIDTH-1:0] outpt;
-	wire signed [WIDTH-1:0] out_netlist;
+	reg  [WIDTH-1:0] inpt;
+	wire  [WIDTH-1:0] outpt;
+	wire  [WIDTH-1:0] out_netlist;
 
 	integer mismatch=0;
 
@@ -39,7 +39,7 @@ initial begin
 	reset = 0;
 	@(negedge clk);
 
-	$display ("\n\n*** Random Functionality Tests for multiplier with signed inputs are applied***\n\n");
+	$display ("\n\n*** Random Functionality Tests for multiplier with  inputs are applied***\n\n");
 	repeat (1000) begin
 		inpt = $random( );
 		display_stimulus();
@@ -47,7 +47,7 @@ initial begin
 		@(negedge clk);
 		compare();
 	end
-	$display ("\n\n***Random Functionality Tests for multiplier with signed inputs are ended***\n\n");
+	$display ("\n\n***Random Functionality Tests for multiplier with  inputs are ended***\n\n");
 
 	reset =1;
 	inpt=0;
