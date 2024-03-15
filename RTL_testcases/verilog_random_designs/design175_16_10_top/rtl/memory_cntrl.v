@@ -44,11 +44,11 @@ always@(posedge clk)
                  state<=s0;
                  wr_addr<=wr_addr+1;
                  wr_en<=1;
+                 wr_data_mem<=data_in;
                end
             end
          s1:
             begin
-               wr_data_mem<=data_in;
                rd_en<=1;
                rd_addr<=rd_addr+1;
                // wr_en<=1;
