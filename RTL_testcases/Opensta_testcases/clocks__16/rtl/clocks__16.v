@@ -27,7 +27,7 @@ module dffn (
     end
 endmodule
 
-module mux (
+module mux2_1 (
     input wire a,
     input wire b,
     input wire select,
@@ -104,7 +104,7 @@ module clocks__16 (
     generate
         genvar k;
         for (k = 0; k < 16; k = k + 1) begin : mux_inst
-            mux mux_inst (.a(dff_out[k]),.b(dffn_out[k]),.select(select),.out(q[k]));
+            mux2_1 mux_inst (.a(dff_out[k]),.b(dffn_out[k]),.select(select),.out(q[k]));
         end
     endgenerate
 
