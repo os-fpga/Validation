@@ -10,24 +10,23 @@ module dsp_mult_accum_input_not_registered_output_registered_inf_dsp19x2 (clk, r
 
 	always @ (posedge clk, negedge reset)  begin
 		if(reset == 0) begin
-		mult1 <= 0;
-		mult2 <=  0;	
+			mult1 <= 0;
+			mult2 <=  0;	
 		end
 		else begin
-		mult1 <= A1*B1;
-		mult2 <= A2*B2;
+			mult1 <= A1*B1;
+			mult2 <= A2*B2;
 		end
 	end
 
 	always @ (posedge clk, negedge reset)  begin
-		if(reset == 1) begin
-			if (subtract)
-				add_or_sub = {(add_or_sub[63:0] - mult2),(add_or_sub[31:0] - mult1)};
-			else
-				add_or_sub = {(add_or_sub[63:0] - mult2),(add_or_sub[31:0] - mult1)};
-		end
+		if(reset == 0) 
+			add_or_sub <= 0;
 		else begin
-			add_or_sub = 0;
+			if (subtract)
+				add_or_sub <= {(add_or_sub[63:32] - mult2),(add_or_sub[31:0] - mult1)};
+			else
+				add_or_sub <= {(add_or_sub[63:32] + mult2),(add_or_sub[31:0] + mult1)};
 		end
 	end
 

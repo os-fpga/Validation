@@ -11,16 +11,16 @@ module co_sim_ram_simple_dp_synch_rf_1024x32_neg;
 
     ram_simple_dp_synch_rf_1024x32_neg golden(.*);
     `ifdef PNR
+        ram_simple_dp_synch_rf_1024x32_neg_post_route netlist(.*, .dout(dout_netlist));
     `else
         ram_simple_dp_synch_rf_1024x32_neg_post_synth netlist(.*, .dout(dout_netlist));
     `endif
-
 
     always #10 clk = ~clk;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 
             golden.ram[i] ='b0;
-        end  
+        end 
     end
     initial begin
 
@@ -40,7 +40,7 @@ module co_sim_ram_simple_dp_synch_rf_1024x32_neg;
 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (posedge clk)
-        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=0; re<=1'b1;
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=0; re<=1'b1;
         cycle = cycle +1;
      
         compare(cycle);
@@ -49,7 +49,7 @@ module co_sim_ram_simple_dp_synch_rf_1024x32_neg;
 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (posedge clk)
-        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=1'b1; re<=1'b0; din<= $random;
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=1'b1; re<=1'b0; din<= $random;
         cycle = cycle +1;
      
         compare(cycle);
@@ -70,6 +70,13 @@ module co_sim_ram_simple_dp_synch_rf_1024x32_neg;
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (posedge clk)
         read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <={$random};  re <={$random};  din<= {$random}; 
+        cycle = cycle +1;
+       
+        compare(cycle);
+    end
+    for (integer i=0; i<512; i=i+1)begin
+        repeat (1) @ (posedge clk)
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <={$random};  re <={$random};  din<= {$random}; 
         cycle = cycle +1;
        
         compare(cycle);

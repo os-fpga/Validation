@@ -20,7 +20,7 @@ initial begin
     forever #5 clk = ~clk;
 end
 initial begin
-	reset = 1;
+	reset = 0;
 	{A1, A2, B1, B2, shift_right} = 'd0;
 	subtract = 0;
 	round = 0;
@@ -31,9 +31,9 @@ initial begin
 	display_stimulus();
 	@(negedge clk);
 	@(negedge clk);
-	compare();
 	$display ("\n\n***Reset Test is ended***\n\n");
-
+	@(negedge clk);
+	compare();
 	reset = 1;
 	subtract = 0;
 	@(negedge clk);

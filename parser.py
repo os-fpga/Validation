@@ -114,9 +114,14 @@ def find_clock_after_path():
     current_directory = os.getcwd()
     # Search for files matching the specified pattern
     input_file_path = glob.glob(os.path.join(current_directory, '**/timing_analysis/report_timing.setup.rpt'), recursive=True)
+    rpt_lines = [] 
     # Read input from the file
-    with open(input_file_path[0], "r") as rpt_file:
-        rpt_lines = rpt_file.read().splitlines()
+    if input_file_path:  # If the list is not empty
+        # Read input from the first file
+        with open(input_file_path[0], "r") as rpt_file:
+            rpt_lines = rpt_file.read().splitlines()
+    else:
+        print("No timing files matching the pattern were found.")
 
     for line in rpt_lines:
         if line.startswith("#Path"):
