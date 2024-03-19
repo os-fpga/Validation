@@ -10,38 +10,40 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32_neg;
     reg [6:0]cycle, i;
 
     ram_simple_dp_sync_reg_read_1024x32_neg golden(.*);
+
     `ifdef PNR
+        ram_simple_dp_sync_reg_read_1024x32_neg_post_route netlist(.*, .dout(dout_netlist));
     `else
         ram_simple_dp_sync_reg_read_1024x32_neg_post_synth netlist(.*, .dout(dout_netlist));
     `endif
-
-
     always #10 clk = ~clk;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 
             golden.ram[i] ='b0;
-        end  
+        end 
     end
     initial begin
     {clk, we, read_addr, write_addr, din, cycle, i} = 0;
-
     repeat (1) @ (posedge clk);
-    //write and reads simulatneously from registered read addr(during we high) and write addr 
-    for (integer i=0; i<1024; i=i+1)begin
+     
+    repeat (1) @ (posedge clk)
+    read_addr <= 1; write_addr <= 0; we <=1'b1; din<= $random;
+
+    repeat (1) @ (posedge clk)
+    for (integer i=1; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        read_addr <= i; write_addr <= i; we <=1'b1; din<= $random;
-        cycle = cycle +1;
-        #1;
-        compare(cycle);
+        read_addr <= 0; write_addr <= i; we <=1'b1; din<= $random;
+        
 
     end
-
+    
+   
     //not writing and reading simulatneously from last registered addr during we high
     for (integer i=0; i<1024; i=i+1)begin
-        repeat (1) @ (posedge clk)
-        read_addr <= i; write_addr <= i; we <=0;
+        
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=0;
         cycle = cycle +1;
-        #1;
+        repeat (1) @ (posedge clk)
         compare(cycle);
 
     end
@@ -49,9 +51,9 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32_neg;
     //random registtered addr
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        read_addr <= $random; write_addr <= i; we <=1'b1; din<= $random;
+        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); we <=1'b1; din<= $random;
         cycle = cycle +1;
-        #1;
+       
         compare(cycle);
 
     end
@@ -59,9 +61,9 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32_neg;
     //read from only last registered addr
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (posedge clk)
-        read_addr <= i; we <=0;
+        read_addr <= $urandom_range(0,511); write_addr <= $urandom_range(512,1023); we <=0;
         cycle = cycle +1;
-        #1;
+       
         compare(cycle);
 
     end
@@ -79,10 +81,6 @@ module co_sim_ram_simple_dp_sync_reg_read_1024x32_neg;
     if(dout !== dout_netlist) begin
         $display("dout mismatch. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
         mismatch = mismatch+1;
-    end
-    if(dout == dout_netlist) begin
-        $display("dout matched. Golden: %0h, Netlist: %0h, Time: %0t", dout, dout_netlist,$time);
-        match = match+1;
     end
     
     endtask

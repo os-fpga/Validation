@@ -11,6 +11,7 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
 
     rams_sp_re_we_asynch_rst_1024x32_neg golden(.*);
     `ifdef PNR
+        rams_sp_re_we_asynch_rst_1024x32_neg_post_route netlist(.*, .dout(dout_netlist));
     `else
         rams_sp_re_we_asynch_rst_1024x32_neg_post_synth netlist(.*, .dout(dout_netlist));
     `endif
@@ -20,11 +21,11 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
     initial begin
         for(integer i = 0; i<1024; i=i+1) begin 
             golden.RAM[i] ='b0;
-        end  
+        end 
     end
     initial begin
     {clk,  we, re, addr ,di, cycle, i} = 0;
-    rst = 1;  
+    rst = 1;
 
     repeat (3) @ (posedge clk);
     rst = 0;
@@ -33,7 +34,7 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
         repeat (1) @ (posedge clk)
         addr <= i; we <=1; re<=0; di<= $random;
         cycle = cycle +1;
-        
+       
         compare(cycle);
 
     end
@@ -43,7 +44,7 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
         repeat (1) @ (posedge clk)
         addr <= i; we <=0; re<=1; 
         cycle = cycle +1;
-        
+       
         compare(cycle);
 
     end
@@ -55,7 +56,16 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
         repeat (1) @ (posedge clk)
         addr <= i; we <=0; re<=1; di<= $random;
         cycle = cycle +2;
-        
+       
+        compare(cycle);
+
+    end
+
+      for (integer i=0; i<1024; i=i+1)begin
+        repeat (1) @ (posedge clk)
+        addr <= $random; we <=$random; re<=$random;  di<= $random;
+        cycle = cycle +1; 
+       
         compare(cycle);
 
     end
