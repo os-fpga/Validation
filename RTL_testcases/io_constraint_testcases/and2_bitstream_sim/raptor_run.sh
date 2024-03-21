@@ -10,9 +10,9 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
-bitstream_sim=true
+post_synth_sim=true 
+post_route_sim=true 
+bitstream_sim=false
 
 #raptor options
 device="GEMINI_COMPACT_10x8"
@@ -193,8 +193,8 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file testbench.sv ">>raptor_tcl.tcl 
-        echo "set_top_testbench tb_and2">>raptor_tcl.tcl 
+        echo "add_simulation_file sim/co_sim_tb/co_sim_$design.v">>raptor_tcl.tcl 
+        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     else
         echo ""
     fi
@@ -262,7 +262,7 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
-            echo "set tb_path \"../bitstream_testbench.v\"">>raptor_tcl.tcl
+            echo "set tb_path \"../sim/bitsteam_tb/bitstream_testbench.v\"">>raptor_tcl.tcl
             echo "set openfpga_tb_path \"$design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v\"">>raptor_tcl.tcl
             echo "set search_line \"// ----- Can be changed by the user for his/her need -------\"">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
@@ -301,7 +301,6 @@ parse_cga exit 1; }
             echo "} else {">>raptor_tcl.tcl
             echo "    file copy -force ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
             echo "}">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
             echo "# Bitstream Simulation">>raptor_tcl.tcl
             echo "clear_simulation_files">>raptor_tcl.tcl
