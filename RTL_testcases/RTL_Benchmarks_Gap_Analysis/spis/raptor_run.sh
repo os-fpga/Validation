@@ -218,8 +218,8 @@ parse_cga exit 1; }
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
-    [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
-    [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    [ -z "$synth_options" ] && echo "" || echo "#synth_options $synth_options">>raptor_tcl.tcl
+    [ -z "$strategy" ] && echo "" || echo "#synthesize $strategy">>raptor_tcl.tcl  
     if [ "$post_synth_sim" == true ]; then 
         echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
@@ -243,15 +243,15 @@ parse_cga exit 1; }
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
-    [ -z "$pin_loc_assign_method" ] && echo "" || echo "pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
-    [ -z "$pnr_options" ] && echo "" || echo "pnr_options $pnr_options">>raptor_tcl.tcl
-    [ -z "$pnr_netlist_lang" ] && echo "" || echo "pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
-    [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
-    [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
-    [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
-    echo "packing">>raptor_tcl.tcl  
-    echo "place">>raptor_tcl.tcl  
-    echo "route">>raptor_tcl.tcl  
+    [ -z "$pin_loc_assign_method" ] && echo "" || echo "#pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
+    [ -z "$pnr_options" ] && echo "" || echo "#pnr_options $pnr_options">>raptor_tcl.tcl
+    [ -z "$pnr_netlist_lang" ] && echo "" || echo "#pnr_netlist_lang $pnr_netlist_lang">>raptor_tcl.tcl
+    [ -z "$set_channel_width" ] && echo "" || echo "#set_channel_width $set_channel_width">>raptor_tcl.tcl 
+    [ -z "$architecture" ] && echo "" || echo "#architecture $architecture">>raptor_tcl.tcl 
+    [ -z "$set_device_size" ] && echo "" || echo "#set_device_size $set_device_size">>raptor_tcl.tcl 
+    echo "#packing">>raptor_tcl.tcl  
+    echo "#place">>raptor_tcl.tcl  
+    echo "#route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
             echo "# Open the input file in read mode">>raptor_tcl.tcl 
             echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" r]">>raptor_tcl.tcl 
@@ -273,8 +273,9 @@ parse_cga exit 1; }
         else
             echo ""
         fi
-    echo "sta">>raptor_tcl.tcl  
-    echo "power">>raptor_tcl.tcl  
+    echo "#sta">>raptor_tcl.tcl  
+    echo "#power">>raptor_tcl.tcl  
+    echo "routability_flow">>raptor_tcl.tcl 
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
             echo "clear_simulation_files">>raptor_tcl.tcl 
