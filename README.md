@@ -1,4 +1,4 @@
-# Compiler_Validation
+# Validation
 This repo contains RTL and their testbenches to validate RTL vs Netlist for compiler validation
 
 ## RTL Designs Netlist to Simulation Flow
