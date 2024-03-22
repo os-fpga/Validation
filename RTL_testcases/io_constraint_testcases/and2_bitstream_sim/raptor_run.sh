@@ -12,7 +12,7 @@ tool_name="iverilog"
 #simulation stages
 post_synth_sim=true 
 post_route_sim=true 
-bitstream_sim=false
+bitstream_sim=true
 
 #raptor options
 device="GEMINI_COMPACT_10x8"
