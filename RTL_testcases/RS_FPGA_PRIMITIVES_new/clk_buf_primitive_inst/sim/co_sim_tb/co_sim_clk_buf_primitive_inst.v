@@ -8,13 +8,15 @@ clk_buf_primitive_inst DUT (.*);
 
 integer mismatch=0;
 
+always #2.5 clock_input = ~clock_input;
+
 initial begin
   {clock_input} = 1'b0;
-  #5
   compare;
+  #5
   {clock_input} = 1'b1;
-  #5
   compare;
+  #5
   if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
