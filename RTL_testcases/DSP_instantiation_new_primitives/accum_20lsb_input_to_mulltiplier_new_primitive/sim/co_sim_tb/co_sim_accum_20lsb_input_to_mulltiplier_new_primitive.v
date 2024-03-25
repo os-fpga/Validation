@@ -10,9 +10,9 @@
 	integer mismatch=0;
 
 `ifdef PNR
+	accum_20lsb_input_to_mulltiplier_new_primitive_post_route golden(.*);
 `else
-
-accum_20lsb_input_to_mulltiplier_new_primitive golden(.*);
+	accum_20lsb_input_to_mulltiplier_new_primitive_post_synth golden(.*);
 `endif
 
 //accum_20lsb_input_to_mulltiplier_new_primitive_post_route netlist(.*, .z_out(z_out_netlist));

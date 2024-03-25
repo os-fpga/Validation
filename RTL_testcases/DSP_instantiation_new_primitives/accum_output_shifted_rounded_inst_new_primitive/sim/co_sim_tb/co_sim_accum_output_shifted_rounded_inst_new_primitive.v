@@ -9,9 +9,9 @@ module co_sim_accum_output_shifted_rounded_inst_new_primitive;
 
 	integer mismatch=0;
 `ifdef PNR
+	accum_output_shifted_rounded_inst_new_primitive_post_route golden(.*);
 `else
-
-accum_output_shifted_rounded_inst_new_primitive golden(.*);
+	accum_output_shifted_rounded_inst_new_primitive_post_synth golden(.*);
 `endif
 
 

@@ -11,7 +11,7 @@ module co_sim_add_output_of_four_multipliers#(
 
 	add_output_of_four_multipliers golden(.*);
     `ifdef PNR
-	add_output_of_four_multipliers_post_route netlist (.*, .P(P_netlist));
+	add_output_of_four_multipliers_post_route netlist (.*, .y(y_netlist));
     `else
     add_output_of_four_multipliers_post_synth netlist(.* ,. y(y_netlist));
     `endif

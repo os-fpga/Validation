@@ -8,9 +8,9 @@ module co_sim_registered_in_accum_out_registered_new_primitive;
 	integer mismatch=0;
 
 `ifdef PNR
+	registered_in_accum_out_registered_new_primitive_post_route golden(.*);
 `else
-
-registered_in_accum_out_registered_new_primitive golden(.*);
+	registered_in_accum_out_registered_new_primitive_post_synth golden(.*);
 `endif
 
 

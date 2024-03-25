@@ -8,9 +8,9 @@ module co_sim_subtract_mult_output_coeff2_from_shifted_a_new_primitive;
 
 	integer mismatch=0;
 `ifdef PNR
+	subtract_mult_output_coeff2_from_shifted_a_new_primitive_post_route golden(.*);
 `else
-
-subtract_mult_output_coeff2_from_shifted_a_new_primitive golden(.*);
+	subtract_mult_output_coeff2_from_shifted_a_new_primitive_post_synth golden(.*);
 `endif
 
 //clock initialization

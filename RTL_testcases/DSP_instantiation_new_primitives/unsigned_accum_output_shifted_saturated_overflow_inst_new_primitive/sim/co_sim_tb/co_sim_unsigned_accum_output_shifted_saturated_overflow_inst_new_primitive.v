@@ -10,9 +10,9 @@ module co_sim_unsigned_accum_output_shifted_saturated_overflow_inst_new_primitiv
 
 	integer mismatch=0;
 `ifdef PNR
+	unsigned_accum_output_shifted_saturated_overflow_inst_new_primitive_post_route golden(.*);
 `else
-
-unsigned_accum_output_shifted_saturated_overflow_inst_new_primitive golden(.*);
+	unsigned_accum_output_shifted_saturated_overflow_inst_new_primitive_post_synth golden(.*);
 `endif
 
 //clock initialization

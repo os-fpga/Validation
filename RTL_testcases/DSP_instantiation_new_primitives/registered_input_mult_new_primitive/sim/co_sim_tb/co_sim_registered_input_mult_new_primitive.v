@@ -8,9 +8,9 @@ module co_sim_registered_input_mult_new_primitive;
 	integer mismatch=0;
 
 `ifdef PNR
+	registered_input_mult_new_primitive_post_route golden(.*);
 `else
-
-registered_input_mult_new_primitive golden(.*);
+	registered_input_mult_new_primitive_post_synth golden(.*);
 `endif
 
 //clock initialization
