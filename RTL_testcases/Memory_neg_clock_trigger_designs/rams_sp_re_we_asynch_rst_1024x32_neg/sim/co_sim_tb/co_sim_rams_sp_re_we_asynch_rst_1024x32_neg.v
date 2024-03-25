@@ -18,11 +18,11 @@ module co_sim_rams_sp_re_we_asynch_rst_1024x32_neg;
 
 
     always #10 clk = ~clk;
-    initial begin
-        for(integer i = 0; i<1024; i=i+1) begin 
-            golden.RAM[i] ='b0;
-        end 
-    end
+    // initial begin
+    //     for(integer i = 0; i<1024; i=i+1) begin 
+    //         golden.RAM[i] ='b0;
+    //     end 
+    // end
     initial begin
     {clk,  we, re, addr ,di, cycle, i} = 0;
     rst = 1;

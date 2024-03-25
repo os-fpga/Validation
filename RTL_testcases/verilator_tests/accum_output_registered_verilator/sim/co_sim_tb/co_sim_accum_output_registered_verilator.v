@@ -6,10 +6,10 @@ module co_sim_accum_output_registered_verilator;
 	reg  [37:0] expected_out;
 
 	integer mismatch=0;
-
 `ifdef PNR
+	accum_output_registered_verilator_post_route Netlist(.*);
 `else
-   	accum_output_registered_verilator inst(.*);
+	accum_output_registered_verilator_post_synth Netlist(.*);
 `endif
 
 //clock initialization
@@ -65,13 +65,12 @@ end
 	
 
 task compare();
- 	
-  	if(z_out !== expected_out) begin
-    	$display("Data Mismatch. Golden RTL: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
+  	if ((z_out !== expected_out)) begin
+    	$display("Data Mismatch, Netlist: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
     	mismatch = mismatch+1;
  	end
   	else
-  		$display("Data Matched. Golden RTL: %0d, Expected output: %0d, Time: %0t", z_out, expected_out, $time);
+  		$display("Data Matched: Netlist: %0d,  Expected output: %0d, Time: %0t", z_out, expected_out, $time);
 endtask
 
 task display_stimulus();

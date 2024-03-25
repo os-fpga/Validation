@@ -6,9 +6,9 @@ module co_sim_signed_comb_mult_new_primitive;
 
 	integer mismatch=0;
 `ifdef PNR
+	signed_comb_mult_new_primitive_post_route golden(.*);
 `else
-
-signed_comb_mult_new_primitive golden(.*);
+	signed_comb_mult_new_primitive_post_synth golden(.*);
 `endif
 
 initial begin

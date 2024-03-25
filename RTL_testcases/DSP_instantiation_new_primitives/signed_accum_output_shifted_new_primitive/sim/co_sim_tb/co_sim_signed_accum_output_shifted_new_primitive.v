@@ -9,9 +9,9 @@ module co_sim_signed_accum_output_shifted_new_primitive;
 
 	integer mismatch=0;
 `ifdef PNR
+	signed_accum_output_shifted_new_primitive_post_route golden(.*);
 `else
-
-signed_accum_output_shifted_new_primitive golden(.*);
+	signed_accum_output_shifted_new_primitive_post_synth golden(.*);
 `endif
 
 //clock initialization

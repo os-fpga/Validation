@@ -7,9 +7,9 @@ module co_sim_mult_add_to_accumulator_new_primitive;
 
 	integer mismatch=0;
 `ifdef PNR
+	mult_add_to_accumulator_new_primitive_post_route golden(.*);
 `else
-
-mult_add_to_accumulator_new_primitive golden(.*);
+	mult_add_to_accumulator_new_primitive_post_synth golden(.*);
 `endif
 
 //clock initialization

@@ -8,9 +8,9 @@ module co_sim_add_shifted_a_to_mult_output_coeff3_output_registered_new_primitiv
 
 	integer mismatch=0;
 `ifdef PNR
+	add_shifted_a_to_mult_output_coeff3_output_registered_new_primitive_post_route golden(.*);
 `else
-
-add_shifted_a_to_mult_output_coeff3_output_registered_new_primitive golden(.*);
+	add_shifted_a_to_mult_output_coeff3_output_registered_new_primitive_post_synth golden(.*);
 `endif
 
 initial begin
