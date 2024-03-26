@@ -1,7 +1,7 @@
 module co_sim_ram_true_dp_dc_32768x4;
 
     reg clkA, clkB, weA, weB;
-    reg [15:0] addrA, addrB;
+    reg [14:0] addrA, addrB;
     reg [3:0] dinA, dinB;
     wire [3:0] doutA, doutB, doutA_netlist, doutB_netlist;
 

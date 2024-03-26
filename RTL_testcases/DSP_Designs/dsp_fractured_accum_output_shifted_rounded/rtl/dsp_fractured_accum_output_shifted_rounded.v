@@ -1,10 +1,10 @@
-module dsp_fractured_accum_output_shifted_rounded (clk, reset, subtract_i, load_acc_i, shift_right_i, round_i, A, A_fmode, B, B_fmode, P);
+module dsp_fractured_accum_output_shifted_rounded (clk, reset, subtract_i, load_acc_i, shift_right_i, round_i, A, B, P);
 
 	input clk, reset, subtract_i, load_acc_i;
 	input [5:0] shift_right_i;
 	input round_i;
-	input signed [9:0] A , A_fmode;
-	input signed [8:0] B , B_fmode;
+	input signed [9:0] A ;
+	input signed [8:0] B ;
 	output reg signed [63:0] P;
 	reg signed [31:0] P_f1, P_f2;
 	reg signed [31:0] out_f1, out_f2, out_shift_f1, out_shift_f2;
