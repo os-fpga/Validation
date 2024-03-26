@@ -38,7 +38,7 @@ module instantiate_adder_in_mult_and_shifted_input_design (clk, areset, A, B, ac
     assign extend_A_input =  { {44{a_reg[19]}}, a_reg[19:0] };
     assign acc_fir_left_shift_o = extend_A_input << acc_fir_reg;
 
-    adder add_unit(.A(extended_mult_o),.B(acc_fir_left_shift_o),.out(adder_output));
+    adder2 add_unit(.A(extended_mult_o),.B(acc_fir_left_shift_o),.out(adder_output));
 
     always @ (posedge clk or posedge areset) begin
         if (areset) begin
