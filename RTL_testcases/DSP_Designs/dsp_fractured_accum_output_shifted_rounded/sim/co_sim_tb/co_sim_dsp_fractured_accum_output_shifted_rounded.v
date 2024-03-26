@@ -1,6 +1,6 @@
 module co_sim_dsp_fractured_accum_output_shifted_rounded;
-	reg signed [9:0] A, A_fmode;
-	reg signed [8:0] B, B_fmode;
+	reg signed [9:0] A;
+	reg signed [8:0] B;
 	reg clk, reset, subtract_i, load_acc_i ;
 	reg [5:0] shift_right_i;
 	reg round_i;
@@ -23,7 +23,7 @@ initial begin
 end
 initial begin
 	reset = 0;
-	{A, A_fmode, B, B_fmode} = 'd0;
+	{A, B} = 'd0;
 	subtract_i = 0;
 	shift_right_i = 0;
 	round_i = 0;
@@ -43,8 +43,6 @@ initial begin
 	$display ("\n\n***Directed Functionality Test is applied for P = P + A*B***\n\n");
 	A = 5;
 	B = 2;
-	A_fmode = 3;
-	B_fmode = 7;
 	display_stimulus();
 	@(negedge clk);
 	compare();
@@ -55,8 +53,6 @@ initial begin
 	repeat (1000) begin
 		A = $random( );
 		B = $random( );
-		A_fmode = $random( );
-		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -84,8 +80,6 @@ initial begin
 	repeat (1000) begin
 		A = $random( );
 		B = $random( );
-		A_fmode = $random( );
-		B_fmode = $random( );
 		shift_right_i = $random( );
 		display_stimulus();
 		@(negedge clk);
@@ -101,8 +95,6 @@ initial begin
 	repeat (1000) begin
 		A = $random( );
 		B = $random( );
-		A_fmode = $random( );
-		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
@@ -115,8 +107,6 @@ initial begin
 	repeat (1000) begin
 		A = $random( );
 		B = $random( );
-		A_fmode = $random( );
-		B_fmode = $random( );
 		display_stimulus();
 		@(negedge clk);
 		compare();
