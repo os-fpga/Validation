@@ -36,7 +36,7 @@ module shift_reg #(parameter WIDTH=32) (
             data_out = 0;
         else begin
             if (en)
-                data_out <= {data_out[WIDTH-1:0],1};
+                data_out <= {data_out[WIDTH-2:0],1'b1};
             else
                 data_out <= data_in;
         end
