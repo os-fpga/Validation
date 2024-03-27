@@ -174,7 +174,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdefault_prescale=1 -Pfixed_prescale=0 -Pcmd_fifo=2 -Pcmd_addr_width=5 -Pwrite_fifo=1 -Pwrite_addr_fifo_width=5 -Pread_fifo=2 -Pread_addr_width=5 -out_file $IP_PATH/$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdefault_prescale=1 -Pfixed_prescale=0 -Pcmd_fifo=2 -Pcmd_addr_width=5 -Pwrite_fifo=1 -Pwrite_addr_fifo_width=5 -Pread_fifo=2 -Pread_addr_fifo_width=5 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
