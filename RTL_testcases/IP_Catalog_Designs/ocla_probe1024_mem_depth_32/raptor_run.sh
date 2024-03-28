@@ -4,9 +4,9 @@ main_path=$PWD
 start=`date +%s`
  
  
-#select tool (verilator, vcs, ghdl)
-design="axil_ocla_md512_prbs128"
-    ip_name="axil_ocla"
+design="ocla_probe1024_mem_depth_32"
+ip_name="" #design_level
+#select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
 
 #simulation stages
@@ -27,7 +27,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options="-new_tdp36k "
+synth_options=""
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -50,7 +50,7 @@ synth_options="-new_tdp36k "
                         #       late                   : Perform late extraction
                         #       -cec                     : Dump verilog after key phases and use internal equivalence checking (ABC based)
 
-pin_loc_assign_method="free"  #pin_loc_assign_method <Method>: Method choices:
+pin_loc_assign_method=""  #pin_loc_assign_method <Method>: Method choices:
                           #      in_define_order(Default), port order pin assignment
                           #      random , random pin assignment
                           #      free , no automatic pin assignment
@@ -153,7 +153,7 @@ function compile () {
     [ -z "$ip_name" ] && echo $temp || echo ""
     #finding the design
     [ -z "$ip_name" ] && echo "Current Design is $design" || echo ""
-    [ -z "$ip_name" ] && design_path=`find $temp -type f -iname "$design.sv"` || echo ""
+    [ -z "$ip_name" ] && design_path=`find $temp -type f -iname "$design.v"` || echo ""
     if [ -z "$design_path" ]
     then
         [ -z "$ip_name" ] && echo "No such design $design" || echo ""
@@ -166,7 +166,6 @@ parse_cga exit 1; }
 #directory path where all the rtl design files are placed    
     [ -z "$ip_name" ] && directory_path=$(dirname $design_path) || echo ""
 
-    IP_PATH="./$design/run_1/IPs"
 #creating a tcl file to run raptor flow 
     cd ..
     
@@ -174,17 +173,17 @@ parse_cga exit 1; }
     echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pmem_depth=512 -Pno_of_probes=128 -out_file $IP_PATH/$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "configure_ip $ip_name"_v1_0" -mod_name=$design -Pdata_width=32 -Paddr_width=16 -Pid_width=32 -Pa_pip_out=0 -Pb_pip_out=0 -Pa_interleave=0 -Pb_interleave=0 -out_file ./$design.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
-    [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_include_path ./rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_library_ext .v .sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_library_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "" || echo "add_design_file $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/$design\_v1_0.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_library_path rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo ""  
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.sv">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
@@ -297,7 +296,7 @@ parse_cga exit 1; }
             exit
         fi 
     fi 
-    # [ -f ../newsum.md5 ] && cp ../newsum.md5 ../cksums.md5
+    [ -f ../newsum.md5 ] && cp ../newsum.md5 ../cksums.md5
   
 }
 
