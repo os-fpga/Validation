@@ -8,7 +8,6 @@ def create_folders_and_file():
     design = sys.argv[1]
     design_path = sys.argv[2]
 
-
     # Construct the path to port_info.json using *
     port_info_path = os.path.join(
         design_path,
@@ -128,7 +127,7 @@ def create_folders_and_file():
                 if "]" in info["width"]:
                     info["width"] = info["width"].replace("]", ":0]")
                 if info["direction"] == "input":
-                    file.write("    reg " + info["width"] + " " + port)
+                    file.write("    reg \t\t" + info["width"] + " \t\t" + port)
                 elif info["direction"] == "output":
                     p_name_inst     = port + "_netlist"
                     p_name_with_netlist = port + "\t,\t" + p_name_inst
@@ -136,10 +135,10 @@ def create_folders_and_file():
                     p_name_netlist.append(p_name_inst)
                     wire_instances.append(".{}({})".format(port, p_name_inst))
                     out_instances.append("{} !== {}".format(port, p_name_inst))
-                    file.write("    wire " + info["width"] + " " + p_name_with_netlist)
+                    file.write("    wire \t\t" + info["width"] + " \t\t" + p_name_with_netlist)
             else:
                 if info["direction"] == "input":
-                    file.write("    reg " + port)
+                    file.write("    reg \t\t" + port)
                 elif info["direction"] == "output":
                     p_name_inst     = port + "_netlist"
                     p_name_with_netlist = port + "\t,\t" + p_name_inst
@@ -147,9 +146,9 @@ def create_folders_and_file():
                     p_name_netlist.append(p_name_inst)
                     wire_instances.append(".{}({})".format(port, p_name_inst))
                     out_instances.append("{} !== {}".format(port, p_name_inst))
-                    file.write("    wire " + p_name_with_netlist)
+                    file.write("    wire \t\t" + p_name_with_netlist)
         
-        file.write(";\n\tinteger\tmismatch\t=\t0;\n\n")
+        file.write(";\n\tinteger\t\tmismatch\t=\t0;\n\n")
         file.write(top_module + "\t" + rtl_inst + "\n\n`ifdef PNR\n`else\n")
         file.write("\t" + top_module + '_post_synth synth_net (.*, {} );\n'.format(', '.join(wire_instances)) + "`endif\n\n" )
         
@@ -202,8 +201,8 @@ def create_folders_and_file():
                 print("No Reset Signal Found")
                 # initialize values to zero
                 for clk in clk_port:
+                    file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
                     if len(input_ports) > 1:
-                        file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
                         input_port_str = ', '.join(input_ports)
                         input_port_str += " } <= 'd0;"
                         print(input_port_str, file=file) 
@@ -239,20 +238,21 @@ def create_folders_and_file():
             else:
                 print("Found Reset Signal:")
                 # Check sync_reset value and write stimulus generation accordingly
+                file.write ("//Reset Stimulus generation\ninitial begin\n")
                 for clk in clk_port:
                     for rst in reset_port:
                         if sync_reset_value == "active_high":
-                            file.write("//Reset Stimulus generation\ninitial begin\n\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n\t{' )
+                            file.write("\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n\t{' )
                             input_port_str = ', '.join(input_ports)
                             input_port_str += " } <= 'd0;"
                             print(input_port_str, file=file)                
-                            file.write('\t' + rst + ' <= 0;\n')
+                            file.write('\t' + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n')
                         else:
-                            file.write("//Reset Stimulus generation\ninitial begin\n\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t{' )
+                            file.write("\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t{' )
                             input_port_str = ', '.join(input_ports)
                             input_port_str += " } <= 'd0;"
                             print(input_port_str, file=file)                
-                            file.write('\t' + rst + ' <= 1;\n')
+                            file.write('\t' + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n')
                 #
                 file.write('\t$display ("***Reset Test is applied***");\n\t@(negedge ' + 
                               clk + ');\n\t@(negedge ' + clk + ');\n\tcompare();\n\t$display ("***Reset Test is ended***");\n')
@@ -260,7 +260,7 @@ def create_folders_and_file():
                 file.write('\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
                 random_stimulus_lines = []
                 for port in input_ports:
-                    random_stimulus_lines.append(f'{port} <= $random();')    
+                    random_stimulus_lines.append(f'{port} \t\t <= $random();')    
                 for rand_line in random_stimulus_lines:
                     file.write('\t\t' + rand_line + '\n')
                 file.write('\t\tcompare();\nend\n\n')
@@ -281,10 +281,8 @@ def create_folders_and_file():
                 for line in stimulus_lines:
                     file.write('\t' + line + '\n')
                 file.write('\tcompare();\n\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-                file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\trepeat(50) @(posedge ' 
-                           + clk + ');\n\t$finish;\nend\n\n')
+                file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\trepeat(50) @(posedge ' + clk + ');\n\t$finish;\nend\n\n')
                       
-            
         # compare task
         dec = len(out_instances)
         dec_string = ["%0d"] * dec
@@ -307,27 +305,5 @@ def create_folders_and_file():
         
         file.write('initial begin\n\t$dumpfile("tb.vcd");\n\t$dumpvars;\nend\n\nendmodule\n')
 
-
-            
-    #         if reset_port_name is not None:
-    #             print("Found Reset Signal:", reset_port_name)
-    #             index_reset = input_ports.index(reset_port_name)
-    #             del bit_widths[index_reset]
-    #             # Check sync_reset value and write stimulus generation accordingly
-    #             if sync_reset_value == "active_high":
-    #                 file.write("// Reset High Stimulus generation\ninitial begin\n\t")
-    #             else:
-    #                 file.write("// Reset Low Stimulus generation\ninitial begin\n\t")
-                
-    #             # Remove reset port name from port_names
-    #             input_ports.remove(reset_port_name)
-                
-    #         else:
-
-
-
-
 if __name__ == "__main__":
     create_folders_and_file()
-
-
