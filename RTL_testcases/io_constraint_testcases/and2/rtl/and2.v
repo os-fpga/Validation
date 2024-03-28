@@ -16,20 +16,24 @@ generate
   end
 endgenerate
 
-always@(*)begin
-  for(j=0;j<Total_Instances;j=j+1)begin
-    a_sub_in[j]='d0;
-    b_sub_in[j]='d0;
-  end
-  a_sub_in[id]=a;
-  b_sub_in[id]=b;
+  always @* begin
+    for (j = 0; j < 16; j = j + 1) begin
+      if (j == id) begin
+        a_sub_in[j] = a;
+        b_sub_in[j] = b;
+      end else begin
+        a_sub_in[j] = 'd0;
+        b_sub_in[j] = 'd0;
+      end
+    end
   end
 always@(posedge clock0)begin
 for(j=0;j<Total_Instances;j=j+1)begin
   c_sub_out_reg[j]<=c_sub_out[j];
 end
 end
-assign c = c_sub_out_reg[id];
+
+assign c = (id >= 0 && id < 10) ? c_sub_out_reg[id] : 0;
 endmodule
 
 module and2_submodule(
