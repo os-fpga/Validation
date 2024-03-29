@@ -28,4 +28,4 @@ set_output_delay 0 -clock clk_usb_i [get_ports {*}]
 
 set_clock_groups -exclusive -group {clk_i} -group {clk_aon_i} -group {clk_io_div4_i} -group {clk_main_i} -group {clk_io_i} -group {clk_io_div2_i} -group {clk_usb_i}
 
-set_clock_uncertainty 0.698
+set_clock_uncertainty 0.298

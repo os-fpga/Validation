@@ -16,4 +16,4 @@ set_output_delay 0 -clock clk4 [get_ports {*}]
 
 set_clock_groups -exclusive -group {clk1} -group {clk2} -group {clk3} -group {clk4}
 
-set_clock_uncertainty 0.698
+set_clock_uncertainty 0.298
