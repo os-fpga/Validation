@@ -3,4 +3,4 @@ set_input_delay 0.1 -clock PCLK [get_ports {*}]
 set_output_delay 0.1 -clock PCLK [get_ports {*}]
 
 
-set_clock_uncertainty 0.698
+set_clock_uncertainty 0.298
