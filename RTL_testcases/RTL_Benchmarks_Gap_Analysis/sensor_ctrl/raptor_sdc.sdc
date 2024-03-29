@@ -8,4 +8,4 @@ set_output_delay 0 -clock clk_aon_i [get_ports {*}]
 
 set_clock_groups -exclusive -group {clk_i} -group {clk_aon_i}
 
-set_clock_uncertainty 0.698
+set_clock_uncertainty 0.677
