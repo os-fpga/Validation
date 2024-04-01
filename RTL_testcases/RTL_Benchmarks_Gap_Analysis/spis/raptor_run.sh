@@ -241,7 +241,7 @@ parse_cga exit 1; }
         echo ""
     fi
     if [ "$synth_stage" == "1" ]; then 
-		echo "" 
+		echo "synthesize $strategy">>raptor_tcl.tcl 
 	else
     [ -z "$pin_loc_assign_method" ] && echo "" || echo "#pin_loc_assign_method $pin_loc_assign_method">>raptor_tcl.tcl 
     [ -z "$pnr_options" ] && echo "" || echo "#pnr_options $pnr_options">>raptor_tcl.tcl
