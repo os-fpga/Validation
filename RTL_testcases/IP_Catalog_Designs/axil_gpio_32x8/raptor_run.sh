@@ -194,8 +194,6 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     else
         echo ""
     fi
@@ -307,6 +305,5 @@ echo -e "\n\n#########Raptor Performance Data#########" >> results.log
 cat raptor_perf.log >> results.log
 echo -e "#############################################\n" >> results.log
 
-[ -f $main_path/sim/co_sim_tb/co_sim_$design\_temp.v ] && mv $main_path/sim/co_sim_tb/co_sim_$design\_temp.v $main_path/sim/co_sim_tb/co_sim_$design.v || echo ""
 end_time
 parse_cga
