@@ -85,7 +85,7 @@ parse_cga exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
 primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
-sim_lib=`find $library -wholename "*/rapidsilicon/genesis3/simlib.v"`
+
 
 #removing and creating raptor_testcase_files
 #rm -fR $PWD/results_dir
