@@ -195,10 +195,7 @@ IP_PATH="./$design/run_1/IPs"
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
-    else
+    if [ "$post_synth_sim" == false ] && [ "$post_route_sim" == false ] && [ "$bitstream_sim" == false ]; then
         echo ""
     fi
 
@@ -222,20 +219,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
-            echo "# Open the input file in read mode">>raptor_tcl.tcl 
-            echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" r]">>raptor_tcl.tcl 
-            echo "# Read the file content">>raptor_tcl.tcl 
-            echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
-            echo "# Close the input file after reading">>raptor_tcl.tcl 
-            echo "close \$input_file">>raptor_tcl.tcl 
-            echo "set modified_content [string map {\"module $design(\" \"module ${design}_post_route (\"} \$file_content]">>raptor_tcl.tcl 
-            echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
-            echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" w]">>raptor_tcl.tcl
-            echo "# Write the modified content back to the file">>raptor_tcl.tcl 
-            echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
-            echo "# Close the file">>raptor_tcl.tcl 
-            echo "close \$output_file">>raptor_tcl.tcl 
-            echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+            
             # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
@@ -304,6 +288,5 @@ echo -e "\n\n#########Raptor Performance Data#########" >> results.log
 cat raptor_perf.log >> results.log
 echo -e "#############################################\n" >> results.log
 
-[ -f $main_path/sim/co_sim_tb/co_sim_$design\_temp.v ] && mv $main_path/sim/co_sim_tb/co_sim_$design\_temp.v $main_path/sim/co_sim_tb/co_sim_$design.v || echo ""
 end_time
 parse_cga
