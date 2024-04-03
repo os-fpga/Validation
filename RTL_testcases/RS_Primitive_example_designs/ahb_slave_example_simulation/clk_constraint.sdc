@@ -1,3 +1,3 @@
-create_clock -period 2.5 clk
-set_input_delay 1 -clock clk [get_ports {*}] 
-set_output_delay 1 -clock clk [get_ports {*}] 
+create_clock -period 2.5 s_ahb_aclk
+set_input_delay 0.1 -clock s_ahb_aclk [get_ports {*}] 
+set_output_delay 0.1 -clock s_ahb_aclk [get_ports {*}] 

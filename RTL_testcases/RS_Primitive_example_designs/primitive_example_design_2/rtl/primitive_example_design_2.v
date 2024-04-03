@@ -56,7 +56,7 @@ module primitive_example_design_2(
 
     assign mux2_out = i_buf_mux2_sel ? ac_out : acc_out;
     
-    CARRY_CHAIN carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(out),.O(ac_out),.COUT(acc_out));
+    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(out),.O(ac_out),.COUT(acc_out));
 
     infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
 
