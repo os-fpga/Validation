@@ -2,7 +2,7 @@ module co_sim_dsp_fractured_accum_output_shifted_rounded;
 	reg signed [9:0] A;
 	reg signed [8:0] B;
 	reg clk, reset, subtract_i, load_acc_i ;
-	reg [5:0] shift_right_i;
+	reg [4:0] shift_right_i;
 	reg round_i;
 	wire signed [63:0] P;
 	wire signed [63:0] P_netlist;
