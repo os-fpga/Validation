@@ -3,7 +3,6 @@ import random
 import json
 import sys
 
-
 def create_folders_and_file():
     design = sys.argv[1]
     design_path = sys.argv[2]
@@ -73,6 +72,9 @@ def create_folders_and_file():
         elif "sync_reset" in port:
             reset_port.append(port["name"])
             sync_reset_value = port["sync_reset"]
+        elif "async_reset" in port:
+            reset_port.append(port["name"])
+            sync_reset_value = port["async_reset"]
         else:
             port_name = port["name"]
             port_direction = port["direction"]
@@ -241,19 +243,26 @@ def create_folders_and_file():
                 file.write ("//Reset Stimulus generation\ninitial begin\n")
                 for clk in clk_port:
                     for rst in reset_port:
-                        if sync_reset_value == "active_high":
-                            file.write("\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n\t{' )
-                            input_port_str = ', '.join(input_ports)
-                            input_port_str += " } <= 'd0;"
-                            print(input_port_str, file=file)                
-                            file.write('\t' + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n')
+                        if not input_ports:
+                            if sync_reset_value == "active_high":
+                                file.write("\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n' )               
+                                file.write('\t' + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n')
+                            else:
+                                file.write("\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t' )          
+                                file.write('\t' + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n')                        
                         else:
-                            file.write("\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t{' )
-                            input_port_str = ', '.join(input_ports)
-                            input_port_str += " } <= 'd0;"
-                            print(input_port_str, file=file)                
-                            file.write('\t' + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n')
-                #
+                            if sync_reset_value == "active_high":
+                                file.write("\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n\t{' )
+                                input_port_str = ', '.join(input_ports)
+                                input_port_str += " } <= 'd0;"
+                                print(input_port_str, file=file)                
+                                file.write('\t' + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n')
+                            else:
+                                file.write("\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t{' )
+                                input_port_str = ', '.join(input_ports)
+                                input_port_str += " } <= 'd0;"
+                                print(input_port_str, file=file)                
+                                file.write('\t' + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n')
                 file.write('\t$display ("***Reset Test is applied***");\n\t@(negedge ' + 
                               clk + ');\n\t@(negedge ' + clk + ');\n\tcompare();\n\t$display ("***Reset Test is ended***");\n')
                 # Generate random stimulus values for each input port
