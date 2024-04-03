@@ -10,7 +10,7 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=false 
 bitstream_sim=false
 
@@ -98,7 +98,7 @@ echo "Domain of the design: Unit Level Test">>results.log
 # Check if parameters were passed as command line arguments
 reg_id="23"
 timeout="90"
-synth_stage=""
+synth_stage="1"
 mute_flag=""
 if [[ $# -eq 6 ]]; then
   reg_id=$1
@@ -184,39 +184,39 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/sync_data.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/sync_event.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/ad_mem_asym.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/up_axi.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/2d_transfer.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/ad_mem.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/address_generator.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_burst_memory.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_regmap.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_regmap_request.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_reset_manager.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_resize_dest.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_resize_src.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_response_manager.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_transfer.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/axi_register_slice.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/data_mover.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/dest_axi_mm.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/dest_axi_stream.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/dest_fifo_inf.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/request_arb.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/request_generator.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/resp.vh">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/response_generator.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/response_handler.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/splitter.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/src_axi_mm.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/src_axi_stream.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/src_fifo_inf.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/sync_bits.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/sync_gray.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/util_axis_fifo.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file rtl/util_axis_fifo_address_generator.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/sync_data.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/sync_event.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/ad_mem_asym.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/up_axi.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/2d_transfer.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/ad_mem.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/address_generator.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_burst_memory.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_regmap.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_regmap_request.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_reset_manager.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_resize_dest.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_resize_src.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_response_manager.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_dmac_transfer.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/axi_register_slice.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/data_mover.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/dest_axi_mm.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/dest_axi_stream.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/dest_fifo_inf.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/request_arb.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/request_generator.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/resp.vh">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/response_generator.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/response_handler.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/splitter.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/src_axi_mm.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/src_axi_stream.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/src_fifo_inf.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/sync_bits.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/sync_gray.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/util_axis_fifo.v">>raptor_tcl.tcl || echo "" 
+    # [ -z "$ip_name" ] && echo "add_design_file rtl/util_axis_fifo_address_generator.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
@@ -225,12 +225,6 @@ parse_cga exit 1; }
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
@@ -238,6 +232,13 @@ parse_cga exit 1; }
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    echo "exec python3 $main_path/../../../scripts/tb_generator.py $design $main_path">>raptor_tcl.tcl
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
     if [ "$post_synth_sim" == true ]; then 
         echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
