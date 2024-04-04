@@ -1,20 +1,36 @@
 module o_buft_primitive_inst (
-  input I_O_BUFT, // Data input
-  input T_O_BUFT, // Tri-state output
-  output O_O_BUFT // Data output (connect to top-level port)
+  input clk,
+  input rst,
+  input data1,
+  input data2,
+  output O_O_BUFT
 );
 
-  wire I;
-  wire T;
   wire O;
+  reg dff1;
+  reg dff2;
 
   O_BUFT O_BUFT_primitive (
-    .I(I_O_BUFT), // Connect to your input signal
-    .T(T_O_BUFT), // Connect to your tri-state signal
-    .O(O)         // Connect to your output signal
+    .I(dff1), 
+    .T(dff2),
+    .O(O)
   );
 
-  // Connect your output signal to the instance's output
   assign O_O_BUFT = O;
 
+  always @(negedge clk or posedge rst) begin
+    if (rst) begin
+      dff1 <= 1'b0;
+    end else begin
+      dff1 <= data1;
+    end
+  end
+
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
+      dff2 <= 1'b0;
+    end else begin
+      dff2 <= data2;
+    end
+  end
 endmodule

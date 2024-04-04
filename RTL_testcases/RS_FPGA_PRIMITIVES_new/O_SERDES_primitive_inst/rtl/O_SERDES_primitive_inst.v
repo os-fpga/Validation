@@ -1,31 +1,43 @@
 
-module O_SERDES_primitive_inst(
-  input [3:0] D, // D input bus
+module O_SERDES_primitive_inst #(
+  parameter DATA_RATE = "SDR", // Single or double data rate (SDR/DDR)
+  parameter WIDTH = 4 // Width of input data to serializer (3-10)(
+)(
+  input reset,
+  input [WIDTH-1:0] in, // D input bus
   input RST, // Active-low, asynchronous reset
   input LOAD_WORD, // Load word input
-  output OE, // Output enable output (Connect to T input of O_BUFT)
-  input CLK_EN, // Clock enable input
-  input CLK_IN, // Clock input
-  output CLK_OUT, // Clock output
+  input CLK_IN, // Fabric clock input
+  input OE_IN, // Output tri-state enable input
+  output OE_OUT, // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
   output Q, // Data output (Connect to output port, buffer or O_DELAY)
   input CHANNEL_BOND_SYNC_IN, // Channel bond sync input
-  output CHANNEL_BOND_SYNC_OUT, // channel bond sync output
+  output CHANNEL_BOND_SYNC_OUT, // Channel bond sync output
   input PLL_LOCK, // PLL lock input
   input PLL_CLK // PLL clock input
 );
 
+reg [WIDTH-1:0] dff;
+
 O_SERDES inst (
-  D, // D input bus
-  RST, // Active-low, asynchronous reset
-  LOAD_WORD, // Load word input
-  OE, // Output enable output (Connect to T input of O_BUFT)
-  CLK_EN, // Clock enable input
-  CLK_IN, // Clock input
-  CLK_OUT, // Clock output
-  Q, // Data output (Connect to output port, buffer or O_DELAY)
-  CHANNEL_BOND_SYNC_IN, // Channel bond sync input
-  CHANNEL_BOND_SYNC_OUT, // channel bond sync output
-  PLL_LOCK, // PLL lock input
-  PLL_CLK 
+  .D(dff),
+  .RST(RST),
+  .LOAD_WORD(LOAD_WORD),
+  .CLK_IN(CLK_IN),
+  .OE_IN(OE_IN),
+  .OE_OUT(OE_OUT),
+  .Q(Q),
+  .CHANNEL_BOND_SYNC_IN(CHANNEL_BOND_SYNC_IN),
+  .CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT),
+  .PLL_LOCK(PLL_LOCK),
+  .PLL_CLK(PLL_CLK) 
 );
+
+always @(negedge CLK_IN) begin
+  if (reset) begin
+    dff <= 0;
+  end
+    dff <= in;
+end
+
 endmodule

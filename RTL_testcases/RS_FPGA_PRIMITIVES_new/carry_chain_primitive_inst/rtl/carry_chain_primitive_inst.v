@@ -1,30 +1,47 @@
 module carry_chain_primitive_inst(
-  input P, G, CIN,
-  output O, COUT);
-
-  // Instantiate the CARRY_CHAIN module
-  CARRY_CHAIN carry_chain_inst (
-    .P(P),
-    .G(G),
-    .CIN(CIN),
-    .O(O),
-    .COUT(COUT)
+  input clk,rst,
+  input data_cin,
+  input P, G,
+  output data_cout,
+  output reg [7:0] out
   );
 
-  // You can connect signals to the inputs (P, G, CIN) and monitor the outputs (SUMOUT, COUT) here
-  // For example:
-  // assign P = 1'b0;
-  // assign G = 1'b1;
-  // assign CIN = 1'b0;
+  reg dff1;
+  wire dff2;
+  wire o;
+  reg [7:0] register;
 
+  CARRY carry_inst (
+    .P(P),
+    .G(G),
+    .CIN(dff1),
+    .O(o),
+    .COUT(dff2)
+  );
+
+  always @(negedge clk or negedge rst) begin
+    if (!rst) begin
+      dff1 <= 1'b0;
+    end else begin
+      dff1 <= data_cin;
+    end
+  end
+
+  always @(negedge clk or negedge rst) begin
+    if (!rst) begin
+      data_cout <= 1'b0;
+    end else begin
+      data_cout <= dff2;
+    end
+  end
+
+  always @(posedge clk or negedge rst) begin
+      if (!rst) begin
+          register <= 8'b00000000;
+      end else begin
+          register <= {register[6:0], o};
+      end
+  end
+
+  assign out = register;
 endmodule
-// module CARRY_CHAIN (
-//   input P, // Partial data input
-//   input G, // Partial data input
-//   input CIN, // Carry in
-//   output O, // Data Output
-//   output COUT // Carry out
-// );
-
-//   assign {COUT, O} = {P ? CIN : G, P ^ CIN};
-// endmodule

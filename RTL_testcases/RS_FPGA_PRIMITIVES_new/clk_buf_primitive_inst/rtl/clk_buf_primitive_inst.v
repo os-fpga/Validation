@@ -8,7 +8,7 @@ wire wire_out_clk;
 
 
 always @(posedge clock_input) begin
-  assign wire1 =  clock_input;
+  wire1 <=  clock_input;
 end
 
   // Instantiate the CLK_BUF module

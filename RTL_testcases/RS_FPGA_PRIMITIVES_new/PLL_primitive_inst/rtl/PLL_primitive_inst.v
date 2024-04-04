@@ -9,6 +9,8 @@ module PLL_primitive_inst (
   output reg LOCK = 1'b0 // PLL lock signal
 );
 
+wire pll_lock;
+
 PLL inst (
   .PLL_EN(PLL_EN),
   .CLK_IN(CLK_IN),
@@ -17,7 +19,15 @@ PLL inst (
   .CLK_OUT_DIV3(CLK_OUT_DIV3),
   .CLK_OUT_DIV4(CLK_OUT_DIV4),
   .SERDES_FAST_CLK(SERDES_FAST_CLK),
-  .LOCK(LOCK)
+  .LOCK(pll_lock)
 );
+
+
+always @(negedge CLK_IN) begin
+  if (reset) begin
+    LOCK <= 0;
+  end
+    LOCK <= pll_lock;
+end
 
 endmodule
