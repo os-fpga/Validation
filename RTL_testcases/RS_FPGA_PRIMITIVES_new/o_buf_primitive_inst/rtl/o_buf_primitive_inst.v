@@ -1,15 +1,22 @@
 module o_buf_primitive_inst (
-  input data_input,     // Data input
-  output data_output    // Data output (connect to top-level port)
+  input data_in,
+  input clk,
+  input rst,
+  output data_output
 );
 
-  O_BUF #(
-    // .IOSTANDARD("DEFAULT"),     // IO Standard
-    // .DRIVE_STRENGTH(2),         // Drive strength in mA for LVCMOS standards
-    // .SLEW_RATE("SLOW")          // Transition rate for LVCMOS standards
-  ) o_buf_inst (
-    .I(data_input),
+  reg dff_out;
+
+  O_BUF o_buf_inst (
+    .I(dff_out),
     .O(data_output)
   );
+
+  always @(negedge clk or posedge rst) begin
+    if (rst) begin
+      dff_out <= 1'b0; end 
+    else begin
+      dff_out <= data_in; end
+  end
 
 endmodule

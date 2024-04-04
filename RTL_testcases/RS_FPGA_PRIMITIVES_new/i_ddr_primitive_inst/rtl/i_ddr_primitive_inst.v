@@ -1,19 +1,27 @@
 module i_ddr_primitive_inst (
-  input data_input,       // Data input (connect to your input signal)
-  input reset,            // Active-low asynchronous reset
-  input enable,           // Active-high enable
-  input clock,            // Clock input
-  output reg [1:0] output_data // Data output
+  input data_input,
+  input reset,
+  input enable,
+  input clock,
+  output reg [1:0] output_data
 );
 
-  // Instantiate the I_DDR module
+  wire out;
+
   I_DDR i_ddr_inst (
     .D(data_input),
     .R(reset),
     .E(enable),
     .C(clock),
-    .Q(output_data)
+    .Q(out)
   );
+
+  always @(*) begin
+    if (enable) begin
+      output_data <= out;   end 
+    else begin
+      output_data <= output_data;   end
+  end
 
 
 endmodule

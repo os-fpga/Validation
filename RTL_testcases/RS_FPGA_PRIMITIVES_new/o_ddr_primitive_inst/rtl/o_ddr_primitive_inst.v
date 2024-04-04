@@ -1,19 +1,26 @@
 module o_ddr_primitive_inst (
-  input [1:0] data_input,       // Data input (connect to your input signal)
-  input reset,            // Active-low asynchronous reset
-  input enable,           // Active-high enable
-  input clock,            // Clock input
-  output reg output_data // Data output
+  input data_input,
+  input reset,
+  input enable,
+  input clk,
+  output reg output_data
 );
 
-  // Instantiate the I_DDR module
+  reg out;
+
   O_DDR o_ddr_inst (
-    .D(data_input),
+    .D(out),
     .R(reset),
     .E(enable),
-    .C(clock),
+    .C(clk),
     .Q(output_data)
   );
 
+  always @(posedge clk) begin
+    if (rst) begin
+      out <= 1'b0;   end 
+    else begin
+      out <= data_input;   end
+  end
 
 endmodule
