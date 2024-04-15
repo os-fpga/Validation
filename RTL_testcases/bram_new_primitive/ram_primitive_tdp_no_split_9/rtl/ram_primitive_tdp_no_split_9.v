@@ -16,7 +16,7 @@ TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .WEN_A(weA), // Write-enable port A
   .WEN_B(weB), // Write-enable port B
   .REN_A(reA), // Read-enable port A
-  .REN_B(reB)), // Read-enable port B
+  .REN_B(reB), // Read-enable port B
   .CLK_A(clock0), // Clock port A
   .CLK_B(clock1), // Clock port B
   .BE_A(4'b1111), // Byte-write enable port A

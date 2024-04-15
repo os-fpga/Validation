@@ -6,6 +6,8 @@ module ram_primitive_tdp_no_split_1 (
   input dinA, dinB, 
   output doutA, doutB);
 
+wire temp1, temp2;
+
 TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .INIT_PARITY({2048{1'b0}}), // Initial Contents of memory
   .WRITE_WIDTH_A(1), // Write data width on port A (1-36)
@@ -16,7 +18,7 @@ TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .WEN_A(weA), // Write-enable port A
   .WEN_B(weB), // Write-enable port B
   .REN_A(reA), // Read-enable port A
-  .REN_B(reB)), // Read-enable port B
+  .REN_B(reB), // Read-enable port B
   .CLK_A(clock0), // Clock port A
   .CLK_B(clock1), // Clock port B
   .BE_A(4'b1111), // Byte-write enable port A
@@ -28,9 +30,9 @@ TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .WDATA_B(dinB), // Write data port B
   .WPARITY_B(0), // Write parity port B
   .RDATA_A(doutA), // Read data port A
-  .RPARITY_A(), // Read parity port A
+  .RPARITY_A(temp1), // Read parity port A
   .RDATA_B(doutB), // Read data port B
-  .RPARITY_B() // Read parity port B
+  .RPARITY_B(temp2) // Read parity port B
 );
  
 
