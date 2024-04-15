@@ -4,7 +4,7 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="FIFO18kx2_R9W9_primitive_inst"
+design="FIFO36K_synch_primitive_inst"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 

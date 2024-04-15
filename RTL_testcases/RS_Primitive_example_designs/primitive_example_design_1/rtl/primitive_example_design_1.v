@@ -1,4 +1,4 @@
-module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ram_we,buft_out,obuft_oe,ibuf0_en,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en,ibuf15_en,ibuf16_en);
+module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ram_we,buft_out,obuft_oe,ibuf0_en,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en,ibuf15_en,ibuf16_en,out);
     input [2:0] in;
     input clk, rst;
     input mux1_sel,mux2_sel;
@@ -8,6 +8,7 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     input ram_we;
     input obuft_oe;
     output Q,buft_out;
+    output out;
 
     wire [2:0] i_buf_out;
     wire [5:0] i_buf_ram_addr;
@@ -53,9 +54,9 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
 
     DFFRE ff_inst (.D(mux2_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_out),.Q(Q_buff_in));
 
-    assign mux2_out = i_buf_mux2_sel ? ac_out : acc_out;
+    assign mux2_out = i_buf_mux2_sel ? ac_out : 1'b1;
     
-    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(out),.O(ac_out),.COUT(acc_out));
+    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
 
     infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
 
