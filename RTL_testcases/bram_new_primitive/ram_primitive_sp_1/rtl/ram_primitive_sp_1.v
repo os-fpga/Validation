@@ -6,6 +6,8 @@ module ram_primitive_sp_1 (
   input din, 
   output dout);
 
+wire [3:0] temp1, temp2;
+wire [31:0] temp3, temp4;
 
 TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .INIT_PARITY({2048{1'b0}}), // Initial Contents of memory
@@ -28,10 +30,10 @@ TDP_RAM36K #(.INIT({32768{1'b0}}), // Initial Contents of memory
   .WPARITY_A(0), // Write parity data port A
   .WDATA_B(0), // Write data port B
   .WPARITY_B(0), // Write parity port B
-  .RDATA_A(dout), // Read data port A
-  .RPARITY_A(), // Read parity port A
-  .RDATA_B(), // Read data port B
-  .RPARITY_B() // Read parity port B
+  .RDATA_A({temp4[31:1],dout}), // Read data port A
+  .RPARITY_A(temp1), // Read parity port A
+  .RDATA_B(temp3), // Read data port B
+  .RPARITY_B(temp2) // Read parity port B
 );
 
 endmodule
