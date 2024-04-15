@@ -7,7 +7,7 @@ module primitive_example_design_2(
     input [5:0] ram_addr,
     input ram_we,
     input obuft_oe,
-    output q_p,q_n,buft_out_p,buft_out_n
+    output q_p,q_n,buft_out_p,buft_out_n,out
 );
 
     wire [2:0] i_buf_out;
@@ -54,9 +54,9 @@ module primitive_example_design_2(
 
     DFFRE ff_inst (.D(mux2_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_out),.Q(Q_buff_in));
 
-    assign mux2_out = i_buf_mux2_sel ? ac_out : acc_out;
+    assign mux2_out = i_buf_mux2_sel ? ac_out : 1'b1;
     
-    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(out),.O(ac_out),.COUT(acc_out));
+    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
 
     infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
 
