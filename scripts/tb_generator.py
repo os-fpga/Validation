@@ -67,7 +67,7 @@ def create_folders_and_file():
     bit_width_list = []
     ports = {}
     for port in data['ports']:
-        if "clock" in port:
+        if "clock" in port and port["direction"] == "input":
             clk_port.append(port["name"])
         elif "sync_reset" in port:
             reset_port.append(port["name"])
@@ -151,7 +151,8 @@ def create_folders_and_file():
                     file.write("    wire \t\t" + p_name_with_netlist)
         
         file.write(";\n\tinteger\t\tmismatch\t=\t0;\n\n")
-        file.write(top_module + "\t" + rtl_inst + "\n\n`ifdef PNR\n`else\n")
+        file.write(top_module + "\t" + rtl_inst + "\n\n`ifdef PNR\n")
+        file.write("\t" + top_module + '_post_route route_net (.*, {} );\n'.format(', '.join(wire_instances)) + '`else\n' )
         file.write("\t" + top_module + '_post_synth synth_net (.*, {} );\n'.format(', '.join(wire_instances)) + "`endif\n\n" )
         
         if len(clk_port) == 0:
@@ -203,14 +204,15 @@ def create_folders_and_file():
                 print("No Reset Signal Found")
                 # initialize values to zero
                 for clk in clk_port:
-                    file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
+                    file.write("// Initialize values to zero \ninitial\tbegin\n\t")
                     if len(input_ports) > 1:
+                        outfile.write("{")
                         input_port_str = ', '.join(input_ports)
                         input_port_str += " } <= 'd0;"
                         print(input_port_str, file=file) 
                         file.write("\t repeat (2) @ (negedge " + clk + "); ")
                     else:
-                        file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + 
+                        file.write("\n\t" + str(input_ports[0]) + 
                                     " <= 'd0;\n\t repeat (2) @ (negedge " + clk + "); ")
                     # generate random stimulus
                     file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
