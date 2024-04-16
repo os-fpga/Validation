@@ -193,12 +193,6 @@ parse_cga exit 1; }
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
@@ -206,8 +200,15 @@ parse_cga exit 1; }
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    echo "exec python3 $main_path/../../../scripts/tb_generator.py $design $main_path">>raptor_tcl.tcl
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
     if [ "$post_synth_sim" == true ]; then 
-        echo "# Open the input file in read mode">>raptor_tcl.tcl 
+            echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
         echo "# Read the file content">>raptor_tcl.tcl 
         echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
