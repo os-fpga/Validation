@@ -36,7 +36,7 @@ while read line; do
 done < top.txt
 rm -fR top.txt
 
-sed -i "s/$run_file_name/$run_file_name 23 $timeout true GEMINI_COMPACT_104x68 $synthesis/" active_designs.txt
+sed -i "s/$run_file_name/$run_file_name 23 $timeout true GEMINI_COMPACT_104x68 $synthesis --batch/" active_designs.txt
 
 line_count=$(wc -l < "active_designs.txt")
 line_number=$((line_count / $number_of_parallel_threads))
