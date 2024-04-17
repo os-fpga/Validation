@@ -206,7 +206,7 @@ def create_folders_and_file():
                 for clk in clk_port:
                     file.write("// Initialize values to zero \ninitial\tbegin\n\t")
                     if len(input_ports) > 1:
-                        outfile.write("{")
+                        file.write("{")
                         input_port_str = ', '.join(input_ports)
                         input_port_str += " } <= 'd0;"
                         print(input_port_str, file=file) 
