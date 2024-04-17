@@ -1,4 +1,4 @@
-module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ram_we,buft_out,obuft_oe,ibuf0_en,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en,ibuf15_en,ibuf16_en,out);
+module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ram_we,buft_out,obuft_oe,ibuf0_en,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en,ibuf15_en,ibuf16_en,out,Cout);
     input [2:0] in;
     input clk, rst;
     input mux1_sel,mux2_sel;
@@ -8,12 +8,12 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     input ram_we;
     input obuft_oe;
     output Q,buft_out;
-    output out;
+    output out,Cout;
 
     wire [2:0] i_buf_out;
     wire [5:0] i_buf_ram_addr;
     wire in_buf_out,clk_buf_out;
-    wire lut_out;
+    reg lut_out;
     wire rst_i_buf_out,i_buf_mux1_sel,i_buf_mux2_sel;
     wire out,p_ibuf,g_ibuf; 
     wire dffnre_out;
@@ -56,7 +56,9 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
 
     assign mux2_out = i_buf_mux2_sel ? ac_out : 1'b1;
     
-    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
+    // CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
+    assign ac_out = p_ibuf ^ g_ibuf ^ out; //Cin;
+    assign Cout = (p_ibuf & g_ibuf) | (g_ibuf & out) | (p_ibuf & out);
 
     infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
 
@@ -81,7 +83,7 @@ module flip_flop(
     output reg Q
 );
     always @ (posedge clk) begin
-        if (rst)
+        if (!rst)
             Q <= 0;
         else
             Q <= D;
