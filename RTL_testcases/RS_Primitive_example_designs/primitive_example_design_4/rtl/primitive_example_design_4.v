@@ -3,12 +3,13 @@ module primitive_example_design_4(
     input clk, rst,
     input ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,
     output [2:0] q_n,
-    output [2:0] q_p,
+    output [2:0] q_p
     );
 
     wire [2:0] i_buf_out;
     wire rst_i_buf_out;
     wire [2:0] dffre_out;
+    wire clk_buf_out;
 
     CLK_BUF clk_buf_inst (.I(clk),.O(clk_buf_out));
 

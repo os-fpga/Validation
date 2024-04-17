@@ -1,19 +1,20 @@
 module primitive_example_design_2(
     input [2:0] in_n,in_p,
-    input clk, rst_n,rst_p,
+    input clk, rst,
     input mux1_sel_n,mux1_sel_p,mux2_sel_n,mux2_sel_p,
     input ibuf0_en,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,ibuf6_en,ibuf7_en,ibuf8_en,ibuf9_en,ibuf10_en,ibuf11_en,ibuf12_en,ibuf13_en,ibuf14_en,ibuf15_en,ibuf16_en,
     input P,G,
     input [5:0] ram_addr,
     input ram_we,
     input obuft_oe,
-    output q_p,q_n,buft_out_p,buft_out_n,out
+    output q_p,q_n,buft_out_p,buft_out_n,
+    output Cout
 );
 
     wire [2:0] i_buf_out;
     wire [5:0] i_buf_ram_addr;
     wire in_buf_out,clk_buf_out;
-    wire lut_out;
+    reg lut_out;
     wire rst_i_buf_out,i_buf_mux1_sel,i_buf_mux2_sel;
     wire out,p_ibuf,g_ibuf; 
     wire dffnre_out;
@@ -28,7 +29,7 @@ module primitive_example_design_2(
     I_BUF_DS ibuf_ds_inst1 (.I_P(in_p[0]),.I_N(in_n[0]),.EN(ibuf1_en),.O(i_buf_out[0]));
     I_BUF_DS ibuf_ds_inst2 (.I_P(in_p[1]),.I_N(in_n[1]),.EN(ibuf2_en),.O(i_buf_out[1]));
     I_BUF_DS ibuf_ds_inst3 (.I_P(in_p[2]),.I_N(in_n[2]),.EN(ibuf3_en),.O(i_buf_out[2]));
-    I_BUF_DS ibuf_ds_inst4 (.I_P(rst_p),.I_N(rst_n),.EN(ibuf4_en),.O(rst_i_buf_out));
+    I_BUF ibuf_ds_inst4 (.I(rst),.EN(ibuf4_en),.O(rst_i_buf_out));
     I_BUF_DS ibuf_ds_inst5 (.I_P(mux1_sel_p),.I_N(mux1_sel_n),.EN(ibuf5_en),.O(i_buf_mux1_sel));
     I_BUF_DS ibuf_ds_inst6 (.I_P(mux2_sel_p),.I_N(mux2_sel_n),.EN(ibuf6_en),.O(i_buf_mux2_sel));
     I_BUF ibuf_inst7 (.I(P),.EN(ibuf7_en),.O(p_ibuf));
@@ -46,7 +47,7 @@ module primitive_example_design_2(
 
     assign out = i_buf_mux1_sel ? dffnre_out : !dffnre_out;
 
-    flip_flop ff_inst1 (.clk(clk),.rst(rst),.D(ac_out),.Q(inf_q));
+    flip_flop ff_inst1 (.clk(clk),.rst(rst_i_buf_out),.D(ac_out),.Q(inf_q));
 
     O_BUFT_DS obuft_ds_inst (.I(inf_q),.T(ibuf_obuft_oe),.O_P(buft_out_p),.O_N(buft_out_n));
 
@@ -56,7 +57,9 @@ module primitive_example_design_2(
 
     assign mux2_out = i_buf_mux2_sel ? ac_out : 1'b1;
     
-    CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
+    // CARRY carry_chain_inst (.P(p_ibuf),.G(g_ibuf),.CIN(),.O(ac_out),.COUT());
+    assign ac_out = p_ibuf ^ g_ibuf ^ out; //Cin;
+    assign Cout = (p_ibuf & g_ibuf) | (g_ibuf & out) | (p_ibuf & out);
 
     infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
 
