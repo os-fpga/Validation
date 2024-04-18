@@ -10,8 +10,8 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
+post_synth_sim=true 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
@@ -19,7 +19,7 @@ device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="clk_constraint.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 

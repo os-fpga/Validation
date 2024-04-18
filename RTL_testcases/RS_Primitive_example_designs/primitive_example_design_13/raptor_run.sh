@@ -10,12 +10,12 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
+post_synth_sim=true 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
-device="GEMINI_COMPACT_104x68"
+device="GEMINI_COMPACT_10x8"
 
 strategy="delay" #(area, delay, mixed, none) 
 
