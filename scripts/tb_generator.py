@@ -205,6 +205,7 @@ def create_folders_and_file():
                 # initialize values to zero
                 for clk in clk_port:
                     file.write("// Initialize values to zero \ninitial\tbegin\n\t")
+                    file.write('repeat (2) @ (negedge ' + clk + ');\n')
                     if len(input_ports) > 1:
                         file.write("{")
                         input_port_str = ', '.join(input_ports)
@@ -212,8 +213,11 @@ def create_folders_and_file():
                         print(input_port_str, file=file) 
                         file.write("\t repeat (2) @ (negedge " + clk + "); ")
                     else:
-                        file.write("\n\t" + str(input_ports[0]) + 
+                        if len(input_ports) == 1:
+                            file.write("\n\t" + str(input_ports[0]) + 
                                     " <= 'd0;\n\t repeat (2) @ (negedge " + clk + "); ")
+                        else:
+                            file.write ("\n")
                     # generate random stimulus
                     file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
                     random_stimulus_lines = []
