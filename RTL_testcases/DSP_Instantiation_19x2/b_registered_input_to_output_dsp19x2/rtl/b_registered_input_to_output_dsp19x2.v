@@ -21,7 +21,7 @@ DSP19X2 #(
   .COEFF2_2(10'h000), // Multiplier 2 10-bit A input coefficient 2
   .COEFF2_3(10'h000), // Multiplier 2 10-bit A input coefficient 3
   .OUTPUT_REG_EN("FALSE"), // Enable output register (TRUE/FALSE)
-  .INPUT_REG_EN("FALSE") // Enable input register (TRUE/FALSE)
+  .INPUT_REG_EN("TRUE") // Enable input register (TRUE/FALSE)
 ) DSP_inst(
   .A1(a[9:0]), // Multiplier 1 10-bit data input for multiplier or accumulator loading
   .B1(b[8:0]), // 9-bit data input for multiplication
