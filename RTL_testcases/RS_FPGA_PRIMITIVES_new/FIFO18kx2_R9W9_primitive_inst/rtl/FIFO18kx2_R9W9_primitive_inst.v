@@ -45,7 +45,7 @@ FIFO18KX2 #(
     .PROG_EMPTY1(prog_empty), // FIFO programmable empty flag
     .PROG_FULL1(prog_full), // FIFO programmable full flag
     .OVERFLOW1(overflow), // FIFO overflow error flag
-    .UNDERFLOW1(underflow) // FIFO underflow error flag
+    .UNDERFLOW1(underflow), // FIFO underflow error flag
     .EMPTY2(empty), // FIFO empty flag
     .FULL2(full), // FIFO full flag
     .ALMOST_EMPTY2(almost_empty), // FIFO almost empty flag
@@ -53,7 +53,7 @@ FIFO18KX2 #(
     .PROG_EMPTY2(prog_empty), // FIFO programmable empty flag
     .PROG_FULL2(prog_full), // FIFO programmable full flag
     .OVERFLOW2(overflow), // FIFO overflow error flag
-    .UNDERFLOW2(underflow) // FIFO underflow error flag
+    .UNDERFLOW2(underflow), // FIFO underflow error flag
     .RD_DATA1(dout1[8:0]),
     .RD_DATA2(dout2[8:0]),
     .RD_EN1(re1),
@@ -61,7 +61,7 @@ FIFO18KX2 #(
     .WR_DATA1(din1[8:0]),
     .WR_DATA2(din2[8:0]),
     .WR_EN1(we1),
-    .WR_EN2(we2),
+    .WR_EN2(we2)
   );
 
 endmodule
