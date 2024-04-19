@@ -321,4 +321,4 @@ def create_folders_and_file():
         file.write('initial begin\n\t$dumpfile("tb.vcd");\n\t$dumpvars;\nend\n\nendmodule\n')
 
 if __name__ == "__main__":
-    create_folders_and_file() 
+    create_folders_and_file()
