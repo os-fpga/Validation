@@ -1,33 +1,8 @@
 import os
-import re
 import random
 import json
 import sys
 
-def check_clock_declaration(port_names):
-    clock_pattern =  r"\b(?i:(?:clock|clk|clck)\w*|CLOCK)\b(?:\s*(?:[\[\]\w]+[,\s]*)*)"
-
-    # Search for the combined clock pattern in the list of port names
-    for index, port_name in enumerate(port_names):
-        match = re.search(clock_pattern, port_name)
-        if match:
-            # Return the port name and its index
-            return index
-
-    # Return None if clock signal not found
-    return None
-
-def check_sync_reset(ports):
-    # Iterate through the list of ports
-    for port in ports:
-        if "sync_reset" in port:
-            # Extract the reset signal name
-            reset_signal_name = port['name']
-            sync_reset_value = port['sync_reset']
-            return reset_signal_name, sync_reset_value
-
-    # Return None if no sync_reset found
-    return None, None
 
 def create_folders_and_file():
     design = sys.argv[1]
@@ -41,7 +16,7 @@ def create_folders_and_file():
         design,
         "run_1",
         "synth_1_1",
-        "analysis",
+        "synthesis",
         "port_info.json"
     )
 
@@ -55,7 +30,6 @@ def create_folders_and_file():
     wire_instances = []
     p_name_compare = []
     p_name_netlist = []
-    bit_widths = []
     
     # List to check outputs
     out_instances = []
@@ -78,189 +52,278 @@ def create_folders_and_file():
         data = json.load(json_file)
 
     # Extract topModule
-    top_module = data[0]['topModule']
-
-    # Extract I/O ports info
-    ports = data[0]['ports']
-    # Filter and store only INPUT port names
-    input_port_names = [port['name'] for port in ports if port['direction'] == "Input"]
+    top_module = data['top']
 
     # Create a file with the topModule name
     filename = file_string + top_module + ".v"
     output_filename = os.path.join(sub_folder_path, filename) 
-    with open(output_filename, "w") as outfile:
-        # Write module header
-        outfile.write("module " + file_string + top_module + ";\n")
+    # Extract port information
 
-        # Write input and output ports
-        for i, port in enumerate(ports):
-            direction = port['direction']
-            name = port['name']
-            range_lsb = port['range']['lsb']
-            range_msb = port['range']['msb']
-            port_type = port['type']
-            
-            # Replace "input" with "reg" and "output" with "wire"
-            if direction == "Input":
-                direction = "reg"
-                # Calculate the bit width of the port
-                bit_width = range_msb - range_lsb + 1
-                bit_widths.append(bit_width)
-            elif direction == "Output":
-                direction = "wire"
-
-              # Append "_netlist" to p.name if mode_str is "wire"
-            if direction == "wire":
-              p_name_modified = name + "\t,\t" + name + "_netlist"
-              p_name_inst     = name + "_netlist"
-              p_name_compare.append(name)
-              p_name_netlist.append(p_name_inst)
-              wire_instances.append(".{}({})".format(name, p_name_inst))
-              out_instances.append("{} !== {}".format(name, p_name_inst))
-            else:
-              p_name_modified = name
-
-            # Check if single-bit port
-            if range_lsb == range_msb:
-                range_str = ""
-            else:
-                range_str = f"[{range_msb}:{range_lsb}]"
-
-            # Write port declaration
-            outfile.write(f"\t{direction}\t\t\t\t{range_str}\t\t\t{p_name_modified};\n")
-        outfile.write("\tinteger\tmismatch\t=\t0;\n\n")
-        outfile.write(top_module + "\t" + rtl_inst + "\n\n`ifdef PNR\n`else\n")
-        outfile.write("\t" + top_module + '_post_synth synth_net (.*, {} );\n'.format(', '.join(wire_instances)) + "`endif\n\n" )
-        
-        clock_port = check_clock_declaration(input_port_names)
-        clk = input_port_names[clock_port] if clock_port is not None else None
-        
-        if clk is not None:
-            print("FOUND SEQUENTIAL DESIGN - Clock Signal:", clk ,"at index", clock_port)
-            outfile.write('//clock initialization\ninitial begin\n\t' + str(clk) + 
-                          " = 1'b0;\n\tforever #5 " + str(clk) + ' = ~' + str(clk) + ';\nend\n\n')
-
-            index_clock = input_port_names.index(clk)
-            del input_port_names[clock_port]
-            del bit_widths[index_clock]
-            
-            # check for reset signal 
-            reset_port_name, sync_reset_value = check_sync_reset(ports)
-            print (input_port_names)
-            print (bit_widths)
-            
-            if reset_port_name is not None:
-                print("Found Reset Signal:", reset_port_name)
-                index_reset = input_port_names.index(reset_port_name)
-                del bit_widths[index_reset]
-                # Check sync_reset value and write stimulus generation accordingly
-                if sync_reset_value == "active_high":
-                    outfile.write("// Reset High Stimulus generation\ninitial begin\n\t")
-                else:
-                    outfile.write("// Reset Low Stimulus generation\ninitial begin\n\t")
-                
-                # Remove reset port name from port_names
-                input_port_names.remove(reset_port_name)
-            else:
-                print("No Reset Signal Found")
-                # initialize values to zero
-                if len(input_port_names) > 1:
-                    outfile.write("// Initialize values to zero \ninitial\tbegin\n\t{")
-                    input_port_str = ', '.join(input_port_names)
-                    input_port_str += " } <= 'd0;"
-                    print(input_port_str, file=outfile) 
-                    outfile.write("\t repeat (2) @ (negedge " + clk + "); ")
-                else:
-                    outfile.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_port_names[0]) + 
-                                  " <= 'd0;\n\t repeat (2) @ (negedge " + clk + "); ")
-                # generate random stimulus
-                outfile.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
-                random_stimulus_lines = []
-                for port in input_port_names:
-                    random_stimulus_lines.append(f'{port} <= $random();')    
-                for rand_line in random_stimulus_lines:
-                    outfile.write('\t\t' + rand_line + '\n')
-                outfile.write('\n\t\tcompare();\n\tend\n\n')            
-                
-                # generate corner case stimulus 
-                outfile.write("\t// ----------- Corner Case stimulus generation -----------\n")
-                max_values = []
-                for bit_width in bit_widths:
-                    if bit_width is None:
-                        bit_width = 0  # Consider None as 1 for the port
-                    max_value = 2**bit_width - 1
-                    max_values.append(max_value)
-                # Create stimulus assignments for each input port
-                stimulus_lines = []
-                for port, max_value in zip(input_port_names, max_values):
-                    stimulus_lines.append(f'{port} <= {max_value};')
-                for line in stimulus_lines:
-                    outfile.write('\t' + line + '\n')
-                outfile.write('\trepeat (2) @ (negedge ' + clk + ');\n\tcompare();\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-                outfile.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n') 
-                
-            
-            # drive stimulus to remaining inputs
-            
+    input_ports = []
+    output_ports = []
+    clk_port = []
+    reset_port = []
+    wire_instances = []
+    p_name_compare = []
+    p_name_netlist = []
+    bit_width_list = []
+    ports = {}
+    for port in data['ports']:
+        if "clock" in port:
+            clk_port.append(port["name"])
+        elif "sync_reset" in port:
+            reset_port.append(port["name"])
+            sync_reset_value = port["sync_reset"]
         else:
-            print("FOUND COMBINATIONAL DESIGN")
-            print (input_port_names)
-            print (bit_widths)
-            # initialize values to zero
-            if len(input_port_names) > 1:
-              outfile.write("// Initialize values to zero \ninitial\tbegin\n\t{")
-              input_port_str = ', '.join(input_port_names)
-              input_port_str += " } <= 'd0;"
-              print(input_port_str, file=outfile) 
+            port_name = port["name"]
+            port_direction = port["direction"]
+            if "[" in port_name:
+                bus_name, bus_width = port_name.split("[")
+                bus_width = "[" + bus_width
+                if bus_name not in ports:
+                    ports[bus_name] = {"direction": port_direction, "width": bus_width}
+                else:
+                    existing_width = ports[bus_name]["width"]
+                    if existing_width is None:
+                        ports[bus_name]["width"] = bus_width
+                    else:
+                        existing_width_int = int(existing_width.strip("[]"))
+                        new_width_int = int(bus_width.strip("[]"))
+                        max_width = max(existing_width_int, new_width_int)
+                        ports[bus_name]["width"] = f"[{max_width}]"
             else:
-              outfile.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_port_names[0]) + " <= 'd0;\n")
+                ports[port_name] = {"direction": port_direction, "width": None}
+           
+    # Separate input and output ports    
+    for port, info in ports.items():
+        if info["direction"] == "input":
+            input_ports.append(port)
+            if info["width"] is not None:
+                width_str = info["width"].strip("[]")
+                width_int = int(width_str) + 1
+                bit_width_list.append(width_int)
+            else:
+                bit_width_list.append(None)
+        elif info["direction"] == "output":
+            output_ports.append(port)
+            
+    # Write module name and port information to a file
+    with open(output_filename, "w") as file:
+        file.write("module " + file_string + top_module + ";\n")
+        if clk_port:
+            file.write("// Clock signals\n")
+            for port in clk_port:
+                file.write("    reg " + port + ";\n")
+
+        # Check if reset_port list is not empty and write its contents to the file
+        if reset_port:
+            file.write("// Reset signals\n")
+            for port in reset_port:
+                file.write("    reg " + port + ";\n")
+            file.write("\n")
+        for i, (port, info) in enumerate(ports.items()):
+            if i != 0:
+                file.write(";\n")
+            if info["width"] is not None:
+                if "]" in info["width"]:
+                    info["width"] = info["width"].replace("]", ":0]")
+                if info["direction"] == "input":
+                    file.write("    reg " + info["width"] + " " + port)
+                elif info["direction"] == "output":
+                    p_name_inst     = port + "_netlist"
+                    p_name_with_netlist = port + "\t,\t" + p_name_inst
+                    p_name_compare.append(port)
+                    p_name_netlist.append(p_name_inst)
+                    wire_instances.append(".{}({})".format(port, p_name_inst))
+                    out_instances.append("{} !== {}".format(port, p_name_inst))
+                    file.write("    wire " + info["width"] + " " + p_name_with_netlist)
+            else:
+                if info["direction"] == "input":
+                    file.write("    reg " + port)
+                elif info["direction"] == "output":
+                    p_name_inst     = port + "_netlist"
+                    p_name_with_netlist = port + "\t,\t" + p_name_inst
+                    p_name_compare.append(port)
+                    p_name_netlist.append(p_name_inst)
+                    wire_instances.append(".{}({})".format(port, p_name_inst))
+                    out_instances.append("{} !== {}".format(port, p_name_inst))
+                    file.write("    wire " + p_name_with_netlist)
+        
+        file.write(";\n\tinteger\tmismatch\t=\t0;\n\n")
+        file.write(top_module + "\t" + rtl_inst + "\n\n`ifdef PNR\n`else\n")
+        file.write("\t" + top_module + '_post_synth synth_net (.*, {} );\n'.format(', '.join(wire_instances)) + "`endif\n\n" )
+        
+        if len(clk_port) == 0:
+            print("FOUND COMBINATIONAL DESIGN")
+            # initialize values to zero
+            if len(input_ports) > 1:
+              file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
+              input_port_str = ', '.join(input_ports)
+              input_port_str += " } <= 'd0;"
+              print(input_port_str, file=file) 
+            else:
+              file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + " <= 'd0;\n")
             # generate random stimulus
-            outfile.write('\t#50;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
+            file.write('\t#50;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
             random_stimulus_lines = []
-            for port in input_port_names:
+            for port in input_ports:
                 random_stimulus_lines.append(f'{port} <= $random();')    
             for rand_line in random_stimulus_lines:
-              outfile.write('\t\t' + rand_line + '\n')
-            outfile.write('\t\t#50;\n\t\tcompare();\n\tend\n\n')            
+              file.write('\t\t' + rand_line + '\n')
+            file.write('\t\t#50;\n\t\tcompare();\n\tend\n\n')            
             
             # generate corner case stimulus 
-            outfile.write("\t// ----------- Corner Case stimulus generation -----------\n")
+            file.write("\t// ----------- Corner Case stimulus generation -----------\n")
             max_values = []
-            for bit_width in bit_widths:
+            for bit_width in bit_width_list:
                 if bit_width is None:
-                    bit_width = 0  # Consider None as 1 for the port
+                    bit_width = 1  # Consider None as 1 for the port
                 max_value = 2**bit_width - 1
                 max_values.append(max_value)
             # Create stimulus assignments for each input port
             stimulus_lines = []
-            for port, max_value in zip(input_port_names, max_values):
+            for port, max_value in zip(input_ports, max_values):
               stimulus_lines.append(f'{port} <= {max_value};')
             for line in stimulus_lines:
-              outfile.write('\t' + line + '\n')
-            outfile.write('\tcompare();\n\t#50;\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-            outfile.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n')  
-        
+              file.write('\t' + line + '\n')
+            file.write('\tcompare();\n\t#50;\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
+            file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n') 
+        else:
+            print ("FOUND SEQUENTIAL DESIGN")
+            for clk in clk_port:
+                file.write('//clock initialization for ' + clk + '\n')
+                file.write('    initial begin\n')
+                file.write('        ' + clk + " = 1'b0;\n")
+                file.write('        forever #5 ' + clk + ' = ~' + clk + ';\n')
+                file.write('    end\n')      
+            
+            # check for reset signal 
+            if len(reset_port) == 0:  
+                print("No Reset Signal Found")
+                # initialize values to zero
+                for clk in clk_port:
+                    if len(input_ports) > 1:
+                        file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
+                        input_port_str = ', '.join(input_ports)
+                        input_port_str += " } <= 'd0;"
+                        print(input_port_str, file=file) 
+                        file.write("\t repeat (2) @ (negedge " + clk + "); ")
+                    else:
+                        file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + 
+                                    " <= 'd0;\n\t repeat (2) @ (negedge " + clk + "); ")
+                    # generate random stimulus
+                    file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
+                    random_stimulus_lines = []
+                    for port in input_ports:
+                        random_stimulus_lines.append(f'{port} <= $random();')    
+                    for rand_line in random_stimulus_lines:
+                        file.write('\t\t' + rand_line + '\n')
+                    file.write('\n\t\tcompare();\n\tend\n\n')            
+                    
+                    # generate corner case stimulus 
+                    file.write("\t// ----------- Corner Case stimulus generation -----------\n")
+                    max_values = []
+                    for bit_width in bit_width_list:
+                        if bit_width is None:
+                            bit_width = 1  # Consider None as 1 for the port
+                        max_value = 2**bit_width - 1
+                        max_values.append(max_value)
+                    # Create stimulus assignments for each input port
+                    stimulus_lines = []
+                    for port, max_value in zip(input_ports, max_values):
+                        stimulus_lines.append(f'{port} <= {max_value};')
+                    for line in stimulus_lines:
+                        file.write('\t' + line + '\n')
+                    file.write('\trepeat (2) @ (negedge ' + clk + ');\n\tcompare();\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
+                    file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n')  
+            else:
+                print("Found Reset Signal:")
+                # Check sync_reset value and write stimulus generation accordingly
+                for clk in clk_port:
+                    for rst in reset_port:
+                        if sync_reset_value == "active_high":
+                            file.write("//Reset Stimulus generation\ninitial begin\n\t" + rst + ' <= 1;\n\t@(negedge ' + clk + ');\n\t{' )
+                            input_port_str = ', '.join(input_ports)
+                            input_port_str += " } <= 'd0;"
+                            print(input_port_str, file=file)                
+                            file.write('\t' + rst + ' <= 0;\n')
+                        else:
+                            file.write("//Reset Stimulus generation\ninitial begin\n\t" + rst + ' <= 0;\n\t@(negedge ' + clk + ');\n\t{' )
+                            input_port_str = ', '.join(input_ports)
+                            input_port_str += " } <= 'd0;"
+                            print(input_port_str, file=file)                
+                            file.write('\t' + rst + ' <= 1;\n')
+                #
+                file.write('\t$display ("***Reset Test is applied***");\n\t@(negedge ' + 
+                              clk + ');\n\t@(negedge ' + clk + ');\n\tcompare();\n\t$display ("***Reset Test is ended***");\n')
+                # Generate random stimulus values for each input port
+                file.write('\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
+                random_stimulus_lines = []
+                for port in input_ports:
+                    random_stimulus_lines.append(f'{port} <= $random();')    
+                for rand_line in random_stimulus_lines:
+                    file.write('\t\t' + rand_line + '\n')
+                file.write('\t\tcompare();\nend\n\n')
+
+                file.write("\t// ----------- Corner Case stimulus generation -----------\n")
+                
+                # Generate Corner Case stimulus for remaining INPUTS
+                max_values = []
+                for bit_width in bit_width_list:
+                    if bit_width is None:
+                        bit_width = 1  # Consider None as 1 for the port
+                    max_value = 2**bit_width - 1
+                    max_values.append(max_value)
+                # Create stimulus assignments for each input port
+                stimulus_lines = []
+                for port, max_value in zip(input_ports, max_values):
+                    stimulus_lines.append(f'{port} <= {max_value};')
+                for line in stimulus_lines:
+                    file.write('\t' + line + '\n')
+                file.write('\tcompare();\n\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
+                file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\trepeat(50) @(posedge ' 
+                           + clk + ');\n\t$finish;\nend\n\n')
+                      
+            
         # compare task
         dec = len(out_instances)
         dec_string = ["%0d"] * dec
         dec_string = ", ".join(dec_string)
-        outfile.write("task compare();\n")
-        outfile.write('\tif ( {} ) begin\n'.format('\t||\t'.join(out_instances) ))
-        outfile.write('\t\t$display("Data Mismatch: Actual output: ' + dec_string + ", Netlist Output " +
+        file.write("task compare();\n")
+        file.write('\tif ( {} ) begin\n'.format('\t||\t'.join(out_instances) ))
+        file.write('\t\t$display("Data Mismatch: Actual output: ' + dec_string + ", Netlist Output " +
         dec_string + ', Time: %0t ", ')
         for ports in p_name_compare:
-          outfile.write("%s, " % ports)
+          file.write("%s, " % ports)
         for net_ports in p_name_netlist:
-          outfile.write("%s, " % net_ports)
-        outfile.write( ' $time);\n\t\tmismatch = mismatch+1;\n\tend\n\telse\n\t\t$display("Data Matched: Actual output: ' + 
+          file.write("%s, " % net_ports)
+        file.write( ' $time);\n\t\tmismatch = mismatch+1;\n\tend\n\telse\n\t\t$display("Data Matched: Actual output: ' + 
         dec_string + ", Netlist Output " + dec_string + ', Time: %0t ", ')
         for ports in p_name_compare:
-          outfile.write("%s, " % ports)
+          file.write("%s, " % ports)
         for net_ports in p_name_netlist:
-          outfile.write("%s, " % net_ports)
-        outfile.write( ' $time);\nendtask\n\n')
+          file.write("%s, " % net_ports)
+        file.write( ' $time);\nendtask\n\n')
         
-        outfile.write('initial begin\n\t$dumpfile("tb.vcd");\n\t$dumpvars;\nend\n\nendmodule\n')
+        file.write('initial begin\n\t$dumpfile("tb.vcd");\n\t$dumpvars;\nend\n\nendmodule\n')
+
+
+            
+    #         if reset_port_name is not None:
+    #             print("Found Reset Signal:", reset_port_name)
+    #             index_reset = input_ports.index(reset_port_name)
+    #             del bit_widths[index_reset]
+    #             # Check sync_reset value and write stimulus generation accordingly
+    #             if sync_reset_value == "active_high":
+    #                 file.write("// Reset High Stimulus generation\ninitial begin\n\t")
+    #             else:
+    #                 file.write("// Reset Low Stimulus generation\ninitial begin\n\t")
+                
+    #             # Remove reset port name from port_names
+    #             input_ports.remove(reset_port_name)
+                
+    #         else:
+
 
 
 
