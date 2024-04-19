@@ -2,13 +2,13 @@ module b_registered_input_to_output_new_primitive (
 	input  wire [19:0] a,
     input  wire [17:0] b,
 	input wire clk, reset,
-    output wire [17:0] dly_b,
     output wire [37:0] z_out
     );
 
     parameter [83:0] MODE_BITS = 84'd0;
     
     wire [37:0] z_w;
+    wire [17:0] dly_b;
 
 DSP38 #(
   .DSP_MODE("MULTIPLY"), // DSp arithmetic mode (MULTIPLY/MULTIPLY_ADD_SUB/MULTIPLY_ACCUMULATE)
@@ -17,7 +17,7 @@ DSP38 #(
   .COEFF_2(20'h00000), // 20-bit A input coefficient 2
   .COEFF_3(20'h00000), // 20-bit A input coefficient 3
   .OUTPUT_REG_EN("FALSE"), // Enable output register (TRUE/FALSE)
-  .INPUT_REG_EN("FALSE") // Enable input register (TRUE/FALSE)
+  .INPUT_REG_EN("TRUE") // Enable input register (TRUE/FALSE)
 ) DSP_inst(
   .A(a), // 20-bit data input for multipluier or accumulator loading
   .B(b), // 18-bit data input for multiplication

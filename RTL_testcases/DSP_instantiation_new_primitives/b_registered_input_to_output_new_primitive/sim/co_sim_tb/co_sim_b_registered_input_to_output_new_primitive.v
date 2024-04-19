@@ -2,8 +2,6 @@ module co_sim_b_registered_input_to_output_new_primitive;
 	reg  [19:0] a;
 	reg  [17:0] b;
 	reg clk, reset;
-	wire [17:0] dly_b;
-	wire [17:0] dly_b_netlist;
 	wire  [37:0] z_out;
 	reg  [37:0] expected_out;
 
