@@ -67,7 +67,7 @@ def create_folders_and_file():
     bit_width_list = []
     ports = {}
     for port in data['ports']:
-        if "clock" in port:
+        if "clock" in port and port["direction"] == "input":
             clk_port.append(port["name"])
         elif "sync_reset" in port:
             reset_port.append(port["name"])
@@ -204,15 +204,20 @@ def create_folders_and_file():
                 print("No Reset Signal Found")
                 # initialize values to zero
                 for clk in clk_port:
-                    file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
+                    file.write("// Initialize values to zero \ninitial\tbegin\n\t")
+                    file.write('repeat (2) @ (negedge ' + clk + ');\n')
                     if len(input_ports) > 1:
+                        file.write("{")
                         input_port_str = ', '.join(input_ports)
                         input_port_str += " } <= 'd0;"
                         print(input_port_str, file=file) 
                         file.write("\t repeat (2) @ (negedge " + clk + "); ")
                     else:
-                        file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + 
+                        if len(input_ports) == 1:
+                            file.write("\n\t" + str(input_ports[0]) + 
                                     " <= 'd0;\n\t repeat (2) @ (negedge " + clk + "); ")
+                        else:
+                            file.write ("\n")
                     # generate random stimulus
                     file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
                     random_stimulus_lines = []
@@ -316,4 +321,4 @@ def create_folders_and_file():
         file.write('initial begin\n\t$dumpfile("tb.vcd");\n\t$dumpvars;\nend\n\nendmodule\n')
 
 if __name__ == "__main__":
-    create_folders_and_file()
+    create_folders_and_file() 

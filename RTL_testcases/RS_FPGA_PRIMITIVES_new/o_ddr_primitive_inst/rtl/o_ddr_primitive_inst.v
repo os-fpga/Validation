@@ -17,7 +17,7 @@ module o_ddr_primitive_inst (
   );
 
   always @(posedge clk) begin
-    if (rst) begin
+    if (reset) begin
       out <= 1'b0;   end 
     else begin
       out <= data_input;   end

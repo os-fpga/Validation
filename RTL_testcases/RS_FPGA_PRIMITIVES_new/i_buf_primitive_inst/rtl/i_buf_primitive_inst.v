@@ -2,7 +2,7 @@ module i_buf_primitive_inst (
   input enable_output,
   input data_input,     // Data input (connect to top-level port)
   input enable_input,   // Enable input
-  output data_output    // Data output
+  output reg data_output    // Data output
 );
   wire i_out;
 

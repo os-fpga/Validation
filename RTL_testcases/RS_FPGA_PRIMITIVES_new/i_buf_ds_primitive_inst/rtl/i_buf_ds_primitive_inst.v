@@ -4,7 +4,7 @@ module i_buf_ds_primitive_inst (
   input data_positive_input,    // Data positive input (connect to top-level port)
   input data_negative_input,    // Data negative input (connect to top-level port)
   input enable_input,           // Enable the input
-  output data_output            // Data output
+  output reg data_output            // Data output
 );
   wire do_wire;
 
