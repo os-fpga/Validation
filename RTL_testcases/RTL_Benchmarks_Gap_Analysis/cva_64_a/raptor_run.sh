@@ -185,6 +185,7 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cv64a6_imafdc_sv39_config_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/wt_cache_pkg.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/riscv_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/dm_pkg.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/ariane_pkg.sv">>raptor_tcl.tcl 
@@ -220,7 +221,6 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/csr_buffer.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/csr_regfile.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cva6.sv">>raptor_tcl.tcl 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/wt_cache_pkg.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cva6_icache.sv">>raptor_tcl.tcl 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cva6_icache_axi_wrapper.sv">>raptor_tcl.tcl  
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/decoder.sv">>raptor_tcl.tcl  
