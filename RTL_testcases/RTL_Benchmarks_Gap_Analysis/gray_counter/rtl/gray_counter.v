@@ -18,12 +18,11 @@ module gray_counter
   
 	always @ (posedge clk) begin
 		if (rst) begin
-    	q <= 0;
+    		q <= 0;
     		out <= 0;
-      end else begin
-  		q <= q + 1;
-        
+      	end else begin
+  			q <= q + 1;
 			out <= {q[`size-1], q[`size-1:1] ^ q[`size-2:0]};
-     end
+     	end
  	end
 endmodule

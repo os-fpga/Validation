@@ -10,16 +10,16 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
-bitstream_sim=false
+post_synth_sim=true 
+post_route_sim=true 
+bitstream_sim=true
 
 #raptor options
-device="GEMINI_COMPACT_104x68"
+device="GEMINI_COMPACT_10x8"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="./raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -170,7 +170,7 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device 1GVTC">>raptor_tcl.tcl 
+    echo "target_device $device">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo "configure_ip $ip_name"_v1_0" -mod_name=$design -Pdata_width=32 -Paddr_width=16 -Pid_width=32 -Pa_pip_out=0 -Pb_pip_out=0 -Pa_interleave=0 -Pb_interleave=0 -out_file ./$design.v">>raptor_tcl.tcl
@@ -184,7 +184,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/param_gray_counter.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
     echo "set_top_module $design">>raptor_tcl.tcl 
@@ -193,7 +193,7 @@ parse_cga exit 1; }
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "add_simulation_file sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
         echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     else
         echo ""
@@ -262,10 +262,25 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
-            echo "clear_simulation_files">>raptor_tcl.tcl 
-            echo "add_simulation_file testbench.sv">>raptor_tcl.tcl 
-            echo "add_library_path ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl 
-            echo "simulate "bitstream_bd" "icarus" ">>raptor_tcl.tcl 
+            echo "">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v $design">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_top_formal_verification.v $design">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "file mkdir $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
+            echo "if {[file exists $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/CustomModules]} {">>raptor_tcl.tcl
+            echo "    puts \"Destination directory already exists. Skipping the copy operation.\"">>raptor_tcl.tcl
+            echo "} else {">>raptor_tcl.tcl
+            echo "    file copy -force /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
+            echo "}">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "# Bitstream Simulation">>raptor_tcl.tcl
+            echo "exec /bin/bash ../sed.sh">>raptor_tcl.tcl
+            echo "clear_simulation_files">>raptor_tcl.tcl
+            echo "add_library_path /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "simulate \"bitstream_bd\" \"icarus\"">>raptor_tcl.tcl
         else
             echo ""
         fi
