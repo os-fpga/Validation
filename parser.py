@@ -245,12 +245,19 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         lines = f.readlines()
         first_pnr_sim_line = -1
         last_pnr_sim_line = -1
+        simulation_start_line = -1
+        simulation_succeed_line = -1
         # Find first and last occurrence of the target string
         for i, line in enumerate(lines):
             if "SPR: Post-PnR simulation for design:" in line:
                 if first_pnr_sim_line == -1:
                     first_pnr_sim_line = i
                 last_pnr_sim_line = i
+        
+            if "Simulation start" in line:
+                simulation_start_line = i
+            if "Simulation Succeed" in line:
+                simulation_succeed_line = i
         
         print(f"First occurrence: {first_pnr_sim_line}, Last occurrence: {last_pnr_sim_line}")
         
@@ -300,6 +307,20 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         else:
             print("SGT: Gate simulation for design: not found in the log.")
 
+        bit_sim_status=None
+        if simulation_start_line != -1 and simulation_succeed_line != -1:
+            for line in lines[simulation_start_line:simulation_succeed_line+1]:
+                if "Status:" in line:
+                    if "Status: Test Failed" in line or "Test Failed" in line:
+                        bit_sim_status = "Fail"
+                        break
+                    elif "Test Passed" in line or "Status: Test Passed" in line:
+                        bit_sim_status = "Pass"
+                        # break
+                    else:
+                        bit_sim_status = "Fail"
+        else:
+            print("Bitstream simulation not found in the log.")
 
         temp_string = ""
         temp_list = []
@@ -361,7 +382,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 if log_line_key == 'post_route_sim_status':
                             data[log_line_key] = pnr_sim_status               
                 if log_line_key == 'bitstream_sim_status':
-                            data[log_line_key] = None
+                            data[log_line_key] = bit_sim_status
         start_print_fmax=-1
         start_print_stats=-1
         start_pb_type_usage=-1
