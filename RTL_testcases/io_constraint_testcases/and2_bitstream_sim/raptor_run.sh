@@ -262,34 +262,6 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
-            echo "set tb_path \"../sim/bitsteam_tb/bitstream_testbench.v\"">>raptor_tcl.tcl
-            echo "set openfpga_tb_path \"$design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v\"">>raptor_tcl.tcl
-            echo "set search_line \"// ----- Can be changed by the user for his/her need -------\"">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "set source_file [open \$tb_path r]">>raptor_tcl.tcl
-            echo "set destination_file [open \$openfpga_tb_path r+]">>raptor_tcl.tcl
-            echo "set search_string \$search_line">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "set content [read \$source_file]">>raptor_tcl.tcl
-            echo "close \$source_file">>raptor_tcl.tcl
-            echo "set destination_lines [split [read \$destination_file] \"\n\"]">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "set line_number_to_insert_after -1">>raptor_tcl.tcl
-            echo "foreach line \$destination_lines {">>raptor_tcl.tcl
-            echo "    if {[string first \$search_string \$line] != -1} {">>raptor_tcl.tcl
-            echo "        set line_number_to_insert_after [expr {[lsearch \$destination_lines \$line] + 1}]">>raptor_tcl.tcl
-            echo "        break">>raptor_tcl.tcl
-            echo "    }">>raptor_tcl.tcl
-            echo "}">>raptor_tcl.tcl
-            echo "if {\$line_number_to_insert_after > 0} {">>raptor_tcl.tcl
-            echo "    set destination_lines [linsert \$destination_lines \$line_number_to_insert_after \$content]">>raptor_tcl.tcl
-            echo "} else {">>raptor_tcl.tcl
-            echo "    puts "Search string not found in the destination file."">>raptor_tcl.tcl
-            echo "}">>raptor_tcl.tcl
-            echo "seek \$destination_file 0">>raptor_tcl.tcl
-            echo "puts -nonewline \$destination_file [join \$destination_lines \"\n\"]">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "close \$destination_file">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
             echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v $design">>raptor_tcl.tcl
             echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_top_formal_verification.v $design">>raptor_tcl.tcl
@@ -299,12 +271,12 @@ parse_cga exit 1; }
             echo "if {[file exists $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/CustomModules]} {">>raptor_tcl.tcl
             echo "    puts \"Destination directory already exists. Skipping the copy operation.\"">>raptor_tcl.tcl
             echo "} else {">>raptor_tcl.tcl
-            echo "    file copy -force ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
+            echo "    file copy -force /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
             echo "}">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
             echo "# Bitstream Simulation">>raptor_tcl.tcl
             echo "clear_simulation_files">>raptor_tcl.tcl
-            echo "add_library_path ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
+            echo "add_library_path /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
             echo "simulate \"bitstream_bd\" \"icarus\"">>raptor_tcl.tcl

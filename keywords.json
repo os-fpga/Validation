@@ -18,7 +18,7 @@
     "error_msg": "ERROR: ",
     "post_synth_sim_status": "",
     "post_route_sim_status": "",
-    "bitstream_sim_status": "Status: ",
+    "bitstream_sim_status": "",
     "failure_type": "",
     "fmax_clock1": "Fmax:",
     "fmax_clock2": "Fmax:",
