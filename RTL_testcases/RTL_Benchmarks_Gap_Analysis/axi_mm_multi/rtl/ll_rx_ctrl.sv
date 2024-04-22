@@ -26,7 +26,7 @@
 
 module ll_rx_ctrl #(parameter FIFO_COUNT_MSB=4) (
     // clk, reset
-    input  logic                        clk_wr ,
+    input  logic                        clk_wr,
     input  logic                        rst_wr_n ,
 
     // To Downstream

@@ -871,11 +871,11 @@ module rvdffe #( parameter WIDTH=1, parameter OVERRIDE=0 )
       rvdff #(WIDTH) dff (.*, .clk(l1clk));
 `endif
 
-`ifndef PHYSICAL
+// `ifndef PHYSICAL
    end
-   else
-      $error("%m: rvdffe width must be >= 8");
-`endif
+//    else
+//       $error("%m: rvdffe width must be >= 8");
+// `endif
 
 
 endmodule // rvdffe

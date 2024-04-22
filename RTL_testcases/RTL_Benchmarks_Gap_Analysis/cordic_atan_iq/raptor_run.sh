@@ -184,7 +184,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/AuxClasses.sv">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/AuxClasses.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/AuxFunc.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/atan32_table.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cordic_atan_abs.sv">>raptor_tcl.tcl

@@ -188,7 +188,6 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/bcd_to_binary.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/binary_to_bcd.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/led_display_driver.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/pndkr_1e_build_17.ucf">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/reg_8_io_clrset.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/reg_8_iorw_clrset.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/rs232_syscon.v">>raptor_tcl.tcl

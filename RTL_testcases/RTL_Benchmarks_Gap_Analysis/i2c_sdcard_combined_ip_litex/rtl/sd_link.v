@@ -84,8 +84,8 @@ module sd_link (
    output reg  [6:0]   state
 );
 
-`include "sd_params.vh"
-`include "sd_const.vh"
+// `include "sd_params.vh"
+// `include "sd_const.vh"
 
 reg  [47:0]  cmd_in_latch;
 //    wire   [5:0]   cmd_in_cmd = cmd_in_latch[45:40] /* synthesis noprune */;

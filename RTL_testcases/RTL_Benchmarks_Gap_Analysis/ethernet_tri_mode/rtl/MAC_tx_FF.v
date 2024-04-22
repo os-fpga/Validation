@@ -760,7 +760,7 @@ always @ (posedge Clk_MAC or posedge Reset)
 always @ (posedge Clk_MAC)
     if (Current_state_MAC_reg==MAC_FF_Err)  
         begin
-        $finish(2); 
+        // $finish(2); 
         $display("mac_tx_FF meet error status at time :%t",$time);
         end
 

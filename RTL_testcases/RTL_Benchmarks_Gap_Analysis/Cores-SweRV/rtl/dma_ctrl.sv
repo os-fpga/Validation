@@ -117,7 +117,7 @@ module dma_ctrl (
    localparam NACK_COUNT = 7;
 
    logic [DEPTH-1:0]        fifo_valid;
-   logic [DEPTH-1:0][1:0]   fifo_error;
+   logic [DEPTH-1:0]   fifo_error;
    logic [DEPTH-1:0]        fifo_dccm_valid;
    logic [DEPTH-1:0]        fifo_iccm_valid;
    logic [DEPTH-1:0]        fifo_data_valid;
@@ -127,13 +127,13 @@ module dma_ctrl (
    logic [DEPTH-1:0]        fifo_done;      // DMA trxn is done in core
    logic [DEPTH-1:0]        fifo_done_bus;  // DMA trxn is done in core synced to bus
    logic [DEPTH-1:0]        fifo_rsp_done;  // DMA response sent to bus
-   logic [DEPTH-1:0][31:0]  fifo_addr;
-   logic [DEPTH-1:0][2:0]   fifo_sz;
+   logic [DEPTH-1:0]  fifo_addr;
+   logic [DEPTH-1:0]  fifo_sz;
    logic [DEPTH-1:0]        fifo_write;
    logic [DEPTH-1:0]        fifo_posted_write;
    logic [DEPTH-1:0]        fifo_dbg;
-   logic [DEPTH-1:0][63:0]  fifo_data;
-   logic [DEPTH-1:0][1-1:0]  fifo_tag;
+   logic [DEPTH-1:0] fifo_data;
+   logic [DEPTH-1:0]  fifo_tag;
 
    logic [DEPTH-1:0]        fifo_cmd_en;
    logic [DEPTH-1:0]        fifo_valid_en;
@@ -146,8 +146,8 @@ module dma_ctrl (
    logic [DEPTH-1:0]        fifo_error_bus_en;
    //logic [DEPTH-1:0]      fifo_rsp_done_en;
    logic [DEPTH-1:0]        fifo_reset;
-   logic [DEPTH-1:0][1:0]   fifo_error_in;
-   logic [DEPTH-1:0][63:0]  fifo_data_in;
+   logic [DEPTH-1:0]  fifo_error_in;
+   logic [DEPTH-1:0]  fifo_data_in;
 
    logic                    fifo_write_in;
    logic                    fifo_posted_write_in;
@@ -254,7 +254,7 @@ module dma_ctrl (
       assign fifo_data_bus_en[i] = (fifo_data_en[i] | fifo_data_valid[i]) & dma_bus_clk_en;
       assign fifo_pend_en[i] = (dma_dccm_req | dma_iccm_req) & ~dma_mem_write & (i == RdPtr[DEPTH_PTR-1:0]);
       assign fifo_error_en[i] = fifo_cmd_en[i] | (((dccm_dma_rvalid & dccm_dma_ecc_error & (i == RdPtr_Q3[DEPTH_PTR-1:0])) | (iccm_dma_rvalid & iccm_dma_ecc_error & (i == RdPtr_Q2[DEPTH_PTR-1:0]))));
-      assign fifo_error_bus_en[i] = (((|fifo_error_in[i][1:0]) & fifo_error_en[i]) | (|fifo_error[i])) & dma_bus_clk_en;
+      assign fifo_error_bus_en[i] = (((|fifo_error_in[i]) & fifo_error_en[i]) | (|fifo_error[i])) & dma_bus_clk_en;
       assign fifo_done_en[i] = (((|fifo_error[i]) | ((dma_dccm_req | dma_iccm_req) & dma_mem_write)) & (i == RdPtr[DEPTH_PTR-1:0])) |
                                ((dccm_dma_rvalid & (i == RdPtr_Q3[DEPTH_PTR-1:0])) | (iccm_dma_rvalid & (i == RdPtr_Q2[DEPTH_PTR-1:0])));
       assign fifo_done_bus_en[i] = (fifo_done_en[i] | fifo_done[i]) & dma_bus_clk_en;
@@ -281,7 +281,7 @@ module dma_ctrl (
       rvdffs  #(1) fifo_posted_write_dff (.din(fifo_posted_write_in), .dout(fifo_posted_write[i]), .en(fifo_cmd_en[i]), .clk(dma_buffer_c1_clk), .*);
       rvdffs  #(1) fifo_dbg_dff (.din(fifo_dbg_in), .dout(fifo_dbg[i]), .en(fifo_cmd_en[i]), .clk(dma_buffer_c1_clk), .*);
       rvdffe  #(64) fifo_data_dff (.din(fifo_data_in[i]), .dout(fifo_data[i]), .en(fifo_data_en[i]), .*);
-      rvdffs  #(1) fifo_tag_dff(.din(axi_mstr_tag[1-1:0]), .dout(fifo_tag[i][1-1:0]), .en(fifo_cmd_en[i]), .clk(dma_buffer_c1_clk), .*);
+      rvdffs  #(1) fifo_tag_dff(.din(axi_mstr_tag[1-1:0]), .dout(fifo_tag[i]), .en(fifo_cmd_en[i]), .clk(dma_buffer_c1_clk), .*);
    end
 
    // Pointer logic
@@ -330,9 +330,9 @@ module dma_ctrl (
    assign dma_dbg_cmd_done = (fifo_valid[RspPtr] & fifo_dbg[RspPtr] & (fifo_write[RspPtr] | fifo_data_valid[RspPtr] | (|fifo_error[RspPtr])));
    assign dma_dbg_cmd_fail     = |fifo_error[RspPtr];
 
-   assign dma_dbg_sz[1:0]          = fifo_sz[RspPtr][1:0];
-   assign dma_dbg_addr[1:0]        = fifo_addr[RspPtr][1:0];
-   assign dma_dbg_mem_rddata[31:0] = fifo_addr[RspPtr][2] ? fifo_data[RspPtr][63:32] : fifo_data[RspPtr][31:0];
+   assign dma_dbg_sz[1:0]          = fifo_sz[1:0];
+   assign dma_dbg_addr[1:0]        = fifo_addr[1:0];
+   assign dma_dbg_mem_rddata[31:0] = fifo_addr[2] ? fifo_data[63:32] : fifo_data[31:0];
    assign dma_dbg_rddata[31:0]     = ({32{(dma_dbg_sz[1:0] == 2'h0)}} & ((dma_dbg_mem_rddata[31:0] >> 8*dma_dbg_addr[1:0]) & 32'hff)) |
                                      ({32{(dma_dbg_sz[1:0] == 2'h1)}} & ((dma_dbg_mem_rddata[31:0] >> 16*dma_dbg_addr[1]) & 32'hffff)) |
                                      ({32{(dma_dbg_sz[1:0] == 2'h2)}} & dma_dbg_mem_rddata[31:0]);
@@ -475,7 +475,7 @@ module dma_ctrl (
    assign axi_slv_rdata[63:0]            = fifo_data[RspPtr];
    assign axi_slv_write                  = fifo_write[RspPtr];
    assign axi_slv_posted_write           = axi_slv_write & fifo_posted_write[RspPtr];
-   assign axi_slv_error[1:0]             = fifo_error[RspPtr][0] ? 2'b10 : (fifo_error[RspPtr][1] ? 2'b11 : 2'b0);
+   assign axi_slv_error[1:0]             = fifo_error[0] ? 2'b10 : (fifo_error[1] ? 2'b11 : 2'b0);
 
 
    // AXI response channel signals
@@ -490,7 +490,7 @@ module dma_ctrl (
    assign dma_axi_rlast                   = 1'b1;
 
    assign axi_slv_sent       = (dma_axi_bvalid & dma_axi_bready) | (dma_axi_rvalid & dma_axi_rready);
-   assign dma_slv_algn_err   = fifo_error[RspPtr][1];
+   assign dma_slv_algn_err   = fifo_error[1];
 
 `ifdef ASSERT_ON
 

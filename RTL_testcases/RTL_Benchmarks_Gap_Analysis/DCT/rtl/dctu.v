@@ -55,6 +55,7 @@
 //synopsys translate_off
 //`include "timescale.v"
 //synopsys translate_on
+`include "dct_cos_table.svh"
 
 module dctu(clk, ena, ddgo, x, y, ddin, dout);
 

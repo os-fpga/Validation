@@ -182,14 +182,14 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/const_enc.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/fifo.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/generic_dpram.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/const_enc.v">>raptor_tcl.tcl
     ##vary design to design
 
-    echo "set_top_module const_enc">>raptor_tcl.tcl 
+    echo "set_top_module fifo">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 

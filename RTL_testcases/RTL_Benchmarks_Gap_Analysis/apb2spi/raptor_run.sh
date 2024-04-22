@@ -184,10 +184,11 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/AIC1106_PCM.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/APB_SLAVE.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/APB_SPI_Top.v">>raptor_tcl.tcl
     ##vary design to design
 
-    echo "set_top_module APB_SPI_Top">>raptor_tcl.tcl 
+    echo "set_top_module APB_SPI_top">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
