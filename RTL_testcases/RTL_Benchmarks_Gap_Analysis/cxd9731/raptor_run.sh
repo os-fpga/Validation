@@ -193,7 +193,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/Reg38.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/TF_Stub.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/Top.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/chip.ucf">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/chip.ucf">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/chip.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/dcm3.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/dna_p1.v">>raptor_tcl.tcl

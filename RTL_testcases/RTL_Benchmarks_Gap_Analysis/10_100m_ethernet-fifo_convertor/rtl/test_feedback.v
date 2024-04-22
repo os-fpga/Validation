@@ -9,13 +9,15 @@ module test_feedback(reset, clk_in,
 					phy_rxd, phy_rxen, phy_rxclk, phy_rxer,
 					phy_txd, phy_txen, phy_txclk, phy_txer,
 					phy_reset, phy_col, phy_linksts, phy_crs,
-					test1, test2, test3, test4
+					test1, test2, test3, test4,clk_10K,ff_clk
 					);
 	input reset, clk_in;
 	output phy_reset, test1, test2, test3, test4;
 	
 	input[3:0] phy_rxd;			//MII interface for the phy chip
 	input phy_rxclk, phy_rxer;
+
+	input clk_10K, ff_clk;
 	
 	output[3:0] phy_txd;
 	output phy_txer, phy_txen;
@@ -25,7 +27,7 @@ module test_feedback(reset, clk_in,
 	inout phy_txclk, phy_col, phy_rxen, phy_linksts, phy_crs;
 	
 	wire ff_en, ff_data;
-	wire clk_10K, ff_clk;
+	// wire clk_10K, ff_clk;
 	
 	EthernetModule EthernetModule_inst(.reset(reset), .clk_10K(clk_10K), 
 					.ff_clk(ff_clk), .ff_en_source(ff_en), .ff_en_sink(1'b1), 
@@ -36,10 +38,10 @@ module test_feedback(reset, clk_in,
 					.test1(test1), .test2(test2), .test3(test3), .test4(test4)
 					);
 					
-	pll	pll_inst (
-	.inclk0 ( clk_in ),
-	.c0 ( clk_10K ),
-	.c1 ( ff_clk )
-	);
+	// pll	pll_inst (
+	// .inclk0 ( clk_in ),
+	// .c0 ( clk_10K ),
+	// .c1 ( ff_clk )
+	// );
 
 endmodule

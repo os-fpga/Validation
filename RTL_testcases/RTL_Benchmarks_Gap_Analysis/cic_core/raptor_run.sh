@@ -19,7 +19,7 @@ device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="./raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -184,8 +184,8 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cic_i.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/cic_package.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cic_i.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/comb.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/downsampler.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/integrator.sv">>raptor_tcl.tcl

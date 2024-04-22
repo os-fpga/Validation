@@ -184,7 +184,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/axi_st_d256_gen2_only_master_concat.sv">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/axi_st_d256_gen2_only_master_concat.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/axi_st_d256_multichannel_full_master_concat.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/axi_st_d256_multichannel_full_master_name.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/axi_st_d256_multichannel_full_slave_concat.sv">>raptor_tcl.tcl

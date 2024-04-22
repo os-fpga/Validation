@@ -186,13 +186,13 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/FIFO_8K_BLK.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/af512x16_512x16.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bram_init_32.vh">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/bram_init_8_16.vh">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/bram_init_32.vh">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/bram_init_8_16.vh">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/camif_new.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/gclkbuff.v">>raptor_tcl.tcl
     ##vary design to design
 
-    echo "set_top_module camif_new">>raptor_tcl.tcl 
+    echo "set_top_module top">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 

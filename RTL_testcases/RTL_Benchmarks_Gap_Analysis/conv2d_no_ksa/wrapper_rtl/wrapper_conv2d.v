@@ -166,5 +166,5 @@ conv2d	(clk, rstn, start2d,
 	    	shift,
 	    	debug
 	       );
-		   mux_8x1 (.in0(tcdm2_wdata),. in1(bias_wdata),. in2(pixel_wdata),. in3(filter_wdata),. in4(mult1_oper),. in5(mult2_oper),. in6(mult1_coef),. in7(mult2_coef),.sel(sel_mux_data_32),.out(mux_data_32));
+		   mux_8x1 mux_8x1_inst (.in0(tcdm2_wdata),. in1(bias_wdata),. in2(pixel_wdata),. in3(filter_wdata),. in4(mult1_oper),. in5(mult2_oper),. in6(mult1_coef),. in7(mult2_coef),.sel(sel_mux_data_32),.out(mux_data_32));
 endmodule

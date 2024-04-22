@@ -237,19 +237,19 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/cortexm0plus/verilog/cm0p_top_clk.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/cortexm0plus/verilog/cm0p_top_dbg.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/cortexm0plus/verilog/cm0p_top_sys.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_acg.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_capt_sync.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and_addr.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and_data.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_addr.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_data.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_reset.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_jt_cdc_comb_and.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_sw_cdc_capt_reset.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_sw_cdc_capt_sync.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dbg_reset_sync.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_acg.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_capt_sync.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and_addr.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_comb_and_data.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_addr.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_data.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_cdc_send_reset.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_jt_cdc_comb_and.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_sw_cdc_capt_reset.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dap_sw_cdc_capt_sync.v">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_dbg_reset_sync.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_pmu_acg.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_pmu_cdc_send_reset.v">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/logical/models/cells/generic/cm0p_pmu_cdc_send_set.v">>raptor_tcl.tcl
