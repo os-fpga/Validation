@@ -103,7 +103,7 @@ mute_flag=""
 if [[ $# -eq 6 ]]; then
   reg_id=$1
   timeout=$2
-  post_synth_sim=$3
+  post_synth_sim_=$3
   device=$4
   synth_stage=$5
   mute_flag=$6
