@@ -1293,9 +1293,9 @@ always @(posedge sys_clk_1) begin
 	if ((main_timer_zero_trigger & (~main_timer_zero_trigger_d))) begin
 		main_timer_zero_pending <= 1'd1;
 	end
-	if (main_finish_re) begin
-		$finish;
-	end
+	// if (main_finish_re) begin
+	// 	$finish;
+	// end
 	builder_state <= builder_next_state;
 	builder_slave_sel_r <= builder_slave_sel;
 	if (builder_wait) begin

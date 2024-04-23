@@ -87,6 +87,7 @@
 //
 
 
+`include "MEM_FILE_PATH/raw_rtl/wb_dma_defines.vh"
 module wb_dma_ch_rf(	clk, rst,
 			pointer, pointer_s, ch_csr, ch_txsz, ch_adr0, ch_adr1,
 			ch_am0, ch_am1, sw_pointer, ch_stop, ch_dis, inti,

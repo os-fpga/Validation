@@ -74,7 +74,7 @@ module lpffir_core (
    rca rca_inst3 (.a(h0),.b(h1),.ci(0),.co(co3),.s(h01));
    rca rca_inst4 (.a(h01),.b(h2),.ci(0),.co(co4),.s(y_o));
 
-   always_ff @(posedge clk_i or posedge rstn_i)
+   always_ff @(posedge clk_i or negedge rstn_i)
      if(!rstn_i)
        begin
           x1 <= 0;

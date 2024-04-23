@@ -281,7 +281,9 @@ parse_cga exit 1; }
             echo ""
         fi
     fi
-
+    
+    [ -f rtl/raw_rtl/wb_dma_ch_rf.v ] && sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/raw_rtl/wb_dma_ch_rf.v
+    
     cd results_dir
     echo "Device: $device">>results.log
     echo "Strategy: $strategy">>results.log

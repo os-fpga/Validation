@@ -255,7 +255,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_sparse_fsm_flop.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_subreg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_subreg_ext.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_sync_reqack.sv">>raptor_tcl.tcl
+    # [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_sync_reqack.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_adapter_reg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_adapter_sram.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_cmd_intg_chk.sv">>raptor_tcl.tcl

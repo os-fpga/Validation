@@ -235,7 +235,6 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_subst_perm.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_sync_reqack.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_sync_reqack_data.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/sram_ctrl.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/sram_ctrl_regs_reg_top.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_adapter_reg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_adapter_sram.sv">>raptor_tcl.tcl
@@ -246,6 +245,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_err.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_rsp_intg_gen.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_sram_byte.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/sram_ctrl.sv">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module $design">>raptor_tcl.tcl 
