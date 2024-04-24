@@ -7,11 +7,11 @@ start=`date +%s`
 design="o_buft_primitive_inst"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="iverilog" 
+tool_name="verilator" 
 
 #simulation stages
 post_synth_sim=false 
-post_route_sim=false 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options

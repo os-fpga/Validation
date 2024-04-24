@@ -25,7 +25,8 @@ always @(posedge CLK_IN) begin
   if (reset) begin
       dff <= 0;
   end
-    dff <= in;
+  else
+      dff <= in;
 end
 
 endmodule

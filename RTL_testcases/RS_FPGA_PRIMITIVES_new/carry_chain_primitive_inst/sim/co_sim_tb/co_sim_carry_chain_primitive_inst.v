@@ -1,7 +1,7 @@
 module co_sim_carry_chain_primitive_inst;
-    wire 		[7:0] 		sum	,	sum_netlist;
-    reg 		[7:0] 		g;
     reg 		[7:0] 		p;
+    reg 		[7:0] 		g;
+    wire 		[7:0] 		sum	,	sum_netlist;
     reg 		cin;
     wire 		mycout	,	mycout_netlist;
 	integer		mismatch	=	0;
@@ -16,21 +16,21 @@ carry_chain_primitive_inst	golden (.*);
 
 // Initialize values to zero 
 initial	begin
-	{g, p, cin } <= 'd0;
+	{p, g, cin } <= 'd0;
 	#50;
 	compare();
 // Generating random stimulus 
 	for (int i = 0; i < 100; i = i + 1) begin
-		g <= $random();
 		p <= $random();
+		g <= $random();
 		cin <= $random();
 		#50;
 		compare();
 	end
 
 	// ----------- Corner Case stimulus generation -----------
-	g <= 255;
 	p <= 255;
+	g <= 255;
 	cin <= 1;
 	compare();
 	#50;

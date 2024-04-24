@@ -1,6 +1,7 @@
 module co_sim_i_ddr_primitive_inst;
+// Clock signals
+    reg clock;
     wire 		[1:0] 		output_data	,	output_data_netlist;
-    reg 		clock;
     reg 		data_input;
     reg 		enable;
     reg 		reset;
@@ -14,28 +15,32 @@ i_ddr_primitive_inst	golden (.*);
 	i_ddr_primitive_inst_post_synth synth_net (.*, .output_data(output_data_netlist) );
 `endif
 
+//clock initialization for clock
+    initial begin
+        clock = 1'b0;
+        forever #5 clock = ~clock;
+    end
 // Initialize values to zero 
 initial	begin
-	{clock, data_input, enable, reset } <= 'd0;
-	#50;
+	repeat (2) @ (negedge clock);
+{data_input, enable, reset } <= 'd0;
+	 repeat (2) @ (negedge clock); 
 	compare();
-// Generating random stimulus 
-	for (int i = 0; i < 100; i = i + 1) begin
-		clock <= $random();
+	//Random stimulus generation
+	repeat(100) @ (negedge clock) begin
 		data_input <= $random();
 		enable <= $random();
 		reset <= $random();
-		#50;
+
 		compare();
 	end
 
 	// ----------- Corner Case stimulus generation -----------
-	clock <= 1;
 	data_input <= 1;
 	enable <= 1;
 	reset <= 1;
+	repeat (2) @ (negedge clock);
 	compare();
-	#50;
 	if(mismatch == 0)
 		$display("**** All Comparison Matched *** \n		Simulation Passed\n");
 	else

@@ -43,7 +43,8 @@ I_SERDES #(
     if (reset) begin
         dff <= 0;
     end
-      dff <= data_in;
+    else
+        dff <= data_in;
   end
 
 endmodule

@@ -1,12 +1,12 @@
 module o_ddr_primitive_inst (
-  input data_input,
+  input [1:0] data_input,
   input reset,
   input enable,
   input clk,
   output reg output_data
 );
 
-  reg out;
+  reg [1:0] out;
 
   O_DDR o_ddr_inst (
     .D(out),
@@ -17,7 +17,7 @@ module o_ddr_primitive_inst (
   );
 
   always @(posedge clk) begin
-    if (reset) begin
+    if (!reset) begin
       out <= 1'b0;   end 
     else begin
       out <= data_input;   end

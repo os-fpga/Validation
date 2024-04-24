@@ -4,7 +4,7 @@ module co_sim_o_ddr_primitive_inst;
 // Reset signals
     reg reset;
 
-    reg 		data_input;
+    reg 		[1:0] 		data_input;
     reg 		enable;
     wire 		output_data	,	output_data_netlist;
 	integer		mismatch	=	0;
@@ -24,10 +24,10 @@ o_ddr_primitive_inst	golden (.*);
     end
 //Reset Stimulus generation
 initial begin
-	reset <= 1;
+	reset <= 0;
 	@(negedge clk);
 	{data_input, enable } <= 'd0;
-	reset <= 0;
+	reset <= 1;
 	@(negedge clk);
 	$display ("***Reset Test is applied***");
 	@(negedge clk);
@@ -42,7 +42,7 @@ initial begin
 end
 
 	// ----------- Corner Case stimulus generation -----------
-	data_input <= 1;
+	data_input <= 3;
 	enable <= 1;
 	compare();
 

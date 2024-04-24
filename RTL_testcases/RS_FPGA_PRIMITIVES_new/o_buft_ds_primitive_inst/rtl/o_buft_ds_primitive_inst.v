@@ -3,7 +3,6 @@ module o_buft_ds_primitive_inst (
   input en1,
   input d2,
   input en2,
-  input T_O_BUFT_DS,
   output O_P_O_BUFT_DS,
   output O_N_O_BUFT_DS
 );
