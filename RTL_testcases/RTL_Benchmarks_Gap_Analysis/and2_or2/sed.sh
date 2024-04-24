@@ -1,0 +1,10 @@
+
+# sed -i "s|// 	wire \[0:0\] bcd\[0\]_gfpga;|   integer i;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+# sed -i "s|// 	wire \[0:0\] bcd\[1\]_gfpga;|   integer mismatch=0;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+sed -i "s|//----- Default net type -----|\`timescale 1ns / 1ps|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+sed -i "s|// ----- Default clock port is added here since benchmark does not contain one -------|    integer i=0;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+sed -i "s|// ----- Shared inputs -------|    integer mismatch=0;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+sed -i "s|// ----- FPGA fabric instanciation -------|    wire c;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+sed -i "s|// ----- FPGA fabric outputs -------|    wire d;|" $(find . -type f -name "fabric_and2_or2_formal_random_top_tb.v")
+# sed -i "s|clk_fm\[15\] = 1'b0|clk_fm\[15\] = clock0|" $(find . -type f -name "fabric_and2_or2_top_formal_verification.v")
+# sed -i "s|global_resetn_fm\[0\] = 1'b0|global_resetn_fm\[0\] = 1'b1|" $(find . -type f -name "fabric_and2_or2_top_formal_verification.v")
