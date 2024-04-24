@@ -21,7 +21,8 @@ BOOT_CLOCK_primitive_inst	golden (.*);
     end
 // Initialize values to zero 
 initial	begin
-	
+	repeat (2) @ (negedge clk1);
+
 	async_signal <= 'd0;
 	 repeat (2) @ (negedge clk1); 
 	compare();

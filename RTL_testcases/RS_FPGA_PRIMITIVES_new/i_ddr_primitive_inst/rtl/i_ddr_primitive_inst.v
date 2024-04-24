@@ -3,10 +3,10 @@ module i_ddr_primitive_inst (
   input reset,
   input enable,
   input clock,
-  output reg [1:0] output_data
+  output reg [1:0] output_data = 0
 );
 
-  wire out;
+  wire [1:0] out;
 
   I_DDR i_ddr_inst (
     .D(data_input),
@@ -16,7 +16,7 @@ module i_ddr_primitive_inst (
     .Q(out)
   );
 
-  always @(*) begin
+  always @(posedge clock) begin
     if (enable) begin
       output_data <= out;   end 
     else begin

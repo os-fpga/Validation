@@ -1,7 +1,6 @@
 module co_sim_o_buft_ds_primitive_inst;
     wire 		O_N_O_BUFT_DS	,	O_N_O_BUFT_DS_netlist;
     wire 		O_P_O_BUFT_DS	,	O_P_O_BUFT_DS_netlist;
-    reg 		T_O_BUFT_DS;
     reg 		d1;
     reg 		d2;
     reg 		en1;
@@ -18,12 +17,11 @@ o_buft_ds_primitive_inst	golden (.*);
 
 // Initialize values to zero 
 initial	begin
-	{T_O_BUFT_DS, d1, d2, en1, en2 } <= 'd0;
+	{d1, d2, en1, en2 } <= 'd0;
 	#50;
 	compare();
 // Generating random stimulus 
 	for (int i = 0; i < 100; i = i + 1) begin
-		T_O_BUFT_DS <= $random();
 		d1 <= $random();
 		d2 <= $random();
 		en1 <= $random();
@@ -33,7 +31,6 @@ initial	begin
 	end
 
 	// ----------- Corner Case stimulus generation -----------
-	T_O_BUFT_DS <= 1;
 	d1 <= 1;
 	d2 <= 1;
 	en1 <= 1;

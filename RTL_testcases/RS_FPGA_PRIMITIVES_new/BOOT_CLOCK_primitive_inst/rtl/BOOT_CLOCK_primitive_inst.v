@@ -5,7 +5,7 @@ module BOOT_CLOCK_primitive_inst (
   output reg O_BOOT_CLOCK // Clock output
 );
 
-  reg [1:0] sync_reg; // Two-stage synchronizer flip-flops
+  reg sync_reg1=0, sync_reg0=0; // Two-stage synchronizer flip-flops
 
   BOOT_CLOCK #(
     .PERIOD(30.0) // Set the clock period to 30.0 ns
@@ -14,12 +14,12 @@ module BOOT_CLOCK_primitive_inst (
   );
 
   always @(posedge clk1) begin    // Capture input on source clock domain
-    sync_reg[0] <= async_signal;
+    sync_reg0 <= async_signal;
   end
 
   always @(posedge O_BOOT_CLOCK) begin    // Release synchronized signal on destination clock domain
-    sync_signal <= sync_reg[1];
-    sync_reg[1] <= sync_reg[0];
+    sync_signal <= sync_reg1;
+    sync_reg1 <= sync_reg0;
   end
 
 endmodule
