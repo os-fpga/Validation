@@ -4,15 +4,15 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="comparator_1bit"
+design="comparator1BitVerilog"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
-bitstream_sim=false
+post_synth_sim=true 
+post_route_sim=true 
+bitstream_sim=true
 
 #raptor options
 device="GEMINI_COMPACT_104x68"
@@ -191,13 +191,6 @@ parse_cga exit 1; }
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
-    
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
-        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
@@ -205,6 +198,13 @@ parse_cga exit 1; }
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    echo "exec python3 $main_path/../../../scripts/tb_generator.py $design $main_path">>raptor_tcl.tcl
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl
+        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl
+    else
+        echo ""
+    fi
     if [ "$post_synth_sim" == true ]; then 
         echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
@@ -262,10 +262,26 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
-            echo "clear_simulation_files">>raptor_tcl.tcl 
-            echo "add_simulation_file testbench.sv">>raptor_tcl.tcl 
-            echo "add_library_path ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl 
-            echo "simulate "bitstream_bd" "icarus" ">>raptor_tcl.tcl 
+            echo "">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v $design">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_top_formal_verification.v $design">>raptor_tcl.tcl
+            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "file mkdir $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
+            echo "if {[file exists $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/CustomModules]} {">>raptor_tcl.tcl
+            echo "    puts \"Destination directory already exists. Skipping the copy operation.\"">>raptor_tcl.tcl
+            echo "} else {">>raptor_tcl.tcl
+            echo "    file copy -force /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
+            echo "}">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "# Bitstream Simulation">>raptor_tcl.tcl
+            echo "exec /bin/bash ../sed.sh">>raptor_tcl.tcl
+            echo "clear_simulation_files">>raptor_tcl.tcl
+            echo "add_library_path /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
+            echo "add_library_path $PWD/rtl/">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "">>raptor_tcl.tcl
+            echo "simulate \"bitstream_bd\" \"icarus\"">>raptor_tcl.tcl
         else
             echo ""
         fi
