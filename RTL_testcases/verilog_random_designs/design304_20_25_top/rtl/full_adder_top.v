@@ -19,8 +19,7 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     full_adder #(.WIDTH(WIDTH)) full_adder_inst (.clk(clk),.rst(rst),.data_in(data_in),.data_out(d_out),.cin(cin),.cout(cout));
 
 
-    assign data_out[31:16]=16'hffff;
-    assign data_out[15:0]=d_out;
+    assign data_out = d_out;
 //    assign cout=cout;
 endmodule
 
