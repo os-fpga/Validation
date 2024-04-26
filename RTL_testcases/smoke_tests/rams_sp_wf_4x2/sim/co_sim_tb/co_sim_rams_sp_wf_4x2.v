@@ -2,7 +2,7 @@
 module co_sim_rams_sp_wf_4x2;
     reg clk;
     reg we;
-    reg [2:0] addr;
+    reg [1:0] addr;
     reg [1:0] di;
     wire [1:0] dout, dout_netlist;
 

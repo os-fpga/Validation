@@ -2,7 +2,7 @@
 module rams_sp_wf_4x2 (clk, we, addr, di, dout);
 input clk;
 input we;
-input [2:0] addr;
+input [1:0] addr;
 input [1:0] di;
 output [1:0] dout;
 
