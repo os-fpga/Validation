@@ -254,7 +254,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                     first_pnr_sim_line = i
                 last_pnr_sim_line = i
         
-            if "Simulation start" in line:
+            if "SBS: Bitstream simulation for design" in line:
                 simulation_start_line = i
             if "Simulation Succeed" in line:
                 simulation_succeed_line = i
@@ -308,17 +308,17 @@ def parse_log_files(file,timing_file,log_line_keys_map):
             print("SGT: Gate simulation for design: not found in the log.")
 
         bit_sim_status=None
-        if simulation_start_line != -1 and simulation_succeed_line != -1:
-            for line in lines[simulation_start_line:simulation_succeed_line+1]:
-                if "Status:" in line:
-                    if "Status: Test Failed" in line or "Test Failed" in line:
-                        bit_sim_status = "Fail"
-                        break
-                    elif "Test Passed" in line or "Status: Test Passed" in line:
-                        bit_sim_status = "Pass"
-                        # break
-                    else:
-                        bit_sim_status = "Fail"
+        if simulation_start_line != -1: # and simulation_succeed_line != -1:
+            for line in lines[simulation_start_line:]: #:simulation_succeed_line+1]:
+                # if "Status:" in line:
+                if "Status: Test Failed" in line or "Test Failed" in line or "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line or "Error" in line or "ERROR" in line or "error" in line:
+                    bit_sim_status = "Fail"
+                    break
+                elif "Test Passed" in line or "Status: Test Passed" in line or "Data Matched" in line or "Simulation Passed" in line or "All Comparison Matched" in line:
+                    bit_sim_status = "Pass"
+                    break
+                else:
+                    bit_sim_status = "Fail"
         else:
             print("Bitstream simulation not found in the log.")
 
