@@ -78,9 +78,11 @@ def create_folders_and_file():
     top_module = data['top']
     
     # memory info 
-    rtl_mem = data['memories']
-    print ("RTL MEMORY is ", rtl_mem)
-    print ("len of memory is " , len(rtl_mem))
+    if "memories" in data:
+        rtl_mem = data['memories']
+    else:
+        rtl_mem = []
+        print("No memories were found in this design")
 
     # Create a file with the topModule name
     filename = file_string + top_module + ".v"
