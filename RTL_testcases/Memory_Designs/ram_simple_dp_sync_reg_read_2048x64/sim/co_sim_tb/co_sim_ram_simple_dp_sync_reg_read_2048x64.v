@@ -41,7 +41,7 @@ module co_sim_ram_simple_dp_sync_reg_read_2048x64;
     //not writing and reading simulatneously from last registered addr during we high
     for (integer i=0; i<2048; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,1023); write_addr <= $urandom_range(1024,2047); we <=0;
+        write_addr <= $urandom_range(0,1023); read_addr <= $urandom_range(1024,2047); we <=0;
         cycle = cycle +1;
         
         compare(cycle);
@@ -51,7 +51,7 @@ module co_sim_ram_simple_dp_sync_reg_read_2048x64;
     //random registtered addr
     for (integer i=0; i<2048; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,1023); write_addr <= $urandom_range(1024,2047); we <=1'b1; din<= $random;
+        write_addr <= $urandom_range(0,1023); read_addr <= $urandom_range(1024,2047); we <=1'b1; din<= $random;
         cycle = cycle +1;
         
         compare(cycle);
@@ -71,6 +71,15 @@ module co_sim_ram_simple_dp_sync_reg_read_2048x64;
      for (integer i=0; i<2048; i=i+1)begin
         repeat (1) @ (negedge clk)
         read_addr <= $urandom_range(0,1023); write_addr <= $urandom_range(1024,2047); we <=$random; din<= $random;
+        cycle = cycle +1;
+        
+        compare(cycle);
+
+    end
+
+     for (integer i=0; i<2048; i=i+1)begin
+        repeat (1) @ (negedge clk)
+        write_addr <= $urandom_range(0,1023); read_addr <= $urandom_range(1024,2047); we <=$random; din<= $random;
         cycle = cycle +1;
         
         compare(cycle);
