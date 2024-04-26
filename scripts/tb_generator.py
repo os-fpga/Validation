@@ -1,3 +1,28 @@
+#  -----------------------------------------------------------------------------
+#  FILE NAME      : tb_generator.py
+#  AUTHOR         : Muhammad Bilal Malik
+#  AUTHOR'S EMAIL : bilalmalik12341@gmail.com
+#  -----------------------------------------------------------------------------
+#  RELEASE HISTORY
+#  VERSION          DATE       AUTHOR                        DESCRIPTION
+#  1.0              2024       Muhammad Bilal Malik          Initial Version
+#  -----------------------------------------------------------------------------
+#  -----------------------------------------------------------------------------
+#  PURPOSE: Generates LEC based test bench to compare RTL vs NETLIST O/Ps
+#  -----------------------------------------------------------------------------
+#  REQUIRES: 
+        #    Raptor
+        #    random
+        #    json
+        #    sys
+#  -----------------------------------------------------------------------------
+#  USED BY:  Raptor
+#  -----------------------------------------------------------------------------
+#  DESCRIPTION: 
+        #   Parse .json file created after synthesis to extract and create
+        #   test bench for combinational as well as sequential designs
+#  -----------------------------------------------------------------------------
+
 import os
 import random
 import json
@@ -15,7 +40,7 @@ def create_folders_and_file():
         "run_1",
         "synth_1_1",
         "synthesis",
-        "port_info.json"
+        "netlist_info.json"
     )
 
     # Define the folder names
@@ -51,6 +76,11 @@ def create_folders_and_file():
 
     # Extract topModule
     top_module = data['top']
+    
+    # memory info 
+    rtl_mem = data['memories']
+    print ("RTL MEMORY is ", rtl_mem)
+    print ("len of memory is " , len(rtl_mem))
 
     # Create a file with the topModule name
     filename = file_string + top_module + ".v"
@@ -110,7 +140,7 @@ def create_folders_and_file():
             
     # Write module name and port information to a file
     with open(output_filename, "w") as file:
-        file.write("module " + file_string + top_module + ";\n")
+        file.write("`timescale 1ns/1ps\nmodule " + file_string + top_module + ";\n")
         if clk_port:
             file.write("// Clock signals\n")
             for port in clk_port:
@@ -159,20 +189,20 @@ def create_folders_and_file():
             print("FOUND COMBINATIONAL DESIGN")
             # initialize values to zero
             if len(input_ports) > 1:
-              file.write("// Initialize values to zero \ninitial\tbegin\n\t{")
+              file.write("\t\t// Initialize values to zero \ninitial\tbegin\n\t{")
               input_port_str = ', '.join(input_ports)
               input_port_str += " } <= 'd0;"
               print(input_port_str, file=file) 
             else:
               file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + " <= 'd0;\n")
             # generate random stimulus
-            file.write('\t#50;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
+            file.write('\t#10;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
             random_stimulus_lines = []
             for port in input_ports:
                 random_stimulus_lines.append(f'{port} <= $random();')    
             for rand_line in random_stimulus_lines:
               file.write('\t\t' + rand_line + '\n')
-            file.write('\t\t#50;\n\t\tcompare();\n\tend\n\n')            
+            file.write('\t\t#10;\n\t\tcompare();\n\tend\n\n')            
             
             # generate corner case stimulus 
             file.write("\t// ----------- Corner Case stimulus generation -----------\n")
@@ -188,15 +218,15 @@ def create_folders_and_file():
               stimulus_lines.append(f'{port} <= {max_value};')
             for line in stimulus_lines:
               file.write('\t' + line + '\n')
-            file.write('\tcompare();\n\t#50;\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-            file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n') 
+            file.write('\tcompare();\n\t#10;\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
+            file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#200;\n\t$finish;\nend\n\n') 
         else:
             print ("FOUND SEQUENTIAL DESIGN")
             for clk in clk_port:
                 file.write('//clock initialization for ' + clk + '\n')
                 file.write('    initial begin\n')
                 file.write('        ' + clk + " = 1'b0;\n")
-                file.write('        forever #5 ' + clk + ' = ~' + clk + ';\n')
+                file.write('        forever #1 ' + clk + ' = ~' + clk + ';\n')
                 file.write('    end\n')      
             
             # check for reset signal 
@@ -204,10 +234,23 @@ def create_folders_and_file():
                 print("No Reset Signal Found")
                 # initialize values to zero
                 for clk in clk_port:
-                    file.write("// Initialize values to zero \ninitial\tbegin\n\t")
+                    file.write("\t\t// Initialize values to zero \ninitial\tbegin\n\t")
+                    # look for memories and initialize to 0 
+                    if len(rtl_mem) > 0:
+                        # Iterate over each memory in the "memories" list
+                        for memory in rtl_mem:
+                            memory_name = memory["name"]
+                            memory_width = int(memory["width"])
+                            memory_depth = int(memory["depth"])
+                            # Write the module declaration to the file
+                            file.write(f"\n// Initialization for {memory_name}\n")
+                            # Initialize the memory with 0 values for each depth
+                            file.write(f"\tfor (integer i = 0; i < {memory_depth}; i++)  begin\n")
+                            file.write(f"\t\tgolden.{memory_name}[i] = 'b0;\n")
+                            file.write("\tend\n\n")
                     file.write('repeat (2) @ (negedge ' + clk + ');\n')
                     if len(input_ports) > 1:
-                        file.write("{")
+                        file.write("\t{")
                         input_port_str = ', '.join(input_ports)
                         input_port_str += " } <= 'd0;"
                         print(input_port_str, file=file) 
@@ -242,11 +285,24 @@ def create_folders_and_file():
                     for line in stimulus_lines:
                         file.write('\t' + line + '\n')
                     file.write('\trepeat (2) @ (negedge ' + clk + ');\n\tcompare();\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-                    file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#50;\n\t$finish;\nend\n\n')  
+                    file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\t#200;\n\t$finish;\nend\n\n')  
             else:
                 print("Found Reset Signal:")
                 # Check sync_reset value and write stimulus generation accordingly
                 file.write ("//Reset Stimulus generation\ninitial begin\n")
+                # look for memories and initialize to 0 
+                if len(rtl_mem) > 0:
+                    # Iterate over each memory in the "memories" list
+                    for memory in rtl_mem:
+                        memory_name = memory["name"]
+                        memory_width = int(memory["width"])
+                        memory_depth = int(memory["depth"])
+                        # Write the module declaration to the file
+                        file.write(f"\n// Initialization for {memory_name}\n")
+                        # Initialize the memory with 0 values for each depth
+                        file.write(f"\tfor (integer i = 0; i < {memory_depth}; i++)  begin\n")
+                        file.write(f"\t\tgolden.{memory_name}[i] = 'b0;\n")
+                        file.write("\tend\n\n")
                 for clk in clk_port:
                     for rst in reset_port:
                         if not input_ports:
@@ -296,7 +352,7 @@ def create_folders_and_file():
                 for line in stimulus_lines:
                     file.write('\t' + line + '\n')
                 file.write('\tcompare();\n\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
-                file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\trepeat(50) @(posedge ' + clk + ');\n\t$finish;\nend\n\n')
+                file.write('$display("%0d comparison(s) mismatched\\nERROR: SIM: Simulation Failed", mismatch);\n\trepeat(200) @(posedge ' + clk + ');\n\t$finish;\nend\n\n')
                       
         # compare task
         dec = len(out_instances)
