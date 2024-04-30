@@ -29,34 +29,34 @@ module co_sim_ram_true_reg_addr_dp_512x16_logic;
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
 
-        addrA <= i; addrB <= {$random} % 512; weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
 
     end
 
      for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addrA <= i; addrB <= i; weA <=1'b1; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(256,511); addrB <= $urandom_range(0,255); weA <=1'b1; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
     end
 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addrA <= i; addrB <= i; weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
+        addrA <= $urandom_range(256,511); addrB <= $urandom_range(0,255); weA <=1'b1; weB <=1'b1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
     end
 
    for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addrA <= i; addrB <= i; weA <=1'b0; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
+         addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b0; weB <=1'b0; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
     end
     if(mismatch == 0)

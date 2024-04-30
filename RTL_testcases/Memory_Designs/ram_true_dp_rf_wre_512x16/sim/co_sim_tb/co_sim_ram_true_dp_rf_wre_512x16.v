@@ -1,103 +1,102 @@
-
+`timescale 1ns/1ps
 module co_sim_ram_true_dp_rf_wre_512x16;
+// Clock signals
+    reg clk;
+    reg 		[15:0] 		dinB;
+    reg 		[8:0] 		addrB;
+    wire 		[15:0] 		doutA	,	doutA_netlist;
+    reg 		[15:0] 		dinA;
+    reg 		[8:0] 		addrA;
+    wire 		[15:0] 		doutB	,	doutB_netlist;
+    reg 		reA;
+    reg 		reB;
+    reg 		weA;
+    reg 		weB;
+	integer		mismatch	=	0;
 
-    reg clk, weA, weB, reA, reB;
-    reg [8:0] addrA, addrB;
-    reg [15:0] dinA, dinB;
-    wire [15:0] doutA, doutB, doutA_netlist, doutB_netlist;
+ram_true_dp_rf_wre_512x16	golden (.*);
 
-    integer mismatch=0;
-    reg [6:0]cycle, i;
+`ifdef PNR
+	ram_true_dp_rf_wre_512x16_post_route route_net (.*, .doutA(doutA_netlist), .doutB(doutB_netlist) );
+`else
+	ram_true_dp_rf_wre_512x16_post_synth synth_net (.*, .doutA(doutA_netlist), .doutB(doutB_netlist) );
+`endif
 
-    ram_true_dp_rf_wre_512x16 golden(.*);
-    `ifdef PNR
-        ram_true_dp_rf_wre_512x16_post_route netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
-    `else
-        ram_true_dp_rf_wre_512x16_post_synth netlist(.*, .doutA(doutA_netlist), .doutB(doutB_netlist));
-    `endif
-
-
-    always #10 clk = ~clk;
-    // initial begin
-    //     for(integer i = 0; i<512; i=i+1) begin 
-    //         golden.ram[i] ='b0;
-    //     end 
-    // end
+//clock initialization for clk
     initial begin
-
-    {clk, weA,weB,reA, reB, addrA,addrB, dinA, dinB, cycle, i} = 0;
- 
-    repeat (1) @ (negedge clk);
-    
-    for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-
+        clk = 1'b0;
+        forever #1 clk = ~clk;
     end
+		// Initialize values to zero 
+initial	begin
+	
+// Initialization for ram
+	for (integer i = 0; i < 512; i++)  begin
+		golden.ram[i] = 'b0;
+	end
 
-     for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b0; reA<=0; reB <=1; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-    end
+repeat (2) @ (negedge clk);
+	{dinB, addrB, dinA, addrA, reA, reB, weA, weB } <= 'd0;
+	 repeat (2) @ (negedge clk); 
+	compare();
+	//Random stimulus generation
+	repeat(100) @ (negedge clk) begin
+		dinB <= $random();
+		addrB <= $urandom_range(0,255);
+		dinA <= $random();
+		addrA <= $urandom_range(256,511);
+		reA <= $random();
+		reB <= $random();
+		weA <= $random();
+		weB <= $random();
 
-    for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-    end
+		compare();
+	end
+	//Random stimulus generation
+	repeat(100) @ (negedge clk) begin
+		dinB <= $random();
+		addrA <= $urandom_range(0,255);
+		dinA <= $random();
+		addrB <= $urandom_range(256,511);
+		reA <= $random();
+		reB <= $random();
+		weA <= $random();
+		weB <= $random();
 
-   for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b0; weB <=1'b0;  reA<=1; reB <=1; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-    end
+		compare();
+	end
 
-    //random
-    for (integer i=0; i<512; i=i+1)begin
-        repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511);  weA <= {$random}; weB <= {$random}; reA <= {$random}; reB <= {$random}; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-       
-        compare(cycle);
-    end
-    if(mismatch == 0)
-        $display("\n**** All Comparison Matched ***\nSimulation Passed");
-    else
-        $display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
-    
+	// ----------- Corner Case stimulus generation -----------
+	dinB <= 65535;
+	addrB <= 511;
+	dinA <= 65535;
+	addrA <= 0;
+	reA <= 1;
+	reB <= 1;
+	weA <= 1;
+	weB <= 1;
+	repeat (2) @ (negedge clk);
+	compare();
+	if(mismatch == 0)
+		$display("**** All Comparison Matched *** \n		Simulation Passed\n");
+	else
+		$display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
+	#200;
+	$finish;
+end
 
-    repeat (10) @(negedge clk); $finish;
-    end
-
-    task compare(input integer cycle);
-    //$display("\n Comparison at cycle %0d", cycle);
-    if(doutA !== doutA_netlist) begin
-        $display("doutA mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutA, doutA_netlist,$time);
-        mismatch = mismatch+1;
-    end
-
-     if(doutB !== doutB_netlist) begin
-        $display("doutB mismatch. Golden: %0h, Netlist: %0h, Time: %0t", doutB, doutB_netlist,$time);
-        mismatch = mismatch+1;
-    end
-    
-    
-    endtask
-
+task compare();
+	if ( doutA !== doutA_netlist	||	doutB !== doutB_netlist ) begin
+		$display("Data Mismatch: Actual output: %0d, %0d, Netlist Output %0d, %0d, Time: %0t ", doutA, doutB, doutA_netlist, doutB_netlist,  $time);
+		mismatch = mismatch+1;
+	end
+	else
+		$display("Data Matched: Actual output: %0d, %0d, Netlist Output %0d, %0d, Time: %0t ", doutA, doutB, doutA_netlist, doutB_netlist,  $time);
+endtask
 
 initial begin
-    $dumpfile("tb.vcd");
-    $dumpvars;
+	$dumpfile("tb.vcd");
+	$dumpvars;
 end
+
 endmodule

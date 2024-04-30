@@ -5,7 +5,7 @@ module ram_simple_dp_reg_addr_dc_512x32_logic(
    output  [31:0] dout);
     
    (* ram_style = "logic" *)   
-   reg        [31:0] ram[0:512];
+   reg        [31:0] ram[0:511];
 
    reg       [8:0] read_addr_reg;
    always @ (posedge write_clock)                // write clock

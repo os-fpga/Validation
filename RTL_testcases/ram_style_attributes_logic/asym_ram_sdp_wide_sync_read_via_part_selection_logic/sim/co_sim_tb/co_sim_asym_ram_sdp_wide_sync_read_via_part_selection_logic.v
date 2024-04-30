@@ -2,7 +2,7 @@
 module co_sim_asym_ram_sdp_wide_sync_read_via_part_selection_logic;
     
 reg clk, write_enable, read_enable;
-reg [1:0] byte_lane;
+reg byte_lane;
 reg [7:0] write_addr;
 reg [5:0] read_addr;
 reg [7:0] write_data;
@@ -31,7 +31,7 @@ wire [15:0] read_data, read_data_netlist;
     //write 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        write_addr <= $urandom_range(0,511); read_addr <= $urandom_range(512,1023); write_enable <=1'b1; byte_lane<= 2'b10; write_data<= $random;
+        write_addr <= $urandom_range(0,255); read_addr <= $urandom_range(0,63); write_enable <=1'b1; byte_lane<= 2'b10; write_data<= $random;
         cycle = cycle +1;
    
         compare(cycle);
@@ -41,7 +41,7 @@ wire [15:0] read_data, read_data_netlist;
     //reading 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,510); read_enable<=1;
+        read_addr <= $urandom_range(0,63); read_enable<=1;
         cycle = cycle +1;
    
         compare(cycle);
@@ -50,7 +50,7 @@ wire [15:0] read_data, read_data_netlist;
     //Random 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        write_addr <= $urandom_range(512,1023); write_enable <=$random; byte_lane<= $random; write_data<= $random;
+        write_addr <= $urandom_range(0,255); write_enable <=$random; byte_lane<= $random; write_data<= $random;
         cycle = cycle +1;
    
         compare(cycle);
@@ -60,7 +60,17 @@ wire [15:0] read_data, read_data_netlist;
     //reading 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        write_addr <= $urandom_range(512,1023); write_enable <=$random; byte_lane<= $random; write_data<= $random; read_addr <= $urandom_range(0,511); read_enable<=$random;
+        write_addr <= $urandom_range(0,254);  read_addr <= 6'd63; write_enable <=$random; byte_lane<= $random; write_data<= $random; read_enable<=$random;
+        cycle = cycle +1;
+   
+        compare(cycle);
+
+    end
+
+    //reading 
+    for (integer i=0; i<1024; i=i+1)begin
+        repeat (1) @ (negedge clk)
+        write_addr <= $urandom_range(1,255);  read_addr <= 6'd0; write_enable <=$random; byte_lane<= $random; write_data<= $random; read_enable<=$random;
         cycle = cycle +1;
    
         compare(cycle);

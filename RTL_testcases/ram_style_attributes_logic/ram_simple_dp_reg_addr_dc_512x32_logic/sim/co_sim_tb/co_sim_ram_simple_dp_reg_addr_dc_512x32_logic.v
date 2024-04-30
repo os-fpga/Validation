@@ -37,9 +37,9 @@ module co_sim_ram_simple_dp_reg_addr_dc_512x32_logic;
     //write 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge write_clock)
-        read_addr <= i; write_addr <= i; we <=1'b1; din<= i;
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=1'b1; din<= i;
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
 
     end
@@ -47,9 +47,9 @@ module co_sim_ram_simple_dp_reg_addr_dc_512x32_logic;
     //reading 
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge read_clock)
-        read_addr <= i; write_addr <= i; we <=0;
+        write_addr <= $urandom_range(0,255); read_addr <= $urandom_range(256,511);  we <=0;
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
 
     end
@@ -57,22 +57,22 @@ module co_sim_ram_simple_dp_reg_addr_dc_512x32_logic;
     //writes
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge read_clock)
-        read_addr <= i; write_addr <= i; we <=1'b1; din<= 'h25;
+        write_addr <= $urandom_range(0,255); read_addr <= $urandom_range(256,511); we <=1'b1; din<= 'h25;
         cycle = cycle +1;
-        #1;
+        
         compare(cycle);
 
     end
 
-    // //read from only last registered addr
-    // for (integer i=0; i<512; i=i+1)begin
-    //     repeat (1) @ (negedge clk)
-    //     read_addr <= i; we <=0;
-    //     cycle = cycle +1;
-    //     #1;
-    //     compare(cycle);
+    for (integer i=0; i<512; i=i+1)begin
+        repeat (1) @ (negedge read_clock)
+        read_addr <= $urandom_range(0,255); write_addr <= $urandom_range(256,511); we <=1'b0;
+        cycle = cycle +1;
+        
+        compare(cycle);
 
-    // end
+    end
+   
     if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
