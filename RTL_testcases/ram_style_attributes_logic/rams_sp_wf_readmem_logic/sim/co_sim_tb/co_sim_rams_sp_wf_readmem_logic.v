@@ -24,8 +24,8 @@ module co_sim_rams_sp_wf_readmem_logic;
 
     repeat (1) @ (negedge clk);
 
-    for (integer i=0; i<1024; i=i+1)begin
-        addr <= i; //we <=1; di<= $random;
+    for (integer i=0; i<512; i=i+1)begin
+        addr <= i; we <= 0;
         cycle = cycle +1;
         repeat (1) @ (negedge clk)
 
@@ -34,14 +34,26 @@ module co_sim_rams_sp_wf_readmem_logic;
 
     end
 
-    // //not writing and reading from the addr of rams
-    // for (integer i=0; i<1024; i=i+1)begin
-    //     addr <= i; we <=0;
-    //     cycle = cycle +1;
-    //     repeat (1) @ (negedge clk)
-    //     compare(cycle);
+    for (integer i=0; i<512; i=i+1)begin
+        addr <= i; we <=1; di <= $random;
+        cycle = cycle +1;
+        repeat (1) @ (negedge clk)
 
-    // end
+        //$display ("%0t %0h", $time, addr);
+        compare(cycle);
+
+    end
+
+    for (integer i=0; i<512; i=i+1)begin
+        addr <= i; we <= 0 ;
+        cycle = cycle +1;
+        repeat (1) @ (negedge clk)
+
+        //$display ("%0t %0h", $time, addr);
+        compare(cycle);
+
+    end
+
     if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else

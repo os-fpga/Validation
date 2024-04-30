@@ -1,6 +1,6 @@
-module asym_ram_sdp_wide_sync_read_via_part_selection_logic #(parameter ADDR_WIDTH = 16)(
+module asym_ram_sdp_wide_sync_read_via_part_selection_logic #(parameter ADDR_WIDTH = 8)(
 input clk, write_enable, read_enable,
-input [1:0] byte_lane,
+input byte_lane,
 input [7:0] write_addr,
 input [5:0] read_addr,
 input [7:0] write_data,

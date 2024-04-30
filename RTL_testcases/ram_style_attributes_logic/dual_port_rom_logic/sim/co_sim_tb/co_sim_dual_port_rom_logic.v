@@ -22,17 +22,17 @@ module co_sim_dual_port_rom_logic
     {clk, addr_a, addr_b, i} = 0;
 
     repeat (1) @ (negedge clk);
-    for (integer i=0; i<ADDR_WIDTH; i=i+1)begin
+    for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addr_a <= i; addr_b <= i;
+        addr_a <= $urandom_range(0,255); addr_b <= $urandom_range(256,512);
        
         compare();
 
     end
 
-    for (integer i=0; i<ADDR_WIDTH; i=i+1)begin
+    for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addr_a <= $urandom_range(0,ADDR_WIDTH-1); addr_b <= $urandom_range(0,ADDR_WIDTH-1);
+        addr_b <= $urandom_range(0,255); addr_a <= $urandom_range(256,512);
        
         compare();
 

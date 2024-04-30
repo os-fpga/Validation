@@ -25,7 +25,7 @@ module co_sim_ram_simple_dp_synch_wf_readmem_512x16_logic;
     repeat (1) @ (negedge clk);
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,512); we <=1'b1; re<=1'b0; din<= $random;
+        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,511); we <=1'b1; re<=1'b0; din<= $random;
         cycle = cycle +1;
       
         compare(cycle);
@@ -34,7 +34,7 @@ module co_sim_ram_simple_dp_synch_wf_readmem_512x16_logic;
 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,512); we <=0; re<=1'b1;
+        write_addr <= $urandom_range(0,256); read_addr <= $urandom_range(257,511); we <=0; re<=1'b1;
         cycle = cycle +1;
       
         compare(cycle);
@@ -43,7 +43,7 @@ module co_sim_ram_simple_dp_synch_wf_readmem_512x16_logic;
 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,512); we <=1'b1; re<=1'b0; din<= $random;
+        write_addr <= $urandom_range(0,256); read_addr <= $urandom_range(257,511); we <=1'b1; re<=1'b0; din<= $random;
         cycle = cycle +1;
       
         compare(cycle);
@@ -52,7 +52,7 @@ module co_sim_ram_simple_dp_synch_wf_readmem_512x16_logic;
 
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,512); we <=0; re<=1'b1;
+        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,511); we <=0; re<=1'b1;
         cycle = cycle +1;
       
         compare(cycle);
@@ -62,7 +62,7 @@ module co_sim_ram_simple_dp_synch_wf_readmem_512x16_logic;
     //random
     for (integer i=0; i<1024; i=i+1)begin
         repeat (1) @ (negedge clk)
-        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,512); we <= {$random}; re <= {$random};  din<= {$random}; 
+        read_addr <= $urandom_range(0,256); write_addr <= $urandom_range(257,511); we <= {$random}; re <= {$random};  din<= {$random}; 
         cycle = cycle +1;
        
         compare(cycle);
