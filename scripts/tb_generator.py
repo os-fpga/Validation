@@ -56,6 +56,9 @@ def create_folders_and_file():
     
     # List to check outputs
     out_instances = []
+    
+    # List to store memories
+    filtered_mem = []
 
     # Create the main folder "sim"
     try:
@@ -79,7 +82,11 @@ def create_folders_and_file():
     
     # memory info 
     if "memories" in data:
-        rtl_mem = data['memories']
+        for port in data["memories"]:
+            # Check if the "name" field contains "$" or ":" characters
+            if "$" not in port["name"] and ":" not in port["name"]:
+                filtered_mem.append(port)
+        rtl_mem = filtered_mem
     else:
         rtl_mem = []
         print("No memories were found in this design")
@@ -146,13 +153,13 @@ def create_folders_and_file():
         if clk_port:
             file.write("// Clock signals\n")
             for port in clk_port:
-                file.write("    reg " + port + ";\n")
+                file.write("    reg\t\t\t" + port + ";\n")
 
         # Check if reset_port list is not empty and write its contents to the file
         if reset_port:
             file.write("// Reset signals\n")
             for port in reset_port:
-                file.write("    reg " + port + ";\n")
+                file.write("    reg\t\t\t" + port + ";\n")
             file.write("\n")
         for i, (port, info) in enumerate(ports.items()):
             if i != 0:
@@ -201,7 +208,7 @@ def create_folders_and_file():
             file.write('\t#10;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
             random_stimulus_lines = []
             for port in input_ports:
-                random_stimulus_lines.append(f'{port} <= $random();')    
+                random_stimulus_lines.append(f'{port} <= $urandom();')    
             for rand_line in random_stimulus_lines:
               file.write('\t\t' + rand_line + '\n')
             file.write('\t\t#10;\n\t\tcompare();\n\tend\n\n')            
@@ -225,18 +232,18 @@ def create_folders_and_file():
         else:
             print ("FOUND SEQUENTIAL DESIGN")
             for clk in clk_port:
-                file.write('//clock initialization for ' + clk + '\n')
-                file.write('    initial begin\n')
-                file.write('        ' + clk + " = 1'b0;\n")
-                file.write('        forever #1 ' + clk + ' = ~' + clk + ';\n')
-                file.write('    end\n')      
+                file.write('// clock initialization for ' + clk + '\n')
+                file.write('initial begin\n')
+                file.write('\t' + clk + " = 1'b0;\n")
+                file.write('\tforever #1 ' + clk + ' = ~' + clk + ';\n')
+                file.write('end\n')      
             
             # check for reset signal 
             if len(reset_port) == 0:  
                 print("No Reset Signal Found")
                 # initialize values to zero
                 for clk in clk_port:
-                    file.write("\t\t// Initialize values to zero \ninitial\tbegin\n\t")
+                    file.write("\n// Initialize values to zero \ninitial\tbegin\n\t")
                     # look for memories and initialize to 0 
                     if len(rtl_mem) > 0:
                         # Iterate over each memory in the "memories" list
@@ -267,7 +274,7 @@ def create_folders_and_file():
                     file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
                     random_stimulus_lines = []
                     for port in input_ports:
-                        random_stimulus_lines.append(f'{port} <= $random();')    
+                        random_stimulus_lines.append(f'{port}\t\t\t <= $urandom();')    
                     for rand_line in random_stimulus_lines:
                         file.write('\t\t' + rand_line + '\n')
                     file.write('\n\t\tcompare();\n\tend\n\n')            
@@ -333,7 +340,7 @@ def create_folders_and_file():
                 file.write('\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
                 random_stimulus_lines = []
                 for port in input_ports:
-                    random_stimulus_lines.append(f'{port} \t\t <= $random();')    
+                    random_stimulus_lines.append(f'{port} \t\t\t <= $urandom();')    
                 for rand_line in random_stimulus_lines:
                     file.write('\t\t' + rand_line + '\n')
                 file.write('\t\tcompare();\nend\n\n')
