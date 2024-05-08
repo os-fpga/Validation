@@ -181,21 +181,21 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_library_path rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
-    [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_include_path ./wrapper_rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_ahbdec.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_ahbmst.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_ahbmux.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_ahbslv.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_chrf.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_chsel.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_ctlrf.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_engine.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_fifo.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dma_rrarb.v">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/wrapper_dma.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_ahbdec.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_ahbmst.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_ahbmux.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_ahbslv.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_chrf.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_chsel.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_ctlrf.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_engine.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_fifo.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/dma_rrarb.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./wrapper_rtl/wrapper_dma.v">>raptor_tcl.tcl
     ##vary design to design
 
     echo "set_top_module wrapper_dma">>raptor_tcl.tcl 
