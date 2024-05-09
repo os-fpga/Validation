@@ -170,7 +170,7 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device $device">>raptor_tcl.tcl 
+    echo "target_device 1GVTC">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo "configure_ip $ip_name"_v1_0" -mod_name=$design -Pdata_width=32 -Paddr_width=16 -Pid_width=32 -Pa_pip_out=0 -Pb_pip_out=0 -Pa_interleave=0 -Pb_interleave=0 -out_file ./$design.v">>raptor_tcl.tcl
@@ -262,6 +262,8 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
+            echo "add_simulation_file results_dir/${design}/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_${design}_formal_random_top_tb.v">>raptor_tcl.tcl 
+            echo "set_top_testbench fabric_${design}_top_formal_verification_random_tb">>raptor_tcl.tcl 
             echo "">>raptor_tcl.tcl
             echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v $design">>raptor_tcl.tcl
             echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_top_formal_verification.v $design">>raptor_tcl.tcl
