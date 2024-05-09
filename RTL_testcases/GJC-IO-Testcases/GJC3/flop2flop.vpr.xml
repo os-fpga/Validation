@@ -1,0 +1,28 @@
+<vpr_constraints>
+  <partition_list>
+    <partition name="launch_partition">
+      <add_atom name_pattern="u1.q1"/>
+      <add_region x_low="10" y_low="10" x_high="10" y_high="10"/>
+    </partition>
+    <partition name="north_partition">
+      <add_atom name_pattern="dout_north"/>
+      <add_region x_low="10" y_low="11" x_high="10" y_high="11"/>
+    </partition>
+    <partition name="south_partition">
+      <add_atom name_pattern="dout_south"/>
+      <add_region x_low="10" y_low="9" x_high="10" y_high="9"/>
+    </partition>
+    <partition name="east_partition">
+      <add_atom name_pattern="dout_east"/>
+      <add_region x_low="11" y_low="10" x_high="11" y_high="10"/>
+    </partition>
+    <partition name="west_partition">
+      <add_atom name_pattern="dout_west"/>
+      <add_region x_low="9" y_low="10" x_high="9" y_high="10"/>
+    </partition>
+  </partition_list>
+</vpr_constraints>
+
+    
+      
+      

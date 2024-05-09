@@ -1,0 +1,75 @@
+
+set_property mode Mode_BP_SDR_A_RX HR_1_0_0P
+set_pin_loc data_i[0] HR_1_0_0P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_2_1P
+set_pin_loc data_i[1] HR_1_2_1P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_4_2P
+set_pin_loc data_i[2] HR_1_4_2P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_6_3P
+set_pin_loc data_i[3] HR_1_6_3P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_0_0P
+set_pin_loc data_i[4] HR_2_0_0P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_2_1P
+set_pin_loc data_i[5] HR_2_2_1P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_4_2P
+set_pin_loc data_i[6] HR_2_4_2P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_6_3P
+set_pin_loc data_i[7] HR_2_6_3P
+
+
+
+set_property mode Mode_BP_SDR_A_TX HR_1_8_4P
+set_pin_loc data_o[0] HR_1_8_4P
+
+set_property mode Mode_BP_SDR_A_TX HR_1_12_6P
+set_pin_loc data_o[1] HR_1_12_6P
+
+set_property mode Mode_BP_SDR_A_TX HR_1_14_7P
+set_pin_loc data_o[2] HR_1_14_7P
+
+set_property mode Mode_BP_SDR_A_TX HR_1_16_8P
+set_pin_loc data_o[3] HR_1_16_8P
+
+set_property mode Mode_BP_SDR_A_TX HR_2_8_4P
+set_pin_loc data_o[4] HR_2_8_4P
+
+set_property mode Mode_BP_SDR_A_TX HR_2_12_6P
+set_pin_loc data_o[5] HR_2_12_6P
+
+set_property mode Mode_BP_SDR_A_TX HR_2_14_7P
+set_pin_loc data_o[6] HR_2_14_7P
+
+set_property mode Mode_BP_SDR_A_TX HR_2_16_8P
+set_pin_loc data_o[7] HR_2_16_8P
+
+
+set_property mode Mode_BP_SDR_A_RX HR_1_CC_18_9P
+set_pin_loc enable[0] HR_1_CC_18_9P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_20_10P
+set_pin_loc enable[1] HR_1_20_10P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_22_11P
+set_pin_loc enable[2] HR_1_22_11P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_24_12P
+set_pin_loc enable[3] HR_1_24_12P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_CC_18_9P
+set_pin_loc enable[4] HR_2_CC_18_9P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_20_10P
+set_pin_loc enable[5] HR_2_20_10P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_22_11P
+set_pin_loc enable[6] HR_2_22_11P
+
+set_property mode Mode_BP_SDR_A_RX HR_2_24_12P
+set_pin_loc enable[7] HR_2_24_12P

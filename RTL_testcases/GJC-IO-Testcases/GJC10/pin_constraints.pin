@@ -1,0 +1,19 @@
+set_clock_pin -device_clock clk[0] -design_clock clock0
+
+set_property mode Mode_BP_DIR_A_RX HR_1_2_1P
+set_pin_loc reset HR_1_2_1P
+
+set_property mode Mode_BP_DIR_A_RX HR_1_4_2P
+set_pin_loc push_button HR_1_4_2P
+
+set_property mode Mode_BP_DIR_A_TX HR_1_6_3P
+set_pin_loc led0 HR_1_6_3P
+
+set_property mode Mode_BP_DIR_A_TX HR_1_8_4P
+set_pin_loc led1 HR_1_8_4P
+
+set_property mode Mode_BP_DIR_A_TX HR_1_12_6P
+set_pin_loc led2 HR_1_12_6P
+
+set_property mode Mode_BP_DIR_A_TX HR_1_14_7P
+set_pin_loc led3 HR_1_14_7P
