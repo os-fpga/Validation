@@ -391,19 +391,252 @@ def multiclock_update(file_path,number_of_clocks):
     for i in range(number_of_clocks):
             replace_pattern_in_file(file_path,match[i],"clock"+str(i))
 
+def remove_lines_with_two_dollar_signs(filename):
+
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+
+    filtered_lines = []
+
+    for i,line in enumerate(lines):
+
+        dollar_sign_count = line.count('$')
+
+        if dollar_sign_count < 2:
+            filtered_lines.append(line)
+        elif ");" in line and dollar_sign_count >= 2:
+            filtered_lines.append(");")
+
+    with open(filename, 'w') as file:
+        file.writelines(filtered_lines)
+
+def remove_comma_from_line(file_path):
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    modified_lines = []
+    found_first_occurrence = False
+
+    for i, line in enumerate(lines):
+
+        if not found_first_occurrence and lines[i+1].strip() == ');':
+            found_first_occurrence = True
+
+            # print(line)
+            if ',' in lines[i]:
+                # print("in if",lines[i - 1])
+                # Remove the comma
+                lines[i] = lines[i].replace(',', '')
+                # line = line.replace(',', '')
+                # print("in if",lines[i])
+                # del lines[i]
+                modified_lines.append(lines[i])
+
+        elif not found_first_occurrence and ');' in line and line.strip() != ');':
+            found_first_occurrence = True
+
+            if ',' in line:
+                line = line.replace(',', '')
+
+        modified_lines.append(line)
+
+    with open(file_path, 'w') as file:
+        file.writelines(modified_lines)
+
+def replace_auto_in_file(file_path):
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern = r'(\$auto\$[a-zA-Z_]+\.cc:\d+:[a-zA-Z_]+\$\d+)(_[a-zA-Z_]+)?'
+
+    modified_content = re.sub(pattern, r'\\\1\2 ', content)
+
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
+
+def remove_comma_from_last_line(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+    
+    # Initialize a variable to track whether we've found the );
+    found_close_parenthesis = False
+    line_index = 0
+    
+    # Iterate through the lines to find the );
+    for i in range(len(lines) - 1, -1, -1):
+        line = lines[i]
+        
+        # Check for );
+        if ');' in line:
+            found_close_parenthesis = True
+            
+        # Once we find the );
+        if found_close_parenthesis:
+            # Check if the line contains // (skip comments)
+            if '//' not in line:
+                # If a line without // is found, check for the comma
+                if line.strip().endswith(','):
+                    # Remove the comma from the line
+                    lines[i] = line.rstrip(',') + '\n'
+                    break  # Stop as soon as we make a change
+            
+            # If the line contains //, continue searching upwards
+        else:
+            continue
+
+    # Write the modified lines back to the file
+    with open(file_path, 'w') as file:
+        file.writelines(lines)
+
+def move_semicolon_to_next_line(file_path):
+    modified_lines = []
+    one = 1
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    for line in lines:
+        line = line.rstrip()
+
+        if ');' in line:
+            if one==1:
+                index = line.find(');')
+
+                before_semicolon = line[:index]
+
+                modified_lines.append(before_semicolon + ',\n')
+
+                after_semicolon = line[index + 2:]
+
+                modified_lines.append(after_semicolon + ');\n')
+                one=0
+            else:
+                modified_lines.append(line + '\n')
+        else:
+            modified_lines.append(line + '\n')
+
+    with open(file_path, 'w') as file:
+        file.writelines(modified_lines)
+
+def sort_lines(file_path):
+
+    if file_path.endswith("_top_formal_verification.v"):
+        move_semicolon_to_next_line(file_path)
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    if file_path.endswith("_top_formal_verification.v"):
+        pattern = r'(\w+) \[(\d+):(\d+)\] (\w+)\[(\d+)\],'
+    else:
+        pattern = r'(\w+) \[(\d+):(\d+)\] (\w+)\[(\d+)\];'
+
+    matches = list(re.finditer(pattern, content))
+
+    if matches:
+        for i in range(len(matches)):
+            last_match = matches[i]
+            # print(last_match)
+            signal = last_match.group(4)
+            # variable_name = last_match.group(2)
+            array_size = last_match.group(5)
+            # last_charater = last_match.group(4)
+            start_j=i+1
+
+            for j in range(start_j,len(matches)):
+                j_last_match = matches[j]
+                j_signal = j_last_match.group(4)
+                # variable_name = j_last_match.group(2)
+                j_array_size = j_last_match.group(5)
+                # print(j_signal+" == "+signal)
+                # x=input()
+                # print(content)
+                if j_signal == signal:
+                    # print("1) in if")
+                    if int(j_array_size) > int(array_size):
+                        # print("3)        in if")
+                        content = content.replace(last_match.group(0), f'// {last_match.group(0)}')
+                        array_size=int(j_array_size)
+                        # print(int(array_size))
+                    elif int(j_array_size) < int(array_size):
+                        # print("4)            in else")
+                        content = content.replace(j_last_match.group(0), f'// {j_last_match.group(0)}')
+                        # print(array_size)
+                        # content = content.replace(f'reg [0:0] {signal}[{array_size}]',f'reg [{array_size}:0] {signal}')
+                    else:
+                        content = content.replace(f'reg [0:0] {signal}[{array_size}]',f'reg [{array_size}:0] {signal}')
+
+    with open(file_path, 'w') as file:
+        file.write(content)
+
+    if file_path.endswith("_top_formal_verification.v"):
+        pattern2 = r'(\w+) \[(\d+):(\d+)\]\s+(\w+)\[(\d+)\](,?\);)'
+    else:
+        pattern2 = r'\t(\w+) \[(\d+):(\d+)\]\s+(\w+)\[(\d+)\](;)'
+
+    replacement = r'\t\1 [\5:\3] \4\6'
+
+    modified_lines = []
+    one=1
+
+    with open(file_path, 'r') as file:
+        for line in file:
+            modified_line = re.sub(pattern2, replacement, line)
+            modified_lines.append(modified_line)
+            if one==1:
+                if ");" in line:
+                    one=0
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern3 = r'wire \[(\d+):(\d+)\] (\w+)\[(\d+)\](\w+);'
+
+    matches = list(re.finditer(pattern3, content))
+
+    if matches:
+        for i in range(len(matches)):
+            last_match = matches[i]
+            signal = last_match.group(3)
+            array_size = last_match.group(4)
+            last_charater = last_match.group(5)
+
+            for j in range(1,len(matches)):
+                j_last_match = matches[j]
+                j_signal = j_last_match.group(3)
+                j_array_size = j_last_match.group(4)
+
+                if j_signal == signal:
+                    if int(j_array_size) > int(array_size):
+                        content = content.replace(last_match.group(0), f'// {last_match.group(0)}')
+                        array_size=j_array_size
+                    else:
+                        content = content.replace(f'wire [0:0] {signal}[{array_size}]{last_charater}',f'wire [{array_size}:0] {signal}{last_charater}')
+
+    with open(file_path, 'w') as file:
+        file.write(content)
+
+
 def main():
     file_path = sys.argv[1]
     design_name=sys.argv[2]
 
     if file_path.endswith("fabric_"+design_name+"_formal_random_top_tb.v"):
         remove_iopadmap(file_path)
+        # sort_lines(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
+        # remove_lines_with_two_dollar_signs(file_path)
+        replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
+        # sort_lines(file_path)
+        # remove_comma_from_last_line(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
         if design_name != "up5bit_counter_dual_clock":
@@ -414,6 +647,9 @@ def main():
         if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
             replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
+        # remove_lines_with_two_dollar_signs(file_path)
+        # remove_comma_from_line(file_path)
+        replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_netlists.v"):
         inc_upate(file_path,"BIT_SIM/","`include \"")
         rename_p(file_path,"BIT_SIM/./SRC/","SRC/")

@@ -5,7 +5,7 @@
     integer i;
     begin
         result = 0;
-        for (i = 0; i < 8; i = i+1)
+        for (integer i = 0; i < 8; i = i+1)
         begin
             result = {result[10:0],bin[7-i]};
                 
