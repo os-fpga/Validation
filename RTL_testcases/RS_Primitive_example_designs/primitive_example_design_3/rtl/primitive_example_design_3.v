@@ -24,7 +24,8 @@ module primitive_example_design_3(
   wire [37:0] z_out;
   wire [19:0] a_out;
   wire [17:0] b_out;
-  wire i_buft_oe_in,i_buf_reset,i_buf_load_acc,i_buf_saturate,i_buf_clk;
+  wire [37:0] i_buft_oe_in;
+  wire i_buf_reset,i_buf_load_acc,i_buf_saturate,i_buf_clk;
   wire [5:0] i_buf_ACC_FIR;
   wire [31:0] o_buf_dly_b;
   wire [2:0] i_buf_feedback;
@@ -34,7 +35,7 @@ module primitive_example_design_3(
   genvar i;
   generate
     for (i = 0; i < 20; i = i + 1) begin : gen_i_buf
-      I_BUF i_buf_instance (.I(A[i]),.EN(ibuf_en[i]),.O(a_out[i]));
+      I_BUF i_buf_instance (.I(A[i]),.EN(ibuf1_en[i]),.O(a_out[i]));
     end
   endgenerate
 
