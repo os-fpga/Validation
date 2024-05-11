@@ -278,7 +278,7 @@ parse_cga exit 1; }
             echo "">>raptor_tcl.tcl
             echo "# Bitstream Simulation">>raptor_tcl.tcl
             echo "exec /bin/bash ../sed.sh">>raptor_tcl.tcl
-            echo "clear_simulation_files">>raptor_tcl.tcl
+            # echo "clear_simulation_files">>raptor_tcl.tcl
             echo "add_library_path /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
             echo "add_library_path $PWD/rtl/">>raptor_tcl.tcl
             echo "">>raptor_tcl.tcl
