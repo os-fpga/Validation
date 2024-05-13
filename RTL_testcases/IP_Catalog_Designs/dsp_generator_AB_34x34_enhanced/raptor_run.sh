@@ -172,7 +172,7 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device $device">>raptor_tcl.tcl 
+    echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pa_width=34 -Pb_width=34 -Pfeature=Enhanced -out_file $IP_PATH/$design">>raptor_tcl.tcl
