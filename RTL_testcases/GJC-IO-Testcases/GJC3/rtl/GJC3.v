@@ -32,9 +32,11 @@ always @(posedge clk)
 endmodule // flop2
 
 module GJC3(
-  din,
-  dout,
-  clk);
+  input din,
+  output dout,
+  input clk);
+
+  wire q1;
 
    flop1 u1 (.clk(clk), .din(din), .q1(q1) );
    flop2 u2 (.clk(clk), .q1(q1), .dout(dout) );

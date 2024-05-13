@@ -1,7 +1,7 @@
 set_top_module GJC5
 # Timing constraints
-create_clock -name CLK -period 5 [get_ports CLK]
-create_generated_clock -name half_clk -source [get_clocks CLK] -divide_by 2 [get_nets half_clk]
+create_clock -name CLK -period 5 
+create_generated_clock -source [get_clocks CLK] -divide_by 2 [get_nets half_clk]
 set_input_delay -clock CLK -max 3 [get_ports D_full_speed]
 set_input_delay -clock CLK -min 1 [get_ports D_full_speed]
 set_input_delay -clock half_clk -max 3 [get_ports D_half_speed]
