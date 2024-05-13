@@ -172,7 +172,7 @@ IP_PATH="./$design/run_1/IPs"
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device $device">>raptor_tcl.tcl 
+    echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pdepth=8 -Pdata_width=8 -Plast_en=1 -Pid_en=0 -Pid_width=8 -Pdest_en=0 -Pdest_width=8 -Puser_en=1 -Puser_width=1 -Pram_pipeline=2 -Pframe_fifo=0 -Pdrop_bad_frame=0 -Pdrop_when_full=0 -out_file $IP_PATH/$design">>raptor_tcl.tcl

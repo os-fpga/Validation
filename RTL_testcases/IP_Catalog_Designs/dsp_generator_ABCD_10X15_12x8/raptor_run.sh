@@ -171,7 +171,7 @@ IP_PATH="./$design/run_1/IPs"
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device $device">>raptor_tcl.tcl 
+    echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pequation=AxB+CxD -Pa_width=10 -Pb_width=15 -Pc_width=12 -Pd_width=8 -Preg_in=1 -Preg_out=0 -out_file $IP_PATH/$design">>raptor_tcl.tcl
