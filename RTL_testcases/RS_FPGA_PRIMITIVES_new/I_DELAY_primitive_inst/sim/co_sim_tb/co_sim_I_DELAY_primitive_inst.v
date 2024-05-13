@@ -1,8 +1,9 @@
+`timescale 1ns/1ps
 module co_sim_I_DELAY_primitive_inst;
 // Clock signals
-    reg CLK_IN;
+    reg			CLK_IN;
 // Reset signals
-    reg reset;
+    reg			reset;
 
     wire 		[5:0] 		DLY_TAP_VALUE	,	DLY_TAP_VALUE_netlist;
     reg 		DLY_ADJ;
@@ -20,11 +21,11 @@ I_DELAY_primitive_inst	golden (.*);
 	I_DELAY_primitive_inst_post_synth synth_net (.*, .DLY_TAP_VALUE(DLY_TAP_VALUE_netlist), .O(O_netlist) );
 `endif
 
-//clock initialization for CLK_IN
-    initial begin
-        CLK_IN = 1'b0;
-        forever #5 CLK_IN = ~CLK_IN;
-    end
+// clock initialization for CLK_IN
+initial begin
+	CLK_IN = 1'b0;
+	forever #1 CLK_IN = ~CLK_IN;
+end
 //Reset Stimulus generation
 initial begin
 	reset <= 1;
@@ -37,12 +38,13 @@ initial begin
 	@(negedge CLK_IN);
 	compare();
 	$display ("***Reset Test is ended***");
+	repeat(500) @ (negedge CLK_IN);
 	//Random stimulus generation
 	repeat(100) @ (negedge CLK_IN) begin
-		DLY_ADJ 		 <= $random();
-		DLY_INCDEC 		 <= $random();
-		DLY_LOAD 		 <= $random();
-		in 		 <= $random();
+		DLY_ADJ 			 <= $urandom();
+		DLY_INCDEC 			 <= $urandom();
+		DLY_LOAD 			 <= $urandom();
+		in 			 <= $urandom();
 		compare();
 end
 
@@ -57,7 +59,7 @@ end
 		$display("**** All Comparison Matched *** \n		Simulation Passed\n");
 	else
 		$display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
-	repeat(50) @(posedge CLK_IN);
+	repeat(10) @(posedge CLK_IN);
 	$finish;
 end
 
