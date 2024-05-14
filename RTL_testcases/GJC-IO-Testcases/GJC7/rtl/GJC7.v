@@ -12,7 +12,7 @@ module GJC7 #(
   input [ADDR_WIDTH-1:0] ADDRA,
   input [ADDR_WIDTH-1:0] ADDRB,
 
-  output reg [DATA_WIDTH-1:0] DOUT
+  output reg [DATA_WIDTH-1:0] DOUT=0
 );
 
   reg [DATA_WIDTH-1:0] RAM [2**ADDR_WIDTH-1:0];

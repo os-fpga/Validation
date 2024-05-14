@@ -28,11 +28,11 @@ module GJC10 (
 
 
     // debounce filter to remove high freq oscillations from button metal contacts
-    btn_debounce_filter #(.DELAY_MS(250), .CLK_FREQ_MHZ(40)) DBN_FILTER_PUSH_BUTTON (.clk(clock0), .btn(push_button_debounce_in), .btn_debounced(push_button_debounce_out));
+    btn_debounce_filter #(.DELAY_MS(1), .CLK_FREQ_MHZ(40)) DBN_FILTER_PUSH_BUTTON (.clk(clock0), .btn(push_button_debounce_in), .btn_debounced(push_button_debounce_out));
 
 
     // debounce filter to remove high freq oscillations from button metal contacts
-    btn_debounce_filter #(.DELAY_MS(250), .CLK_FREQ_MHZ(40)) DBN_FILTER_RESET_BUTTON (.clk(clock0), .btn(reset_button_debounce_in), .btn_debounced(reset_button_debounce_out));
+    btn_debounce_filter #(.DELAY_MS(1), .CLK_FREQ_MHZ(40)) DBN_FILTER_RESET_BUTTON (.clk(clock0), .btn(reset_button_debounce_in), .btn_debounced(reset_button_debounce_out));
 
 
     always @(posedge clock0) begin
@@ -61,8 +61,8 @@ module btn_debounce_filter #(
     output reg btn_debounced // Debounced push button output
 );
 
-    parameter DEBOUNCE_CYCLES = DELAY_MS * CLK_FREQ_MHZ * 10**3; // Adjust as necessary for your clock frequency
-
+    // parameter DEBOUNCE_CYCLES = DELAY_MS * CLK_FREQ_MHZ * 10**3; // Adjust as necessary for your clock frequency
+    parameter DEBOUNCE_CYCLES = 10; //for simulation purpose
     reg [31:0] debounce_count;
     reg btn_prev, btn_current;
     
