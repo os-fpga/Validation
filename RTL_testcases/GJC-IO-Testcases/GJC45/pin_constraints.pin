@@ -26,8 +26,8 @@ set_pin_loc data_o[2] HR_1_14_7P
 set_property mode Mode_BP_DIR_A_TX HR_1_16_8P
 set_pin_loc data_o[3] HR_1_16_8P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_18_9P
-set_pin_loc data_o[4] HR_1_18_9P
+set_property mode Mode_BP_DIR_A_TX HR_1_CC_18_9P
+set_pin_loc data_o[4] HR_1_CC_18_9P
 
 set_property mode Mode_BP_DIR_A_TX HR_1_20_10P
 set_pin_loc data_o[5] HR_1_20_10P
