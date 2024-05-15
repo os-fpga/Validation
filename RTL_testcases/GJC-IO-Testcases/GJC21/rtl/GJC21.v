@@ -16,7 +16,7 @@ module GJC21 (
     output  wire data_o
 );
 
-    reg [1:0] data_reg;
+    reg [1:0] data_reg=0;
     wire data_o_buf, data_o_delayed;
     reg dly_ld;
     wire dly_adj, dly_incdec;
