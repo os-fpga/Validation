@@ -21,8 +21,8 @@ set_pin_loc dly_tap_val_inv_buf[0] HR_1_12_6P
 set_property mode Mode_BP_DIR_A_TX HR_1_16_8P
 set_pin_loc dly_tap_val_inv_buf[1] HR_1_16_8P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_18_9P
-set_pin_loc dly_tap_val_inv_buf[2] HR_1_18_9P
+set_property mode Mode_BP_DIR_A_TX HR_1_CC_18_9P
+set_pin_loc dly_tap_val_inv_buf[2] HR_1_CC_18_9P
 
 set_property mode Mode_BP_DIR_A_TX HR_1_20_10P
 set_pin_loc dly_tap_val_inv_buf[3] HR_1_20_10P
