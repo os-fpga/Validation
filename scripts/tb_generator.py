@@ -29,8 +29,17 @@ import json
 import sys
 
 def create_folders_and_file():
-    design = sys.argv[1]
-    design_path = sys.argv[2]
+    default_iteration   = 100
+    design              = sys.argv[1]
+    design_path         = sys.argv[2]
+    if len(sys.argv) >= 4:
+        try:
+            iteration_val = sys.argv[3]
+        except ValueError:
+            print("Invalid value provided for iteration_val. Using default value.")
+            iteration_val = default_iteration
+    else:
+        iteration_val = default_iteration
 
     # Construct the path to port_info.json using *
     port_info_path = os.path.join(
@@ -94,8 +103,8 @@ def create_folders_and_file():
     # Create a file with the topModule name
     filename = file_string + top_module + ".v"
     output_filename = os.path.join(sub_folder_path, filename) 
+    
     # Extract port information
-
     input_ports = []
     output_ports = []
     clk_port = []
@@ -105,6 +114,14 @@ def create_folders_and_file():
     p_name_netlist = []
     bit_width_list = []
     ports = {}
+    
+    # Extract iteration value 
+    iteration_map = {'1': 1000, '2': 2000}
+    iteration = iteration_map.get(iteration_val)
+    if iteration is None:
+        iteration = default_iteration
+
+    # store port list info 
     for port in data['ports']:
         if "clock" in port and port["direction"] == "input":
             clk_port.append(port["name"])
@@ -205,7 +222,7 @@ def create_folders_and_file():
             else:
               file.write("// Initialize values to zero \ninitial\tbegin\n\t" + str(input_ports[0]) + " <= 'd0;\n")
             # generate random stimulus
-            file.write('\t#10;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < 100; i = i + 1) begin\n') 
+            file.write('\t#10;\n\tcompare();\n// Generating random stimulus \n\tfor (int i = 0; i < ' + str(iteration) + '; i = i + 1) begin\n') 
             random_stimulus_lines = []
             for port in input_ports:
                 random_stimulus_lines.append(f'{port} <= $urandom();')    
@@ -271,7 +288,7 @@ def create_folders_and_file():
                         else:
                             file.write ("\n")
                     # generate random stimulus
-                    file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
+                    file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(' + str(iteration) + ') @ (negedge ' + clk + ') begin\n')
                     random_stimulus_lines = []
                     for port in input_ports:
                         random_stimulus_lines.append(f'{port}\t\t\t <= $urandom();')    
@@ -337,7 +354,7 @@ def create_folders_and_file():
                 file.write('\t$display ("***Reset Test is applied***");\n\t@(negedge ' + 
                               clk + ');\n\t@(negedge ' + clk + ');\n\tcompare();\n\t$display ("***Reset Test is ended***");\n')
                 # Generate random stimulus values for each input port
-                file.write('\t//Random stimulus generation\n\trepeat(100) @ (negedge ' + clk + ') begin\n')
+                file.write('\t//Random stimulus generation\n\trepeat(' + str(iteration) + ') @ (negedge ' + clk + ') begin\n')
                 random_stimulus_lines = []
                 for port in input_ports:
                     random_stimulus_lines.append(f'{port} \t\t\t <= $urandom();')    
