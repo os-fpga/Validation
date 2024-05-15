@@ -19,7 +19,7 @@ module GJC29 (
     output wire [5:0] dly_tap_val_inv_buf
 );
 
-    reg test_data;
+    reg test_data=0;
     wire dly_adj_inv, dly_incdec_inv, dly_ld_inv;
     wire data_o_delayed_buf;
     wire [5:0] dly_tap_val;
@@ -42,7 +42,7 @@ module GJC29 (
     O_BUF obuf2_ (dly_tap_val_inv[2], dly_tap_val_inv_buf[2]);
     O_BUF obuf3_ (dly_tap_val_inv[3], dly_tap_val_inv_buf[3]);
     O_BUF obuf4_ (dly_tap_val_inv[4], dly_tap_val_inv_buf[4]);
-    O_BUF obuf4_ (dly_tap_val_inv[5], dly_tap_val_inv_buf[5]);
+    O_BUF obuf5_ (dly_tap_val_inv[5], dly_tap_val_inv_buf[5]);
 
     assign const1 = 1;
 
