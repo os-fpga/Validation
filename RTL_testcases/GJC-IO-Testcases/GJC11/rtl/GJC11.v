@@ -55,7 +55,7 @@ module custom_dff (
     input wire D,
     input wire E,
     input wire C,
-    output reg Q
+    output reg Q=0 //for simulation purpose
 );
     always @(posedge C) begin
         if(E) Q <= D;
