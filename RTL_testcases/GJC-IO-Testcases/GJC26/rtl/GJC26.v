@@ -24,11 +24,11 @@ module GJC26 (
     wire reset_n;
     wire enable;
     wire clk_i;
-    reg [1:0] data_o;
+    reg [1:0] data_o=0;
 
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf0_ (reset_n_buf,const1,reset_n);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf1_ (enable_buf,const1,enable);
-    I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf1_ (clk_i_buf,const1,clk_i);
+    I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf2_ (clk_i_buf,const1,clk_i);
     O_BUF obuf0_ (data_o[0],data_o_buf[0]);
     O_BUF obuf1_ (data_o[1],data_o_buf[1]);
 
