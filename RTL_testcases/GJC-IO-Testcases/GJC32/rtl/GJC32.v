@@ -16,9 +16,9 @@ module GJC32 (
     output  wire data_o
 );
 
-    reg [1:0] data_reg;
+    reg [1:0] data_reg=0;
     wire data_o_buf, data_o_delayed;
-    reg dly_ld;
+    reg dly_ld=0;
     wire dly_adj, dly_incdec;
     wire reset_n;
     wire enable;
@@ -38,7 +38,7 @@ module GJC32 (
 
     CLK_BUF clock_buffer (clk_buf_i,clk_pll);
 
-    PLL #(.PLL_MULT(16), .PLL_DIV(1), .PLL_POST_DIV(2)) clk_pll_gen (
+    PLL #(.PLL_MULT(300), .PLL_DIV(3), .PLL_POST_DIV(2)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll), // Clock input
         .CLK_OUT_DIV4(clk_i)

@@ -19,13 +19,13 @@ module GJC31 (
 
     wire [1:0] data_reg;
     wire data_i_buf, data_i_buf_delayed;
-    reg dly_ld;
+    reg dly_ld=0;
     wire dly_adj, dly_incdec;
     wire reset_n;
     wire enable;
     wire clk_i,clk_buf_i,clk_pll;
     wire dly_inc_pulse_inv;
-    reg  [1:0] data_o;
+    reg  [1:0] data_o=0;
     wire const1;
 
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf0_ (reset_n_buf,const1,reset_n);
@@ -39,7 +39,7 @@ module GJC31 (
 
     CLK_BUF clock_buffer (clk_buf_i,clk_pll);
 
-    PLL #(.PLL_MULT(16), .PLL_DIV(1), .PLL_POST_DIV(2)) clk_pll_gen (
+    PLL #(.PLL_MULT(300), .PLL_DIV(3), .PLL_POST_DIV(2)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll), // Clock input
         .CLK_OUT_DIV4(clk_i)

@@ -14,7 +14,7 @@ module GJC33 (
     wire clk_pll_in;
     wire data_design;
     wire enable_design;
-    reg  data_o_design;
+    reg  data_o_design=0;
 
     assign const1 = 1;
 
