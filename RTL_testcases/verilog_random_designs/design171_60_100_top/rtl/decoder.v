@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module decoder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     input clk;
     input rst;
@@ -40,7 +42,7 @@ module decoder #(parameter WIDTH=32)(
     end
     
     always @ (data_in) begin
-        case(data_in) // synopsys full_case
+        case(data_in[2:0])
             3'b000: data_out_w = 32'd11111110;
             3'b001: data_out_w = 32'd11111101;
             3'b010: data_out_w = 32'd11111011;
@@ -49,6 +51,8 @@ module decoder #(parameter WIDTH=32)(
             3'b101: data_out_w = 32'd11011111;
             3'b110: data_out_w = 32'd10111111;
             3'b111: data_out_w = 32'd01111111;
+
+            default: data_out_w = 32'd11111111;
          endcase
     end
     
