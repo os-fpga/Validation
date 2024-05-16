@@ -1,5 +1,5 @@
 set_property mode Mode_BP_SDR_A_RX HP_2_10_5P
-set_pin_loc clk_i HP_2_CC_10_5P
+set_pin_loc clk_i HP_2_10_5P
 
 set_property mode Mode_BP_SDR_A_RX HR_2_6_3P
 set_pin_loc data_i[0] HR_2_6_3P
