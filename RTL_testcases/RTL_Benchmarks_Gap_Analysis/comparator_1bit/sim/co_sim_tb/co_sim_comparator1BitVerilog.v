@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_comparator1BitVerilog;
     wire 		eq	,	eq_netlist;
     reg 		x;
@@ -12,16 +13,16 @@ comparator1BitVerilog	golden (.*);
 	comparator1BitVerilog_post_synth synth_net (.*, .eq(eq_netlist) );
 `endif
 
-// Initialize values to zero 
+		// Initialize values to zero 
 initial	begin
 	{x, y } <= 'd0;
-	#50;
+	#10;
 	compare();
 // Generating random stimulus 
 	for (int i = 0; i < 100; i = i + 1) begin
-		x <= $random();
-		y <= $random();
-		#50;
+		x <= $urandom();
+		y <= $urandom();
+		#10;
 		compare();
 	end
 
@@ -29,12 +30,12 @@ initial	begin
 	x <= 1;
 	y <= 1;
 	compare();
-	#50;
+	#10;
 	if(mismatch == 0)
 		$display("**** All Comparison Matched *** \n		Simulation Passed\n");
 	else
 		$display("%0d comparison(s) mismatched\nERROR: SIM: Simulation Failed", mismatch);
-	#50;
+	#200;
 	$finish;
 end
 
