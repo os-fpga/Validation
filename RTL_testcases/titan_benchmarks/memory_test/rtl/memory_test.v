@@ -204,7 +204,7 @@ module memory_test #(
 `endif
 
 `ifdef DUAL_PORT
-	infer_byte_enabled_simple_dual_port_ram #(.ADDR_WIDTH(ADDR_WIDTH), .BYTE_WIDTH(DATA_WIDTH),	.BYTES(2**DATA_WIDTH-1)) inst10 ( 
+	infer_byte_enabled_simple_dual_port_ram #(.ADDR_WIDTH(ADDR_WIDTH), .BYTE_WIDTH(DATA_WIDTH),	.BYTES(/*2**DATA_WIDTH-1*/4)) inst10 (  // EDA-2833
 		.waddr(addr_a),
 		.raddr(addr_b),
 		.be(1),
@@ -216,7 +216,7 @@ module memory_test #(
 `endif
 
 `ifdef BIDIR_DUAL_PORT	
-	infer_byte_enabled_true_dual_port_ram #(.ADDRESS_WIDTH(ADDR_WIDTH), .BYTE_WIDTH(DATA_WIDTH),	.BYTES(2**DATA_WIDTH-1)) inst11 ( 
+	infer_byte_enabled_true_dual_port_ram #(.ADDRESS_WIDTH(ADDR_WIDTH), .BYTE_WIDTH(DATA_WIDTH),	.BYTES(/*2**DATA_WIDTH-1*/4)) inst11 ( // EDA-2833
 		.addr1(addr_a),
 		.addr2(addr_b),
 		.be1(1),
