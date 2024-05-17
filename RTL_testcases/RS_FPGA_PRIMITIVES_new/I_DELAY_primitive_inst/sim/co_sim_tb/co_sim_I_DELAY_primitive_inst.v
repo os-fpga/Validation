@@ -35,12 +35,12 @@ initial begin
 	@(negedge CLK_IN);
 	$display ("***Reset Test is applied***");
 	@(negedge CLK_IN);
-	@(negedge CLK_IN);
+	repeat(16)@(negedge CLK_IN);
 	compare();
 	$display ("***Reset Test is ended***");
 	repeat(100) @ (negedge CLK_IN);
 	//Random stimulus generation
-	repeat(500) @ (negedge CLK_IN) begin
+	repeat(5000) @ (negedge CLK_IN) begin
 		DLY_ADJ 			 <= $urandom();
 		DLY_INCDEC 			 <= $urandom();
 		DLY_LOAD 			 <= $urandom();
