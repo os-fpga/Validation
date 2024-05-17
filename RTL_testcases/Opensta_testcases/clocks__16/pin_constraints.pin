@@ -1,3 +1,5 @@
+
+set_property mode Mode_RATE_10_A_RX HR_1_0_0P
 set_pin_loc d[0] HR_1_0_0P g2f_rx_in[0]_A
 set_pin_loc d[1] HR_1_0_0P g2f_rx_in[1]_A
 set_pin_loc d[2] HR_1_0_0P g2f_rx_in[2]_A
@@ -8,6 +10,9 @@ set_pin_loc d[6] HR_1_0_0P g2f_rx_in[6]_A
 set_pin_loc d[7] HR_1_0_0P g2f_rx_in[7]_A
 set_pin_loc d[8] HR_1_0_0P g2f_rx_in[8]_A
 set_pin_loc d[9] HR_1_0_0P g2f_rx_in[9]_A
+
+
+set_property mode Mode_RATE_8_A_RX HR_2_0_0P
 set_pin_loc d[10] HR_2_0_0P g2f_rx_in[0]_A
 set_pin_loc d[11] HR_2_0_0P g2f_rx_in[1]_A
 set_pin_loc d[12] HR_2_0_0P g2f_rx_in[2]_A 
@@ -17,9 +22,8 @@ set_pin_loc d[15] HR_2_0_0P g2f_rx_in[5]_A
 set_pin_loc select HR_2_0_0P g2f_rx_in[6]_A
 set_pin_loc reset HR_2_0_0P g2f_rx_in[7]_A
 
-set_property mode Mode_RATE_10_A_RX HR_1_0_0P
-set_property mode Mode_RATE_8_A_RX HR_2_0_0P
 
+set_property mode Mode_RATE_10_A_TX HR_3_0_0P
 set_pin_loc q[0] HR_3_0_0P f2g_tx_out[0]_A
 set_pin_loc q[1] HR_3_0_0P f2g_tx_out[1]_A
 set_pin_loc q[2] HR_3_0_0P f2g_tx_out[2]_A
@@ -30,6 +34,9 @@ set_pin_loc q[6] HR_3_0_0P f2g_tx_out[6]_A
 set_pin_loc q[7] HR_3_0_0P f2g_tx_out[7]_A
 set_pin_loc q[8] HR_3_0_0P f2g_tx_out[8]_A
 set_pin_loc q[9] HR_3_0_0P f2g_tx_out[9]_A
+
+
+set_property mode Mode_RATE_6_A_TX HP_1_0_0P
 set_pin_loc q[10] HP_1_0_0P f2g_tx_out[0]_A
 set_pin_loc q[11] HP_1_0_0P f2g_tx_out[1]_A
 set_pin_loc q[12] HP_1_0_0P f2g_tx_out[2]_A
@@ -37,9 +44,8 @@ set_pin_loc q[13] HP_1_0_0P f2g_tx_out[3]_A
 set_pin_loc q[14] HP_1_0_0P f2g_tx_out[4]_A
 set_pin_loc q[15] HP_1_0_0P f2g_tx_out[5]_A
 
-set_property mode Mode_RATE_10_A_TX HR_3_0_0P
-set_property mode Mode_RATE_6_A_TX HP_1_0_0P
 
+set_property mode Mode_RATE_10_A_TX HR_5_0_0P
 set_pin_loc qn[0] HR_5_0_0P f2g_tx_out[0]_A
 set_pin_loc qn[1] HR_5_0_0P f2g_tx_out[1]_A
 set_pin_loc qn[2] HR_5_0_0P f2g_tx_out[2]_A
@@ -50,6 +56,9 @@ set_pin_loc qn[6] HR_5_0_0P f2g_tx_out[6]_A
 set_pin_loc qn[7] HR_5_0_0P f2g_tx_out[7]_A
 set_pin_loc qn[8] HR_5_0_0P f2g_tx_out[8]_A
 set_pin_loc qn[9] HR_5_0_0P f2g_tx_out[9]_A
+
+
+set_property mode Mode_RATE_6_A_TX HP_2_0_0P
 set_pin_loc qn[10] HP_2_0_0P f2g_tx_out[0]_A
 set_pin_loc qn[11] HP_2_0_0P f2g_tx_out[1]_A
 set_pin_loc qn[12] HP_2_0_0P f2g_tx_out[2]_A
@@ -57,8 +66,6 @@ set_pin_loc qn[13] HP_2_0_0P f2g_tx_out[3]_A
 set_pin_loc qn[14] HP_2_0_0P f2g_tx_out[4]_A
 set_pin_loc qn[15] HP_2_0_0P f2g_tx_out[5]_A
 
-set_property mode Mode_RATE_10_A_TX HR_5_0_0P
-set_property mode Mode_RATE_6_A_TX HP_2_0_0P
 
 set_clock_pin -device_clock clk[0] -design_clock clk_0
 set_clock_pin -device_clock clk[1] -design_clock clk_1
