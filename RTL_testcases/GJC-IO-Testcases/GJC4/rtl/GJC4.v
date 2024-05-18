@@ -23,11 +23,11 @@ module GJC4(
    input         round,            // Round
    input         subtract,         // Add or subtract
    output [37:0] z_mult,           // 38-bit data output
-   output [17:0] dly_b_mult,       // 18-bit B registered output
+  //  output [17:0] dly_b_mult,       // 18-bit B registered output
    output [37:0] z_multadd,           // 38-bit data output
    output [17:0] dly_b_multadd,       // 18-bit B registered output
    output [37:0] z_multacc,           // 38-bit data output
-   output [17:0] dly_b_multacc,       // 18-bit B registered output
+  //  output [17:0] dly_b_multacc,       // 18-bit B registered output
 
 
    output  [37:0] z_mult_regout, z_mult_regin, z_mult_regin_regout, z_multadd_regout, z_multadd_regin, z_multadd_regin_regout, z_multacc_regout, z_multacc_regin, z_multacc_regin_regout,
@@ -41,7 +41,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_mult),
-                  .DLY_B(dly_b_mult),
+                //   .DLY_B(dly_b_mult),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -63,7 +63,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_mult_regout),
-                  .DLY_B(dly_b_mult_regout),
+                //   .DLY_B(dly_b_mult_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -85,7 +85,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_mult_regin),
-                  .DLY_B(dly_b_mult_regin),
+                //   .DLY_B(dly_b_mult_regin),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -107,7 +107,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_mult_regin_regout),
-                  .DLY_B(dly_b_mult_regin_regout),
+                //   .DLY_B(dly_b_mult_regin_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -128,7 +128,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_multadd),
-                  .DLY_B(dly_b_multadd),
+                //   .DLY_B(dly_b_multadd),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -216,7 +216,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_multacc),
-                  .DLY_B(dly_b_multacc),
+                //   .DLY_B(dly_b_multacc),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -238,7 +238,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_multacc_regout),
-                  .DLY_B(dly_b_multacc_regout),
+                //   .DLY_B(dly_b_multacc_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -260,7 +260,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_multacc_regin),
-                  .DLY_B(dly_b_multacc_regin),
+                //   .DLY_B(dly_b_multacc_regin),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
@@ -282,7 +282,7 @@ module GJC4(
                   .B(b),
                   .ACC_FIR(acc_fir),
                   .Z(z_multacc_regin_regout),
-                  .DLY_B(dly_b_multacc_regin_regout),
+                //   .DLY_B(dly_b_multacc_regin_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
