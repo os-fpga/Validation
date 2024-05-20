@@ -184,6 +184,10 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/addsubb_top.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/decoder_top.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/paritygenerator_top.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/single_port_ram_top.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/register_vhd.vhd">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design

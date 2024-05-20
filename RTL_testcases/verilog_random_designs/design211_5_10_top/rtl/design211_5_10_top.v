@@ -86,7 +86,7 @@ module design1_5_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, d_
 	wire [WIDTH-1:0] wire_d4_3;
 	wire [WIDTH-1:0] wire_d4_4;
 
-	register_vhd #(.WIDTH(WIDTH)) register_vhd_instance100(.data_in(d_in0),.data_out(wire_d0_0),.clk(clk),.rst(rst));            //channel 1
+	register_vhd register_vhd_instance100(.data_in(d_in0),.data_out(wire_d0_0),.clk(clk),.rst(rst));            //channel 1
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance101(.data_in(wire_d0_0),.data_out(wire_d0_1),.clk(clk),.rst(rst));
 	addsubb_top #(.WIDTH(WIDTH)) addsubb_instance102(.data_in(wire_d0_1),.data_out(wire_d0_2),.clk(clk),.rst(rst));
 	addsubb_top #(.WIDTH(WIDTH)) addsubb_instance103(.data_in(wire_d0_2),.data_out(wire_d0_3),.clk(clk),.rst(rst));
@@ -96,7 +96,7 @@ module design1_5_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, d_
 	addsubb_top #(.WIDTH(WIDTH)) addsubb_instance210(.data_in(d_in1),.data_out(wire_d1_0),.clk(clk),.rst(rst));            //channel 2
 	addsubb_top #(.WIDTH(WIDTH)) addsubb_instance211(.data_in(wire_d1_0),.data_out(wire_d1_1),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance212(.data_in(wire_d1_1),.data_out(wire_d1_2),.clk(clk),.rst(rst));
-	register_vhd #(.WIDTH(WIDTH)) register_vhd_instance213(.data_in(wire_d1_2),.data_out(wire_d1_3),.clk(clk),.rst(rst));
+	register_vhd register_vhd_instance213(.data_in(wire_d1_2),.data_out(wire_d1_3),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance214(.data_in(wire_d1_3),.data_out(wire_d1_4),.clk(clk),.rst(rst));
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance215(.data_in(wire_d1_4),.data_out(d_out1),.clk(clk),.rst(rst));
 
@@ -104,12 +104,12 @@ module design1_5_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, d_
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance321(.data_in(wire_d2_0),.data_out(wire_d2_1),.clk(clk),.rst(rst));
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance322(.data_in(wire_d2_1),.data_out(wire_d2_2),.clk(clk),.rst(rst));
 	single_port_ram_top #(.WIDTH(WIDTH)) single_port_ram_instance323(.data_in(wire_d2_2),.data_out(wire_d2_3),.clk(clk),.rst(rst));
-	register_vhd #(.WIDTH(WIDTH)) register_vhd_instance324(.data_in(wire_d2_3),.data_out(wire_d2_4),.clk(clk),.rst(rst));
+	register_vhd register_vhd_instance324(.data_in(wire_d2_3),.data_out(wire_d2_4),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance325(.data_in(wire_d2_4),.data_out(d_out2),.clk(clk),.rst(rst));
 
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance430(.data_in(d_in3),.data_out(wire_d3_0),.clk(clk),.rst(rst));            //channel 4
 	single_port_ram_top #(.WIDTH(WIDTH)) single_port_ram_instance431(.data_in(wire_d3_0),.data_out(wire_d3_1),.clk(clk),.rst(rst));
-	register_vhd #(.WIDTH(WIDTH)) register_vhd_instance432(.data_in(wire_d3_1),.data_out(wire_d3_2),.clk(clk),.rst(rst));
+	register_vhd register_vhd_instance432(.data_in(wire_d3_1),.data_out(wire_d3_2),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance433(.data_in(wire_d3_2),.data_out(wire_d3_3),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance434(.data_in(wire_d3_3),.data_out(wire_d3_4),.clk(clk),.rst(rst));
 	addsubb_top #(.WIDTH(WIDTH)) addsubb_instance435(.data_in(wire_d3_4),.data_out(d_out3),.clk(clk),.rst(rst));
