@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module decoder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     input clk;
     input rst;
@@ -7,7 +9,7 @@ module decoder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     reg enable;
     wire [WIDTH-1:0] d_out;
     
-    always @ (negedge clk) begin
+    always @ (posedge clk) begin
         if (rst)
             enable <= 0;
         else
@@ -29,7 +31,7 @@ module decoder #(parameter WIDTH=32)(
     );
     reg [WIDTH-1:0 ] data_out_w;
     
-    always @ (negedge clk) begin
+    always @ (posedge clk) begin
         if (rst)
             data_out <= 0;
         else
@@ -40,16 +42,17 @@ module decoder #(parameter WIDTH=32)(
     end
     
     always @ (data_in) begin
-        casez(data_in) //synopsys full_case
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz000: data_out_w = 32'd11111110;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz001: data_out_w = 32'd11111101;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz010: data_out_w = 32'd11111011;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz011: data_out_w = 32'd11110111;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz100: data_out_w = 32'd11101111;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz101: data_out_w = 32'd11011111;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz110: data_out_w = 32'd10111111;
-            32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzz111: data_out_w = 32'd01111111;
- 	 	 	default: data_out_w = 32'd11111111;
+        case(data_in[2:0])
+            3'b000: data_out_w = 32'd11111110;
+            3'b001: data_out_w = 32'd11111101;
+            3'b010: data_out_w = 32'd11111011;
+            3'b011: data_out_w = 32'd11110111;
+            3'b100: data_out_w = 32'd11101111;
+            3'b101: data_out_w = 32'd11011111;
+            3'b110: data_out_w = 32'd10111111;
+            3'b111: data_out_w = 32'd01111111;
+
+            default: data_out_w = 32'd11111111;
          endcase
     end
     
