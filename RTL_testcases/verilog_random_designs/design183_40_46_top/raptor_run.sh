@@ -184,6 +184,15 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/large_mux.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/memory_cntrl.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/register.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/full_adder.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/d_latch.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/shift_reg.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/mod_n_counter.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/decoder.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/parity_generator.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
