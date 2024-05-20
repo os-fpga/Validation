@@ -8,11 +8,9 @@ input rst,
 input [WIDTH-1:0] data_in,
 output [WIDTH-1:0] data_out);
 
-
-
+localparam s0=2'b00,s1=2'b01,s2=2'b10,s3=2'b11;
 
 reg [1:0] state;
-parameter s0=0,s1=1,s2=2,s3=3;
 reg reset_mem;
 reg [ADDR-1:0] wr_addr;
 reg [ADDR-1:0] rd_addr;
@@ -21,51 +19,46 @@ reg rd_en;
 reg wr_en;
 
 always@(posedge clk)
-begin 
-if(rst) begin 
-reset_mem<=1;
-state<=s0;
-wr_addr<=0;
-rd_addr<=0;
-wr_en<=0;
-rd_en<=0;
-end
-else 
-case(state)
-s0: 
-begin
-wr_data_mem<=0;
-
-if (wr_addr==10'b1111111111) begin
-   state<=s1;
-   wr_addr<=1;
-   wr_en<=0;
-   reset_mem<=0;  
-end
-else
- begin 
-  state<=s0;
-  wr_addr<=wr_addr+1;
-  wr_en<=1;
-end
-
-end
-
-s1:
-begin
-wr_data_mem<=data_in;
-rd_en<=1;
-rd_addr<=rd_addr+1;
-
-wr_en<=1;
-wr_addr<=wr_addr+1;
-state<=s1;
-end
-
-default:
-state<=s0;
-endcase
-end
+   begin 
+      if(rst) begin 
+         reset_mem<=1;
+         state<=s0;
+         wr_addr<=0;
+         rd_addr<=0;
+         wr_en<=0;
+         rd_en<=0;
+      end
+      else 
+      case(state) //synopsys full_case
+         s0: 
+            begin
+               wr_data_mem<=0;
+               reset_mem<=0;  
+               if (wr_addr==10'b1111111111) begin
+                  state<=s1;
+                  wr_addr<=0;
+                  wr_en<=0;
+               end
+               else
+                begin 
+                 state<=s0;
+                 wr_addr<=wr_addr+1;
+                 wr_en<=1;
+                 wr_data_mem<=data_in;
+               end
+            end
+         s1:
+            begin
+               rd_en<=1;
+               if(rd_addr == wr_addr)
+                  rd_addr<=wr_addr+1;
+               else 
+                  rd_addr<=rd_addr+1;
+               state<=s1;
+            end
+         default: state<=s0;
+      endcase
+   end
 
 
 
@@ -102,19 +95,19 @@ output reg [DATA-1:0] rd_data_out);
 reg [DATA-1:0] mem [(2**ADDR)-1:0];
 
 always@(posedge clk) begin
-if(wr_en) begin
-mem[wr_addr] <= wr_data_in;
-end
-end
-
+   if(wr_en) begin
+      mem[wr_addr] <= wr_data_in;
+      end
+   end
+   
 always@(posedge clk) begin
-if(rst) begin 
-rd_data_out<=0; end
-else begin
-if(rd_en) begin
-rd_data_out<=mem[rd_addr];
-end
-end
+   if(rst) begin 
+      rd_data_out<=0; end
+   else begin
+      if(rd_en) begin
+         rd_data_out<=mem[rd_addr];
+      end
+   end
 end
 endmodule
 
