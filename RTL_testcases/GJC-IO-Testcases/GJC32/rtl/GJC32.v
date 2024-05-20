@@ -49,9 +49,9 @@ module GJC32 (
 
     O_BUF ddr_buf (data_o_buf,data_o);
     O_DELAY data_o_delay (  .I(data_o_delayed), 
-                            .DLY_LOAD(dly_ld_inv), 
-                            .DLY_ADJ(dly_adj_inv), 
-                            .DLY_INCDEC(dly_incdec_inv), 
+                            .DLY_LOAD(dly_ld), 
+                            .DLY_ADJ(dly_adj), 
+                            .DLY_INCDEC(dly_incdec), 
                             .CLK_IN(clk_i), 
                             .O(data_o_buf));
     O_DDR data_o_ddr (data_reg,reset_n,enable,clk_i,data_o_delayed);
