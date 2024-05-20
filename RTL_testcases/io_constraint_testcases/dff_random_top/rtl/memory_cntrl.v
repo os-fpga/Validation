@@ -33,26 +33,27 @@ always@(posedge clk)
          s0: 
             begin
                wr_data_mem<=0;
+               reset_mem<=0;  
                if (wr_addr==10'b1111111111) begin
                   state<=s1;
-                  wr_addr<=1;
+                  wr_addr<=0;
                   wr_en<=0;
-                  reset_mem<=0;  
                end
                else
                 begin 
                  state<=s0;
                  wr_addr<=wr_addr+1;
                  wr_en<=1;
+                 wr_data_mem<=data_in;
                end
             end
          s1:
             begin
-               wr_data_mem<=data_in;
                rd_en<=1;
-               rd_addr<=rd_addr+1;
-               // wr_en<=1;
-               // wr_addr<=wr_addr+1;
+               if(rd_addr == wr_addr)
+                  rd_addr<=wr_addr+1;
+               else 
+                  rd_addr<=rd_addr+1;
                state<=s1;
             end
          default: state<=s0;
