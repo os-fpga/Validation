@@ -22,31 +22,31 @@ set_pin_loc in1[26] HR_1_26_13P g2f_rx_in[3]_A
 set_pin_loc in1[27] HR_1_26_13P g2f_rx_in[2]_A
 set_pin_loc in1[28] HR_1_26_13P g2f_rx_in[1]_A
 set_pin_loc in1[29] HR_1_26_13P g2f_rx_in[0]_A
-set_pin_loc in1[30] HR_1_CC_28_14P g2f_rx_in[1]_A
-set_pin_loc in1[31] HR_1_CC_28_14P g2f_rx_in[0]_A
+set_pin_loc in1[30] HR_1_20_10P g2f_rx_in[1]_A
+set_pin_loc in1[31] HR_1_20_10P g2f_rx_in[0]_A
 set_pin_loc in1[7] HR_1_22_11P g2f_rx_in[2]_A
 set_pin_loc out[0] HR_1_16_8P f2g_tx_out[9]_A
 set_pin_loc out[10] HR_1_2_1P f2g_tx_out[0]_A
-set_pin_loc out[21] HR_1_18_9P f2g_tx_out[0]_A
-set_pin_loc out[22] HR_1_18_9P f2g_tx_out[9]_A
-set_pin_loc out[23] HR_1_18_9P f2g_tx_out[8]_A
-set_pin_loc out[24] HR_1_18_9P f2g_tx_out[7]_A
-set_pin_loc out[25] HR_1_18_9P f2g_tx_out[6]_A
-set_pin_loc out[26] HR_1_18_9P f2g_tx_out[5]_A
-set_pin_loc out[27] HR_1_18_9P f2g_tx_out[4]_A
-set_pin_loc out[28] HR_1_18_9P f2g_tx_out[3]_A
-set_pin_loc out[29] HR_1_18_9P f2g_tx_out[2]_A
-set_pin_loc out[30] HR_1_18_9P f2g_tx_out[1]_A
+set_pin_loc out[21] HR_1_28_14P f2g_tx_out[0]_A
+set_pin_loc out[22] HR_1_28_14P f2g_tx_out[9]_A
+set_pin_loc out[23] HR_1_28_14P f2g_tx_out[8]_A
+set_pin_loc out[24] HR_1_28_14P f2g_tx_out[7]_A
+set_pin_loc out[25] HR_1_28_14P f2g_tx_out[6]_A
+set_pin_loc out[26] HR_1_28_14P f2g_tx_out[5]_A
+set_pin_loc out[27] HR_1_28_14P f2g_tx_out[4]_A
+set_pin_loc out[28] HR_1_28_14P f2g_tx_out[3]_A
+set_pin_loc out[29] HR_1_28_14P f2g_tx_out[2]_A
+set_pin_loc out[30] HR_1_28_14P f2g_tx_out[1]_A
 set_pin_loc reset HR_1_14_7P g2f_rx_in[0]_A
 set_mode MODE_BP_SDR_A_RX HR_1_0_0P
 set_mode MODE_BP_SDR_A_RX HR_1_12_6P
 set_mode MODE_BP_SDR_A_RX HR_1_14_7P
 set_mode MODE_RATE_10_A_TX HR_1_16_8P
-set_mode MODE_RATE_10_A_TX HR_1_18_9P
+set_mode MODE_RATE_10_A_TX HR_1_28_14P
 set_mode MODE_RATE_8_A_RX HR_1_22_11P
 set_mode MODE_RATE_10_A_RX HR_1_24_12P
 set_mode MODE_RATE_10_A_RX HR_1_26_13P
 set_mode MODE_BP_SDR_A_TX HR_1_2_1P
 set_mode MODE_BP_SDR_A_RX HR_1_32_16P
 set_mode MODE_BP_SDR_A_RX HR_1_8_4P
-set_mode MODE_BP_DDR_A_RX HR_1_CC_28_14P
+set_mode MODE_BP_DDR_A_RX HR_1_20_10P
