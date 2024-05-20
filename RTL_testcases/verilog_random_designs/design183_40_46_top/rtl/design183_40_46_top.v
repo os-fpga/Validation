@@ -1,12 +1,12 @@
-`include "large_mux.v"
-`include "memory_cntrl.v"
-`include "register.v"
-`include "full_adder.v"
-`include "d_latch.v"
-`include "shift_reg.v"
-`include "mod_n_counter.v"
-`include "decoder.v"
-`include "parity_generator.v"
+// `include "large_mux.v"
+// `include "memory_cntrl.v"
+// `include "register.v"
+// `include "full_adder.v"
+// `include "d_latch.v"
+// `include "shift_reg.v"
+// `include "mod_n_counter.v"
+// `include "decoder.v"
+// `include "parity_generator.v"
 
 module design183_40_46_top #(parameter WIDTH=32,CHANNEL=40) (clk, rst, in, out);
 
