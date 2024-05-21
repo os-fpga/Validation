@@ -46,7 +46,7 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
 
     assign out = i_buf_mux1_sel ? dffnre_out : !dffnre_out;
 
-    flip_flop ff_inst1 (.clk(clk),.rst(rst),.D(ac_out),.Q(inf_q));
+    flip_flop ff_inst1 (.clk(clk_buf_out),.rst(rst_i_buf_out),.D(ac_out),.Q(inf_q));
 
     O_BUFT obuft_inst (.I(inf_q),.T(ibuf_obuft_oe),.O(buft_out));
 
@@ -60,7 +60,7 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     assign ac_out = p_ibuf ^ g_ibuf ^ out; //Cin;
     assign Cout = (p_ibuf & g_ibuf) | (g_ibuf & out) | (p_ibuf & out);
 
-    infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk),.q(ram_out));
+    infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk_buf_out),.q(ram_out));
 
     always @(*) begin
         case(i_buf_out)

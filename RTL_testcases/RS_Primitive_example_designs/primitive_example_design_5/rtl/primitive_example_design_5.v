@@ -17,9 +17,9 @@ module primitive_example_design_5(
 
     I_BUF clk_buf_inst (.I(clk),.EN(ibuf1_en),.O(clk_buf_out));
 
-    I_DDR iddr_ist1 (.D(i_buf_out[0]),.R(rst),.E(iddr_en[0]),.C(clk_buf_out),.Q(iddr_out[0]));
-    I_DDR iddr_ist2 (.D(i_buf_out[1]),.R(rst),.E(iddr_en[1]),.C(clk_buf_out),.Q(iddr_out[1]));
-    I_DDR iddr_ist3 (.D(i_buf_out[2]),.R(rst),.E(iddr_en[2]),.C(clk_buf_out),.Q(iddr_out[2]));
+    I_DDR iddr_ist1 (.D(i_buf_out[0]),.R(rst_i_buf_out),.E(iddr_en[0]),.C(clk_buf_out),.Q(iddr_out[0]));
+    I_DDR iddr_ist2 (.D(i_buf_out[1]),.R(rst_i_buf_out),.E(iddr_en[1]),.C(clk_buf_out),.Q(iddr_out[1]));
+    I_DDR iddr_ist3 (.D(i_buf_out[2]),.R(rst_i_buf_out),.E(iddr_en[2]),.C(clk_buf_out),.Q(iddr_out[2]));
 
     O_BUFT_DS o_buft_inst1 (.I(dffre_out[0]),.T(obuft_ds_en1),.O_P(q_p[0]),.O_N(q_n[0]));
     O_BUFT_DS o_buft_inst2 (.I(dffre_out[1]),.T(obuft_ds_en2),.O_P(q_p[1]),.O_N(q_n[1]));

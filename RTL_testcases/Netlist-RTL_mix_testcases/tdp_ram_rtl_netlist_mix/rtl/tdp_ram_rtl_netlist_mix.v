@@ -2186,6 +2186,6 @@ module tdp_ram_rtl_netlist_mix(clk, we, read_addr, write_addr, din, dout, rtl_ou
 
   wire [9:0] addr;
   wire [31:0] rtl_out;
-  assign addr = read_addr ^ write_addr;
-  sp_ram inst (.clk(clk), .we(we), .addr(addr), .di(dout), .dout(rtl_out));
+  assign addr = \$iopadmap$read_addr ^ \$iopadmap$write_addr;
+  sp_ram inst (.clk(\$auto$clkbufmap.cc:294:execute$2701), .we(\$iopadmap$we), .addr(addr), .di(\$iopadmap$dout ), .dout(rtl_out));
 endmodule
