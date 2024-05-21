@@ -39,19 +39,19 @@ module GJC4(
            ) dut_mult (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_mult),
                 //   .DLY_B(dly_b_mult),
-                  .CLK(clk),
-                  .RESET(reset),
+                  // .CLK(clk),
+                  // .RESET(reset),
                   .FEEDBACK(feedback),
-                  .LOAD_ACC(load_acc),
+                  // .LOAD_ACC(load_acc),
                   .UNSIGNED_A(unsigned_a),
-                  .UNSIGNED_B(unsigned_b),
-                  .SATURATE(saturate_enable),
-                  .SHIFT_RIGHT(shift_right),
-                  .ROUND(round),
-                  .SUBTRACT(subtract)
+                  .UNSIGNED_B(unsigned_b)
+                  // .SATURATE(saturate_enable),
+                  // .SHIFT_RIGHT(shift_right),
+                  // .ROUND(round),
+                  // .SUBTRACT(subtract)
                   );
 
    DSP38 #(
@@ -61,19 +61,19 @@ module GJC4(
            ) dut_mult_regout (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_mult_regout),
                 //   .DLY_B(dly_b_mult_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
-                  .LOAD_ACC(load_acc),
+                  // .LOAD_ACC(load_acc),
                   .UNSIGNED_A(unsigned_a),
-                  .UNSIGNED_B(unsigned_b),
-                  .SATURATE(saturate_enable),
-                  .SHIFT_RIGHT(shift_right),
-                  .ROUND(round),
-                  .SUBTRACT(subtract)
+                  .UNSIGNED_B(unsigned_b)
+                  // .SATURATE(saturate_enable),
+                  // .SHIFT_RIGHT(shift_right),
+                  // .ROUND(round),
+                  // .SUBTRACT(subtract)
                   );
 
    DSP38 #(
@@ -83,19 +83,19 @@ module GJC4(
            ) dut_mult_regin (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_mult_regin),
                 //   .DLY_B(dly_b_mult_regin),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
-                  .LOAD_ACC(load_acc),
+                  // .LOAD_ACC(load_acc),
                   .UNSIGNED_A(unsigned_a),
-                  .UNSIGNED_B(unsigned_b),
-                  .SATURATE(saturate_enable),
-                  .SHIFT_RIGHT(shift_right),
-                  .ROUND(round),
-                  .SUBTRACT(subtract)
+                  .UNSIGNED_B(unsigned_b)
+                  // .SATURATE(saturate_enable),
+                  // .SHIFT_RIGHT(shift_right),
+                  // .ROUND(round),
+                  // .SUBTRACT(subtract)
                   );
 
    DSP38 #(
@@ -105,19 +105,19 @@ module GJC4(
            ) dut_mult_regin_regout (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_mult_regin_regout),
                 //   .DLY_B(dly_b_mult_regin_regout),
                   .CLK(clk),
                   .RESET(reset),
                   .FEEDBACK(feedback),
-                  .LOAD_ACC(load_acc),
+                  // .LOAD_ACC(load_acc),
                   .UNSIGNED_A(unsigned_a),
-                  .UNSIGNED_B(unsigned_b),
-                  .SATURATE(saturate_enable),
-                  .SHIFT_RIGHT(shift_right),
-                  .ROUND(round),
-                  .SUBTRACT(subtract)
+                  .UNSIGNED_B(unsigned_b)
+                  // .SATURATE(saturate_enable),
+                  // .SHIFT_RIGHT(shift_right),
+                  // .ROUND(round),
+                  // .SUBTRACT(subtract)
                   );
    DSP38 #(
            .DSP_MODE("MULTIPLY_ADD_SUB"),
@@ -214,7 +214,7 @@ module GJC4(
            ) dut_multacc (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_multacc),
                 //   .DLY_B(dly_b_multacc),
                   .CLK(clk),
@@ -236,7 +236,7 @@ module GJC4(
            ) dut_multacc_regout (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_multacc_regout),
                 //   .DLY_B(dly_b_multacc_regout),
                   .CLK(clk),
@@ -258,7 +258,7 @@ module GJC4(
            ) dut_multacc_regin (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_multacc_regin),
                 //   .DLY_B(dly_b_multacc_regin),
                   .CLK(clk),
@@ -280,7 +280,7 @@ module GJC4(
            ) dut_multacc_regin_regout (
                   .A(a),
                   .B(b),
-                  .ACC_FIR(acc_fir),
+                  // .ACC_FIR(acc_fir),
                   .Z(z_multacc_regin_regout),
                 //   .DLY_B(dly_b_multacc_regin_regout),
                   .CLK(clk),
