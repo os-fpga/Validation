@@ -15,7 +15,7 @@ wire clk_buf_out;
 
 I_BUF clk_buf_inst (.I(clk),.EN(ibuf_oe1),.O(clk_buf_out));
 
-O_DDR iddr_ist1 (.D(i_buf_out),.R(rst),.E(oddr_en),.C(clk_buf_out),.Q(oddr_out));
+O_DDR iddr_ist1 (.D(i_buf_out),.R(rst_i_buf_out),.E(oddr_en),.C(clk_buf_out),.Q(oddr_out));
 
 O_BUFT_DS o_buft_inst1 (.I(dffre_out),.O_N(q_n),.O_P(q_p),.T(1'b1));
 
