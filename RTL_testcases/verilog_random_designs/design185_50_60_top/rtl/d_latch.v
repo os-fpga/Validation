@@ -9,7 +9,7 @@ module d_latch_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     reg enable;
     wire [WIDTH-1:0] d_out;
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             enable <= 0;
         else

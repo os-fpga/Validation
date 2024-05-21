@@ -1,8 +1,8 @@
-`include "d_latch.v"
-`include "shift_reg.v"
-`include "mod_n_counter.v"
-`include "decoder.v"
-`include "parity_generator.v"
+// `include "d_latch.v"
+// `include "shift_reg.v"
+// `include "mod_n_counter.v"
+// `include "decoder.v"
+// `include "parity_generator.v"
 
 module design155_100_50_top #(parameter WIDTH=32,CHANNEL=100) (clk, rst, in, out);
 
