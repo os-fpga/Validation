@@ -21,7 +21,9 @@ module GJC8(
    input 	 unsigned_b;   // Selects signed or unsigned data for B input
 
    DSP38 #(
-			.DSP_MODE("MULTIPLY")
+	.DSP_MODE("MULTIPLY"),
+	.OUTPUT_REG_EN("FALSE"),
+  	.INPUT_REG_EN("FALSE") 
    )dut (
 		   .A(a),
 		   .B(b),
