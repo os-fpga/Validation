@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     input clk;
     input rst;
@@ -13,7 +11,7 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
         
     always @ (posedge clk) begin
         if (!rst)
-            cin <= 1;
+            cin <= 0;
         else
             cin <= 1;
     end
