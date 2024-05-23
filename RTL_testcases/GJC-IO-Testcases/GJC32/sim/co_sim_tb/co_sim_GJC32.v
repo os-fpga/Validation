@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+
 module co_sim_GJC32;
     reg 		[1:0] 		data_i_buf;
     reg 		clk_i_buf;
@@ -16,12 +16,12 @@ GJC32	golden (.*);
 	GJC32_post_synth synth_net (.*, .data_o(data_o_netlist) );
 `endif
 
-always #50 clk_i_buf = ~clk_i_buf;
+always #12.5 clk_i_buf = ~clk_i_buf;
 
 		// Initialize values to zero 
 initial	begin
 	{data_i_buf, clk_i_buf, dly_inc_pulse_inv_buf, enable_buf, reset_n_buf } <= 'd0;
-	#100;
+	#25;
 	reset_n_buf <= 'd1;
 // Generating random stimulus 
 	for (int i = 0; i < 1000; i = i + 1) begin
