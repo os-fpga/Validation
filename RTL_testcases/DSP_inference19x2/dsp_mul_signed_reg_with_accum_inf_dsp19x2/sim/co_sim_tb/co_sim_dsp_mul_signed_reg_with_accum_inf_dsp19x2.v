@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_signed_reg_with_accum_inf_dsp19x2;
 	reg signed [9:0] A, A1;
 	reg signed [8:0] B, B1;

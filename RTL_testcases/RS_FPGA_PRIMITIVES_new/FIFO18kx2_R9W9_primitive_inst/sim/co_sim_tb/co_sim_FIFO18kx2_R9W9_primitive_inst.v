@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_FIFO18kx2_R9W9_primitive_inst;
     reg 		[8:0] 		din1;
     reg 		[8:0] 		din2;

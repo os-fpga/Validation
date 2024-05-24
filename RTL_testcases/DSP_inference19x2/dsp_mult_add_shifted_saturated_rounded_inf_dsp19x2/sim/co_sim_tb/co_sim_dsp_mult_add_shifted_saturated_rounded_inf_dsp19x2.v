@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mult_add_shifted_saturated_rounded_inf_dsp19x2;
 	reg [9:0] A1, A2;
 	reg [8:0] B1, B2;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_complex_multiplier_iverilog #(parameter A_WIDTH = 20, B_WIDTH = 18);
 	reg clk, reset;
  	reg signed [ 19:0] ar, ai;

@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_simple_dp_reg_addr_dc_512x32_logic;
 
      reg  [31:0] din;

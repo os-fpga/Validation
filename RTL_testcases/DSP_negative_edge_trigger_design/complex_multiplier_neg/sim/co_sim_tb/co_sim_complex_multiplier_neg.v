@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_complex_multiplier_neg #(parameter A_WIDTH = 20, B_WIDTH = 18);
 	reg clk, reset;
  	reg signed [ A_WIDTH-1:0] ar, ai;

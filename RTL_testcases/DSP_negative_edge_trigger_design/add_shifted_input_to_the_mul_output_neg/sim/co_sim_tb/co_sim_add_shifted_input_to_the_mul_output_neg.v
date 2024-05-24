@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_add_shifted_input_to_the_mul_output_neg;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_subtract_mult_output_coeff2_from_shifted_a;
 	reg  [19:0] a;
 	reg  [17:0] b;

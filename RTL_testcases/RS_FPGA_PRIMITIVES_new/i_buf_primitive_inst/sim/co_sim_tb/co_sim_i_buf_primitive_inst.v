@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_i_buf_primitive_inst;
     reg 		data_input;
     wire 		data_output	,	data_output_netlist;

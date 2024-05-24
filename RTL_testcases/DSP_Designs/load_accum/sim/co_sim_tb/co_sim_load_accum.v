@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_load_accum;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

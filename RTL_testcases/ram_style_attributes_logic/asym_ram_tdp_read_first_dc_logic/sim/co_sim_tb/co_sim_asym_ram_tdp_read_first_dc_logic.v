@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_asym_ram_tdp_read_first_dc_logic;
     
     parameter WIDTHB = 4;

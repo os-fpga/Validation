@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_ram_true_dp_dc_excl_rw_512x32_block;
 
     reg clkA, clkB, weA, weB, reA, reB;

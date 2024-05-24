@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_true_dp_512x16_block;
 
     reg clk, weA, weB;

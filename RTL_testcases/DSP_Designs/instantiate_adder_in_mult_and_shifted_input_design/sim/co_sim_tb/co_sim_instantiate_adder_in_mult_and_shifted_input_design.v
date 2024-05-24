@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_instantiate_adder_in_mult_and_shifted_input_design;
 
 	reg signed [19:0] A;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_unsigned_reg;
 	reg  [19:0] A;
 	reg  [17:0] B;

@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_synth_options_no_simplify;
 	reg signed [19:0] A;
 	reg clk, reset, subtract_i;

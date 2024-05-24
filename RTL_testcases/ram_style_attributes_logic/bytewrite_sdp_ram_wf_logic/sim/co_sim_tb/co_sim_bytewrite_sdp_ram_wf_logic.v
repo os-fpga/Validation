@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_bytewrite_sdp_ram_wf_logic;
     //--------------------------------------------------------------------------
     parameter NUM_COL = 2; // 2 columns of 1 byte each make : 32 bits

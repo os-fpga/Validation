@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_simple_dp_synch_wf_1024x32_neg;
 
     reg clk, we,re;

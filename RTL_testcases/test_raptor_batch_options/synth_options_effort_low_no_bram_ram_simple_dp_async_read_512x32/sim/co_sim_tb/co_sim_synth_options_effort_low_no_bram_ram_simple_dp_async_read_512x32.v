@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_synth_options_effort_low_no_bram_ram_simple_dp_async_read_512x32;
 
     reg clk, we;

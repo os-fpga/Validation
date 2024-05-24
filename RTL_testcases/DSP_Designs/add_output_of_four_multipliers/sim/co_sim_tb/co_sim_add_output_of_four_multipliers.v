@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_add_output_of_four_multipliers#(
     parameter INPUT_WIDTH = 14,
     parameter OUTPUT_WIDTH = 28) ();

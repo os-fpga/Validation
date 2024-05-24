@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_ram_simple_dp_synch_wf_via_blocking_1024x32;
 
     reg clk, we,re;

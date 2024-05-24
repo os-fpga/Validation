@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_rams_sp_wf_1024x7;
     reg clk;
     reg we;

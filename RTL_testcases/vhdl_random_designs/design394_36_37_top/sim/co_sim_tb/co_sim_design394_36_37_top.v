@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_design394_36_37_top #(parameter WIDTH=32, CHANNEL=5);
 	reg clk, reset;
 	reg signed [WIDTH-1:0] inpt;

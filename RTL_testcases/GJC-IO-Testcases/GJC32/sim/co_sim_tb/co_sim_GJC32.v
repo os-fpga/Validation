@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_GJC32;
     reg 		[1:0] 		data_i_buf;
     reg 		clk_i_buf;

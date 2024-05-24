@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_o_buft_primitive_inst;
 // Clock signals
     reg clk;

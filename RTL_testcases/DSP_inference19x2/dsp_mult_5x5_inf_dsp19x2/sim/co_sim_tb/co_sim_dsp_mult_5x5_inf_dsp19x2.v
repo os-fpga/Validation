@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mult_5x5_inf_dsp19x2;
 	reg  [4:0] A;
 	reg  [4:0] B;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_ram_sdp_async_write_undesired;
 
     reg clk, we,re;

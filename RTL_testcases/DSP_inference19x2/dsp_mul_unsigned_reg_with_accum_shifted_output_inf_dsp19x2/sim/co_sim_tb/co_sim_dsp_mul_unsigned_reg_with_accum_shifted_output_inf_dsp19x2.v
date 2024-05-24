@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_unsigned_reg_with_accum_shifted_output_inf_dsp19x2;
 	reg [9:0] A, A1;
 	reg [8:0] B, B1;

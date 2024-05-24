@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_route_oneff_verilog;
 	reg d;
 	reg rstn;

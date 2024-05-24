@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_design128_6_3_top_iverilog #(parameter WIDTH=32, CHANNEL=6);
 	reg clk, rst;
 	reg signed [WIDTH-1:0] in;

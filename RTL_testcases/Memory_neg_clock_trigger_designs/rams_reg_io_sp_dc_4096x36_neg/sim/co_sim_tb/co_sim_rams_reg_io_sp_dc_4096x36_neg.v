@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_rams_reg_io_sp_dc_4096x36_neg;
     reg clkA;
     reg clkB;

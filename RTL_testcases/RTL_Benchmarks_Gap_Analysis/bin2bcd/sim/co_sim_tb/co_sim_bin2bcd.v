@@ -2,6 +2,7 @@
 // Function: Testbench for the Binary to Decimal converter
 // Source: 
 //   https://verilogcodes.blogspot.com/2015/10/verilog-code-for-8-bit-binary-to-bcd.html
+`timescale 1ns/1ps
 module co_sim_bin2bcd;
 
     // Input

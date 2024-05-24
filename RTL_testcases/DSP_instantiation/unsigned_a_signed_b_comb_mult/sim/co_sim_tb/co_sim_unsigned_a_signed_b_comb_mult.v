@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_unsigned_a_signed_b_comb_mult;
 	reg [19:0] a;
 	reg signed [17:0] b;

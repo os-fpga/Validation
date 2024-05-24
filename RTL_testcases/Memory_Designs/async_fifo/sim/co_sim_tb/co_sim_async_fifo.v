@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_async_fifo;
   reg clk_read, clk_write;
   reg reset;

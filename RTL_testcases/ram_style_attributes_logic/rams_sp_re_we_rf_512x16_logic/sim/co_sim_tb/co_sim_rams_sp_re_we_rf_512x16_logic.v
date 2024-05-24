@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_rams_sp_re_we_rf_512x16_logic;
     reg clk;
     reg we, re;

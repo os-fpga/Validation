@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_z_o_wrt_out_select_i;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

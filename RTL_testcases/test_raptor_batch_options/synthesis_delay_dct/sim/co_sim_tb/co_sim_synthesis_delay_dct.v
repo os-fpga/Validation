@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_synthesis_delay_dct ();
 	reg [2:0] sel;
   	wire [15:0] y; 

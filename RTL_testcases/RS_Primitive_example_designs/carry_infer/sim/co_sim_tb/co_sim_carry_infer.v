@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_carry_infer;
 
   reg clk;

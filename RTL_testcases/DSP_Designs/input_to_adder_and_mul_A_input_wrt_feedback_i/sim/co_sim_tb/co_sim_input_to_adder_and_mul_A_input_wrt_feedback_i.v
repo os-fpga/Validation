@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_input_to_adder_and_mul_A_input_wrt_feedback_i;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

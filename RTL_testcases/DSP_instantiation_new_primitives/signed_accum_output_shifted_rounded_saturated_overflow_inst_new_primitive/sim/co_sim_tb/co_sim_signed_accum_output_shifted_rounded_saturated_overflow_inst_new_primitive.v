@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_signed_accum_output_shifted_rounded_saturated_overflow_inst_new_primitive;
 	reg signed  [19:0] a;
 	reg signed  [17:0] b;

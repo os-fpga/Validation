@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_asym_ram_sdp_read_wider_dc_block;
    
 parameter WIDTHA = 4;

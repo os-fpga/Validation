@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_LUT6_primitive_inst;
     reg 		[5:0] 		A_LUT6;
     wire 		Y_LUT6	,	Y_LUT6_netlist;

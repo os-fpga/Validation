@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_fractured_accum_output_shifted_rounded;
 	reg signed [9:0] A;
 	reg signed [8:0] B;

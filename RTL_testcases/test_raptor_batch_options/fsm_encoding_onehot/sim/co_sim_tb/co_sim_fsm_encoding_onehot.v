@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_fsm_encoding_onehot #(parameter width = 12);
 	reg clk;
 	reg reset_n;

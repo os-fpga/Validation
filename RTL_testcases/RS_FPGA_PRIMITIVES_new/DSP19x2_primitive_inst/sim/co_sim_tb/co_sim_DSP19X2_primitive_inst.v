@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_DSP19X2_primitive_inst;
 // Clock signals
     reg clk;

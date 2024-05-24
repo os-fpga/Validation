@@ -1,5 +1,6 @@
  
  
+`timescale 1ns/1ps
 module co_sim_mult_28x20_unsigned_regout();
 
   reg [0:27] A;

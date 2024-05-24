@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_add_mul_output_to_accum_20lsb_neg;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

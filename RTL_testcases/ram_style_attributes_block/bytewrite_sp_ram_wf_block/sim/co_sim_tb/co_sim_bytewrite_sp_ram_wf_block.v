@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_bytewrite_sp_ram_wf_block;
     //--------------------------------------------------------------------------
     parameter NUM_COL = 2; // 2 columns of 1 byte each make : 16 bits

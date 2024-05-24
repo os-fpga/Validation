@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_synth_options_effort_low_dsp_multiplier_accum_with_add_and_sub;
 
 	reg signed [29:0] A;

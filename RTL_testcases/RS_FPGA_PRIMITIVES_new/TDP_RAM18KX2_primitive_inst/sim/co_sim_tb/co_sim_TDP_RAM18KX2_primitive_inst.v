@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_TDP_RAM18KX2_primitive_inst;
 // Clock signals
     reg CLK_A1;

@@ -1,5 +1,6 @@
 `define MAC_32 2
 
+`timescale 1ns/1ps
 module co_sim_mac_32;
 
    // Inputs

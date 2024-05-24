@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_multi_port_1024x32;
 
     input clk, we;

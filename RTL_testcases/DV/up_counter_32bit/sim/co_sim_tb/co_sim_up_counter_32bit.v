@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_up_counter_32bit;
 
   parameter CLK_PERIOD = 2; // Clock period in nanoseconds

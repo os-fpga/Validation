@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_shift_register_512bit;
 
   parameter CLK_PERIOD = 2;
