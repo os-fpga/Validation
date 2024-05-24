@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_add_shifted_a_to_mult_output_coeff3_in_and_out_registered_dsp19x2;
 	reg  [19:0] a;
 	reg  [17:0] b;

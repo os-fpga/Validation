@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_multiplier_accum_with_add;
 	reg signed [31:0] A, B, C, D;
 	reg clk, reset, sel_c_or_p ;

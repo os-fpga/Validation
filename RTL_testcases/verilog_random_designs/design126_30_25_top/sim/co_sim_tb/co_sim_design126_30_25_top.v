@@ -1,5 +1,6 @@
 //`include "../../rtl/design1_5_5_top.v"
 // `include "../../design1_5_5_top_netlist.v"
+`timescale 1ns/1ps
 module co_sim_design126_30_25_top #(parameter WIDTH=32, CHANNEL=30);
 	reg clk, reset;
 	reg  [WIDTH-1:0] inpt;

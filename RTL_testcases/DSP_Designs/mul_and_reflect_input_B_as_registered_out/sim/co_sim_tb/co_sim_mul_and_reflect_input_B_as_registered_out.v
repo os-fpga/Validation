@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_mul_and_reflect_input_B_as_registered_out;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

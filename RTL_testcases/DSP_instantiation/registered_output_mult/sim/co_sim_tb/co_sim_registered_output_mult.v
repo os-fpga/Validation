@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_registered_output_mult;
 	reg clk, reset;
 	reg signed [19:0] a;

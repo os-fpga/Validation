@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_sixteen_mult_accum #
     (parameter WIDTH = 18);
     reg clk, areset;

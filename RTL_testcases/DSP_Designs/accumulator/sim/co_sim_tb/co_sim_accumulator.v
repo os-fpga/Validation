@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_accumulator;
 	reg signed [19:0] A;
 	reg clk, reset, subtract_i;

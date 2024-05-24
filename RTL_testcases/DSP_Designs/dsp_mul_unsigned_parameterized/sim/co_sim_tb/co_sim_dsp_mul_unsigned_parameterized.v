@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_unsigned_parameterized #(parameter A_WIDTH = 64, B_WIDTH = 64);
 	reg [A_WIDTH-1:0] A;
 	reg [B_WIDTH-1:0] B;

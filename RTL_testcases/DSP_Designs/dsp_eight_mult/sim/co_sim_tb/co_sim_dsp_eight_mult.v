@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_eight_mult #
     (parameter WIDTH = 9);
     reg clk, areset;

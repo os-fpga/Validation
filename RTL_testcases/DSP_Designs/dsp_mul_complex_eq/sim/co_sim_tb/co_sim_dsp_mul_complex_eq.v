@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_complex_eq ();
  reg [15:0] a, b;
  wire [31:0] z, z1, z2;

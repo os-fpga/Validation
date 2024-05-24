@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_simple_dp_async_reg_read_512x16_block;
 
     reg clk, we;

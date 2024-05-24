@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_gray_to_bin;
 
   parameter WIDTH = 32;

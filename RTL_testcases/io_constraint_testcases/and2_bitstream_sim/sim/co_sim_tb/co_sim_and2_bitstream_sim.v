@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_and2_bitstream_sim;
 	bit a, b;
 	wire c,c_netlist;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_matrix_mult_3x3_iverilog;
 	reg [143:0] A;
 	reg [143:0] B;

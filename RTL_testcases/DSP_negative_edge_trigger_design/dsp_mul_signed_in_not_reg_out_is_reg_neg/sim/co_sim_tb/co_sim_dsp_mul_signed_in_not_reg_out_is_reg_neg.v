@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_signed_in_not_reg_out_is_reg_neg;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

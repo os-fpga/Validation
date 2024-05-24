@@ -1,5 +1,6 @@
 `define size 5
 
+`timescale 1ns/1ps
 module co_sim_gray_counter;
 
 	reg  clk;

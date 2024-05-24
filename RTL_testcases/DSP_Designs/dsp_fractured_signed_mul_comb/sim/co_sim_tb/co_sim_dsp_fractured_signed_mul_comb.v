@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_dsp_fractured_signed_mul_comb;
 	reg signed [9:0] A, A_fmode;
 	reg signed [8:0] B, B_fmode;

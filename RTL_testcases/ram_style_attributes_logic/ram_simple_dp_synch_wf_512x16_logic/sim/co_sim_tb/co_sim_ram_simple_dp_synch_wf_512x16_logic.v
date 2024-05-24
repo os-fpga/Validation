@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_simple_dp_synch_wf_512x16_logic;
 
     reg clk, we,re;

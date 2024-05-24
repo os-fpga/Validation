@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_asym_ram_sdp_wide_sync_read_block;
     
 reg clk, write_enable, read_enable;

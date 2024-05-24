@@ -1,5 +1,6 @@
 `include "../../rtl/dsp_multiplier_accum_with_add.v"
 `include "../netlist/dsp_multiplier_accum_with_add_netlist.v"
+`timescale 1ns/1ps
 module co_sim_tb;
 	reg signed [31:0] A, B, C, D;
 	reg clk, reset, sel_c_or_p ;

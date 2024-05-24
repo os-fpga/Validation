@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_encoder_8;
 	reg  [7:0] data_in;
 	reg clk, rst ;

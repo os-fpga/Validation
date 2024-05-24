@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_b_registered_input_to_output_dsp19x2;
 	reg  [19:0] a;
 	reg  [17:0] b;

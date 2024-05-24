@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_design1_5_5_top_verilator #(parameter WIDTH=32, CHANNEL=5);
 	reg clk, rst;
 	reg signed [WIDTH-1:0] in;

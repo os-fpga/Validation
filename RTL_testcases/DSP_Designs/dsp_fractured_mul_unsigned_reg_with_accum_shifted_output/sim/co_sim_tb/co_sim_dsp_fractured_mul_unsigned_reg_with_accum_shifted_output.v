@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_fractured_mul_unsigned_reg_with_accum_shifted_output;
 	reg [9:0] A, A_fmode;
 	reg [8:0] B, B_fmode;

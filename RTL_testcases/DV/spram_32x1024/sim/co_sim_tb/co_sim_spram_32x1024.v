@@ -1,4 +1,5 @@
  
+`timescale 1ns/1ps
 module co_sim_spram_32x1024;
 	//spram_32x1024 interface declaration
     //===================================================================

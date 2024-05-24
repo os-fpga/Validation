@@ -1,4 +1,5 @@
  
+`timescale 1ns/1ps
 module co_sim_eight_mult_20x18_unsigned_regout();
 
   reg [0:19] A;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_tdp_100x11_block;
 
     reg clkA, clkB, weA, weB;

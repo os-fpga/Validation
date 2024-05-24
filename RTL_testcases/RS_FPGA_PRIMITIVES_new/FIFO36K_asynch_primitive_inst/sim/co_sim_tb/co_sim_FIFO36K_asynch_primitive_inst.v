@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_FIFO36K_asynch_primitive_inst;
     wire 		[35:0] 		pop	,	pop_netlist;
     reg 		[35:0] 		push;

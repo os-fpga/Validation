@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_BOOT_CLOCK_primitive_inst;
 // Clock signals
     reg clk1;

@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_register_2;
 	reg  [1:0] data_in;
 	reg clk, rst ;

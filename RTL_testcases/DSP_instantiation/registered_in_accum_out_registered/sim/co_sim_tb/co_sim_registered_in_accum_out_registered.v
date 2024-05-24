@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_registered_in_accum_out_registered;
 	reg  [19:0] a;
 	reg  [17:0] b;

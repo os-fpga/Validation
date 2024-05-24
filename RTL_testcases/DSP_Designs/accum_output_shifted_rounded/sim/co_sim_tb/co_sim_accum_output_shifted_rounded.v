@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_accum_output_shifted_rounded;
 	reg signed [19:0] A;
 	reg signed [17:0] B;

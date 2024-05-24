@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_SBox;
 reg clk;               //system clock
 reg reset;             //asynch active low reset

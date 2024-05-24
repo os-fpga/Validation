@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_dual_port_rom_logic
 #(parameter DATA_WIDTH=32, parameter ADDR_WIDTH=10);
 

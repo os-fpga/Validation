@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_rams_sp_reg_addr_1024x18;
     reg clk;
     reg we;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_cic_decimator #(parameter width = 12);
 	reg               clk;
 	reg               rst;

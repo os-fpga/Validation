@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_invertion_4;
 	reg [3:0] data_in;
 	wire  [3:0] data_out, data_out_netlist;

@@ -1,5 +1,6 @@
 `include "clb_defines.v"
 
+`timescale 1ns/1ps
 module co_sim_up_down_counter;
 
   reg  clock0;

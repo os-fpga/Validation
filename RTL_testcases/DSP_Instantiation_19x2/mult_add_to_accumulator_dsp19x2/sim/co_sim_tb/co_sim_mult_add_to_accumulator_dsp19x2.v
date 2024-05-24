@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_mult_add_to_accumulator_dsp19x2;
 	reg  [19:0] a;
 	reg  [17:0] b;

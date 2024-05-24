@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_signed_accum_output_shifted_dsp19x2;
 	reg signed [19:0] a;
 	reg signed [17:0] b;

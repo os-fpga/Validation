@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 	module co_sim_accum_20lsb_input_to_mulltiplier_new_primitive;
 	reg  [19:0] a;
 	reg  [17:0] b;

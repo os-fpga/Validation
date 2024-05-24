@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_tdp_256x9;
 
     reg clkA, clkB, weA, weB;

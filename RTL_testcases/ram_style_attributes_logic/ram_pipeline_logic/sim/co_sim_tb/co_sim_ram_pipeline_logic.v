@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_ram_pipeline_logic;
 
     reg clk1;

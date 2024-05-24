@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_I_SERDES_primitive_inst;
 // Clock signals
     reg CLK_IN;

@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_bytewrite_tdp_ram_wf;
   parameter NB_COL = 4;                           // Specify number of columns (number of bytes)
   parameter COL_WIDTH = 9;                        // Specify column width (byte width, typically 8 or 9)

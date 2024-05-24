@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_registered_in_and_out_mult_dsp19x2;
 	reg clk, reset;
 	reg signed [19:0] a;

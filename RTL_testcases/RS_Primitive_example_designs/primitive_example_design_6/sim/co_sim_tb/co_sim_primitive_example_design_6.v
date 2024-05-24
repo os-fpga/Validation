@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_primitive_example_design_6;
 
   reg [1:0] in;

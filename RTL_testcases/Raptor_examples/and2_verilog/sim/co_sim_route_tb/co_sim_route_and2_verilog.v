@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_route_and2_verilog #(parameter WIDTH=32, CHANNEL=30);
 
   	reg a     = 1'b0;

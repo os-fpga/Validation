@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_o_buft_ds_primitive_inst;
     wire 		O_N_O_BUFT_DS	,	O_N_O_BUFT_DS_netlist;
     wire 		O_P_O_BUFT_DS	,	O_P_O_BUFT_DS_netlist;

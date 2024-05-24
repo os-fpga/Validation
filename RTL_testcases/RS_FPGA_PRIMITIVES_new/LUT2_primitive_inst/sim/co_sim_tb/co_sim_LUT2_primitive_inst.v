@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_LUT2_primitive_inst;
     reg 		[1:0] 		A_LUT2;
     wire 		Y_LUT2	,	Y_LUT2_netlist;

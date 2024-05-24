@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_rams_sp_reg_addr_readmem_1024x16;
     reg clk;
     reg we;

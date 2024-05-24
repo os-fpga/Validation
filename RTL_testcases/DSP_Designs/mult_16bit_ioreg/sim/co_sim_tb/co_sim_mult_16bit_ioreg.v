@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_mult_16bit_ioreg();
 
   reg [15:0] a;

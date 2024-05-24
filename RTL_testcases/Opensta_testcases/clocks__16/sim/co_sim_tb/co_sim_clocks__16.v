@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_clocks__16;
 
     reg clk_0, clk_1, clk_2, clk_3, clk_4, clk_5, clk_6, clk_7, clk_8, clk_9, clk_10, clk_11, clk_12, clk_13, clk_14, clk_15;

@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_rams_sp_rf_rst_async_512x16_block;
     reg clk;
     reg we;

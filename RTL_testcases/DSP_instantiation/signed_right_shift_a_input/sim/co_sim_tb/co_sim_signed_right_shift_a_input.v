@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_signed_right_shift_a_input;
 	reg   [19:0] a;
 	reg   [17:0] b;

@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_carry_chain_primitive_inst;
     reg 		[7:0] 		p;
     reg 		[7:0] 		g;

@@ -1,4 +1,5 @@
  
+`timescale 1ns/1ps
 module co_sim_TDP_RAM36K_primitive_inst_iverilog;
    reg WEN_A; // Write-enable port A
   reg WEN_B; // Write-enable port B

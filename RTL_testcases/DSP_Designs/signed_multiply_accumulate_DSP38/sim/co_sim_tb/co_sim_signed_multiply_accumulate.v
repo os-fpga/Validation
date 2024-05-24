@@ -1,4 +1,5 @@
 
+`timescale 1ns/1ps
 module co_sim_signed_multiply_accumulate;
 
   localparam  WIDTH = 25;

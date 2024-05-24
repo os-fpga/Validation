@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module co_sim_dsp_mul_signed_reg_with_accum_parametrized #(parameter A_WIDTH = 32, B_WIDTH = 32);
 	reg signed [A_WIDTH-1:0] A;
 	reg signed [A_WIDTH-1:0] B;
