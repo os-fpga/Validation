@@ -8,7 +8,7 @@
     "time_analysis_runtime": "",
     "bitstream_runtime": "",
     "reg_id": "RegID:",
-    "device": "Device:",
+    "device": "Target device:",
     "target device": "Target device:",
     "version": "Version  :",
     "git_hash": "Hash     :",
