@@ -107,12 +107,14 @@ def create_folders_and_file():
     # Extract port information
     input_ports = []
     output_ports = []
+    inout_ports = []
     clk_port = []
     reset_port = []
     wire_instances = []
     p_name_compare = []
     p_name_netlist = []
     bit_width_list = []
+    inout_wdth_lst = []
     ports = {}
     
     # Extract iteration value 
@@ -151,7 +153,7 @@ def create_folders_and_file():
             else:
                 ports[port_name] = {"direction": port_direction, "width": None}
            
-    # Separate input and output ports    
+    # Separate input, inout and output ports    
     for port, info in ports.items():
         if info["direction"] == "input":
             input_ports.append(port)
@@ -161,9 +163,20 @@ def create_folders_and_file():
                 bit_width_list.append(width_int)
             else:
                 bit_width_list.append(None)
+        elif info["direction"] == "inout":
+            inout_ports.append(port)
+            if info["width"] is not None:
+                inout_width_str = info["width"].strip("[]")
+                inout_width_int = int(inout_width_str) + 1
+                inout_wdth_lst.append(inout_width_int)
+            else:
+                inout_wdth_lst.append(None)
         elif info["direction"] == "output":
             output_ports.append(port)
-            
+    
+    print (inout_ports)
+    print (inout_wdth_lst) 
+    
     # Write module name and port information to a file
     with open(output_filename, "w") as file:
         file.write("`timescale 1ns/1ps\nmodule " + file_string + top_module + ";\n")
@@ -186,6 +199,10 @@ def create_folders_and_file():
                     info["width"] = info["width"].replace("]", ":0]")
                 if info["direction"] == "input":
                     file.write("    reg \t\t" + info["width"] + " \t\t" + port)
+                elif info["direction"] == "inout":
+                    file.write("    wire \t\t" + info["width"] + " \t\t" + port + ";\n")
+                    file.write("    reg  \t\t" + info["width"] + " \t\tinout_drv_" + port + ";\n")
+                    file.write("    wire\t\t" + info["width"] + " \t\tinout_rcv_" + port)
                 elif info["direction"] == "output":
                     p_name_inst     = port + "_netlist"
                     p_name_with_netlist = port + "\t,\t" + p_name_inst
@@ -197,6 +214,10 @@ def create_folders_and_file():
             else:
                 if info["direction"] == "input":
                     file.write("    reg \t\t" + port)
+                elif info["direction"] == "inout":
+                    file.write("    wire \t\t" + " \t\t" + port + ";\n")
+                    file.write("    reg  \t\t" + " \t\tinout_drv_" + port + ";\n")
+                    file.write("    wire\t\t" + " \t\tinout_rcv_" + port)
                 elif info["direction"] == "output":
                     p_name_inst     = port + "_netlist"
                     p_name_with_netlist = port + "\t,\t" + p_name_inst
@@ -211,6 +232,13 @@ def create_folders_and_file():
         file.write("\t" + top_module + '_post_route route_net (.*, {} );\n'.format(', '.join(wire_instances)) + '`else\n' )
         file.write("\t" + top_module + '_post_synth synth_net (.*, {} );\n'.format(', '.join(wire_instances)) + "`endif\n\n" )
         
+        if inout_ports:
+            for inout in inout_ports:
+                file.write("assign\t" + inout + " = inout_drv_" + inout + ";\n")
+                file.write("assign\tinout_rcv_" + inout  + " = " + inout + ";\n\n")
+            inout_ports = ["inout_drv_" + port for port in inout_ports]
+            input_ports.extend(inout_ports)
+            bit_width_list.extend(inout_wdth_lst)
         if len(clk_port) == 0:
             print("FOUND COMBINATIONAL DESIGN")
             # initialize values to zero
@@ -261,6 +289,10 @@ def create_folders_and_file():
                 # initialize values to zero
                 for clk in clk_port:
                     file.write("\n// Initialize values to zero \ninitial\tbegin\n\t")
+                    # look for any inout signal 
+                    if inout_ports:
+                        for inout in inout_ports:
+                            file.write("\t" + inout + " = 'bz;\n")  
                     # look for memories and initialize to 0 
                     if len(rtl_mem) > 0:
                         # Iterate over each memory in the "memories" list
@@ -291,7 +323,7 @@ def create_folders_and_file():
                     file.write('\n\tcompare();\n\t//Random stimulus generation\n\trepeat(' + str(iteration) + ') @ (negedge ' + clk + ') begin\n')
                     random_stimulus_lines = []
                     for port in input_ports:
-                        random_stimulus_lines.append(f'{port}\t\t\t <= $urandom();')    
+                        random_stimulus_lines.append(f'{port.ljust(20)} <= $urandom();')    
                     for rand_line in random_stimulus_lines:
                         file.write('\t\t' + rand_line + '\n')
                     file.write('\n\t\tcompare();\n\tend\n\n')            
@@ -307,7 +339,7 @@ def create_folders_and_file():
                     # Create stimulus assignments for each input port
                     stimulus_lines = []
                     for port, max_value in zip(input_ports, max_values):
-                        stimulus_lines.append(f'{port} <= {max_value};')
+                        stimulus_lines.append(f'{port.ljust(22)} <= {max_value};')
                     for line in stimulus_lines:
                         file.write('\t' + line + '\n')
                     file.write('\trepeat (2) @ (negedge ' + clk + ');\n\tcompare();\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
@@ -316,6 +348,10 @@ def create_folders_and_file():
                 print("Found Reset Signal:")
                 # Check sync_reset value and write stimulus generation accordingly
                 file.write ("//Reset Stimulus generation\ninitial begin\n")
+                # look for any inout signal 
+                if inout_ports:
+                    for inout in inout_ports:
+                        file.write("\t" + inout + " = 'bz;\n")                
                 # look for memories and initialize to 0 
                 if len(rtl_mem) > 0:
                     # Iterate over each memory in the "memories" list
@@ -357,7 +393,7 @@ def create_folders_and_file():
                 file.write('\t//Random stimulus generation\n\trepeat(' + str(iteration) + ') @ (negedge ' + clk + ') begin\n')
                 random_stimulus_lines = []
                 for port in input_ports:
-                    random_stimulus_lines.append(f'{port} \t\t\t <= $urandom();')    
+                    random_stimulus_lines.append(f'{port.ljust(20)} <= $urandom();')    
                 for rand_line in random_stimulus_lines:
                     file.write('\t\t' + rand_line + '\n')
                 file.write('\t\tcompare();\nend\n\n')
@@ -374,7 +410,7 @@ def create_folders_and_file():
                 # Create stimulus assignments for each input port
                 stimulus_lines = []
                 for port, max_value in zip(input_ports, max_values):
-                    stimulus_lines.append(f'{port} <= {max_value};')
+                    stimulus_lines.append(f'{port.ljust(22)} <= {max_value};')
                 for line in stimulus_lines:
                     file.write('\t' + line + '\n')
                 file.write('\tcompare();\n\n\tif(mismatch == 0)\n\t\t$display("**** All Comparison Matched *** \\n\t\tSimulation Passed\\n");\n\telse\n\t\t')
