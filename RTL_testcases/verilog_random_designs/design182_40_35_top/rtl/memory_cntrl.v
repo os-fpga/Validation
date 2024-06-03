@@ -95,10 +95,12 @@ output reg [DATA-1:0] rd_data_out);
 reg [DATA-1:0] mem [(2**ADDR)-1:0];
 
 always@(posedge clk) begin
-   if(wr_en) begin
-      mem[wr_addr] <= wr_data_in;
+   if(!rst) begin
+      if(wr_en) begin
+         mem[wr_addr] <= wr_data_in;
       end
    end
+end
    
 always@(posedge clk) begin
    if(rst) begin 
