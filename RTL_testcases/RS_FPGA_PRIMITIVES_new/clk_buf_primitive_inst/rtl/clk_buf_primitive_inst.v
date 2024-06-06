@@ -3,18 +3,18 @@ module clk_buf_primitive_inst (
   output clock_output // Clock output
 );
 
-reg wire1, wire2;
-wire wire_out_clk;
+wire wire1, wire2;
+reg wire_out_clk;
 
 
-always @(posedge clock_input) begin
-  wire1 <=  clock_input;
+always @(posedge wire1) begin
+  wire_out_clk <=  wire1;
 end
 
   // Instantiate the CLK_BUF module
   CLK_BUF clk_buf_inst (
-    .I(wire1),
-    .O(wire_out_clk)
+    .I(clock_input),
+    .O(wire1)
   );
 
 assign clock_output = wire_out_clk;
