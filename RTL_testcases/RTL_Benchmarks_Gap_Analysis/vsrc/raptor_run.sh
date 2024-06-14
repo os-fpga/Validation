@@ -19,7 +19,7 @@ device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="./raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
