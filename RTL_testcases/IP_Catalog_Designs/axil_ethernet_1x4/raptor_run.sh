@@ -15,7 +15,7 @@ post_route_sim=false
 bitstream_sim=false
 
 #raptor options
-device="GEMINI_COMPACT_104x68"
+device="1GE75"
 
 strategy="delay" #(area, delay, mixed, none) 
 
