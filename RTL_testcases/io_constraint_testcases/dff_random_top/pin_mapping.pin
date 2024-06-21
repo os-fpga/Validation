@@ -1,52 +1,149 @@
-set_pin_loc clk1 HR_1_0_0P g2f_rx_in[0]_A
-set_pin_loc clk2 HR_1_32_16P g2f_rx_in[0]_A
-set_pin_loc clk3 HR_1_8_4P g2f_rx_in[0]_A
-set_pin_loc clk4 HR_1_12_6P g2f_rx_in[0]_A
-set_pin_loc in1[10] HR_1_24_12P g2f_rx_in[9]_A
-set_pin_loc in1[11] HR_1_24_12P g2f_rx_in[8]_A
-set_pin_loc in1[12] HR_1_24_12P g2f_rx_in[7]_A
-set_pin_loc in1[13] HR_1_24_12P g2f_rx_in[6]_A
-set_pin_loc in1[14] HR_1_24_12P g2f_rx_in[5]_A
-set_pin_loc in1[15] HR_1_24_12P g2f_rx_in[4]_A
-set_pin_loc in1[16] HR_1_24_12P g2f_rx_in[3]_A
-set_pin_loc in1[17] HR_1_24_12P g2f_rx_in[2]_A
-set_pin_loc in1[18] HR_1_24_12P g2f_rx_in[1]_A
-set_pin_loc in1[19] HR_1_24_12P g2f_rx_in[0]_A
-set_pin_loc in1[20] HR_1_26_13P g2f_rx_in[9]_A
-set_pin_loc in1[21] HR_1_26_13P g2f_rx_in[8]_A
-set_pin_loc in1[22] HR_1_26_13P g2f_rx_in[7]_A
-set_pin_loc in1[23] HR_1_26_13P g2f_rx_in[6]_A
-set_pin_loc in1[24] HR_1_26_13P g2f_rx_in[5]_A
-set_pin_loc in1[25] HR_1_26_13P g2f_rx_in[4]_A
-set_pin_loc in1[26] HR_1_26_13P g2f_rx_in[3]_A
-set_pin_loc in1[27] HR_1_26_13P g2f_rx_in[2]_A
-set_pin_loc in1[28] HR_1_26_13P g2f_rx_in[1]_A
-set_pin_loc in1[29] HR_1_26_13P g2f_rx_in[0]_A
-set_pin_loc in1[30] HR_1_20_10P g2f_rx_in[1]_A
-set_pin_loc in1[31] HR_1_20_10P g2f_rx_in[0]_A
-set_pin_loc in1[7] HR_1_22_11P g2f_rx_in[2]_A
-set_pin_loc out[0] HR_1_16_8P f2g_tx_out[9]_A
-set_pin_loc out[10] HR_1_2_1P f2g_tx_out[0]_A
-set_pin_loc out[21] HR_1_28_14P f2g_tx_out[0]_A
-set_pin_loc out[22] HR_1_28_14P f2g_tx_out[9]_A
-set_pin_loc out[23] HR_1_28_14P f2g_tx_out[8]_A
-set_pin_loc out[24] HR_1_28_14P f2g_tx_out[7]_A
-set_pin_loc out[25] HR_1_28_14P f2g_tx_out[6]_A
-set_pin_loc out[26] HR_1_28_14P f2g_tx_out[5]_A
-set_pin_loc out[27] HR_1_28_14P f2g_tx_out[4]_A
-set_pin_loc out[28] HR_1_28_14P f2g_tx_out[3]_A
-set_pin_loc out[29] HR_1_28_14P f2g_tx_out[2]_A
-set_pin_loc out[30] HR_1_28_14P f2g_tx_out[1]_A
-set_pin_loc reset HR_1_14_7P g2f_rx_in[0]_A
-set_mode MODE_BP_SDR_A_RX HR_1_0_0P
-set_mode MODE_BP_SDR_A_RX HR_1_12_6P
-set_mode MODE_BP_SDR_A_RX HR_1_14_7P
-set_mode MODE_RATE_10_A_TX HR_1_16_8P
-set_mode MODE_RATE_10_A_TX HR_1_28_14P
-set_mode MODE_RATE_8_A_RX HR_1_22_11P
-set_mode MODE_RATE_10_A_RX HR_1_24_12P
-set_mode MODE_RATE_10_A_RX HR_1_26_13P
-set_mode MODE_BP_SDR_A_TX HR_1_2_1P
-set_mode MODE_BP_SDR_A_RX HR_1_32_16P
-set_mode MODE_BP_SDR_A_RX HR_1_8_4P
-set_mode MODE_BP_DDR_A_RX HR_1_20_10P
+set_pin_loc clk1 HR_1_CC_38_19P g2f_rx_in[0]_A
+set_pin_loc clk2 HR_1_CC_18_9P g2f_rx_in[0]_A
+set_pin_loc clk3 HR_2_CC_38_19P g2f_rx_in[0]_A
+set_pin_loc clk4 HR_2_CC_18_9P g2f_rx_in[0]_A
+
+
+set_pin_loc reset HR_5_28_14P g2f_rx_in[0]_A
+
+
+set_pin_loc in1[0]  HR_1_0_0P g2f_rx_in[0]_A
+set_pin_loc in1[1]  HR_1_2_1P g2f_rx_in[0]_A
+set_pin_loc in1[2]  HR_1_4_2P g2f_rx_in[0]_A
+set_pin_loc in1[3]  HR_1_6_3P g2f_rx_in[0]_A
+set_pin_loc in1[4]  HR_1_8_4P g2f_rx_in[0]_A
+set_pin_loc in1[5]  HR_1_10_5P g2f_rx_in[0]_A
+set_pin_loc in1[6]  HR_1_12_6P g2f_rx_in[0]_A
+set_pin_loc in1[7]  HR_1_14_7P g2f_rx_in[0]_A
+set_pin_loc in1[8]  HR_1_16_8P g2f_rx_in[0]_A
+set_pin_loc in1[9]  HR_1_20_10P g2f_rx_in[0]_A
+set_pin_loc in1[10] HP_1_16_8P g2f_rx_in[0]_A
+set_pin_loc in1[11] HP_1_20_10P g2f_rx_in[0]_A
+set_pin_loc in1[12] HP_1_22_11P g2f_rx_in[0]_A
+set_pin_loc in1[13] HP_1_24_12P g2f_rx_in[0]_A
+set_pin_loc in1[14] HP_1_26_13P g2f_rx_in[0]_A
+set_pin_loc in1[15] HP_1_28_14P g2f_rx_in[0]_A
+set_pin_loc in1[16] HP_1_30_15P g2f_rx_in[0]_A
+set_pin_loc in1[17] HP_1_32_16P g2f_rx_in[0]_A
+set_pin_loc in1[18] HP_1_34_17P g2f_rx_in[0]_A
+set_pin_loc in1[19] HP_1_36_18P g2f_rx_in[0]_A
+set_pin_loc in1[20] HR_5_0_0P g2f_rx_in[0]_A
+set_pin_loc in1[21] HR_5_2_1P g2f_rx_in[0]_A
+set_pin_loc in1[22] HR_5_4_2P g2f_rx_in[0]_A
+set_pin_loc in1[23] HR_5_6_3P g2f_rx_in[0]_A
+set_pin_loc in1[24] HR_5_8_4P g2f_rx_in[0]_A
+set_pin_loc in1[25] HR_5_10_5P g2f_rx_in[0]_A
+set_pin_loc in1[26] HR_5_12_6P g2f_rx_in[0]_A
+set_pin_loc in1[27] HR_5_14_7P g2f_rx_in[0]_A
+set_pin_loc in1[28] HR_5_16_8P g2f_rx_in[0]_A
+set_pin_loc in1[29] HR_5_20_10P g2f_rx_in[0]_A
+set_pin_loc in1[30] HR_5_22_11P g2f_rx_in[0]_A
+set_pin_loc in1[31] HR_5_24_12P g2f_rx_in[0]_A
+
+set_pin_loc out[0]  HR_3_8_4P f2g_tx_out[0]_A
+set_pin_loc out[1]  HR_3_10_5P f2g_tx_out[0]_A
+set_pin_loc out[2]  HR_3_12_6P f2g_tx_out[0]_A
+set_pin_loc out[3]  HR_3_14_7P f2g_tx_out[0]_A
+set_pin_loc out[4]  HR_3_16_8P f2g_tx_out[0]_A
+set_pin_loc out[5]  HR_3_20_10P f2g_tx_out[0]_A
+set_pin_loc out[6]  HR_3_22_11P f2g_tx_out[0]_A
+set_pin_loc out[7]  HR_3_24_12P f2g_tx_out[0]_A
+set_pin_loc out[8]  HR_3_26_13P f2g_tx_out[0]_A
+set_pin_loc out[9]  HR_3_28_14P f2g_tx_out[0]_A
+set_pin_loc out[10] HR_2_30_15P f2g_tx_out[0]_A
+set_pin_loc out[11] HR_2_32_16P f2g_tx_out[0]_A
+set_pin_loc out[12] HR_2_0_0P f2g_tx_out[0]_A
+set_pin_loc out[13] HR_2_2_1P f2g_tx_out[0]_A
+set_pin_loc out[14] HR_2_4_2P f2g_tx_out[0]_A
+set_pin_loc out[15] HR_2_6_3P f2g_tx_out[0]_A
+set_pin_loc out[16] HR_2_8_4P f2g_tx_out[0]_A
+set_pin_loc out[17] HR_2_10_5P f2g_tx_out[0]_A
+set_pin_loc out[18] HR_2_12_6P f2g_tx_out[0]_A
+set_pin_loc out[19] HR_2_14_7P f2g_tx_out[0]_A
+set_pin_loc out[20] HP_2_16_8P f2g_tx_out[0]_A
+set_pin_loc out[21] HP_2_20_10P f2g_tx_out[0]_A
+set_pin_loc out[22] HP_2_22_11P f2g_tx_out[0]_A
+set_pin_loc out[23] HP_2_24_12P f2g_tx_out[0]_A
+set_pin_loc out[24] HP_2_26_13P f2g_tx_out[0]_A
+set_pin_loc out[25] HP_2_28_14P f2g_tx_out[0]_A
+set_pin_loc out[26] HR_2_34_17P f2g_tx_out[0]_A
+set_pin_loc out[27] HR_2_36_18P f2g_tx_out[0]_A
+set_pin_loc out[28] HR_3_0_0P f2g_tx_out[0]_A
+set_pin_loc out[29] HR_3_2_1P f2g_tx_out[0]_A
+set_pin_loc out[30] HP_1_0_0P f2g_tx_out[0]_A
+set_pin_loc out[31] HP_1_2_1P f2g_tx_out[0]_A
+
+
+
+set_mode MODE_BP_SDR_A_RX HR_1_CC_38_19P
+set_mode MODE_BP_SDR_A_RX HR_1_CC_18_9P
+set_mode MODE_BP_SDR_A_RX HR_2_CC_38_19P
+set_mode MODE_BP_SDR_A_RX HR_2_CC_18_9P
+
+set_mode MODE_BP_SDR_A_RX HR_5_28_14P
+
+set_property mode Mode_BP_SDR_A_RX HR_1_0_0P
+set_property mode Mode_BP_SDR_A_RX HR_1_2_1P
+set_property mode Mode_BP_SDR_A_RX HR_1_4_2P
+set_property mode Mode_BP_SDR_A_RX HR_1_6_3P
+set_property mode Mode_BP_SDR_A_RX HR_1_8_4P
+set_property mode Mode_BP_SDR_A_RX HR_1_10_5P
+set_property mode Mode_BP_SDR_A_RX HR_1_12_6P
+set_property mode Mode_BP_SDR_A_RX HR_1_14_7P
+set_property mode Mode_BP_SDR_A_RX HR_1_16_8P
+set_property mode Mode_BP_SDR_A_RX HR_1_20_10P
+set_property mode Mode_BP_SDR_A_RX HP_1_16_8P
+set_property mode Mode_BP_SDR_A_RX HP_1_20_10P
+set_property mode Mode_BP_SDR_A_RX HP_1_22_11P
+set_property mode Mode_BP_SDR_A_RX HP_1_24_12P
+set_property mode Mode_BP_SDR_A_RX HP_1_26_13P
+set_property mode Mode_BP_SDR_A_RX HP_1_28_14P
+set_property mode Mode_BP_SDR_A_RX HP_1_30_15P
+set_property mode Mode_BP_SDR_A_RX HP_1_32_16P
+set_property mode Mode_BP_SDR_A_RX HP_1_34_17P
+set_property mode Mode_BP_SDR_A_RX HP_1_36_18P
+set_property mode Mode_BP_SDR_A_RX HR_5_0_0P
+set_property mode Mode_BP_SDR_A_RX HR_5_2_1P
+set_property mode Mode_BP_SDR_A_RX HR_5_4_2P
+set_property mode Mode_BP_SDR_A_RX HR_5_6_3P
+set_property mode Mode_BP_SDR_A_RX HR_5_8_4P
+set_property mode Mode_BP_SDR_A_RX HR_5_10_5P
+set_property mode Mode_BP_SDR_A_RX HR_5_12_6P
+set_property mode Mode_BP_SDR_A_RX HR_5_14_7P
+set_property mode Mode_BP_SDR_A_RX HR_5_16_8P
+set_property mode Mode_BP_SDR_A_RX HR_5_20_10P
+set_property mode Mode_BP_SDR_A_RX HR_5_22_11P
+set_property mode Mode_BP_SDR_A_RX HR_5_24_12P
+
+set_property mode Mode_BP_SDR_A_TX HR_3_8_4P
+set_property mode Mode_BP_SDR_A_TX HR_3_10_5P
+set_property mode Mode_BP_SDR_A_TX HR_3_12_6P
+set_property mode Mode_BP_SDR_A_TX HR_3_14_7P
+set_property mode Mode_BP_SDR_A_TX HR_3_16_8P
+set_property mode Mode_BP_SDR_A_TX HR_3_20_10P
+set_property mode Mode_BP_SDR_A_TX HR_3_22_11P
+set_property mode Mode_BP_SDR_A_TX HR_3_24_12P
+set_property mode Mode_BP_SDR_A_TX HR_3_26_13P
+set_property mode Mode_BP_SDR_A_TX HR_3_28_14P
+set_property mode Mode_BP_SDR_A_TX HR_2_30_15P
+set_property mode Mode_BP_SDR_A_TX HR_2_32_16P
+set_property mode Mode_BP_SDR_A_TX HR_2_0_0P
+set_property mode Mode_BP_SDR_A_TX HR_2_2_1P
+set_property mode Mode_BP_SDR_A_TX HR_2_4_2P
+set_property mode Mode_BP_SDR_A_TX HR_2_6_3P
+set_property mode Mode_BP_SDR_A_TX HR_2_8_4P
+set_property mode Mode_BP_SDR_A_TX HR_2_10_5P
+set_property mode Mode_BP_SDR_A_TX HR_2_12_6P
+set_property mode Mode_BP_SDR_A_TX HR_2_14_7P
+set_property mode Mode_BP_SDR_A_TX HP_2_16_8P
+set_property mode Mode_BP_SDR_A_TX HP_2_20_10P
+set_property mode Mode_BP_SDR_A_TX HP_2_22_11P
+set_property mode Mode_BP_SDR_A_TX HP_2_24_12P
+set_property mode Mode_BP_SDR_A_TX HP_2_26_13P
+set_property mode Mode_BP_SDR_A_TX HP_2_28_14P
+set_property mode Mode_BP_SDR_A_TX HR_2_34_17P
+set_property mode Mode_BP_SDR_A_TX HR_2_36_18P
+set_property mode Mode_BP_SDR_A_TX HR_3_0_0P
+set_property mode Mode_BP_SDR_A_TX HR_3_2_1P
+set_property mode Mode_BP_SDR_A_TX HP_1_0_0P
+set_property mode Mode_BP_SDR_A_TX HP_1_2_1P
