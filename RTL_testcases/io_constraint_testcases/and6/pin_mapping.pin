@@ -1,19 +1,28 @@
 set_property mode Mode_BP_SDR_A_RX HR_1_0_0P
 set_pin_loc clock0 HR_1_0_0P g2f_rx_in[0]_A
 
-set_property mode MODE_RATE_6_A_RX HR_2_0_0P
+set_property mode Mode_BP_SDR_A_RX HR_2_0_0P
+set_property mode Mode_BP_SDR_A_RX HR_2_2_1P
+set_property mode Mode_BP_SDR_A_RX HR_2_4_2P
+set_property mode Mode_BP_SDR_A_RX HR_2_6_3P
+set_property mode Mode_BP_SDR_A_RX HR_2_8_4P
+set_property mode Mode_BP_SDR_A_RX HR_2_10_5P
 set_pin_loc a[0] HR_2_0_0P g2f_rx_in[0]_A
-set_pin_loc a[1] HR_2_0_0P g2f_rx_in[1]_A
-set_pin_loc a[2] HR_2_0_0P g2f_rx_in[2]_A
-set_pin_loc a[3] HR_2_0_0P g2f_rx_in[3]_A
-set_pin_loc a[4] HR_2_0_0P g2f_rx_in[4]_A
-set_pin_loc a[5] HR_2_0_0P g2f_rx_in[5]_A
+set_pin_loc a[1] HR_2_2_1P g2f_rx_in[0]_A
+set_pin_loc a[2] HR_2_4_2P g2f_rx_in[0]_A
+set_pin_loc a[3] HR_2_6_3P g2f_rx_in[0]_A
+set_pin_loc a[4] HR_2_8_4P g2f_rx_in[0]_A
+set_pin_loc a[5] HR_2_10_5P g2f_rx_in[0]_A
 
 set_property mode Mode_BP_SDR_A_TX HR_3_0_0P
 set_pin_loc c HR_3_0_0P f2g_tx_out[0]_A
 
-set_property mode MODE_RATE_4_A_RX HR_5_0_0P
+
+set_property mode Mode_BP_SDR_A_RX HR_5_0_0P
+set_property mode Mode_BP_SDR_A_RX HR_5_2_1P
+set_property mode Mode_BP_SDR_A_RX HR_5_4_2P
+set_property mode Mode_BP_SDR_A_RX HR_5_6_3P
 set_pin_loc id[0] HR_5_0_0P g2f_rx_in[0]_A
-set_pin_loc id[1] HR_5_0_0P g2f_rx_in[1]_A
-set_pin_loc id[2] HR_5_0_0P g2f_rx_in[2]_A
-set_pin_loc id[3] HR_5_0_0P g2f_rx_in[3]_A
+set_pin_loc id[1] HR_5_2_1P g2f_rx_in[0]_A
+set_pin_loc id[2] HR_5_4_2P g2f_rx_in[0]_A
+set_pin_loc id[3] HR_5_6_3P g2f_rx_in[0]_A
