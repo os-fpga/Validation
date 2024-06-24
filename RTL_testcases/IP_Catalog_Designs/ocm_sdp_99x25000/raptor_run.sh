@@ -171,7 +171,7 @@ IP_PATH="./$design/run_1/IPs"
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device $device">>raptor_tcl.tcl 
+    echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pmemory_type=Simple_Dual_Port -Pdata_width=99 -Pwrite_depth=25000 -Pcommon_clk=1 -Pmemory_mapping=Block_RAM -out_file $IP_PATH/$design">>raptor_tcl.tcl
@@ -244,7 +244,7 @@ IP_PATH="./$design/run_1/IPs"
     fi
 
     cd results_dir
-    echo "Device: $device">>results.log
+    echo "Device: 1VG28">>results.log
     echo "Strategy: $strategy">>results.log
 
     timeout+='m'
