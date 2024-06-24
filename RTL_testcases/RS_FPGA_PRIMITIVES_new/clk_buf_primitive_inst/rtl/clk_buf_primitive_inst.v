@@ -14,7 +14,7 @@ I_BUF i_buf_inst (
 );
 
 always @(posedge wire1) begin
-  wire_out_clk <=  wire1;
+  wire_out_clk <=  wire2;
 end
 
   // Instantiate the CLK_BUF module
