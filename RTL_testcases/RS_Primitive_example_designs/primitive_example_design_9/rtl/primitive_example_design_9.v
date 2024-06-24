@@ -25,11 +25,11 @@ module primitive_example_design_9 (
 
   O_BUF obuf_inst1 (.I(set_o),.O(set));
 
-  latchn #(1) latch_inst1 (.d(src_w1),.en(reset),.q(src_w2));
-  latch #(16) latch_inst2 (.d(set_w),.en(reset),.q(set_o));
+  latchn #(1) latch_inst1 (.d(src_w1),.en(reset_w),.q(src_w2));
+  latch #(16) latch_inst2 (.d(set_w),.en(reset_w),.q(set_o));
 
-  always @ (posedge clock or negedge reset) begin
-    if (reset)
+  always @ (posedge clock_buf or negedge reset_w) begin
+    if (reset_w)
       irq_src_w <= 16'b0;
     else
       irq_src_w <= {irq_src_w[14:0],src_w2};
