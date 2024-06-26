@@ -11,8 +11,12 @@ module soc_fpga_intf_ahb_m (
     output [        31:0] S0_HRDATA,
     output                S0_HREADY,
     output                S0_HRESP,
-    input                 S0_HCLK
+    input                 S0_HCLK,
+    input                 clk,
+    input                 reset
 );
+
+    wire wwrite_w;
 
 SOC_FPGA_INTF_AHB_M inst (
     .HRESETN_I(S0_HRESETN_I),
@@ -22,11 +26,18 @@ SOC_FPGA_INTF_AHB_M inst (
     .HSIZE(S0_HSIZE),
     .HTRANS(S0_HTRANS),
     .HWDATA(S0_HWDATA),
-    .HWWRITE(S0_HWWRITE),
+    .HWWRITE(wwrite_w),
     .HRDATA(S0_HRDATA),
     .HREADY(S0_HREADY),
     .HRESP(S0_HRESP),
     .HCLK(S0_HCLK)
 );
+
+    always @(posedge clk) begin
+        if (reset)
+            wwrite_w <= 0;
+        else
+            wwrite_w <= S0_HWWRITE;
+    end
 
 endmodule
