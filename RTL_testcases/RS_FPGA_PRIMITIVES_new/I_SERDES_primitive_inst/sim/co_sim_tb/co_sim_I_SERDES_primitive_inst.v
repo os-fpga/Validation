@@ -31,11 +31,15 @@ I_SERDES_primitive_inst	golden (.*);
         CLK_IN = 1'b0;
         forever #5 CLK_IN = ~CLK_IN;
     end
+		 initial begin
+        PLL_CLK = 1'b0;
+        forever #1 PLL_CLK = ~PLL_CLK;
+    end
 //Reset Stimulus generation
 initial begin
 	reset <= 1;
 	@(negedge CLK_IN);
-	{BITSLIP_ADJ, EN, PLL_CLK, PLL_LOCK, RX_RST, data_in } <= 'd0;
+	{BITSLIP_ADJ, EN, PLL_LOCK, RX_RST, data_in } <= 'd0;
 	reset <= 0;
 	@(negedge CLK_IN);
 	$display ("***Reset Test is applied***");
@@ -47,7 +51,6 @@ initial begin
 	repeat(10000) @ (negedge CLK_IN) begin
 		BITSLIP_ADJ 		 <= $random();
 		EN 		 					 <= $random();
-		PLL_CLK 		 	   <= $random();
 		PLL_LOCK 		 	   <= 1;
 		RX_RST 		 			 <= 1;
 		data_in 		 	   <= $random();
@@ -58,7 +61,6 @@ end
 	repeat(100) @ (negedge CLK_IN) begin
 		BITSLIP_ADJ 		 <= $random();
 		EN 		 					 <= $random();
-		PLL_CLK 		 	   <= $random();
 		PLL_LOCK 		 	   <= $random();
 		RX_RST 		 			 <= $random();
 		data_in 		 	   <= $random();
@@ -68,7 +70,6 @@ end
 	// ----------- Corner Case stimulus generation -----------
 	BITSLIP_ADJ <= 1;
 	EN <= 1;
-	PLL_CLK <= 1;
 	PLL_LOCK <= 1;
 	RX_RST <= 1;
 	data_in <= 1;
