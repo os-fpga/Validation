@@ -13,9 +13,11 @@ module soc_fpga_intf_ahb_s (
     output   [         3:0] S0_HWBE      ,
     output   [        31:0] S0_HWDATA    ,
     output                  S0_HWRITE    ,
-    input                   S0_HCLK
+    input                   S0_HCLK,
+    input                   clk,
+    input                   reset
 );
-
+wire hsel_w;
 SOC_FPGA_INTF_AHB_S inst (
     .HRESETN_I(S0_HRESETN_I),
     .HADDR(S0_HADDR),
@@ -25,7 +27,7 @@ SOC_FPGA_INTF_AHB_S inst (
     .HPROT(S0_HPROT),
     .HRDATA(S0_HRDATA),
     .HRESP(S0_HRESP),
-    .HSEL(S0_HSEL),
+    .HSEL(hsel_w),
     .HSIZE(S0_HSIZE),
     .HTRANS(S0_HTRANS),
     .HWBE(S0_HWBE),
@@ -33,5 +35,12 @@ SOC_FPGA_INTF_AHB_S inst (
     .HWRITE(S0_HWRITE),
     .HCLK(S0_HCLK)
 );
+
+always @(posedge clk) begin
+    if (reset)
+        hsel_w <= 0;
+    else
+        hsel_w <= S0_HSEL;
+end
 
 endmodule
