@@ -36,8 +36,12 @@ module soc_fpga_intf_axi_m0 (
     input  [7:0]  M0_WSTRB,
     input         M0_WVALID,
     input         M0_ACLK,
-    output        M0_ARESETN_I 
+    output        M0_ARESETN_I,
+    input         clk,
+    input         reset
 );
+
+wire arvalid_w;
 
 SOC_FPGA_INTF_AXI_M0 inst (
     .M0_ARADDR(M0_ARADDR),
@@ -49,7 +53,7 @@ SOC_FPGA_INTF_AXI_M0 inst (
     .M0_ARPROT(M0_ARPROT),
     .M0_ARREADY(M0_ARREADY),
     .M0_ARSIZE(M0_ARSIZE),
-    .M0_ARVALID(M0_ARVALID),
+    .M0_ARVALID(arvalid_w),
     .M0_AWADDR(M0_AWADDR),
     .M0_AWBURST(M0_AWBURST),
     .M0_AWCACHE(M0_AWCACHE),
@@ -78,5 +82,12 @@ SOC_FPGA_INTF_AXI_M0 inst (
     .M0_ACLK(M0_ACLK),
     .M0_ARESETN_I(M0_ARESETN_I)
 );
+
+always @(posedge clk) begin
+    if (reset)
+        arvalid_w <= 0;
+    else
+        arvalid_w <= M0_ARVALID;
+end
 
 endmodule 
