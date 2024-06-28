@@ -249,8 +249,6 @@ IP_PATH="./$design/run_1/IPs"
         echo "exec make clear" >> raptor_tcl.tcl
         echo "exec make MODULE_NAME=$design >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
         echo "cd ../../../../../../../../../../" >> raptor_tcl.tcl
-        echo "puts \"Current Path: [pwd]\"" >> raptor_tcl.tcl
-        
     else
         echo ""
     fi
