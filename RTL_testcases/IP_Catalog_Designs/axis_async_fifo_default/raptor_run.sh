@@ -246,8 +246,8 @@ IP_PATH="./$design/run_1/IPs"
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
         echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
         echo "exec make clear" >> raptor_tcl.tcl
-        echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design > post_synth_sim.log 2>&1" >> raptor_tcl.tcl
-        echo "cd ../../../../../../" >> raptor_tcl.tcl
+        echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
+        echo "cd ../../../../../../../../../../../" >> raptor_tcl.tcl
     else
         echo ""
     fi
