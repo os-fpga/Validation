@@ -247,9 +247,9 @@ IP_PATH="./$design/run_1/IPs"
         echo 'exec sed -i [list -e $sed_script] test_i2c_slave_axil_master.py' >> raptor_tcl.tcl
         echo "set sed_script {s|iverilog|iverilog -g2012|}" >> raptor_tcl.tcl
         echo 'exec sed -i [list -e $sed_script] test_i2c_slave_axil_master.py' >> raptor_tcl.tcl
-        echo "exec make clean" >> raptor_tcl.tcl
-        echo "exec make MODULE_NAME=$design > post_synth_sim.log 2>&1" >> raptor_tcl.tcl
-        echo "cd ../../../../../../" >> raptor_tcl.tcl
+        echo "exec make clear" >> raptor_tcl.tcl
+        echo "exec make MODULE_NAME=$design >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
+        echo "cd ../../../../../../../../../../../" >> raptor_tcl.tcl
     else
         echo ""
     fi
