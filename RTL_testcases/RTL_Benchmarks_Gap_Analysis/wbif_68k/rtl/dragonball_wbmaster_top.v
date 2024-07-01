@@ -123,29 +123,29 @@ module dragonball_wbmaster_top (
   always @(posedge clk or negedge reset_n)
     if (!reset_n)
       begin
-          cyc_o  <= #1 1'b0;
-          stb_o  <= #1 1'b0;
-          // adr_o  <= #1 {{adr_hi-1}{1'b0}};
-          adr_o  <= #1 'b0;
-          sel_o  <= #1 2'b00;
-          we_o   <= #1 1'b0;
-          dtack  <= #1 1'b0;
-          sdat_i <= #1 16'h0;
+          cyc_o  <=  1'b0;
+          stb_o  <=  1'b0;
+          // adr_o  <=  {{adr_hi-1}{1'b0}};
+          adr_o  <=  'b0;
+          sel_o  <=  2'b00;
+          we_o   <=  1'b0;
+          dtack  <=  1'b0;
+          sdat_i <=  16'h0;
       end
     else
       begin
-          cyc_o  <= #1 cs;                       // assert cyc_o when CS asserted
-          stb_o  <= #1 cs;                       // assert stb_o when CS asserted
+          cyc_o  <=  cs;                       // assert cyc_o when CS asserted
+          stb_o  <=  cs;                       // assert stb_o when CS asserted
 
-          adr_o  <= #1 a;                        // address == external address
-          sel_o  <= #1 oe ? 2'b11 : {uwe, lwe};  // generate select lines;
+          adr_o  <=  a;                        // address == external address
+          sel_o  <=  oe ? 2'b11 : {uwe, lwe};  // generate select lines;
                                                  // read (oe asserted): SEL[1:0] = '11'
                                                  // write (oe negated): SEL[1:0] = 'uwe, lwe'
-          we_o   <= #1 uwe | lwe;                // write == uwe OR lwe asserted
+          we_o   <=  uwe | lwe;                // write == uwe OR lwe asserted
 
-          dtack  <= #1 ack_i & !dtack;           // generate DTACK signal
+          dtack  <=  ack_i & !dtack;           // generate DTACK signal
 
-          sdat_i <= #1 dat_i;                    // synchronize dat_i
+          sdat_i <=  dat_i;                    // synchronize dat_i
       end
 
   assign dat_o   = d;                            // dat_o==external databus (not synchronised!!)
