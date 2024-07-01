@@ -125,7 +125,8 @@ module dragonball_wbmaster_top (
       begin
           cyc_o  <= #1 1'b0;
           stb_o  <= #1 1'b0;
-          adr_o  <= #1 {{adr_hi-1}{1'b0}};
+          // adr_o  <= #1 {{adr_hi-1}{1'b0}};
+          adr_o  <= #1 'b0;
           sel_o  <= #1 2'b00;
           we_o   <= #1 1'b0;
           dtack  <= #1 1'b0;
