@@ -9,8 +9,8 @@ set_pin_loc dly_adj_buf HR_1_4_2P
 set_property mode Mode_BP_DIR_A_RX HR_1_8_4P
 set_pin_loc dly_incdec_buf HR_1_8_4P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_12_6P
-set_pin_loc data_o_delayed HR_1_12_6P
+set_property mode Mode_BP_DIR_A_TX HR_1_30_15P
+set_pin_loc data_o_delayed HR_1_30_15P
 
 set_property mode Mode_BP_DIR_A_TX HR_1_14_7P
 set_pin_loc data_o_ref_buf HR_1_14_7P
