@@ -4,7 +4,7 @@
 #
 
 set raptor_path "/home/alain/os-fpga/Raptor/build/bin/raptor"
-set device "1VG28"
+set device "GEMINI_COMPACT_22x4"
 
 regexp {raptor_path=([a-zA-Z0-9/\.-]+)} $argv tmp raptor_path
 regexp {device=([a-zA-Z0-9/\.-]+)} $argv tmp device
