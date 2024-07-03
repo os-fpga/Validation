@@ -1,11 +1,7 @@
 module top(
-    (* clkbuf_inhibit *)
     input  wire       clk1,
-    (* clkbuf_inhibit *)
     input  wire       clk2,
-    (* clkbuf_inhibit *)
     input  wire       clk3,
-    (* clkbuf_inhibit *)
     input  wire       clk4,
     output wire [3:0] led
 );
