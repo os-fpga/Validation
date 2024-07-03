@@ -14,9 +14,12 @@ module primitive_example_design_5(
     wire [2:0] i_buf_out;
     wire rst_i_buf_out;
     wire clk_buf_out;
+    wire i_clk_buf_out;
 
-    I_BUF clk_buf_inst (.I(clk),.EN(ibuf1_en),.O(clk_buf_out));
 
+    I_BUF i_buf_inst (.I(clk),.EN(ibuf_oe1),.O(i_clk_buf_out));
+    CLK_BUF clk_buf_inst (.I(i_clk_buf_out), .O(clk_buf_out));
+   
     I_DDR iddr_ist1 (.D(i_buf_out[0]),.R(rst_i_buf_out),.E(iddr_en[0]),.C(clk_buf_out),.Q(iddr_out[0]));
     I_DDR iddr_ist2 (.D(i_buf_out[1]),.R(rst_i_buf_out),.E(iddr_en[1]),.C(clk_buf_out),.Q(iddr_out[1]));
     I_DDR iddr_ist3 (.D(i_buf_out[2]),.R(rst_i_buf_out),.E(iddr_en[2]),.C(clk_buf_out),.Q(iddr_out[2]));
