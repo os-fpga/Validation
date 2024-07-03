@@ -185,11 +185,13 @@ parse_cga exit 1; }
     # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
     # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/alert_handler_reg_pkg.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/edn_pkg.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/edn_reg_pkg.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/entropy_src_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/entropy_src_reg_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/entropy_src_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/edn_reg_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/edn_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/ibex_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_util_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/rv_core_ibex_reg_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/lc_ctrl_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_alert_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_cipher_pkg.sv">>raptor_tcl.tcl
@@ -200,9 +202,8 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_ram_1p_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_secded_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_subreg_pkg.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/prim_util_pkg.sv">>raptor_tcl.tcl
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/pwrmgr_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/pwrmgr_reg_pkg.sv">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/pwrmgr_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/rv_core_ibex_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/top_pkg.sv">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/tlul_pkg.sv">>raptor_tcl.tcl
