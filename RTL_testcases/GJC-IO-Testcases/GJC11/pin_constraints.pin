@@ -1,21 +1,14 @@
-set_clock_pin -device_clock clk[0] -design_clock clock0
+set_pin_loc clock0 HP_1_CC_18_9P
 
-set_property mode Mode_BP_SDR_A_RX HR_1_2_1P
-set_pin_loc data_in_P HR_1_2_1P
+set_pin_loc data_in_P HP_1_0_0P
 
-#set_property mode Mode_BP_SDR_A_RX HR_1_3_1N
-#set_pin_loc data_in_n HR_1_3_1N
+set_pin_loc data_in_N HP_1_1_0N
 
-set_property mode Mode_BP_SDR_A_RX HR_1_4_2P
-set_pin_loc data_push_P HR_1_4_2P
+set_pin_loc data_push_P HP_1_2_1P
 
-#set_property mode Mode_BP_SDR_A_RX HR_1_5_2N
-#set_pin_loc data_push_P HR_1_5_2N
+set_pin_loc data_push_N HP_1_3_1N
 
-set_property mode Mode_BP_SDR_A_TX HR_1_14_7P
-set_pin_loc data_out_P HR_1_14_7P
+set_pin_loc data_out_P HP_1_4_2P
 
-#set_property mode Mode_BP_SDR_A_TX HR_1_15_7N
-#set_pin_loc data_out_P HR_1_15_7N
-
+set_pin_loc data_out_N HP_1_5_2N
 
