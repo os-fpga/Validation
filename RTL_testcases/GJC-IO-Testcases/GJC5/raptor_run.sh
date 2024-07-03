@@ -192,7 +192,7 @@ parse_cga exit 1; }
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
-    
+    echo "add_constraint_file pin_constraints.pin">>raptor_tcl.tcl 
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl

@@ -1,0 +1,4 @@
+set_pin_loc din HP_1_2_1P
+
+set_pin_loc dout HP_1_4_2P
+
