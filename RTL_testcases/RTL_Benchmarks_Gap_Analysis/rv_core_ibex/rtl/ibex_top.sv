@@ -429,53 +429,54 @@ module ibex_top import ibex_pkg::*; #(
     // Our Xilinx and DC synthesis flows make sure that these buffers cannot be optimized away
     // using keep attributes (Vivado) and size_only constraints (DC).
 
-    localparam int NumBufferBits = $bits({
-      hart_id_i,
-      boot_addr_i,
-      instr_req_o,
-      instr_gnt_i,
-      instr_rvalid_i,
-      instr_addr_o,
-      instr_rdata_i,
-      instr_rdata_intg_i,
-      instr_err_i,
-      data_req_o,
-      data_gnt_i,
-      data_rvalid_i,
-      data_we_o,
-      data_be_o,
-      data_addr_o,
-      data_wdata_o,
-      data_rdata_i,
-      data_rdata_intg_i,
-      data_err_i,
-      dummy_instr_id,
-      rf_raddr_a,
-      rf_raddr_b,
-      rf_waddr_wb,
-      rf_we_wb,
-      rf_wdata_wb_ecc,
-      rf_rdata_a_ecc,
-      rf_rdata_b_ecc,
-      ic_tag_req,
-      ic_tag_write,
-      ic_tag_addr,
-      ic_tag_wdata,
-      ic_data_req,
-      ic_data_write,
-      ic_data_addr,
-      ic_data_wdata,
-      irq_software_i,
-      irq_timer_i,
-      irq_external_i,
-      irq_fast_i,
-      irq_nm_i,
-      irq_pending,
-      debug_req_i,
-      crash_dump_o,
-      fetch_enable_i,
-      core_busy_d
-    });
+    localparam int NumBufferBits = 623;
+    // localparam int NumBufferBits = $bits({
+    //   hart_id_i, //32 bits
+    //   boot_addr_i,// 32 bits
+    //   instr_req_o, // 1 bit
+    //   instr_gnt_i, // 1 bit
+    //   instr_rvalid_i,// 1 bit
+    //   instr_addr_o, // 32 bits
+    //   instr_rdata_i, // 32 bits
+    //   instr_rdata_intg_i, // 7 bits
+    //   instr_err_i, // 1 bit
+    //   data_req_o,// 1 bit
+    //   data_gnt_i,//  1 bit
+    //   data_rvalid_i, // 1 bit
+    //   data_we_o, // 1 bit
+    //   data_be_o, // 4 bits
+    //   data_addr_o, // 32 bits
+    //   data_wdata_o, // 32 bits
+    //   data_rdata_i, // 32 bits
+    //   data_rdata_intg_i, // 7 bits
+    //   data_err_i, // 1 bit
+    //   dummy_instr_id, // 1 bit
+    //   rf_raddr_a, // 5 bit
+    //   rf_raddr_b, // 5 bit
+    //   rf_waddr_wb, // 5 bits
+    //   rf_we_wb, // 1 bit
+    //   rf_wdata_wb_ecc, // 32 bit 
+    //   rf_rdata_a_ecc, // 32 bit
+    //   rf_rdata_b_ecc, // 32 bit
+    //   ic_tag_req, // 2 bits
+    //   ic_tag_write, // 1 bit
+    //   ic_tag_addr, // 8 bits
+    //   ic_tag_wdata, // 22 bits
+    //   ic_data_req, // 2 bits
+    //   ic_data_write, // 1 bit
+    //   ic_data_addr, // 8 bits
+    //   ic_data_wdata, // 64 bitd
+    //   irq_software_i, // 1 bit
+    //   irq_timer_i, // 1 bit
+    //   irq_external_i, // 1 bit
+    //   irq_fast_i, // 15 bits
+    //   irq_nm_i, // 1 bit
+    //   irq_pending, // 1 bit
+    //   debug_req_i, // 1 bit
+    //   crash_dump_o, // 128 bits
+    //   fetch_enable_i, // 1 bit
+    //   core_busy_d // 1 bit
+    // });
 
     logic [NumBufferBits-1:0] buf_in, buf_out;
 
