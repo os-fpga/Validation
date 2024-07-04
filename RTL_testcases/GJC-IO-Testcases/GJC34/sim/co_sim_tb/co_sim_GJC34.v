@@ -1,8 +1,8 @@
 `timescale 1ns/1ps
 module co_sim_GJC34;
-    reg 		[3:0] 		enable;
     wire 		[3:0] 		data_o	,	data_o_netlist;
     reg 		[3:0] 		data_i;
+    reg 		[3:0] 		enable;
 	integer		mismatch	=	0;
 
 GJC34	golden (.*);
@@ -15,20 +15,20 @@ GJC34	golden (.*);
 
 		// Initialize values to zero 
 initial	begin
-	{enable, data_i } <= 'd0;
+	{data_i, enable } <= 'd0;
 	#10;
 	compare();
 // Generating random stimulus 
 	for (int i = 0; i < 100; i = i + 1) begin
-		enable <= $urandom();
 		data_i <= $urandom();
+		enable <= $urandom();
 		#10;
 		compare();
 	end
 
 	// ----------- Corner Case stimulus generation -----------
-	enable <= 15;
 	data_i <= 15;
+	enable <= 15;
 	compare();
 	#10;
 	if(mismatch == 0)
