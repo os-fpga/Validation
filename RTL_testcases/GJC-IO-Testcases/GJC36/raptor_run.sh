@@ -192,8 +192,8 @@ parse_cga exit 1; }
     echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     [ -z "$add_sdc_constraint_file" ] && echo "" || echo "add_constraint_file $add_sdc_constraint_file">>raptor_tcl.tcl 
+    [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl  
     
 
 	echo "analyze">>raptor_tcl.tcl
