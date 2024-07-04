@@ -636,10 +636,13 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                     pass
                 else:
                     clock_period,clock_name_returned = find_period_in_sdc(sdc_file_path[0], clock_name,single_clock_design)
-                    target_f=1/clock_period
-                    target_freq=round(target_f * 1000, 2)
-                    if log_line_key == 'target_freq_clock1':
-                        data[log_line_key]=target_freq
+                    if clock_period is not None:   
+                        target_f=1/clock_period
+                        target_freq=round(target_f * 1000, 2)
+                        if log_line_key == 'target_freq_clock1':
+                            data[log_line_key]=target_freq
+                    else:
+                        print(f"No matching clock_period of {clock_name_returned} found for keyword '{clock_name}'")
 
                 llvl_count,returned_clock_name = get_llvl("combinational delay")
                 if log_line_key == 'logic_level_clock1':
