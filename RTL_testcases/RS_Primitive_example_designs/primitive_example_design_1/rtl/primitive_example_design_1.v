@@ -12,7 +12,7 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
 
     wire [2:0] i_buf_out;
     wire [5:0] i_buf_ram_addr;
-    wire in_buf_out,clk_buf_out;
+    wire in_buf_out,clk_buf_out, clk_buf_output;
     reg lut_out;
     wire rst_i_buf_out,i_buf_mux1_sel,i_buf_mux2_sel;
     wire out,p_ibuf,g_ibuf; 
@@ -23,7 +23,8 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     wire ram_out,i_buf_ram_we;
     wire inf_q,ibuf_obuft_oe;
 
-    I_BUF clk_buf_inst (.I(clk),.EN(ibuf0_en),.O(clk_buf_out));
+    I_BUF ibuf_clk_inst (.I(clk),.EN(ibuf0_en),.O(clk_buf_out));
+    CLK_BUF clk_buf_inst (clk_buf_out,clk_buf_output);
     
     I_BUF ibuf_inst1 (.I(in[0]),.EN(ibuf1_en),.O(i_buf_out[0]));
     I_BUF ibuf_inst2 (.I(in[1]),.EN(ibuf2_en),.O(i_buf_out[1]));
@@ -42,17 +43,17 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     I_BUF ibuf_inst15 (.I(ram_addr[5]),.EN(ibuf15_en),.O(i_buf_ram_addr[5]));
     I_BUF ibuf_inst16 (.I(obuft_oe),.EN(ibuf16_en),.O(ibuf_obuft_oe));
 
-    DFFNRE ffn_inst (.D(lut_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_out),.Q(dffnre_out));
+    DFFNRE ffn_inst (.D(lut_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_output),.Q(dffnre_out));
 
     assign out = i_buf_mux1_sel ? dffnre_out : !dffnre_out;
 
-    flip_flop ff_inst1 (.clk(clk_buf_out),.rst(rst_i_buf_out),.D(ac_out),.Q(inf_q));
+    flip_flop ff_inst1 (.clk(clk_buf_output),.rst(rst_i_buf_out),.D(ac_out),.Q(inf_q));
 
     O_BUFT obuft_inst (.I(inf_q),.T(ibuf_obuft_oe),.O(buft_out));
 
     O_BUF o_buff_inst (.I(ram_out),.O(Q));
 
-    DFFRE ff_inst (.D(mux2_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_out),.Q(Q_buff_in));
+    DFFRE ff_inst (.D(mux2_out),.R(rst_i_buf_out),.E(1'b1),.C(clk_buf_output),.Q(Q_buff_in));
 
     assign mux2_out = i_buf_mux2_sel ? ac_out : 1'b1;
     
@@ -60,7 +61,7 @@ module primitive_example_design_1(clk,in,rst,Q,mux1_sel,mux2_sel,P,G,ram_addr,ra
     assign ac_out = p_ibuf ^ g_ibuf ^ out; //Cin;
     assign Cout = (p_ibuf & g_ibuf) | (g_ibuf & out) | (p_ibuf & out);
 
-    infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk_buf_out),.q(ram_out));
+    infer_single_port_ram ram_inst (.data(Q_buff_in),.addr(i_buf_ram_addr),.we(i_buf_ram_we),.clk(clk_buf_output),.q(ram_out));
 
     always @(*) begin
         case(i_buf_out)
