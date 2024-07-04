@@ -8,7 +8,6 @@ set raptor_path "/home/alain/os-fpga/Raptor/build/bin/raptor"
 regexp {raptor_path=([a-zA-Z0-9/\.-]+)} $argv tmp raptor_path
 
 puts "Raptor: $raptor_path"
-puts "Device: $device"
 puts "GJC Begin Run"
 
 foreach dirName [glob -nocomplain -type {d} GJC* ] {
