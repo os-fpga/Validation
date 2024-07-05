@@ -10,7 +10,7 @@ design="axil_interconnect_wrapper"
 tool_name="cocotb" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=false 
 bitstream_sim=false
 

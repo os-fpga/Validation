@@ -10,7 +10,7 @@ design="dsp_ABCDEFGH_18X18_12x11_8X8_13x13_signed"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=false 
 bitstream_sim=false
 
