@@ -9,16 +9,16 @@ module co_sim_primitive_example_design_13;
   reg  load_word;
   reg  channel_bond_sync_in;
   wire  data_out,data_out_netlist;
-  wire OE_OUT,OE_OUT_netlist;
-  wire CHANNEL_BOND_SYNC_OUT,CHANNEL_BOND_SYNC_OUT_netlist;
+  wire CHANNEL_BOND_SYNC_OUT, CHANNEL_BOND_SYNC_OUT_netlist;
+  
 
 	integer mismatch=0;
 
-  primitive_example_design_13 golden (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out),.OE_OUT(OE_OUT),.CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT));
+  primitive_example_design_13 golden (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out), .CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT));
   `ifdef PNR
-  primitive_example_design_13_post_route netlist (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out_netlist),.OE_OUT(OE_OUT_netlist),.CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT_netlist));
+  primitive_example_design_13_post_route netlist (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out_netlist), .CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT_netlist));
   `else
-  primitive_example_design_13_post_synth netlist (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out_netlist),.OE_OUT(OE_OUT_netlist),.CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT_netlist));
+  primitive_example_design_13_post_synth netlist (.clk_in(clk_in),.pll_clk(pll_clk),.reset(reset),.i1(i1),.i2(i2),.load_word(load_word),.channel_bond_sync_in(channel_bond_sync_in),.data_out(data_out_netlist), .CHANNEL_BOND_SYNC_OUT(CHANNEL_BOND_SYNC_OUT_netlist));
   `endif
 
   always #1 clk_in = !clk_in;
@@ -93,12 +93,12 @@ module co_sim_primitive_example_design_13;
   end
 
   task compare();
-  	if(data_out !== data_out_netlist || OE_OUT !== OE_OUT_netlist || CHANNEL_BOND_SYNC_OUT !== CHANNEL_BOND_SYNC_OUT_netlist) begin
-    	$display("Data Mismatch. Golden data_out: %0d, Netlist data_out: %0d, Golden OE_OUT: %0d, Netlist OE_OUT: %0d, Golden CHANNEL_BOND_SYNC_OUT: %0d, Netlist CHANNEL_BOND_SYNC_OUT: %0d, Time: %0t", data_out, data_out_netlist,OE_OUT,OE_OUT_netlist,CHANNEL_BOND_SYNC_OUT,CHANNEL_BOND_SYNC_OUT_netlist,$time);
+  	if(data_out !== data_out_netlist || CHANNEL_BOND_SYNC_OUT !== CHANNEL_BOND_SYNC_OUT_netlist) begin
+    	$display("Data Mismatch. Golden data_out: %0d, Netlist data_out: %0d, Golden Channel_bond_sync_out: %0d, Netlist Channel_bond_sync_out: %0d, Time: %0t", data_out, data_out_netlist, CHANNEL_BOND_SYNC_OUT, CHANNEL_BOND_SYNC_OUT_netlist, $time);
     	mismatch = mismatch+1;
  	  end
   	else
-  		$display("Data Matched. Golden data_out: %0d, Netlist data_out: %0d, Golden OE_OUT: %0d, Netlist OE_OUT: %0d, Golden CHANNEL_BOND_SYNC_OUT: %0d, Netlist CHANNEL_BOND_SYNC_OUT: %0d, Time: %0t", data_out, data_out_netlist,OE_OUT,OE_OUT_netlist,CHANNEL_BOND_SYNC_OUT,CHANNEL_BOND_SYNC_OUT_netlist,$time);
+  		$display("Data Matched. Golden data_out: %0d, Netlist data_out: %0d, Golden Channel_bond_sync_out: %0d, Netlist Channel_bond_sync_out: %0d, Time: %0t", data_out, data_out_netlist, CHANNEL_BOND_SYNC_OUT, CHANNEL_BOND_SYNC_OUT_netlist, $time);
   endtask
 
   initial begin
