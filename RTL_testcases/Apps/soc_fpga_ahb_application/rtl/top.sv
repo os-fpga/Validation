@@ -1,4 +1,4 @@
-module SOC_FPGA_INTF_AHB_S (
+module SOC_FPGA_INTF_AHB_S_app (
     output logic  		  S0_HRESETN_I  ,
     output logic   [        31:0] S0_HADDR     ,
     output logic   [         2:0] S0_HBURST    ,  //check

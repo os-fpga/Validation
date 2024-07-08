@@ -199,7 +199,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/top_vs.sv">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
-    echo "set_top_module SOC_FPGA_INTF_AXI_M0">>raptor_tcl.tcl 
+    echo "set_top_module SOC_FPGA_INTF_AXI_M0_app">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
