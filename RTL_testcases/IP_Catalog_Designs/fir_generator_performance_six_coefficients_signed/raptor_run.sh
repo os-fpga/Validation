@@ -10,7 +10,7 @@ design="fir_generator_performance_six_coefficients_signed"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=false 
 bitstream_sim=false
 
