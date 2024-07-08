@@ -11,6 +11,7 @@ module primitive_example_design_11 (
   wire clock,reset;
   wire en_w,tdo_w,tdi_w,reset_n_w,tms_w,out_w;
   wire tdi_wm,tms_wm,reset_nm;
+  wire clk_buf_in;
   
   SOC_FPGA_INTF_JTAG inst (
     .BOOT_JTAG_TCK(clock),
@@ -21,9 +22,11 @@ module primitive_example_design_11 (
     .BOOT_JTAG_EN(en_w)
   );
   
-  I_BUF ibuf_inst1 (.I(clk),.EN(ibuf1_en),.O(clock));
+  I_BUF ibuf_inst1 (.I(clk),.EN(ibuf1_en),.O(clk_buf_in));
   I_BUF ibuf_inst2 (.I(en),.EN(ibuf2_en),.O(en_w));
   I_BUF ibuf_inst3 (.I(rst),.EN(ibuf3_en),.O(reset));
+
+  CLK_BUF clk_buf_inst (clk_buf_in,clock);
 
   register reg_inst1 (.d(tdo),.clk(clock),.rst(reset),.q(tdo_w));
   register reg_inst2 (.d(tdi_w),.clk(clock),.rst(reset),.q(tdi_wm));

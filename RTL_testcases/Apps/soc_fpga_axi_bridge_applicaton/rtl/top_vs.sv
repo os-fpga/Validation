@@ -1,5 +1,5 @@
 
-module SOC_FPGA_INTF_AXI_M0 (
+module SOC_FPGA_INTF_AXI_M0_app (
     // AXI master 0
     input  logic [        31:0] M0_ARADDR   ,
     input  logic [         1:0] M0_ARBURST  ,
