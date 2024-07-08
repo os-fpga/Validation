@@ -38,7 +38,7 @@ module GJC32 (
 
     CLK_BUF clock_buffer (clk_buf_i,clk_pll);
 
-    PLL #(.PLL_MULT(40), .PLL_DIV(1), .PLL_POST_DIV(2)) clk_pll_gen (
+    PLL #(.PLL_MULT(40), .PLL_DIV(1), .PLL_POST_DIV(33)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll), // Clock input
         .CLK_OUT_DIV4(clk_i)
