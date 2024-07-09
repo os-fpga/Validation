@@ -19,7 +19,8 @@ device="GEMINI_COMPACT_22x4"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="pin_constraints.pin" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="pin_constraints.pin" #location constraints  Constraints: set_pin_loc
+add_sdc_constraint_file="constraints.sdc" #Sets SDC, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -192,6 +193,7 @@ parse_cga exit 1; }
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
+    [ -z "$add_sdc_constraint_file" ] && echo "" || echo "add_constraint_file $add_sdc_constraint_file">>raptor_tcl.tcl 
 
 
 	echo "analyze">>raptor_tcl.tcl
