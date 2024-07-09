@@ -2,11 +2,11 @@
   <partition_list>
     <partition name="launch_partition">
       <add_atom name_pattern="u1.q1"/>
-      <add_region x_low="60" y_low="23" x_high="60" y_high="23"/>
+      <add_region x_low="20" y_low="3" x_high="20" y_high="3"/>
     </partition>
     <partition name="east_partition">
       <add_atom name_pattern="u2.dout"/>
-      <add_region x_low="61" y_low="23" x_high="61" y_high="23"/>
+      <add_region x_low="20" y_low="2" x_high="20" y_high="2"/>
     </partition>
   </partition_list>
 </vpr_constraints>
