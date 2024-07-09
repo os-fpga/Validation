@@ -10,7 +10,8 @@ design="axis_adapter_wrapper"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=true 
+post_synth_sim=false
+post_synth_sim_hard_code=true 
 post_route_sim=false 
 bitstream_sim=false
 
@@ -237,7 +238,7 @@ IP_PATH="./$design/run_1/IPs"
             echo ""
         fi
     fi
-    if [ "$post_synth_sim" == true ]; then 
+    if [ "$post_synth_sim_hard_code" == true ]; then 
         echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
         echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
         echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
