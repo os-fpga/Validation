@@ -10,7 +10,8 @@ design="dsp_ABCD_15x10_7x2_signed"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=true 
+post_synth_sim=false
+post_synth_sim_hard_code=true 
 post_route_sim=false 
 bitstream_sim=false
 
@@ -193,7 +194,7 @@ IP_PATH="./$design/run_1/IPs"
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+    if [ "$post_synth_sim_hard_code" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
         echo "add_simulation_file $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/dsp_test.v">>raptor_tcl.tcl 
     else
         echo ""
@@ -206,7 +207,7 @@ IP_PATH="./$design/run_1/IPs"
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
-    if [ "$post_synth_sim" == true ]; then 
+    if [ "$post_synth_sim_hard_code" == true ]; then 
         
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
