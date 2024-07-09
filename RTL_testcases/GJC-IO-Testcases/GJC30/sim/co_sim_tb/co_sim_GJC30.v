@@ -3,6 +3,7 @@ module co_sim_GJC30;
     wire 		[5:0] 		dly_tap_val_inv_buf	,	dly_tap_val_inv_buf_netlist;
     reg 		clk_i_buf;
     reg 		data_i_n;
+	reg 		reset;
     reg 		data_i_p;
     wire 		data_o_inv_delayed_buf	,	data_o_inv_delayed_buf_netlist;
     reg 		dly_adj_buf;
@@ -23,8 +24,10 @@ always #100 clk_i_buf = ~clk_i_buf;
 initial	begin
 	{clk_i_buf, data_i_n, dly_adj_buf, dly_incdec_buf, dly_ld_buf } <= 'd0;
 	data_i_p <= 'd1;
+	reset <= 1;
 	@(negedge clk_i_buf);
 	@(negedge clk_i_buf);
+	reset <= 0;
 
 // Generating random stimulus 
 	for (int i = 0; i < 1000; i = i + 1) begin

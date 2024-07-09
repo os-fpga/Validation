@@ -1,38 +1,26 @@
-set_property mode Mode_BP_DIR_A_RX HP_1_CC_18_9P
 set_pin_loc clk_i_buf HP_1_CC_18_9P
 
-set_property mode Mode_BP_DIR_A_RX HR_1_0_0P
-set_pin_loc dly_incdec_buf HR_1_0_0P
+set_pin_loc dly_incdec_buf HP_1_0_0P
 
-set_property mode Mode_BP_DIR_A_RX HR_1_4_2P
-set_pin_loc dly_ld_buf HR_1_4_2P
+set_pin_loc dly_ld_buf HP_1_2_1P
 
-set_property mode Mode_BP_DIR_A_RX HR_1_8_4P
-set_pin_loc dly_adj_buf HR_1_8_4P
+set_pin_loc dly_adj_buf HP_1_4_2P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_30_15P
-set_pin_loc data_o_delayed_p HR_1_30_15P
+set_pin_loc data_o_delayed_p HP_1_6_3P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_14_7P
-set_pin_loc data_o_delayed_n HR_1_14_7P
+set_pin_loc data_o_delayed_n HP_1_8_4P
 
-set_property mode Mode_BP_DIR_A_TX HP_1_0_0P
-set_pin_loc data_o_ref_buf HP_1_0_0P
+#bug here
+#set_pin_loc data_o_ref_buf HP_1_34_17P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_12_6P
-set_pin_loc dly_tap_val_inv_buf[0] HR_1_12_6P
+set_pin_loc dly_tap_val_inv_buf[0] HP_1_12_6P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_16_8P
-set_pin_loc dly_tap_val_inv_buf[1] HR_1_16_8P
+set_pin_loc dly_tap_val_inv_buf[1] HP_1_14_7P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_CC_18_9P
-set_pin_loc dly_tap_val_inv_buf[2] HR_1_CC_18_9P
+set_pin_loc dly_tap_val_inv_buf[2] HP_1_16_8P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_20_10P
-set_pin_loc dly_tap_val_inv_buf[3] HR_1_20_10P
+set_pin_loc dly_tap_val_inv_buf[3] HP_1_20_10P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_24_12P
-set_pin_loc dly_tap_val_inv_buf[4] HR_1_24_12P
+set_pin_loc dly_tap_val_inv_buf[4] HP_1_22_11P
 
-set_property mode Mode_BP_DIR_A_TX HR_1_26_13P
-set_pin_loc dly_tap_val_inv_buf[5] HR_1_26_13P
+set_pin_loc dly_tap_val_inv_buf[5] HP_1_24_12P

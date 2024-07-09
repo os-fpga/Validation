@@ -8,6 +8,7 @@
 
 module GJC30 (
     input wire clk_i_buf,
+    input wire reset,
     input wire data_i_p,
     input wire data_i_n,
     input wire dly_incdec_buf,
@@ -21,7 +22,7 @@ module GJC30 (
     wire [5:0] dly_tap_val;
     wire dly_incdec_inv, dly_adj_inv, dly_ld_inv;
     wire enable;
-    wire data_i_buf;
+    reg data_i_buf,data_i_buf_reg;
     wire clk_buf_i;
     wire clk_i;
     wire dly_incdec;
@@ -54,7 +55,7 @@ module GJC30 (
     assign dly_ld_inv           = ~dly_ld;
     assign dly_tap_val_inv      = ~dly_tap_val;
 
-    I_BUF_DS data_buf (.I_P(data_i_p),.I_N(data_i_n),.EN(enable),.O(data_i_buf));
+    I_BUF_DS data_buf (.I_P(data_i_p),.I_N(data_i_n),.EN(enable),.O(data_i_buf_reg));
     I_DELAY data_i_delay (  .I(data_i_buf),
                             .DLY_LOAD(dly_ld_inv),
                             .DLY_ADJ(dly_adj_inv),
@@ -62,4 +63,10 @@ module GJC30 (
                             .DLY_TAP_VALUE(dly_tap_val),
                             .CLK_IN(clk_buf_i),
                             .O(data_o));
+    always @(posedge clk_buf_i) begin
+        if (reset)
+            data_i_buf <= 0;
+        else
+            data_i_buf <= data_i_buf_reg;
+    end
 endmodule
