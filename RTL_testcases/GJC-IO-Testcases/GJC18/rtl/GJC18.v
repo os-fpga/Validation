@@ -48,7 +48,7 @@ module GJC18 (
 
     CLK_BUF clock_buffer (clk_i,clk_buf_i);
 
-    always @(clk_buf_i) begin
+    always @(posedge clk_buf_i) begin
         if(clk_buf_i)test_data <= 1;
         else test_data <= 0;
     end

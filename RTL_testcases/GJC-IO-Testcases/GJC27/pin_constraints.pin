@@ -4,10 +4,10 @@ set_pin_loc dly_incdec_buf HP_1_20_10P
 set_pin_loc dly_ld_buf HP_1_22_11P
 set_pin_loc dly_adj_buf HP_1_24_12P
 set_pin_loc data_o_delayed HP_1_28_14P
-set_pin_loc data_o_ref_buf HP_1_26_13P
+#set_pin_loc data_o_ref_buf HP_1_26_13P
 set_pin_loc dly_tap_val_inv_buf[0] HP_1_30_15P
 set_pin_loc dly_tap_val_inv_buf[1] HP_1_32_16P
 set_pin_loc dly_tap_val_inv_buf[2] HP_1_34_17P
-set_pin_loc dly_tap_val_inv_buf[3] HP_1_36_18P
+set_pin_loc dly_tap_val_inv_buf[3] HP_1_12_6P
 set_pin_loc dly_tap_val_inv_buf[4] HP_1_16_8P
 set_pin_loc dly_tap_val_inv_buf[5] HP_1_14_7P
