@@ -26,8 +26,8 @@ set_pin_loc data_o[2] HP_1_14_7P
 set_property mode Mode_BP_DIR_A_TX HP_1_16_8P
 set_pin_loc data_o[3] HP_1_16_8P
 
-set_property mode Mode_BP_DIR_A_TX HP_1_36_18P
-set_pin_loc data_o[4] HP_1_36_18P
+set_property mode Mode_BP_DIR_A_TX HP_1_10_5P
+set_pin_loc data_o[4] HP_1_10_5P
 
 set_property mode Mode_BP_DIR_A_TX HP_1_20_10P
 set_pin_loc data_o[5] HP_1_20_10P
