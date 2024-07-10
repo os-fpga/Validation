@@ -41,5 +41,5 @@ set_pin_loc data_o[8] HP_1_26_13P
 set_property mode Mode_BP_DIR_A_TX HP_1_30_15P
 set_pin_loc data_o[9] HP_1_30_15P
 
-set_property mode Mode_BP_DIR_A_TX HP_2_8_4P
-set_pin_loc ready HP_2_8_4P
+set_property mode Mode_BP_DIR_A_TX HP_1_6_3P
+set_pin_loc ready HP_1_6_3P
