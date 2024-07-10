@@ -31,6 +31,7 @@ module GJC28 (
     wire const1;
     wire data_o_ref;
     wire [5:0] dly_tap_val_inv;
+    reg set=0;
 
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf0_ (clk_i_buf,const1,clk_i);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf1_ (dly_incdec_buf,const1,dly_incdec);
@@ -49,7 +50,11 @@ module GJC28 (
     CLK_BUF clock_buffer (clk_i,clk_buf_i);
 
     always @(posedge clk_buf_i) begin
-        if(clk_buf_i)test_data <= 1;
+        set <= ~set;
+    end
+    
+    always @(posedge clk_buf_i) begin
+        if(set)test_data <= 1;
         else test_data <= 0;
     end
     assign data_o_ref       = test_data;

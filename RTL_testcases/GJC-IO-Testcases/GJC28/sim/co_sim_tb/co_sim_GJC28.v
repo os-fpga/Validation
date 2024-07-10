@@ -18,7 +18,7 @@ GJC28	golden (.*);
 	GJC28_post_synth synth_net (.*, .dly_tap_val_inv_buf(dly_tap_val_inv_buf_netlist), .data_o_delayed_n(data_o_delayed_n_netlist), .data_o_delayed_p(data_o_delayed_p_netlist), .data_o_ref_buf(data_o_ref_buf_netlist) );
 `endif
 
-always #100 clk_i_buf = ~clk_i_buf;
+always #2 clk_i_buf = ~clk_i_buf;
 		// Initialize values to zero 
 initial	begin
 	{clk_i_buf, dly_adj_buf, dly_incdec_buf, dly_ld_buf } <= 'd0;
