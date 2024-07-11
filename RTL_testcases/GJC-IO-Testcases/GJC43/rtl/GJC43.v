@@ -83,7 +83,7 @@ module GJC43 #(
         .DPA_MODE("DPA") // Select Dynamic Phase Alignment or Clock Data Recovery (NONE/DPA/CDR)
     ) input_data_serdes (
         .D(data_i_delay), // Data input (connect to input port, buffer or I_DELAY)
-        .RX_RST(reset_buf_n), // Active-low asycnhronous reset
+        .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(bitslip_ctrl), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
         .CLK_IN(fabric_clk_div), // Fabric clock input

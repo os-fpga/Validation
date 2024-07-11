@@ -74,7 +74,7 @@ module GJC46 #(
         .DPA_MODE("DPA") // Select Dynamic Phase Alignment or Clock Data Recovery (NONE/DPA/CDR)
     ) input_data_serdes (
         .D(data_i_delay), // Data input (connect to input port, buffer or I_DELAY)
-        .RX_RST(reset_buf_n), // Active-low asycnhronous reset
+        .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(bitslip_ctrl), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
         .CLK_IN(fabric_clk_div), // Fabric clock input
@@ -106,7 +106,7 @@ module GJC46 #(
     ) counter_o_serdes (
         .D(data_i_serdes_reg), // D input bus
         .RST(reset_buf_n), // Active-low, asynchronous reset
-        .LOAD_WORD(enable_buf), // Load word input
+        .DATA_VALID(enable_buf), // Load word input
         .CLK_IN(fabric_clk_div), // Fabric clock input
         .OE_IN(enable_buf), // Output tri-state enable input
         .OE_OUT(buf_output_enable), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)

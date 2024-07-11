@@ -50,7 +50,7 @@ module GJC37 (
     ) counter_o_serdes (
         .D(counter), // D input bus
         .RST(reset_buf_n), // Active-low, asynchronous reset
-        .LOAD_WORD(enable_buf), // Load word input
+        .DATA_VALID(enable_buf), // Load word input
         .CLK_IN(pll_clk_div3), // Fabric clock input
         .OE_IN(enable_buf), // Output tri-state enable input
         .OE_OUT(buf_output_enable), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
