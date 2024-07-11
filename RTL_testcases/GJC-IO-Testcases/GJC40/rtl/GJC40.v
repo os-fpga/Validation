@@ -55,7 +55,7 @@ module GJC40 #(
 
     BOOT_CLOCK internal_osc (clk_pll_in);
    
-    PLL #(.PLL_MULT(50), .PLL_DIV(1), .PLL_POST_DIV(50)) clk_pll_gen0 (
+    PLL #(.PLL_MULT(50), .PLL_DIV(1), .PLL_POST_DIV(17)) clk_pll_gen0 (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll_in), // Clock input
         .CLK_OUT(pll_clk),

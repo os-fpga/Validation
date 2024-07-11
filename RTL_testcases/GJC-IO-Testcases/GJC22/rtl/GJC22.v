@@ -27,7 +27,7 @@ module GJC22 (
     O_BUF data_o_buffer (.I(data_o_design), .O(data_o));
     CLK_BUF clock_buffer (.I(clk_buf), .O(clk_pll_in));
 
-    PLL #(.PLL_MULT(100), .PLL_DIV(32), .PLL_POST_DIV(50)) clk_pll_gen (
+    PLL #(.PLL_MULT(100), .PLL_DIV(32), .PLL_POST_DIV(17)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll_in), // Clock input
         .CLK_OUT_DIV4(clk_design)
