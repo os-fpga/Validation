@@ -9,6 +9,7 @@ module co_sim_DSP_MULTACC_TEST;
     reg 		[2:0] 		feedback;
     reg 		[5:0] 		acc_fir;
     wire 		[37:0] 		z_multadd	,	z_multadd_netlist;
+		wire [17:0] dly_b, dly_b_netlist; 
     reg 		[5:0] 		shift_right;
     reg 		[19:0] 		a;
     reg 		[17:0] 		b;
@@ -23,14 +24,14 @@ module co_sim_DSP_MULTACC_TEST;
 DSP_MULTACC_TEST	golden (.*);
 
 `ifdef PNR
-	DSP_MULTACC_TEST_post_route route_net (.*, .z_multacc(z_multacc_netlist), .z_multadd(z_multadd_netlist) );
+	DSP_MULTACC_TEST_post_route route_net (.*, .z_multacc(z_multacc_netlist), .z_multadd(z_multadd_netlist), .dly_b(dly_b_netlist) );
 `else
-	DSP_MULTACC_TEST_post_synth synth_net (.*, .z_multacc(z_multacc_netlist), .z_multadd(z_multadd_netlist) );
+	DSP_MULTACC_TEST_post_synth synth_net (.*, .z_multacc(z_multacc_netlist), .z_multadd(z_multadd_netlist), .dly_b(dly_b_netlist) );
 `endif
 
 // clock initialization for clk
 initial begin
-	clk = 1'b0;
+	clk = 1'b1;
 	forever #1 clk = ~clk;
 end
 //Reset Stimulus generation
@@ -48,7 +49,7 @@ initial begin
 	//Random stimulus generation
 	repeat(100) @ (negedge clk) begin
 		feedback 			 <= $urandom();
-		acc_fir 			 <= $urandom();
+		acc_fir 			 <= $urandom_range(0,43);
 		shift_right 			 <= $urandom();
 		a 			 <= $urandom();
 		b 			 <= $urandom();
@@ -63,7 +64,7 @@ end
 
 	// ----------- Corner Case stimulus generation -----------
 	feedback <= 7;
-	acc_fir <= 63;
+	acc_fir <= 43;
 	shift_right <= 63;
 	a <= 1048575;
 	b <= 262143;
@@ -84,12 +85,12 @@ end
 end
 
 task compare();
-	if ( z_multacc !== z_multacc_netlist	||	z_multadd !== z_multadd_netlist ) begin
-		$display("Data Mismatch: Actual output: %0d, %0d, Netlist Output %0d, %0d, Time: %0t ", z_multacc, z_multadd, z_multacc_netlist, z_multadd_netlist,  $time);
+	if ( z_multacc !== z_multacc_netlist	||	z_multadd !== z_multadd_netlist ||	dly_b !== dly_b_netlist ) begin
+		$display("Data Mismatch: Actual output: %0d, %0d, %0d , Netlist Output %0d, %0d, %0d, Time: %0t ", z_multacc, z_multadd, dly_b, z_multacc_netlist, z_multadd_netlist, dly_b_netlist,  $time);
 		mismatch = mismatch+1;
 	end
 	else
-		$display("Data Matched: Actual output: %0d, %0d, Netlist Output %0d, %0d, Time: %0t ", z_multacc, z_multadd, z_multacc_netlist, z_multadd_netlist,  $time);
+		$display("Data Matched: Actual output: %0d, %0d, %0d, Netlist Output %0d, %0d, %0d, Time: %0t ", z_multacc, z_multadd, dly_b, z_multacc_netlist, z_multadd_netlist, dly_b_netlist, $time);
 endtask
 
 initial begin
