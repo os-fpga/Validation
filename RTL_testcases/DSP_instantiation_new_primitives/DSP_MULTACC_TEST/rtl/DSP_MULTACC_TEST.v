@@ -12,8 +12,8 @@ module DSP_MULTACC_TEST(
    input [5:0] 	 shift_right,      // 6-bit Shift right
    input         round,            // Round
    input         subtract,         // Add or subtract
-   output [37:0] z_multacc, z_multadd);           // 38-bit data output
-//    output [17:0] dly_b_multacc, dly_b_multadd );      // 18-bit B registered output
+   output [37:0] z_multacc, z_multadd,           // 38-bit data output
+   output [17:0] dly_b );      // 18-bit B registered output
 
 
         DSP38 #(
@@ -25,7 +25,7 @@ module DSP_MULTACC_TEST(
                 .B(b),
                 .ACC_FIR(acc_fir),
                 .Z(z_multadd),
-        //   .DLY_B(dly_b_multadd),
+                .DLY_B(dly_b),
                 .CLK(clk),
                 .RESET(reset),
                 .FEEDBACK(feedback),
@@ -47,10 +47,9 @@ module DSP_MULTACC_TEST(
                         .B(b),
                         .ACC_FIR(acc_fir),
                         .Z(z_multacc),
-                        // .DLY_B(dly_b_multacc),
                         .CLK(clk),
                         .RESET(reset),
-                        .FEEDBACK(feedback),
+                        .FEEDBACK(3'b000),
                         .LOAD_ACC(load_acc),
                         .UNSIGNED_A(unsigned_a),
                         .UNSIGNED_B(unsigned_b),
