@@ -20,7 +20,7 @@ reg enable, pll_lock;
 
 I_SERDES inst(
 .D(data_in),
-.RX_RST(RX_RST),
+.RST(RX_RST),
 .BITSLIP_ADJ(BITSLIP_ADJ),
 .EN(enable),
 .CLK_IN(clk_in),

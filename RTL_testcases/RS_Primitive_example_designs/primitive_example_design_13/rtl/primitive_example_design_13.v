@@ -20,7 +20,7 @@ O_SERDES #(
 ) inst(
 .D(data_in), // D input bus
 .RST(reset), // Active-low, asynchronous reset
-.LOAD_WORD(load_word), // Load word input
+.DATA_VALID(load_word), // Load word input
 .CLK_IN(clk_in), // Fabric clock input
 .OE_IN(output_enable), // Output tri-state enable input
 .OE_OUT(out_tri_en), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)

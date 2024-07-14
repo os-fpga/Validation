@@ -39,7 +39,7 @@ module GJC31 (
 
     CLK_BUF clock_buffer (clk_buf_i,clk_pll);
 
-    PLL #(.PLL_MULT(300), .PLL_DIV(3), .PLL_POST_DIV(17)) clk_pll_gen (
+    PLL #(.PLL_MULT(100), .PLL_DIV(32), .PLL_POST_DIV(17)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll), // Clock input
         .CLK_OUT_DIV4(clk_i)

@@ -16,7 +16,7 @@ GJC31	golden (.*);
 	GJC31_post_synth synth_net (.*, .data_o_buf(data_o_buf_netlist) );
 `endif
 
-always #50 clk_i_buf = ~clk_i_buf;
+always #1 clk_i_buf = ~clk_i_buf;
 		// Initialize values to zero 
 initial	begin
 	{clk_i_buf, data_i, dly_inc_pulse_inv_buf, enable_buf, reset_n_buf } <= 'd0;
