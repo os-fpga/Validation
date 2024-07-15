@@ -69,6 +69,23 @@ def remove_iopadmap(file_path):
         print("'$iopadmap$' removed from lines in the file.")
     except FileNotFoundError:
         print(f"File '{file_path}' not found.")
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    with open(file_path, 'w') as file:
+        for line in lines:
+            modified_line = line.replace("$ibuf_", "")
+            file.write(modified_line)
+
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    with open(file_path, 'w') as file:
+        for line in lines:
+            modified_line = line.replace("$obuf_", "")
+            modified_line_on = modified_line.replace("$clk_buf_", "")
+            file.write(modified_line_on)
     
     # comment the always block
     with open(file_path, 'r') as file:
@@ -342,6 +359,18 @@ def clk_update(file_path):
     with open(file_path, 'w') as f:
             f.write(new_content)
 
+    pattern_genblk = r'genblk1\[0\]\.(\w+)\.clock0(?=[,\[0\];])'
+
+    match = re.search(pattern_genblk, content)
+    if match:
+        with open(file_path, 'r') as f:
+            content = f.read()
+
+        new_content = re.sub(pattern_genblk, replacement, content)
+
+        with open(file_path, 'w') as f:
+                f.write(new_content)
+
 def replacement(file_path,pattern,replacement):
 
     with open(file_path, 'r') as f:
@@ -374,7 +403,8 @@ def replace_pattern_in_file(file_path, pattern, replacement):
 
 def multiclock_update(file_path,number_of_clocks):
     match=[]
-    pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+    # pattern = r'\$auto\$clkbufmap\.cc:\d+:execute\$\d+'
+    pattern = r'\$clk_buf_\$ibuf_clock\d+'
 
     with open(file_path, 'r') as f:
         content = f.read()
@@ -388,8 +418,9 @@ def multiclock_update(file_path,number_of_clocks):
     else:
         print("Pattern not found in the file.")
 
-    for i in range(number_of_clocks):
-            replace_pattern_in_file(file_path,match[i],"clock"+str(i))
+    if matches:
+        for i in range(number_of_clocks):
+                replace_pattern_in_file(file_path,match[i],"clock"+str(i))
 
 def remove_lines_with_two_dollar_signs(filename):
 
@@ -618,6 +649,43 @@ def sort_lines(file_path):
     with open(file_path, 'w') as file:
         file.write(content)
 
+def remove_genblk1a0_occurrences(file_path):
+
+    pattern = r'genblk1\[0\]\.a0\.'
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    match = re.search(pattern, content)
+    if (match):
+        new_content = re.sub(pattern, '', content)
+
+        with open(file_path, 'w') as file:
+            file.write(new_content)
+
+def replace_output(file_path):
+    pattern = r'output\s+\[0:0\]\s+a(\d+)\.cnt_reg\[(\d+)\]'
+    pattern2 = r'assign a(\d+).cnt_reg'
+
+    regex = re.compile(pattern)
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    modified_content = regex.sub(r'output [0:0] cnt\1_reg[\2]', content)
+
+    with open(file_path, 'w') as f:
+        f.write(modified_content)
+
+    regex = re.compile(pattern2)
+
+    with open(file_path, 'r') as f:
+        content = f.read()
+
+    modified_content = regex.sub(r'assign cnt\1_reg', content)
+
+    with open(file_path, 'w') as f:
+        f.write(modified_content)
 
 def main():
     file_path = sys.argv[1]
@@ -625,27 +693,33 @@ def main():
 
     if file_path.endswith("fabric_"+design_name+"_formal_random_top_tb.v"):
         remove_iopadmap(file_path)
+        # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
         adjust_ios(file_path)
         instance_update(file_path)
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
+        replacement(file_path,"\$display\(\"Simulation Succeed\"","// $display(\"Simulation Succeed\"")
         # remove_lines_with_two_dollar_signs(file_path)
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
+        if design_name == "multi_clocks":
+            replace_output(file_path)
+        # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
         # remove_comma_from_last_line(file_path)
         adjust_ios(file_path)
         remove_twodim_array(file_path)
-        if design_name != "up5bit_counter_dual_clock":
+        if design_name != "up5bit_counter_dual_clock" and design_name != "dpram_36x1024" and design_name != "multi_clocks":
             clk_update(file_path)
         else:
             if int(sys.argv[3]) > 1:
                 multiclock_update(file_path,int(sys.argv[3]))
         if design_name in ["shift_register", "dffre_inst", "lut_ff_mux", "sp_ram", "up5bit_counter"]:
-            replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clock0")
+            replacement(file_path,"clk_fm\[15\] = 1\'b0","clk_fm[15] = clk")
+            replacement(file_path,"clock0","clk")
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
         # remove_lines_with_two_dollar_signs(file_path)
         # remove_comma_from_line(file_path)
