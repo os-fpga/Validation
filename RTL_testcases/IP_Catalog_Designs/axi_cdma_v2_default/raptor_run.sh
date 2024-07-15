@@ -85,6 +85,7 @@ command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 e
 parse_cga exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
+primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
 
 #removing and creating raptor_testcase_files
 #rm -fR $PWD/results_dir
@@ -199,19 +200,12 @@ IP_PATH="./$design/run_1/IPs"
     fi
 
 	echo "analyze">>raptor_tcl.tcl
-    # echo "simulate_ip $design">>raptor_tcl.tcl
+    echo "simulate_ip $design">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
-    if [ "$post_synth_sim_hard_code" == true ]; then 
-        
-        [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
-        [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
@@ -243,6 +237,20 @@ IP_PATH="./$design/run_1/IPs"
         else
             echo ""
         fi
+    fi
+    if [ "$post_synth_sim_hard_code" == true ]; then 
+        echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
+        echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
+        echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
+        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+        echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
+        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
+        echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
+        echo "exec make clear" >> raptor_tcl.tcl
+        echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
+        echo "cd ../../../../../../../../../../../" >> raptor_tcl.tcl
+    else
+        echo ""
     fi
 
     cd results_dir
