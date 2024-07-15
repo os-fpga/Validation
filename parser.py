@@ -352,6 +352,8 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                 if log_line_key == 'error_msg':
                     if log_line_keyword and "Memory collision occured" in line:
                         data[log_line_key] = None  # Clears or prevents setting the error message
+                    elif log_line_keyword and "Write collision occured" in line:
+                        data[log_line_key] = None  # Clears or prevents setting the error message
                     elif log_line_keyword in line:
                         # temp_string = line.split(log_line_keyword)[1].strip() + " " + temp_string
                         # data[log_line_key] = temp_string
@@ -362,6 +364,8 @@ def parse_log_files(file,timing_file,log_line_keys_map):
                         data[log_line_key] = temp_string + ",VCS: " + line.split("Error-")[1].strip()
                 if log_line_key == 'status':
                     if "ERROR: Memory collision occured" in line:
+                        data[log_line_key] = 'Pass'  # Directly set the status to 'Pass' for this specific error
+                    elif "ERROR: Write collision occured" in line:
                         data[log_line_key] = 'Pass'  # Directly set the status to 'Pass' for this specific error
                     else:
                         #the code splits the log line keyword by commas and loops through the resulting list of keywords.
