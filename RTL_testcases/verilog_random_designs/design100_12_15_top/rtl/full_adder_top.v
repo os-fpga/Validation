@@ -11,9 +11,9 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
         
     always @ (posedge clk) begin
         if (!rst)
-            cin <= 0;
-        else
             cin <= 1;
+        else
+            cin <= 0;
     end
 
     full_adder #(.WIDTH(WIDTH)) full_adder_inst (.clk(clk),.rst(rst),.data_in(data_in),.data_out(d_out),.cin(cin),.cout(cout));
