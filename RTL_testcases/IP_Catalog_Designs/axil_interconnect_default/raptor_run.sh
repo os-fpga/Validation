@@ -244,7 +244,7 @@ parse_cga exit 1; }
         echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
         echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
-        echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v\\\\n\tVERILOG_SOURCES += $sim_lib|g\"" >> raptor_tcl.tcl
+        echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
         echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
         echo "exec make clear" >> raptor_tcl.tcl
