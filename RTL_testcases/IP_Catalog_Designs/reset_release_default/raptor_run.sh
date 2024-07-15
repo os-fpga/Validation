@@ -194,7 +194,9 @@ IP_PATH="./$design/run_1/IPs"
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == false ] && [ "$post_route_sim" == false ] && [ "$bitstream_sim" == false ]; then
+    if [ "$post_synth_sim_hard_code" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "add_simulation_file $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim/testbench.v">>raptor_tcl.tcl 
+    else
         echo ""
     fi
 
