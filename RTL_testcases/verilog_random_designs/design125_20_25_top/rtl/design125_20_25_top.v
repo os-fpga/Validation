@@ -632,7 +632,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1014(.data_in(wire_d0_13),.data_out(wire_d0_14),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1015(.data_in(wire_d0_14),.data_out(wire_d0_15),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1016(.data_in(wire_d0_15),.data_out(wire_d0_16),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1017(.data_in(wire_d0_16),.data_out(wire_d0_17),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance1017(.data_in(wire_d0_16),.data_out(wire_d0_17),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1018(.data_in(wire_d0_17),.data_out(wire_d0_18),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1019(.data_in(wire_d0_18),.data_out(wire_d0_19),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1020(.data_in(wire_d0_19),.data_out(wire_d0_20),.clk(clk),.rst(rst));
@@ -662,13 +662,13 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance2118(.data_in(wire_d1_17),.data_out(wire_d1_18),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance2119(.data_in(wire_d1_18),.data_out(wire_d1_19),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance2120(.data_in(wire_d1_19),.data_out(wire_d1_20),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance2121(.data_in(wire_d1_20),.data_out(wire_d1_21),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance2121(.data_in(wire_d1_20),.data_out(wire_d1_21),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance2122(.data_in(wire_d1_21),.data_out(wire_d1_22),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance2123(.data_in(wire_d1_22),.data_out(wire_d1_23),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance2124(.data_in(wire_d1_23),.data_out(d_out1),.clk(clk),.rst(rst));
 
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance320(.data_in(d_in2),.data_out(wire_d2_0),.clk(clk),.rst(rst));            //channel 3
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance321(.data_in(wire_d2_0),.data_out(wire_d2_1),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance321(.data_in(wire_d2_0),.data_out(wire_d2_1),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance322(.data_in(wire_d2_1),.data_out(wire_d2_2),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance323(.data_in(wire_d2_2),.data_out(wire_d2_3),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance324(.data_in(wire_d2_3),.data_out(wire_d2_4),.clk(clk),.rst(rst));
@@ -707,7 +707,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance4311(.data_in(wire_d3_10),.data_out(wire_d3_11),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance4312(.data_in(wire_d3_11),.data_out(wire_d3_12),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance4313(.data_in(wire_d3_12),.data_out(wire_d3_13),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance4314(.data_in(wire_d3_13),.data_out(wire_d3_14),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance4314(.data_in(wire_d3_13),.data_out(wire_d3_14),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance4315(.data_in(wire_d3_14),.data_out(wire_d3_15),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance4316(.data_in(wire_d3_15),.data_out(wire_d3_16),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance4317(.data_in(wire_d3_16),.data_out(wire_d3_17),.clk(clk),.rst(rst));
@@ -725,7 +725,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance543(.data_in(wire_d4_2),.data_out(wire_d4_3),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance544(.data_in(wire_d4_3),.data_out(wire_d4_4),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance545(.data_in(wire_d4_4),.data_out(wire_d4_5),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance546(.data_in(wire_d4_5),.data_out(wire_d4_6),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance546(.data_in(wire_d4_5),.data_out(wire_d4_6),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance547(.data_in(wire_d4_6),.data_out(wire_d4_7),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance548(.data_in(wire_d4_7),.data_out(wire_d4_8),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance549(.data_in(wire_d4_8),.data_out(wire_d4_9),.clk(clk),.rst(rst));
@@ -753,7 +753,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	encoder #(.WIDTH(WIDTH)) encoder_instance655(.data_in(wire_d5_4),.data_out(wire_d5_5),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance656(.data_in(wire_d5_5),.data_out(wire_d5_6),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance657(.data_in(wire_d5_6),.data_out(wire_d5_7),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance658(.data_in(wire_d5_7),.data_out(wire_d5_8),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance658(.data_in(wire_d5_7),.data_out(wire_d5_8),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance659(.data_in(wire_d5_8),.data_out(wire_d5_9),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance6510(.data_in(wire_d5_9),.data_out(wire_d5_10),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance6511(.data_in(wire_d5_10),.data_out(wire_d5_11),.clk(clk),.rst(rst));
@@ -857,7 +857,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	register #(.WIDTH(WIDTH)) register_instance10095(.data_in(wire_d9_4),.data_out(wire_d9_5),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance10096(.data_in(wire_d9_5),.data_out(wire_d9_6),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance10097(.data_in(wire_d9_6),.data_out(wire_d9_7),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance10098(.data_in(wire_d9_7),.data_out(wire_d9_8),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance10098(.data_in(wire_d9_7),.data_out(wire_d9_8),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance10099(.data_in(wire_d9_8),.data_out(wire_d9_9),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance100910(.data_in(wire_d9_9),.data_out(wire_d9_10),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance100911(.data_in(wire_d9_10),.data_out(wire_d9_11),.clk(clk),.rst(rst));
@@ -909,7 +909,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	register #(.WIDTH(WIDTH)) register_instance120115(.data_in(wire_d11_4),.data_out(wire_d11_5),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance120116(.data_in(wire_d11_5),.data_out(wire_d11_6),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance120117(.data_in(wire_d11_6),.data_out(wire_d11_7),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance120118(.data_in(wire_d11_7),.data_out(wire_d11_8),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance120118(.data_in(wire_d11_7),.data_out(wire_d11_8),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance120119(.data_in(wire_d11_8),.data_out(wire_d11_9),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1201110(.data_in(wire_d11_9),.data_out(wire_d11_10),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance1201111(.data_in(wire_d11_10),.data_out(wire_d11_11),.clk(clk),.rst(rst));
@@ -949,7 +949,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1301219(.data_in(wire_d12_18),.data_out(wire_d12_19),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance1301220(.data_in(wire_d12_19),.data_out(wire_d12_20),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1301221(.data_in(wire_d12_20),.data_out(wire_d12_21),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1301222(.data_in(wire_d12_21),.data_out(wire_d12_22),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance1301222(.data_in(wire_d12_21),.data_out(wire_d12_22),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance1301223(.data_in(wire_d12_22),.data_out(wire_d12_23),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance1301224(.data_in(wire_d12_23),.data_out(d_out12),.clk(clk),.rst(rst));
 
@@ -1054,7 +1054,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1701620(.data_in(wire_d16_19),.data_out(wire_d16_20),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance1701621(.data_in(wire_d16_20),.data_out(wire_d16_21),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1701622(.data_in(wire_d16_21),.data_out(wire_d16_22),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1701623(.data_in(wire_d16_22),.data_out(wire_d16_23),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance1701623(.data_in(wire_d16_22),.data_out(wire_d16_23),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1701624(.data_in(wire_d16_23),.data_out(d_out16),.clk(clk),.rst(rst));
 
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance180170(.data_in(d_in17),.data_out(wire_d17_0),.clk(clk),.rst(rst));            //channel 18
@@ -1076,7 +1076,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	encoder #(.WIDTH(WIDTH)) encoder_instance1801716(.data_in(wire_d17_15),.data_out(wire_d17_16),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1801717(.data_in(wire_d17_16),.data_out(wire_d17_17),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance1801718(.data_in(wire_d17_17),.data_out(wire_d17_18),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1801719(.data_in(wire_d17_18),.data_out(wire_d17_19),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance1801719(.data_in(wire_d17_18),.data_out(wire_d17_19),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1801720(.data_in(wire_d17_19),.data_out(wire_d17_20),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance1801721(.data_in(wire_d17_20),.data_out(wire_d17_21),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1801722(.data_in(wire_d17_21),.data_out(wire_d17_22),.clk(clk),.rst(rst));
@@ -1103,7 +1103,7 @@ module design125_20_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1901817(.data_in(wire_d18_16),.data_out(wire_d18_17),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1901818(.data_in(wire_d18_17),.data_out(wire_d18_18),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance1901819(.data_in(wire_d18_18),.data_out(wire_d18_19),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1901820(.data_in(wire_d18_19),.data_out(wire_d18_20),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance1901820(.data_in(wire_d18_19),.data_out(wire_d18_20),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance1901821(.data_in(wire_d18_20),.data_out(wire_d18_21),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance1901822(.data_in(wire_d18_21),.data_out(wire_d18_22),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance1901823(.data_in(wire_d18_22),.data_out(wire_d18_23),.clk(clk),.rst(rst));
