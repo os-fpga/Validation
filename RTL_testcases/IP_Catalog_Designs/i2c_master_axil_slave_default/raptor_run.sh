@@ -243,7 +243,7 @@ IP_PATH="./$design/run_1/IPs"
         echo "set sed_script {s|../src/\*\.v|$main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v|g}" >> raptor_tcl.tcl
         echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
         echo "exec sed -i {29i\import glob} test_i2c_master_axil.py" >> raptor_tcl.tcl
-        echo "set sed_script {s|srcs = \[\]|srcs = []\nsrcs += glob.glob(\"$primitive_sim_path/*.v\")\nsrcs.remove(\"$primitive_sim_path/SOC_FPGA_TEMPERATURE.v\")\nsrcs.append(\"$sim_lib\")|}" >> raptor_tcl.tcl
+        echo "set sed_script {s|srcs = \[\]|srcs = []\nsrcs += glob.glob(\"$primitive_sim_path/*.v\")\nsrcs.remove(\"$primitive_sim_path/SOC_FPGA_TEMPERATURE.v\")|}" >> raptor_tcl.tcl
         echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
         echo "set sed_script {s|iverilog|iverilog -g2012|}" >> raptor_tcl.tcl
         echo 'exec sed -i [list -e $sed_script] test_i2c_master_axil.py' >> raptor_tcl.tcl
