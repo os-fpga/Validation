@@ -5,8 +5,6 @@ module DSP19X2_primitive_inst (
       output wire [37:0] z_out
     );
 
-    wire [8:0]DLY_B1,DLY_B2;  
-    wire [4:0] ACC_FIR; 
     wire [37:0] z_w;
 
 DSP19X2 #(
@@ -25,14 +23,11 @@ DSP19X2 #(
   .A1(a[9:0]), // Multiplier 1 10-bit data input for multiplier or accumulator loading
   .B1(b[8:0]), // 9-bit data input for multiplication
   .Z1(z_out[18:0]), // Multiplier 1 19-bit data output
-  .DLY_B1(DLY_B1), // Multiplier 1 9-bit B registered output
   .A2(a[19:10]), // Multiplier 2 10-bit data input for multiplier or accumulator loading
   .B2(b[17:9]), // Multiplier 2 9-bit data input for multiplication
   .Z2(z_out[37:19]), // Multiplier 2 19-bit data output
-  .DLY_B2(DLY_B2), // Multiplier 2 9-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // Reset input
-  .ACC_FIR(ACC_FIR), // 5-bit left shift A input
   .FEEDBACK(3'd1), // 3-bit feedback input selects coefficient
   .LOAD_ACC(1'd1), // Load accumulator input
   .UNSIGNED_A(1'b1), // Selects signed or unsigned data for A input

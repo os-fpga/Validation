@@ -10,9 +10,6 @@ module DSP38_primitive_inst (
   parameter [79:0] MODE_BITS = 80'd0;
     
   wire [37:0] z_w;
-  wire [5:0] ACC_FIR;
-  wire [17:0] DLY_B;
-	//wire reset;
 
 DSP38 #(
   .DSP_MODE("MULTIPLY_ACCUMULATE"), // DSp arithmetic mode (MULTIPLY/MULTIPLY_ADD_SUB/MULTIPLY_ACCUMULATE)
@@ -25,9 +22,7 @@ DSP38 #(
 ) DSP_inst(
   .A(a), // 20-bit data input for multipluier or accumulator loading
   .B(b), // 18-bit data input for multiplication
-  .ACC_FIR(ACC_FIR), // 6-bit left shift A input
   .Z(z_w), // 38-bit data output
-  .DLY_B(DLY_B), // 18-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // None
   .FEEDBACK(3'd0), // 3-bit feedback input selects coefficient

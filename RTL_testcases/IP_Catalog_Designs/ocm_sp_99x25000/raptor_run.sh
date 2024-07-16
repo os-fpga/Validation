@@ -219,9 +219,7 @@ IP_PATH="./$design/run_1/IPs"
     [ -z "$set_channel_width" ] && echo "" || echo "set_channel_width $set_channel_width">>raptor_tcl.tcl 
     [ -z "$architecture" ] && echo "" || echo "architecture $architecture">>raptor_tcl.tcl 
     [ -z "$set_device_size" ] && echo "" || echo "set_device_size $set_device_size">>raptor_tcl.tcl 
-    echo "packing">>raptor_tcl.tcl  
-    echo "place">>raptor_tcl.tcl  
-    echo "route">>raptor_tcl.tcl  
+    echo "routability_flow">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
             
             # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 

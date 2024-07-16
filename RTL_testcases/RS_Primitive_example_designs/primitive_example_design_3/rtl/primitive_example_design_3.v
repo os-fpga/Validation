@@ -2,7 +2,6 @@ module primitive_example_design_3(
     input [19:0] A, 
     input [17:0] B, 
     input [37:0] i_buft_oe,
-    input [5:0] ACC_FIR, 
     output [37:0] Z,
     output reg [17:0] DLY_B,
     input CLK,
@@ -26,8 +25,6 @@ module primitive_example_design_3(
   wire [17:0] b_out;
   wire [37:0] i_buft_oe_in;
   wire i_buf_reset,i_buf_load_acc,i_buf_saturate,i_buf_clk;
-  wire [5:0] i_buf_ACC_FIR;
-  wire [31:0] o_buf_dly_b;
   wire [2:0] i_buf_feedback;
   wire [5:0] i_buf_shift_right;
   wire i_buf_round,i_buf_subtract,i_buf_unsigned_a,i_buf_unsigned_b;
@@ -55,12 +52,6 @@ module primitive_example_design_3(
 
   I_BUF i_buf_instance2 (.I(CLK),.EN(ibuf4_en[0]),.O(i_buf_clk));
   I_BUF i_buf_instance3 (.I(i_buft_oe),.EN(ibuf4_en[1]),.O(i_buft_oe_in));
-  I_BUF i_buf_instance4 (.I(ACC_FIR[0]),.EN(ibuf4_en[2]),.O(i_buf_ACC_FIR[0]));
-  I_BUF i_buf_instance5 (.I(ACC_FIR[1]),.EN(ibuf4_en[3]),.O(i_buf_ACC_FIR[1]));
-  I_BUF i_buf_instance6 (.I(ACC_FIR[2]),.EN(ibuf4_en[4]),.O(i_buf_ACC_FIR[2]));
-  I_BUF i_buf_instance7 (.I(ACC_FIR[3]),.EN(ibuf4_en[5]),.O(i_buf_ACC_FIR[3]));
-  I_BUF i_buf_instance8 (.I(ACC_FIR[4]),.EN(ibuf4_en[6]),.O(i_buf_ACC_FIR[4]));
-  I_BUF i_buf_instance9 (.I(ACC_FIR[5]),.EN(ibuf4_en[7]),.O(i_buf_ACC_FIR[5]));
   I_BUF i_buf_instance10 (.I(RESET),.EN(ibuf4_en[8]),.O(i_buf_reset));
   I_BUF i_buf_instance11 (.I(FEEDBACK[0]),.EN(ibuf4_en[9]),.O(i_buf_feedback[0]));
   I_BUF i_buf_instance12 (.I(FEEDBACK[1]),.EN(ibuf4_en[10]),.O(i_buf_feedback[1]));
@@ -96,10 +87,8 @@ module primitive_example_design_3(
       .OUTPUT_REG_EN("TRUE"), 
       .INPUT_REG_EN("TRUE") 
     )dsp38_inst (.A(a_out),
-      .ACC_FIR(i_buf_ACC_FIR),
       .B(b_out),
       .CLK(i_buf_clk),
-      .DLY_B(o_buf_dly_b),
       .FEEDBACK(i_buf_feedback),
       .LOAD_ACC(i_buf_load_acc),
       .RESET(i_buf_reset),
