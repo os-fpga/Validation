@@ -1,8 +1,13 @@
-set_top_module GJC38
+create_clock -period 10 clk_pll_in
 
-create_clock -period 10 -name clk_design
+# TODO:
+#create_generated_clock -source clk_pll_in -divide_by 1 pll_clk
 
-set_input_delay 2 -clock clk_design [get_ports {reset}]
-set_input_delay 2 -clock clk_design [get_ports {enable_n}]
-set_output_delay 2 -clock clk_design [get_ports {data_o}]
+create_generated_clock -source clk_pll_in -divide_by 4 pll_clk_div4
+
+# TODO:
+#set_input_delay 2 -clock  pll_clk [get_ports {reset}]
+#set_input_delay 2 -clock pll_clk [get_ports {enable_n}]
+
+set_output_delay 2 -clock pll_clk_div4  [get_ports {data_o}]
 

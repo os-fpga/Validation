@@ -30,18 +30,18 @@ set_pin_loc data_o[6] HP_1_14_7P
 
 set_pin_loc data_o[7] HP_1_15_7N
 
-set_pin_loc enable[0] HP_1_16_8P
+set_pin_loc enable[0] HP_1_CC_38_19P
 
-set_pin_loc enable[1] HP_1_17_8N
+set_pin_loc enable[1] HP_1_35_17N
 
-set_pin_loc enable[2] HP_1_CC_18_9P
+set_pin_loc enable[2] HP_1_34_17P
 
-set_pin_loc enable[3] HP_1_CC_19_9N
+set_pin_loc enable[3] HP_1_33_16N
 
-set_pin_loc enable[4] HP_1_20_10P
+set_pin_loc enable[4] HP_1_32_16P
 
-set_pin_loc enable[5] HP_1_21_10N
+set_pin_loc enable[5] HP_1_31_15N
 
-set_pin_loc enable[6] HP_1_22_11P
+set_pin_loc enable[6] HP_1_30_15P
 
-set_pin_loc enable[7] HP_1_23_11N
+set_pin_loc enable[7] HP_1_29_14N

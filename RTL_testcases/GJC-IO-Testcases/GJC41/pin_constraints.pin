@@ -1,25 +1,15 @@
-
-set_property mode Mode_BP_SDR_A_RX HP_1_12_6P
 set_pin_loc reset HP_1_12_6P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_2_1P
 set_pin_loc enable_n HP_1_2_1P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_4_2P
 set_pin_loc data_i HP_1_4_2P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_14_7P
 set_pin_loc bitslip_ctrl_n HP_1_14_7P
 
+set_pin_loc data_o[0] HP_1_21_10N
 
-set_property mode Mode_BP_SDR_A_TX HP_1_16_8P
-set_pin_loc data_o[0] HP_1_16_8P
-
-set_property mode Mode_BP_SDR_A_TX HP_1_20_10P
 set_pin_loc data_o[1] HP_1_20_10P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_22_11P
 set_pin_loc data_o[2] HP_1_22_11P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_24_12P
 set_pin_loc ready HP_1_24_12P

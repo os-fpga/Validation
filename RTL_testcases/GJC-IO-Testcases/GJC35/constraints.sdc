@@ -1,8 +1,9 @@
-set_top_module GJC35
-
-create_clock -period 5 -name clk_design
-
-set_input_delay 2 -clock clk_design [get_ports {data_i}]
-set_input_delay 2 -clock clk_design [get_ports {enable}]
-set_output_delay 2 -clock clk_design [get_ports {data_o}]
-
+create_clock -period 10 clk_pll_in
+create_generated_clock -source clk_pll_in -divide_by 1 clk_design0
+create_generated_clock -source clk_pll_in -divide_by 2 clk_design1 
+create_generated_clock -source clk_pll_in -divide_by 3 clk_design2 
+create_generated_clock -source clk_pll_in -divide_by 4 clk_design3
+create_generated_clock -source clk_pll_in -divide_by 1 clk_design4 
+create_generated_clock -source clk_pll_in -divide_by 2 clk_design5 
+create_generated_clock -source clk_pll_in -divide_by 3 clk_design6 
+create_generated_clock -source clk_pll_in -divide_by 4 clk_design7
