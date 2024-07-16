@@ -1,5 +1,3 @@
-set_top_module GJC45
-
 create_clock -period 10 clkGHz
 
 set_input_delay 1 -clock clkGHz [get_ports {reset}]
