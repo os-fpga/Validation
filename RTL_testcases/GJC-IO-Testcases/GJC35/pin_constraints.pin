@@ -1,75 +1,47 @@
-
-set_property mode Mode_BP_SDR_A_RX HP_1_0_0P
 set_pin_loc data_i[0] HP_1_0_0P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_2_1P
-set_pin_loc data_i[1] HP_1_2_1P
+set_pin_loc data_i[1] HP_1_1_0N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_4_2P
-set_pin_loc data_i[2] HP_1_4_2P
+set_pin_loc data_i[2] HP_1_2_1P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_6_3P
-set_pin_loc data_i[3] HP_1_6_3P
+set_pin_loc data_i[3] HP_1_3_1N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_8_4P
-set_pin_loc data_i[4] HP_1_8_4P
+set_pin_loc data_i[4] HP_1_4_2P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_10_5P
-set_pin_loc data_i[5] HP_1_10_5P
+set_pin_loc data_i[5] HP_1_5_2N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_12_6P
-set_pin_loc data_i[6] HP_1_12_6P
+set_pin_loc data_i[6] HP_1_6_3P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_14_7P
-set_pin_loc data_i[7] HP_1_14_7P
+set_pin_loc data_i[7] HP_1_7_3N
 
+set_pin_loc data_o[0] HP_1_8_4P
 
+set_pin_loc data_o[1] HP_1_9_4N
 
-set_property mode Mode_BP_SDR_A_TX HP_1_16_8P
-set_pin_loc data_o[0] HP_1_16_8P
+set_pin_loc data_o[2] HP_1_10_5P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_20_10P
-set_pin_loc data_o[1] HP_1_20_10P
+set_pin_loc data_o[3] HP_1_11_5N
 
-set_property mode Mode_BP_SDR_A_TX HP_1_22_11P
-set_pin_loc data_o[2] HP_1_22_11P
+set_pin_loc data_o[4] HP_1_12_6P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_24_12P
-set_pin_loc data_o[3] HP_1_24_12P
+set_pin_loc data_o[5] HP_1_13_6N
 
-set_property mode Mode_BP_SDR_A_TX HP_1_26_13P
-set_pin_loc data_o[4] HP_1_26_13P
+set_pin_loc data_o[6] HP_1_14_7P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_28_14P
-set_pin_loc data_o[5] HP_1_28_14P
+set_pin_loc data_o[7] HP_1_15_7N
 
-set_property mode Mode_BP_SDR_A_TX HP_1_30_15P
-set_pin_loc data_o[6] HP_1_30_15P
+set_pin_loc enable[0] HP_1_CC_38_19P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_32_16P
-set_pin_loc data_o[7] HP_1_32_16P
+set_pin_loc enable[1] HP_1_35_17N
 
+set_pin_loc enable[2] HP_1_34_17P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_34_17P
-set_pin_loc enable[0] HP_1_34_17P
+set_pin_loc enable[3] HP_1_33_16N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_15_7N
-set_pin_loc enable[1] HP_1_15_7N
+set_pin_loc enable[4] HP_1_32_16P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_27_13N
-set_pin_loc enable[2] HP_1_27_13N
+set_pin_loc enable[5] HP_1_31_15N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_11_5N
-set_pin_loc enable[3] HP_1_11_5N
+set_pin_loc enable[6] HP_1_30_15P
 
-set_property mode Mode_BP_SDR_A_RX HP_1_35_17N
-set_pin_loc enable[4] HP_1_35_17N
-
-set_property mode Mode_BP_SDR_A_RX HP_1_33_16N
-set_pin_loc enable[5] HP_1_33_16N
-
-set_property mode Mode_BP_SDR_A_RX HP_1_31_15N
-set_pin_loc enable[6] HP_1_31_15N
-
-set_property mode Mode_BP_SDR_A_RX HP_1_29_14N
 set_pin_loc enable[7] HP_1_29_14N
