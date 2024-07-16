@@ -15,7 +15,7 @@ module GJC39 (
 
    reg [WIDTH - 1:0] counter;
    wire clk_pll_in;
-   wire const1;
+   reg const1;
    wire pll_clk;
    wire pll_clk_div4;
    wire pll_lock;
@@ -36,7 +36,7 @@ module GJC39 (
    I_BUF #(.WEAK_KEEPER("PULLDOWN")) reset_buffer0 (.I(reset),   .EN(const1), .O(reset_buf));
    I_BUF #(.WEAK_KEEPER("PULLUP")) enable_buffer0 (.I(enable_n), .EN(const1), .O(enable_buf_n));
 
-   BOOT_CLOCK internal_osc (clk_pll_in);
+   BOOT_CLOCK #(.PERIOD(16.0)) internal_osc (clk_pll_in);
    
    PLL #(.PLL_MULT(40), .PLL_DIV(1), .PLL_POST_DIV(17)) clk_pll_gen0 (
         .PLL_EN(const1), // PLL Enable
@@ -80,7 +80,7 @@ module GJC39 (
 
 
     O_SERDES_CLK  clock_output (
-        .CLK_EN(const1), // Gates output OUTPUT_CLK
+        .CLK_EN(enable_buf), // Gates output OUTPUT_CLK
         .OUTPUT_CLK(clk_buf_in), // Clock output (Connect to output port, buffer or O_DELAY)
         .PLL_LOCK(pll_lock), // PLL lock input
         .PLL_CLK(pll_clk) // PLL clock input
