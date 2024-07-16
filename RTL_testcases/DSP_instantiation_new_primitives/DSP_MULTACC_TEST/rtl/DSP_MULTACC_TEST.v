@@ -45,7 +45,6 @@ module DSP_MULTACC_TEST(
                 ) dut_multacc (
                         .A(a),
                         .B(b),
-                        .ACC_FIR(acc_fir),
                         .Z(z_multacc),
                         .CLK(clk),
                         .RESET(reset),
