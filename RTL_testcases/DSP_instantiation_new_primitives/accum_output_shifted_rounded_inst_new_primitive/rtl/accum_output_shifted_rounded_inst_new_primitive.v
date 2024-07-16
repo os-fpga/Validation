@@ -24,7 +24,6 @@ DSP38 #(
   .B(b), // 18-bit data input for multiplication
   .ACC_FIR(ACC_FIR), // 6-bit left shift A input
   .Z(z_w), // 38-bit data output
-  .DLY_B(DLY_B), // 18-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // None
   .FEEDBACK(3'd0), // 3-bit feedback input selects coefficient
