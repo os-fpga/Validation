@@ -16,19 +16,13 @@ GJC39	golden (.*);
 
 		// Initialize values to zero 
 initial	begin
-	enable_n <= 'd0;
+	enable_n <= 'd1;
 	reset <= 'd1;
 	#10;
-	enable_n <= 'd1;
-	#10;
-	reset <= 'd0;
-	#10;
-	enable_n <= 'd0;
-	compare();
 // Generating random stimulus 
 	for (int i = 0; i < 1000; i = i + 1) begin
-		// enable_n <= $urandom();
-		// reset <= $urandom();
+		enable_n <= 'd0;
+		reset <= 'd0;
 		#10;
 		compare();
 	end
