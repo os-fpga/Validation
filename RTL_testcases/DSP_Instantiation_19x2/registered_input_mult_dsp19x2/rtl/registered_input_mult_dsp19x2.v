@@ -6,8 +6,6 @@ module registered_input_mult_dsp19x2 (
     );
 
   //  parameter [79:0] MODE_BITS = 80'd0;
-    
-  //  wire [37:0] z_w;
 
 DSP19X2 #(
   .DSP_MODE("MULTIPLY"), // DSP arithmetic mode (MULTIPLY/MULTIPLY_ACCUMULATE)
@@ -25,11 +23,9 @@ DSP19X2 #(
   .A1(a[9:0]), // Multiplier 1 10-bit data input for multiplier or accumulator loading
   .B1(b[8:0]), // 9-bit data input for multiplication
   .Z1(z_out[18:0]), // Multiplier 1 19-bit data output
-  .DLY_B1(DLY_B1), // Multiplier 1 9-bit B registered output
   .A2(a[19:10]), // Multiplier 2 10-bit data input for multiplier or accumulator loading
   .B2(b[17:9]), // Multiplier 2 9-bit data input for multiplication
   .Z2(z_out[37:19]), // Multiplier 2 19-bit data output
-  .DLY_B2(DLY_B2), // Multiplier 2 9-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // Reset input
   .ACC_FIR(ACC_FIR), // 5-bit left shift A input

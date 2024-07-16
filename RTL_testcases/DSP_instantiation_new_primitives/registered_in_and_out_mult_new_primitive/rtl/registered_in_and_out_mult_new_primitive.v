@@ -9,7 +9,6 @@ module registered_in_and_out_mult_new_primitive (
     
     wire [37:0] z_w;
 
-
 DSP38 #(
   .DSP_MODE("MULTIPLY"), // DSp arithmetic mode (MULTIPLY/MULTIPLY_ADD_SUB/MULTIPLY_ACCUMULATE)
   .COEFF_0(20'h00000), // 20-bit A input coefficient 0
@@ -23,7 +22,6 @@ DSP38 #(
   .B(b), // 18-bit data input for multiplication
   .ACC_FIR(ACC_FIR), // 6-bit left shift A input
   .Z(z_w), // 38-bit data output
-  .DLY_B(DLY_B), // 18-bit B registered output
   .CLK(clk), // Clock
   .RESET(reset), // None
   .FEEDBACK(3'd1), // 3-bit feedback input selects coefficient
