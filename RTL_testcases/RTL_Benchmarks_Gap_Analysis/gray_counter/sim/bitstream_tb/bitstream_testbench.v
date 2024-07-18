@@ -1,10 +1,10 @@
 
     rst=1;
-    repeat(10)@(negedge clock0);
+    repeat(10)@(negedge clk);
     rst=0;
 
     for (int i=0; i<2**6; i=i+1)begin
-      @(negedge clock0);
+      @(negedge clk);
       if (counter_model !== out_gfpga) begin
           $display("Status: Test Failed  =>  Model Output = %7b , Fabric Output  = %7b",counter_model,out_gfpga);
       end

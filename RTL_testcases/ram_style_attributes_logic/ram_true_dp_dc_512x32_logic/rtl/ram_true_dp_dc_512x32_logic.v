@@ -4,7 +4,7 @@ module ram_true_dp_dc_512x32_logic (clkA, clkB, weA, weB, addrA, addrB, dinA, di
     input [31:0] dinA, dinB;
     output reg [31:0] doutA, doutB;
     
-    (* ram_style = "logic" *)
+    (* ram_style = "block" *)
     reg [31:0] ram [511:0];
     always @(posedge clkA)
     begin
