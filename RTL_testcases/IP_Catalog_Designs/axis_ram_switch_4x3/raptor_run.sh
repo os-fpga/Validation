@@ -27,7 +27,7 @@ synthesis_type="" #(Yosys/QL/RS)
 
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
-synth_options="-new_tdp36k "
+synth_options=""
                         #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
                         #                               :   -effort high
                         #                               :   -fsm_encoding binary if optimization == area else onehot
@@ -196,8 +196,8 @@ IP_PATH="./$design/run_1/IPs"
     if [ "$post_synth_sim" == false ] && [ "$post_route_sim" == false ] && [ "$bitstream_sim" == false ]; then
         echo ""
     fi
-
-	echo "analyze">>raptor_tcl.tcl
+    echo "parser_type surelog">>raptor_tcl.tcl
+    echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
