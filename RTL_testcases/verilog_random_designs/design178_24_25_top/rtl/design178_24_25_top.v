@@ -908,7 +908,7 @@ module design178_24_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	register #(.WIDTH(WIDTH)) register_instance7614(.data_in(wire_d6_13),.data_out(wire_d6_14),.clk(clk),.rst(rst));
 	shift_reg_top #(.WIDTH(WIDTH)) shift_reg_instance7615(.data_in(wire_d6_14),.data_out(wire_d6_15),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance7616(.data_in(wire_d6_15),.data_out(wire_d6_16),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance7617(.data_in(wire_d6_16),.data_out(wire_d6_17),.clk(clk),.rst(rst));
+	d_latch_top #(.WIDTH(WIDTH)) d_latch_top_instance7617(.data_in(wire_d6_16),.data_out(wire_d6_17),.clk(clk),.rst(rst));
 	d_latch_top #(.WIDTH(WIDTH)) d_latch_instance7618(.data_in(wire_d6_17),.data_out(wire_d6_18),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance7619(.data_in(wire_d6_18),.data_out(wire_d6_19),.clk(clk),.rst(rst));
 	paritygenerator_top #(.WIDTH(WIDTH)) parity_generator_instance7620(.data_in(wire_d6_19),.data_out(wire_d6_20),.clk(clk),.rst(rst));
@@ -1212,7 +1212,7 @@ module design178_24_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance190186(.data_in(wire_d18_5),.data_out(wire_d18_6),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance190187(.data_in(wire_d18_6),.data_out(wire_d18_7),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance190188(.data_in(wire_d18_7),.data_out(wire_d18_8),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance190189(.data_in(wire_d18_8),.data_out(wire_d18_9),.clk(clk),.rst(rst));
+	d_latch_top #(.WIDTH(WIDTH)) d_latch_top_instance190189(.data_in(wire_d18_8),.data_out(wire_d18_9),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance1901810(.data_in(wire_d18_9),.data_out(wire_d18_10),.clk(clk),.rst(rst));
 	d_latch_top #(.WIDTH(WIDTH)) d_latch_instance1901811(.data_in(wire_d18_10),.data_out(wire_d18_11),.clk(clk),.rst(rst));
 	shift_reg_top #(.WIDTH(WIDTH)) shift_reg_instance1901812(.data_in(wire_d18_11),.data_out(wire_d18_12),.clk(clk),.rst(rst));
@@ -1299,7 +1299,7 @@ module design178_24_25 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4,
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance2202115(.data_in(wire_d21_14),.data_out(wire_d21_15),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance2202116(.data_in(wire_d21_15),.data_out(wire_d21_16),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance2202117(.data_in(wire_d21_16),.data_out(wire_d21_17),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance2202118(.data_in(wire_d21_17),.data_out(wire_d21_18),.clk(clk),.rst(rst));
+	d_latch_top #(.WIDTH(WIDTH)) d_latch_top_instance2202118(.data_in(wire_d21_17),.data_out(wire_d21_18),.clk(clk),.rst(rst));
 	full_adder_top #(.WIDTH(WIDTH)) full_adder_instance2202119(.data_in(wire_d21_18),.data_out(wire_d21_19),.clk(clk),.rst(rst));
 	decoder_top #(.WIDTH(WIDTH)) decoder_instance2202120(.data_in(wire_d21_19),.data_out(wire_d21_20),.clk(clk),.rst(rst));
 	mod_n_counter #(.WIDTH(WIDTH)) mod_n_counter_instance2202121(.data_in(wire_d21_20),.data_out(wire_d21_21),.clk(clk),.rst(rst));
