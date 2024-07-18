@@ -171,7 +171,7 @@ module design42_10_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, 
 
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance100(.data_in(d_in0),.data_out(wire_d0_0),.clk(clk),.rst(rst));            //channel 1
 	register #(.WIDTH(WIDTH)) register_instance101(.data_in(wire_d0_0),.data_out(wire_d0_1),.clk(clk),.rst(rst));
-	large_adder #(.WIDTH(WIDTH)) large_adder_instance102(.data_in(wire_d0_1),.data_out(wire_d0_2),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) large_adder_instance102(.data_in(wire_d0_1),.data_out(wire_d0_2),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance103(.data_in(wire_d0_2),.data_out(wire_d0_3),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance104(.data_in(wire_d0_3),.data_out(wire_d0_4),.clk(clk),.rst(rst));
 	register #(.WIDTH(WIDTH)) register_instance105(.data_in(wire_d0_4),.data_out(wire_d0_5),.clk(clk),.rst(rst));
@@ -182,13 +182,13 @@ module design42_10_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, 
 
 	register #(.WIDTH(WIDTH)) register_instance210(.data_in(d_in1),.data_out(wire_d1_0),.clk(clk),.rst(rst));            //channel 2
 	invertion #(.WIDTH(WIDTH)) invertion_instance211(.data_in(wire_d1_0),.data_out(wire_d1_1),.clk(clk),.rst(rst));
-	large_adder #(.WIDTH(WIDTH)) large_adder_instance212(.data_in(wire_d1_1),.data_out(wire_d1_2),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) large_adder_instance212(.data_in(wire_d1_1),.data_out(wire_d1_2),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance213(.data_in(wire_d1_2),.data_out(wire_d1_3),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance214(.data_in(wire_d1_3),.data_out(wire_d1_4),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance215(.data_in(wire_d1_4),.data_out(wire_d1_5),.clk(clk),.rst(rst));
 	encoder #(.WIDTH(WIDTH)) encoder_instance216(.data_in(wire_d1_5),.data_out(wire_d1_6),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance217(.data_in(wire_d1_6),.data_out(wire_d1_7),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance218(.data_in(wire_d1_7),.data_out(wire_d1_8),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance218(.data_in(wire_d1_7),.data_out(wire_d1_8),.clk(clk),.rst(rst));
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance219(.data_in(wire_d1_8),.data_out(d_out1),.clk(clk),.rst(rst));
 
 	register #(.WIDTH(WIDTH)) register_instance320(.data_in(d_in2),.data_out(wire_d2_0),.clk(clk),.rst(rst));            //channel 3
@@ -214,7 +214,7 @@ module design42_10_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, 
 	register #(.WIDTH(WIDTH)) register_instance439(.data_in(wire_d3_8),.data_out(d_out3),.clk(clk),.rst(rst));
 
 	encoder #(.WIDTH(WIDTH)) encoder_instance540(.data_in(d_in4),.data_out(wire_d4_0),.clk(clk),.rst(rst));            //channel 5
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance541(.data_in(wire_d4_0),.data_out(wire_d4_1),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance541(.data_in(wire_d4_0),.data_out(wire_d4_1),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance542(.data_in(wire_d4_1),.data_out(wire_d4_2),.clk(clk),.rst(rst));
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance543(.data_in(wire_d4_2),.data_out(wire_d4_3),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance544(.data_in(wire_d4_3),.data_out(wire_d4_4),.clk(clk),.rst(rst));
@@ -233,14 +233,14 @@ module design42_10_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, 
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance656(.data_in(wire_d5_5),.data_out(wire_d5_6),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance657(.data_in(wire_d5_6),.data_out(wire_d5_7),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance658(.data_in(wire_d5_7),.data_out(wire_d5_8),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance659(.data_in(wire_d5_8),.data_out(d_out5),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance659(.data_in(wire_d5_8),.data_out(d_out5),.clk(clk),.rst(rst));
 
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance760(.data_in(d_in6),.data_out(wire_d6_0),.clk(clk),.rst(rst));            //channel 7
 	invertion #(.WIDTH(WIDTH)) invertion_instance761(.data_in(wire_d6_0),.data_out(wire_d6_1),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance762(.data_in(wire_d6_1),.data_out(wire_d6_2),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance763(.data_in(wire_d6_2),.data_out(wire_d6_3),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance764(.data_in(wire_d6_3),.data_out(wire_d6_4),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance765(.data_in(wire_d6_4),.data_out(wire_d6_5),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance765(.data_in(wire_d6_4),.data_out(wire_d6_5),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance766(.data_in(wire_d6_5),.data_out(wire_d6_6),.clk(clk),.rst(rst));
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance767(.data_in(wire_d6_6),.data_out(wire_d6_7),.clk(clk),.rst(rst));
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance768(.data_in(wire_d6_7),.data_out(wire_d6_8),.clk(clk),.rst(rst));
@@ -260,7 +260,7 @@ module design42_10_10 #(parameter WIDTH=32) (d_in0, d_in1, d_in2, d_in3, d_in4, 
 	encoder #(.WIDTH(WIDTH)) encoder_instance980(.data_in(d_in8),.data_out(wire_d8_0),.clk(clk),.rst(rst));            //channel 9
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance981(.data_in(wire_d8_0),.data_out(wire_d8_1),.clk(clk),.rst(rst));
 	large_mux #(.WIDTH(WIDTH)) large_mux_instance982(.data_in(wire_d8_1),.data_out(wire_d8_2),.clk(clk),.rst(rst));
-	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance983(.data_in(wire_d8_2),.data_out(wire_d8_3),.clk(clk),.rst(rst));
+	register #(.WIDTH(WIDTH)) register_instance983(.data_in(wire_d8_2),.data_out(wire_d8_3),.clk(clk),.rst(rst));
 	memory_cntrl #(.WIDTH(WIDTH)) memory_cntrl_instance984(.data_in(wire_d8_3),.data_out(wire_d8_4),.clk(clk),.rst(rst));
 	large_adder #(.WIDTH(WIDTH)) large_adder_instance985(.data_in(wire_d8_4),.data_out(wire_d8_5),.clk(clk),.rst(rst));
 	invertion #(.WIDTH(WIDTH)) invertion_instance986(.data_in(wire_d8_5),.data_out(wire_d8_6),.clk(clk),.rst(rst));
