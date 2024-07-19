@@ -26,48 +26,79 @@ module co_sim_ram_true_dp_rf_wre_512x16_block;
  
     repeat (1) @ (negedge clk);
     
+    weA <=1'b1; weB <=1'b1;
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
 
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-
-    end
-
-     for (integer i=0; i<512; i=i+1)begin
+        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
         repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b0; reA<=0; reB <=1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
       
         compare(cycle);
     end
 
+//      for (integer i=0; i<512; i=i+1)begin
+//         repeat (1) @ (negedge clk)
+//         addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b0; reA<=0; reB <=1; dinA<= {$random}; dinB<= {$random};
+//         cycle = cycle +1;
+      
+//         compare(cycle);
+//     end
+    weA <=1'b1; weB <=1'b0;
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
-        cycle = cycle +1;
-      
-        compare(cycle);
-    end
 
-   for (integer i=0; i<512; i=i+1)begin
+        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
         repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b0; weB <=1'b0;  reA<=1; reB <=1; dinA<= {$random}; dinB<= {$random};
         cycle = cycle +1;
       
         compare(cycle);
     end
 
-    //random
+//     for (integer i=0; i<512; i=i+1)begin
+//         repeat (1) @ (negedge clk)
+//         addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b1; weB <=1'b1; reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
+//         cycle = cycle +1;
+      
+//         compare(cycle);
+//     end
+    weA <=1'b0; weB <=1'b1;
     for (integer i=0; i<512; i=i+1)begin
         repeat (1) @ (negedge clk)
-        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <={$random}; weB <={$random}; reA <={$random}; reB <={$random}; dinA<= {$random}; dinB<= {$random};
+
+        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
+        repeat (1) @ (negedge clk)
         cycle = cycle +1;
+      
+        compare(cycle);
+    end
+
+//    for (integer i=0; i<512; i=i+1)begin
+//         repeat (1) @ (negedge clk)
+//         addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <=1'b0; weB <=1'b0;  reA<=1; reB <=1; dinA<= {$random}; dinB<= {$random};
+//         cycle = cycle +1;
+      
+//         compare(cycle);
+//     end
+    weA <=1'b0; weB <=1'b0;
+    for (integer i=0; i<512; i=i+1)begin
+        repeat (1) @ (negedge clk)
+
+        addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); reA<=0; reB <=0; dinA<= {$random}; dinB<= {$random};
+        repeat (1) @ (negedge clk)
+        cycle = cycle +1;
+      
+        compare(cycle);
+    end
+
+//     //random
+//     for (integer i=0; i<512; i=i+1)begin
+//         repeat (1) @ (negedge clk)
+//         addrA <= $urandom_range(0,255); addrB <= $urandom_range(256,511); weA <={$random}; weB <={$random}; reA <={$random}; reB <={$random}; dinA<= {$random}; dinB<= {$random};
+//         cycle = cycle +1;
        
-        compare(cycle);
-    end
+//         compare(cycle);
+//     end
     if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
