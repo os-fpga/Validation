@@ -265,14 +265,18 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         
         # Initialize status, default to None
         pnr_sim_status = None
+
+        # Regular expression pattern to match "TEST <something> FAILED"
+        pattern_test_failed = r"^TEST .+ FAILED$"
+        pattern_test_passed = r"^TEST .+ PASSED$"
         
         if first_pnr_sim_line != -1 and last_pnr_sim_line != -1:
             # Check for simulation status messages between the first and last occurrence
             for line in lines[first_pnr_sim_line:last_pnr_sim_line + 1]:
-                if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
+                if ("ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line or "Error-" in line or "comparison(s) mismatched" in line or "TEST FAILED" in line or re.match(pattern_test_failed, line)):
                     pnr_sim_status = "Fail"
                     break  # Prioritize failure detection
-                elif "Simulation Passed" in line or "All Comparison Matched" in line:
+                elif ("Simulation Passed" in line or "All Comparison Matched" in line or "FAIL=0 SKIP=0" in line or "SoC Simulation Completed" in line or "TEST PASSED" in line or re.match(pattern_test_passed, line)):
                     pnr_sim_status = "Pass"
                     break
                 else:
@@ -298,10 +302,10 @@ def parse_log_files(file,timing_file,log_line_keys_map):
         if first_sgt_sim_line != -1 and last_sgt_sim_line != -1:
             # Check for simulation status messages between the first and last occurrence
             for line in lines[first_sgt_sim_line:last_sgt_sim_line + 1]:
-                if "ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line:
+                if ("ERROR: SIM: Simulation Failed" in line or "Simulation Failed" in line or "Error-" in line or "comparison(s) mismatched" in line or "TEST FAILED" in line or re.match(pattern_test_failed, line)):
                     sgt_sim_status = "Fail"
                     break  # Prioritize failure detection
-                elif "Simulation Passed" in line or "All Comparison Matched" in line:
+                elif ("Simulation Passed" in line or "All Comparison Matched" in line or "FAIL=0 SKIP=0" in line or "SoC Simulation Completed" in line or "TEST PASSED" in line or re.match(pattern_test_passed, line)):
                     sgt_sim_status = "Pass"
                     break
                 else:
