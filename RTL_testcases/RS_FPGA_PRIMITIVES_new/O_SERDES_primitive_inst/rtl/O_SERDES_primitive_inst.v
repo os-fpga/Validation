@@ -6,7 +6,7 @@ module O_SERDES_primitive_inst #(
   input reset,
   input [WIDTH-1:0] in, // D input bus
   input RST, // Active-low, asynchronous reset
-  input LOAD_WORD, // Load word input
+  input DATA_VALID, // Load word input
   input CLK_IN, // Fabric clock input
   input OE_IN, // Output tri-state enable input
   output OE_OUT, // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
@@ -22,7 +22,7 @@ reg [WIDTH-1:0] dff;
 O_SERDES inst (
   .D(dff),
   .RST(RST),
-  .LOAD_WORD(LOAD_WORD),
+  .DATA_VALID(LOAD_WORD),
   .CLK_IN(CLK_IN),
   .OE_IN(OE_IN),
   .OE_OUT(OE_OUT),
