@@ -3432,10 +3432,10 @@ output	[1:0]		level;
 // Local Wires
 //
  
-reg	[`awa-1:0]	wp;
+reg	[`awa-1:0]	wp=0;
 wire	[`awa-1:0]	wp_pl1;
 wire	[`awa-1:0]	wp_pl2;
-reg	[`awa-1:0]	rp;
+reg	[`awa-1:0]	rp=0;
 wire	[`awa-1:0]	rp_pl1;
 reg			full_r;
 reg			empty_r;
