@@ -17,7 +17,7 @@ module primitive_example_design_12 (
   .CLK_OUT_DIV2(clk_out1_w),
   .CLK_OUT_DIV3(clk_out2_w),
   .CLK_OUT_DIV4(clk_out3_w),
-  .SERDES_FAST_CLK(serdes_fast_clk_w),
+  .FAST_CLK(serdes_fast_clk_w),
   .LOCK(lock_w)
 );
   
