@@ -26,7 +26,7 @@ I_SERDES #(
   .DPA_MODE("NONE") 
 ) inst (
   .D(dff),
-  .RX_RST(RX_RST),
+  .RST(RX_RST),
   .BITSLIP_ADJ(BITSLIP_ADJ),
   .EN(EN),
   .CLK_IN(CLK_IN),
