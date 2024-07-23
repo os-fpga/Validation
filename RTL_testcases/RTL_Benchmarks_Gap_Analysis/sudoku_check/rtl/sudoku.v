@@ -66,10 +66,10 @@ wire [9*9*4-1:0] ofifo_dataout;
 reg    sudoku_go;
 wire   solution_wire;
 
-//pll spll (.areset(rst),
-//		  .inclk0(clk),
-//		  .c0(clk_150),
-//		  .locked(pll_locked));
+pll spll (.areset(rst),
+		  .inclk0(clk),
+		  .c0(clk_150),
+		  .locked(pll_locked));
 
 fifo ififo (.aclr(rst),
 			.data(puzzle_io),

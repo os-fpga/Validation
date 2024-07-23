@@ -13,7 +13,7 @@ reg[323:0] clue;
 
 assign masked = clue;
 function [15:0] signature;
-  input tri [323:0] puz;
+  input [323:0] puz;
   reg [15:0] tmp;
   begin
     tmp[0] = puz[279]^puz[179]^puz[61]^puz[42]^puz[161]^puz[167]^puz[291]^puz[122]^puz[280]^puz[271]^puz[24]^puz[176]^puz[266]^puz[65]^puz[186]^puz[4];
