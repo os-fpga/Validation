@@ -477,10 +477,32 @@ def remove_comma_from_line(file_path):
 
 def replace_auto_in_file(file_path):
 
+    # with open(file_path, 'r') as file:
+    #     content = file.read()
+
+    # pattern = r'(\$auto\$[a-zA-Z_]+\.cc:\d+:[a-zA-Z_]+\$\d+)(_[a-zA-Z_]+)?'
+
+    # modified_content = re.sub(pattern, r'\\\1\2 ', content)
+
+    # with open(file_path, 'w') as file:
+    #     file.write(modified_content)
+
     with open(file_path, 'r') as file:
         content = file.read()
 
-    pattern = r'(\$auto\$[a-zA-Z_]+\.cc:\d+:[a-zA-Z_]+\$\d+)(_[a-zA-Z_]+)?'
+    pattern = r'(\$auto_\d+)(_[a-zA-Z_]+)?'
+
+    modified_content = re.sub(pattern, r'\\\1\2 ', content)
+
+    with open(file_path, 'w') as file:
+        file.write(modified_content)
+
+def replace_auto_in_file_verif(file_path):
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern = r'(\$auto_)(\d+)?'
 
     modified_content = re.sub(pattern, r'\\\1\2 ', content)
 
@@ -700,8 +722,8 @@ def main():
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbech_tasks.v","----- END output waveform to VCD file -------")
         clk_update(file_path)
-        # replacement(file_path,"\$display\(\"Simulation Succeed\"","// $display(\"Simulation Succeed\"")
-        # remove_lines_with_two_dollar_signs(file_path)
+        replacement(file_path,"\$display\(\"Simulation Succeed\"","// $display(\"Simulation Succeed\"")
+        remove_lines_with_two_dollar_signs(file_path)
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
@@ -723,7 +745,7 @@ def main():
             replacement(file_path,"global_resetn_fm\[0\] = 1'b0","global_resetn_fm[0] = 1'b1")
         # remove_lines_with_two_dollar_signs(file_path)
         # remove_comma_from_line(file_path)
-        replace_auto_in_file(file_path)
+        replace_auto_in_file_verif(file_path)
     elif file_path.endswith("fabric_netlists.v"):
         inc_upate(file_path,"BIT_SIM/","`include \"")
         rename_p(file_path,"BIT_SIM/./SRC/","SRC/")
