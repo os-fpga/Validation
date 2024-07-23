@@ -33,75 +33,173 @@
 // synopsys translate_off
 `timescale 1 ps / 1 ps
 // synopsys translate_on
+// module fifo (
+// 	aclr,
+// 	data,
+// 	rdclk,
+// 	rdreq,
+// 	wrclk,
+// 	wrreq,
+// 	q,
+// 	rdempty,
+// 	rdfull,
+// 	wrempty,
+// 	wrfull);
+
+// 	input	  aclr;
+// 	input	[323:0]  data;
+// 	input	  rdclk;
+// 	input	  rdreq;
+// 	input	  wrclk;
+// 	input	  wrreq;
+// 	output	[323:0]  q;
+// 	output	  rdempty;
+// 	output	  rdfull;
+// 	output	  wrempty;
+// 	output	  wrfull;
+
+// 	wire  sub_wire0;
+// 	wire  sub_wire1;
+// 	wire  sub_wire2;
+// 	wire  sub_wire3;
+// 	wire [323:0] sub_wire4;
+// 	wire  rdfull = sub_wire0;
+// 	wire  rdempty = sub_wire1;
+// 	wire  wrfull = sub_wire2;
+// 	wire  wrempty = sub_wire3;
+// 	wire [323:0] q = sub_wire4[323:0];
+// assign q = data;
+// //	dcfifo	dcfifo_component (
+// //				.wrclk (wrclk),
+// //				.rdreq (rdreq),
+// //				.aclr (aclr),
+// //				.rdclk (rdclk),
+// //				.wrreq (wrreq),
+// //				.data (data),
+// //				.rdfull (sub_wire0),
+// //				.rdempty (sub_wire1),
+// //				.wrfull (sub_wire2),
+// //				.wrempty (sub_wire3),
+// //				.q (sub_wire4)
+// //				// synopsys translate_off
+// //				,
+// //				.rdusedw (),
+// //				.wrusedw ()
+// //				// synopsys translate_on
+// //				);
+// //	defparam
+// //		dcfifo_component.intended_device_family = "Cyclone II",
+// //		dcfifo_component.lpm_numwords = 6,
+// //		dcfifo_component.lpm_showahead = "ON",
+// //		dcfifo_component.lpm_type = "dcfifo",
+// //		dcfifo_component.lpm_width = 324,
+// //		dcfifo_component.lpm_widthu = 3,
+// //		dcfifo_component.overflow_checking = "OFF",
+// //		dcfifo_component.rdsync_delaypipe = 4,
+// //		dcfifo_component.underflow_checking = "OFF",
+// //		dcfifo_component.use_eab = "ON",
+// //		dcfifo_component.wrsync_delaypipe = 4;
+
+
+// endmodule
+
 module fifo (
-	aclr,
-	data,
-	rdclk,
-	rdreq,
-	wrclk,
-	wrreq,
-	q,
-	rdempty,
-	rdfull,
-	wrempty,
-	wrfull);
+    input wire aclr,
+    input wire [323:0] data,
+    input wire rdclk,
+    input wire rdreq,
+    input wire wrclk,
+    input wire wrreq,
+    output reg [323:0] q,
+    output wire rdempty,
+    output wire rdfull,
+    output wire wrempty,
+    output wire wrfull
+);
 
-	input	  aclr;
-	input	[323:0]  data;
-	input	  rdclk;
-	input	  rdreq;
-	input	  wrclk;
-	input	  wrreq;
-	output	[323:0]  q;
-	output	  rdempty;
-	output	  rdfull;
-	output	  wrempty;
-	output	  wrfull;
+    parameter DEPTH = 256;
+    parameter ADDR_WIDTH = 8;
 
-	wire  sub_wire0;
-	wire  sub_wire1;
-	wire  sub_wire2;
-	wire  sub_wire3;
-	wire [323:0] sub_wire4;
-	wire  rdfull = sub_wire0;
-	wire  rdempty = sub_wire1;
-	wire  wrfull = sub_wire2;
-	wire  wrempty = sub_wire3;
-	wire [323:0] q = sub_wire4[323:0];
-assign q = data;
-//	dcfifo	dcfifo_component (
-//				.wrclk (wrclk),
-//				.rdreq (rdreq),
-//				.aclr (aclr),
-//				.rdclk (rdclk),
-//				.wrreq (wrreq),
-//				.data (data),
-//				.rdfull (sub_wire0),
-//				.rdempty (sub_wire1),
-//				.wrfull (sub_wire2),
-//				.wrempty (sub_wire3),
-//				.q (sub_wire4)
-//				// synopsys translate_off
-//				,
-//				.rdusedw (),
-//				.wrusedw ()
-//				// synopsys translate_on
-//				);
-//	defparam
-//		dcfifo_component.intended_device_family = "Cyclone II",
-//		dcfifo_component.lpm_numwords = 6,
-//		dcfifo_component.lpm_showahead = "ON",
-//		dcfifo_component.lpm_type = "dcfifo",
-//		dcfifo_component.lpm_width = 324,
-//		dcfifo_component.lpm_widthu = 3,
-//		dcfifo_component.overflow_checking = "OFF",
-//		dcfifo_component.rdsync_delaypipe = 4,
-//		dcfifo_component.underflow_checking = "OFF",
-//		dcfifo_component.use_eab = "ON",
-//		dcfifo_component.wrsync_delaypipe = 4;
+    reg [323:0] mem [0:DEPTH-1];
 
+    reg [ADDR_WIDTH-1:0] rdptr = 0;
+    reg [ADDR_WIDTH-1:0] wrptr = 0;
 
+    reg rdempty_reg = 1;
+    reg rdfull_reg = 0;
+    reg wrempty_reg = 1;
+    reg wrfull_reg = 0;
+
+    assign rdempty = rdempty_reg;
+    assign rdfull = rdfull_reg;
+    assign wrempty = wrempty_reg;
+    assign wrfull = wrfull_reg;
+
+    always @(posedge wrclk or posedge aclr) begin
+        if (aclr) begin
+            wrptr <= 0;
+            wrfull_reg <= 0;
+            wrempty_reg <= 1;
+        end else if (wrreq && !wrfull_reg) begin
+            mem[wrptr] <= data;
+            wrptr <= wrptr + 1;
+            if (wrptr + 1 == rdptr) begin
+                wrfull_reg <= 1;
+            end
+            wrempty_reg <= 0;
+        end
+    end
+
+    always @(posedge rdclk or posedge aclr) begin
+        if (aclr) begin
+            rdptr <= 0;
+            rdempty_reg <= 1;
+            rdfull_reg <= 0;
+        end else if (rdreq && !rdempty_reg) begin
+            q <= mem[rdptr];
+            rdptr <= rdptr + 1;
+            if (rdptr + 1 == wrptr) begin
+                rdempty_reg <= 1;
+            end
+            rdfull_reg <= 0;
+        end
+    end
+
+    always @(posedge wrclk or posedge aclr) begin
+        if (aclr) begin
+            wrempty_reg <= 1;
+            wrfull_reg <= 0;
+        end else if (wrptr == rdptr) begin
+            wrempty_reg <= 1;
+            wrfull_reg <= 0;
+        end else if (wrptr == rdptr - 1) begin
+            wrempty_reg <= 0;
+            wrfull_reg <= 1;
+        end else begin
+            wrempty_reg <= 0;
+            wrfull_reg <= 0;
+        end
+    end
+    
+    always @(posedge rdclk or posedge aclr) begin
+        if (aclr) begin
+            rdempty_reg <= 1;
+            rdfull_reg <= 0;
+        end else if (rdptr == wrptr) begin
+            rdempty_reg <= 1;
+            rdfull_reg <= 0;
+        end else if (rdptr == wrptr - 1) begin
+            rdempty_reg <= 0;
+            rdfull_reg <= 1;
+        end else begin
+            rdempty_reg <= 0;
+            rdfull_reg <= 0;
+        end
+    end
+    
 endmodule
+
+
 
 // ============================================================
 // CNX file retrieval info
