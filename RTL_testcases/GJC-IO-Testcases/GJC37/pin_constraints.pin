@@ -1,9 +1,5 @@
-
-set_property mode Mode_BP_SDR_A_RX HP_1_27_13N
 set_pin_loc reset HP_1_27_13N
 
-set_property mode Mode_BP_SDR_A_RX HP_1_24_12P
 set_pin_loc enable_n HP_1_24_12P
 
-set_property mode Mode_BP_SDR_A_TX HP_1_22_11P
 set_pin_loc data_o HP_1_22_11P
