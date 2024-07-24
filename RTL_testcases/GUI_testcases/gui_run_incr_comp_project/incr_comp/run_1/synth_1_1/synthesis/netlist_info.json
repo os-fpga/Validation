@@ -1,0 +1,17 @@
+{
+  "top" : "and2",
+  "ports" : [
+     {
+        "name": "one",
+        "direction": "input"
+     },
+     {
+        "name": "s",
+        "direction": "output"
+     },
+     {
+        "name": "sec",
+        "direction": "input"
+     }
+   ]
+}

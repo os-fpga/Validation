@@ -1,0 +1,67 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.07
+Build    : 1.1.35
+Hash     : bff3850
+Date     : Jul 24 2024
+Type     : Engineering
+Log Time   : Wed Jul 24 12:43:11 2024 GMT
+#Timing report of worst 1 path(s)
+# Unit scale: 1e-09 seconds
+# Output precision: 3
+
+# Logical Levels: 0
+# Timing Graph Levels: 4
+
+#Path 1
+Startpoint: one.inpad[0] (.input at (51,44) clocked by virtual_io_clock)
+Endpoint  : out:s.outpad[0] (.output at (49,44) clocked by virtual_io_clock)
+Path Type : setup
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock virtual_io_clock (rise edge)                               0.000     0.000
+clock source latency                                             0.000     0.000
+input external delay                                             0.000     0.000
+one.inpad[0] (.input at (51,44))                           0.000     0.000
+| (intra 'io' routing)                                           0.894     0.894
+| (inter-block routing)                                          0.342     1.236
+| (intra 'clb' routing)                                          0.085     1.321
+s.in[1] (.names at (50,40))                                0.000     1.321
+| (primitive '.names' combinational delay)                       0.148     1.469
+s.out[0] (.names at (50,40))                               0.000     1.469
+| (intra 'clb' routing)                                          0.000     1.469
+| (inter-block routing)                                          0.342     1.810
+| (intra 'io' routing)                                           0.733     2.543
+out:s.outpad[0] (.output at (49,44))                       0.000     2.543
+data arrival time                                                          2.543
+
+clock virtual_io_clock (rise edge)                               0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                         0.000
+data arrival time                                                         -2.543
+--------------------------------------------------------------------------------
+slack (VIOLATED)                                                          -2.543
+
+
+#End of timing report

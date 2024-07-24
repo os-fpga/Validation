@@ -1,0 +1,1066 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.07
+Build    : 1.1.35
+Hash     : bff3850
+Date     : Jul 24 2024
+Type     : Engineering
+Log Time   : Wed Jul 24 12:43:11 2024 GMT
+VPR FPGA Placement and Routing.
+Version: 
+Revision: 
+Compiled: 
+Compiler: GNU 11.2.1 on Linux-3.10.0-1160.90.1.el7.x86_64 x86_64
+Build Info: Release VTR_ASSERT_LEVEL=2
+
+University of Toronto
+verilogtorouting.org
+vtr-users@googlegroups.com
+This is free open source code under MIT license.
+
+VPR was run with the following command-line:
+/nfs_eda_sw/softwares/Raptor/instl_dir/07_24_2024_09_15_01/bin/vpr /nfs_eda_sw/softwares/Raptor/instl_dir/07_24_2024_09_15_01/share/raptor/etc/devices/gemini_compact_62x44/gemini_vpr.xml /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/synthesis/fabric_incr_comp_post_synth.eblif --sdc_file /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_openfpga.sdc --route_chan_width 160 --suppress_warnings check_rr_node_warnings.log,check_rr_node --clock_modeling ideal --absorb_buffer_luts off --skip_sync_clustering_and_routing_results off --constant_net_method route --post_place_timing_report incr_comp_post_place_timing.rpt --device castor62x44_heterogeneous --allow_unrelated_clustering on --allow_dangling_combinational_nodes on --place_delta_delay_matrix_calculation_method dijkstra --gen_post_synthesis_netlist on --post_synth_netlist_unconn_inputs gnd --inner_loop_recompute_divider 1 --max_router_iterations 1500 --timing_report_detail detailed --timing_report_npaths 100 --top and2 --net_file /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_post_synth.net --place_file /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/placement/fabric_incr_comp_post_synth.place --route_file /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/routing/fabric_incr_comp_post_synth.route --place --fix_clusters incr_comp_pin_loc.place
+
+Using up to 1 parallel worker(s)
+
+Architecture file: /nfs_eda_sw/softwares/Raptor/instl_dir/07_24_2024_09_15_01/share/raptor/etc/devices/gemini_compact_62x44/gemini_vpr.xml
+Circuit name: fabric_incr_comp_post_synth
+
+# Loading Architecture Description
+Warning 1: Model 'io' input port 'outpad' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 2: Model 'io' output port 'inpad' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 3: Model 'dsp_phy' input port 'sc_in' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 4: Model 'dsp_phy' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 5: Model 'dsp_phy' output port 'sc_out' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 6: Model 'RS_DSP_MULT' input port 'feedback' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 7: Model 'RS_DSP_MULT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 8: Model 'RS_DSP_MULT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 9: Model 'RS_DSP_MULT_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 10: Model 'RS_DSP_MULT_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 11: Model 'RS_DSP_MULT_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 12: Model 'RS_DSP_MULT_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 13: Model 'RS_DSP_MULT_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 14: Model 'RS_DSP_MULT_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 15: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 16: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 17: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 18: Model 'RS_DSP_MULTADD' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 19: Model 'RS_DSP_MULTADD' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 20: Model 'RS_DSP_MULTADD' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 21: Model 'RS_DSP_MULTADD' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 22: Model 'RS_DSP_MULTADD' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 23: Model 'RS_DSP_MULTADD' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 24: Model 'RS_DSP_MULTADD_REGIN' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 25: Model 'RS_DSP_MULTADD_REGIN' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 26: Model 'RS_DSP_MULTADD_REGIN' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 27: Model 'RS_DSP_MULTADD_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 28: Model 'RS_DSP_MULTADD_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 29: Model 'RS_DSP_MULTADD_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 30: Model 'RS_DSP_MULTADD_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 31: Model 'RS_DSP_MULTADD_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 32: Model 'RS_DSP_MULTADD_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 33: Model 'RS_DSP_MULTADD_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 34: Model 'RS_DSP_MULTADD_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 35: Model 'RS_DSP_MULTADD_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 36: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 37: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 38: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 39: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 40: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 41: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 42: Model 'RS_DSP_MULTACC' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 43: Model 'RS_DSP_MULTACC' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 44: Model 'RS_DSP_MULTACC' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 45: Model 'RS_DSP_MULTACC' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 46: Model 'RS_DSP_MULTACC' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 47: Model 'RS_DSP_MULTACC' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 48: Model 'RS_DSP_MULTACC_REGIN' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 49: Model 'RS_DSP_MULTACC_REGIN' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 50: Model 'RS_DSP_MULTACC_REGIN' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 51: Model 'RS_DSP_MULTACC_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 52: Model 'RS_DSP_MULTACC_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 53: Model 'RS_DSP_MULTACC_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 54: Model 'RS_DSP_MULTACC_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 55: Model 'RS_DSP_MULTACC_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 56: Model 'RS_DSP_MULTACC_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 57: Model 'RS_DSP_MULTACC_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 58: Model 'RS_DSP_MULTACC_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 59: Model 'RS_DSP_MULTACC_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 60: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 61: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 62: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 63: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 64: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 65: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 66: Model 'bram_phy' input port 'sc_in' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 67: Model 'bram_phy' output port 'sc_out' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 68: Model 'bram_phy' output port 'PL_DATA_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 69: Model 'bram_phy' output port 'PL_ADDR_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 70: Model 'bram_phy' output port 'PL_WEN_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 71: Model 'bram_phy' output port 'PL_CLK_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 72: Model 'bram_phy' output port 'PL_REN_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 73: Model 'bram_phy' output port 'PL_ENA_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 74: Model 'bram_phy' output port 'PL_INIT_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+mode 'io[physical]' is defined by user to be disabled in packing
+mode 'iopad[default]' is defined by user to be disabled in packing
+mode 'fle[physical]' is defined by user to be disabled in packing
+mode 'fabric[default]' is defined by user to be disabled in packing
+mode 'ff_bypass[default]' is defined by user to be disabled in packing
+mode 'dsp_lr[physical]' is defined by user to be disabled in packing
+mode 'bram_lr[physical]' is defined by user to be disabled in packing
+# Loading Architecture Description took 0.11 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+
+Timing analysis: ON
+Circuit netlist file: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_post_synth.net
+Circuit placement file: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/placement/fabric_incr_comp_post_synth.place
+Circuit routing file: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/routing/fabric_incr_comp_post_synth.route
+Circuit SDC file: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_openfpga.sdc
+Vpr floorplanning constraints file: not specified
+
+Packer: ENABLED
+Placer: ENABLED
+Router: DISABLED
+Analysis: DISABLED
+
+VPR was run with the following options:
+
+NetlistOpts.abosrb_buffer_luts            : false
+NetlistOpts.sweep_dangling_primary_ios    : true
+NetlistOpts.sweep_dangling_nets           : true
+NetlistOpts.sweep_dangling_blocks         : true
+NetlistOpts.sweep_constant_primary_outputs: false
+NetlistOpts.netlist_verbosity             : 1
+NetlistOpts.const_gen_inference           : COMB_SEQ
+
+PackerOpts.allow_unrelated_clustering: true
+PackerOpts.alpha_clustering: 0.750000
+PackerOpts.beta_clustering: 0.900000
+PackerOpts.cluster_seed_type: BLEND2
+PackerOpts.connection_driven: true
+PackerOpts.global_clocks: true
+PackerOpts.hill_climbing_flag: false
+PackerOpts.inter_cluster_net_delay: 1.000000
+PackerOpts.timing_driven: true
+PackerOpts.target_external_pin_util: auto
+
+PlacerOpts.place_freq: PLACE_ONCE
+PlacerOpts.place_algorithm: CRITICALITY_TIMING_PLACE
+PlacerOpts.pad_loc_type: FREE
+PlacerOpts.constraints_file: Using constraints file 'incr_comp_pin_loc.place'
+PlacerOpts.place_cost_exp: 1.000000
+PlacerOpts.place_chan_width: 160
+PlacerOpts.inner_loop_recompute_divider: 1
+PlacerOpts.recompute_crit_iter: 1
+PlacerOpts.timing_tradeoff: 0.500000
+PlacerOpts.td_place_exp_first: 1.000000
+PlacerOpts.td_place_exp_last: 8.000000
+PlacerOpts.delay_offset: 0.000000
+PlacerOpts.delay_ramp_delta_threshold: -1
+PlacerOpts.delay_ramp_slope: 0.000000
+PlacerOpts.tsu_rel_margin: 1.000000
+PlacerOpts.tsu_abs_margin: 0.000000
+PlacerOpts.post_place_timing_report_file: incr_comp_post_place_timing.rpt
+PlacerOpts.allowed_tiles_for_delay_model: 
+PlacerOpts.delay_model_reducer: MIN
+PlacerOpts.delay_model_type: DELTA
+PlacerOpts.rlim_escape_fraction: 0.000000
+PlacerOpts.move_stats_file: 
+PlacerOpts.placement_saves_per_temperature: 0
+PlacerOpts.effort_scaling: CIRCUIT
+PlacerOpts.place_delta_delay_matrix_calculation_method: DIJKSTRA_EXPANSION
+PlaceOpts.seed: 1
+AnnealSched.type: AUTO_SCHED
+AnnealSched.inner_num: 0.500000
+
+# Building complex block graph
+Warning 75: clb[0].sr_in[0] unconnected pin in architecture.
+Warning 76: clb[0].sr_out[0] unconnected pin in architecture.
+Warning 77: dsp[0].sr_in[0] unconnected pin in architecture.
+Warning 78: dsp[0].sr_in[1] unconnected pin in architecture.
+Warning 79: dsp[0].sr_in[2] unconnected pin in architecture.
+Warning 80: dsp[0].sr_out[0] unconnected pin in architecture.
+Warning 81: dsp[0].sr_out[1] unconnected pin in architecture.
+Warning 82: dsp[0].sr_out[2] unconnected pin in architecture.
+Warning 83: bram[0].sr_in[0] unconnected pin in architecture.
+Warning 84: bram[0].sr_in[1] unconnected pin in architecture.
+Warning 85: bram[0].sr_in[2] unconnected pin in architecture.
+Warning 86: bram[0].sr_in[3] unconnected pin in architecture.
+Warning 87: bram[0].sr_in[4] unconnected pin in architecture.
+Warning 88: bram[0].sr_in[5] unconnected pin in architecture.
+Warning 89: bram[0].plr_i[0] unconnected pin in architecture.
+Warning 90: bram[0].plr_i[1] unconnected pin in architecture.
+Warning 91: bram[0].plr_i[2] unconnected pin in architecture.
+Warning 92: bram[0].plr_i[3] unconnected pin in architecture.
+Warning 93: bram[0].plr_i[4] unconnected pin in architecture.
+Warning 94: bram[0].plr_i[5] unconnected pin in architecture.
+Warning 95: bram[0].plr_i[6] unconnected pin in architecture.
+Warning 96: bram[0].plr_i[7] unconnected pin in architecture.
+Warning 97: bram[0].plr_i[8] unconnected pin in architecture.
+Warning 98: bram[0].plr_i[9] unconnected pin in architecture.
+Warning 99: bram[0].plr_i[10] unconnected pin in architecture.
+Warning 100: bram[0].plr_i[11] unconnected pin in architecture.
+Warning 101: bram[0].plr_i[12] unconnected pin in architecture.
+Warning 102: bram[0].plr_i[13] unconnected pin in architecture.
+Warning 103: bram[0].plr_i[14] unconnected pin in architecture.
+Warning 104: bram[0].plr_i[15] unconnected pin in architecture.
+Warning 105: bram[0].plr_i[16] unconnected pin in architecture.
+Warning 106: bram[0].plr_i[17] unconnected pin in architecture.
+Warning 107: bram[0].plr_i[18] unconnected pin in architecture.
+Warning 108: bram[0].plr_i[19] unconnected pin in architecture.
+Warning 109: bram[0].plr_i[20] unconnected pin in architecture.
+Warning 110: bram[0].plr_i[21] unconnected pin in architecture.
+Warning 111: bram[0].plr_i[22] unconnected pin in architecture.
+Warning 112: bram[0].plr_i[23] unconnected pin in architecture.
+Warning 113: bram[0].plr_i[24] unconnected pin in architecture.
+Warning 114: bram[0].plr_i[25] unconnected pin in architecture.
+Warning 115: bram[0].plr_i[26] unconnected pin in architecture.
+Warning 116: bram[0].plr_i[27] unconnected pin in architecture.
+Warning 117: bram[0].plr_i[28] unconnected pin in architecture.
+Warning 118: bram[0].plr_i[29] unconnected pin in architecture.
+Warning 119: bram[0].plr_i[30] unconnected pin in architecture.
+Warning 120: bram[0].plr_i[31] unconnected pin in architecture.
+Warning 121: bram[0].plr_i[32] unconnected pin in architecture.
+Warning 122: bram[0].plr_i[33] unconnected pin in architecture.
+Warning 123: bram[0].plr_i[34] unconnected pin in architecture.
+Warning 124: bram[0].plr_i[35] unconnected pin in architecture.
+Warning 125: bram[0].sr_out[0] unconnected pin in architecture.
+Warning 126: bram[0].sr_out[1] unconnected pin in architecture.
+Warning 127: bram[0].sr_out[2] unconnected pin in architecture.
+Warning 128: bram[0].sr_out[3] unconnected pin in architecture.
+Warning 129: bram[0].sr_out[4] unconnected pin in architecture.
+Warning 130: bram[0].sr_out[5] unconnected pin in architecture.
+Warning 131: bram[0].plr_o[0] unconnected pin in architecture.
+Warning 132: bram[0].plr_o[1] unconnected pin in architecture.
+Warning 133: bram[0].plr_o[2] unconnected pin in architecture.
+Warning 134: bram[0].plr_o[3] unconnected pin in architecture.
+Warning 135: bram[0].plr_o[4] unconnected pin in architecture.
+Warning 136: bram[0].plr_o[5] unconnected pin in architecture.
+Warning 137: bram[0].plr_o[6] unconnected pin in architecture.
+Warning 138: bram[0].plr_o[7] unconnected pin in architecture.
+Warning 139: bram[0].plr_o[8] unconnected pin in architecture.
+Warning 140: bram[0].plr_o[9] unconnected pin in architecture.
+Warning 141: bram[0].plr_o[10] unconnected pin in architecture.
+Warning 142: bram[0].plr_o[11] unconnected pin in architecture.
+Warning 143: bram[0].plr_o[12] unconnected pin in architecture.
+Warning 144: bram[0].plr_o[13] unconnected pin in architecture.
+Warning 145: bram[0].plr_o[14] unconnected pin in architecture.
+Warning 146: bram[0].plr_o[15] unconnected pin in architecture.
+Warning 147: bram[0].plr_o[16] unconnected pin in architecture.
+Warning 148: bram[0].plr_o[17] unconnected pin in architecture.
+Warning 149: bram[0].plr_o[18] unconnected pin in architecture.
+Warning 150: bram[0].plr_o[19] unconnected pin in architecture.
+Warning 151: bram[0].plr_o[20] unconnected pin in architecture.
+Warning 152: bram[0].plr_o[21] unconnected pin in architecture.
+Warning 153: bram[0].plr_o[22] unconnected pin in architecture.
+Warning 154: bram[0].plr_o[23] unconnected pin in architecture.
+Warning 155: bram[0].plr_o[24] unconnected pin in architecture.
+Warning 156: bram[0].plr_o[25] unconnected pin in architecture.
+Warning 157: bram[0].plr_o[26] unconnected pin in architecture.
+Warning 158: bram[0].plr_o[27] unconnected pin in architecture.
+Warning 159: bram[0].plr_o[28] unconnected pin in architecture.
+Warning 160: bram[0].plr_o[29] unconnected pin in architecture.
+Warning 161: bram[0].plr_o[30] unconnected pin in architecture.
+Warning 162: bram[0].plr_o[31] unconnected pin in architecture.
+Warning 163: bram[0].plr_o[32] unconnected pin in architecture.
+Warning 164: bram[0].plr_o[33] unconnected pin in architecture.
+Warning 165: bram[0].plr_o[34] unconnected pin in architecture.
+Warning 166: bram[0].plr_o[35] unconnected pin in architecture.
+# Building complex block graph took 0.06 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+Circuit file: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/synthesis/fabric_incr_comp_post_synth.eblif
+# Load circuit
+Found constant-zero generator '$false'
+Found constant-one generator '$true'
+Found constant-zero generator '$undef'
+# Load circuit took 0.01 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+# Clean circuit
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred    2 additional primitive pins as constant generators due to constant inputs
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred    0 additional primitive pins as constant generators due to constant inputs
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred    0 additional primitive pins as constant generators due to constant inputs
+Swept input(s)      : 0
+Swept output(s)     : 0 (0 dangling, 0 constant)
+Swept net(s)        : 2
+Swept block(s)      : 2
+Constant Pins Marked: 2
+# Clean circuit took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+# Compress circuit
+# Compress circuit took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+# Verify circuit
+# Verify circuit took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+Circuit Statistics:
+  Blocks: 9
+    .input :       2
+    .output:       3
+    0-LUT  :       1
+    6-LUT  :       3
+  Nets  : 6
+    Avg Fanout:     1.2
+    Max Fanout:     2.0
+    Min Fanout:     1.0
+  Netlist Clocks: 0
+# Build Timing Graph
+  Timing Graph Nodes: 13
+  Timing Graph Edges: 11
+  Timing Graph Levels: 4
+# Build Timing Graph took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+Netlist contains 0 clocks
+# Load Timing Constraints
+
+SDC file '/nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_openfpga.sdc' contained no SDC commands
+Setting default timing constraints:
+   * constrain all primay inputs and primary outputs on a virtual external clock 'virtual_io_clock'
+   * optimize virtual clock to run as fast as possible
+Timing constraints created 1 clocks
+  Constrained Clock 'virtual_io_clock' (Virtual Clock)
+
+# Load Timing Constraints took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+# Load packing
+Begin loading packed FPGA netlist file.
+Netlist generated from file '/nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_post_synth.net'.
+Detected 1 constant generators (to see names run with higher pack verbosity)
+Finished loading packed FPGA netlist file (took 0.06 seconds).
+# Load packing took 0.06 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+Warning 167: Netlist contains 0 global net to non-global architecture pin connections
+
+Pb types usage...
+  io             : 5
+   io_output     : 3
+    outpad       : 3
+   io_input      : 2
+    inpad        : 2
+  clb            : 1
+   clb_lr        : 1
+    fle          : 2
+     ble5        : 4
+      lut5       : 4
+       lut       : 4
+
+# Create Device
+## Build Device Grid
+FPGA sized to 64 x 46: 2944 grid tiles (castor62x44_heterogeneous)
+
+Resource usage...
+	Netlist
+		5	blocks of type: io
+	Architecture
+		4320	blocks of type: io_top
+		3168	blocks of type: io_right
+		4320	blocks of type: io_bottom
+		3168	blocks of type: io_left
+	Netlist
+		1	blocks of type: clb
+	Architecture
+		2184	blocks of type: clb
+	Netlist
+		0	blocks of type: dsp
+	Architecture
+		56	blocks of type: dsp
+	Netlist
+		0	blocks of type: bram
+	Architecture
+		56	blocks of type: bram
+
+Device Utilization: 0.00 (target 1.00)
+	Physical Tile io_top:
+	Block Utilization: 0.00 Logical Block: io
+	Physical Tile io_right:
+	Block Utilization: 0.00 Logical Block: io
+	Physical Tile io_bottom:
+	Block Utilization: 0.00 Logical Block: io
+	Physical Tile io_left:
+	Block Utilization: 0.00 Logical Block: io
+	Physical Tile clb:
+	Block Utilization: 0.00 Logical Block: clb
+	Physical Tile dsp:
+	Block Utilization: 0.00 Logical Block: dsp
+	Physical Tile bram:
+	Block Utilization: 0.00 Logical Block: bram
+
+## Build Device Grid took 0.00 seconds (max_rss 59.7 MiB, delta_rss +0.0 MiB)
+Warning 168: Tileable routing resource graph does not support clock modeling yet! Related options are ignored...
+## Build tileable routing resource graph
+X-direction routing channel width is 160
+Y-direction routing channel width is 160
+Warning 169: Sized nonsensical R=0 transistor to minimum width
+Warning 170: Sized nonsensical R=0 transistor to minimum width
+Warning 171: Sized nonsensical R=0 transistor to minimum width
+Warning 172: Sized nonsensical R=0 transistor to minimum width
+## Build tileable routing resource graph took 15.51 seconds (max_rss 476.0 MiB, delta_rss +416.3 MiB)
+  RR Graph Nodes: 1365608
+  RR Graph Edges: 6033268
+# Create Device took 16.25 seconds (max_rss 476.0 MiB, delta_rss +416.3 MiB)
+
+# Computing router lookahead map
+## Computing wire lookahead
+## Computing wire lookahead took 35.12 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+## Computing src/opin lookahead
+Warning 173: Found no more ample locations for SOURCE in io_top
+Warning 174: Found no more ample locations for OPIN in io_top
+Warning 175: Found no more ample locations for SOURCE in io_right
+Warning 176: Found no more ample locations for OPIN in io_right
+Warning 177: Found no more ample locations for SOURCE in io_bottom
+Warning 178: Found no more ample locations for OPIN in io_bottom
+Warning 179: Found no more ample locations for SOURCE in io_left
+Warning 180: Found no more ample locations for OPIN in io_left
+Warning 181: Found no more ample locations for SOURCE in clb
+Warning 182: Found no more ample locations for OPIN in clb
+Warning 183: Found no more ample locations for SOURCE in dsp
+Warning 184: Found no more ample locations for OPIN in dsp
+Warning 185: Found no more ample locations for SOURCE in bram
+Warning 186: Found no more ample locations for OPIN in bram
+## Computing src/opin lookahead took 0.11 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+# Computing router lookahead map took 35.35 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+# Computing placement delta delay look-up
+RR graph channel widths unchanged, skipping RR graph rebuild
+## Computing delta delays
+Warning 187: Unable to route between blocks at (1,1) and (1,45) to characterize delay (setting to inf)
+Warning 188: Unable to route between blocks at (1,1) and (2,45) to characterize delay (setting to inf)
+Warning 189: Unable to route between blocks at (1,1) and (3,45) to characterize delay (setting to inf)
+Warning 190: Unable to route between blocks at (1,1) and (4,45) to characterize delay (setting to inf)
+Warning 191: Unable to route between blocks at (1,1) and (5,45) to characterize delay (setting to inf)
+Warning 192: Unable to route between blocks at (1,1) and (6,45) to characterize delay (setting to inf)
+Warning 193: Unable to route between blocks at (1,1) and (7,45) to characterize delay (setting to inf)
+Warning 194: Unable to route between blocks at (1,1) and (8,45) to characterize delay (setting to inf)
+Warning 195: Unable to route between blocks at (1,1) and (9,45) to characterize delay (setting to inf)
+Warning 196: Unable to route between blocks at (1,1) and (10,45) to characterize delay (setting to inf)
+Warning 197: Unable to route between blocks at (1,1) and (11,45) to characterize delay (setting to inf)
+Warning 198: Unable to route between blocks at (1,1) and (12,45) to characterize delay (setting to inf)
+Warning 199: Unable to route between blocks at (1,1) and (13,45) to characterize delay (setting to inf)
+Warning 200: Unable to route between blocks at (1,1) and (14,45) to characterize delay (setting to inf)
+Warning 201: Unable to route between blocks at (1,1) and (15,45) to characterize delay (setting to inf)
+Warning 202: Unable to route between blocks at (1,1) and (16,45) to characterize delay (setting to inf)
+Warning 203: Unable to route between blocks at (1,1) and (17,45) to characterize delay (setting to inf)
+Warning 204: Unable to route between blocks at (1,1) and (18,45) to characterize delay (setting to inf)
+Warning 205: Unable to route between blocks at (1,1) and (19,45) to characterize delay (setting to inf)
+Warning 206: Unable to route between blocks at (1,1) and (20,45) to characterize delay (setting to inf)
+Warning 207: Unable to route between blocks at (1,1) and (21,45) to characterize delay (setting to inf)
+Warning 208: Unable to route between blocks at (1,1) and (22,45) to characterize delay (setting to inf)
+Warning 209: Unable to route between blocks at (1,1) and (23,45) to characterize delay (setting to inf)
+Warning 210: Unable to route between blocks at (1,1) and (24,45) to characterize delay (setting to inf)
+Warning 211: Unable to route between blocks at (1,1) and (25,45) to characterize delay (setting to inf)
+Warning 212: Unable to route between blocks at (1,1) and (26,45) to characterize delay (setting to inf)
+Warning 213: Unable to route between blocks at (1,1) and (27,45) to characterize delay (setting to inf)
+Warning 214: Unable to route between blocks at (1,1) and (28,45) to characterize delay (setting to inf)
+Warning 215: Unable to route between blocks at (1,1) and (29,45) to characterize delay (setting to inf)
+Warning 216: Unable to route between blocks at (1,1) and (30,45) to characterize delay (setting to inf)
+Warning 217: Unable to route between blocks at (1,1) and (31,45) to characterize delay (setting to inf)
+Warning 218: Unable to route between blocks at (1,1) and (32,45) to characterize delay (setting to inf)
+Warning 219: Unable to route between blocks at (1,1) and (33,45) to characterize delay (setting to inf)
+Warning 220: Unable to route between blocks at (1,1) and (34,45) to characterize delay (setting to inf)
+Warning 221: Unable to route between blocks at (1,1) and (35,45) to characterize delay (setting to inf)
+Warning 222: Unable to route between blocks at (1,1) and (36,45) to characterize delay (setting to inf)
+Warning 223: Unable to route between blocks at (1,1) and (37,45) to characterize delay (setting to inf)
+Warning 224: Unable to route between blocks at (1,1) and (38,45) to characterize delay (setting to inf)
+Warning 225: Unable to route between blocks at (1,1) and (39,45) to characterize delay (setting to inf)
+Warning 226: Unable to route between blocks at (1,1) and (40,45) to characterize delay (setting to inf)
+Warning 227: Unable to route between blocks at (1,1) and (41,45) to characterize delay (setting to inf)
+Warning 228: Unable to route between blocks at (1,1) and (42,45) to characterize delay (setting to inf)
+Warning 229: Unable to route between blocks at (1,1) and (43,45) to characterize delay (setting to inf)
+Warning 230: Unable to route between blocks at (1,1) and (44,45) to characterize delay (setting to inf)
+Warning 231: Unable to route between blocks at (1,1) and (45,45) to characterize delay (setting to inf)
+Warning 232: Unable to route between blocks at (1,1) and (46,45) to characterize delay (setting to inf)
+Warning 233: Unable to route between blocks at (1,1) and (47,45) to characterize delay (setting to inf)
+Warning 234: Unable to route between blocks at (1,1) and (48,45) to characterize delay (setting to inf)
+Warning 235: Unable to route between blocks at (1,1) and (49,45) to characterize delay (setting to inf)
+Warning 236: Unable to route between blocks at (1,1) and (50,45) to characterize delay (setting to inf)
+Warning 237: Unable to route between blocks at (1,1) and (51,45) to characterize delay (setting to inf)
+Warning 238: Unable to route between blocks at (1,1) and (52,45) to characterize delay (setting to inf)
+Warning 239: Unable to route between blocks at (1,1) and (53,45) to characterize delay (setting to inf)
+Warning 240: Unable to route between blocks at (1,1) and (54,45) to characterize delay (setting to inf)
+Warning 241: Unable to route between blocks at (1,1) and (55,45) to characterize delay (setting to inf)
+Warning 242: Unable to route between blocks at (1,1) and (56,45) to characterize delay (setting to inf)
+Warning 243: Unable to route between blocks at (1,1) and (57,45) to characterize delay (setting to inf)
+Warning 244: Unable to route between blocks at (1,1) and (58,45) to characterize delay (setting to inf)
+Warning 245: Unable to route between blocks at (1,1) and (59,45) to characterize delay (setting to inf)
+Warning 246: Unable to route between blocks at (1,1) and (60,45) to characterize delay (setting to inf)
+Warning 247: Unable to route between blocks at (1,1) and (61,45) to characterize delay (setting to inf)
+Warning 248: Unable to route between blocks at (1,1) and (62,45) to characterize delay (setting to inf)
+Warning 249: Unable to route between blocks at (1,1) and (63,1) to characterize delay (setting to inf)
+Warning 250: Unable to route between blocks at (1,1) and (63,2) to characterize delay (setting to inf)
+Warning 251: Unable to route between blocks at (1,1) and (63,3) to characterize delay (setting to inf)
+Warning 252: Unable to route between blocks at (1,1) and (63,4) to characterize delay (setting to inf)
+Warning 253: Unable to route between blocks at (1,1) and (63,5) to characterize delay (setting to inf)
+Warning 254: Unable to route between blocks at (1,1) and (63,6) to characterize delay (setting to inf)
+Warning 255: Unable to route between blocks at (1,1) and (63,7) to characterize delay (setting to inf)
+Warning 256: Unable to route between blocks at (1,1) and (63,8) to characterize delay (setting to inf)
+Warning 257: Unable to route between blocks at (1,1) and (63,9) to characterize delay (setting to inf)
+Warning 258: Unable to route between blocks at (1,1) and (63,10) to characterize delay (setting to inf)
+Warning 259: Unable to route between blocks at (1,1) and (63,11) to characterize delay (setting to inf)
+Warning 260: Unable to route between blocks at (1,1) and (63,12) to characterize delay (setting to inf)
+Warning 261: Unable to route between blocks at (1,1) and (63,13) to characterize delay (setting to inf)
+Warning 262: Unable to route between blocks at (1,1) and (63,14) to characterize delay (setting to inf)
+Warning 263: Unable to route between blocks at (1,1) and (63,15) to characterize delay (setting to inf)
+Warning 264: Unable to route between blocks at (1,1) and (63,16) to characterize delay (setting to inf)
+Warning 265: Unable to route between blocks at (1,1) and (63,17) to characterize delay (setting to inf)
+Warning 266: Unable to route between blocks at (1,1) and (63,18) to characterize delay (setting to inf)
+Warning 267: Unable to route between blocks at (1,1) and (63,19) to characterize delay (setting to inf)
+Warning 268: Unable to route between blocks at (1,1) and (63,20) to characterize delay (setting to inf)
+Warning 269: Unable to route between blocks at (1,1) and (63,21) to characterize delay (setting to inf)
+Warning 270: Unable to route between blocks at (1,1) and (63,22) to characterize delay (setting to inf)
+Warning 271: Unable to route between blocks at (1,1) and (63,23) to characterize delay (setting to inf)
+Warning 272: Unable to route between blocks at (1,1) and (63,24) to characterize delay (setting to inf)
+Warning 273: Unable to route between blocks at (1,1) and (63,25) to characterize delay (setting to inf)
+Warning 274: Unable to route between blocks at (1,1) and (63,26) to characterize delay (setting to inf)
+Warning 275: Unable to route between blocks at (1,1) and (63,27) to characterize delay (setting to inf)
+Warning 276: Unable to route between blocks at (1,1) and (63,28) to characterize delay (setting to inf)
+Warning 277: Unable to route between blocks at (1,1) and (63,29) to characterize delay (setting to inf)
+Warning 278: Unable to route between blocks at (1,1) and (63,30) to characterize delay (setting to inf)
+Warning 279: Unable to route between blocks at (1,1) and (63,31) to characterize delay (setting to inf)
+Warning 280: Unable to route between blocks at (1,1) and (63,32) to characterize delay (setting to inf)
+Warning 281: Unable to route between blocks at (1,1) and (63,33) to characterize delay (setting to inf)
+Warning 282: Unable to route between blocks at (1,1) and (63,34) to characterize delay (setting to inf)
+Warning 283: Unable to route between blocks at (1,1) and (63,35) to characterize delay (setting to inf)
+Warning 284: Unable to route between blocks at (1,1) and (63,36) to characterize delay (setting to inf)
+Warning 285: Unable to route between blocks at (1,1) and (63,37) to characterize delay (setting to inf)
+Warning 286: Unable to route between blocks at (1,1) and (63,38) to characterize delay (setting to inf)
+Warning 287: Unable to route between blocks at (1,1) and (63,39) to characterize delay (setting to inf)
+Warning 288: Unable to route between blocks at (1,1) and (63,40) to characterize delay (setting to inf)
+Warning 289: Unable to route between blocks at (1,1) and (63,41) to characterize delay (setting to inf)
+Warning 290: Unable to route between blocks at (1,1) and (63,42) to characterize delay (setting to inf)
+Warning 291: Unable to route between blocks at (1,1) and (63,43) to characterize delay (setting to inf)
+Warning 292: Unable to route between blocks at (1,1) and (63,44) to characterize delay (setting to inf)
+Warning 293: Unable to route between blocks at (1,1) and (63,45) to characterize delay (setting to inf)
+Warning 294: Unable to route between blocks at (4,4) and (4,45) to characterize delay (setting to inf)
+Warning 295: Unable to route between blocks at (4,4) and (5,45) to characterize delay (setting to inf)
+Warning 296: Unable to route between blocks at (4,4) and (6,45) to characterize delay (setting to inf)
+Warning 297: Unable to route between blocks at (4,4) and (7,45) to characterize delay (setting to inf)
+Warning 298: Unable to route between blocks at (4,4) and (8,45) to characterize delay (setting to inf)
+Warning 299: Unable to route between blocks at (4,4) and (9,45) to characterize delay (setting to inf)
+Warning 300: Unable to route between blocks at (4,4) and (10,45) to characterize delay (setting to inf)
+Warning 301: Unable to route between blocks at (4,4) and (11,45) to characterize delay (setting to inf)
+Warning 302: Unable to route between blocks at (4,4) and (12,45) to characterize delay (setting to inf)
+Warning 303: Unable to route between blocks at (4,4) and (13,45) to characterize delay (setting to inf)
+Warning 304: Unable to route between blocks at (4,4) and (14,45) to characterize delay (setting to inf)
+Warning 305: Unable to route between blocks at (4,4) and (15,45) to characterize delay (setting to inf)
+Warning 306: Unable to route between blocks at (4,4) and (16,45) to characterize delay (setting to inf)
+Warning 307: Unable to route between blocks at (4,4) and (17,45) to characterize delay (setting to inf)
+Warning 308: Unable to route between blocks at (4,4) and (18,45) to characterize delay (setting to inf)
+Warning 309: Unable to route between blocks at (4,4) and (19,45) to characterize delay (setting to inf)
+Warning 310: Unable to route between blocks at (4,4) and (20,45) to characterize delay (setting to inf)
+Warning 311: Unable to route between blocks at (4,4) and (21,45) to characterize delay (setting to inf)
+Warning 312: Unable to route between blocks at (4,4) and (22,45) to characterize delay (setting to inf)
+Warning 313: Unable to route between blocks at (4,4) and (23,45) to characterize delay (setting to inf)
+Warning 314: Unable to route between blocks at (4,4) and (24,45) to characterize delay (setting to inf)
+Warning 315: Unable to route between blocks at (4,4) and (25,45) to characterize delay (setting to inf)
+Warning 316: Unable to route between blocks at (4,4) and (26,45) to characterize delay (setting to inf)
+Warning 317: Unable to route between blocks at (4,4) and (27,45) to characterize delay (setting to inf)
+Warning 318: Unable to route between blocks at (4,4) and (28,45) to characterize delay (setting to inf)
+Warning 319: Unable to route between blocks at (4,4) and (29,45) to characterize delay (setting to inf)
+Warning 320: Unable to route between blocks at (4,4) and (30,45) to characterize delay (setting to inf)
+Warning 321: Unable to route between blocks at (4,4) and (31,45) to characterize delay (setting to inf)
+Warning 322: Unable to route between blocks at (4,4) and (32,45) to characterize delay (setting to inf)
+Warning 323: Unable to route between blocks at (4,4) and (33,45) to characterize delay (setting to inf)
+Warning 324: Unable to route between blocks at (4,4) and (34,45) to characterize delay (setting to inf)
+Warning 325: Unable to route between blocks at (4,4) and (35,45) to characterize delay (setting to inf)
+Warning 326: Unable to route between blocks at (4,4) and (36,45) to characterize delay (setting to inf)
+Warning 327: Unable to route between blocks at (4,4) and (37,45) to characterize delay (setting to inf)
+Warning 328: Unable to route between blocks at (4,4) and (38,45) to characterize delay (setting to inf)
+Warning 329: Unable to route between blocks at (4,4) and (39,45) to characterize delay (setting to inf)
+Warning 330: Unable to route between blocks at (4,4) and (40,45) to characterize delay (setting to inf)
+Warning 331: Unable to route between blocks at (4,4) and (41,45) to characterize delay (setting to inf)
+Warning 332: Unable to route between blocks at (4,4) and (42,45) to characterize delay (setting to inf)
+Warning 333: Unable to route between blocks at (4,4) and (43,45) to characterize delay (setting to inf)
+Warning 334: Unable to route between blocks at (4,4) and (44,45) to characterize delay (setting to inf)
+Warning 335: Unable to route between blocks at (4,4) and (45,45) to characterize delay (setting to inf)
+Warning 336: Unable to route between blocks at (4,4) and (46,45) to characterize delay (setting to inf)
+Warning 337: Unable to route between blocks at (4,4) and (47,45) to characterize delay (setting to inf)
+Warning 338: Unable to route between blocks at (4,4) and (48,45) to characterize delay (setting to inf)
+Warning 339: Unable to route between blocks at (4,4) and (49,45) to characterize delay (setting to inf)
+Warning 340: Unable to route between blocks at (4,4) and (50,45) to characterize delay (setting to inf)
+Warning 341: Unable to route between blocks at (4,4) and (51,45) to characterize delay (setting to inf)
+Warning 342: Unable to route between blocks at (4,4) and (52,45) to characterize delay (setting to inf)
+Warning 343: Unable to route between blocks at (4,4) and (53,45) to characterize delay (setting to inf)
+Warning 344: Unable to route between blocks at (4,4) and (54,45) to characterize delay (setting to inf)
+Warning 345: Unable to route between blocks at (4,4) and (55,45) to characterize delay (setting to inf)
+Warning 346: Unable to route between blocks at (4,4) and (56,45) to characterize delay (setting to inf)
+Warning 347: Unable to route between blocks at (4,4) and (57,45) to characterize delay (setting to inf)
+Warning 348: Unable to route between blocks at (4,4) and (58,45) to characterize delay (setting to inf)
+Warning 349: Unable to route between blocks at (4,4) and (59,45) to characterize delay (setting to inf)
+Warning 350: Unable to route between blocks at (4,4) and (60,45) to characterize delay (setting to inf)
+Warning 351: Unable to route between blocks at (4,4) and (61,45) to characterize delay (setting to inf)
+Warning 352: Unable to route between blocks at (4,4) and (62,45) to characterize delay (setting to inf)
+Warning 353: Unable to route between blocks at (4,4) and (63,4) to characterize delay (setting to inf)
+Warning 354: Unable to route between blocks at (4,4) and (63,5) to characterize delay (setting to inf)
+Warning 355: Unable to route between blocks at (4,4) and (63,6) to characterize delay (setting to inf)
+Warning 356: Unable to route between blocks at (4,4) and (63,7) to characterize delay (setting to inf)
+Warning 357: Unable to route between blocks at (4,4) and (63,8) to characterize delay (setting to inf)
+Warning 358: Unable to route between blocks at (4,4) and (63,9) to characterize delay (setting to inf)
+Warning 359: Unable to route between blocks at (4,4) and (63,10) to characterize delay (setting to inf)
+Warning 360: Unable to route between blocks at (4,4) and (63,11) to characterize delay (setting to inf)
+Warning 361: Unable to route between blocks at (4,4) and (63,12) to characterize delay (setting to inf)
+Warning 362: Unable to route between blocks at (4,4) and (63,13) to characterize delay (setting to inf)
+Warning 363: Unable to route between blocks at (4,4) and (63,14) to characterize delay (setting to inf)
+Warning 364: Unable to route between blocks at (4,4) and (63,15) to characterize delay (setting to inf)
+Warning 365: Unable to route between blocks at (4,4) and (63,16) to characterize delay (setting to inf)
+Warning 366: Unable to route between blocks at (4,4) and (63,17) to characterize delay (setting to inf)
+Warning 367: Unable to route between blocks at (4,4) and (63,18) to characterize delay (setting to inf)
+Warning 368: Unable to route between blocks at (4,4) and (63,19) to characterize delay (setting to inf)
+Warning 369: Unable to route between blocks at (4,4) and (63,20) to characterize delay (setting to inf)
+Warning 370: Unable to route between blocks at (4,4) and (63,21) to characterize delay (setting to inf)
+Warning 371: Unable to route between blocks at (4,4) and (63,22) to characterize delay (setting to inf)
+Warning 372: Unable to route between blocks at (4,4) and (63,23) to characterize delay (setting to inf)
+Warning 373: Unable to route between blocks at (4,4) and (63,24) to characterize delay (setting to inf)
+Warning 374: Unable to route between blocks at (4,4) and (63,25) to characterize delay (setting to inf)
+Warning 375: Unable to route between blocks at (4,4) and (63,26) to characterize delay (setting to inf)
+Warning 376: Unable to route between blocks at (4,4) and (63,27) to characterize delay (setting to inf)
+Warning 377: Unable to route between blocks at (4,4) and (63,28) to characterize delay (setting to inf)
+Warning 378: Unable to route between blocks at (4,4) and (63,29) to characterize delay (setting to inf)
+Warning 379: Unable to route between blocks at (4,4) and (63,30) to characterize delay (setting to inf)
+Warning 380: Unable to route between blocks at (4,4) and (63,31) to characterize delay (setting to inf)
+Warning 381: Unable to route between blocks at (4,4) and (63,32) to characterize delay (setting to inf)
+Warning 382: Unable to route between blocks at (4,4) and (63,33) to characterize delay (setting to inf)
+Warning 383: Unable to route between blocks at (4,4) and (63,34) to characterize delay (setting to inf)
+Warning 384: Unable to route between blocks at (4,4) and (63,35) to characterize delay (setting to inf)
+Warning 385: Unable to route between blocks at (4,4) and (63,36) to characterize delay (setting to inf)
+Warning 386: Unable to route between blocks at (4,4) and (63,37) to characterize delay (setting to inf)
+Warning 387: Unable to route between blocks at (4,4) and (63,38) to characterize delay (setting to inf)
+Warning 388: Unable to route between blocks at (4,4) and (63,39) to characterize delay (setting to inf)
+Warning 389: Unable to route between blocks at (4,4) and (63,40) to characterize delay (setting to inf)
+Warning 390: Unable to route between blocks at (4,4) and (63,41) to characterize delay (setting to inf)
+Warning 391: Unable to route between blocks at (4,4) and (63,42) to characterize delay (setting to inf)
+Warning 392: Unable to route between blocks at (4,4) and (63,43) to characterize delay (setting to inf)
+Warning 393: Unable to route between blocks at (4,4) and (63,44) to characterize delay (setting to inf)
+Warning 394: Unable to route between blocks at (4,4) and (63,45) to characterize delay (setting to inf)
+Warning 395: Unable to route between blocks at (60,42) and (0,0) to characterize delay (setting to inf)
+Warning 396: Unable to route between blocks at (60,42) and (0,1) to characterize delay (setting to inf)
+Warning 397: Unable to route between blocks at (60,42) and (0,2) to characterize delay (setting to inf)
+Warning 398: Unable to route between blocks at (60,42) and (0,3) to characterize delay (setting to inf)
+Warning 399: Unable to route between blocks at (60,42) and (0,4) to characterize delay (setting to inf)
+Warning 400: Unable to route between blocks at (60,42) and (0,5) to characterize delay (setting to inf)
+Warning 401: Unable to route between blocks at (60,42) and (0,6) to characterize delay (setting to inf)
+Warning 402: Unable to route between blocks at (60,42) and (0,7) to characterize delay (setting to inf)
+Warning 403: Unable to route between blocks at (60,42) and (0,8) to characterize delay (setting to inf)
+Warning 404: Unable to route between blocks at (60,42) and (0,9) to characterize delay (setting to inf)
+Warning 405: Unable to route between blocks at (60,42) and (0,10) to characterize delay (setting to inf)
+Warning 406: Unable to route between blocks at (60,42) and (0,11) to characterize delay (setting to inf)
+Warning 407: Unable to route between blocks at (60,42) and (0,12) to characterize delay (setting to inf)
+Warning 408: Unable to route between blocks at (60,42) and (0,13) to characterize delay (setting to inf)
+Warning 409: Unable to route between blocks at (60,42) and (0,14) to characterize delay (setting to inf)
+Warning 410: Unable to route between blocks at (60,42) and (0,15) to characterize delay (setting to inf)
+Warning 411: Unable to route between blocks at (60,42) and (0,16) to characterize delay (setting to inf)
+Warning 412: Unable to route between blocks at (60,42) and (0,17) to characterize delay (setting to inf)
+Warning 413: Unable to route between blocks at (60,42) and (0,18) to characterize delay (setting to inf)
+Warning 414: Unable to route between blocks at (60,42) and (0,19) to characterize delay (setting to inf)
+Warning 415: Unable to route between blocks at (60,42) and (0,20) to characterize delay (setting to inf)
+Warning 416: Unable to route between blocks at (60,42) and (0,21) to characterize delay (setting to inf)
+Warning 417: Unable to route between blocks at (60,42) and (0,22) to characterize delay (setting to inf)
+Warning 418: Unable to route between blocks at (60,42) and (0,23) to characterize delay (setting to inf)
+Warning 419: Unable to route between blocks at (60,42) and (0,24) to characterize delay (setting to inf)
+Warning 420: Unable to route between blocks at (60,42) and (0,25) to characterize delay (setting to inf)
+Warning 421: Unable to route between blocks at (60,42) and (0,26) to characterize delay (setting to inf)
+Warning 422: Unable to route between blocks at (60,42) and (0,27) to characterize delay (setting to inf)
+Warning 423: Unable to route between blocks at (60,42) and (0,28) to characterize delay (setting to inf)
+Warning 424: Unable to route between blocks at (60,42) and (0,29) to characterize delay (setting to inf)
+Warning 425: Unable to route between blocks at (60,42) and (0,30) to characterize delay (setting to inf)
+Warning 426: Unable to route between blocks at (60,42) and (0,31) to characterize delay (setting to inf)
+Warning 427: Unable to route between blocks at (60,42) and (0,32) to characterize delay (setting to inf)
+Warning 428: Unable to route between blocks at (60,42) and (0,33) to characterize delay (setting to inf)
+Warning 429: Unable to route between blocks at (60,42) and (0,34) to characterize delay (setting to inf)
+Warning 430: Unable to route between blocks at (60,42) and (0,35) to characterize delay (setting to inf)
+Warning 431: Unable to route between blocks at (60,42) and (0,36) to characterize delay (setting to inf)
+Warning 432: Unable to route between blocks at (60,42) and (0,37) to characterize delay (setting to inf)
+Warning 433: Unable to route between blocks at (60,42) and (0,38) to characterize delay (setting to inf)
+Warning 434: Unable to route between blocks at (60,42) and (0,39) to characterize delay (setting to inf)
+Warning 435: Unable to route between blocks at (60,42) and (0,40) to characterize delay (setting to inf)
+Warning 436: Unable to route between blocks at (60,42) and (0,41) to characterize delay (setting to inf)
+Warning 437: Unable to route between blocks at (60,42) and (0,42) to characterize delay (setting to inf)
+Warning 438: Unable to route between blocks at (60,42) and (1,0) to characterize delay (setting to inf)
+Warning 439: Unable to route between blocks at (60,42) and (2,0) to characterize delay (setting to inf)
+Warning 440: Unable to route between blocks at (60,42) and (3,0) to characterize delay (setting to inf)
+Warning 441: Unable to route between blocks at (60,42) and (4,0) to characterize delay (setting to inf)
+Warning 442: Unable to route between blocks at (60,42) and (5,0) to characterize delay (setting to inf)
+Warning 443: Unable to route between blocks at (60,42) and (6,0) to characterize delay (setting to inf)
+Warning 444: Unable to route between blocks at (60,42) and (7,0) to characterize delay (setting to inf)
+Warning 445: Unable to route between blocks at (60,42) and (8,0) to characterize delay (setting to inf)
+Warning 446: Unable to route between blocks at (60,42) and (9,0) to characterize delay (setting to inf)
+Warning 447: Unable to route between blocks at (60,42) and (10,0) to characterize delay (setting to inf)
+Warning 448: Unable to route between blocks at (60,42) and (11,0) to characterize delay (setting to inf)
+Warning 449: Unable to route between blocks at (60,42) and (12,0) to characterize delay (setting to inf)
+Warning 450: Unable to route between blocks at (60,42) and (13,0) to characterize delay (setting to inf)
+Warning 451: Unable to route between blocks at (60,42) and (14,0) to characterize delay (setting to inf)
+Warning 452: Unable to route between blocks at (60,42) and (15,0) to characterize delay (setting to inf)
+Warning 453: Unable to route between blocks at (60,42) and (16,0) to characterize delay (setting to inf)
+Warning 454: Unable to route between blocks at (60,42) and (17,0) to characterize delay (setting to inf)
+Warning 455: Unable to route between blocks at (60,42) and (18,0) to characterize delay (setting to inf)
+Warning 456: Unable to route between blocks at (60,42) and (19,0) to characterize delay (setting to inf)
+Warning 457: Unable to route between blocks at (60,42) and (20,0) to characterize delay (setting to inf)
+Warning 458: Unable to route between blocks at (60,42) and (21,0) to characterize delay (setting to inf)
+Warning 459: Unable to route between blocks at (60,42) and (22,0) to characterize delay (setting to inf)
+Warning 460: Unable to route between blocks at (60,42) and (23,0) to characterize delay (setting to inf)
+Warning 461: Unable to route between blocks at (60,42) and (24,0) to characterize delay (setting to inf)
+Warning 462: Unable to route between blocks at (60,42) and (25,0) to characterize delay (setting to inf)
+Warning 463: Unable to route between blocks at (60,42) and (26,0) to characterize delay (setting to inf)
+Warning 464: Unable to route between blocks at (60,42) and (27,0) to characterize delay (setting to inf)
+Warning 465: Unable to route between blocks at (60,42) and (28,0) to characterize delay (setting to inf)
+Warning 466: Unable to route between blocks at (60,42) and (29,0) to characterize delay (setting to inf)
+Warning 467: Unable to route between blocks at (60,42) and (30,0) to characterize delay (setting to inf)
+Warning 468: Unable to route between blocks at (60,42) and (31,0) to characterize delay (setting to inf)
+Warning 469: Unable to route between blocks at (60,42) and (32,0) to characterize delay (setting to inf)
+Warning 470: Unable to route between blocks at (60,42) and (33,0) to characterize delay (setting to inf)
+Warning 471: Unable to route between blocks at (60,42) and (34,0) to characterize delay (setting to inf)
+Warning 472: Unable to route between blocks at (60,42) and (35,0) to characterize delay (setting to inf)
+Warning 473: Unable to route between blocks at (60,42) and (36,0) to characterize delay (setting to inf)
+Warning 474: Unable to route between blocks at (60,42) and (37,0) to characterize delay (setting to inf)
+Warning 475: Unable to route between blocks at (60,42) and (38,0) to characterize delay (setting to inf)
+Warning 476: Unable to route between blocks at (60,42) and (39,0) to characterize delay (setting to inf)
+Warning 477: Unable to route between blocks at (60,42) and (40,0) to characterize delay (setting to inf)
+Warning 478: Unable to route between blocks at (60,42) and (41,0) to characterize delay (setting to inf)
+Warning 479: Unable to route between blocks at (60,42) and (42,0) to characterize delay (setting to inf)
+Warning 480: Unable to route between blocks at (60,42) and (43,0) to characterize delay (setting to inf)
+Warning 481: Unable to route between blocks at (60,42) and (44,0) to characterize delay (setting to inf)
+Warning 482: Unable to route between blocks at (60,42) and (45,0) to characterize delay (setting to inf)
+Warning 483: Unable to route between blocks at (60,42) and (46,0) to characterize delay (setting to inf)
+Warning 484: Unable to route between blocks at (60,42) and (47,0) to characterize delay (setting to inf)
+Warning 485: Unable to route between blocks at (60,42) and (48,0) to characterize delay (setting to inf)
+Warning 486: Unable to route between blocks at (60,42) and (49,0) to characterize delay (setting to inf)
+Warning 487: Unable to route between blocks at (60,42) and (50,0) to characterize delay (setting to inf)
+Warning 488: Unable to route between blocks at (60,42) and (51,0) to characterize delay (setting to inf)
+Warning 489: Unable to route between blocks at (60,42) and (52,0) to characterize delay (setting to inf)
+Warning 490: Unable to route between blocks at (60,42) and (53,0) to characterize delay (setting to inf)
+Warning 491: Unable to route between blocks at (60,42) and (54,0) to characterize delay (setting to inf)
+Warning 492: Unable to route between blocks at (60,42) and (55,0) to characterize delay (setting to inf)
+Warning 493: Unable to route between blocks at (60,42) and (56,0) to characterize delay (setting to inf)
+Warning 494: Unable to route between blocks at (60,42) and (57,0) to characterize delay (setting to inf)
+Warning 495: Unable to route between blocks at (60,42) and (58,0) to characterize delay (setting to inf)
+Warning 496: Unable to route between blocks at (60,42) and (59,0) to characterize delay (setting to inf)
+Warning 497: Unable to route between blocks at (60,42) and (60,0) to characterize delay (setting to inf)
+Warning 498: Unable to route between blocks at (60,4) and (0,4) to characterize delay (setting to inf)
+Warning 499: Unable to route between blocks at (60,4) and (0,5) to characterize delay (setting to inf)
+Warning 500: Unable to route between blocks at (60,4) and (0,6) to characterize delay (setting to inf)
+Warning 501: Unable to route between blocks at (60,4) and (0,7) to characterize delay (setting to inf)
+Warning 502: Unable to route between blocks at (60,4) and (0,8) to characterize delay (setting to inf)
+Warning 503: Unable to route between blocks at (60,4) and (0,9) to characterize delay (setting to inf)
+Warning 504: Unable to route between blocks at (60,4) and (0,10) to characterize delay (setting to inf)
+Warning 505: Unable to route between blocks at (60,4) and (0,11) to characterize delay (setting to inf)
+Warning 506: Unable to route between blocks at (60,4) and (0,12) to characterize delay (setting to inf)
+Warning 507: Unable to route between blocks at (60,4) and (0,13) to characterize delay (setting to inf)
+Warning 508: Unable to route between blocks at (60,4) and (0,14) to characterize delay (setting to inf)
+Warning 509: Unable to route between blocks at (60,4) and (0,15) to characterize delay (setting to inf)
+Warning 510: Unable to route between blocks at (60,4) and (0,16) to characterize delay (setting to inf)
+Warning 511: Unable to route between blocks at (60,4) and (0,17) to characterize delay (setting to inf)
+Warning 512: Unable to route between blocks at (60,4) and (0,18) to characterize delay (setting to inf)
+Warning 513: Unable to route between blocks at (60,4) and (0,19) to characterize delay (setting to inf)
+Warning 514: Unable to route between blocks at (60,4) and (0,20) to characterize delay (setting to inf)
+Warning 515: Unable to route between blocks at (60,4) and (0,21) to characterize delay (setting to inf)
+Warning 516: Unable to route between blocks at (60,4) and (0,22) to characterize delay (setting to inf)
+Warning 517: Unable to route between blocks at (60,4) and (0,23) to characterize delay (setting to inf)
+Warning 518: Unable to route between blocks at (60,4) and (0,24) to characterize delay (setting to inf)
+Warning 519: Unable to route between blocks at (60,4) and (0,25) to characterize delay (setting to inf)
+Warning 520: Unable to route between blocks at (60,4) and (0,26) to characterize delay (setting to inf)
+Warning 521: Unable to route between blocks at (60,4) and (0,27) to characterize delay (setting to inf)
+Warning 522: Unable to route between blocks at (60,4) and (0,28) to characterize delay (setting to inf)
+Warning 523: Unable to route between blocks at (60,4) and (0,29) to characterize delay (setting to inf)
+Warning 524: Unable to route between blocks at (60,4) and (0,30) to characterize delay (setting to inf)
+Warning 525: Unable to route between blocks at (60,4) and (0,31) to characterize delay (setting to inf)
+Warning 526: Unable to route between blocks at (60,4) and (0,32) to characterize delay (setting to inf)
+Warning 527: Unable to route between blocks at (60,4) and (0,33) to characterize delay (setting to inf)
+Warning 528: Unable to route between blocks at (60,4) and (0,34) to characterize delay (setting to inf)
+Warning 529: Unable to route between blocks at (60,4) and (0,35) to characterize delay (setting to inf)
+Warning 530: Unable to route between blocks at (60,4) and (0,36) to characterize delay (setting to inf)
+Warning 531: Unable to route between blocks at (60,4) and (0,37) to characterize delay (setting to inf)
+Warning 532: Unable to route between blocks at (60,4) and (0,38) to characterize delay (setting to inf)
+Warning 533: Unable to route between blocks at (60,4) and (0,39) to characterize delay (setting to inf)
+Warning 534: Unable to route between blocks at (60,4) and (0,40) to characterize delay (setting to inf)
+Warning 535: Unable to route between blocks at (60,4) and (0,41) to characterize delay (setting to inf)
+Warning 536: Unable to route between blocks at (60,4) and (0,42) to characterize delay (setting to inf)
+Warning 537: Unable to route between blocks at (60,4) and (0,43) to characterize delay (setting to inf)
+Warning 538: Unable to route between blocks at (60,4) and (0,44) to characterize delay (setting to inf)
+Warning 539: Unable to route between blocks at (60,4) and (0,45) to characterize delay (setting to inf)
+Warning 540: Unable to route between blocks at (60,4) and (1,45) to characterize delay (setting to inf)
+Warning 541: Unable to route between blocks at (60,4) and (2,45) to characterize delay (setting to inf)
+Warning 542: Unable to route between blocks at (60,4) and (3,45) to characterize delay (setting to inf)
+Warning 543: Unable to route between blocks at (60,4) and (4,45) to characterize delay (setting to inf)
+Warning 544: Unable to route between blocks at (60,4) and (5,45) to characterize delay (setting to inf)
+Warning 545: Unable to route between blocks at (60,4) and (6,45) to characterize delay (setting to inf)
+Warning 546: Unable to route between blocks at (60,4) and (7,45) to characterize delay (setting to inf)
+Warning 547: Unable to route between blocks at (60,4) and (8,45) to characterize delay (setting to inf)
+Warning 548: Unable to route between blocks at (60,4) and (9,45) to characterize delay (setting to inf)
+Warning 549: Unable to route between blocks at (60,4) and (10,45) to characterize delay (setting to inf)
+Warning 550: Unable to route between blocks at (60,4) and (11,45) to characterize delay (setting to inf)
+Warning 551: Unable to route between blocks at (60,4) and (12,45) to characterize delay (setting to inf)
+Warning 552: Unable to route between blocks at (60,4) and (13,45) to characterize delay (setting to inf)
+Warning 553: Unable to route between blocks at (60,4) and (14,45) to characterize delay (setting to inf)
+Warning 554: Unable to route between blocks at (60,4) and (15,45) to characterize delay (setting to inf)
+Warning 555: Unable to route between blocks at (60,4) and (16,45) to characterize delay (setting to inf)
+Warning 556: Unable to route between blocks at (60,4) and (17,45) to characterize delay (setting to inf)
+Warning 557: Unable to route between blocks at (60,4) and (18,45) to characterize delay (setting to inf)
+Warning 558: Unable to route between blocks at (60,4) and (19,45) to characterize delay (setting to inf)
+Warning 559: Unable to route between blocks at (60,4) and (20,45) to characterize delay (setting to inf)
+Warning 560: Unable to route between blocks at (60,4) and (21,45) to characterize delay (setting to inf)
+Warning 561: Unable to route between blocks at (60,4) and (22,45) to characterize delay (setting to inf)
+Warning 562: Unable to route between blocks at (60,4) and (23,45) to characterize delay (setting to inf)
+Warning 563: Unable to route between blocks at (60,4) and (24,45) to characterize delay (setting to inf)
+Warning 564: Unable to route between blocks at (60,4) and (25,45) to characterize delay (setting to inf)
+Warning 565: Unable to route between blocks at (60,4) and (26,45) to characterize delay (setting to inf)
+Warning 566: Unable to route between blocks at (60,4) and (27,45) to characterize delay (setting to inf)
+Warning 567: Unable to route between blocks at (60,4) and (28,45) to characterize delay (setting to inf)
+Warning 568: Unable to route between blocks at (60,4) and (29,45) to characterize delay (setting to inf)
+Warning 569: Unable to route between blocks at (60,4) and (30,45) to characterize delay (setting to inf)
+Warning 570: Unable to route between blocks at (60,4) and (31,45) to characterize delay (setting to inf)
+Warning 571: Unable to route between blocks at (60,4) and (32,45) to characterize delay (setting to inf)
+Warning 572: Unable to route between blocks at (60,4) and (33,45) to characterize delay (setting to inf)
+Warning 573: Unable to route between blocks at (60,4) and (34,45) to characterize delay (setting to inf)
+Warning 574: Unable to route between blocks at (60,4) and (35,45) to characterize delay (setting to inf)
+Warning 575: Unable to route between blocks at (60,4) and (36,45) to characterize delay (setting to inf)
+Warning 576: Unable to route between blocks at (60,4) and (37,45) to characterize delay (setting to inf)
+Warning 577: Unable to route between blocks at (60,4) and (38,45) to characterize delay (setting to inf)
+Warning 578: Unable to route between blocks at (60,4) and (39,45) to characterize delay (setting to inf)
+Warning 579: Unable to route between blocks at (60,4) and (40,45) to characterize delay (setting to inf)
+Warning 580: Unable to route between blocks at (60,4) and (41,45) to characterize delay (setting to inf)
+Warning 581: Unable to route between blocks at (60,4) and (42,45) to characterize delay (setting to inf)
+Warning 582: Unable to route between blocks at (60,4) and (43,45) to characterize delay (setting to inf)
+Warning 583: Unable to route between blocks at (60,4) and (44,45) to characterize delay (setting to inf)
+Warning 584: Unable to route between blocks at (60,4) and (45,45) to characterize delay (setting to inf)
+Warning 585: Unable to route between blocks at (60,4) and (46,45) to characterize delay (setting to inf)
+Warning 586: Unable to route between blocks at (60,4) and (47,45) to characterize delay (setting to inf)
+Warning 587: Unable to route between blocks at (60,4) and (48,45) to characterize delay (setting to inf)
+Warning 588: Unable to route between blocks at (60,4) and (49,45) to characterize delay (setting to inf)
+Warning 589: Unable to route between blocks at (60,4) and (50,45) to characterize delay (setting to inf)
+Warning 590: Unable to route between blocks at (60,4) and (51,45) to characterize delay (setting to inf)
+Warning 591: Unable to route between blocks at (60,4) and (52,45) to characterize delay (setting to inf)
+Warning 592: Unable to route between blocks at (60,4) and (53,45) to characterize delay (setting to inf)
+Warning 593: Unable to route between blocks at (60,4) and (54,45) to characterize delay (setting to inf)
+Warning 594: Unable to route between blocks at (60,4) and (55,45) to characterize delay (setting to inf)
+Warning 595: Unable to route between blocks at (60,4) and (56,45) to characterize delay (setting to inf)
+Warning 596: Unable to route between blocks at (60,4) and (57,45) to characterize delay (setting to inf)
+Warning 597: Unable to route between blocks at (60,4) and (58,45) to characterize delay (setting to inf)
+Warning 598: Unable to route between blocks at (60,4) and (59,45) to characterize delay (setting to inf)
+Warning 599: Unable to route between blocks at (60,4) and (60,45) to characterize delay (setting to inf)
+Warning 600: Unable to route between blocks at (4,42) and (4,0) to characterize delay (setting to inf)
+Warning 601: Unable to route between blocks at (4,42) and (5,0) to characterize delay (setting to inf)
+Warning 602: Unable to route between blocks at (4,42) and (6,0) to characterize delay (setting to inf)
+Warning 603: Unable to route between blocks at (4,42) and (7,0) to characterize delay (setting to inf)
+Warning 604: Unable to route between blocks at (4,42) and (8,0) to characterize delay (setting to inf)
+Warning 605: Unable to route between blocks at (4,42) and (9,0) to characterize delay (setting to inf)
+Warning 606: Unable to route between blocks at (4,42) and (10,0) to characterize delay (setting to inf)
+Warning 607: Unable to route between blocks at (4,42) and (11,0) to characterize delay (setting to inf)
+Warning 608: Unable to route between blocks at (4,42) and (12,0) to characterize delay (setting to inf)
+Warning 609: Unable to route between blocks at (4,42) and (13,0) to characterize delay (setting to inf)
+Warning 610: Unable to route between blocks at (4,42) and (14,0) to characterize delay (setting to inf)
+Warning 611: Unable to route between blocks at (4,42) and (15,0) to characterize delay (setting to inf)
+Warning 612: Unable to route between blocks at (4,42) and (16,0) to characterize delay (setting to inf)
+Warning 613: Unable to route between blocks at (4,42) and (17,0) to characterize delay (setting to inf)
+Warning 614: Unable to route between blocks at (4,42) and (18,0) to characterize delay (setting to inf)
+Warning 615: Unable to route between blocks at (4,42) and (19,0) to characterize delay (setting to inf)
+Warning 616: Unable to route between blocks at (4,42) and (20,0) to characterize delay (setting to inf)
+Warning 617: Unable to route between blocks at (4,42) and (21,0) to characterize delay (setting to inf)
+Warning 618: Unable to route between blocks at (4,42) and (22,0) to characterize delay (setting to inf)
+Warning 619: Unable to route between blocks at (4,42) and (23,0) to characterize delay (setting to inf)
+Warning 620: Unable to route between blocks at (4,42) and (24,0) to characterize delay (setting to inf)
+Warning 621: Unable to route between blocks at (4,42) and (25,0) to characterize delay (setting to inf)
+Warning 622: Unable to route between blocks at (4,42) and (26,0) to characterize delay (setting to inf)
+Warning 623: Unable to route between blocks at (4,42) and (27,0) to characterize delay (setting to inf)
+Warning 624: Unable to route between blocks at (4,42) and (28,0) to characterize delay (setting to inf)
+Warning 625: Unable to route between blocks at (4,42) and (29,0) to characterize delay (setting to inf)
+Warning 626: Unable to route between blocks at (4,42) and (30,0) to characterize delay (setting to inf)
+Warning 627: Unable to route between blocks at (4,42) and (31,0) to characterize delay (setting to inf)
+Warning 628: Unable to route between blocks at (4,42) and (32,0) to characterize delay (setting to inf)
+Warning 629: Unable to route between blocks at (4,42) and (33,0) to characterize delay (setting to inf)
+Warning 630: Unable to route between blocks at (4,42) and (34,0) to characterize delay (setting to inf)
+Warning 631: Unable to route between blocks at (4,42) and (35,0) to characterize delay (setting to inf)
+Warning 632: Unable to route between blocks at (4,42) and (36,0) to characterize delay (setting to inf)
+Warning 633: Unable to route between blocks at (4,42) and (37,0) to characterize delay (setting to inf)
+Warning 634: Unable to route between blocks at (4,42) and (38,0) to characterize delay (setting to inf)
+Warning 635: Unable to route between blocks at (4,42) and (39,0) to characterize delay (setting to inf)
+Warning 636: Unable to route between blocks at (4,42) and (40,0) to characterize delay (setting to inf)
+Warning 637: Unable to route between blocks at (4,42) and (41,0) to characterize delay (setting to inf)
+Warning 638: Unable to route between blocks at (4,42) and (42,0) to characterize delay (setting to inf)
+Warning 639: Unable to route between blocks at (4,42) and (43,0) to characterize delay (setting to inf)
+Warning 640: Unable to route between blocks at (4,42) and (44,0) to characterize delay (setting to inf)
+Warning 641: Unable to route between blocks at (4,42) and (45,0) to characterize delay (setting to inf)
+Warning 642: Unable to route between blocks at (4,42) and (46,0) to characterize delay (setting to inf)
+Warning 643: Unable to route between blocks at (4,42) and (47,0) to characterize delay (setting to inf)
+Warning 644: Unable to route between blocks at (4,42) and (48,0) to characterize delay (setting to inf)
+Warning 645: Unable to route between blocks at (4,42) and (49,0) to characterize delay (setting to inf)
+Warning 646: Unable to route between blocks at (4,42) and (50,0) to characterize delay (setting to inf)
+Warning 647: Unable to route between blocks at (4,42) and (51,0) to characterize delay (setting to inf)
+Warning 648: Unable to route between blocks at (4,42) and (52,0) to characterize delay (setting to inf)
+Warning 649: Unable to route between blocks at (4,42) and (53,0) to characterize delay (setting to inf)
+Warning 650: Unable to route between blocks at (4,42) and (54,0) to characterize delay (setting to inf)
+Warning 651: Unable to route between blocks at (4,42) and (55,0) to characterize delay (setting to inf)
+Warning 652: Unable to route between blocks at (4,42) and (56,0) to characterize delay (setting to inf)
+Warning 653: Unable to route between blocks at (4,42) and (57,0) to characterize delay (setting to inf)
+Warning 654: Unable to route between blocks at (4,42) and (58,0) to characterize delay (setting to inf)
+Warning 655: Unable to route between blocks at (4,42) and (59,0) to characterize delay (setting to inf)
+Warning 656: Unable to route between blocks at (4,42) and (60,0) to characterize delay (setting to inf)
+Warning 657: Unable to route between blocks at (4,42) and (61,0) to characterize delay (setting to inf)
+Warning 658: Unable to route between blocks at (4,42) and (62,0) to characterize delay (setting to inf)
+Warning 659: Unable to route between blocks at (4,42) and (63,0) to characterize delay (setting to inf)
+Warning 660: Unable to route between blocks at (4,42) and (63,1) to characterize delay (setting to inf)
+Warning 661: Unable to route between blocks at (4,42) and (63,2) to characterize delay (setting to inf)
+Warning 662: Unable to route between blocks at (4,42) and (63,3) to characterize delay (setting to inf)
+Warning 663: Unable to route between blocks at (4,42) and (63,4) to characterize delay (setting to inf)
+Warning 664: Unable to route between blocks at (4,42) and (63,5) to characterize delay (setting to inf)
+Warning 665: Unable to route between blocks at (4,42) and (63,6) to characterize delay (setting to inf)
+Warning 666: Unable to route between blocks at (4,42) and (63,7) to characterize delay (setting to inf)
+Warning 667: Unable to route between blocks at (4,42) and (63,8) to characterize delay (setting to inf)
+Warning 668: Unable to route between blocks at (4,42) and (63,9) to characterize delay (setting to inf)
+Warning 669: Unable to route between blocks at (4,42) and (63,10) to characterize delay (setting to inf)
+Warning 670: Unable to route between blocks at (4,42) and (63,11) to characterize delay (setting to inf)
+Warning 671: Unable to route between blocks at (4,42) and (63,12) to characterize delay (setting to inf)
+Warning 672: Unable to route between blocks at (4,42) and (63,13) to characterize delay (setting to inf)
+Warning 673: Unable to route between blocks at (4,42) and (63,14) to characterize delay (setting to inf)
+Warning 674: Unable to route between blocks at (4,42) and (63,15) to characterize delay (setting to inf)
+Warning 675: Unable to route between blocks at (4,42) and (63,16) to characterize delay (setting to inf)
+Warning 676: Unable to route between blocks at (4,42) and (63,17) to characterize delay (setting to inf)
+Warning 677: Unable to route between blocks at (4,42) and (63,18) to characterize delay (setting to inf)
+Warning 678: Unable to route between blocks at (4,42) and (63,19) to characterize delay (setting to inf)
+Warning 679: Unable to route between blocks at (4,42) and (63,20) to characterize delay (setting to inf)
+Warning 680: Unable to route between blocks at (4,42) and (63,21) to characterize delay (setting to inf)
+Warning 681: Unable to route between blocks at (4,42) and (63,22) to characterize delay (setting to inf)
+Warning 682: Unable to route between blocks at (4,42) and (63,23) to characterize delay (setting to inf)
+Warning 683: Unable to route between blocks at (4,42) and (63,24) to characterize delay (setting to inf)
+Warning 684: Unable to route between blocks at (4,42) and (63,25) to characterize delay (setting to inf)
+Warning 685: Unable to route between blocks at (4,42) and (63,26) to characterize delay (setting to inf)
+Warning 686: Unable to route between blocks at (4,42) and (63,27) to characterize delay (setting to inf)
+Warning 687: Unable to route between blocks at (4,42) and (63,28) to characterize delay (setting to inf)
+Warning 688: Unable to route between blocks at (4,42) and (63,29) to characterize delay (setting to inf)
+Warning 689: Unable to route between blocks at (4,42) and (63,30) to characterize delay (setting to inf)
+Warning 690: Unable to route between blocks at (4,42) and (63,31) to characterize delay (setting to inf)
+Warning 691: Unable to route between blocks at (4,42) and (63,32) to characterize delay (setting to inf)
+Warning 692: Unable to route between blocks at (4,42) and (63,33) to characterize delay (setting to inf)
+Warning 693: Unable to route between blocks at (4,42) and (63,34) to characterize delay (setting to inf)
+Warning 694: Unable to route between blocks at (4,42) and (63,35) to characterize delay (setting to inf)
+Warning 695: Unable to route between blocks at (4,42) and (63,36) to characterize delay (setting to inf)
+Warning 696: Unable to route between blocks at (4,42) and (63,37) to characterize delay (setting to inf)
+Warning 697: Unable to route between blocks at (4,42) and (63,38) to characterize delay (setting to inf)
+Warning 698: Unable to route between blocks at (4,42) and (63,39) to characterize delay (setting to inf)
+Warning 699: Unable to route between blocks at (4,42) and (63,40) to characterize delay (setting to inf)
+Warning 700: Unable to route between blocks at (4,42) and (63,41) to characterize delay (setting to inf)
+Warning 701: Unable to route between blocks at (4,42) and (63,42) to characterize delay (setting to inf)
+## Computing delta delays took 45.49 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+# Computing placement delta delay look-up took 45.53 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+
+Bounding box mode is Cube
+
+Using simple RL 'Softmax agent' for choosing move and block types
+# Placement
+## Initial Placement
+Reading incr_comp_pin_loc.place.
+
+Successfully read constraints file incr_comp_pin_loc.place.
+
+Initial placement iteration 0 has finished successfully
+## Initial Placement took 0.00 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+
+There are 5 point to point connections in this circuit.
+
+
+BB estimate of min-dist (placement) wire length: 99
+
+Completed placement consistency check successfully.
+Initial placement cost: 1 bb_cost: 0.61875 td_cost: 2.56421e-09
+Initial placement estimated Critical Path Delay (CPD): 3.55224 ns
+Initial placement estimated setup Total Negative Slack (sTNS): -3.55224 ns
+Initial placement estimated setup Worst Negative Slack (sWNS): -3.55224 ns
+
+Initial placement estimated setup slack histogram:
+[ -3.6e-09: -3.6e-09) 1 (100.0%) |**************************************************
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+[ -3.6e-09: -3.6e-09) 0 (  0.0%) |
+Placement contains 0 placement macros involving 0 blocks (average macro size -nan)
+
+Moves per temperature: 5
+Warning 702: Starting t: 0 of 5 configurations accepted.
+
+---- ------ ------- ------- ---------- ---------- ------- ---------- -------- ------- ------- ------ -------- --------- ------
+Tnum   Time       T Av Cost Av BB Cost Av TD Cost     CPD       sTNS     sWNS Ac Rate Std Dev  R lim Crit Exp Tot Moves  Alpha
+      (sec)                                          (ns)       (ns)     (ns)                                                 
+---- ------ ------- ------- ---------- ---------- ------- ---------- -------- ------- ------- ------ -------- --------- ------
+   1    0.0 0.0e+00   1.000       0.62 2.5642e-09   3.552      -3.55   -3.552   0.000  0.0000   63.0     1.00         5  0.200
+   2    0.0 0.0e+00   0.534       0.30 1.4954e-09   3.552      -3.55   -3.552   0.400  0.2230   63.0     1.00        10  0.950
+## Placement Quench took 0.00 seconds (max_rss 476.0 MiB)
+post-quench CPD = 2.5431 (ns) 
+
+BB estimate of min-dist (placement) wire length: 35
+
+Completed placement consistency check successfully.
+
+Swaps called: 15
+
+Aborted Move Reasons:
+  No moves aborted
+
+Placement estimated critical path delay (least slack): 2.5431 ns, Fmax: 393.22 MHz
+Placement estimated setup Worst Negative Slack (sWNS): -2.5431 ns
+Placement estimated setup Total Negative Slack (sTNS): -2.5431 ns
+
+Placement estimated setup slack histogram:
+[ -2.5e-09: -2.5e-09) 1 (100.0%) |**************************************************
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+[ -2.5e-09: -2.5e-09) 0 (  0.0%) |
+
+Placement estimated geomean non-virtual intra-domain period: nan ns (nan MHz)
+Placement estimated fanout-weighted geomean non-virtual intra-domain period: nan ns (nan MHz)
+
+Placement cost: 0.376318, bb_cost: 0.21875, td_cost: 1.02291e-09, 
+
+Placement resource usage:
+  io  implemented as io_top: 5
+  clb implemented as clb   : 1
+
+Placement number of temperatures: 2
+Placement total # of swap attempts: 15
+	Swaps accepted:  2 (13.3 %)
+	Swaps rejected:  1 ( 6.7 %)
+	Swaps aborted: 12 (80.0 %)
+
+
+Placement perturbation distribution by block and move type: 
+------------------ ----------------- ---------------- ---------------- --------------- ------------ 
+    Block Type         Move Type       (%) of Total      Accepted(%)     Rejected(%)    Aborted(%)
+------------------ ----------------- ---------------- ---------------- --------------- ------------ 
+io                 Uniform                15.38            0.00            0.00           100.00       
+                   Median                 23.08            0.00            0.00           100.00       
+                   Centroid               7.69             0.00            0.00           100.00       
+                   W. Centroid            30.77            0.00            0.00           100.00       
+
+                   W. Centroid            7.69             100.00          0.00           0.00         
+                   Feasible Region        15.38            50.00           50.00          0.00         
+
+
+Placement Quench timing analysis took 2.0452e-05 seconds (1.5336e-05 STA, 5.116e-06 slack) (1 full updates: 1 setup, 0 hold, 0 combined).
+Placement Total  timing analysis took 0.00248598 seconds (0.00242023 STA, 6.5757e-05 slack) (4 full updates: 4 setup, 0 hold, 0 combined).
+update_td_costs: connections 0 nets 0 sum_nets 0 total 0
+# Placement took 0.01 seconds (max_rss 476.0 MiB, delta_rss +0.0 MiB)
+
+Flow timing analysis took 0.00248598 seconds (0.00242023 STA, 6.5757e-05 slack) (4 full updates: 4 setup, 0 hold, 0 combined).
+VPR succeeded
+The entire flow of VPR took 97.85 seconds (max_rss 476.0 MiB)
+Incr Slack updates 4 in 6.434e-06 sec
+Full Max Req/Worst Slack updates 2 in 1.4616e-05 sec
+Incr Max Req/Worst Slack updates 2 in 4.076e-06 sec
+Incr Criticality updates 2 in 4.119e-06 sec
+Full Criticality updates 2 in 1.2069e-05 sec

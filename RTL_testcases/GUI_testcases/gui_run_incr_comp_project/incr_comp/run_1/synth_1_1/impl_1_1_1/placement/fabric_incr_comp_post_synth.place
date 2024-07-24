@@ -1,0 +1,11 @@
+Netlist_File: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/packing/fabric_incr_comp_post_synth.net Netlist_ID: SHA256:4d3114d243c10cbd65c1cf6a96d1fde825c646766aab7ae70e14b81f7da9c2ed
+Array size: 64 x 46 logic blocks
+
+#block name	x	y	subblk	layer	block number
+#----------	--	--	------	-----	------------
+$obuf_s		50	40	0	0	#0
+out:$obuf_s	49	44	69	0	#1
+out:$auto_413	49	44	71	0	#2
+out:$auto_414	49	44	70	0	#3
+$ibuf_one	51	44	23	0	#4
+$ibuf_sec	51	44	22	0	#5

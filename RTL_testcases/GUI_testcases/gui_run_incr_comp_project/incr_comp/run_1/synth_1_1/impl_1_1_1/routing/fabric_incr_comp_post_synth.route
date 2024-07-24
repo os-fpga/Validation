@@ -1,0 +1,66 @@
+Placement_File: /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/impl_1_1_1/placement/fabric_incr_comp_post_synth.place Placement_ID: SHA256:1a8220a48fdde61cfddfac64702058b6f72c54e02f55710a09ba11fb8b198db8
+Array size: 64 x 46 logic blocks.
+
+Routing:
+
+Net 0 ($ibuf_sec)
+
+Node:	964756	SOURCE (0,51,44)  Pad: 442  Switch: 0
+Node:	966222	  OPIN (0,51,44)  Pad: 442  Switch: 3
+Node:	1333509	 CHANY (0,51,43) to (51,44)  Track: 151  Switch: 2
+Node:	1173261	 CHANX (0,51,42)  Track: 5  Switch: 3
+Node:	1330337	 CHANY (0,50,39) to (50,42)  Track: 135  Switch: 2
+Node:	1165075	 CHANX (0,50,40)  Track: 11  Switch: 1
+Node:	770402	  IPIN (0,50,40)  Pin: 21   clb.I10[9] Switch: 0
+Node:	770331	  SINK (0,50,40)  Class: 1  Switch: -1 Net_pin_index: 1
+
+
+Net 1 ($ibuf_one)
+
+Node:	964758	SOURCE (0,51,44)  Pad: 462  Switch: 0
+Node:	966223	  OPIN (0,51,44)  Pad: 462  Switch: 3
+Node:	1333573	 CHANY (0,51,44)  Track: 151  Switch: 2
+Node:	1177325	 CHANX (0,51,43)  Track: 5  Switch: 3
+Node:	1330401	 CHANY (0,50,40) to (50,43)  Track: 135  Switch: 1
+Node:	770412	  IPIN (0,50,40)  Pin: 27   clb.I20[3] Switch: 0
+Node:	770332	  SINK (0,50,40)  Class: 2  Switch: -1 Net_pin_index: 1
+
+
+Net 2 ($auto_414)
+
+Node:	770321	SOURCE (0,50,40)  Class: 26  Switch: 0
+Node:	770372	  OPIN (0,50,40)  Pin: 75   clb.O0[18] Switch: 3
+Node:	1330404	 CHANY (0,50,40) to (50,43)  Track: 144  Switch: 3
+Node:	1177127	 CHANX (0,47,43) to (50,43)  Track: 159  Switch: 2
+Node:	1177219	 CHANX (0,49,43)  Track: 27  Switch: 2
+Node:	1324800	 CHANY (0,48,44)  Track: 24  Switch: 3
+Node:	1181292	 CHANX (0,49,44) to (52,44)  Track: 48  Switch: 2
+Node:	1327701	 CHANY (0,49,44)  Track: 13  Switch: 1
+Node:	960606	  IPIN (0,49,44)  Pad: 1400  Switch: 0
+Node:	960356	  SINK (0,49,44)  Pad: 1400  Switch: -1 Net_pin_index: 1
+
+
+Net 3 ($auto_413)
+
+Node:	770324	SOURCE (0,50,40)  Class: 29  Switch: 0
+Node:	770375	  OPIN (0,50,40)  Pin: 78   clb.O0[21] Switch: 3
+Node:	1330378	 CHANY (0,50,40) to (50,43)  Track: 40  Switch: 2
+Node:	1165071	 CHANX (0,50,40)  Track: 7  Switch: 2
+Node:	1327500	 CHANY (0,49,41)  Track: 4  Switch: 2
+Node:	1169071	 CHANX (0,49,41)  Track: 7  Switch: 3
+Node:	1324447	 CHANY (0,48,38) to (48,41)  Track: 127  Switch: 2
+Node:	1165002	 CHANX (0,49,40)  Track: 2  Switch: 3
+Node:	1327558	 CHANY (0,49,41) to (49,44)  Track: 152  Switch: 1
+Node:	960607	  IPIN (0,49,44)  Pad: 1420  Switch: 0
+Node:	960374	  SINK (0,49,44)  Pad: 1420  Switch: -1 Net_pin_index: 1
+
+
+Net 4 ($obuf_s)
+
+Node:	770325	SOURCE (0,50,40)  Class: 30  Switch: 0
+Node:	770376	  OPIN (0,50,40)  Pin: 79   clb.O0[22] Switch: 3
+Node:	1330396	 CHANY (0,50,40) to (50,43)  Track: 112  Switch: 2
+Node:	1173193	 CHANX (0,50,42)  Track: 1  Switch: 3
+Node:	1327686	 CHANY (0,49,43) to (49,44)  Track: 152  Switch: 1
+Node:	960605	  IPIN (0,49,44)  Pad: 1380  Switch: 0
+Node:	960338	  SINK (0,49,44)  Pad: 1380  Switch: -1 Net_pin_index: 1

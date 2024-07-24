@@ -1,0 +1,3 @@
+plugin -i pow-extract
+read_verilog /nfs_scratch/scratch/CompilerValidation/abdul_hameed/24july/Validation/RTL_testcases/GUI_testcases/gui_run_incr_comp_project/incr_comp/run_1/synth_1_1/synthesis/incr_comp_post_synth.v
+pow_extract -tech genesis3 

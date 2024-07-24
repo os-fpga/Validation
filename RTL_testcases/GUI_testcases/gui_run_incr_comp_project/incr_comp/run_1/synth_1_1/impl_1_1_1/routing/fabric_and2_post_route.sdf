@@ -1,0 +1,116 @@
+(DELAYFILE
+    (SDFVERSION "2.1")
+    (DESIGN "fabric_and2")
+    (VENDOR "verilog-to-routing")
+    (PROGRAM "vpr")
+    (VERSION "")
+    (DIVIDER /)
+    (TIMESCALE 1 ps)
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_\$ibuf_one_output_0_0_to_lut_\$obuf_s_input_0_2)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (1378.94:1378.94:1378.94) (1378.94:1378.94:1378.94))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_\$ibuf_sec_output_0_0_to_lut_\$obuf_s_input_0_3)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (1439.9:1439.9:1439.9) (1439.9:1439.9:1439.9))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_lut_\$auto_413_output_0_0_to_\$auto_413_input_0_0)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (1434.02:1434.02:1434.02) (1434.02:1434.02:1434.02))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_lut_\$auto_414_output_0_0_to_\$auto_414_input_0_0)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (1373.06:1373.06:1373.06) (1373.06:1373.06:1373.06))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_lut_\$obuf_s_output_0_0_to_\$obuf_s_input_0_0)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (1132.24:1132.24:1132.24) (1132.24:1132.24:1132.24))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_lut_\$true_output_0_0_to_lut_\$auto_414_input_0_4)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (85.13:85.13:85.13) (85.13:85.13:85.13))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "fpga_interconnect")
+        (INSTANCE routing_segment_lut_\$true_output_0_0_to_lut_\$auto_413_input_0_4)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH datain dataout (85.13:85.13:85.13) (85.13:85.13:85.13))
+            )
+        )
+    )
+
+    (CELL
+        (CELLTYPE "LUT_K")
+        (INSTANCE lut_\$auto_414)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH in[4] out (99.19:99.19:99.19) (99.19:99.19:99.19))
+            )
+        )
+    )
+    
+    (CELL
+        (CELLTYPE "LUT_K")
+        (INSTANCE lut_\$true)
+    )
+    
+    (CELL
+        (CELLTYPE "LUT_K")
+        (INSTANCE lut_\$auto_413)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH in[4] out (99.19:99.19:99.19) (99.19:99.19:99.19))
+            )
+        )
+    )
+    
+    (CELL
+        (CELLTYPE "LUT_K")
+        (INSTANCE lut_\$obuf_s)
+        (DELAY
+            (ABSOLUTE
+                (IOPATH in[2] out (147.8:147.8:147.8) (147.8:147.8:147.8))
+                (IOPATH in[3] out (135.5:135.5:135.5) (135.5:135.5:135.5))
+            )
+        )
+    )
+    
+)

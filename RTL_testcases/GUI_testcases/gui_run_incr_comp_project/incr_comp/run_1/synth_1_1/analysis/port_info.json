@@ -1,0 +1,34 @@
+[
+      {
+          "ports": [
+              {
+                  "direction": "Input",
+                  "name": "one",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "sec",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Output",
+                  "name": "s",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              }
+          ],
+          "topModule": "and2"
+      }
+]
