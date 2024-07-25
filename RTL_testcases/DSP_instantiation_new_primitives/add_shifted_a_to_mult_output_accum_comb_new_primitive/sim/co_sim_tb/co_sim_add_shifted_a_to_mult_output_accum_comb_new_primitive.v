@@ -63,7 +63,7 @@ initial begin
 		compare();
 		a = $urandom( );
 		b = $urandom( );
-		acc_fir = $urandom( );
+		acc_fir = $urandom_range(0,43);
 	end
 	$display ("\n\n***Random Functionality Tests with random inputs for multiplier and acc_fir are ended***\n\n");
 

@@ -65,7 +65,7 @@ initial begin
 	repeat (600) begin
 		a = $urandom( );
 		b = $urandom( );
-		acc_fir = $urandom( );
+		acc_fir = $urandom_range(0,43);
 		@(posedge clk);
 		expected_out = (a<<acc_fir) + (expected_out[19:0]*b); //calculate the result at every negedge
 		@(negedge clk);

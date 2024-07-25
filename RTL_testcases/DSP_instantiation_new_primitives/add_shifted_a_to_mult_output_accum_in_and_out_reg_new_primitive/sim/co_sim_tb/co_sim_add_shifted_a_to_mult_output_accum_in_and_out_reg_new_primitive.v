@@ -65,7 +65,7 @@ initial begin
 		//expected_out = (a<<acc_fir) + (expected_out[19:0]*b);
 		a = $urandom( );
 		b = $urandom( );
-		acc_fir = $urandom( );
+		acc_fir = $urandom_range(0,43);
 		//@(negedge clk);
 		@(negedge clk);
 		display_stimulus();

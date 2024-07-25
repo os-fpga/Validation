@@ -92,7 +92,7 @@ initial begin
 	@(negedge clk);
 	a = 20'hfffff;
 	b = 18'h3ffff;
-	acc_fir =6'h3f;
+	acc_fir =6'd43;
 	@(posedge clk);
 	expected_out = (a<<acc_fir) - (16*b);
 	

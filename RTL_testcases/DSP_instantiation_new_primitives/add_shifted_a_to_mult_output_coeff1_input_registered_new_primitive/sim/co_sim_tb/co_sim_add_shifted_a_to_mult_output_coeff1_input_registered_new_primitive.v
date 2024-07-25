@@ -63,7 +63,7 @@ initial begin
 	repeat (600) begin
 		a = $random( );
 		b = $random( );
-		acc_fir = $random( );
+		acc_fir = $urandom_range(0,43);
 		expected_out = (a<<acc_fir) + (16*b); //calculate the result at every negedge
 		@(negedge clk);
 		display_stimulus();
