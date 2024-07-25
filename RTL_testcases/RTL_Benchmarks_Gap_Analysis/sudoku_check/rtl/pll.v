@@ -141,7 +141,7 @@
 module pll (
     input wire areset,
     input wire inclk0,
-    output reg c0,
+    output wire c0,
     output reg locked
 );
 
@@ -153,8 +153,6 @@ module pll (
     always @(posedge inclk0 or posedge areset) begin
         if (areset) begin
             internal_clk <= 0;
-            lock_counter <= 0;
-            locked <= 0;
         end else begin
             internal_clk <= ~internal_clk;
         end
@@ -166,7 +164,7 @@ module pll (
             locked <= 0;
         end else begin
             if (lock_counter < LOCK_THRESHOLD) begin
-                lock_counter <= lock_counter + 1;
+                lock_counter <= lock_counter + 1'd1;
             end else begin
                 locked <= 1;
             end

@@ -117,7 +117,7 @@ module fifo (
     output wire wrfull
 );
 
-    parameter DEPTH = 256;
+    parameter DEPTH = 8;
     parameter ADDR_WIDTH = 8;
 
     reg [323:0] mem [0:DEPTH-1];
@@ -165,11 +165,11 @@ module fifo (
         end
     end
 
-    always @(posedge wrclk or posedge aclr) begin
-        if (aclr) begin
-            wrempty_reg <= 1;
-            wrfull_reg <= 0;
-        end else if (wrptr == rdptr) begin
+    always @(posedge wrclk) begin
+        // if (aclr) begin
+        //     wrempty_reg <= 1;
+        //     wrfull_reg <= 0;
+        if (wrptr == rdptr) begin
             wrempty_reg <= 1;
             wrfull_reg <= 0;
         end else if (wrptr == rdptr - 1) begin
@@ -181,11 +181,11 @@ module fifo (
         end
     end
     
-    always @(posedge rdclk or posedge aclr) begin
-        if (aclr) begin
-            rdempty_reg <= 1;
-            rdfull_reg <= 0;
-        end else if (rdptr == wrptr) begin
+    always @(posedge rdclk) begin
+        // if (aclr) begin
+        //     rdempty_reg <= 1;
+        //     rdfull_reg <= 0;
+        if (rdptr == wrptr) begin
             rdempty_reg <= 1;
             rdfull_reg <= 0;
         end else if (rdptr == wrptr - 1) begin

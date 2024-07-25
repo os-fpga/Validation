@@ -114,7 +114,7 @@ sudoku_core sc (.clk(clk),
 
 sudoku_solution ss (.puzzle_ans(ofifo_dataout),
 					.solution(solution_wire));
-defparam ss.WIDTH = 4;
+// defparam ss.WIDTH = 4;
 
 // Generate output signals
 assign puzzle_io = (puzzle_oe ? ofifo_dataout : 324'bz);
