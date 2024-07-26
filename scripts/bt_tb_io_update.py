@@ -494,8 +494,12 @@ def replace_auto_in_file(file_path):
 
     modified_content = re.sub(pattern, r'\\\1\2 ', content)
 
+    second_pattern = r'(\$f2g_tx_oe_A_obuft_const1_\d+)(_[a-zA-Z_]+)?'
+
+    modified_content_again = re.sub(second_pattern, r'\\\1\2 ', modified_content)
+
     with open(file_path, 'w') as file:
-        file.write(modified_content)
+        file.write(modified_content_again)
 
 def replace_auto_in_file_verif(file_path):
 
@@ -506,8 +510,12 @@ def replace_auto_in_file_verif(file_path):
 
     modified_content = re.sub(pattern, r'\\\1\2 ', content)
 
+    second_pattern = r'(\$f2g_tx_oe_A_obuft_const1_)(\d+)?'
+
+    modified_content_again = re.sub(second_pattern, r'\\\1\2 ', modified_content)
+
     with open(file_path, 'w') as file:
-        file.write(modified_content)
+        file.write(modified_content_again)
 
 def remove_comma_from_last_line(file_path):
     with open(file_path, 'r') as file:
