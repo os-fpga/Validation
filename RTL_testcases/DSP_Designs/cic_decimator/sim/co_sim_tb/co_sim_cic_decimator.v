@@ -73,6 +73,7 @@ initial begin
 
 	always @(negedge d_clk)
 	begin
+		#1;
 		compare();
 	end
 
