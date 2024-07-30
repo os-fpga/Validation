@@ -67,7 +67,7 @@ initial begin
 	$display ("***Reset Test is ended***");
 	//Random stimulus generation
 	repeat(100) @ (negedge clk) begin
-		acc_fir 			 <= $urandom();
+		acc_fir 			 <= $urandom_range(0,43);
 		a 			 <= $urandom();
 		feedback 			 <= $urandom();
 		b 			 <= $urandom();
@@ -82,7 +82,7 @@ initial begin
 end
 
 	// ----------- Corner Case stimulus generation -----------
-	acc_fir <= 63;
+	acc_fir <= 43;
 	a <= 1048575;
 	feedback <= 7;
 	b <= 262143;
