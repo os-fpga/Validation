@@ -19,10 +19,13 @@ GJC30	golden (.*);
 	GJC30_post_synth synth_net (.*, .dly_tap_val_inv_buf(dly_tap_val_inv_buf_netlist), .data_o_inv_delayed_buf(data_o_inv_delayed_buf_netlist) );
 `endif
 
+reg random;
+
 always #100 clk_i_buf = ~clk_i_buf;
-		// Initialize values to zero 
+		
 initial	begin
-	{clk_i_buf, data_i_n, dly_adj_buf, dly_incdec_buf, dly_ld_buf } <= 'd0;
+	// Initialize values to zero 
+	{clk_i_buf, random, data_i_n, dly_adj_buf, dly_incdec_buf, dly_ld_buf } <= 'd0;
 	data_i_p <= 'd1;
 	reset <= 1;
 	@(negedge clk_i_buf);
@@ -31,13 +34,13 @@ initial	begin
 
 // Generating random stimulus 
 	for (int i = 0; i < 1000; i = i + 1) begin
-		data_i_n <= $urandom();
-		data_i_p <= $urandom();
-		dly_adj_buf <= $urandom();
-		dly_incdec_buf <= $urandom();
-		dly_ld_buf <= $urandom();
+		random 			<= $random();
+		data_i_p 		<= random;
+		data_i_n 		<= ~random;
+		dly_adj_buf 	<= $urandom();
+		dly_incdec_buf 	<= $urandom();
+		dly_ld_buf 		<= $urandom();
 		@(negedge clk_i_buf);
-		#1
 		compare();
 	end
 
