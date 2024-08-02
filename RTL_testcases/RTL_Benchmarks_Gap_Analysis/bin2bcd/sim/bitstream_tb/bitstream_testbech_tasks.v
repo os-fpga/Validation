@@ -4,18 +4,18 @@
     reg [3:0] digit;
     integer i;
     begin
-        result = 0;
-        for (integer i = 0; i < 8; i = i+1)
-        begin
-            result = {result[10:0],bin[7-i]};
-                
-            //if a hex digit of 'result' is more than 4, add 3 to it.  
-            if(i < 7 && result[3:0] > 4) 
+
+        result = 12'd0;
+    
+        for (i = 7; i >= 0; i = i - 1) begin
+            result = {result[10:0], bin[i]};
+
+            if (result[3:0] >= 5)
                 result[3:0] = result[3:0] + 3;
-            if(i < 7 && result[7:4] > 4)
+            if (result[7:4] >= 5)
                 result[7:4] = result[7:4] + 3;
-            if(i < 7 && result[11:8] > 4)
-                result[11:8] = result[11:8] + 3;  
+            if (result[11:8] >= 5)
+                result[11:8] = result[11:8] + 3;
         end
         calculate_expected_bcd = result;
     end
