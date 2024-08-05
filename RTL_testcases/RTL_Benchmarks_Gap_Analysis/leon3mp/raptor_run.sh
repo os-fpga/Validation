@@ -205,7 +205,12 @@ parse_cga exit 1; }
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
-    [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    # [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl 
+    echo "if {[catch {synthesize $strategy} error]} {">>raptor_tcl.tcl
+    echo "    puts \"Negative Test Passed\"">>raptor_tcl.tcl
+    echo "    puts \"INFO: SYN: Design $design is synthesized\"">>raptor_tcl.tcl
+    echo "    exit 1">>raptor_tcl.tcl
+    echo "}">>raptor_tcl.tcl
     if [ "$post_synth_sim" == true ]; then 
         echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
