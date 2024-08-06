@@ -11,9 +11,9 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
         
     always @ (posedge clk) begin
         if (!rst)
-            cin <= 1;
-        else
             cin <= 0;
+        else
+            cin <= 1;
     end
 
     full_adder #(.WIDTH(WIDTH)) full_adder_inst (.clk(clk),.rst(rst),.data_in(data_in),.data_out(d_out),.cin(cin),.cout(cout));
@@ -46,8 +46,7 @@ module full_adder #(parameter WIDTH=32)(
             a <= data_in[15:0];
             b <= data_in[31:16];
             c <= cin;
-            data_out <= a^b^c;
-            cout <= (a & b)|(c & b)|(a & c);
+            {cout , data_out} < = a+b+c;
         end
             
     end
