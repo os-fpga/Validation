@@ -46,8 +46,7 @@ module full_adder #(parameter WIDTH=32)(
             a <= data_in[15:0];
             b <= data_in[31:16];
             c <= cin;
-            data_out <= a^b^c;
-            cout <= (a & b)|(c & b)|(a & c);
+            {cout, data_out} <= a+b+c;
         end
             
     end
