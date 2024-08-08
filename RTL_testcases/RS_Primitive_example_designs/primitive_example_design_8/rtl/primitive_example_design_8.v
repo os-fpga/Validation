@@ -6,7 +6,7 @@ module primitive_example_design_8 (
     input ready,
     input ibuf1_en,ibuf2_en,ibuf3_en,
     input [1:0] mux_select,
-    input obuft_ds1_oe,obuft_ds2_oe,obuft_ds3_oe,obuft_ds4_oe,
+    input obuft_ds1_oe,obuft_ds2_oe,obuft_ds3_oe,obuft_ds4_oe,obuft_ds5_oe,
     output reset_o,
     output obuft_ds_out_n,obuft_ds_out_p,
     output size_out,
@@ -22,9 +22,9 @@ module primitive_example_design_8 (
     reg [31:0] shift_reg;
     wire [31:0] shift_reg_out,wdata_w,addr_w;
     wire resp_w,ready_w,data_in_w;
-    wire [2:0] size_w,burst_w;
+    wire [2:0] size_w,burst_w,burst_ff_w;
     wire masterlock,sel,write;
-    wire mux_out,burst_ff_w,wdata_ww;
+    wire mux_out,wdata_ww;
     wire [3:0] prot_w,wbe_w;
     wire [1:0] trans_w;
     
@@ -81,6 +81,9 @@ SOC_FPGA_INTF_AHB_S inst (
     O_BUFT_DS obuft_ds_inst2 (.I(wbe_w[0]),.T(obuft_ds2_oe),.O_N(wbe_n[0]),.O_P(wbe_p[0]));
     O_BUFT_DS obuft_ds_inst3 (.I(wbe_w[1]),.T(obuft_ds3_oe),.O_N(wbe_n[1]),.O_P(wbe_p[1]));
     O_BUFT_DS obuft_ds_inst4 (.I(wbe_w[2]),.T(obuft_ds4_oe),.O_N(wbe_n[2]),.O_P(wbe_p[2]));
+    O_BUFT_DS obuft_ds_inst5 (.I(wbe_w[3]),.T(obuft_ds5_oe),.O_N(wbe_n[3]),.O_P(wbe_p[3]));
+
+    
 
     register register_inst1 (.clk(clk),.d(burst_w),.rst(reset),.q(burst_ff_w));
     register register_inst2 (.clk(clk),.d(prot_w),.rst(reset),.q(prot_ff));
@@ -92,7 +95,12 @@ SOC_FPGA_INTF_AHB_S inst (
     // count ones in addr
     assign addr = $countones(addr_w);
 
-    O_BUF o_buff_inst1 (.I(burst_ff_w),.O(burst_ff));
+    genvar j;
+    generate
+      for (j = 0; j < 3; j = j + 1) begin : gen_i_buf
+        O_BUF o_buff_inst1 (.I(burst_ff_w[j]),.O(burst_ff[j]));
+      end
+    endgenerate
     O_BUF o_buff_inst2 (.I(wdata_ww),.O(wdata));
 
 endmodule

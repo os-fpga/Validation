@@ -51,7 +51,13 @@ module primitive_example_design_3(
   endgenerate
 
   I_BUF i_buf_instance2 (.I(CLK),.EN(ibuf4_en[0]),.O(i_buf_clk));
-  I_BUF i_buf_instance3 (.I(i_buft_oe),.EN(ibuf4_en[1]),.O(i_buft_oe_in));
+  genvar j;
+  generate
+    for (j = 0; j < 38; j = j + 1) begin : gen_i_buf
+    I_BUF i_buf_instance3 (.I(i_buft_oe[j]),.EN(ibuf4_en[1]),.O(i_buft_oe_in[j]));
+    end
+  endgenerate
+  
   I_BUF i_buf_instance10 (.I(RESET),.EN(ibuf4_en[8]),.O(i_buf_reset));
   I_BUF i_buf_instance11 (.I(FEEDBACK[0]),.EN(ibuf4_en[9]),.O(i_buf_feedback[0]));
   I_BUF i_buf_instance12 (.I(FEEDBACK[1]),.EN(ibuf4_en[10]),.O(i_buf_feedback[1]));
@@ -66,7 +72,7 @@ module primitive_example_design_3(
 
   genvar j;
   generate
-    for (j = 0; j < 37; j = j + 1) begin : gen_o_buft
+    for (j = 0; j < 38; j = j + 1) begin : gen_o_buft
         O_BUFT o_buft_inst (.I(z_out[j]),.T(i_buft_oe_in[j]),.O(Z[j]));
     end
   endgenerate
