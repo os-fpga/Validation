@@ -1,11 +1,22 @@
-set_top_module GJC41
+create_clock -period 10 clk_pll_in
 
-create_clock -period 10 -name clk_design
+create_generated_clock -source [get_clocks clk_pll_in] -divide_by 1 [get_nets pll_clk]
 
-set_input_delay 1 -clock clk_design [get_ports {reset}]
-set_input_delay 1 -clock clk_design [get_ports {enable_n}]
-set_output_delay 1.5 -clock clk_design [get_ports {data_i}]
-set_output_delay 1.5 -clock clk_design [get_ports {data_o}]
-set_output_delay 1 -clock clk_design [get_ports {bitslip_ctrl_n}]
-set_output_delay 1 -clock clk_design [get_ports {ready}]
+create_clock -period 5 fabric_clk_div
+
+set_input_delay  1 -clock fabric_clk_div [get_ports {reset}]
+set_input_delay  1 -clock fabric_clk_div [get_ports {enable_n}]
+
+set_input_delay 2 -clock fabric_clk_div [get_ports data_i_serdes[0]]
+set_input_delay 2 -clock fabric_clk_div [get_ports data_i_serdes[1]]
+set_input_delay 2 -clock fabric_clk_div [get_ports data_i_serdes[2]]
+set_input_delay 2 -clock fabric_clk_div [get_ports data_i_serdes[3]]
+
+set_output_delay 2 -clock fabric_clk_div  [get_ports data_o[0]]
+set_output_delay 2 -clock fabric_clk_div  [get_ports data_o[1]]
+set_output_delay 2 -clock fabric_clk_div  [get_ports data_o[2]]
+set_output_delay 2 -clock fabric_clk_div  [get_ports data_o[3]]
+
+set_input_delay 1 -clock fabric_clk_div [get_ports {bitslip_ctrl_n}]
+set_output_delay 1 -clock fabric_clk_div [get_ports {ready}]
 
