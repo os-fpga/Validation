@@ -1,5 +1,4 @@
-set_top_module GJC39
-
+# Create a Virtual clock (-name option) as there are no clocks in this design
 create_clock -period 10 -name clk_design
 
 set_input_delay 2 -clock clk_design [get_ports {reset}]

@@ -1,6 +1,6 @@
-set_top_module GJC8
-# -name is used for creating virtual clock and for actual clock -name option will not be used
+# Create a Virtual clock (-name option) as there are no clocks in this design
 create_clock -period 5 -name vclk
+
 set_input_delay 1 -clock vclk [get_ports {*}]
 set_output_delay 1 -clock vclk [get_ports {*}]
 
