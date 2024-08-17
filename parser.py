@@ -708,7 +708,7 @@ def parse_log_files(file,timing_file,log_line_keys_map):
 
 def main():
     # Open the keywords file and read the keywords mapping
-    with open('../../../keywords.json', 'r') as f:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'keywords.json'), 'r') as f:
         log_line_keys_map = json.load(f)
     data = parse_log_files(sys.argv[1],sys.argv[2],log_line_keys_map)
     with open('CGA_Result.json', 'w') as f:
