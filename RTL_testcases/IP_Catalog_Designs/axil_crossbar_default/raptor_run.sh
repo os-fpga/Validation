@@ -176,7 +176,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
-    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pm_count=4 -Ps_count=4 -Pdata_width=32 -Paddr_width=32 -out_file $IP_PATH/$design">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "" || echo  "configure_ip $ip_name"_v1_0" -mod_name $design -Pm_count=4 -Ps_count=4 -out_file $IP_PATH/$design">>raptor_tcl.tcl
     [ -z "$ip_name" ] && echo "" || echo "ipgenerate">>raptor_tcl.tcl
 
     # [ -z "$ip_name" ] && echo "" || echo "add_include_path $IP_PATH/rapidsilicon/ip/$ip_name/v1_0/$design/src/">>raptor_tcl.tcl
@@ -220,7 +220,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
             
-            # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
+            echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else

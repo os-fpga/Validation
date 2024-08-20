@@ -150,7 +150,7 @@
 //
 
 // synopsys translate_off
-`include "MEM_FILE_PATHtimescale.v"
+`include "timescale.v"
 // synopsys translate_on
 
 `include "uart_defines.vh"
