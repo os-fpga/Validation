@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MIT
 
+SHELL := /bin/bash
+.SHELLFLAGS := -O extglob -c
+
 MODULE_NAME ?= vex_soc_sim
 
 OUT_DIR ?= $(PWD)

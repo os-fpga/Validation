@@ -2,6 +2,9 @@
 #
 # SPDX-License-Identifier: MIT
 
+SHELL := /bin/bash
+.SHELLFLAGS := -O extglob -c
+
 MODULE_NAME ?= vex_soc_sim
 
 OUT_DIR ?= $(PWD)
@@ -28,6 +31,7 @@ all:
 	$(VVP_CMD)
 	-@mv $(TARGET) $(OUT_DIR)
 	@sed -i "s|$(OUT_DIR)/tb.vcd|tb.vcd|g" ./testbench.v
+
 
 # Rule to build the Verilog executable
 $(TARGET): $(VERILOG_FILES)
