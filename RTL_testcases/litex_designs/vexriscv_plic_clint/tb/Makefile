@@ -1,8 +1,10 @@
 # This file is Copyright (c) 2022 RapidSilicon.
 #
 # SPDX-License-Identifier: MIT
+
 SHELL := /bin/bash
 .SHELLFLAGS := -O extglob -c
+
 MODULE_NAME ?= vex_soc_sim
 
 OUT_DIR ?= $(PWD)
@@ -24,11 +26,12 @@ VVP_CMD = vvp $(TARGET)
 
 # Default target (the first target is the default)
 all:
-	@sed -i "s|tb.vcd|$(OUT_DIR)/tb_post.vcd|g" ./testbench.v
+	@sed -i "s|tb.vcd|$(OUT_DIR)/tb.vcd|g" ./testbench.v
 	$(IVERILOG_CMD) $(VERILOG_FILES)
 	$(VVP_CMD)
 	-@mv $(TARGET) $(OUT_DIR)
-	@sed -i "s|$(OUT_DIR)/tb_post.vcd|tb.vcd|g" ./testbench.v
+	@sed -i "s|$(OUT_DIR)/tb.vcd|tb.vcd|g" ./testbench.v
+
 
 # Rule to build the Verilog executable
 $(TARGET): $(VERILOG_FILES)

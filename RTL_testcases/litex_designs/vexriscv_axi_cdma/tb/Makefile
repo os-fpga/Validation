@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 SHELL := /bin/bash
 .SHELLFLAGS := -O extglob -c
+
 MODULE_NAME ?= vex_soc_sim
 
 OUT_DIR ?= $(PWD)
@@ -11,6 +12,7 @@ TARGET = $(MODULE_NAME)
 
 # Directories containing Verilog source and simulation files
 RTL_DIR += ../rtl
+
 SIM_DIR = ../tb
 
 # Verilog source files
@@ -39,4 +41,5 @@ clear:
 	rm -f $(TARGET)
 
 # Phony targets (not actual files)
+
 .PHONY: all run clean
