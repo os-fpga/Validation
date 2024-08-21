@@ -85,7 +85,7 @@ command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 e
 parse_cga exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
-
+primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIMITIVES_MODELS/sim_models/verilog/*.v" -exec dirname {} \; -quit)
 #removing and creating raptor_testcase_files
 #rm -fR $PWD/results_dir
 [ ! -d $PWD/results_dir ] && mkdir $PWD/results_dir
@@ -199,26 +199,24 @@ parse_cga exit 1; }
         echo ""
     fi
 
-	# echo "analyze">>raptor_tcl.tcl
+	echo "analyze">>raptor_tcl.tcl
     echo "cd ../tb">>raptor_tcl.tcl
-    echo "exec make clear" >> raptor_tcl.tcl
     echo "exec make MODULE_NAME=${design}_sim >> ../results_dir/raptor.log 2>&1">>raptor_tcl.tcl
     echo "cd ..">>raptor_tcl.tcl
-    # [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
-    # [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
-    # [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
-    # [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
-    # [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
+    [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
+    [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
+    [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
+    [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
     if [ "$post_synth_sim_hard_code" == true ]; then 
         echo "exec echo \"SGT: Gate simulation for design: $design\" >> results_dir/raptor.log 2>&1" >> raptor_tcl.tcl
         echo "cd tb/">>raptor_tcl.tcl
-        echo "set sed_script \"s|RTL_DIR += ../rtl|RTL_DIR += ../rtl\\\nRTL_DIR += $primitive_sim_path/\\\\*.v|\"" >> raptor_tcl.tcl
+        echo "set sed_script \"s|RTL_DIR += ../rtl|RTL_DIR += ../rtl\\\nRTL_DIR += $primitive_sim_path/\\\\!(SOC_FPGA_TEMPERATURE).v|\"" >> raptor_tcl.tcl
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
         echo "set sed_script \"s|RTL_DIR += ../rtl|RTL_DIR += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v|\"" >> raptor_tcl.tcl
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
         echo "set sed_script \"s|R)/tb.vcd|R)/tb_post.vcd|\"" >> raptor_tcl.tcl
         echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
-        echo "exec make clear" >> raptor_tcl.tcl
         echo "exec make MODULE_NAME=${design}_post_sim >> ../results_dir/raptor.log 2>&1">>raptor_tcl.tcl
         echo "cd .." >>raptor_tcl.tcl
         echo "exec echo \"SGT: Gate simulation for design: $design had ended\" >> results_dir/raptor.log 2>&1" >> raptor_tcl.tcl

@@ -1,7 +1,8 @@
 # This file is Copyright (c) 2022 RapidSilicon.
 #
 # SPDX-License-Identifier: MIT
-
+SHELL := /bin/bash
+.SHELLFLAGS := -O extglob -c
 MODULE_NAME ?= vex_soc_sim
 
 OUT_DIR ?= $(PWD)
@@ -9,8 +10,7 @@ OUT_DIR ?= $(PWD)
 TARGET = $(MODULE_NAME)
 
 # Directories containing Verilog source and simulation files
-RTL_DIR += /nfs_scratch/scratch/litex/sarmad_salman/practice/ep3/Validation/RTL_testcases/litex_designs/vexriscv_axi_cdma/results_dir/vex_soc/run_1/synth_1_1/synthesis/vex_soc_post_synth.v
-RTL_DIR += /*.v
+RTL_DIR += ../rtl
 SIM_DIR = ../tb
 
 # Verilog source files
