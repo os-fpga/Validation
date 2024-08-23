@@ -1,0 +1,43 @@
+[
+      {
+          "ports": [
+              {
+                  "direction": "Input",
+                  "name": "clk",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "reset_n",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 0
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Input",
+                  "name": "dma_req_in",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 3
+                  },
+                  "type": "LOGIC"
+              },
+              {
+                  "direction": "Output",
+                  "name": "dma_ack_out",
+                  "range": {
+                      "lsb": 0,
+                      "msb": 3
+                  },
+                  "type": "LOGIC"
+              }
+          ],
+          "topModule": "GJC48"
+      }
+]

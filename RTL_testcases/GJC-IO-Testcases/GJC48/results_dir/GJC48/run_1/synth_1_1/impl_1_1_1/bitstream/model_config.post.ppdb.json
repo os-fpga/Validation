@@ -1,0 +1,546 @@
+{
+  "messages" : [
+    "Netlist PPDB: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/synthesis/io_config.json",
+    "Config Mapping: /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/configuration/Virgo/gemini_compact_22x4_config_attributes.mapping.json",
+    "Property JSON: model_config.property.json",
+    "Preparing Python file: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/bitstream/config.py",
+    "Read resources",
+    "Validate Instances",
+    "Merge properties into instances",
+    "Re-location instances",
+    "Configure Mapping file initialization",
+    "Validation using '__primary_validation__' rule",
+    "Internal error validations",
+    "Assign instance-without-location",
+    "Allocate FCLK routing resource",
+    "  CLKBUF $clkbuf$GJC48.$ibuf_clk (location:HP_1_CC_18_9P)",
+    "Allocate ROOT BANK CLKMUX resource",
+    "  CLKBUF $clkbuf$GJC48.$ibuf_clk (location: HP_1_CC_18_9P) try to route clock to clock tree slot #0",
+    "    Used by fabric logic only",
+    "      Resource: u_GBOX_HP_40X2.u_gbox_root_bank_clkmux_0",
+    "Set CLKBUF configuration attributes",
+    "  Set FCLK configuration attributes",
+    "    Skip for HP_1_CC_18_9P",
+    "Allocate PLL resource (and set PLLREF configuration attributes)",
+    "Set PLL remaining configuration attributes",
+    "Validation using '__secondary_validation__' rule",
+    "Set configuration attributes",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_clk)",
+    "    Object: clk",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: CLK_BUF ($clkbuf$GJC48.$ibuf_clk)",
+    "    Object: clk",
+    "      Parameter",
+    "      Property",
+    "        Rule CLK_BUF.GBOX_TOP",
+    "          Match",
+    "        Rule CLK_BUF.ROOT_BANK_CLKMUX",
+    "          Match",
+    "        Rule CLK_BUF.ROOT_MUX",
+    "          Match",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_dma_req_in)",
+    "    Object: dma_req_in[0]",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_dma_req_in_1)",
+    "    Object: dma_req_in[1]",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_dma_req_in_2)",
+    "    Object: dma_req_in[2]",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_dma_req_in_3)",
+    "    Object: dma_req_in[3]",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: I_BUF ($ibuf$GJC48.$ibuf_reset_n)",
+    "    Object: reset_n",
+    "      Parameter",
+    "        Rule I_BUF.WEAK_KEEPER",
+    "          Match",
+    "      Property",
+    "        Rule I_BUF.IOSTANDARD",
+    "          Mismatch",
+    "  Module: O_BUFT ($obuf$GJC48.$obuf_dma_ack_out)",
+    "    Object: dma_ack_out[0]",
+    "      Parameter",
+    "      Property",
+    "        Rule O_BUFT.IOSTANDARD",
+    "          Mismatch",
+    "  Module: O_BUFT ($obuf$GJC48.$obuf_dma_ack_out_1)",
+    "    Object: dma_ack_out[1]",
+    "      Parameter",
+    "      Property",
+    "        Rule O_BUFT.IOSTANDARD",
+    "          Mismatch",
+    "  Module: O_BUFT ($obuf$GJC48.$obuf_dma_ack_out_2)",
+    "    Object: dma_ack_out[2]",
+    "      Parameter",
+    "      Property",
+    "        Rule O_BUFT.IOSTANDARD",
+    "          Mismatch",
+    "  Module: O_BUFT ($obuf$GJC48.$obuf_dma_ack_out_3)",
+    "    Object: dma_ack_out[3]",
+    "      Parameter",
+    "      Property",
+    "        Rule O_BUFT.IOSTANDARD",
+    "          Mismatch"
+  ],
+  "instances" : [
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_clk",
+      "location_object" : "clk",
+      "location" : "HP_1_CC_18_9P",
+      "linked_object" : "clk",
+      "linked_objects" : {
+        "clk" : {
+          "location" : "HP_1_CC_18_9P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "clk",
+        "O" : "$ibuf_clk"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+        "CLK_BUF"
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "CLK_BUF",
+      "name" : "$clkbuf$GJC48.$ibuf_clk",
+      "location_object" : "clk",
+      "location" : "HP_1_CC_18_9P",
+      "linked_object" : "clk",
+      "linked_objects" : {
+        "clk" : {
+          "location" : "HP_1_CC_18_9P",
+          "properties" : {
+            "ROUTE_TO_FABRIC_CLK" : "0"
+          },
+          "config_attributes" : [
+            {
+              "CLK_BUF" : "GBOX_TOP_SRC==DEFAULT"
+            },
+            {
+              "CLK_BUF" : "ROOT_BANK_SRC==A --#MUX=18",
+              "__comment__" : "Used by fabric logic only",
+              "__location__" : "u_GBOX_HP_40X2.u_gbox_root_bank_clkmux_0"
+            },
+            {
+              "ROOT_MUX_SEL" : "0",
+              "__comment__" : "From u_GBOX_HP_40X2.u_gbox_root_bank_clkmux_0",
+              "__location__" : "u_GBOX_HP_40X2.u_gbox_clkmux_52x1_left_0"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "$ibuf_clk",
+        "O" : "$clk_buf_$ibuf_clk"
+      },
+      "parameters" : {
+        "ROUTE_TO_FABRIC_CLK" : "0"
+      },
+      "pre_primitive" : "I_BUF",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__clock_pin_is_valid__,__check_fabric_clock_resource__,__update_fabric_clock_resource__"
+    },
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_dma_req_in",
+      "location_object" : "dma_req_in[0]",
+      "location" : "HP_1_4_2P",
+      "linked_object" : "dma_req_in[0]",
+      "linked_objects" : {
+        "dma_req_in[0]" : {
+          "location" : "HP_1_4_2P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "dma_req_in[0]",
+        "O" : "$ibuf_dma_req_in[0]"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_dma_req_in_1",
+      "location_object" : "dma_req_in[1]",
+      "location" : "HP_1_6_3P",
+      "linked_object" : "dma_req_in[1]",
+      "linked_objects" : {
+        "dma_req_in[1]" : {
+          "location" : "HP_1_6_3P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "dma_req_in[1]",
+        "O" : "$ibuf_dma_req_in[1]"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_dma_req_in_2",
+      "location_object" : "dma_req_in[2]",
+      "location" : "HP_1_8_4P",
+      "linked_object" : "dma_req_in[2]",
+      "linked_objects" : {
+        "dma_req_in[2]" : {
+          "location" : "HP_1_8_4P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "dma_req_in[2]",
+        "O" : "$ibuf_dma_req_in[2]"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_dma_req_in_3",
+      "location_object" : "dma_req_in[3]",
+      "location" : "HP_1_10_5P",
+      "linked_object" : "dma_req_in[3]",
+      "linked_objects" : {
+        "dma_req_in[3]" : {
+          "location" : "HP_1_10_5P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "dma_req_in[3]",
+        "O" : "$ibuf_dma_req_in[3]"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "I_BUF",
+      "name" : "$ibuf$GJC48.$ibuf_reset_n",
+      "location_object" : "reset_n",
+      "location" : "HP_1_2_1P",
+      "linked_object" : "reset_n",
+      "linked_objects" : {
+        "reset_n" : {
+          "location" : "HP_1_2_1P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "I_BUF" : "WEAK_KEEPER==NONE"
+            },
+            {
+              "I_BUF" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "reset_n",
+        "O" : "$ibuf_reset_n"
+      },
+      "parameters" : {
+        "WEAK_KEEPER" : "NONE"
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_input_pin_resource__"
+    },
+    {
+      "module" : "O_BUFT",
+      "name" : "$obuf$GJC48.$obuf_dma_ack_out",
+      "location_object" : "dma_ack_out[0]",
+      "location" : "HP_1_12_6P",
+      "linked_object" : "dma_ack_out[0]",
+      "linked_objects" : {
+        "dma_ack_out[0]" : {
+          "location" : "HP_1_12_6P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "O_BUFT" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "$obuf_dma_ack_out[0]",
+        "O" : "dma_ack_out[0]"
+      },
+      "parameters" : {
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_output_pin_resource__"
+    },
+    {
+      "module" : "O_BUFT",
+      "name" : "$obuf$GJC48.$obuf_dma_ack_out_1",
+      "location_object" : "dma_ack_out[1]",
+      "location" : "HP_1_14_7P",
+      "linked_object" : "dma_ack_out[1]",
+      "linked_objects" : {
+        "dma_ack_out[1]" : {
+          "location" : "HP_1_14_7P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "O_BUFT" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "$obuf_dma_ack_out[1]",
+        "O" : "dma_ack_out[1]"
+      },
+      "parameters" : {
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_output_pin_resource__"
+    },
+    {
+      "module" : "O_BUFT",
+      "name" : "$obuf$GJC48.$obuf_dma_ack_out_2",
+      "location_object" : "dma_ack_out[2]",
+      "location" : "HP_1_20_10P",
+      "linked_object" : "dma_ack_out[2]",
+      "linked_objects" : {
+        "dma_ack_out[2]" : {
+          "location" : "HP_1_20_10P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "O_BUFT" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "$obuf_dma_ack_out[2]",
+        "O" : "dma_ack_out[2]"
+      },
+      "parameters" : {
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_output_pin_resource__"
+    },
+    {
+      "module" : "O_BUFT",
+      "name" : "$obuf$GJC48.$obuf_dma_ack_out_3",
+      "location_object" : "dma_ack_out[3]",
+      "location" : "HP_1_22_11P",
+      "linked_object" : "dma_ack_out[3]",
+      "linked_objects" : {
+        "dma_ack_out[3]" : {
+          "location" : "HP_1_22_11P",
+          "properties" : {
+          },
+          "config_attributes" : [
+            {
+              "O_BUFT" : "IOSTANDARD==DEFAULT"
+            }
+          ]
+        }
+      },
+      "connectivity" : {
+        "I" : "$obuf_dma_ack_out[3]",
+        "O" : "dma_ack_out[3]"
+      },
+      "parameters" : {
+      },
+      "pre_primitive" : "",
+      "post_primitives" : [
+      ],
+      "route_clock_to" : {
+      },
+      "route_clock_result" : {
+      },
+      "errors" : [
+      ],
+      "__validation__" : "TRUE",
+      "__validation_msg__" : "Pass:__pin_is_valid__,__check_output_pin_resource__"
+    }
+  ]
+}

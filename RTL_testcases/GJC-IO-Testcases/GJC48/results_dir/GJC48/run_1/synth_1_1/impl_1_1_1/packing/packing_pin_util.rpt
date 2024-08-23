@@ -1,0 +1,89 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.08
+Build    : 1.1.48
+Hash     : 0b01354
+Date     : Aug 22 2024
+Type     : Engineering
+Log Time   : Fri Aug 23 07:14:08 2024 GMT
+#Packing pin usage report
+Type: io
+	Input Pin Usage:
+		Max: 1.00 (0.06)
+		Avg: 0.64 (0.04)
+		Min: 0.00 (0.00)
+		Histogram:
+		[        0:      1.8) 28 (100.0%) |************************************************
+		[      1.8:      3.6)  0 (  0.0%) |
+		[      3.6:      5.4)  0 (  0.0%) |
+		[      5.4:      7.2)  0 (  0.0%) |
+		[      7.2:        9)  0 (  0.0%) |
+		[        9:       11)  0 (  0.0%) |
+		[       11:       13)  0 (  0.0%) |
+		[       13:       14)  0 (  0.0%) |
+		[       14:       16)  0 (  0.0%) |
+		[       16:       18)  0 (  0.0%) |
+	Output Pin Usage:
+		Max: 1.00 (0.50)
+		Avg: 0.36 (0.18)
+		Min: 0.00 (0.00)
+		Histogram:
+		[        0:      0.2) 18 ( 64.3%) |************************************************
+		[      0.2:      0.4)  0 (  0.0%) |
+		[      0.4:      0.6)  0 (  0.0%) |
+		[      0.6:      0.8)  0 (  0.0%) |
+		[      0.8:        1) 10 ( 35.7%) |***************************
+		[        1:      1.2)  0 (  0.0%) |
+		[      1.2:      1.4)  0 (  0.0%) |
+		[      1.4:      1.6)  0 (  0.0%) |
+		[      1.6:      1.8)  0 (  0.0%) |
+		[      1.8:        2)  0 (  0.0%) |
+
+Type: clb
+	Input Pin Usage:
+		Max: 9.00 (0.12)
+		Avg: 7.50 (0.10)
+		Min: 6.00 (0.08)
+		Histogram:
+		[        0:      7.3) 1 ( 50.0%) |**************************************************
+		[      7.3:       15) 1 ( 50.0%) |**************************************************
+		[       15:       22) 0 (  0.0%) |
+		[       22:       29) 0 (  0.0%) |
+		[       29:       36) 0 (  0.0%) |
+		[       36:       44) 0 (  0.0%) |
+		[       44:       51) 0 (  0.0%) |
+		[       51:       58) 0 (  0.0%) |
+		[       58:       66) 0 (  0.0%) |
+		[       66:       73) 0 (  0.0%) |
+	Output Pin Usage:
+		Max: 16.00 (0.59)
+		Avg: 9.50 (0.35)
+		Min: 3.00 (0.11)
+		Histogram:
+		[        0:      2.7) 0 (  0.0%) |
+		[      2.7:      5.4) 1 ( 50.0%) |**************************************************
+		[      5.4:      8.1) 0 (  0.0%) |
+		[      8.1:       11) 0 (  0.0%) |
+		[       11:       14) 0 (  0.0%) |
+		[       14:       16) 1 ( 50.0%) |**************************************************
+		[       16:       19) 0 (  0.0%) |
+		[       19:       22) 0 (  0.0%) |
+		[       22:       24) 0 (  0.0%) |
+		[       24:       27) 0 (  0.0%) |
+

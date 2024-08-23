@@ -1,0 +1,444 @@
+{
+  "__layout__" : [
+    {
+      "x" : 1,
+      "y" : 1,
+      "name" : "io_left"
+    },
+    {
+      "x" : 1,
+      "y" : 2,
+      "name" : "io_left"
+    },
+    {
+      "x" : 1,
+      "y" : 3,
+      "name" : "io_left"
+    },
+    {
+      "x" : 1,
+      "y" : 4,
+      "name" : "io_left"
+    },
+    {
+      "x" : 2,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 2,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 2,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 2,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 3,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 3,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 3,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 3,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 4,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 4,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 4,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 4,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 5,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 5,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 5,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 5,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 6,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 6,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 6,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 6,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 7,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 7,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 7,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 7,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 8,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 8,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 8,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 8,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 9,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 9,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 9,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 9,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 10,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 10,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 10,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 10,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 11,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 11,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 11,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 11,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 12,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 12,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 12,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 12,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 13,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 13,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 13,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 13,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 14,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 14,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 14,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 14,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 15,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 15,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 15,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 15,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 16,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 16,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 16,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 16,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 17,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 17,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 17,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 17,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 18,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 18,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 18,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 18,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 19,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 19,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 19,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 19,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 20,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 20,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 20,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 20,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 21,
+      "y" : 1,
+      "name" : "io_bottom"
+    },
+    {
+      "x" : 21,
+      "y" : 2,
+      "name" : "clb"
+    },
+    {
+      "x" : 21,
+      "y" : 3,
+      "name" : "clb"
+    },
+    {
+      "x" : 21,
+      "y" : 4,
+      "name" : "io_top"
+    },
+    {
+      "x" : 22,
+      "y" : 1,
+      "name" : "io_right"
+    },
+    {
+      "x" : 22,
+      "y" : 2,
+      "name" : "io_right"
+    },
+    {
+      "x" : 22,
+      "y" : 3,
+      "name" : "io_right"
+    },
+    {
+      "x" : 22,
+      "y" : 4,
+      "name" : "io_right"
+    }
+  ]
+}

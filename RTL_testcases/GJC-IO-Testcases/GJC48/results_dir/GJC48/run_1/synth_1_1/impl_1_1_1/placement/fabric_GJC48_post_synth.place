@@ -1,0 +1,35 @@
+Netlist_File: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_post_synth.net Netlist_ID: SHA256:32224d7e0e9295b21d1a4c0eb7bc5926bfdef5cc16b265cdfd82d32fb23c137a
+Array size: 24 x 6 logic blocks
+
+#block name	x	y	subblk	layer	block number
+#----------	--	--	------	-----	------------
+$auto_528	11	2	0	0	#0
+$obuf_dma_ack_out[0]	12	2	0	0	#1
+out:$auto_524	11	1	68	0	#2
+out:$auto_525	5	1	68	0	#3
+out:$auto_526	6	1	68	0	#4
+out:$auto_527	7	1	68	0	#5
+out:$auto_528	8	1	68	0	#6
+out:$auto_529	4	1	68	0	#7
+out:$auto_530	9	1	67	0	#8
+out:$auto_531	10	1	67	0	#9
+out:$auto_532	13	1	67	0	#10
+out:$auto_533	14	1	67	0	#11
+out:$obuf_dma_ack_out[0]	9	1	65	0	#12
+out:$obuf_dma_ack_out[1]	10	1	65	0	#13
+out:$obuf_dma_ack_out[2]	13	1	65	0	#14
+out:$obuf_dma_ack_out[3]	14	1	65	0	#15
+out:dma_req_reg[0]	10	1	33	0	#16
+out:dma_req_reg[1]	11	4	36	0	#17
+out:dma_req_reg[2]	10	4	62	0	#18
+out:dma_req_reg[3]	10	4	23	0	#19
+$clk_buf_$ibuf_clk	13	1	24	0	#20
+$ibuf_dma_req_in[0]	5	1	22	0	#21
+$ibuf_dma_req_in[1]	6	1	22	0	#22
+$ibuf_dma_req_in[2]	7	1	22	0	#23
+$ibuf_dma_req_in[3]	8	1	22	0	#24
+$ibuf_reset_n	4	1	22	0	#25
+dma_ack_reg[0]	10	1	34	0	#26
+dma_ack_reg[1]	16	4	35	0	#27
+dma_ack_reg[2]	4	1	45	0	#28
+dma_ack_reg[3]	11	4	25	0	#29

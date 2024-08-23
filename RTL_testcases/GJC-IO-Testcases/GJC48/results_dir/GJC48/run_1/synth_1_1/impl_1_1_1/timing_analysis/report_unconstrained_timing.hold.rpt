@@ -1,0 +1,81 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.08
+Build    : 1.1.48
+Hash     : 0b01354
+Date     : Aug 22 2024
+Type     : Engineering
+Log Time   : Fri Aug 23 07:14:13 2024 GMT
+#Unconstrained hold timing startpoint/endpoint
+
+timing_node_id node_type node_name
+-------------- --------- ---------
+1 .input at (5,1) dma_req_in[0].inpad[0]
+2 .input at (6,1) dma_req_in[1].inpad[0]
+3 .input at (7,1) dma_req_in[2].inpad[0]
+4 .input at (8,1) dma_req_in[3].inpad[0]
+5 .input at (4,1) reset_n.inpad[0]
+6 .input at (10,1) dma_ack_reg[0].inpad[0]
+7 .input at (16,4) dma_ack_reg[1].inpad[0]
+8 .input at (4,1) dma_ack_reg[2].inpad[0]
+9 .input at (11,4) dma_ack_reg[3].inpad[0]
+29 dffre at (12,2) dma_ack_out[0].Q[0]
+30 dffre at (12,2) dma_ack_out[1].Q[0]
+31 dffre at (12,2) dma_ack_out[2].Q[0]
+32 dffre at (11,2) dma_ack_out[3].Q[0]
+33 dffre at (11,2) dma_req_reg[0].Q[0]
+34 dffre at (11,2) dma_req_reg[1].Q[0]
+35 dffre at (11,2) dma_req_reg[2].Q[0]
+36 dffre at (11,2) dma_req_reg[3].Q[0]
+47 dffre at (12,2) dma_ack_out[0].D[0]
+49 dffre at (12,2) dma_ack_out[0].R[0]
+50 dffre at (12,2) dma_ack_out[1].D[0]
+52 dffre at (12,2) dma_ack_out[1].R[0]
+53 dffre at (12,2) dma_ack_out[2].D[0]
+55 dffre at (12,2) dma_ack_out[2].R[0]
+56 dffre at (11,2) dma_ack_out[3].D[0]
+58 dffre at (11,2) dma_ack_out[3].R[0]
+59 dffre at (11,2) dma_req_reg[0].D[0]
+61 dffre at (11,2) dma_req_reg[0].R[0]
+62 dffre at (11,2) dma_req_reg[1].D[0]
+64 dffre at (11,2) dma_req_reg[1].R[0]
+65 dffre at (11,2) dma_req_reg[2].D[0]
+67 dffre at (11,2) dma_req_reg[2].R[0]
+68 dffre at (11,2) dma_req_reg[3].D[0]
+70 dffre at (11,2) dma_req_reg[3].R[0]
+71 .output at (9,1) out:dma_ack_out[0].outpad[0]
+72 .output at (10,1) out:dma_ack_out[1].outpad[0]
+73 .output at (13,1) out:dma_ack_out[2].outpad[0]
+74 .output at (14,1) out:dma_ack_out[3].outpad[0]
+75 .output at (10,1) out:dma_req_reg[0].outpad[0]
+76 .output at (11,4) out:dma_req_reg[1].outpad[0]
+77 .output at (10,4) out:dma_req_reg[2].outpad[0]
+78 .output at (10,4) out:dma_req_reg[3].outpad[0]
+79 .output at (8,1) out:$auto_528.outpad[0]
+80 .output at (7,1) out:$auto_527.outpad[0]
+81 .output at (6,1) out:$auto_526.outpad[0]
+82 .output at (5,1) out:$auto_525.outpad[0]
+83 .output at (11,1) out:$auto_524.outpad[0]
+84 .output at (14,1) out:$auto_533.outpad[0]
+85 .output at (9,1) out:$auto_530.outpad[0]
+86 .output at (4,1) out:$auto_529.outpad[0]
+87 .output at (10,1) out:$auto_531.outpad[0]
+88 .output at (13,1) out:$auto_532.outpad[0]
+
+#End of unconstrained hold startpoint/endpoint report

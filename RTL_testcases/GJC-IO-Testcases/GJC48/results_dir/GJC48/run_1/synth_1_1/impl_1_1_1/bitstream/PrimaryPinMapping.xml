@@ -1,0 +1,36 @@
+<!--
+	- I/O mapping
+	- Version: 
+	- Date: Fri Aug 23 12:14:21 2024
+-->
+
+<io_mapping>
+	<io name="gfpga_pad_QL_PREIO_A2F[2616:2616]" net="clk" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[3190:3190]" net="dma_req_in[0]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[3118:3118]" net="dma_req_in[1]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[3046:3046]" net="dma_req_in[2]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[2974:2974]" net="dma_req_in[3]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[3262:3262]" net="reset_n" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[2842:2842]" net="dma_ack_reg[0]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[1331:1331]" net="dma_ack_reg[1]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[3285:3285]" net="dma_ack_reg[2]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_A2F[961:961]" net="dma_ack_reg[3]" dir="input"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2804:2804]" net="$auto_524" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[3236:3236]" net="$auto_525" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[3164:3164]" net="$auto_526" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[3092:3092]" net="$auto_527" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[3020:3020]" net="$auto_528" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[3308:3308]" net="$auto_529" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2947:2947]" net="$auto_530" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2875:2875]" net="$auto_531" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2659:2659]" net="$auto_532" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2587:2587]" net="$auto_533" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2945:2945]" net="dma_ack_out[0]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2873:2873]" net="dma_ack_out[1]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2657:2657]" net="dma_ack_out[2]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2585:2585]" net="dma_ack_out[3]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[2841:2841]" net="dma_req_reg[0]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[972:972]" net="dma_req_reg[1]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[926:926]" net="dma_req_reg[2]" dir="output"/>
+	<io name="gfpga_pad_QL_PREIO_F2A[887:887]" net="dma_req_reg[3]" dir="output"/>
+</io_mapping>

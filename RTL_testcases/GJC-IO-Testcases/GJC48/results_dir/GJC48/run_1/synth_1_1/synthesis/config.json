@@ -1,0 +1,553 @@
+{
+    "instances": [
+        {
+            "connectivity": {
+                "$auto_524": "$auto_524",
+                "$auto_525": "$auto_525",
+                "$auto_526": "$auto_526",
+                "$auto_527": "$auto_527",
+                "$auto_528": "$auto_528",
+                "$auto_529": "$auto_529",
+                "$auto_530": "$auto_530",
+                "$auto_531": "$auto_531",
+                "$auto_532": "$auto_532",
+                "$auto_533": "$auto_533",
+                "$clk_buf_$ibuf_clk": "$clk_buf_$ibuf_clk",
+                "$ibuf_dma_req_in[0]": "$ibuf_dma_req_in[0]",
+                "$ibuf_dma_req_in[1]": "$ibuf_dma_req_in[1]",
+                "$ibuf_dma_req_in[2]": "$ibuf_dma_req_in[2]",
+                "$ibuf_dma_req_in[3]": "$ibuf_dma_req_in[3]",
+                "$ibuf_reset_n": "$ibuf_reset_n",
+                "$obuf_dma_ack_out[0]": "$obuf_dma_ack_out[0]",
+                "$obuf_dma_ack_out[1]": "$obuf_dma_ack_out[1]",
+                "$obuf_dma_ack_out[2]": "$obuf_dma_ack_out[2]",
+                "$obuf_dma_ack_out[3]": "$obuf_dma_ack_out[3]",
+                "dma_ack_reg[0]": "dma_ack_reg[0]",
+                "dma_ack_reg[1]": "dma_ack_reg[1]",
+                "dma_ack_reg[2]": "dma_ack_reg[2]",
+                "dma_ack_reg[3]": "dma_ack_reg[3]",
+                "dma_req_reg[0]": "dma_req_reg[0]",
+                "dma_req_reg[1]": "dma_req_reg[1]",
+                "dma_req_reg[2]": "dma_req_reg[2]",
+                "dma_req_reg[3]": "dma_req_reg[3]"
+            },
+            "module": "fabric_GJC48",
+            "name": "$auto_534"
+        },
+        {
+            "connectivity": {
+                "DMA_ACK": [
+                    "$auto_535.dma_ack_reg[0]",
+                    "$auto_535.dma_ack_reg[1]",
+                    "$auto_535.dma_ack_reg[2]",
+                    "$auto_535.dma_ack_reg[3]"
+                ],
+                "DMA_CLK": "$flatten$auto_535.$ibuf_clk",
+                "DMA_REQ": [
+                    "$auto_535.dma_req_reg[0]",
+                    "$auto_535.dma_req_reg[1]",
+                    "$auto_535.dma_req_reg[2]",
+                    "$auto_535.dma_req_reg[3]"
+                ],
+                "DMA_RST_N": "$flatten$auto_535.$ibuf_reset_n"
+            },
+            "module": "SOC_FPGA_INTF_DMA",
+            "name": "$auto_535.dma_inst"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_clk",
+                "O": "$flatten$auto_535.$clk_buf_$ibuf_clk"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "clk",
+            "module": "CLK_BUF",
+            "name": "$flatten$auto_535.$clkbuf$GJC48.$ibuf_clk"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_524",
+                "I": "$auto_535.clk",
+                "O": "$flatten$auto_535.$ibuf_clk"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "clk",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_clk"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_525",
+                "I": "$auto_535.dma_req_in[0]",
+                "O": "$flatten$auto_535.$ibuf_dma_req_in[0]"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "dma_req_in[0]",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_dma_req_in"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_526",
+                "I": "$auto_535.dma_req_in[1]",
+                "O": "$flatten$auto_535.$ibuf_dma_req_in[1]"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "dma_req_in[1]",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_dma_req_in_1"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_527",
+                "I": "$auto_535.dma_req_in[2]",
+                "O": "$flatten$auto_535.$ibuf_dma_req_in[2]"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "dma_req_in[2]",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_dma_req_in_2"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_528",
+                "I": "$auto_535.dma_req_in[3]",
+                "O": "$flatten$auto_535.$ibuf_dma_req_in[3]"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "dma_req_in[3]",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_dma_req_in_3"
+        },
+        {
+            "connectivity": {
+                "EN": "$flatten$auto_535.$auto_529",
+                "I": "$auto_535.reset_n",
+                "O": "$flatten$auto_535.$ibuf_reset_n"
+            },
+            "direction": "IN",
+            "index": 1,
+            "linked_object": "reset_n",
+            "module": "I_BUF",
+            "name": "$flatten$auto_535.$ibuf$GJC48.$ibuf_reset_n"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$obuf_dma_ack_out[0]",
+                "O": "$auto_535.dma_ack_out[0]",
+                "T": "$flatten$auto_535.$auto_530"
+            },
+            "direction": "OUT",
+            "index": 1,
+            "linked_object": "dma_ack_out[0]",
+            "module": "O_BUFT",
+            "name": "$flatten$auto_535.$obuf$GJC48.$obuf_dma_ack_out"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$obuf_dma_ack_out[1]",
+                "O": "$auto_535.dma_ack_out[1]",
+                "T": "$flatten$auto_535.$auto_531"
+            },
+            "direction": "OUT",
+            "index": 1,
+            "linked_object": "dma_ack_out[1]",
+            "module": "O_BUFT",
+            "name": "$flatten$auto_535.$obuf$GJC48.$obuf_dma_ack_out_1"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$obuf_dma_ack_out[2]",
+                "O": "$auto_535.dma_ack_out[2]",
+                "T": "$flatten$auto_535.$auto_532"
+            },
+            "direction": "OUT",
+            "index": 1,
+            "linked_object": "dma_ack_out[2]",
+            "module": "O_BUFT",
+            "name": "$flatten$auto_535.$obuf$GJC48.$obuf_dma_ack_out_2"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$obuf_dma_ack_out[3]",
+                "O": "$auto_535.dma_ack_out[3]",
+                "T": "$flatten$auto_535.$auto_533"
+            },
+            "direction": "OUT",
+            "index": 1,
+            "linked_object": "dma_ack_out[3]",
+            "module": "O_BUFT",
+            "name": "$flatten$auto_535.$obuf$GJC48.$obuf_dma_ack_out_3"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_533",
+                "O": "$flatten$auto_535.$auto_533"
+            },
+            "module": "WIRE",
+            "name": "wire0"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_532",
+                "O": "$flatten$auto_535.$auto_532"
+            },
+            "module": "WIRE",
+            "name": "wire1"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_531",
+                "O": "$flatten$auto_535.$auto_531"
+            },
+            "module": "WIRE",
+            "name": "wire2"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_530",
+                "O": "$flatten$auto_535.$auto_530"
+            },
+            "module": "WIRE",
+            "name": "wire3"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_529",
+                "O": "$flatten$auto_535.$auto_529"
+            },
+            "module": "WIRE",
+            "name": "wire4"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_528",
+                "O": "$flatten$auto_535.$auto_528"
+            },
+            "module": "WIRE",
+            "name": "wire5"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_527",
+                "O": "$flatten$auto_535.$auto_527"
+            },
+            "module": "WIRE",
+            "name": "wire6"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_526",
+                "O": "$flatten$auto_535.$auto_526"
+            },
+            "module": "WIRE",
+            "name": "wire7"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_525",
+                "O": "$flatten$auto_535.$auto_525"
+            },
+            "module": "WIRE",
+            "name": "wire8"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_524",
+                "O": "$flatten$auto_535.$auto_524"
+            },
+            "module": "WIRE",
+            "name": "wire9"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$clk_buf_$ibuf_clk",
+                "O": "$clk_buf_$ibuf_clk"
+            },
+            "direction": "IN",
+            "index": 3,
+            "linked_object": "clk",
+            "module": "WIRE",
+            "name": "wire10"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_dma_req_in[0]",
+                "O": "$ibuf_dma_req_in[0]"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "dma_req_in[0]",
+            "module": "WIRE",
+            "name": "wire11"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_dma_req_in[1]",
+                "O": "$ibuf_dma_req_in[1]"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "dma_req_in[1]",
+            "module": "WIRE",
+            "name": "wire12"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_dma_req_in[2]",
+                "O": "$ibuf_dma_req_in[2]"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "dma_req_in[2]",
+            "module": "WIRE",
+            "name": "wire13"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_dma_req_in[3]",
+                "O": "$ibuf_dma_req_in[3]"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "dma_req_in[3]",
+            "module": "WIRE",
+            "name": "wire14"
+        },
+        {
+            "connectivity": {
+                "I": "$flatten$auto_535.$ibuf_reset_n",
+                "O": "$ibuf_reset_n"
+            },
+            "direction": "IN",
+            "index": 2,
+            "linked_object": "reset_n",
+            "module": "WIRE",
+            "name": "wire15"
+        },
+        {
+            "connectivity": {
+                "I": "$obuf_dma_ack_out[0]",
+                "O": "$flatten$auto_535.$obuf_dma_ack_out[0]"
+            },
+            "direction": "OUT",
+            "index": 2,
+            "linked_object": "dma_ack_out[0]",
+            "module": "WIRE",
+            "name": "wire16"
+        },
+        {
+            "connectivity": {
+                "I": "$obuf_dma_ack_out[1]",
+                "O": "$flatten$auto_535.$obuf_dma_ack_out[1]"
+            },
+            "direction": "OUT",
+            "index": 2,
+            "linked_object": "dma_ack_out[1]",
+            "module": "WIRE",
+            "name": "wire17"
+        },
+        {
+            "connectivity": {
+                "I": "$obuf_dma_ack_out[2]",
+                "O": "$flatten$auto_535.$obuf_dma_ack_out[2]"
+            },
+            "direction": "OUT",
+            "index": 2,
+            "linked_object": "dma_ack_out[2]",
+            "module": "WIRE",
+            "name": "wire18"
+        },
+        {
+            "connectivity": {
+                "I": "$obuf_dma_ack_out[3]",
+                "O": "$flatten$auto_535.$obuf_dma_ack_out[3]"
+            },
+            "direction": "OUT",
+            "index": 2,
+            "linked_object": "dma_ack_out[3]",
+            "module": "WIRE",
+            "name": "wire19"
+        },
+        {
+            "connectivity": {
+                "I": "clk",
+                "O": "$auto_535.clk"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "clk",
+            "module": "WIRE",
+            "name": "wire20"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_out[0]",
+                "O": "dma_ack_out[0]"
+            },
+            "direction": "OUT",
+            "index": 0,
+            "linked_object": "dma_ack_out[0]",
+            "module": "WIRE",
+            "name": "wire21"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_out[1]",
+                "O": "dma_ack_out[1]"
+            },
+            "direction": "OUT",
+            "index": 0,
+            "linked_object": "dma_ack_out[1]",
+            "module": "WIRE",
+            "name": "wire22"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_out[2]",
+                "O": "dma_ack_out[2]"
+            },
+            "direction": "OUT",
+            "index": 0,
+            "linked_object": "dma_ack_out[2]",
+            "module": "WIRE",
+            "name": "wire23"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_out[3]",
+                "O": "dma_ack_out[3]"
+            },
+            "direction": "OUT",
+            "index": 0,
+            "linked_object": "dma_ack_out[3]",
+            "module": "WIRE",
+            "name": "wire24"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_reg[0]",
+                "O": "dma_ack_reg[0]"
+            },
+            "module": "WIRE",
+            "name": "wire25"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_reg[1]",
+                "O": "dma_ack_reg[1]"
+            },
+            "module": "WIRE",
+            "name": "wire26"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_reg[2]",
+                "O": "dma_ack_reg[2]"
+            },
+            "module": "WIRE",
+            "name": "wire27"
+        },
+        {
+            "connectivity": {
+                "I": "$auto_535.dma_ack_reg[3]",
+                "O": "dma_ack_reg[3]"
+            },
+            "module": "WIRE",
+            "name": "wire28"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_in[0]",
+                "O": "$auto_535.dma_req_in[0]"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "dma_req_in[0]",
+            "module": "WIRE",
+            "name": "wire29"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_in[1]",
+                "O": "$auto_535.dma_req_in[1]"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "dma_req_in[1]",
+            "module": "WIRE",
+            "name": "wire30"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_in[2]",
+                "O": "$auto_535.dma_req_in[2]"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "dma_req_in[2]",
+            "module": "WIRE",
+            "name": "wire31"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_in[3]",
+                "O": "$auto_535.dma_req_in[3]"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "dma_req_in[3]",
+            "module": "WIRE",
+            "name": "wire32"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_reg[0]",
+                "O": "$auto_535.dma_req_reg[0]"
+            },
+            "module": "WIRE",
+            "name": "wire33"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_reg[1]",
+                "O": "$auto_535.dma_req_reg[1]"
+            },
+            "module": "WIRE",
+            "name": "wire34"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_reg[2]",
+                "O": "$auto_535.dma_req_reg[2]"
+            },
+            "module": "WIRE",
+            "name": "wire35"
+        },
+        {
+            "connectivity": {
+                "I": "dma_req_reg[3]",
+                "O": "$auto_535.dma_req_reg[3]"
+            },
+            "module": "WIRE",
+            "name": "wire36"
+        },
+        {
+            "connectivity": {
+                "I": "reset_n",
+                "O": "$auto_535.reset_n"
+            },
+            "direction": "IN",
+            "index": 0,
+            "linked_object": "reset_n",
+            "module": "WIRE",
+            "name": "wire37"
+        }
+    ]
+}

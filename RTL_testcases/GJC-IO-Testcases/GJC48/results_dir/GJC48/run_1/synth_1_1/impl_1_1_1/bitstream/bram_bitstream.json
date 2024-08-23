@@ -1,0 +1,12 @@
+{
+  "bram" : [
+    {
+      "pb" : "bram.bram_lr[mem_36K_tdp].mem_36K",
+      "is_primitive_pb_type" : "true",
+      "type" : "param",
+      "content" : "INIT_i",
+      "grid" : [
+      ]
+    }
+  ]
+}

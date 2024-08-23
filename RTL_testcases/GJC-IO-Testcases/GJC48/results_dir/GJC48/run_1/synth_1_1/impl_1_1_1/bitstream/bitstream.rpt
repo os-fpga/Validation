@@ -1,0 +1,949 @@
+/*******************************************************************************
+Copyright (c) 2022-2024 Rapid Silicon
+This source code contains proprietary information belonging to Rapid Silicon
+(the "licensor") released under license and non-disclosure agreement to the
+recipient (the "licensee").
+
+The information shared and protected by the license and non-disclosure agreement
+includes but is not limited to the following:
+* operational algorithms of the product
+* logos, graphics, source code, and visual presentation of the product
+* confidential operational information of the licensor
+
+The recipient of this source code is NOT permitted to publicly disclose,
+re-use, archive beyond the period of the license agreement, transfer to a
+sub-licensee, or re-implement any portion of the content covered by the license
+and non-disclosure agreement without the prior written consent of the licensor.
+*********************************************************************************/
+
+Version  : 2024.08
+Build    : 1.1.48
+Hash     : 0b01354
+Date     : Aug 22 2024
+Type     : Engineering
+Log Time   : Fri Aug 23 07:14:22 2024 GMT
+VPR FPGA Placement and Routing.
+Version: 
+Revision: 
+Compiled: 
+Compiler: GNU 11.2.1 on Linux-3.10.0-1160.90.1.el7.x86_64 x86_64
+Build Info: Release VTR_ASSERT_LEVEL=2
+
+University of Toronto
+verilogtorouting.org
+vtr-users@googlegroups.com
+This is free open source code under MIT license.
+
+VPR was run with the following command-line:
+vpr /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_vpr.xml /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/synthesis/fabric_GJC48_post_synth.eblif --clock_modeling ideal --device castor22x4_heterogeneous --net_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_post_synth.net --place_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/fabric_GJC48_post_synth.place --route_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/routing/fabric_GJC48_post_synth.route --route_chan_width 160 --sdc_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_openfpga.sdc --absorb_buffer_luts off --constant_net_method route --skip_sync_clustering_and_routing_results off --circuit_format eblif --analysis --allow_unrelated_clustering on --allow_dangling_combinational_nodes on --place_delta_delay_matrix_calculation_method dijkstra --top GJC48
+
+Using up to 1 parallel worker(s)
+
+Architecture file: /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_vpr.xml
+Circuit name: fabric_GJC48_post_synth
+
+# Loading Architecture Description
+Warning 1: Model 'io' input port 'outpad' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 2: Model 'io' output port 'inpad' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 3: Model 'dsp_phy' input port 'sc_in' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 4: Model 'dsp_phy' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 5: Model 'dsp_phy' output port 'sc_out' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 6: Model 'RS_DSP_MULT' input port 'feedback' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 7: Model 'RS_DSP_MULT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 8: Model 'RS_DSP_MULT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 9: Model 'RS_DSP_MULT_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 10: Model 'RS_DSP_MULT_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 11: Model 'RS_DSP_MULT_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 12: Model 'RS_DSP_MULT_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 13: Model 'RS_DSP_MULT_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 14: Model 'RS_DSP_MULT_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 15: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 16: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 17: Model 'RS_DSP_MULT_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 18: Model 'RS_DSP_MULTADD' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 19: Model 'RS_DSP_MULTADD' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 20: Model 'RS_DSP_MULTADD' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 21: Model 'RS_DSP_MULTADD' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 22: Model 'RS_DSP_MULTADD' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 23: Model 'RS_DSP_MULTADD' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 24: Model 'RS_DSP_MULTADD_REGIN' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 25: Model 'RS_DSP_MULTADD_REGIN' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 26: Model 'RS_DSP_MULTADD_REGIN' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 27: Model 'RS_DSP_MULTADD_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 28: Model 'RS_DSP_MULTADD_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 29: Model 'RS_DSP_MULTADD_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 30: Model 'RS_DSP_MULTADD_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 31: Model 'RS_DSP_MULTADD_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 32: Model 'RS_DSP_MULTADD_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 33: Model 'RS_DSP_MULTADD_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 34: Model 'RS_DSP_MULTADD_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 35: Model 'RS_DSP_MULTADD_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 36: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 37: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 38: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 39: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 40: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 41: Model 'RS_DSP_MULTADD_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 42: Model 'RS_DSP_MULTACC' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 43: Model 'RS_DSP_MULTACC' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 44: Model 'RS_DSP_MULTACC' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 45: Model 'RS_DSP_MULTACC' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 46: Model 'RS_DSP_MULTACC' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 47: Model 'RS_DSP_MULTACC' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 48: Model 'RS_DSP_MULTACC_REGIN' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 49: Model 'RS_DSP_MULTACC_REGIN' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 50: Model 'RS_DSP_MULTACC_REGIN' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 51: Model 'RS_DSP_MULTACC_REGIN' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 52: Model 'RS_DSP_MULTACC_REGIN' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 53: Model 'RS_DSP_MULTACC_REGIN' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 54: Model 'RS_DSP_MULTACC_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 55: Model 'RS_DSP_MULTACC_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 56: Model 'RS_DSP_MULTACC_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 57: Model 'RS_DSP_MULTACC_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 58: Model 'RS_DSP_MULTACC_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 59: Model 'RS_DSP_MULTACC_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 60: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'round' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 61: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'shift_right' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 62: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'saturate_enable' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 63: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'lreset' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 64: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'unsigned_b' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 65: Model 'RS_DSP_MULTACC_REGIN_REGOUT' input port 'unsigned_a' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 66: Model 'bram_phy' input port 'sc_in' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 67: Model 'bram_phy' output port 'sc_out' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 68: Model 'bram_phy' output port 'PL_DATA_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 69: Model 'bram_phy' output port 'PL_ADDR_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 70: Model 'bram_phy' output port 'PL_WEN_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 71: Model 'bram_phy' output port 'PL_CLK_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 72: Model 'bram_phy' output port 'PL_REN_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 73: Model 'bram_phy' output port 'PL_ENA_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+Warning 74: Model 'bram_phy' output port 'PL_INIT_o' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+mode 'io[physical]' is defined by user to be disabled in packing
+mode 'iopad[default]' is defined by user to be disabled in packing
+mode 'fle[physical]' is defined by user to be disabled in packing
+mode 'fabric[default]' is defined by user to be disabled in packing
+mode 'ff_bypass[default]' is defined by user to be disabled in packing
+mode 'dsp_lr[physical]' is defined by user to be disabled in packing
+mode 'bram_lr[physical]' is defined by user to be disabled in packing
+# Loading Architecture Description took 0.08 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+
+Timing analysis: ON
+Circuit netlist file: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_post_synth.net
+Circuit placement file: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/fabric_GJC48_post_synth.place
+Circuit routing file: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/routing/fabric_GJC48_post_synth.route
+Circuit SDC file: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_openfpga.sdc
+Vpr floorplanning constraints file: not specified
+
+Packer: ENABLED
+Placer: ENABLED
+Router: ENABLED
+Analysis: ENABLED
+
+VPR was run with the following options:
+
+NetlistOpts.abosrb_buffer_luts            : false
+NetlistOpts.sweep_dangling_primary_ios    : true
+NetlistOpts.sweep_dangling_nets           : true
+NetlistOpts.sweep_dangling_blocks         : true
+NetlistOpts.sweep_constant_primary_outputs: false
+NetlistOpts.netlist_verbosity             : 1
+NetlistOpts.const_gen_inference           : COMB_SEQ
+
+PackerOpts.allow_unrelated_clustering: true
+PackerOpts.alpha_clustering: 0.750000
+PackerOpts.beta_clustering: 0.900000
+PackerOpts.cluster_seed_type: BLEND2
+PackerOpts.connection_driven: true
+PackerOpts.global_clocks: true
+PackerOpts.hill_climbing_flag: false
+PackerOpts.inter_cluster_net_delay: 1.000000
+PackerOpts.timing_driven: true
+PackerOpts.target_external_pin_util: auto
+
+PlacerOpts.place_freq: PLACE_ONCE
+PlacerOpts.place_algorithm: CRITICALITY_TIMING_PLACE
+PlacerOpts.pad_loc_type: FREE
+PlacerOpts.constraints_file: No constraints file given
+PlacerOpts.place_cost_exp: 1.000000
+PlacerOpts.place_chan_width: 160
+PlacerOpts.inner_loop_recompute_divider: 0
+PlacerOpts.recompute_crit_iter: 1
+PlacerOpts.timing_tradeoff: 0.500000
+PlacerOpts.td_place_exp_first: 1.000000
+PlacerOpts.td_place_exp_last: 8.000000
+PlacerOpts.delay_offset: 0.000000
+PlacerOpts.delay_ramp_delta_threshold: -1
+PlacerOpts.delay_ramp_slope: 0.000000
+PlacerOpts.tsu_rel_margin: 1.000000
+PlacerOpts.tsu_abs_margin: 0.000000
+PlacerOpts.post_place_timing_report_file: 
+PlacerOpts.allowed_tiles_for_delay_model: 
+PlacerOpts.delay_model_reducer: MIN
+PlacerOpts.delay_model_type: DELTA
+PlacerOpts.rlim_escape_fraction: 0.000000
+PlacerOpts.move_stats_file: 
+PlacerOpts.placement_saves_per_temperature: 0
+PlacerOpts.effort_scaling: CIRCUIT
+PlacerOpts.place_delta_delay_matrix_calculation_method: DIJKSTRA_EXPANSION
+PlaceOpts.seed: 1
+AnnealSched.type: AUTO_SCHED
+AnnealSched.inner_num: 0.500000
+
+RouterOpts.route_type: DETAILED
+RouterOpts.flat_routing: false
+RouterOpts.has_choking_spot: false
+RouterOpts.router_algorithm: TIMING_DRIVEN
+RouterOpts.base_cost_type: DELAY_NORMALIZED_LENGTH
+RouterOpts.fixed_channel_width: 160
+RouterOpts.check_route: FULL
+RouterOpts.acc_fac: 1.000000
+RouterOpts.bb_factor: 3
+RouterOpts.bend_cost: 0.000000
+RouterOpts.first_iter_pres_fac: 0.000000
+RouterOpts.initial_pres_fac: 0.500000
+RouterOpts.pres_fac_mult: 1.300000
+RouterOpts.max_pres_fac: 1000.000000
+RouterOpts.max_router_iterations: 50
+RouterOpts.min_incremental_reroute_fanout: 16
+RouterOpts.do_check_rr_graph: true
+RouterOpts.verify_binary_search: false
+RouterOpts.min_channel_width_hint: 0
+RouterOpts.read_rr_edge_metadata: false
+RouterOpts.exit_after_first_routing_iteration: false
+RouterOpts.astar_fac: 1.200000
+RouterOpts.router_profiler_astar_fac: 1.200000
+RouterOpts.criticality_exp: 1.000000
+RouterOpts.max_criticality: 0.990000
+RouterOpts.init_wirelength_abort_threshold: 0.850000
+RouterOpts.incr_reroute_delay_ripup: AUTO
+RouterOpts.save_routing_per_iteration: false
+RouterOpts.congested_routing_iteration_threshold_frac: 1.000000
+RouterOpts.high_fanout_threshold: 64
+RouterOpts.router_debug_net: -2
+RouterOpts.router_debug_sink_rr: -2
+RouterOpts.router_debug_iteration: -2
+RouterOpts.max_convergence_count: 1
+RouterOpts.reconvergence_cpd_threshold: 0.990000
+RouterOpts.update_lower_bound_delays: true
+RouterOpts.first_iteration_timing_report_file: 
+RouterOpts.route_bb_update: DYNAMIC
+RouterOpts.lookahead_type: MAP
+RouterOpts.initial_timing: LOOKAHEAD
+RouterOpts.router_heap: BINARY_HEAP
+RouterOpts.routing_failure_predictor = SAFE
+RouterOpts.routing_budgets_algorithm = DISABLE
+
+AnalysisOpts.gen_post_synthesis_netlist: false
+AnalysisOpts.timing_report_npaths: 100
+AnalysisOpts.timing_report_skew: false
+AnalysisOpts.echo_dot_timing_graph_node: -1
+AnalysisOpts.timing_report_detail: NETLIST
+AnalysisOpts.post_synth_netlist_unconn_input_handling: UNCONNECTED
+AnalysisOpts.post_synth_netlist_unconn_output_handling: UNCONNECTED
+
+# Building complex block graph
+Warning 75: clb[0].sr_in[0] unconnected pin in architecture.
+Warning 76: clb[0].sr_out[0] unconnected pin in architecture.
+Warning 77: dsp[0].sr_in[0] unconnected pin in architecture.
+Warning 78: dsp[0].sr_in[1] unconnected pin in architecture.
+Warning 79: dsp[0].sr_in[2] unconnected pin in architecture.
+Warning 80: dsp[0].sr_out[0] unconnected pin in architecture.
+Warning 81: dsp[0].sr_out[1] unconnected pin in architecture.
+Warning 82: dsp[0].sr_out[2] unconnected pin in architecture.
+Warning 83: bram[0].sr_in[0] unconnected pin in architecture.
+Warning 84: bram[0].sr_in[1] unconnected pin in architecture.
+Warning 85: bram[0].sr_in[2] unconnected pin in architecture.
+Warning 86: bram[0].sr_in[3] unconnected pin in architecture.
+Warning 87: bram[0].sr_in[4] unconnected pin in architecture.
+Warning 88: bram[0].sr_in[5] unconnected pin in architecture.
+Warning 89: bram[0].plr_i[0] unconnected pin in architecture.
+Warning 90: bram[0].plr_i[1] unconnected pin in architecture.
+Warning 91: bram[0].plr_i[2] unconnected pin in architecture.
+Warning 92: bram[0].plr_i[3] unconnected pin in architecture.
+Warning 93: bram[0].plr_i[4] unconnected pin in architecture.
+Warning 94: bram[0].plr_i[5] unconnected pin in architecture.
+Warning 95: bram[0].plr_i[6] unconnected pin in architecture.
+Warning 96: bram[0].plr_i[7] unconnected pin in architecture.
+Warning 97: bram[0].plr_i[8] unconnected pin in architecture.
+Warning 98: bram[0].plr_i[9] unconnected pin in architecture.
+Warning 99: bram[0].plr_i[10] unconnected pin in architecture.
+Warning 100: bram[0].plr_i[11] unconnected pin in architecture.
+Warning 101: bram[0].plr_i[12] unconnected pin in architecture.
+Warning 102: bram[0].plr_i[13] unconnected pin in architecture.
+Warning 103: bram[0].plr_i[14] unconnected pin in architecture.
+Warning 104: bram[0].plr_i[15] unconnected pin in architecture.
+Warning 105: bram[0].plr_i[16] unconnected pin in architecture.
+Warning 106: bram[0].plr_i[17] unconnected pin in architecture.
+Warning 107: bram[0].plr_i[18] unconnected pin in architecture.
+Warning 108: bram[0].plr_i[19] unconnected pin in architecture.
+Warning 109: bram[0].plr_i[20] unconnected pin in architecture.
+Warning 110: bram[0].plr_i[21] unconnected pin in architecture.
+Warning 111: bram[0].plr_i[22] unconnected pin in architecture.
+Warning 112: bram[0].plr_i[23] unconnected pin in architecture.
+Warning 113: bram[0].plr_i[24] unconnected pin in architecture.
+Warning 114: bram[0].plr_i[25] unconnected pin in architecture.
+Warning 115: bram[0].plr_i[26] unconnected pin in architecture.
+Warning 116: bram[0].plr_i[27] unconnected pin in architecture.
+Warning 117: bram[0].plr_i[28] unconnected pin in architecture.
+Warning 118: bram[0].plr_i[29] unconnected pin in architecture.
+Warning 119: bram[0].plr_i[30] unconnected pin in architecture.
+Warning 120: bram[0].plr_i[31] unconnected pin in architecture.
+Warning 121: bram[0].plr_i[32] unconnected pin in architecture.
+Warning 122: bram[0].plr_i[33] unconnected pin in architecture.
+Warning 123: bram[0].plr_i[34] unconnected pin in architecture.
+Warning 124: bram[0].plr_i[35] unconnected pin in architecture.
+Warning 125: bram[0].sr_out[0] unconnected pin in architecture.
+Warning 126: bram[0].sr_out[1] unconnected pin in architecture.
+Warning 127: bram[0].sr_out[2] unconnected pin in architecture.
+Warning 128: bram[0].sr_out[3] unconnected pin in architecture.
+Warning 129: bram[0].sr_out[4] unconnected pin in architecture.
+Warning 130: bram[0].sr_out[5] unconnected pin in architecture.
+Warning 131: bram[0].plr_o[0] unconnected pin in architecture.
+Warning 132: bram[0].plr_o[1] unconnected pin in architecture.
+Warning 133: bram[0].plr_o[2] unconnected pin in architecture.
+Warning 134: bram[0].plr_o[3] unconnected pin in architecture.
+Warning 135: bram[0].plr_o[4] unconnected pin in architecture.
+Warning 136: bram[0].plr_o[5] unconnected pin in architecture.
+Warning 137: bram[0].plr_o[6] unconnected pin in architecture.
+Warning 138: bram[0].plr_o[7] unconnected pin in architecture.
+Warning 139: bram[0].plr_o[8] unconnected pin in architecture.
+Warning 140: bram[0].plr_o[9] unconnected pin in architecture.
+Warning 141: bram[0].plr_o[10] unconnected pin in architecture.
+Warning 142: bram[0].plr_o[11] unconnected pin in architecture.
+Warning 143: bram[0].plr_o[12] unconnected pin in architecture.
+Warning 144: bram[0].plr_o[13] unconnected pin in architecture.
+Warning 145: bram[0].plr_o[14] unconnected pin in architecture.
+Warning 146: bram[0].plr_o[15] unconnected pin in architecture.
+Warning 147: bram[0].plr_o[16] unconnected pin in architecture.
+Warning 148: bram[0].plr_o[17] unconnected pin in architecture.
+Warning 149: bram[0].plr_o[18] unconnected pin in architecture.
+Warning 150: bram[0].plr_o[19] unconnected pin in architecture.
+Warning 151: bram[0].plr_o[20] unconnected pin in architecture.
+Warning 152: bram[0].plr_o[21] unconnected pin in architecture.
+Warning 153: bram[0].plr_o[22] unconnected pin in architecture.
+Warning 154: bram[0].plr_o[23] unconnected pin in architecture.
+Warning 155: bram[0].plr_o[24] unconnected pin in architecture.
+Warning 156: bram[0].plr_o[25] unconnected pin in architecture.
+Warning 157: bram[0].plr_o[26] unconnected pin in architecture.
+Warning 158: bram[0].plr_o[27] unconnected pin in architecture.
+Warning 159: bram[0].plr_o[28] unconnected pin in architecture.
+Warning 160: bram[0].plr_o[29] unconnected pin in architecture.
+Warning 161: bram[0].plr_o[30] unconnected pin in architecture.
+Warning 162: bram[0].plr_o[31] unconnected pin in architecture.
+Warning 163: bram[0].plr_o[32] unconnected pin in architecture.
+Warning 164: bram[0].plr_o[33] unconnected pin in architecture.
+Warning 165: bram[0].plr_o[34] unconnected pin in architecture.
+Warning 166: bram[0].plr_o[35] unconnected pin in architecture.
+# Building complex block graph took 0.06 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+# Load circuit
+Found constant-zero generator '$false'
+Found constant-one generator '$true'
+Found constant-zero generator '$undef'
+# Load circuit took 0.01 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+# Clean circuit
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred   10 additional primitive pins as constant generators due to constant inputs
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred    0 additional primitive pins as constant generators due to constant inputs
+Inferred    0 additional primitive pins as constant generators since they have no combinationally connected inputs
+Inferred    0 additional primitive pins as constant generators due to constant inputs
+Swept input(s)      : 0
+Swept output(s)     : 0 (0 dangling, 0 constant)
+Swept net(s)        : 2
+Swept block(s)      : 2
+Constant Pins Marked: 10
+# Clean circuit took 0.00 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+# Compress circuit
+# Compress circuit took 0.00 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+# Verify circuit
+# Verify circuit took 0.00 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+Circuit Statistics:
+  Blocks: 47
+    .input :      10
+    .output:      18
+    0-LUT  :       1
+    6-LUT  :      10
+    dffre  :       8
+  Nets  : 29
+    Avg Fanout:     2.1
+    Max Fanout:    18.0
+    Min Fanout:     1.0
+  Netlist Clocks: 1
+# Build Timing Graph
+  Timing Graph Nodes: 89
+  Timing Graph Edges: 102
+  Timing Graph Levels: 4
+# Build Timing Graph took 0.00 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+Netlist contains 1 clocks
+  Netlist Clock '$clk_buf_$ibuf_clk' Fanout: 8 pins (9.0%), 8 blocks (17.0%)
+# Load Timing Constraints
+
+Applied 1 SDC commands from '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_openfpga.sdc'
+Timing constraints created 1 clocks
+  Constrained Clock '$clk_buf_$ibuf_clk' Source: '$clk_buf_$ibuf_clk.inpad[0]'
+
+# Load Timing Constraints took 0.00 seconds (max_rss 22.3 MiB, delta_rss +0.0 MiB)
+# Load packing
+Begin loading packed FPGA netlist file.
+Netlist generated from file '/nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_post_synth.net'.
+Detected 1 constant generators (to see names run with higher pack verbosity)
+Finished loading packed FPGA netlist file (took 0.04 seconds).
+# Load packing took 0.04 seconds (max_rss 58.9 MiB, delta_rss +36.6 MiB)
+Warning 167: Netlist contains 0 global net to non-global architecture pin connections
+
+Pb types usage...
+  io             : 28
+   io_output     : 18
+    outpad       : 18
+   io_input      : 10
+    inpad        : 10
+  clb            : 2
+   clb_lr        : 2
+    fle          : 10
+     ble5        : 19
+      lut5       : 11
+       lut       : 11
+      ff         : 8
+       DFFRE     : 8
+
+# Create Device
+## Build Device Grid
+Warning 168: Block type 'dsp' was not specified in device grid layout
+Warning 169: Block type 'bram' was not specified in device grid layout
+FPGA sized to 24 x 6: 144 grid tiles (castor22x4_heterogeneous)
+
+Resource usage...
+	Netlist
+		28	blocks of type: io
+	Architecture
+		1440	blocks of type: io_top
+		288	blocks of type: io_right
+		1440	blocks of type: io_bottom
+		288	blocks of type: io_left
+	Netlist
+		2	blocks of type: clb
+	Architecture
+		40	blocks of type: clb
+	Netlist
+		0	blocks of type: dsp
+	Architecture
+		0	blocks of type: dsp
+	Netlist
+		0	blocks of type: bram
+	Architecture
+		0	blocks of type: bram
+
+Device Utilization: 0.02 (target 1.00)
+	Physical Tile io_top:
+	Block Utilization: 0.02 Logical Block: io
+	Physical Tile io_right:
+	Block Utilization: 0.10 Logical Block: io
+	Physical Tile io_bottom:
+	Block Utilization: 0.02 Logical Block: io
+	Physical Tile io_left:
+	Block Utilization: 0.10 Logical Block: io
+	Physical Tile clb:
+	Block Utilization: 0.05 Logical Block: clb
+
+## Build Device Grid took 0.00 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+Warning 170: Tileable routing resource graph does not support clock modeling yet! Related options are ignored...
+## Build tileable routing resource graph
+X-direction routing channel width is 160
+Y-direction routing channel width is 160
+Warning 171: Sized nonsensical R=0 transistor to minimum width
+Warning 172: Sized nonsensical R=0 transistor to minimum width
+Warning 173: Sized nonsensical R=0 transistor to minimum width
+Warning 174: Sized nonsensical R=0 transistor to minimum width
+## Build tileable routing resource graph took 0.64 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+  RR Graph Nodes: 159896
+  RR Graph Edges: 279220
+# Create Device took 0.67 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+
+# Load Placement
+Reading /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/fabric_GJC48_post_synth.place.
+
+Successfully read /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/fabric_GJC48_post_synth.place.
+
+# Load Placement took 0.00 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+
+# Load Routing
+Begin loading FPGA routing file.
+Finished loading route file
+Warning 175: 9 timing startpoints were not constrained during timing analysis
+Warning 176: 34 timing endpoints were not constrained during timing analysis
+# Load Routing took 0.01 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+
+Checking to ensure routing is legal...
+# Checking to ensure non-configurable edges are legal
+# Checking to ensure non-configurable edges are legal took 0.00 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+Completed routing consistency check successfully.
+
+Serial number (magic cookie) for the routing is: -10408586
+Circuit successfully routed with a channel width factor of 160.
+# Synchronize the packed netlist to routing optimization
+OK: before pb_pin_fixup: pb_route connectivity is consistent in all 30 blocks
+## Annotating rr_node with routed nets
+## Annotating rr_node with routed nets took 0.00 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+Found 24 mismatches between routing and packing results.
+Fixed 12 routing traces due to mismatch between routing and packing results.
+OK: after pb_pin_fixup: pb_route connectivity is consistent in all 30 blocks
+# Synchronize the packed netlist to routing optimization took 0.00 seconds (max_rss 59.1 MiB, delta_rss +0.0 MiB)
+Clustering Statistics: 
+----------   --------   ------------------------------------   --------------------------
+Block Type   # Blocks   Avg. # of input clocks and pins used   Avg. # of output pins used
+----------   --------   ------------------------------------   --------------------------
+     EMPTY          0                                      0                            0   
+        io         28                               0.642857                     0.357143   
+       clb          2                                    7.5                          9.5   
+       dsp          0                                      0                            0   
+      bram          0                                      0                            0   
+Absorbed logical nets 0 out of 29 nets, 29 nets not absorbed.
+
+
+Average number of bends per net: 3.32143  Maximum # of bends: 6
+
+Number of global nets: 1
+Number of routed nets (nonglobal): 28
+Wire length results (in units of 1 clb segments)...
+	Total wirelength: 254, average net length: 9.07143
+	Maximum net length: 15
+
+Wire length results in terms of physical segments...
+	Total wiring segments used: 129, average wire segments per net: 4.60714
+	Maximum segments used by a net: 7
+	Total local nets with reserved CLB opins: 0
+Total number of nets absorbed: 0
+
+Routing channel utilization histogram:
+[        1:      inf)   0 (  0.0%) |
+[      0.9:        1)   0 (  0.0%) |
+[      0.8:      0.9)   0 (  0.0%) |
+[      0.7:      0.8)   0 (  0.0%) |
+[      0.5:      0.6)   0 (  0.0%) |
+[      0.4:      0.5)   0 (  0.0%) |
+[      0.3:      0.4)   0 (  0.0%) |
+[      0.2:      0.3)   0 (  0.0%) |
+[      0.1:      0.2)   2 (  0.9%) |
+[        0:      0.1) 228 ( 99.1%) |***********************************************
+Maximum routing channel utilization:      0.11 at (11,2)
+
+X - Directed channels:   j max occ ave occ capacity
+                      ---- ------- ------- --------
+                         0       4   0.833      160
+                         1       8   2.458      160
+                         2      17   2.625      160
+                         3       3   0.250      160
+                         4       2   0.583      160
+Y - Directed channels:   i max occ ave occ capacity
+                      ---- ------- ------- --------
+                         0       0   0.000      160
+                         1       0   0.000      160
+                         2       0   0.000      160
+                         3       0   0.000      160
+                         4       2   0.333      160
+                         5       2   0.333      160
+                         6       3   0.667      160
+                         7       2   0.500      160
+                         8       3   1.000      160
+                         9       5   1.333      160
+                        10       9   4.000      160
+                        11      14   4.167      160
+                        12       4   1.667      160
+                        13       2   0.667      160
+                        14       2   0.333      160
+                        15       1   0.333      160
+                        16       0   0.000      160
+                        17       0   0.000      160
+                        18       0   0.000      160
+                        19       0   0.000      160
+                        20       0   0.000      160
+                        21       0   0.000      160
+                        22       0   0.000      160
+
+Total tracks in x-direction: 800, in y-direction: 3680
+
+Logic area (in minimum width transistor areas, excludes I/Os and empty grid tiles)...
+	Total logic block area (Warning, need to add pitch of routing to blocks with height > 3): 2.15576e+06
+	Total used logic block area: 107788
+
+Routing area (in minimum width transistor areas)...
+	Total routing area: 1.43362e+06, per logic tile: 9955.69
+
+Total Number of Wiring Segments by Direction: direction length number
+                                              --------- ------ -------
+                                                      X      1   3520
+                                                      Y      1   2944
+                                                      X      4   4000
+                                                      Y      4   5152
+
+X - Directed Wiring Segment usage by length: length utilization
+                                             ------ -----------
+                                             1     0.00852
+                                             4     0.00825
+
+Y - Directed Wiring Segment usage by length: length utilization
+                                             ------ -----------
+                                             1      0.0146
+                                             4     0.00446
+
+Segment occupancy by length: Length utilization
+                             ------ -----------
+                             L1          0.0113
+                             L4         0.00612
+
+Segment occupancy by type: name type utilization
+                           ---- ---- -----------
+                             L1    0      0.0113
+                             L4    1     0.00612
+Warning 177: 9 timing startpoints were not constrained during timing analysis
+Warning 178: 34 timing endpoints were not constrained during timing analysis
+
+Final hold Worst Negative Slack (hWNS): 0 ns
+Final hold Total Negative Slack (hTNS): 0 ns
+
+Final hold slack histogram:
+
+Final critical path delay (least slack): nan ns
+Final setup Worst Negative Slack (sWNS): 0 ns
+Final setup Total Negative Slack (sTNS): 0 ns
+
+Final setup slack histogram:
+
+Final geomean non-virtual intra-domain period: nan ns (nan MHz)
+Final fanout-weighted geomean non-virtual intra-domain period: nan ns (nan MHz)
+
+Incr Slack updates 1 in 4.745e-06 sec
+Full Max Req/Worst Slack updates 1 in 3.228e-06 sec
+Incr Max Req/Worst Slack updates 0 in 0 sec
+Incr Criticality updates 0 in 0 sec
+Full Criticality updates 1 in 5.592e-06 sec
+Flow timing analysis took 0.00140372 seconds (0.00127931 STA, 0.00012441 slack) (2 full updates: 0 setup, 0 hold, 2 combined).
+VPR suceeded
+The entire flow of VPR took 0.97 seconds (max_rss 59.1 MiB)
+
+Command line to execute: read_openfpga_arch -f /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_openfpga.xml
+
+Confirm selected options when call command 'read_openfpga_arch':
+--file, -f: /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_openfpga.xml
+Reading XML architecture '/nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_openfpga.xml'...
+Read OpenFPGA architecture
+Warning 179: Automatically set circuit model 'RS_LATCH' to be default in its type.
+Warning 180: Automatically set circuit model 'RS_CCFF' to be default in its type.
+Use the default configurable memory model 'RS_LATCH' for circuit model 'frac_lut6' port 'sram')
+Read OpenFPGA architecture took 0.03 seconds (max_rss 85.8 MiB, delta_rss +22.6 MiB)
+Check circuit library
+Checking circuit library passed.
+Check circuit library took 0.00 seconds (max_rss 86.0 MiB, delta_rss +0.0 MiB)
+Found 0 errors when checking configurable memory circuit models!
+Found 0 errors when checking configuration protocol!
+Found 0 errors when checking tile annotation!
+
+Command line to execute: read_openfpga_simulation_setting -f /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/fixed_sim_openfpga.xml
+
+Confirm selected options when call command 'read_openfpga_simulation_setting':
+--file, -f: /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/fixed_sim_openfpga.xml
+Reading XML simulation setting '/nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/fixed_sim_openfpga.xml'...
+Read OpenFPGA simulation settings
+Read OpenFPGA simulation settings took 0.00 seconds (max_rss 86.0 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: read_openfpga_bitstream_setting -f bitstream_setting.xml
+
+Confirm selected options when call command 'read_openfpga_bitstream_setting':
+--file, -f: bitstream_setting.xml
+Reading XML bitstream setting 'bitstream_setting.xml'...
+Read OpenFPGA bitstream settings
+Read OpenFPGA bitstream settings took 0.00 seconds (max_rss 86.0 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: link_openfpga_arch --sort_gsb_chan_node_in_edges
+
+Confirm selected options when call command 'link_openfpga_arch':
+--activity_file: off
+--sort_gsb_chan_node_in_edges: on
+--verbose: off
+Link OpenFPGA architecture to VPR architecture
+# Build fast look-up for physical tile pins
+# Build fast look-up for physical tile pins took 0.00 seconds (max_rss 86.0 MiB, delta_rss +0.0 MiB)
+
+Building annotation for physical modes in pb_type...Done
+Check physical mode annotation for pb_types passed.
+
+Building annotation about physical types for pb_type interconnection...Done
+
+Building annotation between operating and physical pb_types...Done
+Check physical pb_type annotation for pb_types passed.
+
+Building annotation between physical pb_types and circuit models...Done
+Check physical pb_type annotation for circuit model passed.
+
+Building annotation between physical pb_types and mode selection bits...Done
+Check pb_type annotation for mode selection bits passed.
+Assigning unique indices for primitive pb_graph nodes...Done
+Binding operating pb_graph nodes/pins to physical pb_graph nodes/pins...Done
+Check pb_graph annotation for physical nodes and pins passed.
+Binded 3 routing resource graph switches to circuit models
+Binded 2 routing segments to circuit models
+Binded 1 direct connections to circuit models
+# Annotating rr_node with routed nets
+# Annotating rr_node with routed nets took 0.00 seconds (max_rss 88.3 MiB, delta_rss +0.5 MiB)
+Loaded node-to-net mapping
+Annotating previous nodes for rr_node...Warning 181: Override the previous node 'IPIN:67677 side: (TOP,) (11,2,0)' by previous node 'IPIN:67687 side: (TOP,) (11,2,0)' for node 'SINK:67626  (11,2,0)' with in routing context annotation!
+Warning 182: Override the previous node 'IPIN:67709 side: (RIGHT,) (11,2,0)' by previous node 'IPIN:67707 side: (RIGHT,) (11,2,0)' for node 'SINK:67628  (11,2,0)' with in routing context annotation!
+Warning 183: Override the previous node 'IPIN:67730 side: (RIGHT,) (11,2,0)' by previous node 'IPIN:67703 side: (TOP,) (11,2,0)' for node 'SINK:67630  (11,2,0)' with in routing context annotation!
+Warning 184: Override the previous node 'IPIN:67880 side: (RIGHT,) (12,2,0)' by previous node 'IPIN:67852 side: (TOP,) (12,2,0)' for node 'SINK:67781  (12,2,0)' with in routing context annotation!
+Done with 222 nodes mapping
+Built 279220 incoming edges for routing resource graph
+# Build General Switch Block(GSB) annotation on top of routing resource graph
+[0%] Backannotated GSB[0][0][1%] Backannotated GSB[0][1][2%] Backannotated GSB[0][2][3%] Backannotated GSB[0][3][4%] Backannotated GSB[0][4][5%] Backannotated GSB[1][0][6%] Backannotated GSB[1][1][6%] Backannotated GSB[1][2][7%] Backannotated GSB[1][3][8%] Backannotated GSB[1][4][9%] Backannotated GSB[2][0][10%] Backannotated GSB[2][1][11%] Backannotated GSB[2][2][12%] Backannotated GSB[2][3][13%] Backannotated GSB[2][4][13%] Backannotated GSB[3][0][14%] Backannotated GSB[3][1][15%] Backannotated GSB[3][2][16%] Backannotated GSB[3][3][17%] Backannotated GSB[3][4][18%] Backannotated GSB[4][0][19%] Backannotated GSB[4][1][20%] Backannotated GSB[4][2][20%] Backannotated GSB[4][3][21%] Backannotated GSB[4][4][22%] Backannotated GSB[5][0][23%] Backannotated GSB[5][1][24%] Backannotated GSB[5][2][25%] Backannotated GSB[5][3][26%] Backannotated GSB[5][4][26%] Backannotated GSB[6][0][27%] Backannotated GSB[6][1][28%] Backannotated GSB[6][2][29%] Backannotated GSB[6][3][30%] Backannotated GSB[6][4][31%] Backannotated GSB[7][0][32%] Backannotated GSB[7][1][33%] Backannotated GSB[7][2][33%] Backannotated GSB[7][3][34%] Backannotated GSB[7][4][35%] Backannotated GSB[8][0][36%] Backannotated GSB[8][1][37%] Backannotated GSB[8][2][38%] Backannotated GSB[8][3][39%] Backannotated GSB[8][4][40%] Backannotated GSB[9][0][40%] Backannotated GSB[9][1][41%] Backannotated GSB[9][2][42%] Backannotated GSB[9][3][43%] Backannotated GSB[9][4][44%] Backannotated GSB[10][0][45%] Backannotated GSB[10][1][46%] Backannotated GSB[10][2][46%] Backannotated GSB[10][3][47%] Backannotated GSB[10][4][48%] Backannotated GSB[11][0][49%] Backannotated GSB[11][1][50%] Backannotated GSB[11][2][51%] Backannotated GSB[11][3][52%] Backannotated GSB[11][4][53%] Backannotated GSB[12][0][53%] Backannotated GSB[12][1][54%] Backannotated GSB[12][2][55%] Backannotated GSB[12][3][56%] Backannotated GSB[12][4][57%] Backannotated GSB[13][0][58%] Backannotated GSB[13][1][59%] Backannotated GSB[13][2][60%] Backannotated GSB[13][3][60%] Backannotated GSB[13][4][61%] Backannotated GSB[14][0][62%] Backannotated GSB[14][1][63%] Backannotated GSB[14][2][64%] Backannotated GSB[14][3][65%] Backannotated GSB[14][4][66%] Backannotated GSB[15][0][66%] Backannotated GSB[15][1][67%] Backannotated GSB[15][2][68%] Backannotated GSB[15][3][69%] Backannotated GSB[15][4][70%] Backannotated GSB[16][0][71%] Backannotated GSB[16][1][72%] Backannotated GSB[16][2][73%] Backannotated GSB[16][3][73%] Backannotated GSB[16][4][74%] Backannotated GSB[17][0][75%] Backannotated GSB[17][1][76%] Backannotated GSB[17][2][77%] Backannotated GSB[17][3][78%] Backannotated GSB[17][4][79%] Backannotated GSB[18][0][80%] Backannotated GSB[18][1][80%] Backannotated GSB[18][2][81%] Backannotated GSB[18][3][82%] Backannotated GSB[18][4][83%] Backannotated GSB[19][0][84%] Backannotated GSB[19][1][85%] Backannotated GSB[19][2][86%] Backannotated GSB[19][3][86%] Backannotated GSB[19][4][87%] Backannotated GSB[20][0][88%] Backannotated GSB[20][1][89%] Backannotated GSB[20][2][90%] Backannotated GSB[20][3][91%] Backannotated GSB[20][4][92%] Backannotated GSB[21][0][93%] Backannotated GSB[21][1][93%] Backannotated GSB[21][2][94%] Backannotated GSB[21][3][95%] Backannotated GSB[21][4][96%] Backannotated GSB[22][0][97%] Backannotated GSB[22][1][98%] Backannotated GSB[22][2][99%] Backannotated GSB[22][3][100%] Backannotated GSB[22][4]Backannotated 115 General Switch Blocks (GSBs).
+# Build General Switch Block(GSB) annotation on top of routing resource graph took 0.02 seconds (max_rss 88.6 MiB, delta_rss +0.3 MiB)
+# Sort incoming edges for each routing track output node of General Switch Block(GSB)
+[0%] Sorted incoming edges for each routing track output node of GSB[0][0][1%] Sorted incoming edges for each routing track output node of GSB[0][1][2%] Sorted incoming edges for each routing track output node of GSB[0][2][3%] Sorted incoming edges for each routing track output node of GSB[0][3][4%] Sorted incoming edges for each routing track output node of GSB[0][4][5%] Sorted incoming edges for each routing track output node of GSB[1][0][6%] Sorted incoming edges for each routing track output node of GSB[1][1][6%] Sorted incoming edges for each routing track output node of GSB[1][2][7%] Sorted incoming edges for each routing track output node of GSB[1][3][8%] Sorted incoming edges for each routing track output node of GSB[1][4][9%] Sorted incoming edges for each routing track output node of GSB[2][0][10%] Sorted incoming edges for each routing track output node of GSB[2][1][11%] Sorted incoming edges for each routing track output node of GSB[2][2][12%] Sorted incoming edges for each routing track output node of GSB[2][3][13%] Sorted incoming edges for each routing track output node of GSB[2][4][13%] Sorted incoming edges for each routing track output node of GSB[3][0][14%] Sorted incoming edges for each routing track output node of GSB[3][1][15%] Sorted incoming edges for each routing track output node of GSB[3][2][16%] Sorted incoming edges for each routing track output node of GSB[3][3][17%] Sorted incoming edges for each routing track output node of GSB[3][4][18%] Sorted incoming edges for each routing track output node of GSB[4][0][19%] Sorted incoming edges for each routing track output node of GSB[4][1][20%] Sorted incoming edges for each routing track output node of GSB[4][2][20%] Sorted incoming edges for each routing track output node of GSB[4][3][21%] Sorted incoming edges for each routing track output node of GSB[4][4][22%] Sorted incoming edges for each routing track output node of GSB[5][0][23%] Sorted incoming edges for each routing track output node of GSB[5][1][24%] Sorted incoming edges for each routing track output node of GSB[5][2][25%] Sorted incoming edges for each routing track output node of GSB[5][3][26%] Sorted incoming edges for each routing track output node of GSB[5][4][26%] Sorted incoming edges for each routing track output node of GSB[6][0][27%] Sorted incoming edges for each routing track output node of GSB[6][1][28%] Sorted incoming edges for each routing track output node of GSB[6][2][29%] Sorted incoming edges for each routing track output node of GSB[6][3][30%] Sorted incoming edges for each routing track output node of GSB[6][4][31%] Sorted incoming edges for each routing track output node of GSB[7][0][32%] Sorted incoming edges for each routing track output node of GSB[7][1][33%] Sorted incoming edges for each routing track output node of GSB[7][2][33%] Sorted incoming edges for each routing track output node of GSB[7][3][34%] Sorted incoming edges for each routing track output node of GSB[7][4][35%] Sorted incoming edges for each routing track output node of GSB[8][0][36%] Sorted incoming edges for each routing track output node of GSB[8][1][37%] Sorted incoming edges for each routing track output node of GSB[8][2][38%] Sorted incoming edges for each routing track output node of GSB[8][3][39%] Sorted incoming edges for each routing track output node of GSB[8][4][40%] Sorted incoming edges for each routing track output node of GSB[9][0][40%] Sorted incoming edges for each routing track output node of GSB[9][1][41%] Sorted incoming edges for each routing track output node of GSB[9][2][42%] Sorted incoming edges for each routing track output node of GSB[9][3][43%] Sorted incoming edges for each routing track output node of GSB[9][4][44%] Sorted incoming edges for each routing track output node of GSB[10][0][45%] Sorted incoming edges for each routing track output node of GSB[10][1][46%] Sorted incoming edges for each routing track output node of GSB[10][2][46%] Sorted incoming edges for each routing track output node of GSB[10][3][47%] Sorted incoming edges for each routing track output node of GSB[10][4][48%] Sorted incoming edges for each routing track output node of GSB[11][0][49%] Sorted incoming edges for each routing track output node of GSB[11][1][50%] Sorted incoming edges for each routing track output node of GSB[11][2][51%] Sorted incoming edges for each routing track output node of GSB[11][3][52%] Sorted incoming edges for each routing track output node of GSB[11][4][53%] Sorted incoming edges for each routing track output node of GSB[12][0][53%] Sorted incoming edges for each routing track output node of GSB[12][1][54%] Sorted incoming edges for each routing track output node of GSB[12][2][55%] Sorted incoming edges for each routing track output node of GSB[12][3][56%] Sorted incoming edges for each routing track output node of GSB[12][4][57%] Sorted incoming edges for each routing track output node of GSB[13][0][58%] Sorted incoming edges for each routing track output node of GSB[13][1][59%] Sorted incoming edges for each routing track output node of GSB[13][2][60%] Sorted incoming edges for each routing track output node of GSB[13][3][60%] Sorted incoming edges for each routing track output node of GSB[13][4][61%] Sorted incoming edges for each routing track output node of GSB[14][0][62%] Sorted incoming edges for each routing track output node of GSB[14][1][63%] Sorted incoming edges for each routing track output node of GSB[14][2][64%] Sorted incoming edges for each routing track output node of GSB[14][3][65%] Sorted incoming edges for each routing track output node of GSB[14][4][66%] Sorted incoming edges for each routing track output node of GSB[15][0][66%] Sorted incoming edges for each routing track output node of GSB[15][1][67%] Sorted incoming edges for each routing track output node of GSB[15][2][68%] Sorted incoming edges for each routing track output node of GSB[15][3][69%] Sorted incoming edges for each routing track output node of GSB[15][4][70%] Sorted incoming edges for each routing track output node of GSB[16][0][71%] Sorted incoming edges for each routing track output node of GSB[16][1][72%] Sorted incoming edges for each routing track output node of GSB[16][2][73%] Sorted incoming edges for each routing track output node of GSB[16][3][73%] Sorted incoming edges for each routing track output node of GSB[16][4][74%] Sorted incoming edges for each routing track output node of GSB[17][0][75%] Sorted incoming edges for each routing track output node of GSB[17][1][76%] Sorted incoming edges for each routing track output node of GSB[17][2][77%] Sorted incoming edges for each routing track output node of GSB[17][3][78%] Sorted incoming edges for each routing track output node of GSB[17][4][79%] Sorted incoming edges for each routing track output node of GSB[18][0][80%] Sorted incoming edges for each routing track output node of GSB[18][1][80%] Sorted incoming edges for each routing track output node of GSB[18][2][81%] Sorted incoming edges for each routing track output node of GSB[18][3][82%] Sorted incoming edges for each routing track output node of GSB[18][4][83%] Sorted incoming edges for each routing track output node of GSB[19][0][84%] Sorted incoming edges for each routing track output node of GSB[19][1][85%] Sorted incoming edges for each routing track output node of GSB[19][2][86%] Sorted incoming edges for each routing track output node of GSB[19][3][86%] Sorted incoming edges for each routing track output node of GSB[19][4][87%] Sorted incoming edges for each routing track output node of GSB[20][0][88%] Sorted incoming edges for each routing track output node of GSB[20][1][89%] Sorted incoming edges for each routing track output node of GSB[20][2][90%] Sorted incoming edges for each routing track output node of GSB[20][3][91%] Sorted incoming edges for each routing track output node of GSB[20][4][92%] Sorted incoming edges for each routing track output node of GSB[21][0][93%] Sorted incoming edges for each routing track output node of GSB[21][1][93%] Sorted incoming edges for each routing track output node of GSB[21][2][94%] Sorted incoming edges for each routing track output node of GSB[21][3][95%] Sorted incoming edges for each routing track output node of GSB[21][4][96%] Sorted incoming edges for each routing track output node of GSB[22][0][97%] Sorted incoming edges for each routing track output node of GSB[22][1][98%] Sorted incoming edges for each routing track output node of GSB[22][2][99%] Sorted incoming edges for each routing track output node of GSB[22][3][100%] Sorted incoming edges for each routing track output node of GSB[22][4]Sorted incoming edges for each routing track output node of 115 General Switch Blocks (GSBs).
+# Sort incoming edges for each routing track output node of General Switch Block(GSB) took 0.37 seconds (max_rss 90.7 MiB, delta_rss +2.1 MiB)
+# Sort incoming edges for each input pin node of General Switch Block(GSB)
+[0%] Sorted incoming edges for each input pin node of GSB[0][0][1%] Sorted incoming edges for each input pin node of GSB[0][1][2%] Sorted incoming edges for each input pin node of GSB[0][2][3%] Sorted incoming edges for each input pin node of GSB[0][3][4%] Sorted incoming edges for each input pin node of GSB[0][4][5%] Sorted incoming edges for each input pin node of GSB[1][0][6%] Sorted incoming edges for each input pin node of GSB[1][1][6%] Sorted incoming edges for each input pin node of GSB[1][2][7%] Sorted incoming edges for each input pin node of GSB[1][3][8%] Sorted incoming edges for each input pin node of GSB[1][4][9%] Sorted incoming edges for each input pin node of GSB[2][0][10%] Sorted incoming edges for each input pin node of GSB[2][1][11%] Sorted incoming edges for each input pin node of GSB[2][2][12%] Sorted incoming edges for each input pin node of GSB[2][3][13%] Sorted incoming edges for each input pin node of GSB[2][4][13%] Sorted incoming edges for each input pin node of GSB[3][0][14%] Sorted incoming edges for each input pin node of GSB[3][1][15%] Sorted incoming edges for each input pin node of GSB[3][2][16%] Sorted incoming edges for each input pin node of GSB[3][3][17%] Sorted incoming edges for each input pin node of GSB[3][4][18%] Sorted incoming edges for each input pin node of GSB[4][0][19%] Sorted incoming edges for each input pin node of GSB[4][1][20%] Sorted incoming edges for each input pin node of GSB[4][2][20%] Sorted incoming edges for each input pin node of GSB[4][3][21%] Sorted incoming edges for each input pin node of GSB[4][4][22%] Sorted incoming edges for each input pin node of GSB[5][0][23%] Sorted incoming edges for each input pin node of GSB[5][1][24%] Sorted incoming edges for each input pin node of GSB[5][2][25%] Sorted incoming edges for each input pin node of GSB[5][3][26%] Sorted incoming edges for each input pin node of GSB[5][4][26%] Sorted incoming edges for each input pin node of GSB[6][0][27%] Sorted incoming edges for each input pin node of GSB[6][1][28%] Sorted incoming edges for each input pin node of GSB[6][2][29%] Sorted incoming edges for each input pin node of GSB[6][3][30%] Sorted incoming edges for each input pin node of GSB[6][4][31%] Sorted incoming edges for each input pin node of GSB[7][0][32%] Sorted incoming edges for each input pin node of GSB[7][1][33%] Sorted incoming edges for each input pin node of GSB[7][2][33%] Sorted incoming edges for each input pin node of GSB[7][3][34%] Sorted incoming edges for each input pin node of GSB[7][4][35%] Sorted incoming edges for each input pin node of GSB[8][0][36%] Sorted incoming edges for each input pin node of GSB[8][1][37%] Sorted incoming edges for each input pin node of GSB[8][2][38%] Sorted incoming edges for each input pin node of GSB[8][3][39%] Sorted incoming edges for each input pin node of GSB[8][4][40%] Sorted incoming edges for each input pin node of GSB[9][0][40%] Sorted incoming edges for each input pin node of GSB[9][1][41%] Sorted incoming edges for each input pin node of GSB[9][2][42%] Sorted incoming edges for each input pin node of GSB[9][3][43%] Sorted incoming edges for each input pin node of GSB[9][4][44%] Sorted incoming edges for each input pin node of GSB[10][0][45%] Sorted incoming edges for each input pin node of GSB[10][1][46%] Sorted incoming edges for each input pin node of GSB[10][2][46%] Sorted incoming edges for each input pin node of GSB[10][3][47%] Sorted incoming edges for each input pin node of GSB[10][4][48%] Sorted incoming edges for each input pin node of GSB[11][0][49%] Sorted incoming edges for each input pin node of GSB[11][1][50%] Sorted incoming edges for each input pin node of GSB[11][2][51%] Sorted incoming edges for each input pin node of GSB[11][3][52%] Sorted incoming edges for each input pin node of GSB[11][4][53%] Sorted incoming edges for each input pin node of GSB[12][0][53%] Sorted incoming edges for each input pin node of GSB[12][1][54%] Sorted incoming edges for each input pin node of GSB[12][2][55%] Sorted incoming edges for each input pin node of GSB[12][3][56%] Sorted incoming edges for each input pin node of GSB[12][4][57%] Sorted incoming edges for each input pin node of GSB[13][0][58%] Sorted incoming edges for each input pin node of GSB[13][1][59%] Sorted incoming edges for each input pin node of GSB[13][2][60%] Sorted incoming edges for each input pin node of GSB[13][3][60%] Sorted incoming edges for each input pin node of GSB[13][4][61%] Sorted incoming edges for each input pin node of GSB[14][0][62%] Sorted incoming edges for each input pin node of GSB[14][1][63%] Sorted incoming edges for each input pin node of GSB[14][2][64%] Sorted incoming edges for each input pin node of GSB[14][3][65%] Sorted incoming edges for each input pin node of GSB[14][4][66%] Sorted incoming edges for each input pin node of GSB[15][0][66%] Sorted incoming edges for each input pin node of GSB[15][1][67%] Sorted incoming edges for each input pin node of GSB[15][2][68%] Sorted incoming edges for each input pin node of GSB[15][3][69%] Sorted incoming edges for each input pin node of GSB[15][4][70%] Sorted incoming edges for each input pin node of GSB[16][0][71%] Sorted incoming edges for each input pin node of GSB[16][1][72%] Sorted incoming edges for each input pin node of GSB[16][2][73%] Sorted incoming edges for each input pin node of GSB[16][3][73%] Sorted incoming edges for each input pin node of GSB[16][4][74%] Sorted incoming edges for each input pin node of GSB[17][0][75%] Sorted incoming edges for each input pin node of GSB[17][1][76%] Sorted incoming edges for each input pin node of GSB[17][2][77%] Sorted incoming edges for each input pin node of GSB[17][3][78%] Sorted incoming edges for each input pin node of GSB[17][4][79%] Sorted incoming edges for each input pin node of GSB[18][0][80%] Sorted incoming edges for each input pin node of GSB[18][1][80%] Sorted incoming edges for each input pin node of GSB[18][2][81%] Sorted incoming edges for each input pin node of GSB[18][3][82%] Sorted incoming edges for each input pin node of GSB[18][4][83%] Sorted incoming edges for each input pin node of GSB[19][0][84%] Sorted incoming edges for each input pin node of GSB[19][1][85%] Sorted incoming edges for each input pin node of GSB[19][2][86%] Sorted incoming edges for each input pin node of GSB[19][3][86%] Sorted incoming edges for each input pin node of GSB[19][4][87%] Sorted incoming edges for each input pin node of GSB[20][0][88%] Sorted incoming edges for each input pin node of GSB[20][1][89%] Sorted incoming edges for each input pin node of GSB[20][2][90%] Sorted incoming edges for each input pin node of GSB[20][3][91%] Sorted incoming edges for each input pin node of GSB[20][4][92%] Sorted incoming edges for each input pin node of GSB[21][0][93%] Sorted incoming edges for each input pin node of GSB[21][1][93%] Sorted incoming edges for each input pin node of GSB[21][2][94%] Sorted incoming edges for each input pin node of GSB[21][3][95%] Sorted incoming edges for each input pin node of GSB[21][4][96%] Sorted incoming edges for each input pin node of GSB[22][0][97%] Sorted incoming edges for each input pin node of GSB[22][1][98%] Sorted incoming edges for each input pin node of GSB[22][2][99%] Sorted incoming edges for each input pin node of GSB[22][3][100%] Sorted incoming edges for each input pin node of GSB[22][4]Sorted incoming edges for each input pin node of 115 General Switch Blocks (GSBs).
+# Sort incoming edges for each input pin node of General Switch Block(GSB) took 0.20 seconds (max_rss 91.7 MiB, delta_rss +1.0 MiB)
+# Build a library of physical multiplexers
+Built a multiplexer library of 31 physical multiplexers.
+Maximum multiplexer size is 64.
+	model 'mux_tree_tapbuf', input_size='18'
+	model 'mux_tree_tapbuf_L1SB', input_size='5'
+	model 'mux_tree_tapbuf_L1SB', input_size='4'
+	model 'mux_tree_tapbuf_L4SB', input_size='3'
+	model 'mux_tree_tapbuf_L4SB', input_size='4'
+	model 'mux_tree_tapbuf_L1SB', input_size='6'
+	model 'mux_tree_tapbuf_L1SB', input_size='12'
+	model 'mux_tree_tapbuf_L1SB', input_size='7'
+	model 'mux_tree_tapbuf_L1SB', input_size='11'
+	model 'mux_tree_tapbuf_L4SB', input_size='11'
+	model 'mux_tree_tapbuf_L4SB', input_size='13'
+	model 'mux_tree_tapbuf_L4SB', input_size='10'
+	model 'mux_tree_tapbuf_L4SB', input_size='12'
+	model 'mux_tree_tapbuf_L4SB', input_size='9'
+	model 'mux_tree_tapbuf_L4SB', input_size='8'
+	model 'mux_tree_tapbuf_L4SB', input_size='7'
+	model 'mux_tree_tapbuf_L4SB', input_size='5'
+	model 'mux_tree_tapbuf_L4SB', input_size='2'
+	model 'mux_tree_tapbuf_L1SB', input_size='9'
+	model 'mux_tree_tapbuf_L1SB', input_size='8'
+	model 'mux_tree_tapbuf_L1SB', input_size='3'
+	model 'mux_tree_tapbuf_L4SB', input_size='6'
+	model 'mux_tree_tapbuf_L1SB', input_size='2'
+	model 'clock_mux', input_size='16'
+	model 'mux_1level_io', input_size='2'
+	model 'mux_tree', input_size='28'
+	model 'mux_tree', input_size='6'
+	model 'mux_tree', input_size='2'
+	model 'mux_tree', input_size='24'
+	model 'mux_tree', input_size='18'
+	model 'frac_lut6', input_size='64'
+# Build a library of physical multiplexers took 0.01 seconds (max_rss 91.9 MiB, delta_rss +0.3 MiB)
+# Build the annotation about direct connection between tiles
+Built 20 tile-to-tile direct connections
+# Build the annotation about direct connection between tiles took 0.00 seconds (max_rss 91.9 MiB, delta_rss +0.0 MiB)
+Building annotation for post-routing and clustering synchornization results...Done
+Building annotation for mapped blocks on grid locations...Done
+Will apply operating clock frequency 500 [MHz] to simulations
+Will apply 10 operating clock cycles to simulations
+Link OpenFPGA architecture to VPR architecture took 0.85 seconds (max_rss 91.9 MiB, delta_rss +5.9 MiB)
+
+Command line to execute: lut_truth_table_fixup
+
+Confirm selected options when call command 'lut_truth_table_fixup':
+--verbose: off
+Fix up LUT truth tables after packing optimization
+Fix up LUT truth tables after packing optimization took 0.00 seconds (max_rss 91.9 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: build_fabric --compress_routing
+
+Confirm selected options when call command 'build_fabric':
+--frame_view: off
+--compress_routing: on
+--duplicate_grid_pin: off
+--name_module_using_index: off
+--load_fabric_key: off
+--write_fabric_key: off
+--group_tile: off
+--group_config_block: off
+--generate_random_fabric_key: off
+--verbose: off
+Identify unique General Switch Blocks (GSBs)
+Detected 12 unique general switch blocks from a total of 115 (compression rate=858.33%)
+Identify unique General Switch Blocks (GSBs) took 2.05 seconds (max_rss 92.2 MiB, delta_rss +0.3 MiB)
+
+
+Build fabric module graph
+# Build constant generator modules
+# Build constant generator modules took 0.00 seconds (max_rss 92.2 MiB, delta_rss +0.0 MiB)
+# Build user-defined modules
+# Build user-defined modules took 0.00 seconds (max_rss 92.2 MiB, delta_rss +0.0 MiB)
+# Build essential (inverter/buffer/logic gate) modules
+# Build essential (inverter/buffer/logic gate) modules took 0.00 seconds (max_rss 92.2 MiB, delta_rss +0.0 MiB)
+# Build local encoder (for multiplexers) modules
+# Build local encoder (for multiplexers) modules took 0.00 seconds (max_rss 92.2 MiB, delta_rss +0.0 MiB)
+# Building multiplexer modules
+# Building multiplexer modules took 0.00 seconds (max_rss 93.0 MiB, delta_rss +0.8 MiB)
+# Build Look-Up Table (LUT) modules
+# Build Look-Up Table (LUT) modules took 0.00 seconds (max_rss 93.2 MiB, delta_rss +0.3 MiB)
+# Build wire modules
+# Build wire modules took 0.00 seconds (max_rss 93.2 MiB, delta_rss +0.0 MiB)
+# Build memory modules
+# Build memory modules took 0.00 seconds (max_rss 94.3 MiB, delta_rss +1.0 MiB)
+# Build grid modules
+Building logical tiles...Done
+Building physical tiles...Done
+# Build grid modules took 0.20 seconds (max_rss 110.5 MiB, delta_rss +16.2 MiB)
+# Build unique routing modules...
+# Build unique routing modules... took 0.13 seconds (max_rss 122.4 MiB, delta_rss +11.9 MiB)
+# Build FPGA fabric module
+## Add grid instances to top module
+## Add grid instances to top module took 0.02 seconds (max_rss 130.4 MiB, delta_rss +8.0 MiB)
+## Add switch block instances to top module
+## Add switch block instances to top module took 0.00 seconds (max_rss 131.6 MiB, delta_rss +1.3 MiB)
+## Add connection block instances to top module
+## Add connection block instances to top module took 0.00 seconds (max_rss 132.2 MiB, delta_rss +0.5 MiB)
+## Add connection block instances to top module
+## Add connection block instances to top module took 0.00 seconds (max_rss 132.7 MiB, delta_rss +0.5 MiB)
+## Add module nets between grids and GSBs
+## Add module nets between grids and GSBs took 0.69 seconds (max_rss 165.5 MiB, delta_rss +28.9 MiB)
+## Add module nets for inter-tile connections
+## Add module nets for inter-tile connections took 0.00 seconds (max_rss 165.5 MiB, delta_rss +0.0 MiB)
+## Build configurable regions for the top module
+## Build configurable regions for the top module took 0.00 seconds (max_rss 171.5 MiB, delta_rss +0.0 MiB)
+## Add module nets for configuration buses
+## Add module nets for configuration buses took 0.11 seconds (max_rss 189.0 MiB, delta_rss +17.5 MiB)
+# Build FPGA fabric module took 2.03 seconds (max_rss 189.0 MiB, delta_rss +66.6 MiB)
+Build fabric module graph took 2.37 seconds (max_rss 189.0 MiB, delta_rss +96.8 MiB)
+Create I/O location mapping for top module
+Create I/O location mapping for top module took 0.01 seconds (max_rss 189.0 MiB, delta_rss +0.0 MiB)
+Create global port info for top module
+Create global port info for top module took 0.00 seconds (max_rss 189.0 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: repack --design_constraints /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/GJC48_repack_constraints.xml
+
+Confirm selected options when call command 'repack':
+--design_constraints: /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/GJC48_repack_constraints.xml
+--ignore_global_nets_on_pins: off
+--verbose: off
+Read Repack Design Constraints
+Read Repack Design Constraints took 0.00 seconds (max_rss 189.0 MiB, delta_rss +0.0 MiB)
+Build routing resource graph for the physical implementation of logical tile
+Build routing resource graph for the physical implementation of logical tile took 0.01 seconds (max_rss 189.0 MiB, delta_rss +0.0 MiB)
+Repack clustered blocks to physical implementation of logical tile
+Repack clustered block '$auto_528'...Done
+Repack clustered block '$obuf_dma_ack_out[0]'...Done
+Repack clustered block 'out:$auto_524'...Done
+Repack clustered block 'out:$auto_525'...Done
+Repack clustered block 'out:$auto_526'...Done
+Repack clustered block 'out:$auto_527'...Done
+Repack clustered block 'out:$auto_528'...Done
+Repack clustered block 'out:$auto_529'...Done
+Repack clustered block 'out:$auto_530'...Done
+Repack clustered block 'out:$auto_531'...Done
+Repack clustered block 'out:$auto_532'...Done
+Repack clustered block 'out:$auto_533'...Done
+Repack clustered block 'out:$obuf_dma_ack_out[0]'...Done
+Repack clustered block 'out:$obuf_dma_ack_out[1]'...Done
+Repack clustered block 'out:$obuf_dma_ack_out[2]'...Done
+Repack clustered block 'out:$obuf_dma_ack_out[3]'...Done
+Repack clustered block 'out:dma_req_reg[0]'...Done
+Repack clustered block 'out:dma_req_reg[1]'...Done
+Repack clustered block 'out:dma_req_reg[2]'...Done
+Repack clustered block 'out:dma_req_reg[3]'...Done
+Repack clustered block '$clk_buf_$ibuf_clk'...Done
+Repack clustered block '$ibuf_dma_req_in[0]'...Done
+Repack clustered block '$ibuf_dma_req_in[1]'...Done
+Repack clustered block '$ibuf_dma_req_in[2]'...Done
+Repack clustered block '$ibuf_dma_req_in[3]'...Done
+Repack clustered block '$ibuf_reset_n'...Done
+Repack clustered block 'dma_ack_reg[0]'...Done
+Repack clustered block 'dma_ack_reg[1]'...Done
+Repack clustered block 'dma_ack_reg[2]'...Done
+Repack clustered block 'dma_ack_reg[3]'...Done
+Repack clustered blocks to physical implementation of logical tile took 0.01 seconds (max_rss 189.3 MiB, delta_rss +0.3 MiB)
+Identify wire LUTs created by repacking
+Identified 0 wire LUTs created by repacker
+Identify wire LUTs created by repacking took 0.00 seconds (max_rss 189.3 MiB, delta_rss +0.0 MiB)
+Build truth tables for physical LUTs
+Build truth tables for physical LUTs took 0.00 seconds (max_rss 189.3 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: build_architecture_bitstream
+
+Confirm selected options when call command 'build_architecture_bitstream':
+--write_file: off
+--read_file: off
+--no_time_stamp: off
+--verbose: off
+
+Build fabric-independent bitstream for implementation 'fabric_GJC48'
+
+Generating bitstream for Switch blocks...Done
+Generating bitstream for X-direction Connection blocks ...Done
+Generating bitstream for Y-direction Connection blocks ...Done
+
+Build fabric-independent bitstream for implementation 'fabric_GJC48'
+ took 0.59 seconds (max_rss 202.4 MiB, delta_rss +13.1 MiB)
+
+Overwrite Bitstream
+
+
+Overwrite Bitstream
+ took 0.00 seconds (max_rss 202.4 MiB, delta_rss +0.0 MiB)
+
+Build non-fabric bitstream for implementation 'fabric_GJC48'
+
+
+Build non-fabric bitstream for implementation 'fabric_GJC48'
+ took 0.01 seconds (max_rss 202.4 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: build_fabric_bitstream
+
+Confirm selected options when call command 'build_fabric_bitstream':
+--verbose: off
+
+Build fabric dependent bitstream
+
+
+Build fabric dependent bitstream
+ took 0.15 seconds (max_rss 222.7 MiB, delta_rss +20.3 MiB)
+
+Command line to execute: write_fabric_bitstream --keep_dont_care_bits  --format plain_text --file fabric_bitstream.bit
+
+Confirm selected options when call command 'write_fabric_bitstream':
+--file, -f: fabric_bitstream.bit
+--format: plain_text
+--filter_value: off
+--path_only: off
+--value_only: off
+--trim_path: off
+--fast_configuration: off
+--keep_dont_care_bits: on
+--wl_decremental_order: off
+--no_time_stamp: off
+--verbose: off
+Warning 185: Directory path is empty and nothing will be created.
+Write 134403 fabric bitstream into plain text file 'fabric_bitstream.bit'
+Warning 186: None of global reset and set ports are defined for programming purpose. Fast configuration is not applicable
+Write 134403 fabric bitstream into plain text file 'fabric_bitstream.bit' took 0.01 seconds (max_rss 222.9 MiB, delta_rss +0.2 MiB)
+
+Command line to execute: write_io_mapping -f PinMapping.xml
+
+Confirm selected options when call command 'write_io_mapping':
+--file, -f: PinMapping.xml
+--no_time_stamp: off
+--verbose: off
+Warning 187: Directory path is empty and nothing will be created.
+Write I/O mapping into xml file 'PinMapping.xml'
+Write I/O mapping into xml file 'PinMapping.xml' took 0.00 seconds (max_rss 222.9 MiB, delta_rss +0.0 MiB)
+
+Command line to execute: exit
+
+Confirm selected options when call command 'exit':
+
+Finish execution with 0 errors
+
+The entire OpenFPGA flow took 7.09 seconds
+
+Thank you for using OpenFPGA!
+Incr Slack updates 1 in 5.142e-06 sec
+Full Max Req/Worst Slack updates 1 in 4.222e-06 sec
+Incr Max Req/Worst Slack updates 0 in 0 sec
+Incr Criticality updates 0 in 0 sec
+Full Criticality updates 1 in 2.9474e-05 sec

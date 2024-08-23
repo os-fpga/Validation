@@ -1,0 +1,40 @@
+ 
+vpr /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_vpr.xml /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/synthesis/fabric_GJC48_post_synth.eblif --clock_modeling ideal --device castor22x4_heterogeneous --net_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_post_synth.net --place_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/fabric_GJC48_post_synth.place --route_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/routing/fabric_GJC48_post_synth.route --route_chan_width 160 --sdc_file /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/packing/fabric_GJC48_openfpga.sdc --absorb_buffer_luts off --constant_net_method route --skip_sync_clustering_and_routing_results off --circuit_format eblif --analysis  --allow_unrelated_clustering on --allow_dangling_combinational_nodes on --place_delta_delay_matrix_calculation_method dijkstra --top GJC48
+
+# Read OpenFPGA architecture definition
+read_openfpga_arch -f /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/gemini_openfpga.xml
+
+# Read OpenFPGA simulation settings
+read_openfpga_simulation_setting -f /nfs_eda_sw/softwares/Raptor/instl_dir/08_22_2024_09_15_01/share/raptor/etc/devices/gemini_compact_22x4/fixed_sim_openfpga.xml
+
+read_openfpga_bitstream_setting -f bitstream_setting.xml
+
+# Annotate the OpenFPGA architecture to VPR data base
+# to debug use --verbose options
+link_openfpga_arch --sort_gsb_chan_node_in_edges 
+
+
+
+# Apply fix-up to Look-Up Table truth tables based on packing results
+lut_truth_table_fixup
+
+# Build the module graph
+#  - Enabled compression on routing architecture modules
+#  - Enable pin duplication on grid modules
+build_fabric --compress_routing 
+
+# Repack the netlist to physical pbs
+# This must be done before bitstream generator and testbench generation
+# Strongly recommend it is done after all the fix-up have been applied
+repack --design_constraints /nfs_scratch/scratch/CompilerValidation/zaheer_ahmad/os_fpga2/Validation/RTL_testcases/GJC-IO-Testcases/GJC48/results_dir/GJC48/run_1/synth_1_1/impl_1_1_1/placement/GJC48_repack_constraints.xml
+
+build_architecture_bitstream 
+
+build_fabric_bitstream
+write_fabric_bitstream --keep_dont_care_bits  --format plain_text --file fabric_bitstream.bit
+
+write_io_mapping -f PinMapping.xml
+
+# Finish and exit OpenFPGA
+exit
+

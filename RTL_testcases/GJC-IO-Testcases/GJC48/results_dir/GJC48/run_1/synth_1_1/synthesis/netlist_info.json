@@ -1,0 +1,47 @@
+{
+  "top" : "GJC48",
+  "ports" : [
+     {
+        "name": "dma_ack_out[1]",
+        "direction": "output"
+     },
+     {
+        "name": "dma_ack_out[0]",
+        "direction": "output"
+     },
+     {
+        "name": "dma_req_in[3]",
+        "direction": "input"
+     },
+     {
+        "name": "dma_req_in[2]",
+        "direction": "input"
+     },
+     {
+        "name": "dma_req_in[1]",
+        "direction": "input"
+     },
+     {
+        "name": "dma_req_in[0]",
+        "direction": "input"
+     },
+     {
+        "name": "clk",
+        "direction": "input",
+        "clock": "active_high"
+     },
+     {
+        "name": "dma_ack_out[3]",
+        "direction": "output"
+     },
+     {
+        "name": "dma_ack_out[2]",
+        "direction": "output"
+     },
+     {
+        "name": "reset_n",
+        "direction": "input",
+        "async_reset": "active_low"
+     }
+   ]
+}
