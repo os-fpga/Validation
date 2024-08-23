@@ -154,7 +154,7 @@ for (genvar i=0; i<NUM_OF_BUS; i=i+1) begin : GEN_MUX
     end
  end else if (NUM_OF_BUS == 10) begin : MUX10to1
     always @(*) begin
-          $display("time_10 = %t, d[DWIDTH-1:0] = 0x%0h, bus_int9 = 0x%0h", $time, d[DWIDTH-1:0], bus_int9);
+        //   $display("time_10 = %t, d[DWIDTH-1:0] = 0x%0h, bus_int9 = 0x%0h", $time, d[DWIDTH-1:0], bus_int9);
         case (1'b1)
          sel[0]: dout = d[DWIDTH-1:0];
          sel[1]: dout = d[((DWIDTH*2)-1):DWIDTH];
