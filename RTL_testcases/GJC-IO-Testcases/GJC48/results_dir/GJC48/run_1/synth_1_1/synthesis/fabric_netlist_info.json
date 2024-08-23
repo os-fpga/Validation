@@ -1,9 +1,0 @@
-{
-    "ports": [
-        {
-            "clock": "active_high",
-            "direction": "input",
-            "name": "$clk_buf_$ibuf_clk"
-        }
-    ]
-}
