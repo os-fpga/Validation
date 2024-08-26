@@ -2,8 +2,7 @@ set_pin_loc clk_i_buf HP_1_CC_18_9P
 
 set_pin_loc dly_inc_pulse_inv_buf HP_1_0_0P
 
-# Bug here:
-#set_pin_loc data_i HP_1_1_0N
+set_pin_loc data_i HP_1_1_0N
 
 set_pin_loc enable_buf HP_1_4_2P
 
