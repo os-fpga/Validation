@@ -8,7 +8,7 @@ set_pin_loc dly_adj_buf HP_1_4_2P
 
 set_pin_loc data_o_delayed_p HP_1_6_3P
 
-set_pin_loc data_o_delayed_n HP_1_8_4P
+set_pin_loc data_o_delayed_n HP_1_7_3N
 
 # TODO:
 #set_pin_loc data_o_ref_buf HP_1_CC_39_19N

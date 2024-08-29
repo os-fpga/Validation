@@ -10,3 +10,4 @@ set_pin_loc reset_n HP_1_10_5P
 
 set_pin_loc data_o_p HP_1_8_4P
 
+set_pin_loc data_o_n HP_1_9_4N
