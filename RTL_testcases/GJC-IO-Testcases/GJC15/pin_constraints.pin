@@ -1,5 +1,7 @@
 set_pin_loc data_i HP_1_8_4P
 
+set_pin_loc ctrl_T HP_1_12_6P
+
 set_pin_loc data_o_P HP_1_14_7P
 
-set_pin_loc ctrl_T HP_1_12_6P
+set_pin_loc data_o_N HP_1_15_7N

@@ -4,7 +4,7 @@ set_pin_loc in_N HP_1_5_2N
 
 set_pin_loc out_P HP_1_6_3P
 
-set_pin_loc out_N HP_1_8_4P
+set_pin_loc out_N HP_1_7_3N
 
 
 
