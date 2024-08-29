@@ -4,22 +4,22 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="and2_or2"
+design="cholesky_mc"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
 
 #simulation stages
 post_synth_sim=false 
-post_route_sim=true 
-bitstream_sim=true
+post_route_sim=false 
+bitstream_sim=false
 
 #raptor options
 device="GEMINI_COMPACT_104x68"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="./raptor_sdc.sdc" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -107,13 +107,6 @@ if [[ $# -eq 6 ]]; then
   device=$4
   synth_stage=$5
   mute_flag=$6
-  echo "Below are the flags passed from CGA:">CGA_flags.txt
-  echo "reg_id=$reg_id">>CGA_flags.txt
-  echo "timeout=$timeout">>CGA_flags.txt
-  echo "post_synth_sim=$post_synth_sim">>CGA_flags.txt
-  echo "device=$device">>CGA_flags.txt
-  echo "synth_stage=$synth_stage">>CGA_flags.txt
-  echo "mute_flag=$mute_flag">>CGA_flags.txt
 else
   if [[ $1 == "load_toolconf" ]]; then
       # Load parameters from tool.conf file
@@ -160,7 +153,7 @@ function compile () {
     [ -z "$ip_name" ] && echo $temp || echo ""
     #finding the design
     [ -z "$ip_name" ] && echo "Current Design is $design" || echo ""
-    [ -z "$ip_name" ] && design_path=`find $temp -type f -iname "$design.v"` || echo ""
+    [ -z "$ip_name" ] && design_path=`find $temp -type f -iname "$design.vhd"` || echo ""
     if [ -z "$design_path" ]
     then
         [ -z "$ip_name" ] && echo "No such design $design" || echo ""
@@ -177,7 +170,7 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device GEMINI_COMPACT_10x8">>raptor_tcl.tcl 
+    echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo "configure_ip $ip_name"_v1_0" -mod_name=$design -Pdata_width=32 -Paddr_width=16 -Pid_width=32 -Pa_pip_out=0 -Pb_pip_out=0 -Pa_interleave=0 -Pb_interleave=0 -out_file ./$design.v">>raptor_tcl.tcl
@@ -189,30 +182,61 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "" || echo "add_design_file ./rapidsilicon/ip/$ip_name/v1_0/$design/src/$design.v">>raptor_tcl.tcl
 
     [ -z "$ip_name" ] && echo "add_include_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
-    # [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl
+    [ -z "$ip_name" ] && echo "add_library_path ./rtl">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dspba_library_package.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/fpc_library_package.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/hcc_package.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/math_package.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/dspba_library.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/fpc_library.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_CholFwBw_BwSub.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_CholFwBw_Cholesky_Fw.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_CholFwBw_ValidCapture_L.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_CholFwBw_ValidCapture_y.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_safe_path.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/hcc_implementation.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/math_implementation.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/prmtvs_b.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/prmtvs_p.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/timing_b.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/timing_p.vhd">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/cholesky_solver_mc_CholFwBw.vhd">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
-    echo "set_top_module $design">>raptor_tcl.tcl 
+    echo "set_top_module cholesky_solver_mc_CholFwBw">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
+    
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
-    [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl 
-
-    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "setup_lec_sim">>raptor_tcl.tcl 
-    else
-        echo ""
-    fi 
-
+    [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
     if [ "$post_synth_sim" == true ]; then 
+        echo "# Open the input file in read mode">>raptor_tcl.tcl 
+        echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
+        echo "# Read the file content">>raptor_tcl.tcl 
+        echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+        echo "# Close the input file after reading">>raptor_tcl.tcl 
+        echo "close \$input_file">>raptor_tcl.tcl 
+        echo "set modified_content [string map {\"$design(\" \"${design}_post_synth(\"} \$file_content]">>raptor_tcl.tcl 
+        echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
+        echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" w]">>raptor_tcl.tcl
+        echo "# Write the modified content back to the file">>raptor_tcl.tcl 
+        echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+        echo "# Close the file">>raptor_tcl.tcl 
+        echo "close \$output_file">>raptor_tcl.tcl 
+        echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
@@ -231,7 +255,22 @@ parse_cga exit 1; }
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
-            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator pnr" >> raptor_tcl.tcl
+            echo "# Open the input file in read mode">>raptor_tcl.tcl 
+            echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" r]">>raptor_tcl.tcl 
+            echo "# Read the file content">>raptor_tcl.tcl 
+            echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+            echo "# Close the input file after reading">>raptor_tcl.tcl 
+            echo "close \$input_file">>raptor_tcl.tcl 
+            echo "set modified_content [string map {\"module $design(\" \"module ${design}_post_route (\"} \$file_content]">>raptor_tcl.tcl 
+            echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
+            echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" w]">>raptor_tcl.tcl
+            echo "# Write the modified content back to the file">>raptor_tcl.tcl 
+            echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+            echo "# Close the file">>raptor_tcl.tcl 
+            echo "close \$output_file">>raptor_tcl.tcl 
+            echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
+            # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
+            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else
             echo ""
@@ -240,28 +279,10 @@ parse_cga exit 1; }
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
         if [ "$bitstream_sim" == true ]; then 
-            echo "add_simulation_file results_dir/${design}/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_${design}_formal_random_top_tb.v">>raptor_tcl.tcl 
-            echo "set_top_testbench fabric_${design}_top_formal_verification_random_tb">>raptor_tcl.tcl 
-            echo "">>raptor_tcl.tcl
-            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_formal_random_top_tb.v $design">>raptor_tcl.tcl
-            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_$design\_top_formal_verification.v $design">>raptor_tcl.tcl
-            echo "exec python3 ../../../../scripts/bt_tb_io_update.py $design/run_1/synth_1_1/impl_1_1_1/bitstream/BIT_SIM/fabric_netlists.v $design">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "file mkdir $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
-            echo "if {[file exists $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/CustomModules]} {">>raptor_tcl.tcl
-            echo "    puts \"Destination directory already exists. Skipping the copy operation.\"">>raptor_tcl.tcl
-            echo "} else {">>raptor_tcl.tcl
-            echo "    file copy -force /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/ $design/run_1/synth_1_1/impl_1_1_1/bitstream/SRC/">>raptor_tcl.tcl
-            echo "}">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "# Bitstream Simulation">>raptor_tcl.tcl
-            echo "exec /bin/bash ../sed.sh">>raptor_tcl.tcl
-            # echo "clear_simulation_files">>raptor_tcl.tcl
-            echo "add_library_path /nfs_project/castor/DV/fabric_release/v1.6.204/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl
-            echo "add_library_path $PWD/rtl/">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "">>raptor_tcl.tcl
-            echo "simulate \"bitstream_bd\" \"icarus\"">>raptor_tcl.tcl
+            echo "clear_simulation_files">>raptor_tcl.tcl 
+            echo "add_simulation_file testbench.sv">>raptor_tcl.tcl 
+            echo "add_library_path ../../../../openfpga-pd-castor-rs/k6n8_TSMC16nm_7.5T/CommonFiles/task/CustomModules/">>raptor_tcl.tcl 
+            echo "simulate "bitstream_bd" "icarus" ">>raptor_tcl.tcl 
         else
             echo ""
         fi
