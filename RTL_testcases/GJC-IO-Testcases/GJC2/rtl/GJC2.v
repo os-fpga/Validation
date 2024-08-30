@@ -12,10 +12,10 @@ module GJC2(
 
 input din;
 input clk;
-output reg dout;
+output reg dout=0;
 
-reg q1 ;
-   reg q2 ;
+reg q1=0 ;
+   reg q2=0 ;
    
 
 always @(posedge clk)

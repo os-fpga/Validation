@@ -16,8 +16,8 @@ module GJC6(
    input oe;
    output tristate_out;
 
-   reg q1 ;
-   reg q2 ;
+   reg q1=0;
+   reg q2=0;
 
 always @(posedge clk)
     begin

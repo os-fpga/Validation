@@ -12,9 +12,9 @@ module GJC1(
 
 input din;
 input clk;
-output reg dout;
+output reg dout=0;
 
-reg q1 ;
+reg q1=0 ;
 
 
 always @(posedge clk)

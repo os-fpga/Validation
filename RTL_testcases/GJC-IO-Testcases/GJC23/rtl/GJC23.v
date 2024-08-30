@@ -15,7 +15,7 @@ module GJC23 (
     output  wire data_o
 );
 
-    reg [1:0] data_reg;
+    reg [1:0] data_reg=0;
     wire data_o_buf;
     wire clk_buf_i;
     wire const1;
