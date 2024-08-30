@@ -8,7 +8,7 @@
 module flop1( clk, din, q1 );
    input din;
    input clk;
-   output reg q1;
+   output reg q1=0;
    
 always @(posedge clk)
     begin
@@ -21,7 +21,7 @@ module flop2( clk, q1, dout );
    input clk;
 
    input q1;
-   output reg dout;
+   output reg dout=0;
    
    
 always @(posedge clk)

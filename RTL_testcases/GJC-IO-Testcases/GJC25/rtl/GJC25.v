@@ -16,7 +16,7 @@ module GJC25 (
     output  wire data_o_n
 );
 
-    reg [1:0] data_reg;
+    reg [1:0] data_reg=0;
     wire data_o_buf;
     wire clk_buf_i;
     wire const1;
