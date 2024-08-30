@@ -10,7 +10,7 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=true 
 bitstream_sim=true
 
@@ -103,7 +103,7 @@ mute_flag=""
 if [[ $# -eq 6 ]]; then
   reg_id=$1
   timeout=$2
-  post_synth_sim=$3
+  post_synth_sim_cga=$3
   device=$4
   synth_stage=$5
   mute_flag=$6

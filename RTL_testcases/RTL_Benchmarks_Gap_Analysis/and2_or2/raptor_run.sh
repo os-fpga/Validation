@@ -10,7 +10,7 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
+post_synth_sim=true 
 post_route_sim=true 
 bitstream_sim=true
 
@@ -103,14 +103,14 @@ mute_flag=""
 if [[ $# -eq 6 ]]; then
   reg_id=$1
   timeout=$2
-  post_synth_sim=$3
+  post_synth_sim_cga=$3
   device=$4
   synth_stage=$5
   mute_flag=$6
   echo "Below are the flags passed from CGA:">CGA_flags.txt
   echo "reg_id=$reg_id">>CGA_flags.txt
   echo "timeout=$timeout">>CGA_flags.txt
-  echo "post_synth_sim=$post_synth_sim">>CGA_flags.txt
+  echo "post_synth_sim_cga=$post_synth_sim_cga">>CGA_flags.txt
   echo "device=$device">>CGA_flags.txt
   echo "synth_stage=$synth_stage">>CGA_flags.txt
   echo "mute_flag=$mute_flag">>CGA_flags.txt
