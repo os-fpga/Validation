@@ -18,7 +18,7 @@
 module one_round (clk, state_in, key, state_out);
     input              clk;
     input      [127:0] state_in, key;
-    output reg [127:0] state_out;
+    output reg [127:0] state_out=0;
     wire       [31:0]  s0,  s1,  s2,  s3,
                        z0,  z1,  z2,  z3,
                        p00, p01, p02, p03,
@@ -51,7 +51,7 @@ module final_round (clk, state_in, key_in, state_out);
     input              clk;
     input      [127:0] state_in;
     input      [127:0] key_in;
-    output reg [127:0] state_out;
+    output reg [127:0] state_out=0;
     wire [31:0] s0,  s1,  s2,  s3,
                 z0,  z1,  z2,  z3,
                 k0,  k1,  k2,  k3;
@@ -78,4 +78,3 @@ module final_round (clk, state_in, key_in, state_out);
     always @ (posedge clk)
         state_out <= {z0, z1, z2, z3};
 endmodule
-
