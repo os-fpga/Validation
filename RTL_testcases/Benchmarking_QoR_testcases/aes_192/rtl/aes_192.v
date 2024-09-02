@@ -19,8 +19,8 @@ module aes_192 (clk, state, key, out);
     input  [127:0] state;
     input  [191:0] key;
     output [127:0] out;
-    reg    [127:0] s0;
-    reg    [191:0] k0;
+    reg    [127:0] s0=0;
+    reg    [191:0] k0=0;
     wire   [127:0] s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11;
     wire   [191:0] k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
     wire   [127:0] k0b, k1b, k2b, k3b, k4b, k5b, k6b, k7b, k8b, k9b, k10b, k11b;
@@ -66,11 +66,11 @@ module expand_key_type_A_192 (clk, in, rcon, out_1, out_2);
     input              clk;
     input      [191:0] in;
     input      [7:0]   rcon;
-    output reg [191:0] out_1;
+    output reg [191:0] out_1=0;
     output     [127:0] out_2;
     wire       [31:0]  k0, k1, k2, k3, k4, k5,
                        v0, v1, v2, v3;
-    reg        [31:0]  k0a, k1a, k2a, k3a, k4a, k5a;
+    reg        [31:0]  k0a=0, k1a=0, k2a=0, k3a=0, k4a=0, k5a=0;
     wire       [31:0]  k0b, k1b, k2b, k3b, k4b, k5b, k6a;
 
     assign {k0, k1, k2, k3, k4, k5} = in;
@@ -102,11 +102,11 @@ endmodule
 module expand_key_type_B_192 (clk, in, out_1, out_2);
     input              clk;
     input      [191:0] in;
-    output reg [191:0] out_1;
+    output reg [191:0] out_1=0;
     output     [127:0] out_2;
     wire       [31:0]  k0, k1, k2, k3, k4, k5,
                        v2, v3, v4, v5;
-    reg        [31:0]  k0a, k1a, k2a, k3a, k4a, k5a;
+    reg        [31:0]  k0a=0, k1a=0, k2a=0, k3a=0, k4a=0, k5a=0;
 
     assign {k0, k1, k2, k3, k4, k5} = in;
     
@@ -129,11 +129,11 @@ module expand_key_type_C_192 (clk, in, rcon, out_1, out_2);
     input              clk;
     input      [191:0] in;
     input      [7:0]   rcon;
-    output reg [191:0] out_1;
+    output reg [191:0] out_1=0;
     output     [127:0] out_2;
     wire       [31:0]  k0, k1, k2, k3, k4, k5,
                        v4, v5, v0, v1;
-    reg        [31:0]  k0a, k1a, k2a, k3a, k4a, k5a;
+    reg        [31:0]  k0a=0, k1a=0, k2a=0, k3a=0, k4a=0, k5a=0;
     wire       [31:0]  k0b, k1b, k2b, k3b, k4b, k5b, k6a;
 
     assign {k0, k1, k2, k3, k4, k5} = in;
@@ -164,11 +164,11 @@ module expand_key_type_D_192 (clk, in, rcon, out_1, out_2);
     input              clk;
     input      [191:0] in;
     input      [7:0]   rcon;
-    output reg [191:0] out_1;
+    output reg [191:0] out_1=0;
     output     [127:0] out_2;
     wire       [31:0]  k0, k1, k2, k3, k4, k5,
                        v0, v1;
-    reg        [31:0]  k0a, k1a, k2a, k3a, k4a, k5a;
+    reg        [31:0]  k0a=0, k1a=0, k2a=0, k3a=0, k4a=0, k5a=0;
     wire       [31:0]  k0b, k1b, k2b, k3b, k4b, k5b, k6a;
 
     assign {k0, k1, k2, k3, k4, k5} = in;
