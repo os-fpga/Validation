@@ -10,7 +10,7 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=true 
+post_synth_sim=false 
 post_route_sim=true 
 bitstream_sim=false
 
@@ -187,7 +187,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
 
-    echo "set_top_module design111_4_4_top_neg">>raptor_tcl.tcl 
+    echo "set_top_module $design">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl
