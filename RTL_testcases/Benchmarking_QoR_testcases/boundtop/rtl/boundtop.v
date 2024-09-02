@@ -77,7 +77,7 @@
         wire[1:0] raygroupid; 
         wire[1:0] raygroupid01; 
         wire[1:0] raygroupid10; 
-        reg[1:0] oldresultid; 
+        reg[1:0] oldresultid=0; 
         wire[1:0] resultid; 
         wire[31:0] t1i; 
         wire[31:0] t2i; 
@@ -96,11 +96,11 @@
         wire hit3i; 
         wire newresult; 
         wire write; 
-        reg reset; 
+        reg reset=0; 
         wire reset01; 
         wire reset10; 
         wire[103:0] peekdata; 
-        reg[103:0] peeklatch; 
+        reg[103:0] peeklatch=0; 
         wire commit01; 
         wire commit10; 
         wire[1:0] baseaddress01; 
@@ -115,7 +115,7 @@
         wire triIDvalid10; 
         wire[15:0] triID01; 
         wire[15:0] triID10; 
-        reg[9:0] boundNodeID; 
+        reg[9:0] boundNodeID=0; 
         wire[9:0] BoundNodeID01; 
         wire[9:0] BoundNodeID10; 
         wire enablenear; 
@@ -336,31 +336,31 @@ module resulttransmit (valid01, valid10, id01a, id01b, id01c, id10a, id10b, id10
     input[15:0] v10b; 
     input[15:0] v10c; 
     output[31:0] rgResultData; 
-    reg[31:0] rgResultData;
+    reg[31:0] rgResultData=0;
     output rgResultReady; 
-    reg rgResultReady;
+    reg rgResultReady=0;
     output[1:0] rgResultSource; 
-    reg[1:0] rgResultSource;
+    reg[1:0] rgResultSource=0;
     input globalreset; 
     input clk; 
 
-    reg[3:0] state; 
-    reg[3:0] next_state; 
+    reg[3:0] state=0; 
+    reg[3:0] next_state=0; 
 
-    reg hit01al; 
-    reg hit01bl; 
-    reg hit01cl; 
-    reg hit10al; 
-    reg hit10bl; 
-    reg hit10cl; 
-    reg pending01; 
-    reg pending10; 
-    reg valid01d; 
-    reg valid10d; 
+    reg hit01al=0; 
+    reg hit01bl=0; 
+    reg hit01cl=0; 
+    reg hit10al=0; 
+    reg hit10bl=0; 
+    reg hit10cl=0; 
+    reg pending01=0; 
+    reg pending10=0; 
+    reg valid01d=0; 
+    reg valid10d=0; 
 
-reg[31:0] temp_rgResultData;
-   reg temp_rgResultReady;
-      reg[1:0] temp_rgResultSource;
+reg[31:0] temp_rgResultData=0;
+   reg temp_rgResultReady=0;
+      reg[1:0] temp_rgResultSource=0;
 
     always @(posedge clk)
     begin
@@ -408,7 +408,13 @@ reg[31:0] temp_rgResultData;
 
     always @(state or pending01 or pending10)
     begin
+      // Default assignments to prevent latch inference
+         temp_rgResultData = 32'b0;
+         temp_rgResultReady = 1'b0;
+         temp_rgResultSource = 2'b0;
+         next_state = state;
        case (state)
+       
           0 :
                    begin
                       if (pending01 == 1'b1)
@@ -519,49 +525,49 @@ module boundcontroller (raygroupout, raygroupwe, raygroupid, enablenear, raygrou
 	output[1:0] raygroupout; 
 	wire[1:0] raygroupout;
 	output raygroupwe; 
-	reg raygroupwe;
+	reg raygroupwe=0;
 	output[1:0] raygroupid; 
-	reg[1:0] raygroupid;
+	reg[1:0] raygroupid=0;
 	output enablenear; 
-	reg enablenear;
+	reg enablenear=0;
 	input[1:0] raygroup; 
 	input validraygroup; 
 	output busy; 
-	reg busy;
-	reg temp_busy;
+	reg busy=0;
+	reg temp_busy=0;
 	output triIDvalid; 
-	reg triIDvalid;
+	reg triIDvalid=0;
 	output[15:0] triID; 
-	reg[15:0] triID;
+	reg[15:0] triID=0;
 	input wanttriID; 
 	output l0reset; 
-	reg l0reset;
+	reg l0reset=0;
 	output[1:0] baseaddress; 
-	reg[1:0] baseaddress;
+	reg[1:0] baseaddress=0;
 	input newdata; 
 	output[9:0] boundNodeIDout; 
-	reg[9:0] boundNodeIDout;
+	reg[9:0] boundNodeIDout=0;
 	input[1:0] resultID; 
 	output[2:0] hitmask; 
-	reg[2:0] hitmask;
+	reg[2:0] hitmask=0;
 	input ldataready; 
 	input lempty; 
 	input[1:0] llevel; 
 	input[9:0] lboundNodeID; 
 	output lack; 
-	reg lack;
+	reg lack=0;
 	output lhreset; 
-	reg lhreset;
+	reg lhreset=0;
 	output[9:0] addrind; 
-	reg[9:0] addrind;
+	reg[9:0] addrind=0;
 	output addrindvalid; 
-	reg addrindvalid;
+	reg addrindvalid=0;
 	input[31:0] dataind; 
 	input dataindvalid; 
 	output[17:0] tladdr; 
-	reg[17:0] tladdr;
+	reg[17:0] tladdr=0;
 	output tladdrvalid; 
-	reg tladdrvalid;
+	reg tladdrvalid=0;
 	input[63:0] tldata; 
 	input tldatavalid; 
 	input[31:0] t1in; 
@@ -580,102 +586,102 @@ module boundcontroller (raygroupout, raygroupwe, raygroupid, enablenear, raygrou
 	input hit2in; 
 	input hit3in; 
 	output[31:0] t1; 
-	reg[31:0] t1;
+	reg[31:0] t1=0;
 	output[31:0] t2; 
-	reg[31:0] t2;
+	reg[31:0] t2=0;
 	output[31:0] t3; 
-	reg[31:0] t3;
+	reg[31:0] t3=0;
 	output[15:0] u1; 
-	reg[15:0] u1;
+	reg[15:0] u1=0;
 	output[15:0] u2; 
-	reg[15:0] u2;
+	reg[15:0] u2=0;
 	output[15:0] u3; 
-	reg[15:0] u3;
+	reg[15:0] u3=0;
 	output[15:0] v1; 
-	reg[15:0] v1;
+	reg[15:0] v1=0;
 	output[15:0] v2; 
-	reg[15:0] v2;
+	reg[15:0] v2=0;
 	output[15:0] v3; 
-	reg[15:0] v3;
+	reg[15:0] v3=0;
 	output[15:0] id1; 
-	reg[15:0] id1;
+	reg[15:0] id1=0;
 	output[15:0] id2; 
-	reg[15:0] id2;
+	reg[15:0] id2=0;
 	output[15:0] id3; 
-	reg[15:0] id3;
+	reg[15:0] id3=0;
 	output hit1; 
-	reg hit1;
+	reg hit1=0;
 	output hit2; 
-	reg hit2;
+	reg hit2=0;
 	output hit3; 
-	reg hit3;
+	reg hit3=0;
 	output bcvalid; 
-	reg bcvalid;
+	reg bcvalid=0;
 	input[1:0] done; 
 	output resetcnt; 
-	reg resetcnt;
+	reg resetcnt=0;
 	output passCTSout; 
-	reg passCTSout;
+	reg passCTSout=0;
 	input passCTSin; 
 	input globalreset; 
 	input clk; 
 	output[4:0] statepeek; 
-	reg[4:0] statepeek;
+	reg[4:0] statepeek=0;
 	output[1:0] debugsubcount; 
 	wire[1:0] debugsubcount;
 	output[13:0] debugcount; 
 	wire[13:0] debugcount;
 
-	reg[4:0] state; 
-	reg[4:0] next_state; 
-	reg cts; 
-	reg[11:0] addr; 
-	reg[11:0] startAddr; 
-	reg[2:0] resetcount; 
-	reg[1:0] raygroupoutl; 
+	reg[4:0] state=0; 
+	reg[4:0] next_state=0; 
+	reg cts=0; 
+	reg[11:0] addr=0; 
+	reg[11:0] startAddr=0; 
+	reg[2:0] resetcount=0; 
+	reg[1:0] raygroupoutl=0; 
 	// Leaf Node Signals
-	reg[13:0] count; 
-	reg[63:0] triDatalatch; 
-	reg[1:0] subcount; 
-	reg[1:0] maskcount; 
+	reg[13:0] count=0; 
+	reg[63:0] triDatalatch=0; 
+	reg[1:0] subcount=0; 
+	reg[1:0] maskcount=0; 
 
-	reg[4:0] temp_statepeek;
-	reg [1:0]temp_raygroupoutl ;
-	reg temp_cts ;
-	reg temp_passCTSout ;
-	reg [2:0]temp_resetcount ;
-	reg temp_l0reset ;
-	reg [11:0]temp_addr ;
-	reg [11:0]temp_startAddr ;
-	reg [9:0]temp_boundNodeIDout ;
-	reg [1:0]temp_baseaddress ;
-	reg [2:0]temp_hitmask ;
-	reg temp_hit1 ;
-	reg temp_hit2 ;
-	reg temp_hit3 ;
-	reg temp_triIDvalid ;
-	reg [15:0]temp_triID ;
-	reg temp_lack ;
-	reg [9:0]temp_addrind ;
-	reg temp_addrindvalid ;
-	reg temp_tladdrvalid ;
-	reg [17:0]temp_tladdr ;
-	reg [13:0]temp_count ;
-	reg [1:0]temp_subcount ;
-	reg [1:0]temp_maskcount ;
-	reg [63:0]temp_triDatalatch ;
-	reg [31:0]temp_t1 ;
-	reg [15:0]temp_u1 ;
-	reg [15:0]temp_v1 ;
-	reg [15:0]temp_id1 ;
-	reg [31:0]temp_t2 ;
-	reg [15:0]temp_u2 ;
-	reg [15:0]temp_v2 ;
-	reg [15:0]temp_id2 ;
-	reg [31:0]temp_t3 ;
-	reg [15:0]temp_u3 ;
-	reg [15:0]temp_v3 ;
-	reg [15:0]temp_id3 ;
+	reg[4:0] temp_statepeek=0;
+	reg [1:0]temp_raygroupoutl=0 ;
+	reg temp_cts=0 ;
+	reg temp_passCTSout=0 ;
+	reg [2:0]temp_resetcount=0 ;
+	reg temp_l0reset=0 ;
+	reg [11:0]temp_addr=0 ;
+	reg [11:0]temp_startAddr=0 ;
+	reg [9:0]temp_boundNodeIDout=0 ;
+	reg [1:0]temp_baseaddress=0 ;
+	reg [2:0]temp_hitmask=0 ;
+	reg temp_hit1=0 ;
+	reg temp_hit2=0 ;
+	reg temp_hit3=0 ;
+	reg temp_triIDvalid=0 ;
+	reg [15:0]temp_triID=0 ;
+	reg temp_lack=0 ;
+	reg [9:0]temp_addrind=0 ;
+	reg temp_addrindvalid=0 ;
+	reg temp_tladdrvalid=0 ;
+	reg [17:0]temp_tladdr=0 ;
+	reg [13:0]temp_count=0 ;
+	reg [1:0]temp_subcount=0 ;
+	reg [1:0]temp_maskcount=0 ;
+	reg [63:0]temp_triDatalatch=0 ;
+	reg [31:0]temp_t1=0 ;
+	reg [15:0]temp_u1=0 ;
+	reg [15:0]temp_v1=0 ;
+	reg [15:0]temp_id1=0 ;
+	reg [31:0]temp_t2=0 ;
+	reg [15:0]temp_u2=0 ;
+	reg [15:0]temp_v2=0 ;
+	reg [15:0]temp_id2=0 ;
+	reg [31:0]temp_t3=0 ;
+	reg [15:0]temp_u3=0 ;
+	reg [15:0]temp_v3=0 ;
+	reg [15:0]temp_id3=0 ;
 
 	assign debugsubcount = subcount ;
 	assign debugcount = count ;
@@ -782,6 +788,46 @@ module boundcontroller (raygroupout, raygroupwe, raygroupid, enablenear, raygrou
 
 	always @*
 	begin
+       // Default values for all signals
+      temp_statepeek = 0; // Set to initial state or safe value
+      temp_raygroupoutl = 0;
+      temp_cts = 1'b0;
+      temp_passCTSout = 1'b0;
+      temp_resetcount = 0;
+      temp_l0reset = 1'b0;
+      temp_addr = 0;
+      temp_startAddr = 0;
+      temp_boundNodeIDout = 0;
+      temp_baseaddress = 0;
+      temp_hitmask = 1;
+      temp_hit1 = 1'b0;
+      temp_hit2 = 1'b0;
+      temp_hit3 = 1'b0;
+      temp_triIDvalid = 1'b0;
+      temp_triID = 0;
+      temp_lack = 1'b0;
+      temp_addrind = 0;
+      temp_addrindvalid = 1'b0;
+      temp_tladdr = 0;
+      temp_tladdrvalid = 1'b0;
+      temp_count = 0;
+      temp_subcount = 0;
+      temp_maskcount = 0;
+      temp_triDatalatch = 0;
+      temp_t1 = 0;
+      temp_u1 = 0;
+      temp_v1 = 0;
+      temp_id1 = 0;
+      temp_t2 = 0;
+      temp_u2 = 0;
+      temp_v2 = 0;
+      temp_id2 = 0;
+      temp_t3 = 0;
+      temp_u3 = 0;
+      temp_v3 = 0;
+      temp_id3 = 0;
+      enablenear = 1'b0 ; 
+		raygroupwe = 1'b0 ; 
 		case (state)
 		0 :
 		begin
@@ -1360,8 +1406,51 @@ module boundcontroller (raygroupout, raygroupwe, raygroupid, enablenear, raygrou
 			end 
 
 		end
-		endcase 
+      default :
+		begin
+			raygroupid = 0;
+			enablenear = 1'b0 ; 
+			raygroupwe = 1'b0 ; 
+			bcvalid = 1'b0 ; 
+
+			lhreset = 1'b1 ; 
+			if (validraygroup == 1'b1 & cts == 1'b1)
+			begin
+				next_state = 2 ; 
+				temp_busy = 1'b1 ; 
+			end
+			else if (validraygroup == 1'b1 & cts == 1'b0)
+			begin
+				next_state = 1 ; 
+				temp_busy = 1'b0 ; 
+			end
+			else if (validraygroup == 1'b0 & passCTSin == 1'b1 & cts == 1'b1)
+			begin
+				next_state = 1 ; 
+				temp_busy = 1'b0 ; 
+			end
+			else
+			begin
+				next_state = 0 ; 
+				temp_busy = 1'b0 ; 
+			end 
+
+			temp_statepeek = 5'b00001 ; 
+			//
+			temp_raygroupoutl = raygroup ; 
+			if (validraygroup == 1'b1 & cts == 1'b0)
+			begin
+				temp_cts = 1'b1 ; 
+				temp_passCTSout = 1'b1 ; 
+			end
+			else if (validraygroup == 1'b0 & cts == 1'b1 & passCTSin == 1'b1)
+			begin
+				temp_cts = 1'b0 ; 
+				temp_passCTSout = 1'b1 ; 
+			end 
 	end 
+   endcase 
+   end
 endmodule
 
 
@@ -1374,14 +1463,14 @@ endmodule
 
     input trigger; 
     output output_xhdl0; 
-    reg output_xhdl0;
+    reg output_xhdl0=0;
     input globalreset; 
     input clk; 
 
-    reg[1:0] state; 
-    reg[1:0] next_state; 
-    reg[0:0] count; 
-    reg[0:0] temp_count; 
+    reg[1:0] state=0; 
+    reg[1:0] next_state=0; 
+    reg[0:0] count=0; 
+    reg[0:0] temp_count=0; 
 
     always @(posedge clk)
     begin
@@ -1442,6 +1531,19 @@ endmodule
 
                       end 
                    end
+         default :
+                   begin
+       				  output_xhdl0 = 1'b0 ; 
+                      if (trigger == 1'b1)
+                      begin
+                         next_state = 1 ; 
+                      end
+                      else
+                      begin
+                         next_state = 0 ; 
+                      end 
+                         temp_count = 1 - 1 ; 
+                   end     
        endcase 
     end 
  endmodule
@@ -1459,32 +1561,32 @@ endmodule
 
 
     output want_addr; 
-    reg want_addr;
+    reg want_addr=0;
     input addr_ready; 
     input[10 - 1:0] addrin; 
     output want_data; 
-    reg want_data;
+    reg want_data=0;
     input data_ready; 
     input[32 - 1:0] datain; 
 
     input[10 - 1:0] addr; 
     input addrvalid; 
     output[32 - 1:0] data; 
-    reg[32 - 1:0] data;
+    reg[32 - 1:0] data=0;
     output datavalid; 
-    reg datavalid;
+    reg datavalid=0;
     input globalreset; 
     input clk; 
 
-    reg[2:0] state; 
-    reg[2:0] next_state; 
-    reg[10 - 1:0] waddr; 
+    reg[2:0] state=0; 
+    reg[2:0] next_state=0; 
+    reg[10 - 1:0] waddr=0; 
     wire[10 - 1:0] saddr; 
     wire[32 - 1:0] dataout; 
-    reg we; 
-reg		[32 - 1:0]temp_data; 
-reg     [10 - 1:0]temp_waddr ; 
-reg     temp_datavalid;
+    reg we=0; 
+reg		[32 - 1:0]temp_data=0; 
+reg     [10 - 1:0]temp_waddr=0 ; 
+reg     temp_datavalid=0;
 
     assign saddr = (state != 0) ? waddr : addr ;
 
@@ -1623,6 +1725,35 @@ reg     temp_datavalid;
                          next_state = 0 ; 
                       end 
                    end
+         default :
+                   begin
+				       we = 1'b0 ; 
+				       want_addr = 1'b1 ; 
+				       want_data = 1'b0 ; 
+                      if (addr_ready == 1'b1)
+                      begin
+                         next_state = 1 ; 
+                      end
+
+                      else if (addrvalid == 1'b1 & datavalid == 1'b0)
+                      begin
+                         next_state = 5 ; 
+                      end
+                      else
+                      begin
+                         next_state = 0 ; 
+                      end 
+          if (addr_ready == 1'b1)
+                         begin
+                            temp_waddr = addrin ; 
+                         end 
+                         if (addrvalid == 1'b0)
+                         begin
+                            temp_datavalid = 1'b0 ; 
+
+                         end 
+
+                   end
        endcase 
     end 
  endmodule
@@ -1681,7 +1812,7 @@ module single_port_ram(
 
     
     output	[`DATA_WIDTH-1:0] 	out;
-    reg		[`DATA_WIDTH-1:0] 	out;
+    reg		[`DATA_WIDTH-1:0] 	out=0;
      
     reg 	[`DATA_WIDTH-1:0] 	RAM[255:0];
      
@@ -1702,46 +1833,46 @@ endmodule
  module sramcontroller (want_addr, addr_ready, addrin, want_data, data_ready, datain, addr, addrvalid, data, datavalid, tm3_sram_data_in, tm3_sram_data_out, tm3_sram_addr, tm3_sram_we, tm3_sram_oe, tm3_sram_adsp, globalreset, clk, statepeek);
 
     output want_addr; 
-    reg want_addr;
+    reg want_addr=0;
     input addr_ready; 
     input[17:0] addrin; 
     output want_data; 
-    reg want_data;
+    reg want_data=0;
     input data_ready; 
     input[63:0] datain; 
     input[17:0] addr; 
     input addrvalid; 
 
     output[63:0] data; 
-    reg[63:0] data;
-    reg[63:0] temp_data;
+    reg[63:0] data=0;
+    reg[63:0] temp_data=0;
     output datavalid; 
-    reg datavalid;
-    reg temp_datavalid;
+    reg datavalid=0;
+    reg temp_datavalid=0;
     input[63:0] tm3_sram_data_in; 
     wire[63:0] tm3_sram_data_in;
     output[63:0] tm3_sram_data_out; 
     wire[63:0] tm3_sram_data_out;
-    reg[63:0] tm3_sram_data_xhdl0;
+    reg[63:0] tm3_sram_data_xhdl0=0;
     output[18:0] tm3_sram_addr; 
-    reg[18:0] tm3_sram_addr;
+    reg[18:0] tm3_sram_addr=0;
     output[7:0] tm3_sram_we; 
-    reg[7:0] tm3_sram_we;
+    reg[7:0] tm3_sram_we=0;
     output[1:0] tm3_sram_oe; 
 
-    reg[1:0] tm3_sram_oe;
+    reg[1:0] tm3_sram_oe=0;
     output tm3_sram_adsp; 
-    reg tm3_sram_adsp;
+    reg tm3_sram_adsp=0;
     input globalreset; 
     input clk; 
     output[2:0] statepeek; 
-    reg[2:0] statepeek;
-    reg[2:0] temp_statepeek;
+    reg[2:0] statepeek=0;
+    reg[2:0] temp_statepeek=0;
 
-    reg[2:0] state; 
-    reg[2:0] next_state; 
-    reg[17:0] waddress; 
-    reg[17:0] temp_waddress; 
+    reg[2:0] state=0; 
+    reg[2:0] next_state=0; 
+    reg[17:0] waddress=0; 
+    reg[17:0] temp_waddress=0; 
 
     assign tm3_sram_data_out = tm3_sram_data_xhdl0;
 
@@ -1768,6 +1899,19 @@ endmodule
     always @(state or addr_ready or data_ready or waddress or datain or addrvalid or 
              datavalid or addr)
     begin
+      // Default assignments to avoid latches
+        next_state = state;
+        temp_statepeek = statepeek;
+        temp_data = data;
+        temp_datavalid = datavalid;
+        temp_waddress = waddress;
+        want_addr = 1'b0;
+        want_data = 1'b0;
+        tm3_sram_we = 8'b11111111;
+        tm3_sram_oe = 2'b11;
+        tm3_sram_adsp = 1'b1;
+        tm3_sram_data_xhdl0 = 0;
+        tm3_sram_addr = 0;
        case (state)
           0 :
                    begin
@@ -1914,83 +2058,74 @@ endmodule
        endcase 
     end 
  endmodule
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
 
 module resultinterface (t1b, t2b, t3b, u1b, u2b, u3b, v1b, v2b, v3b, id1b, id2b, id3b, hit1b, hit2b, hit3b, resultID, newdata, resultready, resultdata, globalreset, clk);
 
     output[31:0] t1b; 
-    reg[31:0] t1b;
+    reg[31:0] t1b=0;
     output[31:0] t2b; 
-    reg[31:0] t2b;
+    reg[31:0] t2b=0;
     output[31:0] t3b; 
-    reg[31:0] t3b;
+    reg[31:0] t3b=0;
     output[15:0] u1b; 
-    reg[15:0] u1b;
+    reg[15:0] u1b=0;
     output[15:0] u2b; 
-    reg[15:0] u2b;
+    reg[15:0] u2b=0;
 
     output[15:0] u3b; 
-    reg[15:0] u3b;
+    reg[15:0] u3b=0;
     output[15:0] v1b; 
-    reg[15:0] v1b;
+    reg[15:0] v1b=0;
     output[15:0] v2b; 
-    reg[15:0] v2b;
+    reg[15:0] v2b=0;
     output[15:0] v3b; 
-    reg[15:0] v3b;
+    reg[15:0] v3b=0;
     output[15:0] id1b; 
-    reg[15:0] id1b;
+    reg[15:0] id1b=0;
     output[15:0] id2b; 
-    reg[15:0] id2b;
+    reg[15:0] id2b=0;
 
     output[15:0] id3b; 
-    reg[15:0] id3b;
+    reg[15:0] id3b=0;
     output hit1b; 
-    reg hit1b;
+    reg hit1b=0;
     output hit2b; 
-    reg hit2b;
+    reg hit2b=0;
     output hit3b; 
-    reg hit3b;
+    reg hit3b=0;
     output[1:0] resultID; 
-    reg[1:0] resultID;
+    reg[1:0] resultID=0;
     output newdata; 
-    reg newdata;
+    reg newdata=0;
 
-    reg[31:0] temp_t1b;
-    reg[31:0] temp_t2b;
-    reg[31:0] temp_t3b;
-    reg[15:0] temp_u1b;
-    reg[15:0] temp_u2b;
-    reg[15:0] temp_u3b;
-    reg[15:0] temp_v1b;
-    reg[15:0] temp_v2b;
-    reg[15:0] temp_v3b;
-    reg[15:0] temp_id1b;
-    reg[15:0] temp_id2b;
-    reg[15:0] temp_id3b;
-    reg temp_hit1b;
-    reg temp_hit2b;
-    reg temp_hit3b;
-    reg[1:0] temp_resultID;
-    reg temp_newdata;
+    reg[31:0] temp_t1b=0;
+    reg[31:0] temp_t2b=0;
+    reg[31:0] temp_t3b=0;
+    reg[15:0] temp_u1b=0;
+    reg[15:0] temp_u2b=0;
+    reg[15:0] temp_u3b=0;
+    reg[15:0] temp_v1b=0;
+    reg[15:0] temp_v2b=0;
+    reg[15:0] temp_v3b=0;
+    reg[15:0] temp_id1b=0;
+    reg[15:0] temp_id2b=0;
+    reg[15:0] temp_id3b=0;
+    reg temp_hit1b=0;
+    reg temp_hit2b=0;
+    reg temp_hit3b=0;
+    reg[1:0] temp_resultID=0;
+    reg temp_newdata=0;
 
     input resultready; 
     input[31:0] resultdata; 
     input globalreset; 
     input clk; 
 
-    reg[3:0] state; 
-    reg[3:0] next_state; 
+    reg[3:0] state=0; 
+    reg[3:0] next_state=0; 
 
     always @(posedge clk)
     begin
@@ -2118,6 +2253,24 @@ module resultinterface (t1b, t2b, t3b, u1b, u2b, u3b, v1b, v2b, v3b, id1b, id2b,
                          temp_hit3b = resultdata[16] ; 
                          temp_newdata = 1'b1 ; 
                    end
+          default :
+                   begin
+
+                      if (resultready == 1'b1)
+                      begin
+                         next_state = 1 ; 
+                      end
+                      else
+                      begin
+                         next_state = 0 ; 
+                      end 
+   				temp_newdata = 1'b0 ; 
+                         if (resultready == 1'b1)
+                         begin
+                            temp_t1b = resultdata ; 
+                         end 
+
+                   end
        endcase 
     end 
 
@@ -2134,21 +2287,21 @@ module resultinterface (t1b, t2b, t3b, u1b, u2b, u3b, v1b, v2b, v3b, id1b, id2b,
 
     input rgAddrValid; 
     output rgDone; 
-    reg rgDone;
+    reg rgDone=0;
     output[31:0] raydata; 
-    reg[31:0] raydata;
+    reg[31:0] raydata=0;
     output[3:0] rayaddr; 
-    reg[3:0] rayaddr;
+    reg[3:0] rayaddr=0;
     output[2:0] raywe; 
-    reg[2:0] raywe;
+    reg[2:0] raywe=0;
     input globalreset; 
     input clk; 
 
 
-    reg[31:0] rgDatal; 
-    reg[3:0] rgAddrl; 
-    reg[2:0] rgWEl; 
-    reg rgAddrValidl; 
+    reg[31:0] rgDatal=0; 
+    reg[3:0] rgAddrl=0; 
+    reg[2:0] rgWEl=0; 
+    reg rgAddrValidl=0; 
 
     always @(posedge clk)
     begin
@@ -2212,31 +2365,31 @@ module sortedstack (keyin, datain, write, reset, peekdata, globalreset, clk);
     input globalreset; 
     input clk; 
 
-    reg[32 - 1:0] key0; 
-    reg[32 - 1:0] key1; 
-    reg[32 - 1:0] key2; 
-    reg[32 - 1:0] key3; 
-    reg[32 - 1:0] key4; 
-    reg[32 - 1:0] key5; 
-    reg[32 - 1:0] key6; 
-    reg[32 - 1:0] key7; 
-    reg[13 - 1:0] data0; 
-    reg[13 - 1:0] data1; 
-    reg[13 - 1:0] data2; 
-    reg[13 - 1:0] data3; 
-    reg[13 - 1:0] data4; 
-    reg[13 - 1:0] data5; 
-    reg[13 - 1:0] data6; 
-    reg[13 - 1:0] data7; 
-    reg full0; 
-    reg full1; 
-    reg full2; 
-    reg full3; 
-    reg full4; 
-    reg full5; 
-    reg full6; 
-    reg full7; 
-    reg[2:0] location; 
+    reg[32 - 1:0] key0=0; 
+    reg[32 - 1:0] key1=0; 
+    reg[32 - 1:0] key2=0; 
+    reg[32 - 1:0] key3=0; 
+    reg[32 - 1:0] key4=0; 
+    reg[32 - 1:0] key5=0; 
+    reg[32 - 1:0] key6=0; 
+    reg[32 - 1:0] key7=0; 
+    reg[13 - 1:0] data0=0; 
+    reg[13 - 1:0] data1=0; 
+    reg[13 - 1:0] data2=0; 
+    reg[13 - 1:0] data3=0; 
+    reg[13 - 1:0] data4=0; 
+    reg[13 - 1:0] data5=0; 
+    reg[13 - 1:0] data6=0; 
+    reg[13 - 1:0] data7=0; 
+    reg full0=0; 
+    reg full1=0; 
+    reg full2=0; 
+    reg full3=0; 
+    reg full4=0; 
+    reg full5=0; 
+    reg full6=0; 
+    reg full7=0; 
+    reg[2:0] location=0; 
 
     assign peekdata[(0 + 1) * (13) - 1:0 * (13)] = ((full0) == 1'b1) ? data0 : 0;
     assign peekdata[(1 + 1) * (13) - 1:1 * (13)] = ((full1) == 1'b1) ? data1 : 0;
@@ -2487,30 +2640,30 @@ module listhandler (dataarrayin, commit, hitmask, ack, boundnodeID, level, empty
     output peekhit; 
     wire peekhit;
     output[1:0] peekstate; 
-    reg[1:0] peekstate;
-    reg[1:0] temp_peekstate;
+    reg[1:0] peekstate=0;
+    reg[1:0] temp_peekstate=0;
 
-    reg[1:0] next_state; 
-    reg[1:0] state; 
-    reg[1:0] readlevel; 
+    reg[1:0] next_state=0; 
+    reg[1:0] state=0; 
+    reg[1:0] readlevel=0; 
 
-    reg[1:0] writelevel; 
-    reg[2:0] offset0; 
-    reg[2:0] offset1; 
-    reg[2:0] offset2; 
-    reg[4:0] address; 
-    reg we; 
-    reg[12:0] datain; 
+    reg[1:0] writelevel=0; 
+    reg[2:0] offset0=0; 
+    reg[2:0] offset1=0; 
+    reg[2:0] offset2=0; 
+    reg[4:0] address=0; 
+    reg we=0; 
+    reg[12:0] datain=0; 
     wire[12:0] dataout; 
-    reg[2:0] lvempty; 
-    reg busy; 
-    reg temp_busy; 
-    reg[2:0] temp_lvempty; 
-    reg[1:0] temp_readlevel; 
-    reg[1:0] temp_writelevel; 
-    reg[2:0] temp_offset0; 
-    reg[2:0] temp_offset1; 
-    reg[2:0] temp_offset2; 
+    reg[2:0] lvempty=0; 
+    reg busy=0; 
+    reg temp_busy=0; 
+    reg[2:0] temp_lvempty=0; 
+    reg[1:0] temp_readlevel=0; 
+    reg[1:0] temp_writelevel=0; 
+    reg[2:0] temp_offset0=0; 
+    reg[2:0] temp_offset1=0; 
+    reg[2:0] temp_offset2=0; 
 
     // Debug Stuff
 
@@ -2788,6 +2941,66 @@ module listhandler (dataarrayin, commit, hitmask, ack, boundnodeID, level, empty
 			end
 		end
 	end
+   default :
+                   begin
+				       we = 1'b0 ; 
+				       datain = 0;
+                      if (reset == 1'b1)
+                      begin
+                         next_state = 0 ; 
+                      end
+                      else if (commit == 1'b1)
+                      begin
+                         next_state = 1 ; 
+                      end
+                      else if ((ack == 1'b1) | (dataready == 1'b0 & empty == 1'b0))
+
+                      begin
+                         next_state = 2 ; 
+                      end
+                      else
+                      begin
+                         next_state = 0 ; 
+                      end 
+                      temp_peekstate = 2'b01 ; 
+
+                         if (reset == 1'b1)
+                         begin
+                            temp_busy = 1'b0 ; 
+                            temp_lvempty = 1;
+                            temp_readlevel = 2'b00 ; 
+
+                            temp_writelevel = 2'b00 ; 
+                            temp_offset0 = 3'b000 ; 
+                            temp_offset1 = 3'b000 ; 
+                            temp_offset2 = 3'b000 ; 
+                         end
+                         else if (commit == 1'b1)
+                         begin
+                            temp_busy = 1'b1 ; 
+                            if (writelevel == 2'b00)
+                            begin
+                               temp_offset0 = 3'b000 ; 
+                            end
+
+                            else if (writelevel == 2'b01)
+                            begin
+                               temp_offset1 = 3'b000 ; 
+                            end
+							else if (writelevel == 2'b10)
+                            begin
+                               temp_offset2 = 3'b000 ; 
+                            end 
+                            temp_readlevel = writelevel ; 
+                         end
+
+                         else if (ack == 1'b1)
+                         begin
+                            temp_writelevel = readlevel + 1 ; 
+                            temp_busy = 1'b1 ; // This will ensure that align skips one
+                         end 
+
+                   end
 	endcase
 end
 endmodule
@@ -2801,10 +3014,10 @@ endmodule
     wire[13 - 1:0] dataout;
     input[13 - 1:0] datain; 
     input clk; 
-    reg[13 - 1:0] temp_reg; 
+    reg[13 - 1:0] temp_reg=0; 
 
-    reg[13 - 1:0] mem1; 
-    reg[13 - 1:0] mem2; 
+    reg[13 - 1:0] mem1=0; 
+    reg[13 - 1:0] mem2=0; 
 
     assign dataout = mem2 ;
 
@@ -2830,8 +3043,8 @@ endmodule
 
 	wire big_reset;
 
-    reg[3:0] count; 
-    reg[1:0] curr; 
+    reg[3:0] count=0; 
+    reg[1:0] curr=0; 
 
     assign done = (count == 0) ? curr : 2'b00 ;
 	assign big_reset = globalreset | reset;
