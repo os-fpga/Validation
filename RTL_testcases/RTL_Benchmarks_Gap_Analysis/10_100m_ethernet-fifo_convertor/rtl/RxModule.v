@@ -45,7 +45,8 @@ module RxModule(phy_rxd, phy_rxen, phy_rxclk, phy_rxer,
 	
 	output start;			//to tell TxModule that buf in RxModule needs data
 	output test1, test2, test3, test4;
-	reg test1, test2;
+	reg test1=1'b0;
+	reg test2=1'b0;
 	
 	parameter delay_cnt_len =   (`delay_cnt_config <    2) ? 1 : (`delay_cnt_config <    4) ? 2 :
 								(`delay_cnt_config <    8) ? 3 : (`delay_cnt_config <   16) ? 4 :

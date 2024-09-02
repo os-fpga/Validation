@@ -186,7 +186,7 @@ module TxModule(reset, phy_txd, phy_txen, phy_txclk, phy_txer,
 			nibble_idx <= nibble_idx + 1;
 	end
 	
-	always @ (negedge phy_txclk) begin 	//state machine run to send out the MAC frame
+	always @ (negedge ff_clk) begin 	//state machine run to send out the MAC frame
 		if (reset)
 			phy_txd <= 4'h0;
 		else 
@@ -224,7 +224,7 @@ module TxModule(reset, phy_txd, phy_txen, phy_txclk, phy_txer,
 			endcase
 	end
 	
-	always @ (negedge phy_txclk) begin 	//state machine run to send out the MAC frame
+	always @ (negedge ff_clk) begin 	//state machine run to send out the MAC frame
 		if (reset)
 			phy_txen <= 1'b0;
 		else if((txState==s_preamble)||(txState==s_address)||(txState==s_data)||(txState==s_crc))
