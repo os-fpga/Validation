@@ -9,15 +9,15 @@
     output[31:0] Xoutport; 
     output[31:0] Youtport; 
     output[31:0] Uoutport; 
-    reg[31:0] Xoutport;
-    reg[31:0] Youtport;
-    reg[31:0] Uoutport;
+    reg[31:0] Xoutport=0;
+    reg[31:0] Youtport=0;
+    reg[31:0] Uoutport=0;
 
-       reg[31:0] x_var; 
-       reg[31:0] y_var; 
-       reg[31:0] u_var; 
-       wire[31:0] temp; 
-       reg looping; 
+    reg[31:0] x_var=0; 
+    reg[31:0] y_var=0; 
+    reg[31:0] u_var=0; 
+    wire[31:0] temp; 
+    reg looping=0; 
  
 assign temp = u_var * DXport;
     always @(posedge CLK)
