@@ -85,7 +85,7 @@
 //
 
 // synopsys translate_off
-`include "timescale.v"
+// `include "timescale.v"
 // synopsys translate_on
 `include "can_defines.v"
 

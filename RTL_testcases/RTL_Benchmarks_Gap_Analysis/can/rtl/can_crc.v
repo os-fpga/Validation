@@ -69,7 +69,7 @@
 //
 
 // synopsys translate_off
-`include "timescale.v"
+// `include "timescale.v"
 // synopsys translate_on
 
 module can_crc (clk, data, enable, initialize, crc);
