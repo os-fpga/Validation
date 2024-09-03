@@ -58,13 +58,18 @@ module GJC46 #(
 
     O_BUF ready_o_buffer0 (.I(ready_buf), .O(ready));
 
+    PLL #(.PLL_MULT(40), .PLL_DIV(1), .PLL_POST_DIV(17)) clk_pll_gen0 (
+        .PLL_EN(const1), // PLL Enable
+        .CLK_IN(clkGHz_clkbuf), // Clock input
+        .FAST_CLK(fast_clk),
+    );
 
     I_DELAY input_data_delay (
         .I(data_i_buf), // Data Input (Connect to input port or buffer)
         .DLY_LOAD(~const1), // Delay load input
         .DLY_ADJ(~const1), // Delay adjust input
         .DLY_INCDEC(~const1), // Delay increment / decrement input
-        .CLK_IN(clkGHz_clkbuf), // Clock input
+        .CLK_IN(fast_clk), // Clock input
         .O(data_i_delay) // Data output
     );
 
@@ -77,7 +82,7 @@ module GJC46 #(
         .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(bitslip_ctrl), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(fast_clk), // Fabric clock input
         .CLK_OUT(fabric_clk_div), // Fabric clock output
         .Q(data_i_serdes), // Data output
         .DATA_VALID(data_i_valid), // DATA_VALID output
@@ -107,7 +112,7 @@ module GJC46 #(
         .D(data_i_serdes_reg), // D input bus
         .RST(reset_buf_n), // Active-low, asynchronous reset
         .DATA_VALID(enable_buf), // Load word input
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(fast_clk), // Fabric clock input
         .OE_IN(enable_buf), // Output tri-state enable input
         .OE_OUT(buf_output_enable), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
         .Q(delay_in), // Data output (Connect to output port, buffer or O_DELAY)
@@ -122,7 +127,7 @@ module GJC46 #(
         .DLY_LOAD(~const1), // Delay load input
         .DLY_ADJ(~const1), // Delay adjust input
         .DLY_INCDEC(~const1), // Delay increment / decrement input
-        .CLK_IN(clkGHz_clkbuf), // Clock input
+        .CLK_IN(fast_clk), // Clock input
         .O(delay_out) // Data output
     );
 
