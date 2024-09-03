@@ -207,7 +207,7 @@
 //
 
 // synopsys translate_off
-`include "timescale.v"
+// `include "timescale.v"
 // synopsys translate_on
 `include "can_defines.v"
 
@@ -438,6 +438,7 @@ wire   [7:0] data_in;
 reg    [7:0] data_out;
 reg          rx_sync_tmp;
 reg          rx_sync;
+wire rx_inter;
 
 /* Connecting can_registers module */
 can_registers i_can_registers

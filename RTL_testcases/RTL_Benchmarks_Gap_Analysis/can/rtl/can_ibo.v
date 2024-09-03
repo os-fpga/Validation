@@ -66,19 +66,19 @@
 module can_ibo
 ( 
   di,
-  do
+  dout
 );
 
 input   [7:0] di;
-output  [7:0] do;
+output  [7:0] dout;
 
-assign do[0] = di[7];
-assign do[1] = di[6];
-assign do[2] = di[5];
-assign do[3] = di[4];
-assign do[4] = di[3];
-assign do[5] = di[2];
-assign do[6] = di[1];
-assign do[7] = di[0];
+assign dout[0] = di[7];
+assign dout[1] = di[6];
+assign dout[2] = di[5];
+assign dout[3] = di[4];
+assign dout[4] = di[3];
+assign dout[5] = di[2];
+assign dout[6] = di[1];
+assign dout[7] = di[0];
 
 endmodule
