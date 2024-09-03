@@ -1781,7 +1781,7 @@ reg     temp_datavalid=0;
 
 // defparam new_ram.ADDR_WIDTH = 10;
 // defparam new_ram.DATA_WIDTH = 32;
-single_port_ram new_ram(
+single_port_ram1 new_ram(
   .clk (clk),
   .we(we),
   .data(datain),
@@ -1795,7 +1795,7 @@ single_port_ram new_ram(
     
     
     
-module single_port_ram(
+module single_port_ram1(
 			clk,
 			data,
 			we,
