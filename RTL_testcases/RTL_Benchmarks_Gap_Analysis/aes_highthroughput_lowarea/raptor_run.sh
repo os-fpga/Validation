@@ -209,7 +209,7 @@ parse_cga exit 1; }
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "setup_lec_sim">>raptor_tcl.tcl
+        echo "setup_lec_sim 2 2">>raptor_tcl.tcl
     else
         echo ""
     fi
