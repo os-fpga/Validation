@@ -15,11 +15,11 @@ module single_port_ram_top #(parameter WIDTH = 32)(
 		data_out <= data_out_wire;
     end
         
-    single_port_ram single_dut (.clk(clk),.we(we),.data(data_in),.q(data_out_wire),.addr(addr));
+    sp_ram single_dut (.clk(clk),.we(we),.data(data_in),.q(data_out_wire),.addr(addr));
 
 endmodule
 
-module single_port_ram
+module sp_ram
 (
 	input [31:0] data,
 	input [5:0] addr,
