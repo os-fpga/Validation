@@ -294,6 +294,7 @@ always @(posedge clk)	{w3, w2, w1, w0} <= #1 kb[dcnt];
 //
 
 aes_key_expand_128 u0(
+	.rst(       rst ),
 	.clk(		clk	),
 	.kld(		kld	),
 	.key(		key	),

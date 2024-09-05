@@ -205,7 +205,8 @@ parse_cga exit 1; }
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
     
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "setup_lec_sim 2 2">>raptor_tcl.tcl
+        echo "setup_lec_sim 2 1">>raptor_tcl.tcl
+        echo "exec /bin/bash $main_path/change.sh aes_inv_cipher_top">>raptor_tcl.tcl
     else
         echo ""
     fi
