@@ -6,7 +6,7 @@ module single_port_ram_top #(parameter WIDTH = 32)(
 
 	wire [WIDTH-1:0] data_out_wire;
 	wire [5:0] addr = data_in[6:1];
-	wire we = data_in[0];
+	wire we = ~data_in[0];
 
 	always @ (negedge clk) begin
 	if (rst)
