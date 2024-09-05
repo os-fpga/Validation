@@ -55,8 +55,8 @@
 //
 
 
-module aes_key_expand_128(clk, kld, key, wo_0, wo_1, wo_2, wo_3);
-input		clk;
+module aes_key_expand_128(rst, clk, kld, key, wo_0, wo_1, wo_2, wo_3);
+input		clk,rst;
 input		kld;
 input	[127:0]	key;
 output	[31:0]	wo_0, wo_1, wo_2, wo_3;
@@ -78,6 +78,6 @@ aes_sbox u0(	.a(tmp_w[23:16]), .d(subword[31:24]));
 aes_sbox u1(	.a(tmp_w[15:08]), .d(subword[23:16]));
 aes_sbox u2(	.a(tmp_w[07:00]), .d(subword[15:08]));
 aes_sbox u3(	.a(tmp_w[31:24]), .d(subword[07:00]));
-aes_rcon r0(	.clk(clk), .kld(kld), .out(rcon));
+aes_rcon r0(	.clk(clk), .kld(kld), .rst(rst), .out(rcon));
 endmodule
 
