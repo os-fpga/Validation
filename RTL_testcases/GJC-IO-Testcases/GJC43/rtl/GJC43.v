@@ -73,7 +73,7 @@ module GJC43 #(
         .DLY_LOAD(~const1), // Delay load input
         .DLY_ADJ(~const1), // Delay adjust input
         .DLY_INCDEC(~const1), // Delay increment / decrement input
-        .CLK_IN(pll_clk), // Clock input
+        .CLK_IN(clk_pll_in), // Clock input
         .O(data_i_delay) // Data output
     );
 
@@ -86,7 +86,7 @@ module GJC43 #(
         .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(bitslip_ctrl), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(clk_pll_in), // Fabric clock input
         .CLK_OUT(fabric_clk_div), // Fabric clock output
         .Q(data_i_serdes), // Data output
         .DATA_VALID(data_i_valid), // DATA_VALID output
