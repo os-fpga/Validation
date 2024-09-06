@@ -58,7 +58,7 @@ module APB_SPI_top
  input [`APB_DATA_WIDTH-1:0 ]  PWDATA,
  output [`APB_DATA_WIDTH-1:0 ] PRDATA,
  output                        PREADY,
- input                         TrFr,
+ input                         TrFr
  // SPI INTERFACE
  ////if Master/Slave Mode
  //inout                         SCLK,
@@ -66,10 +66,10 @@ module APB_SPI_top
  //inout                         MOSI,
  //output                        SS,
  //if only Master Mode
- output                        SCLK,
- input                         MISO,
- output                        MOSI,
- output                        SS
+//  output                        SCLK,
+//  input                         MISO,
+//  output                        MOSI,
+//  output                        SS
  ////if only Slave Mode
  //input                         SCLK,
  //output                        MISO,

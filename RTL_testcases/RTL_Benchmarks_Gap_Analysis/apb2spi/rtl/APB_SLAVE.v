@@ -80,6 +80,8 @@ localparam SETUP  = 2'b01;
 localparam ENABLE = 2'b10;
 
 reg  [1:0]    STATE;
+wire write_en;
+wire read_en;
 
 always@(posedge PCLK or negedge PRESETn)
 begin
