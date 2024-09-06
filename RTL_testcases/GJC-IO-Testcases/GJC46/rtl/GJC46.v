@@ -24,7 +24,7 @@ module GJC46 #(
     wire data_i_delay;
     wire clk_pll_in;
     wire clkGHz_clkbuf;
-    wire pll_lock;
+    wire pll_clk;
     wire fabric_clk_div;
     wire [WIDTH - 1 : 0] data_i_serdes;
     reg [WIDTH - 1 : 0] data_i_serdes_reg;
@@ -58,6 +58,11 @@ module GJC46 #(
 
     O_BUF ready_o_buffer0 (.I(ready_buf), .O(ready));
 
+    PLL #(.PLL_MULT(50), .PLL_DIV(1), .PLL_POST_DIV(17)) clk_pll_gen0 (
+        .PLL_EN(const1), // PLL Enable
+        .CLK_IN(clkGHz_clkbuf), // Clock input
+        .FAST_CLK(pll_clk)
+    );
 
     I_DELAY input_data_delay (
         .I(data_i_buf), // Data Input (Connect to input port or buffer)
@@ -77,13 +82,13 @@ module GJC46 #(
         .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(bitslip_ctrl), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(clkGHz_clkbuf), // Fabric clock input
         .CLK_OUT(fabric_clk_div), // Fabric clock output
         .Q(data_i_serdes), // Data output
         .DATA_VALID(data_i_valid), // DATA_VALID output
         .DPA_LOCK(serdes_dpa_lock), // DPA_LOCK output
         .PLL_LOCK(const1), // PLL lock input
-        .PLL_CLK(clkGHz_clkbuf) // PLL clock input
+        .PLL_CLK(pll_clk) // PLL clock input
     );
 
 
@@ -98,7 +103,7 @@ module GJC46 #(
     end
 
 
-    //====================================================================================
+//====================================================================================
 
     O_SERDES #(
         .DATA_RATE("SDR"), // Single or double data rate (SDR/DDR)
@@ -107,12 +112,12 @@ module GJC46 #(
         .D(data_i_serdes_reg), // D input bus
         .RST(reset_buf_n), // Active-low, asynchronous reset
         .DATA_VALID(enable_buf), // Load word input
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(clkGHz_clkbuf), // Fabric clock input
         .OE_IN(enable_buf), // Output tri-state enable input
         .OE_OUT(buf_output_enable), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
         .Q(delay_in), // Data output (Connect to output port, buffer or O_DELAY)
         .PLL_LOCK(const1), // PLL lock input
-        .PLL_CLK(clkGHz_clkbuf) // PLL clock input
+        .PLL_CLK(pll_clk) // PLL clock input
     );
 
     O_DELAY #(

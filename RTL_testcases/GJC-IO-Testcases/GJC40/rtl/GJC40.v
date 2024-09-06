@@ -80,7 +80,7 @@ module GJC40 #(
         .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(~const1), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(pll_clk), // Fabric clock input
         .CLK_OUT(fabric_clk_div), // Fabric clock output
         .Q(data_i_serdes), // Data output
         .DATA_VALID(data_i_valid), // DATA_VALID output

@@ -56,7 +56,11 @@ module GJC44 #(
     endgenerate
     O_BUF data_o_buffer0 (.I(ready_buf), .O(ready));
 
-
+    PLL #(.PLL_MULT(50), .PLL_DIV(1), .PLL_POST_DIV(17)) clk_pll_gen0 (
+        .PLL_EN(const1), // PLL Enable
+        .CLK_IN(clkGHz_clkbuf), // Clock input
+        .CLK_OUT(pll_clk)
+    );
 
     I_DELAY input_data_delay (
         .I(data_i_buf), // Data Input (Connect to input port or buffer)
@@ -76,12 +80,12 @@ module GJC44 #(
         .RST(reset_buf_n), // Active-low asycnhronous reset
         .BITSLIP_ADJ(~const1), // BITSLIP_ADJ input
         .EN(enable_buf), // EN input data (input data is low when driven low)
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(clkGHz_clkbuf), // Fabric clock input
         .CLK_OUT(fabric_clk_div), // Fabric clock output
         .Q(data_i_serdes), // Data output
         .DATA_VALID(data_i_valid), // DATA_VALID output
         .PLL_LOCK(const1), // PLL lock input
-        .PLL_CLK(clkGHz_clkbuf) // PLL clock input
+        .PLL_CLK(pll_clk) // PLL clock input
     );
 
 

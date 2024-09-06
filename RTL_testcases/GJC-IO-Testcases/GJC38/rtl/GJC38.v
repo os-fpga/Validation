@@ -66,7 +66,7 @@ module GJC38 (
         .DLY_LOAD(~const1), // Delay load input
         .DLY_ADJ(~const1), // Delay adjust input
         .DLY_INCDEC(~const1), // Delay increment / decrement input
-        .CLK_IN(pll_clk), // Clock input
+        .CLK_IN(pll_clk_div4), // Clock input
         .O(delay_out) // Data output
     );
 
