@@ -103,7 +103,7 @@ module GJC46 #(
     end
 
 
-    //====================================================================================
+//====================================================================================
 
     O_SERDES #(
         .DATA_RATE("SDR"), // Single or double data rate (SDR/DDR)
@@ -112,12 +112,12 @@ module GJC46 #(
         .D(data_i_serdes_reg), // D input bus
         .RST(reset_buf_n), // Active-low, asynchronous reset
         .DATA_VALID(enable_buf), // Load word input
-        .CLK_IN(fabric_clk_div), // Fabric clock input
+        .CLK_IN(clkGHz_clkbuf), // Fabric clock input
         .OE_IN(enable_buf), // Output tri-state enable input
         .OE_OUT(buf_output_enable), // Output tri-state enable output (conttect to O_BUFT or inferred tri-state signal)
         .Q(delay_in), // Data output (Connect to output port, buffer or O_DELAY)
         .PLL_LOCK(const1), // PLL lock input
-        .PLL_CLK(clkGHz_clkbuf) // PLL clock input
+        .PLL_CLK(pll_clk) // PLL clock input
     );
 
     O_DELAY #(
