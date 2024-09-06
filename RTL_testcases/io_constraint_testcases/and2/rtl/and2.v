@@ -3,7 +3,7 @@
 //  Author:        Xifan Tang
 ////////////////////////////////////////
 `timescale 1ns / 1ps
-module and2#(parameter Total_Instances = 10)(input clock0,input a,input b,output c,input [$clog2(Total_Instances)-1:0]id);
+module and2#(parameter Total_Instances = 10)(input clock0,input a,input b,output c,input [$clog2(Total_Instances-2)-1:0]id);
 wire [0:0]c_sub_out[0:Total_Instances-1];
 reg [0:0]a_sub_in[0:Total_Instances-1];
 reg [0:0]b_sub_in[0:Total_Instances-1];

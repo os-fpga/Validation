@@ -17,4 +17,4 @@ set_property mode Mode_BP_SDR_A_RX HR_5_6_3P
 set_pin_loc id[0] HR_5_0_0P g2f_rx_in[0]_A
 set_pin_loc id[1] HR_5_2_1P g2f_rx_in[0]_A
 set_pin_loc id[2] HR_5_4_2P g2f_rx_in[0]_A
-set_pin_loc id[3] HR_5_6_3P g2f_rx_in[0]_A
+#set_pin_loc id[3] HR_5_6_3P g2f_rx_in[0]_A
