@@ -22,7 +22,12 @@ log "GJC Begin Run"
 
 foreach dirName [glob -nocomplain -type {d} GJC* ] {
     cd $dirName
-    log "Creating raptor_tcl.tcl for TESTCASE: $dirName"
+    if [file exist "disabled.txt"] {
+        log "Disabled test: $dirName"
+        cd ..
+        continue
+    }
+    log "Creating raptor_tcl.tcl for testcase: $dirName"
     set result ""
     exec sh -c "rm -rf results_dir"
     catch {set result [exec sh -c "./raptor_run.sh"]} result
@@ -34,7 +39,12 @@ foreach dirName [glob -nocomplain -type {d} GJC* ] {
 
 foreach dirName [glob -nocomplain -type {d} GJC* ] {
     cd $dirName/results_dir
-    log "Running TESTCASE: $dirName"
+    if [file exist "../disabled.txt"] {
+        log "Skiping testcase: $dirName"
+        cd ..
+        continue
+    }
+    log "Running testcase: $dirName"
     set result ""
     catch {set result [exec sh -c "$raptor_path --script ../raptor_tcl.tcl --batch"]} result
     if ![regexp "bitstream is generated" $result] {
