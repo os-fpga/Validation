@@ -41,7 +41,7 @@ foreach dirName [glob -nocomplain -type {d} GJC* ] {
     cd $dirName/results_dir
     if [file exist "../disabled.txt"] {
         log "Skiping testcase: $dirName"
-        cd ..
+        cd ../..
         continue
     }
     log "Running testcase: $dirName"
