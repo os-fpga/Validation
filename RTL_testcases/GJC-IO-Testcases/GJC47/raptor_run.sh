@@ -7,7 +7,7 @@ start=`date +%s`
 design="GJC47"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #simulation stages
 post_synth_sim=false 
@@ -169,7 +169,7 @@ parse_cga exit 1; }
 #creating a tcl file to run raptor flow 
     cd ..
     
-    echo "create_design $design">raptor_tcl.tcl
+    echo "create_design $design">raptor_tcl.tcl 
     echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
@@ -186,7 +186,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/DLY_ADDR_CNTRL.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/one2x_decoder.v">>raptor_tcl.tcl || echo "" 
+    [ -z "$ip_name" ] && echo "add_design_file ./rtl/1tox_decoder.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/muxp.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
     # ./rtl/$design.v 
