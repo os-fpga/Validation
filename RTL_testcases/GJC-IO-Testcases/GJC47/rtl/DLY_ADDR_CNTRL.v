@@ -28,33 +28,25 @@ module DLY_ADDR_CNTRL #(parameter                    NUM_GB_SITES  = 20,
 					  )
                     (input       rst,  
                      input [5:0] cntrl_dly_tap_value,							// Input to fabric from GearBox. I_DELAY TAP Value MUXED Output from GBox
-                     input [(NUM_DLY*DLY_TAP_WIDTH)-1:0] usr_dly_tap_value_in,	// Dummy signal
                      input [NUM_DLY-1: 0] usr_dly_incdec,						// Input from user to control I_DELAY
 	                 input [NUM_DLY-1: 0] usr_dly_ld,							// Input from user to control I_DELAY. Only one signal should be active at any time
 	                 input [NUM_DLY-1: 0] usr_dly_adj,							// Input from user to control I_DELAY
 	                 input [NUM_DLY-1: 0] usr_rd_dly_value,						// Input from user to read the I_DELAY output port for TAP Value
-	                 output [ADDR_WIDTH-1:0] f2g_dly_addr,						// Address bus to GBox. Selects the I_DELAY
+	                 output reg [ADDR_WIDTH-1:0] f2g_dly_addr,						// Address bus to GBox. Selects the I_DELAY
                      output cntrl_dly_incdec,									// Drive the selected I_DELAY INCDEC signal based upon the active user_dly_ld signal
                      output cntrl_dly_ld,										// Drive the selected I_DELAY LD siganl based upon the active user_dly_ld signal
                      output cntrl_dly_adj,										// Drive the selected I_DELAY ADJ siganl based upon the active user_dly_adj signal
-					 output [NUM_DLY-1: 0] phy_dly_incdec,						// Drive the I_DELAY input control. Dummy signal
-	                 output [NUM_DLY-1: 0] phy_dly_ld,							// Drive the I_DELAY input control. Dummy signal
-	                 output [NUM_DLY-1: 0] phy_dly_adj,							// Drive the I_DELAY input control. Dummy signal
                      output [(NUM_DLY*DLY_TAP_WIDTH)-1:0] usr_dly_tap_value_out   // DLY TAP Value out for user. Concatenated value
                     );
 
 integer ACT_IDLY_CNT;
 integer active_idelay_cnt;
-
+wire [4:0] f2g_dly_addr_wire;
 reg [NUM_DLY:0]                  delay_location_index [NUM_GB_SITES-1:0];
 reg [ADDR_WIDTH-1:0]             dly_site_addr [NUM_DLY-1:0];
 wire [(ADDR_WIDTH*NUM_DLY)-1:0]  dly_site_addr_bus;
 wire [NUM_DLY-1:0]               usr_dly_ld_en;
-//reg [(5*NUM_DLY)-1:0] dly_site_addr_reg;
-
-assign phy_dly_incdec   = usr_dly_incdec;
-assign phy_dly_ld       = usr_dly_ld;
-assign phy_dly_adj      = usr_dly_adj;
+reg [5:0] last_dly_sly;
 
 	// Count one to assign DELAY to each address
 	// Total number of GB_SITES are needed to asign address
@@ -94,11 +86,12 @@ assign phy_dly_adj      = usr_dly_adj;
     endfunction    
 
 //drive control signal based upon active delay load control
+
 muxp #(.DWIDTH(1),
        .NUM_OF_BUS(NUM_DLY)
        )
  muxp_inst_incdec (.d(usr_dly_incdec),
-            .sel(usr_dly_ld),
+            .sel(usr_dly_adj),       // dly_adj
             .dout(cntrl_dly_incdec)
     );
     
@@ -106,7 +99,7 @@ muxp #(.DWIDTH(1),
        .NUM_OF_BUS(NUM_DLY)
       )
      muxp_inst_adj (.d(usr_dly_adj),
-                .sel(usr_dly_ld),
+                .sel(usr_dly_adj),       // dly_adj
                 .dout(cntrl_dly_adj)
         );
 
@@ -117,21 +110,21 @@ muxp #(.DWIDTH(1),
                 .sel(usr_dly_ld),
                 .dout(cntrl_dly_ld)
         );
-        
+
+
 muxp #(.DWIDTH(ADDR_WIDTH),
        .NUM_OF_BUS(NUM_DLY)
       )
      muxp_dly_addr (.d(dly_site_addr_bus),
-                    .sel(usr_dly_ld),
+                    .sel(usr_dly_ld | usr_dly_adj),       // dly_adj || dly_ld
                     .dout(f2g_dly_addr)
                 );
-
 
 one2x_decoder #(.DWIDTH(DLY_TAP_WIDTH),
                 .NUM_OF_OBUS(NUM_DLY)
                 )
    one2x_decoder_inst (.din(cntrl_dly_tap_value),
-                       .sel(usr_dly_ld_en),
+                       .sel(usr_dly_ld_en | usr_dly_adj),
                        .dout(usr_dly_tap_value_out)
                         );
                         
@@ -140,7 +133,7 @@ assign usr_dly_ld_en = usr_rd_dly_value ^ usr_dly_ld;
 // This generates the assign delay site address concatenated as a bus
 generate
 for (genvar i=0; i<NUM_DLY; i=i+1) begin : GEN_ADDR_CONCAT   
-     assign dly_site_addr_bus[((ADDR_WIDTH*(i+1))-1):ADDR_WIDTH*i] = dly_site_addr[i];         
+     assign dly_site_addr_bus[((ADDR_WIDTH*(i+1))-1):ADDR_WIDTH*i] = dly_site_addr[i]; 
 end
 endgenerate
   

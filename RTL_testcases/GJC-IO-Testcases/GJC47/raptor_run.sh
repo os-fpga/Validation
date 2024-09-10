@@ -169,7 +169,7 @@ parse_cga exit 1; }
 #creating a tcl file to run raptor flow 
     cd ..
     
-    echo "create_design $design">raptor_tcl.tcl
+    echo "create_design $design">raptor_tcl.tcl 
     echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design

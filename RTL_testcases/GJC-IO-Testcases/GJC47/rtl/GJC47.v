@@ -4,15 +4,13 @@
 // Author:        Azfar  
 //***********************************************************
 
-
-
 module GJC47 #(
-    parameter DELAY         = 0,
+    parameter DELAY         = 5,
     parameter NUM_GB_SITES  = 20,
-    parameter DLY_LOC       = 'h9_6767, // The LSB of this number correspond to GBox IO[0] and MSB correspond to GBox IO[19]. Each 1/2 bank is addressed separately
+    parameter DLY_LOC       = 20'b11110000000000000000, // The LSB of this number correspond to GBox IO[0] and MSB correspond to GBox IO[19]. Each 1/2 bank is addressed separately
     parameter ADDR_WIDTH    = 5,
     parameter DLY_TAP_WIDTH = 6,
-    parameter NUM_DLY       = 12,		// The NUM_DLY will be divided equally between I_DELAY (6) and O_DELAY (6)
+    parameter NUM_DLY       = 4,		// The NUM_DLY will be divided equally between I_DELAY (6) and O_DELAY (6)
     parameter DLY_SEL_WIDTH = $clog2(NUM_DLY)
 )
 (
@@ -21,7 +19,7 @@ module GJC47 #(
 	input wire [DLY_SEL_WIDTH-1:0]  sel_dly,
     input wire [(NUM_DLY/2)-1:0]    din_idly,
     input wire [(NUM_DLY/2)-1:0]    din_odly,	
-	input wire [DLY_TAP_WIDTH:0]    g2f_trx_dly_tap,
+	input wire [DLY_TAP_WIDTH-1:0]    g2f_trx_dly_tap,
     input wire                      dly_incdec_buf,
     input wire                      dly_ld_buf,
     input wire                      dly_adj_buf,
@@ -29,11 +27,11 @@ module GJC47 #(
     //============================================================================================================
     // These ports are added on the top level so synthesis will not optimize them
     // These ports should only be present in the fabric netlist and needs to be removed from the Gearbox netlist
-	input wire [(DLY_TAP_WIDTH)-1:0] g2f_rx_dly_tap,   // This port needs to be edited out from GearBox netlist. This is an input to fabric netlist from GBox fixed output.
-    output wire                      f2g_trx_dly_inc,                      // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
-	output wire                      f2g_trx_dly_ld,                        // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
-	output wire                      f2g_trx_dly_adj,                       // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
-	output wire [ADDR_WIDTH-1:0]     f2g_dly_addr,         // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
+	// input wire [(DLY_TAP_WIDTH)-1:0] g2f_rx_dly_tap,   // This port needs to be edited out from GearBox netlist. This is an input to fabric netlist from GBox fixed output.
+    // output wire                      f2g_trx_dly_inc,                      // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
+	// output wire                      f2g_trx_dly_ld,                        // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
+	// output wire                      f2g_trx_dly_adj,                       // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
+	// output reg [ADDR_WIDTH-1:0]     f2g_dly_addr,         // This port needs to be edited out from GearBox netlist. This is a fixed input to GBox and output from fabric netlist.
 	//=============================================================================================================
     output wire [NUM_DLY-1:0]       data_delayed_buf,
     output wire [DLY_TAP_WIDTH-1:0] dly_tap_val_inv_buf
@@ -51,12 +49,9 @@ module GJC47 #(
     wire [(NUM_DLY/2)-1:0] 	din_odly_buf;	
 	wire [(NUM_DLY/2)-1:0] 	dout_idly;
 	wire [(NUM_DLY/2)-1:0] 	dout_odly;
-	wire [NUM_DLY-1:0] 		dly_incdec_in;  	// Dummy signals
-	wire [NUM_DLY-1:0] 		dly_ld_in;  		// Dummy signals
-	wire [NUM_DLY-1:0] 		dly_adj_in;  		// Dummy signals
     wire [(DLY_TAP_WIDTH*NUM_DLY)-1:0] 	usr_dly_tap_value_out;
     reg  [(DLY_TAP_WIDTH-1):0] 			dly_tap_val;
-	wire [(DLY_TAP_WIDTH*NUM_DLY)-1:0] 	dly_tap_value;
+	wire [(DLY_TAP_WIDTH*20)-1:0] 	dly_tap_value;
 	
     //reg [NUM_DLY-1:0] 		usr_dly_incdec_inv;
     //reg [NUM_DLY-1:0] 		usr_dly_adj_inv;
@@ -66,12 +61,20 @@ module GJC47 #(
     reg [NUM_DLY-1:0] 		usr_dly_adj_in;
     reg [NUM_DLY-1:0] 		usr_dly_ld_in;
 
+	wire f2g_trx_dly_inc;
+	wire f2g_trx_dly_ld;
+	wire f2g_trx_dly_adj;
+	reg [ADDR_WIDTH-1:0] 	 f2g_dly_addr;
+	wire [DLY_TAP_WIDTH-1:0] g2f_rx_dly_tap;
+	
+	wire reset_buf;
 
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf0_ (clk_i_buf,const1,clk_i);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf1_idly_incdec (dly_incdec_buf,const1,dly_incdec);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf2_idly_ld (dly_ld_buf,const1,dly_ld);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf3_ldly_adj (dly_adj_buf,const1,dly_adj);
- 
+	I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf3_reset (reset,const1,reset_buf);
+
     O_BUF obuf0_ (dly_tap_val[0], dly_tap_val_inv_buf[0]);
     O_BUF obuf1_ (dly_tap_val[1], dly_tap_val_inv_buf[1]);
     O_BUF obuf2_ (dly_tap_val[2], dly_tap_val_inv_buf[2]);
@@ -79,37 +82,122 @@ module GJC47 #(
     O_BUF obuf4_ (dly_tap_val[4], dly_tap_val_inv_buf[4]);
     O_BUF obuf5_ (dly_tap_val[5], dly_tap_val_inv_buf[5]);
 	
-	
-
     assign const1 = 1;
     assign enable = const1;
 
     CLK_BUF clock_buffer (clk_i,clk_buf_i);
 	
-	//assign usr_dly_incdec = {
+	// Hardware Multiplexer for DLY_TAP_VALUE
+	muxp #(
+		.DWIDTH(DLY_TAP_WIDTH),
+        .NUM_OF_BUS(NUM_DLY)
+		)
+    muxp_inst1(
+		.d(slice),		// input [DWIDTH*NUM_OF_BUS-1:0] d,
+		.sel(1 << f2g_dly_addr_reg2),		// input [NUM_OF_BUS-1:0] sel,
+		.dout(g2f_rx_dly_tap)	// output reg [DWIDTH-1:0] dout
+		);
 	
-	DLY_ADDR_CNTRL #(.NUM_GB_SITES (NUM_GB_SITES),
-                .DLY_LOC   (DLY_LOC),
-                .NUM_DLY   (NUM_DLY),   //Minimum of 1 and maximum of 20 I_DELAY or O_DELAY 
-                .ADDR_WIDTH (ADDR_WIDTH),
-                .DLY_TAP_WIDTH    (DLY_TAP_WIDTH)
-                )
-                DLY_ADDR_CNTRL_INST (.rst(reset),
-                                    .cntrl_dly_tap_value (g2f_rx_dly_tap),
-                                    .usr_dly_tap_value_in (dly_tap_value),
-                                    .usr_dly_incdec (usr_dly_incdec_in),
-	                                .usr_dly_ld (usr_dly_ld_in),
-	                                .usr_dly_adj (usr_dly_adj_in),
-	                                .usr_rd_dly_value (usr_rd_dly_value),
-	                                .f2g_dly_addr(f2g_dly_addr),
-                                    .cntrl_dly_incdec (f2g_trx_dly_inc),
-                                    .cntrl_dly_ld (f2g_trx_dly_ld),
-                                    .cntrl_dly_adj (f2g_trx_dly_adj),
-									.phy_dly_incdec (dly_incdec_in),
-									.phy_dly_ld (dly_ld_in),
-									.phy_dly_adj (dly_adj_in),									 
-                                    .usr_dly_tap_value_out(usr_dly_tap_value_out)                                     
-                                    );
+	// Hardware Decider for DLY Control	
+	wire usr_dly_incdec_out, usr_dly_ld_out, usr_dly_adj_out;
+	wire [19:0] f2g_trx_dly_inc_out, f2g_trx_dly_ld_out, f2g_trx_dly_adj_out;
+	one2x_decoder #(
+		.DWIDTH(1),
+		.NUM_OF_OBUS(NUM_DLY)
+		)
+    one2x_decoder_inst1 (
+		.din ({f2g_trx_dly_inc}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+		.dout (f2g_trx_dly_inc_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+		);
+
+
+one2x_decoder #(
+		.DWIDTH(1),
+		.NUM_OF_OBUS(NUM_DLY)
+		)
+    one2x_decoder_inst12 (
+		.din ({ f2g_trx_dly_ld}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+		.dout (f2g_trx_dly_ld_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+		);
+
+		one2x_decoder #(
+		.DWIDTH(1),
+		.NUM_OF_OBUS(NUM_DLY)
+		)
+    one2x_decoder_inst13 (
+		.din ({f2g_trx_dly_adj}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+		.dout (f2g_trx_dly_adj_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+		);
+	wire [3:0] twnt_to_fr_adj, twnt_to_fr_inc, twnt_to_fr_ld;
+
+	one_hot_to_output onehot1(
+		.in(f2g_trx_dly_inc_out),
+		.out(twnt_to_fr_inc),
+		.clk(clk_buf_i),
+		.reset(reset_buf),
+		.sel_dly(sel_dly)
+	);
+
+	one_hot_to_output onehot2(
+		.in(f2g_trx_dly_adj_out),
+		.out(twnt_to_fr_adj),
+		.clk(clk_buf_i),
+		.reset(reset_buf),
+		.sel_dly(sel_dly)
+	);
+
+	one_hot_to_output onehot3(
+		.in(f2g_trx_dly_ld_out),
+		.out(twnt_to_fr_ld),
+		.clk(clk_buf_i),
+		.reset(reset_buf),
+		.sel_dly(sel_dly)
+	);
+
+	// integer j;
+	// function [2:0] dly_control_bus (
+	// 	input [NUM_DLY-1:0] dly_incdec_in,
+	// 	input [NUM_DLY-1:0] dly_ld_in,
+	// 	input [NUM_DLY-1:0] dly_adj_in);
+	// begin	
+	// 	for (j=0; j<NUM_DLY; j = j+1) begin
+	// 		dly_control_bus[j] = {dly_incdec_in[j], dly_ld_in[j], dly_adj_in[j]};
+	// 	end // for
+	// end // function
+	// endfunction
+	
+	//assign usr_dly_incdec = {
+	wire [ADDR_WIDTH-1:0] f2g_dly_addr_wire;
+
+	always @(sel_dly) begin
+        f2g_dly_addr <= f2g_dly_addr_wire; 
+    end
+
+
+	DLY_ADDR_CNTRL #(
+		.NUM_GB_SITES 	(NUM_GB_SITES),
+        .DLY_LOC   		(DLY_LOC),
+        .NUM_DLY   		(NUM_DLY),   //Minimum of 1 and maximum of 20 I_DELAY or O_DELAY 
+        .ADDR_WIDTH 	(ADDR_WIDTH),
+        .DLY_TAP_WIDTH  (DLY_TAP_WIDTH)
+        )
+    DLY_ADDR_CNTRL_INST (
+		.rst					(reset_buf),
+        .cntrl_dly_tap_value 	(g2f_rx_dly_tap),
+        .usr_dly_incdec 		(usr_dly_incdec_in),
+	    .usr_dly_ld 			(usr_dly_ld_in),
+	    .usr_dly_adj 			(usr_dly_adj_in),
+	    .usr_rd_dly_value 		(usr_rd_dly_value),
+	    .f2g_dly_addr			(f2g_dly_addr_wire),
+        .cntrl_dly_incdec 		(f2g_trx_dly_inc),
+        .cntrl_dly_ld 			(f2g_trx_dly_ld),
+        .cntrl_dly_adj 			(f2g_trx_dly_adj),
+        .usr_dly_tap_value_out	(usr_dly_tap_value_out)                                     
+        );
+
  //assign dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
  generate
     if (NUM_DLY == 2) begin   
@@ -290,24 +378,14 @@ module GJC47 #(
     end
 */	
 	always @(*) begin
-		usr_dly_incdec_in = 'h0;
-		usr_dly_adj_in = 'h0;
-		usr_dly_ld_in = 'h0;
-		//usr_dly_incdec_inv[sel_dly] = ~dly_incdec;
-		//usr_dly_adj_inv [sel_dly]   = ~dly_adj;
-		//usr_dly_ld_inv[sel_dly]     = ~dly_ld;
-		usr_dly_incdec_in[sel_dly] = dly_incdec;
-		usr_dly_adj_in [sel_dly]   = dly_adj;
-		usr_dly_ld_in[sel_dly]     = dly_ld;
+		usr_dly_incdec_in 			= 'h0;
+		usr_dly_adj_in 				= 'h0;
+		usr_dly_ld_in 				= 'h0;
+		usr_dly_incdec_in[sel_dly] 	= dly_incdec;
+		usr_dly_adj_in [sel_dly]   	= dly_adj;
+		usr_dly_ld_in[sel_dly]     	= dly_ld;
 	end
 
-    //assign data_o_inv_delayed   = ~data_o[select-1];
-
-    //reg  [I_DELAYS-1:0] data_i_buf = {I_DELAYS{1'b0}};
-    //wire [O_DELAYS-1:0] data_o;
-    //wire [NUM_IDLY-1:0] din_reg_odly;
-
-    //assign xx = dout_idly
 
     genvar i;
     generate
@@ -319,10 +397,10 @@ module GJC47 #(
             )
             data_i_delay (  
                 .I(din_idly_buf[i]),
-                .DLY_LOAD(dly_ld_in[i*2]),
-                .DLY_ADJ(dly_adj_in[i*2]),
-                .DLY_INCDEC(dly_incdec_in[i*2]),
-                .DLY_TAP_VALUE(dly_tap_value[((DLY_TAP_WIDTH-1)+(i*2*DLY_TAP_WIDTH)):(i*2*DLY_TAP_WIDTH)]),
+                .DLY_LOAD(twnt_to_fr_ld[i*2]),
+                .DLY_ADJ(twnt_to_fr_adj[i*2]),
+                .DLY_INCDEC(twnt_to_fr_inc[i*2]),
+                .DLY_TAP_VALUE(dly_tap_value[((DLY_TAP_WIDTH-1)+(i*2*DLY_TAP_WIDTH)):(i*2*DLY_TAP_WIDTH)]), 
                 .CLK_IN(clk_buf_i),
                 .O(dout_idly[i])
                 );
@@ -335,9 +413,9 @@ module GJC47 #(
             )
             data_o_delay (
                 .I(din_odly_buf[i]),
-                .DLY_LOAD(dly_ld_in[(i*2)+1]),
-                .DLY_ADJ(dly_adj_in[(i*2)+1]),
-                .DLY_INCDEC(dly_incdec_in[(i*2)+1]),
+                .DLY_LOAD(twnt_to_fr_ld[(i*2)+1]),
+                .DLY_ADJ(twnt_to_fr_adj[(i*2)+1]),
+                .DLY_INCDEC(twnt_to_fr_inc[(i*2)+1]),
                 .DLY_TAP_VALUE(dly_tap_value[((DLY_TAP_WIDTH*2-1)+(i*2*DLY_TAP_WIDTH)):(i*2*DLY_TAP_WIDTH)+(DLY_TAP_WIDTH)]),
                 .CLK_IN(clk_buf_i),
                 .O(dout_odly[i])
@@ -346,11 +424,122 @@ module GJC47 #(
 			
         end
     endgenerate
-	
-//	always @(posedge clk_buf_i or negedge rst_buf_i)
-//		if (!rst_buf_i) 
-//			din_odly <= 'h0;
-//		else
-//			din_odly <= dout_idly;
-	
+
+wire [(DLY_TAP_WIDTH*20)-1:0] slice;
+slice_assignment_with_addr #(
+	.WIDTH(6)
+) slice_assign (
+	.old_wire(dly_tap_value),
+	.sel_dly(sel_dly_reg3),
+	.new_wire(slice),
+	.addr(f2g_dly_addr_reg2)
+);
+
+reg [DLY_SEL_WIDTH-1:0]  sel_dly_reg1, sel_dly_reg2, sel_dly_reg3;
+reg  [ADDR_WIDTH-1:0] f2g_dly_addr_reg1, f2g_dly_addr_reg2;
+always @(posedge clk_buf_i) begin
+	sel_dly_reg1 <= sel_dly;
+	sel_dly_reg2 <= sel_dly_reg1;
+	sel_dly_reg3 <= sel_dly_reg2;
+	f2g_dly_addr_reg1 <= f2g_dly_addr;
+	f2g_dly_addr_reg2 <= f2g_dly_addr_reg1;
+end
+
+endmodule
+
+
+
+module one_hot_to_output #(
+    parameter WIDTH = 20,            // Width of the input one-hot vector
+    parameter OUTPUT_WIDTH = 4       // Width of the output
+)(
+    input wire [WIDTH-1:0] in,       // One-hot input
+    input wire [OUTPUT_WIDTH-1:0] sel_dly,  // Select which output bit to turn on
+    input wire clk,
+    input wire reset,
+    output reg [OUTPUT_WIDTH-1:0] out
+);
+
+    reg [WIDTH-1:0] last_in;          // To store the last input value
+    reg [OUTPUT_WIDTH-1:0] next_out;  // Temporary output register
+	integer i;
+    always @(posedge clk) begin
+        if (reset) begin
+            out <= 0;
+            last_in <= 0;
+        end else begin
+            if (in != last_in) begin
+                // Detect new '1' in input
+                
+                for (i = 0; i < WIDTH; i = i + 1) begin
+                    if (in[i] && !last_in[i]) begin
+                        // If a new '1' appears, turn on the bit specified by sel_dly
+                        next_out = (1 << sel_dly);
+                        // Update the output if there is still a '1' in the input
+                        if (|in) begin
+                            out <= next_out;
+                        end else begin
+                            out <= 0;
+                        end
+                        break;
+                    end
+                end
+                // If the input is all zeros, turn off the output
+                if (~|in) begin
+                    out <= 0;
+                end
+                // Update the last input value
+                last_in <= in;
+            end else begin
+                // If no change in input, retain the previous output
+                if (|in) begin
+                    out <= out;
+                end else begin
+                    out <= 0;
+                end
+            end
+        end
+    end
+endmodule
+
+
+module slice_assignment_with_addr#(
+    parameter WIDTH = 6
+	)
+	(
+    input [119:0] old_wire,   // 120-bit wide old_wire
+    input [4:0] sel_dly,      // 5-bit sel_dly (value between 0 and 19)
+    input [4:0] addr,         // 5-bit address to determine where to place in new_wire
+    output reg [119:0] new_wire // 120-bit wide new_wire to assign the value to
+);
+
+// Combined selection and assignment logic in one always block
+always @(*) begin
+    new_wire = 120'b0; // Initialize new_wire to all 0s
+
+    case(addr)
+        5'd0:  new_wire[5:0]    = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 5:0
+        5'd1:  new_wire[11:6]   = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 11:6
+        5'd2:  new_wire[17:12]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 17:12
+        5'd3:  new_wire[23:18]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 23:18
+        5'd4:  new_wire[29:24]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 29:24
+        5'd5:  new_wire[35:30]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 35:30
+        5'd6:  new_wire[41:36]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 41:36
+        5'd7:  new_wire[47:42]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 47:42
+        5'd8:  new_wire[53:48]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 53:48
+        5'd9:  new_wire[59:54]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 59:54
+        5'd10: new_wire[65:60]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 65:60
+        5'd11: new_wire[71:66]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 71:66
+        5'd12: new_wire[77:72]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 77:72
+        5'd13: new_wire[83:78]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 83:78
+        5'd14: new_wire[89:84]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 89:84
+        5'd15: new_wire[95:90]  = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 95:90
+        5'd16: new_wire[101:96] = old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 101:96
+        5'd17: new_wire[107:102]= old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 107:102
+        5'd18: new_wire[113:108]= old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 113:108
+        5'd19: new_wire[119:114]= old_wire[(sel_dly*WIDTH) +: WIDTH];  // Assign selected slice to bits 119:114
+        default: new_wire = 120'b0;                            // Default case
+    endcase
+end
+
 endmodule
