@@ -1,4 +1,4 @@
-set_top_module GJC47
+
 
 create_clock -period 10 clk_i_buf
 
