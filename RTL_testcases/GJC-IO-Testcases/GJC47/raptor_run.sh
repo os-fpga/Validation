@@ -170,7 +170,6 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl
-    echo "exit" >raptor_tcl.tcl
     echo "target_device 1VG28">>raptor_tcl.tcl 
 
     ##vary design to design
