@@ -67,8 +67,27 @@ module GJC47 #(
 	reg [ADDR_WIDTH-1:0] 	 f2g_dly_addr;
 	wire [DLY_TAP_WIDTH-1:0] g2f_rx_dly_tap;
 	
-	wire reset_buf;
+	wire reset_buf;wire [DLY_SEL_WIDTH-1:0]  sel_dly_buf; wire [DLY_TAP_WIDTH-1:0]    g2f_trx_dly_tap_buf;
+	genvar ii;
+	generate
+		for (ii =0; ii < DLY_SEL_WIDTH; ii = ii + 1) begin
+			I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf2_sel_dly (sel_dly[ii],const1,sel_dly_buf[ii]);
+		end
+	endgenerate
+	genvar iii;
+	generate
+		for (iii =0; iii < DLY_TAP_WIDTH; iii = iii + 1) begin
+			I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf3_g2f_trx_dly_tap (g2f_trx_dly_tap[iii],const1,g2f_trx_dly_tap_buf[iii]);
+		end
+	endgenerate
 
+	wire [NUM_DLY-1:0]        usr_rd_dly_value_buf;
+	genvar iv;
+	generate
+		for (iv =0; iv < NUM_DLY; iv = iv + 1) begin
+			I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf3_usr_rd_dly_value (usr_rd_dly_value[iv],const1,usr_rd_dly_value_buf[iv]);
+		end
+	endgenerate
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf0_ (clk_i_buf,const1,clk_i);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf1_idly_incdec (dly_incdec_buf,const1,dly_incdec);
     I_BUF #(.WEAK_KEEPER("PULLDOWN")) buf2_idly_ld (dly_ld_buf,const1,dly_ld);
@@ -138,7 +157,7 @@ one2x_decoder #(
 		.out(twnt_to_fr_inc),
 		.clk(clk_buf_i),
 		.reset(reset_buf),
-		.sel_dly(sel_dly)
+		.sel_dly(sel_dly_buf)
 	);
 
 	one_hot_to_output onehot2(
@@ -146,7 +165,7 @@ one2x_decoder #(
 		.out(twnt_to_fr_adj),
 		.clk(clk_buf_i),
 		.reset(reset_buf),
-		.sel_dly(sel_dly)
+		.sel_dly(sel_dly_buf)
 	);
 
 	one_hot_to_output onehot3(
@@ -154,7 +173,7 @@ one2x_decoder #(
 		.out(twnt_to_fr_ld),
 		.clk(clk_buf_i),
 		.reset(reset_buf),
-		.sel_dly(sel_dly)
+		.sel_dly(sel_dly_buf)
 	);
 
 	// integer j;
@@ -172,7 +191,7 @@ one2x_decoder #(
 	//assign usr_dly_incdec = {
 	wire [ADDR_WIDTH-1:0] f2g_dly_addr_wire;
 
-	always @(sel_dly) begin
+	always @(sel_dly_buf) begin
         f2g_dly_addr <= f2g_dly_addr_wire; 
     end
 
@@ -190,7 +209,7 @@ one2x_decoder #(
         .usr_dly_incdec 		(usr_dly_incdec_in),
 	    .usr_dly_ld 			(usr_dly_ld_in),
 	    .usr_dly_adj 			(usr_dly_adj_in),
-	    .usr_rd_dly_value 		(usr_rd_dly_value),
+	    .usr_rd_dly_value 		(usr_rd_dly_value_buf),
 	    .f2g_dly_addr			(f2g_dly_addr_wire),
         .cntrl_dly_incdec 		(f2g_trx_dly_inc),
         .cntrl_dly_ld 			(f2g_trx_dly_ld),
@@ -198,175 +217,175 @@ one2x_decoder #(
         .usr_dly_tap_value_out	(usr_dly_tap_value_out)                                     
         );
 
- //assign dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+ //assign dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
  generate
     if (NUM_DLY == 2) begin   
 	   always @(*) begin
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always
     end else if (NUM_DLY == 4) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always    
     end else if (NUM_DLY == 6) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always    
     end else if (NUM_DLY == 8) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   
     end else if (NUM_DLY == 10) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   
     end else if (NUM_DLY == 12) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];			   
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];			   
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   	 
     end else if (NUM_DLY == 14) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   	   
     end else if (NUM_DLY == 16) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   		   
     end else if (NUM_DLY == 18) begin   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   16:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   17:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   			   		   
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   16:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   17:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   			   		   
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   	  	 
     end else   
 	   always @(*) begin    
-	       case (sel_dly)
-			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
-			   16:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   17:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
-			   18:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
-			   19:	dly_tap_val = usr_dly_tap_value_out[sel_dly*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   			   		   
+	       case (sel_dly_buf)
+			   0:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   1:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   2:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   3:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   4:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   5:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   6:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   7:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   8:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   9:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   10:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   11:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   12:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   13:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   14:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   15:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];	
+			   16:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   17:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];		
+			   18:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];
+			   19:	dly_tap_val = usr_dly_tap_value_out[sel_dly_buf*DLY_TAP_WIDTH+:DLY_TAP_WIDTH];				   		   			   		   
 			   default : dly_tap_val = usr_dly_tap_value_out[DLY_TAP_WIDTH-1:0];
 		   endcase
 	    end     // always   	      
@@ -381,9 +400,9 @@ one2x_decoder #(
 		usr_dly_incdec_in 			= 'h0;
 		usr_dly_adj_in 				= 'h0;
 		usr_dly_ld_in 				= 'h0;
-		usr_dly_incdec_in[sel_dly] 	= dly_incdec;
-		usr_dly_adj_in [sel_dly]   	= dly_adj;
-		usr_dly_ld_in[sel_dly]     	= dly_ld;
+		usr_dly_incdec_in[sel_dly_buf] 	= dly_incdec;
+		usr_dly_adj_in [sel_dly_buf]   	= dly_adj;
+		usr_dly_ld_in[sel_dly_buf]     	= dly_ld;
 	end
 
 
@@ -438,7 +457,7 @@ slice_assignment_with_addr #(
 reg [DLY_SEL_WIDTH-1:0]  sel_dly_reg1, sel_dly_reg2, sel_dly_reg3;
 reg  [ADDR_WIDTH-1:0] f2g_dly_addr_reg1, f2g_dly_addr_reg2;
 always @(posedge clk_buf_i) begin
-	sel_dly_reg1 <= sel_dly;
+	sel_dly_reg1 <= sel_dly_buf;
 	sel_dly_reg2 <= sel_dly_reg1;
 	sel_dly_reg3 <= sel_dly_reg2;
 	f2g_dly_addr_reg1 <= f2g_dly_addr;
