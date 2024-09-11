@@ -66,18 +66,18 @@ module KeyExpand256(
 	);
 	
 	// Registers holding the calculated roundkeys
-	logic	[0:31]	w0;
-	logic	[0:31]	w1;
-	logic	[0:31]	w2;
-	logic	[0:31]	w3;
-	logic	[0:31]	w4;
-	logic	[0:31]	w5;
-	logic	[0:31]	w6;
-	logic	[0:31]	w7;
+	logic	[0:31]	w0=0;
+	logic	[0:31]	w1=0;
+	logic	[0:31]	w2=0;
+	logic	[0:31]	w3=0;
+	logic	[0:31]	w4=0;
+	logic	[0:31]	w5=0;
+	logic	[0:31]	w6=0;
+	logic	[0:31]	w7=0;
 	
-	logic	[0:3]	keyexp_state;	// Key expansion state machine
-	logic	[0:7]	Rcon;			// Round constant. See FIPS-197 section 5.3.
-	logic	[0:7]	Rcon_1;		// Shadow Rcon. For use to compute next Rcon value in key expansion state machine.
+	logic	[0:3]	keyexp_state=0;	// Key expansion state machine
+	logic	[0:7]	Rcon=0;			// Round constant. See FIPS-197 section 5.3.
+	logic	[0:7]	Rcon_1=0;		// Shadow Rcon. For use to compute next Rcon value in key expansion state machine.
 	
 	wire	[0:31]	subword_out;
 	wire	[0:31]	subword_in;

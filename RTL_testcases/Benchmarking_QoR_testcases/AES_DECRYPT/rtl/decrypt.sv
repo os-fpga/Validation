@@ -66,8 +66,8 @@ module decrypt(
 	input	rst
 	);
 	
-	logic	[0:127]	State;
-	logic	[14:0]	decrypt_state;
+	logic	[0:127]	State=0;
+	logic	[14:0]	decrypt_state=0;
 		
 	wire	[0:127]	inv_shiftrows_out;
 	wire	[0:127]	inv_subbytes_out;
@@ -77,7 +77,7 @@ module decrypt(
 	wire	load_new_ct;
 	wire	last_round;
 	
-	logic	pt_vld_reg;
+	logic	pt_vld_reg=0;
 	
 	InvShiftRows InvShiftRows_u(.din(State), .dout(inv_shiftrows_out));
 	(* KEEP_HIERARCHY = "yes" *) InvSubBytes InvSubBytes_u(.din(inv_shiftrows_out), .dout(inv_subbytes_out));
@@ -115,9 +115,11 @@ module decrypt(
 	
 	assign pt_vld = pt_vld_reg;
 	
-	always_ff @(posedge clk)
+	always_ff @(posedge clk) begin
 	// The output of InvMixColumns() is the intermediate result after each round.
-		if (~(decrypt_state[0] & ~(ct_vld & rkey_vld))) State <= inv_mixcol_out;
+		if (rst) State <= 0;
+		else if (~(decrypt_state[0] & ~(ct_vld & rkey_vld))) State <= inv_mixcol_out;
+	end
 		
 	assign pt = State;
 	

@@ -515,9 +515,9 @@ module mkDelayWorker32B(wciS0_Clk,
   wire endOfMessage__D_IN, endOfMessage__EN;
 
   // register errCount // jluu removed because never used
-//  reg [255 : 0] errCount;
-//  wire [255 : 0] errCount__D_IN;
-//  wire errCount__EN;
+ reg [255 : 0] errCount;
+ wire [255 : 0] errCount__D_IN;
+ wire errCount__EN;
 
   // register impreciseBurst
   reg impreciseBurst;
@@ -657,9 +657,9 @@ module mkDelayWorker32B(wciS0_Clk,
   wire unrollCnt__EN;
 
   // register valExpect
-//  reg [255 : 0] valExpect;
-//  wire [255 : 0] valExpect__D_IN;
-//  wire valExpect__EN;
+ reg [255 : 0] valExpect;
+ wire [255 : 0] valExpect__D_IN;
+ wire valExpect__EN;
 
   // register wci_cEdge
   reg [2 : 0] wci_cEdge;
@@ -1505,7 +1505,7 @@ wire [255:0] dp_out_not_used2;
 
   defparam dpram1.ADDR_WIDTH = 10;
   defparam dpram1.DATA_WIDTH = 256;
-  dual_port_ram dpram1 (
+  dual_port_ram_1 dpram1 (
 						.clk(wciS0_Clk),
 					    .addr1(mesgRF_memory__ADDRA),
 					    .addr2(mesgRF_memory__ADDRB),
@@ -1525,7 +1525,7 @@ wire [255:0] dp_out_not_used2;
 
  defparam dpram2.ADDR_WIDTH = 10;
  defparam dpram2.DATA_WIDTH = 256;  
- dual_port_ram dpram2   (
+ dual_port_ram_1 dpram2   (
 						.clk(wciS0_Clk),
 					    .addr1(mesgWF_memory__ADDRA),
 					    .addr2(mesgWF_memory__ADDRB),
@@ -2549,12 +2549,12 @@ wire [255:0] dp_out_not_used2;
 	     WILL_FIRE_RL_wmwt_messageFinalize ;
 
   // register errCount - jluu: removed because never used
-//  assign errCount__D_IN = errCount + 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 ;
-//  assign errCount__EN =
-//	     WILL_FIRE_RL_wmwt_messagePushImprecise &&
-//	     wsiS_reqFifo__D_OUT[295:40] != valExpect &&
-//	     (wsiS_reqFifo__D_OUT[307:296] != 12'b01 ||
-//	      wsiS_reqFifo__D_OUT[39:8] != 32'b00000000000000000000000000000000) ;
+ assign errCount__D_IN = errCount + 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 ;
+ assign errCount__EN =
+	     WILL_FIRE_RL_wmwt_messagePushImprecise &&
+	     wsiS_reqFifo__D_OUT[295:40] != valExpect &&
+	     (wsiS_reqFifo__D_OUT[307:296] != 12'b01 ||
+	      wsiS_reqFifo__D_OUT[39:8] != 32'b00000000000000000000000000000000) ;
 
   // register impreciseBurst
   always@(WILL_FIRE_RL_wmwt_doAbort or
@@ -2787,11 +2787,11 @@ wire [255:0] dp_out_not_used2;
 	     WILL_FIRE_RL_wmrd_mesgBodyResponse ;
 
   // register valExpect : jluu removed because never used
-//  assign valExpect__D_IN = valExpect + 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 ;
-//  assign valExpect__EN =
-//	     WILL_FIRE_RL_wmwt_messagePushImprecise &&
-//	     (wsiS_reqFifo__D_OUT[307:296] != 12'b01 ||
-//	      wsiS_reqFifo__D_OUT[39:8] != 32'b00000000000000000000000000000000) ;
+ assign valExpect__D_IN = valExpect + 256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 ;
+ assign valExpect__EN =
+	     WILL_FIRE_RL_wmwt_messagePushImprecise &&
+	     (wsiS_reqFifo__D_OUT[307:296] != 12'b01 ||
+	      wsiS_reqFifo__D_OUT[39:8] != 32'b00000000000000000000000000000000) ;
 
   // register wci_cEdge
   assign wci_cEdge__D_IN = wci_reqF__D_OUT[36:34] ;
@@ -3559,7 +3559,7 @@ wire [255:0] dp_out_not_used2;
 	dlyWordsStored_value <=  20'b00000000000000000000;
 	doAbort <=  1'b0;
 	endOfMessage <=  1'b0;
-//	errCount <=  256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+	errCount <=  256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
 	impreciseBurst <=  1'b0;
 	mesgLength <=  15'b010101010101010;
 	mesgLengthSoFar <=  14'b00000000000000;
@@ -3584,7 +3584,7 @@ wire [255:0] dp_out_not_used2;
 	readyToPush <=  1'b0;
 	readyToRequest <=  1'b0;
 	unrollCnt <=  16'b0000000000000000;
-//	valExpect <=  256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+	valExpect <=  256'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
 	wci_cEdge <=  3'b111;
 	wci_cState <=  3'b000;
 	wci_ctlAckReg <=  1'b0;
@@ -3711,7 +3711,7 @@ wire [255:0] dp_out_not_used2;
 	if (readyToRequest__EN)
 	  readyToRequest <=  readyToRequest__D_IN;
 	if (unrollCnt__EN) unrollCnt <=  unrollCnt__D_IN;
-//	if (valExpect__EN) valExpect <=  valExpect__D_IN;
+	if (valExpect__EN) valExpect <=  valExpect__D_IN;
 	if (wci_cEdge__EN) wci_cEdge <=  wci_cEdge__D_IN;
 	if (wci_cState__EN)
 	  wci_cState <=  wci_cState__D_IN;
@@ -4139,7 +4139,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awa;
 defparam ram1.DATA_WIDTH = `dwa;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -4539,7 +4539,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awa;
 defparam ram1.DATA_WIDTH = `dwa;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -4943,7 +4943,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awa;
 defparam ram1.DATA_WIDTH = `dwc;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -5347,7 +5347,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awa;
 defparam ram1.DATA_WIDTH = `dwd;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -5752,7 +5752,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awc;
 defparam ram1.DATA_WIDTH = `dwc;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -6154,7 +6154,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awf;
 defparam ram1.DATA_WIDTH = `dwf;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -6559,7 +6559,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `awx;
 defparam ram1.DATA_WIDTH = `dwx;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -6661,7 +6661,7 @@ always @(posedge clk )
 	else
 	if(clr)		cnt <=  {3'b000};
 	else
-	if( re & !we)	cnt <=  cnt + { 3'b1111};
+	if( re & !we)	cnt <=  cnt + { 3'b111};
 	else
 	if(!re &  we)	cnt <=  cnt + { {2'b00}, 1'b1};
  
@@ -6690,7 +6690,7 @@ always @(posedge clk )
 
 endmodule
 
-module dual_port_ram #(
+module dual_port_ram_1 #(
     parameter ADDR_WIDTH = 1,
     parameter DATA_WIDTH = 1
 ) (input clk, we1, we2,

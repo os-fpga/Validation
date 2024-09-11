@@ -210,21 +210,21 @@ output slv_brst_mscd;
 wire slv_rf_req; 
 wire ad_d1_we; 
 wire reg_rdy_wait; 
-reg [`DMA_HADDR_WIDTH-1:0] slv_ad_d1o; 
-reg [`DMA_HSIZE_WIDTH-1:0] slv_sz_d1o; 
-reg [`DMA_HPROT_WIDTH-1:0] slv_pt_d1o; 
-reg slv_wr_d1o; 
-reg hreadyout_reg; 
-reg [`DMA_HDATA_WIDTH-1:0] hrdata_reg; 
+reg [`DMA_HADDR_WIDTH-1:0] slv_ad_d1o=0; 
+reg [`DMA_HSIZE_WIDTH-1:0] slv_sz_d1o=0; 
+reg [`DMA_HPROT_WIDTH-1:0] slv_pt_d1o=0; 
+reg slv_wr_d1o=0; 
+reg hreadyout_reg=0; 
+reg [`DMA_HDATA_WIDTH-1:0] hrdata_reg=0; 
 
 `ifdef DMA_HAVE_AHB1 
 `ifdef DMA_HAVE_BRIDGE 
 wire brst_cmd,brst_ms_cmd; 
 wire br_rdy0_p; 
-reg slv_br_req; 
-reg hreadyout_br; 
-reg [`DMA_HRESP_WIDTH-1:0] hresp_br; 
-reg [`DMA_HDATA_WIDTH-1:0] hrdata_br; 
+reg slv_br_req=0; 
+reg hreadyout_br=0; 
+reg [`DMA_HRESP_WIDTH-1:0] hresp_br=0; 
+reg [`DMA_HDATA_WIDTH-1:0] hrdata_br=0; 
 `endif 
 `endif 
 
@@ -384,7 +384,7 @@ parameter BR_IDLE = 3'b001,
 BR_CMD = 3'b010, 
 BR_MS_CMD = 3'b100; 
 
-reg [2:0] br_st, br_ns; 
+reg [2:0] br_st=0, br_ns=0; 
 
 assign brst_cmd = br_st[1]; 
 assign brst_ms_cmd = br_st[2]; 

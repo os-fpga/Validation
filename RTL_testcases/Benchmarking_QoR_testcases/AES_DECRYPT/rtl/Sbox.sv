@@ -81,7 +81,7 @@ endmodule
 // the tool to pack the LUT6 and MUXFX into the same slice.
 
 (* keep_hierarchy = "yes" *) module Sbox_table0(input [5:0] d, output [7:0] q);
-	logic [7:0] p0;
+	logic [7:0] p0=0;
  
 	always_comb
 		case (d)
@@ -155,7 +155,7 @@ endmodule
 endmodule
 
 (* keep_hierarchy = "yes" *) module Sbox_table1(input [5:0] d, output [7:0] q);
-	logic [7:0] p1;
+	logic [7:0] p1=0;
  
 	always_comb
 		case (d)
@@ -228,7 +228,7 @@ endmodule
 endmodule
 
 (* keep_hierarchy = "yes" *) module Sbox_table2(input [5:0] d, output [7:0] q);
-	logic [7:0] p2;
+	logic [7:0] p2=0;
  
 	always_comb
 		case (d)
@@ -301,7 +301,7 @@ endmodule
 endmodule
 
 (* keep_hierarchy = "yes" *) module Sbox_table3(input [5:0] d, output [7:0] q);
-	logic [7:0] p3;
+	logic [7:0] p3=0;
  
 	always_comb
 		case (d)

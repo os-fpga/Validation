@@ -781,11 +781,11 @@ reg [31:16] mux_bbs;
 `endif 
 `endif 
 
-reg [31:0] mux_ms; 
+reg [31:0] mux_ms=0; 
 
 
 reg [31:0] mux_gl; 
-reg [`DMA_HDATA_WIDTH-1:0] mux_ch; 
+reg [`DMA_HDATA_WIDTH-1:0] mux_ch=0; 
 
 reg [`DMA_HDATA_WIDTH-1:0] mux_c0l,mux_c0h; 
 
@@ -1044,24 +1044,25 @@ case(slv_ad[7:6])
 `endif 
 `endif 
 
-default: mux_ms = 32'bx; 
+default: mux_ms = 32'b0; 
 endcase 
 
 
 always @(slv_ad or into or int_tc or int_err or tc or 
 err or ch_en or ch_busy or csr or sync or int_abt or abt) 
 case(slv_ad[5:2]) 
-4'h0: mux_gl = {{{32-`DMA_MAX_CHNO}{1'b0}},into}; 
-4'h1: mux_gl = {{{32-`DMA_MAX_CHNO}{1'b0}},int_tc}; 
-4'h3: mux_gl = {{{16-`DMA_MAX_CHNO}{1'b0}},int_abt,{{16-`DMA_MAX_CHNO}{1'b0}},int_err}; 
-4'h5: mux_gl = {{{32-`DMA_MAX_CHNO}{1'b0}},tc}; 
-4'h6: mux_gl = {{{16-`DMA_MAX_CHNO}{1'b0}},abt, {{16-`DMA_MAX_CHNO}{1'b0}},err}; 
-4'h7: mux_gl = {24'b0,ch_en}; 
-4'h8: mux_gl = {24'b0,ch_busy}; 
-4'h9: mux_gl = {{{32-`DMA_CSR_WIDTH}{1'b0}},csr}; 
-4'ha: mux_gl = {{{32-`DMA_MAX_CHNO}{1'b0}},sync}; 
-default: mux_gl = 'hx; 
-endcase 
+    4'h0: mux_gl = {{24{1'b0}}, into}; // 32-8 = 24 bits
+    4'h1: mux_gl = {{24{1'b0}}, int_tc}; 
+    4'h3: mux_gl = {{8{1'b0}}, int_abt, {8{1'b0}}, int_err}; // 16-8 = 8 bits for both parts
+    4'h5: mux_gl = {{24{1'b0}}, tc}; 
+    4'h6: mux_gl = {{8{1'b0}}, abt, {8{1'b0}}, err}; 
+    4'h7: mux_gl = {24'b0, ch_en}; 
+    4'h8: mux_gl = {24'b0, ch_busy}; 
+    4'h9: mux_gl = {{24{1'b0}}, csr}; 
+    4'ha: mux_gl = {{24{1'b0}}, sync}; 
+    default: mux_gl = 'h0; 
+endcase
+
 
 
 `ifdef DMA_HAVE_AHB1 
@@ -1125,7 +1126,7 @@ case(slv_ad[4:2])
 3'h7: mux_dbs = c7dmabs; 
 `endif 
 
-default: mux_dbs = 'hx; 
+default: mux_dbs = 'h0; 
 endcase 
 
 
@@ -1191,7 +1192,7 @@ case(slv_ad[4:2])
 3'h7: mux_bbs = c7brbs; 
 `endif 
 
-default: mux_bbs = 'hx; 
+default: mux_bbs = 'h0; 
 endcase 
 `endif 
 `endif 
@@ -1266,7 +1267,7 @@ case(slv_ad[7:4])
 4'hf: mux_ch = mux_c7h; 
 `endif 
 
-default: mux_ch = 'hx; 
+default: mux_ch = 'h0; 
 endcase 
 
 
@@ -1290,7 +1291,7 @@ case(slv_ad[3:2])
 2'h0: mux_c0h = c0llp; 
 `endif 
 2'h1: mux_c0h = c0tsz; 
-default: mux_c0h = 'hx; 
+default: mux_c0h = 'h0; 
 endcase 
 
 `ifdef DMA_HAVE_CH1 
@@ -1313,7 +1314,7 @@ case(slv_ad[3:2])
 2'h0: mux_c1h = c1llp; 
 `endif 
 2'h1: mux_c1h = c1tsz; 
-default: mux_c1h = 'hx; 
+default: mux_c1h = 'h0; 
 endcase 
 `endif 
 
@@ -1337,7 +1338,7 @@ case(slv_ad[3:2])
 2'h0: mux_c2h = c2llp; 
 `endif 
 2'h1: mux_c2h = c2tsz; 
-default: mux_c2h = 'hx; 
+default: mux_c2h = 'h0; 
 endcase 
 `endif 
 
@@ -1361,7 +1362,7 @@ case(slv_ad[3:2])
 2'h0: mux_c3h = c3llp; 
 `endif 
 2'h1: mux_c3h = c3tsz; 
-default: mux_c3h = 'hx; 
+default: mux_c3h = 'h0; 
 endcase 
 `endif 
 
@@ -1385,7 +1386,7 @@ case(slv_ad[3:2])
 2'h0: mux_c4h = c4llp; 
 `endif 
 2'h1: mux_c4h = c4tsz; 
-default: mux_c4h = 'hx; 
+default: mux_c4h = 'h0; 
 endcase 
 `endif 
 
@@ -1409,7 +1410,7 @@ case(slv_ad[3:2])
 2'h0: mux_c5h = c5llp; 
 `endif 
 2'h1: mux_c5h = c5tsz; 
-default: mux_c5h = 'hx; 
+default: mux_c5h = 'h0; 
 endcase 
 `endif 
 
@@ -1433,7 +1434,7 @@ case(slv_ad[3:2])
 2'h0: mux_c6h = c6llp; 
 `endif 
 2'h1: mux_c6h = c6tsz; 
-default: mux_c6h = 'hx; 
+default: mux_c6h = 'h0; 
 endcase 
 `endif 
 
@@ -1457,7 +1458,7 @@ case(slv_ad[3:2])
 2'h0: mux_c7h = c7llp; 
 `endif 
 2'h1: mux_c7h = c7tsz; 
-default: mux_c7h = 'hx; 
+default: mux_c7h = 'h0; 
 endcase 
 `endif 
 
