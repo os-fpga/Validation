@@ -5,7 +5,7 @@ module wrapper_top (input	[7:0]	ct,
 	input	rkey_vld,
 	output	next_rkey,
 	
-	output	reg [0:63]	pt,
+	output	reg [0:63]	pt=0,
 	output	pt_vld,
 	
 	input	[0:1]	klen_sel,	
@@ -13,9 +13,9 @@ module wrapper_top (input	[7:0]	ct,
 	input	clk,
 	input	rst);
 
-reg [127:0] ct_data;
+reg [127:0] ct_data=0;
 wire [0:127] pt_data;
-reg count;
+reg count=0;
 wire  [0:63] pt_wire;
 
 always @(posedge clk) begin

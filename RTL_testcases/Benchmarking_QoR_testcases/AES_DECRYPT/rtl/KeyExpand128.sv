@@ -66,13 +66,13 @@ module KeyExpand128(
 	);
 	
 	// Registers holding the current roundkey
-	logic	[0:31]	w0;
-	logic	[0:31]	w1;
-	logic	[0:31]	w2;
-	logic	[0:31]	w3;
+	logic	[0:31]	w0=0;
+	logic	[0:31]	w1=0;
+	logic	[0:31]	w2=0;
+	logic	[0:31]	w3=0;
 	
-	logic	[0:3]	keyexp_state;	// Key expansion state machine.
-	logic	[0:7]	Rcon;			// Round constant. See FIPS-197 section 5.3.
+	logic	[0:3]	keyexp_state=0;	// Key expansion state machine.
+	logic	[0:7]	Rcon=0;			// Round constant. See FIPS-197 section 5.3.
 	
 	wire	[0:31]	subword_out;
 	wire	[0:31]	rotword_out;

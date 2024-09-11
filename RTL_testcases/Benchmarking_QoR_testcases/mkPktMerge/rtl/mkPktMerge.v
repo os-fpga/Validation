@@ -567,7 +567,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `aw;
 defparam ram1.DATA_WIDTH = `dw;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -978,7 +978,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `aw;
 defparam ram1.DATA_WIDTH = `dw;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -1390,7 +1390,7 @@ reg			full_n_r, empty_n_r;
 
 defparam ram1.ADDR_WIDTH = `aw;
 defparam ram1.DATA_WIDTH = `dw;
-dual_port_ram   ram1(
+dual_port_ram_1   ram1(
 	.clk(		clk		),
 	.addr1(		rp		),
 	.addr2(		wp		),
@@ -1535,7 +1535,7 @@ endmodule
 
  
 
-module dual_port_ram #(
+module dual_port_ram_1 #(
     parameter ADDR_WIDTH = 1,
     parameter DATA_WIDTH = 1
 ) (input clk, we1, we2,

@@ -74,10 +74,15 @@ module KschBuffer(
 	
 	(* RAM_STYLE="distributed" *) reg [127:0] lutram [15:0];
 	
-	reg	[3:0]	rd_addr_cnt;
-	reg	[3:0]	wr_addr_cnt;
-	reg			first_rkey_vld_in;
-	reg	[3:0]	nr;
+	integer i;
+	initial begin
+		for (i=0; i<=15 ; i=i+1)
+			lutram[i] = 0;
+	end
+	reg	[3:0]	rd_addr_cnt=0;
+	reg	[3:0]	wr_addr_cnt=0;
+	reg			first_rkey_vld_in=0;
+	reg	[3:0]	nr=0;
 	
 	// Do not change to always_ff. This is the coding template for inferring RAM by
 	// Vivado synthesizer.

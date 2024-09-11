@@ -7,7 +7,7 @@ module InvAddRoundKey(
 	input	S,
 	output	[0:127]	dout);
 	
-	logic	[0:127]	tmp;
+	logic	[0:127]	tmp=0;
 	
 	always_comb
 		tmp <= S? din1 : din0;
