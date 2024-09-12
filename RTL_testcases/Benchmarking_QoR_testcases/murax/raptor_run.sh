@@ -207,6 +207,11 @@ parse_cga exit 1; }
         echo ""
     fi
     if [ "$post_synth_sim" == true ]; then 
+        echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
+        echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol0.bin $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl 
+        echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol1.bin $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
+        echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol2.bin $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
+        echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol3.bin $main_path/results_dir/$design/run_1/synth_1_1/simulate_gate/" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
@@ -225,6 +230,11 @@ parse_cga exit 1; }
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
+            echo "file mkdir $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl
+            echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol0.bin $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl 
+            echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol1.bin $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl 
+            echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol2.bin $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl 
+            echo "file copy -force $main_path/rtl/Murax.v_toplevel_system_ram_ram_symbol3.bin $main_path/results_dir/$design/run_1/synth_1_1/impl_1_1_1/simulate_pnr/" >> raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else
