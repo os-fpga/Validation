@@ -38,6 +38,8 @@ foreach dirName [glob -nocomplain -type {d} GJC* ] {
 }
 
 foreach dirName [glob -nocomplain -type {d} GJC* ] {
+    exec sh -c "rm -rf $dirName/results_dir"
+    file mkdir $dirName/results_dir
     cd $dirName/results_dir
     if [file exist "../disabled.txt"] {
         log "Skiping testcase: $dirName"
