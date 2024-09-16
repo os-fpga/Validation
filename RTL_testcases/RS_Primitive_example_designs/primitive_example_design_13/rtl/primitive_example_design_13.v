@@ -13,6 +13,7 @@ module primitive_example_design_13 (
 reg [3:0] data_in;
 reg data_out_flop;
 reg output_enable, pll_lock,out_tri_en,channel_sync_out_wire;
+wire out_tri_en_ofab;
 
 O_SERDES #(
   .DATA_RATE("SDR"), // Single or double data rate (SDR/DDR)
@@ -36,9 +37,13 @@ O_BUF inst_o_buf (
   .O(CHANNEL_BOND_SYNC_OUT)
 );
 assign data_in = i1+i2; 
+O_FAB o_fab_inst (
+  .I(out_tri_en),
+  .O(out_tri_en_ofab)
+);
 O_BUFT inst_o_buft (
       .I(data_out_flop), // Data input
-      .T(out_tri_en), // Tri-state output
+      .T(out_tri_en_ofab), // Tri-state output
       .O(data_out) // Data output (connect to top-level port)
   );
 always @ (posedge clk_in or negedge reset)
