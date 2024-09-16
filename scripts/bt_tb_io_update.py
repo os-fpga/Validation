@@ -725,6 +725,7 @@ def main():
         remove_iopadmap(file_path)
         # remove_genblk1a0_occurrences(file_path)
         # sort_lines(file_path)
+        replacement(file_path,"\$f2g_tx_out_","")
         adjust_ios(file_path)
         instance_update(file_path)
         copy_tasks(file_path,"../sim/bitstream_tb/bitstream_testbench.v","----- Can be changed by the user for his/her need -------")
@@ -735,6 +736,7 @@ def main():
         replace_auto_in_file(file_path)
     elif file_path.endswith("fabric_"+design_name+"_top_formal_verification.v"):
         remove_iopadmap(file_path)
+        replacement(file_path,"\$f2g_tx_out_","")
         if design_name == "multi_clocks":
             replace_output(file_path)
         # remove_genblk1a0_occurrences(file_path)
