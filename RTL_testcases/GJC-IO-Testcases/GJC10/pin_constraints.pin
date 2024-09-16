@@ -4,11 +4,11 @@ set_pin_loc reset HP_1_5_2N
 
 set_pin_loc push_button HP_1_0_0P
 
-set_pin_loc led0 HP_1_1_0N
+set_pin_loc led0 HP_1_2_1P
 
-set_pin_loc led1 HP_1_2_1P
+set_pin_loc led1 HP_1_4_2P
 
-set_pin_loc led2 HP_1_3_1N
+set_pin_loc led2 HP_1_6_3P
 
-set_pin_loc led3 HP_1_4_2P
+set_pin_loc led3 HP_1_8_4P
 
