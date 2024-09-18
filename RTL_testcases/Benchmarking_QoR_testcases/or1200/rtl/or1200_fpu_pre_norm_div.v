@@ -65,7 +65,7 @@ module or1200_fpu_pre_norm_div
    input clk_i;
    input [FP_WIDTH-1:0] opa_i;
    input [FP_WIDTH-1:0] opb_i;
-   output reg [EXP_WIDTH+1:0] exp_10_o;
+   output reg [EXP_WIDTH+1:0] exp_10_o=0;
    output [2*(FRAC_WIDTH+2)-1:0] dvdnd_50_o;
    output [FRAC_WIDTH+3:0] 	 dvsor_27_o;
 
@@ -76,12 +76,12 @@ module or1200_fpu_pre_norm_div
    wire [FRAC_WIDTH-1:0] 	 s_fractb;
    wire [2*(FRAC_WIDTH+2)-1:0] 	 s_dvdnd_50_o;
    wire [FRAC_WIDTH+3:0] 	 s_dvsor_27_o;
-   reg [5:0] 			 s_dvd_zeros;
-   reg [5:0] 			 s_div_zeros;
-   reg [EXP_WIDTH+1:0] 		 s_exp_10_o;
+   reg [5:0] 			 s_dvd_zeros=0;
+   reg [5:0] 			 s_div_zeros=0;
+   reg [EXP_WIDTH+1:0] 		 s_exp_10_o=0;
    
-   reg [EXP_WIDTH+1:0] 		 s_expa_in;
-   reg [EXP_WIDTH+1:0] 		 s_expb_in;
+   reg [EXP_WIDTH+1:0] 		 s_expa_in=0;
+   reg [EXP_WIDTH+1:0] 		 s_expb_in=0;
    wire 			 s_opa_dn, s_opb_dn;
    
    wire [FRAC_WIDTH:0] 		 s_fracta_24;

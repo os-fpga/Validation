@@ -104,11 +104,11 @@ output				except_ibuserr;
 //
 wire			save_insn;
 wire			if_bypass;
-reg			if_bypass_reg;
-reg	[31:0]		insn_saved;
-reg	[31:0]		addr_saved;
-reg	[2:0]		err_saved;
-reg			saved;
+reg			if_bypass_reg=0;
+reg	[31:0]		insn_saved=0;
+reg	[31:0]		addr_saved=0;
+reg	[2:0]		err_saved=0;
+reg			saved=0;
 
 assign save_insn = (icpu_ack_i | icpu_err_i) & if_freeze & !saved;
 assign saving_if_insn = !if_flushpipe & save_insn;

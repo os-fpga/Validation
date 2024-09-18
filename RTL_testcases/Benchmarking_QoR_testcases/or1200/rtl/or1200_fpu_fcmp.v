@@ -47,7 +47,7 @@ output		inf, zero;
 // Local Wire
 //
 
-reg		altb, blta, aeqb;
+reg		altb=0, blta=0, aeqb=0;
 
 wire		signa, signb;
 wire	[7:0]	expa, expb;

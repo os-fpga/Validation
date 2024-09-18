@@ -116,15 +116,15 @@ input	[dw-1:0]		di_w;
 //
 // Internal wires and regs
 //
-reg	[aw-1:0]		intaddr_a;
-reg	[aw-1:0]		intaddr_b;
+reg	[aw-1:0]		intaddr_a=0;
+reg	[aw-1:0]		intaddr_b=0;
 `ifdef OR1200_RFRAM_16REG
-reg	[16*dw-1:0]		mem;
+reg	[16*dw-1:0]		mem=0;
 `else
-reg	[32*dw-1:0]		mem;
+reg	[32*dw-1:0]		mem=0;
 `endif
-reg	[dw-1:0]		do_a;
-reg	[dw-1:0]		do_b;
+reg	[dw-1:0]		do_a=0;
+reg	[dw-1:0]		do_b=0;
 
 `ifdef verilator
    // Function to access GPRs (for use by Verilator). No need to hide this one

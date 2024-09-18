@@ -82,18 +82,18 @@ module or1200_fpu_div
    parameter t_state_waiting = 1'b0,
 	       t_state_busy = 1'b1;
    
-   reg [FRAC_WIDTH+3:0] 	s_qutnt_o;
-   reg [FRAC_WIDTH+3:0] 	s_rmndr_o;   
-   reg [2*(FRAC_WIDTH+2)-1:0] 	s_dvdnd_i;   
-   reg [FRAC_WIDTH+3:0] 	s_dvsor_i;
-   reg 				s_sign_dvd_i, s_sign_div_i;
+   reg [FRAC_WIDTH+3:0] 	s_qutnt_o=0;
+   reg [FRAC_WIDTH+3:0] 	s_rmndr_o=0;   
+   reg [2*(FRAC_WIDTH+2)-1:0] 	s_dvdnd_i=0;   
+   reg [FRAC_WIDTH+3:0] 	s_dvsor_i=0;
+   reg 				s_sign_dvd_i, s_sign_div_i=0;
    wire 			s_sign_o;
    wire 			s_div_zero_o;
-   reg 				s_start_i;
-   reg 				s_ready_o;
-   reg 				s_state;
-   reg [4:0] 			s_count;
-   reg [FRAC_WIDTH+3:0] 	s_dvd;
+   reg 				s_start_i=0;
+   reg 				s_ready_o=0;
+   reg 				s_state=0;
+   reg [4:0] 			s_count=0;
+   reg [FRAC_WIDTH+3:0] 	s_dvd=0;
 
    // Input Register
    always @(posedge clk_i)

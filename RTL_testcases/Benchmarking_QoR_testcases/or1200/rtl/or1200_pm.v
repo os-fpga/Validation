@@ -111,10 +111,10 @@ output		pm_lvolt;	// Lower operating voltage
 //
 // Power Management Register bits
 //
-reg	[3:0]	sdf;	// Slow-down factor
-reg		dme;	// Doze Mode Enable
-reg		sme;	// Sleep Mode Enable
-reg		dcge;	// Dynamic Clock Gating Enable
+reg	[3:0]	sdf=0;	// Slow-down factor
+reg		dme=0;	// Doze Mode Enable
+reg		sme=0;	// Sleep Mode Enable
+reg		dcge=0;	// Dynamic Clock Gating Enable
 
 //
 // Internal wires

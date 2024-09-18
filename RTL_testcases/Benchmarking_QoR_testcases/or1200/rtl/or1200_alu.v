@@ -85,13 +85,13 @@ input         flag;
 //
 // Internal wires and regs
 //
-reg	[width-1:0]		result;
-reg	[width-1:0]		shifted_rotated;
-reg	[width-1:0]		result_cust5;
-reg				flagforw;
-reg				flagcomp;
-reg				flag_we;
-reg				cy_we;
+reg	[width-1:0]		result=0;
+reg	[width-1:0]		shifted_rotated=0;
+reg	[width-1:0]		result_cust5=0;
+reg				flagforw=0;
+reg				flagcomp=0;
+reg				flag_we=0;
+reg				cy_we=0;
 wire	[width-1:0]		comp_a;
 wire	[width-1:0]		comp_b;
 `ifdef OR1200_IMPL_ALU_COMP1
@@ -108,7 +108,7 @@ wire				cy_sum;
 `ifdef OR1200_IMPL_SUB
 wire				cy_sub;
 `endif
-reg				cyforw;
+reg				cyforw=0;
 
 //
 // Combinatorial logic

@@ -145,8 +145,8 @@ wire				fault;
 wire				miss;
 `ifdef OR1200_NO_DMMU
 `else
-reg				dtlb_done;
-reg	[31:`OR1200_DMMU_PS]	dcpu_vpn_r;
+reg				dtlb_done=0;
+reg	[31:`OR1200_DMMU_PS]	dcpu_vpn_r=0;
 `endif
 
 //

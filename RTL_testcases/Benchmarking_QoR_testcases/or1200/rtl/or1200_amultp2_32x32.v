@@ -778,7 +778,7 @@ input  DIN;
 input  RST;
 input  CLK;
 output DOUT;
-   reg DOUT_reg;
+   reg DOUT_reg=0;
    always @ ( `OR1200_RST_EVENT RST or posedge CLK ) begin
       if (RST == `OR1200_RST_VALUE)
         DOUT_reg <= 1'b0;
@@ -2351,7 +2351,7 @@ output [0:63] RESULT;
    wire [0:63] INT_SUM;
    wire LOGIC_ZERO;
    wire [0:63] ARESULT;
-   reg [0:63] RESULT;
+   reg [0:63] RESULT=0;
    assign LOGIC_ZERO = 0;
    BOOTHCODER_33_32 B (.OPA(MULTIPLICAND[0:32]) , .OPB(MULTIPLIER[0:31]) , .SUMMAND(PPBIT[0:575]) );
    WALLACE_33_32 W (.SUMMAND(PPBIT[0:575]) , .RST(RST), .CLK (CLK) , .CARRY(INT_CARRY[1:63]) , .SUM(INT_SUM[0:63]) );

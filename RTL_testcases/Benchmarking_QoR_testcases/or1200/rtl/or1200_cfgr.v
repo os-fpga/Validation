@@ -65,7 +65,7 @@ module or1200_cfgr(
    //
    // Internal wires & registers
    //
-   reg [31:0] 		spr_dat_o;	// SPR Read Data
+   reg [31:0] 		spr_dat_o=0;	// SPR Read Data
 
 `ifdef OR1200_CFGR_IMPLEMENTED
 

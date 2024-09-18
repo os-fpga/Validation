@@ -69,8 +69,8 @@ module or1200_fpu_addsub(
    input [FRAC_WIDTH+4:0] fractb_i;
    input 		  signa_i;
    input 		  signb_i;
-   output reg [FRAC_WIDTH+4:0] fract_o;
-   output reg 		       sign_o;
+   output reg [FRAC_WIDTH+4:0] fract_o=0;
+   output reg 		       sign_o=0;
    
    wire [FRAC_WIDTH+4:0]       s_fracta_i;
    wire [FRAC_WIDTH+4:0]       s_fractb_i;

@@ -93,10 +93,10 @@ output	[width-1:0]		memdata;
 //
 // Internal regs and wires
 //
-reg	[7:0]			memdata_hh;
-reg	[7:0]			memdata_hl;
-reg	[7:0]			memdata_lh;
-reg	[7:0]			memdata_ll;
+reg	[7:0]			memdata_hh=0;
+reg	[7:0]			memdata_hl=0;
+reg	[7:0]			memdata_lh=0;
+reg	[7:0]			memdata_ll=0;
 
 assign memdata = {memdata_hh, memdata_hl, memdata_lh, memdata_ll};
 

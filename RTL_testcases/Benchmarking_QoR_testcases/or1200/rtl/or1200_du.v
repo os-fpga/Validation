@@ -127,8 +127,8 @@ input	[aw-1:0]	dbg_adr_i;	// External Address Input
 input	[dw-1:0]	dbg_dat_i;	// External Data Input
 output	[dw-1:0]	dbg_dat_o;	// External Data Output
 output			dbg_ack_o;	// External Data Acknowledge (not WB compatible)
-reg	[dw-1:0]	dbg_dat_o;	// External Data Output
-reg			dbg_ack_o;	// External Data Acknowledge (not WB compatible)
+reg	[dw-1:0]	dbg_dat_o=0;	// External Data Output
+reg			dbg_ack_o=0;	// External Data Acknowledge (not WB compatible)
 
 
 //
@@ -137,7 +137,7 @@ reg			dbg_ack_o;	// External Data Acknowledge (not WB compatible)
 `ifdef OR1200_DU_STATUS_UNIMPLEMENTED
 assign dbg_lss_o = 4'b0000;
 
-reg	[1:0]			dbg_is_o;
+reg	[1:0]			dbg_is_o=0;
 //
 // Show insn activity (temp, must be removed)
 //
@@ -164,7 +164,7 @@ assign du_dat_o = dbg_dat_i;
 assign du_read = dbg_stb_i && !dbg_we_i;
 assign du_write = dbg_stb_i && dbg_we_i;
 
-reg				dbg_ack;
+reg				dbg_ack=0;
 //
 // Generate acknowledge -- just delay stb signal
 //
@@ -191,7 +191,7 @@ always @(posedge clk)
 // Debug Mode Register 1
 //
 `ifdef OR1200_DU_DMR1
-reg	[24:0]			dmr1;		// DMR1 implemented
+reg	[24:0]			dmr1=0;		// DMR1 implemented
 `else
 wire	[24:0]			dmr1;		// DMR1 not implemented
 `endif
@@ -201,7 +201,7 @@ assign du_dmr1 = dmr1;
 // Debug Mode Register 2
 //
 `ifdef OR1200_DU_DMR2
-reg	[23:0]			dmr2;		// DMR2 implemented
+reg	[23:0]			dmr2=0;		// DMR2 implemented
 `else
 wire	[23:0]			dmr2;		// DMR2 not implemented
 `endif
@@ -210,7 +210,7 @@ wire	[23:0]			dmr2;		// DMR2 not implemented
 // Debug Stop Register
 //
 `ifdef OR1200_DU_DSR
-reg	[`OR1200_DU_DSR_WIDTH-1:0]	dsr;		// DSR implemented
+reg	[`OR1200_DU_DSR_WIDTH-1:0]	dsr=0;		// DSR implemented
 `else
 wire	[`OR1200_DU_DSR_WIDTH-1:0]	dsr;		// DSR not implemented
 `endif
@@ -219,7 +219,7 @@ wire	[`OR1200_DU_DSR_WIDTH-1:0]	dsr;		// DSR not implemented
 // Debug Reason Register
 //
 `ifdef OR1200_DU_DRR
-reg	[13:0]			drr;		// DRR implemented
+reg	[13:0]			drr=0;		// DRR implemented
 `else
 wire	[13:0]			drr;		// DRR not implemented
 `endif
@@ -228,7 +228,7 @@ wire	[13:0]			drr;		// DRR not implemented
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR0
-reg	[31:0]			dvr0;
+reg	[31:0]			dvr0=0;
 `else
 wire	[31:0]			dvr0;
 `endif
@@ -237,7 +237,7 @@ wire	[31:0]			dvr0;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR1
-reg	[31:0]			dvr1;
+reg	[31:0]			dvr1=0;
 `else
 wire	[31:0]			dvr1;
 `endif
@@ -246,7 +246,7 @@ wire	[31:0]			dvr1;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR2
-reg	[31:0]			dvr2;
+reg	[31:0]			dvr2=0;
 `else
 wire	[31:0]			dvr2;
 `endif
@@ -255,7 +255,7 @@ wire	[31:0]			dvr2;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR3
-reg	[31:0]			dvr3;
+reg	[31:0]			dvr3=0;
 `else
 wire	[31:0]			dvr3;
 `endif
@@ -264,7 +264,7 @@ wire	[31:0]			dvr3;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR4
-reg	[31:0]			dvr4;
+reg	[31:0]			dvr4=0;
 `else
 wire	[31:0]			dvr4;
 `endif
@@ -273,7 +273,7 @@ wire	[31:0]			dvr4;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR5
-reg	[31:0]			dvr5;
+reg	[31:0]			dvr5=0;
 `else
 wire	[31:0]			dvr5;
 `endif
@@ -282,7 +282,7 @@ wire	[31:0]			dvr5;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR6
-reg	[31:0]			dvr6;
+reg	[31:0]			dvr6=0;
 `else
 wire	[31:0]			dvr6;
 `endif
@@ -291,7 +291,7 @@ wire	[31:0]			dvr6;
 // Debug Value Register N
 //
 `ifdef OR1200_DU_DVR7
-reg	[31:0]			dvr7;
+reg	[31:0]			dvr7=0;
 `else
 wire	[31:0]			dvr7;
 `endif
@@ -300,7 +300,7 @@ wire	[31:0]			dvr7;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR0
-reg	[7:0]			dcr0;
+reg	[7:0]			dcr0=0;
 `else
 wire	[7:0]			dcr0;
 `endif
@@ -309,7 +309,7 @@ wire	[7:0]			dcr0;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR1
-reg	[7:0]			dcr1;
+reg	[7:0]			dcr1=0;
 `else
 wire	[7:0]			dcr1;
 `endif
@@ -318,7 +318,7 @@ wire	[7:0]			dcr1;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR2
-reg	[7:0]			dcr2;
+reg	[7:0]			dcr2=0;
 `else
 wire	[7:0]			dcr2;
 `endif
@@ -327,7 +327,7 @@ wire	[7:0]			dcr2;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR3
-reg	[7:0]			dcr3;
+reg	[7:0]			dcr3=0;
 `else
 wire	[7:0]			dcr3;
 `endif
@@ -336,7 +336,7 @@ wire	[7:0]			dcr3;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR4
-reg	[7:0]			dcr4;
+reg	[7:0]			dcr4=0;
 `else
 wire	[7:0]			dcr4;
 `endif
@@ -345,7 +345,7 @@ wire	[7:0]			dcr4;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR5
-reg	[7:0]			dcr5;
+reg	[7:0]			dcr5=0;
 `else
 wire	[7:0]			dcr5;
 `endif
@@ -354,7 +354,7 @@ wire	[7:0]			dcr5;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR6
-reg	[7:0]			dcr6;
+reg	[7:0]			dcr6=0;
 `else
 wire	[7:0]			dcr6;
 `endif
@@ -363,7 +363,7 @@ wire	[7:0]			dcr6;
 // Debug Control Register N
 //
 `ifdef OR1200_DU_DCR7
-reg	[7:0]			dcr7;
+reg	[7:0]			dcr7=0;
 `else
 wire	[7:0]			dcr7;
 `endif
@@ -372,7 +372,7 @@ wire	[7:0]			dcr7;
 // Debug Watchpoint Counter Register 0
 //
 `ifdef OR1200_DU_DWCR0
-reg	[31:0]			dwcr0;
+reg	[31:0]			dwcr0=0;
 `else
 wire	[31:0]			dwcr0;
 `endif
@@ -381,7 +381,7 @@ wire	[31:0]			dwcr0;
 // Debug Watchpoint Counter Register 1
 //
 `ifdef OR1200_DU_DWCR1
-reg	[31:0]			dwcr1;
+reg	[31:0]			dwcr1=0;
 `else
 wire	[31:0]			dwcr1;
 `endif
@@ -411,48 +411,48 @@ wire				dcr0_sel,
 				dcr7_sel; 	// DCR selects
 wire				dwcr0_sel,
 				dwcr1_sel; 	// DWCR selects
-reg				dbg_bp_r;
+reg				dbg_bp_r=0;
 `ifdef OR1200_DU_HWBKPTS
-reg	[31:0]			match_cond0_ct;
-reg	[31:0]			match_cond1_ct;
-reg	[31:0]			match_cond2_ct;
-reg	[31:0]			match_cond3_ct;
-reg	[31:0]			match_cond4_ct;
-reg	[31:0]			match_cond5_ct;
-reg	[31:0]			match_cond6_ct;
-reg	[31:0]			match_cond7_ct;
-reg				match_cond0_stb;
-reg				match_cond1_stb;
-reg				match_cond2_stb;
-reg				match_cond3_stb;
-reg				match_cond4_stb;
-reg				match_cond5_stb;
-reg				match_cond6_stb;
-reg				match_cond7_stb;
-reg				match0;
-reg				match1;
-reg				match2;
-reg				match3;
-reg				match4;
-reg				match5;
-reg				match6;
-reg				match7;
-reg				wpcntr0_match;
-reg				wpcntr1_match;
-reg				incr_wpcntr0;
-reg				incr_wpcntr1;
-reg	[10:0]			wp;
+reg	[31:0]			match_cond0_ct=0;
+reg	[31:0]			match_cond1_ct=0;
+reg	[31:0]			match_cond2_ct=0;
+reg	[31:0]			match_cond3_ct=0;
+reg	[31:0]			match_cond4_ct=0;
+reg	[31:0]			match_cond5_ct=0;
+reg	[31:0]			match_cond6_ct=0;
+reg	[31:0]			match_cond7_ct=0;
+reg				match_cond0_stb=0;
+reg				match_cond1_stb=0;
+reg				match_cond2_stb=0;
+reg				match_cond3_stb=0;
+reg				match_cond4_stb=0;
+reg				match_cond5_stb=0;
+reg				match_cond6_stb=0;
+reg				match_cond7_stb=0;
+reg				match0=0;
+reg				match1=0;
+reg				match2=0;
+reg				match3=0;
+reg				match4=0;
+reg				match5=0;
+reg				match6=0;
+reg				match7=0;
+reg				wpcntr0_match=0;
+reg				wpcntr1_match=0;
+reg				incr_wpcntr0=0;
+reg				incr_wpcntr1=0;
+reg	[10:0]			wp=0;
 `endif
 wire				du_hwbkpt;
-reg				du_hwbkpt_hold;
+reg				du_hwbkpt_hold=0;
 `ifdef OR1200_DU_READREGS
-reg	[31:0]			spr_dat_o;
+reg	[31:0]			spr_dat_o=0;
 `endif
-reg	[13:0]			except_stop;	// Exceptions that stop because of DSR
+reg	[13:0]			except_stop=0;	// Exceptions that stop because of DSR
 `ifdef OR1200_DU_TB_IMPLEMENTED
 wire				tb_enw;
-reg	[7:0]			tb_wadr;
-reg [31:0]			tb_timstmp;
+reg	[7:0]			tb_wadr=0;
+reg [31:0]			tb_timstmp=0;
 `endif
 wire	[31:0]			tbia_dat_o;
 wire	[31:0]			tbim_dat_o;

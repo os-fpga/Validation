@@ -112,14 +112,14 @@ input				no_more_dslot;
 //
 // Internal wires and regs
 //
-reg	[31:2]			pcreg_default;
+reg	[31:2]			pcreg_default=0;
 wire	[31:0]			pcreg_boot;
-reg				pcreg_select;
-reg	[31:2]			pcreg;
-reg	[31:0]			pc;
+reg				pcreg_select=0;
+reg	[31:2]			pcreg=0;
+reg	[31:0]			pc=0;
 // Set in event of jump or taken branch   
-reg				ex_branch_taken;
-reg				genpc_refetch_r;
+reg				ex_branch_taken=0;
+reg				genpc_refetch_r=0;
 
    //
    // Address of insn to be fecthed

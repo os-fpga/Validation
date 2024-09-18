@@ -84,7 +84,7 @@ input	[`OR1200_PIC_INTS-1:0]	pic_int;// Interrupt inputs
 // PIC Mask Register bits (or no register)
 //
 `ifdef OR1200_PIC_PICMR
-reg	[`OR1200_PIC_INTS-1:2]	picmr;	// PICMR bits
+reg	[`OR1200_PIC_INTS-1:2]	picmr=0;	// PICMR bits
 `else
 wire	[`OR1200_PIC_INTS-1:2]	picmr;	// No PICMR register
 `endif
@@ -93,7 +93,7 @@ wire	[`OR1200_PIC_INTS-1:2]	picmr;	// No PICMR register
 // PIC Status Register bits (or no register)
 //
 `ifdef OR1200_PIC_PICSR
-reg	[`OR1200_PIC_INTS-1:0]	picsr;	// PICSR bits
+reg	[`OR1200_PIC_INTS-1:0]	picsr=0;	// PICSR bits
 `else
 wire	[`OR1200_PIC_INTS-1:0]	picsr;	// No PICSR register
 `endif
@@ -104,7 +104,7 @@ wire	[`OR1200_PIC_INTS-1:0]	picsr;	// No PICSR register
 wire		picmr_sel;	// PICMR select
 wire		picsr_sel;	// PICSR select
 wire	[`OR1200_PIC_INTS-1:0] um_ints;// Unmasked interrupts
-reg	[31:0] 	spr_dat_o;	// SPR data out
+reg	[31:0] 	spr_dat_o=0;	// SPR data out
 
 //
 // PIC registers address decoder

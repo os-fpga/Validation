@@ -185,7 +185,7 @@ wire				dcfsm_biu_read;
 wire				dcfsm_biu_write;
 wire                            dcfsm_dcram_di_sel;
 wire                            dcfsm_biu_do_sel;   
-reg				tagcomp_miss;
+reg				tagcomp_miss=0;
 wire	[`OR1200_DCINDXH:`OR1200_DCLS]	dctag_addr;
 wire				dctag_en;
 wire				dctag_v;

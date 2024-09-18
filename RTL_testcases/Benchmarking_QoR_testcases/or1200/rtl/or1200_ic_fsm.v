@@ -100,13 +100,13 @@ output				tag_we;
 //
 // Internal wires and regs
 //
-reg	[31:0]			saved_addr_r;
-reg	[1:0]			state;
-reg [`OR1200_ICLS-1:0]    	cnt;
-reg				hitmiss_eval;
-reg				load;
-reg				cache_inhibit;
-reg 				last_eval_miss; // JPB
+reg	[31:0]			saved_addr_r=0;
+reg	[1:0]			state=0;
+reg [`OR1200_ICLS-1:0]    	cnt=0;
+reg				hitmiss_eval=0;
+reg				load=0;
+reg				cache_inhibit=0;
+reg 				last_eval_miss=0; // JPB
    
    //
    // Generate of ICRAM write enables

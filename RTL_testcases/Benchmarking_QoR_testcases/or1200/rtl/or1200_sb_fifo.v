@@ -86,13 +86,22 @@ output			empty_o;// FIFO empty
 //
 // Internal regs
 //
-reg	[dw-1:0]	mem [fl-1:0];
-reg	[dw-1:0]	dat_o;
-reg	[fw+1:0]	cntr;
-reg	[fw-1:0]	wr_pntr;
-reg	[fw-1:0]	rd_pntr;
-reg			empty_o;
-reg			full_o;
+reg [dw-1:0] mem [fl-1:0]; // RAM content
+integer i;
+
+initial begin
+   // Loop through all the memory locations and initialize them to 0
+   for (i = 0; i < fl; i = i + 1) begin
+      mem[i] = {dw{1'b0}}; // Initialize each element to 0
+   end
+end
+
+reg	[dw-1:0]	dat_o=0;
+reg	[fw+1:0]	cntr=0;
+reg	[fw-1:0]	wr_pntr=0;
+reg	[fw-1:0]	rd_pntr=0;
+reg			empty_o=0;
+reg			full_o=0;
 
 always @(posedge clk_i or `OR1200_RST_EVENT rst_i)
 	if (rst_i == `OR1200_RST_VALUE) begin
