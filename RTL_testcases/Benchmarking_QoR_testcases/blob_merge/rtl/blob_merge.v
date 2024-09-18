@@ -115,11 +115,11 @@ module blob_merge (clk,
     output [10:0] oAvgSizeXaxis; //average size of X axis for detected BLOBs
     output [10:0] oAvgSizeYaxis;  //average size of Y axis for detected BLOBs
     	
-    reg oReadFifoRequest;	//read request to input fifo
-    reg [75:0]oWriteBlobData; //data bus to output fifo [10b index, 11b bb y, 11b bb x, 11b com y, 11b com x, 11b len y, 11b len x]
-    reg oWriteRequest;		 //write request to output fifo
-    reg [10:0] oAvgSizeXaxis; //average size of X axis for detected BLOBs
-    reg [10:0] oAvgSizeYaxis;  //average size of Y axis for detected BLOBs
+    reg oReadFifoRequest=0;	//read request to input fifo
+    reg [75:0]oWriteBlobData=0; //data bus to output fifo [10b index, 11b bb y, 11b bb x, 11b com y, 11b com x, 11b len y, 11b len x]
+    reg oWriteRequest=0;		 //write request to output fifo
+    reg [10:0] oAvgSizeXaxis=0; //average size of X axis for detected BLOBs
+    reg [10:0] oAvgSizeYaxis=0;  //average size of Y axis for detected BLOBs
 
 /*
 parameter LSB_X=0, 	MSB_X=10; //start and end bit for x coordiante
@@ -136,77 +136,77 @@ parameter COM_DELAY_TIME=3'd5;
 */
 
 //internal registers
-reg [17:0] checkResult; //each flage represents one result of conditional checks
-reg [9:0]  run_length;  //temporary store the length of a detected run
-reg [10:0] run_start_x; //temporary store starting X position of run
-reg [10:0] run_start_y; //temporary store starting Y position of run
-reg [31:0] run_sum_x_positions; //temporary store weighted sum of x positions in run
-reg [31:0] run_sum_y_positions; //temporary store weighted sum of y postions in run
-reg [31:0] run_sum_values;      //temporary store sum of weights in run
-reg [3:0] write_result_pointer;
-reg [4:0] state;
-reg RunAdded;
-reg [14:0] ContainerAdjacentResult;
-reg [3:0] countDetectedBlobs;
-reg [10:0] avgSizeXaxis;
-reg [10:0] avgSizeYaxis;
-reg enableCOMcomputation; //flag enables sub-modules for center point computation with COM
-reg [3:0] delayCounterCOM; //counts up to COM_DELAY_TIME to allow sub-module finish computation
+reg [17:0] checkResult=0; //each flage represents one result of conditional checks
+reg [9:0]  run_length=0;  //temporary store the length of a detected run
+reg [10:0] run_start_x=0; //temporary store starting X position of run
+reg [10:0] run_start_y=0; //temporary store starting Y position of run
+reg [31:0] run_sum_x_positions=0; //temporary store weighted sum of x positions in run
+reg [31:0] run_sum_y_positions=0; //temporary store weighted sum of y postions in run
+reg [31:0] run_sum_values=0;      //temporary store sum of weights in run
+reg [3:0] write_result_pointer=0;
+reg [4:0] state=0;
+reg RunAdded=0;
+reg [14:0] ContainerAdjacentResult=0;
+reg [3:0] countDetectedBlobs=0;
+reg [10:0] avgSizeXaxis=0;
+reg [10:0] avgSizeYaxis=0;
+reg enableCOMcomputation=0; //flag enables sub-modules for center point computation with COM
+reg [3:0] delayCounterCOM=0; //counts up to COM_DELAY_TIME to allow sub-module finish computation
 
 //BLOB containers
 //CONTAINER 1
-reg[10:0] blob1minX, blob1minY, blob1maxX, blob1maxY; //bounding box attributes
-reg [10:0] blob1X_bb_center, blob1Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob1X_com_center, blob1Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_1; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_1; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_1;	 //number of pixels belonging to BLOB
-reg blob1empty;		//flag information if container is empty
+reg[10:0] blob1minX=0, blob1minY=0, blob1maxX=0, blob1maxY=0; //bounding box attributes
+reg [10:0] blob1X_bb_center=0, blob1Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob1X_com_center=0, blob1Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_1=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_1=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_1=0;	 //number of pixels belonging to BLOB
+reg blob1empty=0;		//flag information if container is empty
 
 //CONTAINER 2
-reg[10:0] blob2minX, blob2minY, blob2maxX, blob2maxY; //bounding box attributes
-reg [10:0] blob2X_bb_center, blob2Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob2X_com_center, blob2Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_2; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_2; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_2;	 //number of pixels belonging to BLOB
-reg blob2empty;		//flag information if container is empty
+reg[10:0] blob2minX=0, blob2minY=0, blob2maxX=0, blob2maxY=0; //bounding box attributes
+reg [10:0] blob2X_bb_center=0, blob2Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob2X_com_center=0, blob2Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_2=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_2=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_2=0;	 //number of pixels belonging to BLOB
+reg blob2empty=0;		//flag information if container is empty
 
 //CONTAINER 3
-reg[10:0] blob3minX, blob3minY, blob3maxX, blob3maxY; //bounding box attributes
-reg [10:0] blob3X_bb_center, blob3Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob3X_com_center, blob3Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_3; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_3; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_3;	 //number of pixels belonging to BLOB
-reg blob3empty;		//flag information if container is empty
+reg[10:0] blob3minX=0, blob3minY=0, blob3maxX=0, blob3maxY=0; //bounding box attributes
+reg [10:0] blob3X_bb_center=0, blob3Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob3X_com_center=0, blob3Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_3=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_3=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_3=0;	 //number of pixels belonging to BLOB
+reg blob3empty=0;		//flag information if container is empty
 
 //CONTAINER 4
-reg[10:0] blob4minX, blob4minY, blob4maxX, blob4maxY; //bounding box attributes
-reg [10:0] blob4X_bb_center, blob4Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob4X_com_center, blob4Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_4; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_4; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_4;	 //number of pixels belonging to BLOB
-reg blob4empty;		//flag information if container is empty
+reg[10:0] blob4minX=0, blob4minY=0, blob4maxX=0, blob4maxY=0; //bounding box attributes
+reg [10:0] blob4X_bb_center=0, blob4Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob4X_com_center=0, blob4Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_4=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_4=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_4=0;	 //number of pixels belonging to BLOB
+reg blob4empty=0;		//flag information if container is empty
 
 //CONTAINER 5
-reg[10:0] blob5minX, blob5minY, blob5maxX, blob5maxY; //bounding box attributes
-reg [10:0] blob5X_bb_center, blob5Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob5X_com_center, blob5Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_5; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_5; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_5;	 //number of pixels belonging to BLOB
-reg blob5empty;		//flag information if container is empty
+reg[10:0] blob5minX=0, blob5minY=0, blob5maxX=0, blob5maxY=0; //bounding box attributes
+reg [10:0] blob5X_bb_center=0, blob5Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob5X_com_center=0, blob5Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_5=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_5=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_5=0;	 //number of pixels belonging to BLOB
+reg blob5empty=0;		//flag information if container is empty
 
 //CONTAINER 6
-reg[10:0] blob6minX, blob6minY, blob6maxX, blob6maxY; //bounding box attributes
-reg [10:0] blob6X_bb_center, blob6Y_bb_center;  //center points for bounding box attributes
-reg [35:0] blob6X_com_center, blob6Y_com_center;  //center points for center of mass attributes
-reg [35:0] sumBLOB_Xpositions_6; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Ypositions_6; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
-reg [35:0] sumBLOB_Pixels_6;	 //number of pixels belonging to BLOB
-reg blob6empty;		//flag information if container is empty
+reg[10:0] blob6minX=0, blob6minY=0, blob6maxX=0, blob6maxY=0; //bounding box attributes
+reg [10:0] blob6X_bb_center=0, blob6Y_bb_center=0;  //center points for bounding box attributes
+reg [35:0] blob6X_com_center=0, blob6Y_com_center=0;  //center points for center of mass attributes
+reg [35:0] sumBLOB_Xpositions_6=0; //summed X positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Ypositions_6=0; //summed Y positions of all pixels belonging to BLOB, weightend by pixel value
+reg [35:0] sumBLOB_Pixels_6=0;	 //number of pixels belonging to BLOB
+reg blob6empty=0;		//flag information if container is empty
 
 //divider varaible
 
@@ -1385,7 +1385,7 @@ module divider(//clk,
 
 
 
-   reg [10:0] quo, rem;
+   reg [10:0] quo=0, rem=0;
 
 //  """"""""|
 //     1011 |  <----  dividend_copy
@@ -1399,49 +1399,49 @@ module divider(//clk,
 //  """"""""|  001  Difference is positive: use difference and put 1 in quotient.
 //            quotient (numbers above)   
 
-   reg [10:0]    quotient0;
-   reg [10:0]    dividend_copy0, diff0;
-   reg [10:0]    divider_copy0;
+   reg [10:0]    quotient0=0;
+   reg [10:0]    dividend_copy0=0, diff0=0;
+   reg [10:0]    divider_copy0=0;
    wire [10:0]   remainder0;
 
-   reg [10:0]    quotient1;
-   reg [10:0]    dividend_copy1, diff1;
-   reg [10:0]    divider_copy1;
+   reg [10:0]    quotient1=0;
+   reg [10:0]    dividend_copy1=0, diff1=0;
+   reg [10:0]    divider_copy1=0;
    wire [10:0]   remainder1;
  
-   reg [10:0]    quotient2;
-   reg [10:0]    dividend_copy2, diff2;
-   reg [10:0]    divider_copy2;
+   reg [10:0]    quotient2=0;
+   reg [10:0]    dividend_copy2=0, diff2=0;
+   reg [10:0]    divider_copy2=0;
    wire [10:0]   remainder2;
    
-   reg [10:0]    quotient3;
-   reg [10:0]    dividend_copy3, diff3;
-   reg [10:0]    divider_copy3;
+   reg [10:0]    quotient3=0;
+   reg [10:0]    dividend_copy3=0, diff3=0;
+   reg [10:0]    divider_copy3=0;
    wire [10:0]   remainder3;
    
-   reg [10:0]    quotient4;
-   reg [10:0]    dividend_copy4, diff4;
-   reg [10:0]    divider_copy4;
+   reg [10:0]    quotient4=0;
+   reg [10:0]    dividend_copy4=0, diff4=0;
+   reg [10:0]    divider_copy4=0;
    wire [10:0]   remainder4;
    
-   reg [10:0]    quotient5;
-   reg [10:0]    dividend_copy5, diff5;
-   reg [10:0]    divider_copy5;
+   reg [10:0]    quotient5=0;
+   reg [10:0]    dividend_copy5=0, diff5=0;
+   reg [10:0]    divider_copy5=0;
    wire [10:0]   remainder5;
    
-   reg [10:0]    quotient6;
-   reg [10:0]    dividend_copy6, diff6;
-   reg [10:0]    divider_copy6;
+   reg [10:0]    quotient6=0;
+   reg [10:0]    dividend_copy6=0, diff6=0;
+   reg [10:0]    divider_copy6=0;
    wire [10:0]   remainder6;
    
-   reg [10:0]    quotient7;
-   reg [10:0]    dividend_copy7, diff7;
-   reg [10:0]    divider_copy7;
+   reg [10:0]    quotient7=0;
+   reg [10:0]    dividend_copy7=0, diff7=0;
+   reg [10:0]    divider_copy7=0;
    wire [10:0]   remainder7;
    
-   reg [10:0]    quotient8;
-   reg [10:0]    dividend_copy8, diff8;
-   reg [10:0]    divider_copy8;
+   reg [10:0]    quotient8=0;
+   reg [10:0]    dividend_copy8=0, diff8=0;
+   reg [10:0]    divider_copy8=0;
    wire [10:0]   remainder8;
    
 always @ (opa or opb)
