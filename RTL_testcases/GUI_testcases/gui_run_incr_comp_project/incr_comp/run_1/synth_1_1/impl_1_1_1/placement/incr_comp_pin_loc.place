@@ -1,7 +1,0 @@
-#Block Name   x   y   z
-#------------ --  --  -
-$ibuf_one	51	44	23
-$ibuf_sec	51	44	22
-out:$auto_413	49	44	71
-out:$auto_414	49	44	70
-out:$obuf_s	49	44	69
