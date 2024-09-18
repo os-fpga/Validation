@@ -24,6 +24,7 @@ command -v raptor >/dev/null 2>&1 && raptor_path=$(which raptor) || { echo >&2 e
 parse_cga exit; }
 lib_fix_path="${raptor_path:(-11)}"
 library=${raptor_path/$lib_fix_path//share/raptor/sim_models}
+examples_path=${raptor_path/$lib_fix_path//share/raptor/examples}
 
 #removing and creating raptor_testcase_files
 #rm -fR $PWD/results_dir
@@ -88,6 +89,13 @@ else
     echo "timeout: $2">>results.log
 fi
 
+cd $main_path
+
+cp -R $examples_path/incr_comp .
+
+echo "run_project ../incr_comp/incr_comp.ospr">raptor_tcl.tcl
+echo "exit 0">>raptor_tcl.tcl
+
 function compile () {
     cd $main_path/results_dir
     echo $PWD
@@ -95,7 +103,7 @@ function compile () {
 
     timeout+='m'
    
-    timeout $timeout xvfb-run --auto-servernum --server-args="-screen 0, 1280x1024x24" raptor $mute_flag --script ../raptor.tcl 2>&1 | tee -a results.log
+    timeout 5m xvfb-run --auto-servernum --server-args="-screen 0, 1280x1024x24" raptor --script ../raptor_tcl.tcl 2>&1 | tee -a results.log
     if [ ${PIPESTATUS[0]} -eq 124 ]; then
         echo -e "\nERROR: TIM: Design Compilation took $timeout. Exiting due to timeout">>raptor.log
         cat raptor.log >> results.log
@@ -107,6 +115,7 @@ function compile () {
   
 }
 
+cd $main_path/results_dir
 compile 
 cat raptor.log >> results.log
 echo -e "\n\n#########Raptor Performance Data#########" >> results.log
