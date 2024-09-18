@@ -375,8 +375,16 @@ defparam altqpram_component.operation_mode = "BIDIR_DUAL_PORT",
 // Generic RAM's registers and wires
 //
 reg	[dw-1:0]	mem [(1<<aw)-1:0];	// RAM content
-reg	[aw-1:0]	addr_a_reg;		// RAM read address register
-reg	[aw-1:0]	addr_b_reg;		// RAM read address register
+integer i;
+
+initial begin
+   // Loop through all the memory locations and initialize them to 0
+   for (i = 0; i < (1 << aw); i = i + 1) begin
+      mem[i] = {dw{1'b0}}; // Initialize each element to 0
+   end
+end
+reg	[aw-1:0]	addr_a_reg=0;		// RAM read address register
+reg	[aw-1:0]	addr_b_reg=0;		// RAM read address register
 
 //
 // Data output drivers

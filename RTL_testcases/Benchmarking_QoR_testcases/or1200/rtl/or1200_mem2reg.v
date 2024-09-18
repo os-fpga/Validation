@@ -115,13 +115,13 @@ output	[width-1:0]		regdata;
 `define OR1200_M2R_EXTB3 4'b0111
 `define OR1200_M2R_ZERO  4'b0000
 
-reg	[7:0]			regdata_hh;
-reg	[7:0]			regdata_hl;
-reg	[7:0]			regdata_lh;
-reg	[7:0]			regdata_ll;
-reg	[width-1:0]		aligned;
-reg	[3:0]			sel_byte0, sel_byte1,
-				sel_byte2, sel_byte3;
+reg	[7:0]			regdata_hh=0;
+reg	[7:0]			regdata_hl=0;
+reg	[7:0]			regdata_lh=0;
+reg	[7:0]			regdata_ll=0;
+reg	[width-1:0]		aligned=0;
+reg	[3:0]			sel_byte0=0, sel_byte1=0,
+				sel_byte2=0, sel_byte3=0;
 
 assign regdata = {regdata_hh, regdata_hl, regdata_lh, regdata_ll};
 
@@ -381,8 +381,8 @@ end
 // Straightforward implementation of mem2reg
 //
 
-reg	[width-1:0]		regdata;
-reg	[width-1:0]		aligned;
+reg	[width-1:0]		regdata=0;
+reg	[width-1:0]		aligned=0;
 
 //
 // Alignment

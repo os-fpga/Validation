@@ -122,9 +122,9 @@ wire			fifo_rd;
 wire			fifo_full;
 wire			fifo_empty;
 wire			sel_sb;
-reg			sb_en_reg;
-reg			outstanding_store;
-reg			fifo_wr_ack;
+reg			sb_en_reg=0;
+reg			outstanding_store=0;
+reg			fifo_wr_ack=0;
 
 //
 // FIFO data in/out

@@ -145,7 +145,7 @@ wire				ictag_we;
 wire	[31:0]			ic_addr;
 wire				icfsm_biu_read;
 /* verilator lint_off UNOPTFLAT */    
-reg				tagcomp_miss;
+reg				tagcomp_miss=0;
 /* verilator lint_on UNOPTFLAT */    
 wire	[`OR1200_ICINDXH:`OR1200_ICLS]	ictag_addr;
 wire				ictag_en;
@@ -156,7 +156,7 @@ wire				icfsm_first_miss_ack;
 wire				icfsm_first_miss_err;
 wire				icfsm_burst;
 wire				icfsm_tag_we;
-reg 				ic_inv_q;
+reg 				ic_inv_q=0;
    
 `ifdef OR1200_BIST
 //

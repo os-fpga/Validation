@@ -95,28 +95,28 @@ module or1200_fpu_arith
    input [2:0] 		fpu_op_i;
    input [1:0] 		rmode_i;
    input 		start_i;
-   output reg 		ready_o;
-   output reg [FP_WIDTH-1:0] output_o;
-   output reg 		     ine_o;
-   output reg 		     overflow_o;
-   output reg 		     underflow_o;
-   output reg 		     div_zero_o;
-   output reg 		     inf_o;
-   output reg 		     zero_o;
-   output reg 		     qnan_o;
-   output reg 		     snan_o;
+   output reg 		ready_o=0;
+   output reg [FP_WIDTH-1:0] output_o=0;
+   output reg 		     ine_o=0;
+   output reg 		     overflow_o=0;
+   output reg 		     underflow_o=0;
+   output reg 		     div_zero_o=0;
+   output reg 		     inf_o=0;
+   output reg 		     zero_o=0;
+   output reg 		     qnan_o=0;
+   output reg 		     snan_o=0;
 
-   reg [FP_WIDTH-1:0] 	     s_opa_i;
-   reg [FP_WIDTH-1:0] 	     s_opb_i;
-   reg [2:0] 		     s_fpu_op_i;
-   reg [1:0] 		     s_rmode_i;
-   reg 			     s_start_i;
-   reg [5:0] 		     s_count; // Max value of 64
+   reg [FP_WIDTH-1:0] 	     s_opa_i=0;
+   reg [FP_WIDTH-1:0] 	     s_opb_i=0;
+   reg [2:0] 		     s_fpu_op_i=0;
+   reg [1:0] 		     s_rmode_i=0;
+   reg 			     s_start_i=0;
+   reg [5:0] 		     s_count=0; // Max value of 64
 
-   reg [FP_WIDTH-1:0] 	     s_output1;   
-   reg [FP_WIDTH-1:0] 	     s_output_o; // Comb
+   reg [FP_WIDTH-1:0] 	     s_output1=0;   
+   reg [FP_WIDTH-1:0] 	     s_output_o=0; // Comb
    
-   reg 			     s_ine_o;
+   reg 			     s_ine_o=0;
    
    wire 		     s_overflow_o, 
 			     s_underflow_o, 
@@ -128,7 +128,7 @@ module or1200_fpu_arith
    parameter t_state_waiting = 0,
 	       t_state_busy = 1;
    
-   reg 			     s_state;
+   reg 			     s_state=0;
    
    ////	***Add/Substract units signals***
    wire [27:0] 		     prenorm_addsub_fracta_28_o;

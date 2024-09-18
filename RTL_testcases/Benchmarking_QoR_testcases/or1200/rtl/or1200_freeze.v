@@ -106,9 +106,9 @@ input				icpu_err_i;
 // Internal wires and regs
 //
 wire				multicycle_freeze;
-reg	[`OR1200_MULTICYCLE_WIDTH-1:0]	multicycle_cnt;
-reg				flushpipe_r;
-reg [`OR1200_WAIT_ON_WIDTH-1:0]	waiting_on;
+reg	[`OR1200_MULTICYCLE_WIDTH-1:0]	multicycle_cnt=0;
+reg				flushpipe_r=0;
+reg [`OR1200_WAIT_ON_WIDTH-1:0]	waiting_on=0;
    
 //
 // Pipeline freeze

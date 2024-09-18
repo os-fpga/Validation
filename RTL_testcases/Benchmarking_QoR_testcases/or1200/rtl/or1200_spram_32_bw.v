@@ -115,7 +115,18 @@ module or1200_spram_32_bw
    reg [7:0] 				  mem2 [(1<<aw)-1:0];
    reg [7:0] 				  mem3 [(1<<aw)-1:0];
 `endif
-   reg [aw-1:0] 			  addr_reg;		// RAM address register
+  integer i;
+
+  initial begin
+    // Initialize all memory blocks to 0
+    for (i = 0; i < (1 << aw); i = i + 1) begin
+        mem0[i] = 8'b0;
+        mem1[i] = 8'b0;
+        mem2[i] = 8'b0;
+        mem3[i] = 8'b0;
+    end
+  end
+   reg [aw-1:0] 			  addr_reg=0;		// RAM address register
    
    //
    // Data output drivers

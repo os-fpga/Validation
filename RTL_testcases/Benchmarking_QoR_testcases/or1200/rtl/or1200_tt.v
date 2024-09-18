@@ -73,7 +73,7 @@ output		intr;		// Interrupt output
 // TT Mode Register bits (or no register)
 //
 `ifdef OR1200_TT_TTMR
-reg	[31:0]	ttmr;	// TTMR bits
+reg	[31:0]	ttmr=0;	// TTMR bits
 `else
 wire	[31:0]	ttmr;	// No TTMR register
 `endif
@@ -82,7 +82,7 @@ wire	[31:0]	ttmr;	// No TTMR register
 // TT Count Register bits (or no register)
 //
 `ifdef OR1200_TT_TTCR
-reg	[31:0]	ttcr;	// TTCR bits
+reg	[31:0]	ttcr=0;	// TTCR bits
 `else
 wire	[31:0]	ttcr;	// No TTCR register
 `endif
@@ -96,7 +96,7 @@ wire		match;		// Asserted when TTMR[TP]
 				// is equal to TTCR[27:0]
 wire		restart;	// Restart counter when asserted
 wire		stop;		// Stop counter when asserted
-reg	[31:0] 	spr_dat_o;	// SPR data out
+reg	[31:0] 	spr_dat_o=0;	// SPR data out
 
 //
 // TT registers address decoder

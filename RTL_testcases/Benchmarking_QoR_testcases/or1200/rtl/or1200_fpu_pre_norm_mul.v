@@ -64,7 +64,7 @@ module or1200_fpu_pre_norm_mul (
    input clk_i;
    input [FP_WIDTH-1:0] opa_i;
    input [FP_WIDTH-1:0] opb_i;
-   output reg [EXP_WIDTH+1:0] exp_10_o;
+   output reg [EXP_WIDTH+1:0] exp_10_o=0;
    output [FRAC_WIDTH:0] fracta_24_o;
    output [FRAC_WIDTH:0] fractb_24_o; 
 

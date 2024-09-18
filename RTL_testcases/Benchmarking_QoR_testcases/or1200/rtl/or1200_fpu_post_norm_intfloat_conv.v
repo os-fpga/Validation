@@ -63,23 +63,23 @@ module or1200_fpu_post_norm_intfloat_conv
    // Local Wires and registers
    //
 
-   /*wire*/ reg [22:0] 		fract_out;
-   /*wire*/reg [7:0] 		exp_out;
+   /*wire*/ reg [22:0] 		fract_out=0;
+   /*wire*/reg [7:0] 		exp_out=0;
    wire [30:0] 		out;
    wire 		exp_out1_co, overflow, underflow;
    wire [22:0] 		fract_out_final;
-   reg [22:0] 		fract_out_rnd;
+   reg [22:0] 		fract_out_rnd=0;
    wire [8:0] 		exp_next_mi;
    wire 		dn;
    wire 		exp_rnd_adj;
    wire [7:0] 		exp_out_final;
-   reg [7:0] 		exp_out_rnd;
+   reg [7:0] 		exp_out_rnd=0;
    wire 		op_dn = opa_dn | opb_dn;
    wire 		op_mul = fpu_op[2:0]==3'b010;
    wire 		op_div = fpu_op[2:0]==3'b011;
    wire 		op_i2f = fpu_op[2:0]==3'b100;
    wire 		op_f2i = fpu_op[2:0]==3'b101;
-   reg [5:0] 		fi_ldz;
+   reg [5:0] 		fi_ldz=0;
 
    wire 		g, r, s;
    wire 		round, round2, round2a, round2_fasu, round2_fmul;
@@ -94,11 +94,11 @@ module or1200_fpu_post_norm_intfloat_conv
    wire 		exp_out_00, exp_out_fe, exp_out_ff, exp_in_00, 
 			exp_in_ff;
    wire 		exp_out_final_ff, fract_out_7fffff;
-   /*wire*/reg [24:0] 		fract_trunc;
+   /*wire*/reg [24:0] 		fract_trunc=0;
    wire [7:0] 		exp_out1;
    wire 		grs_sel;
    wire 		fract_out_00;
-   reg 			fract_in_00;
+   reg 			fract_in_00=0;
    wire 		shft_co;
    wire [8:0] 		exp_in_pl1, exp_in_mi1;
    wire [47:0] 		fract_in_shftr;

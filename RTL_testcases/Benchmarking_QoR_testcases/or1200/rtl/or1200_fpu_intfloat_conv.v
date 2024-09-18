@@ -91,22 +91,22 @@ module or1200_fpu_intfloat_conv
    //
    // Local Wires
    //
-   reg 			zero;
-   reg [31:0] 		opa_r;	// Input operand registers
-   reg [31:0] 		out;		// Output register
-   reg 			div_by_zero;	// Divide by zero output register
+   reg 			zero=0;
+   reg [31:0] 		opa_r=0;	// Input operand registers
+   reg [31:0] 		out=0;		// Output register
+   reg 			div_by_zero=0;	// Divide by zero output register
    wire [7:0] 		exp_fasu;	// Exponent output from EQU block
-   reg [7:0] 		exp_r;		// Exponent output (registerd)
+   reg [7:0] 		exp_r=0;		// Exponent output (registerd)
    wire 		co;		// carry output
    wire [30:0] 		out_d;		// Intermediate final result output
    wire 		overflow_d, underflow_d;// Overflow/Underflow
-   reg 			inf, snan, qnan;// Output Registers for INF, S/QNAN
-   reg 			ine;		// Output Registers for INE
-   reg [1:0] 		rmode_r1, rmode_r2,// Pipeline registers for round mode
-			rmode_r3;
-   reg [2:0] 		fpu_op_r1, fpu_op_r2,// Pipeline registers for fp 
+   reg 			inf=0, snan=0, qnan=0;// Output Registers for INF, S/QNAN
+   reg 			ine=0;		// Output Registers for INE
+   reg [1:0] 		rmode_r1=0, rmode_r2=0,// Pipeline registers for round mode
+			rmode_r3=0;
+   reg [2:0] 		fpu_op_r1=0, fpu_op_r2=0,// Pipeline registers for fp 
 			                     // operation
-			fpu_op_r3;
+			fpu_op_r3=0;
 
    ////////////////////////////////////////////////////////////////////////
      //
@@ -171,12 +171,12 @@ module or1200_fpu_intfloat_conv
    //
 
    wire 		nan_sign_d, result_zero_sign_d;
-   reg 			sign_fasu_r;
+   reg 			sign_fasu_r=0;
    wire [1:0] 		exp_ovf;
-   reg [1:0] 		exp_ovf_r;
+   reg [1:0] 		exp_ovf_r=0;
   
    // This is all we need from post-norm module for int-float conversion
-   reg 			opa_sign_r;
+   reg 			opa_sign_r=0;
    always @(posedge clk)
      opa_sign_r <= opa_r[31];
    
@@ -191,10 +191,10 @@ module or1200_fpu_intfloat_conv
    wire 		ine_d;
    wire 		inv_d;   
    wire 		sign_d;
-   reg 			sign;
-   reg [30:0] 		opa_r1;
-   reg [47:0] 		fract_i2f;
-   reg 			opas_r1, opas_r2;
+   reg 			sign=0;
+   reg [30:0] 		opa_r1=0;
+   reg [47:0] 		fract_i2f=0;
+   reg 			opas_r1=0, opas_r2=0;
    wire 		f2i_out_sign;
    wire [47:0] 		fract_denorm;
 
@@ -262,7 +262,7 @@ module or1200_fpu_intfloat_conv
      //
    // FPU Outputs
    //
-   reg 			fasu_op_r1, fasu_op_r2;
+   reg 			fasu_op_r1=0, fasu_op_r2=0;
    wire [30:0] 		out_fixed;
    wire 		output_zero_fasu;
    wire 		overflow_fasu;
@@ -340,14 +340,14 @@ module or1200_fpu_intfloat_conv_except
 
    wire [7:0] 		expa, expb;		// alias to opX exponent
    wire [22:0] 		fracta, fractb;		// alias to opX fraction
-   reg 			expa_ff, infa_f_r, qnan_r_a, snan_r_a;
-   reg 			expb_ff, infb_f_r, qnan_r_b, snan_r_b;
-   reg 			inf, ind, qnan, snan;	// Output registers
-   reg 			opa_nan, opb_nan;
-   reg 			expa_00, expb_00, fracta_00, fractb_00;
-   reg 			opa_00, opb_00;
-   reg 			opa_inf, opb_inf;
-   reg 			opa_dn, opb_dn;
+   reg 			expa_ff=0, infa_f_r=0, qnan_r_a=0, snan_r_a=0;
+   reg 			expb_ff=0, infb_f_r=0, qnan_r_b=0, snan_r_b=0;
+   reg 			inf=0, ind=0, qnan=0, snan=0;	// Output registers
+   reg 			opa_nan=0, opb_nan=0;
+   reg 			expa_00=0, expb_00=0, fracta_00=0, fractb_00=0;
+   reg 			opa_00=0, opb_00=0;
+   reg 			opa_inf=0, opb_inf=0;
+   reg 			opa_dn=0, opb_dn=0;
 
    ////////////////////////////////////////////////////////////////////////
    //

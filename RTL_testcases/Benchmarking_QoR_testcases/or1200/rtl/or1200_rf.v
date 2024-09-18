@@ -124,7 +124,7 @@ wire				rf_we;
 wire				spr_valid;
 wire				rf_ena;
 wire				rf_enb;
-reg				rf_we_allow;
+reg				rf_we_allow=0;
 
    // Logic to restore output on RFA after debug unit has read out via SPR if.
    // Problem was that the incorrect output would be on RFA after debug unit
@@ -135,10 +135,10 @@ reg				rf_we_allow;
    // -- Julius
    
    // Detect falling edge of SPR select 
-   reg 				spr_du_cs;
+   reg 				spr_du_cs=0;
    wire 			spr_cs_fe;
    // Track RF A's address each time it's enabled
-   reg	[aw-1:0]		addra_last;
+   reg	[aw-1:0]		addra_last=0;
 
 
    always @(posedge clk)

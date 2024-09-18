@@ -70,38 +70,38 @@ module or1200_fpu_post_norm_mul(
    input [2*FRAC_WIDTH+1:0] fract_48_i;
    input 		    sign_i;
    input [1:0] 		    rmode_i;
-   output reg [FP_WIDTH-1:0]    output_o;
-   output reg 		    ine_o;
+   output reg [FP_WIDTH-1:0]    output_o=0;
+   output reg 		    ine_o=0;
 
    
-   reg [EXP_WIDTH-1:0]     s_expa;
-   reg [EXP_WIDTH-1:0]     s_expb;
-   reg [EXP_WIDTH+1:0]     s_exp_10_i;
-   reg [2*FRAC_WIDTH+1:0]  s_fract_48_i;
-   reg 			   s_sign_i;   
+   reg [EXP_WIDTH-1:0]     s_expa=0;
+   reg [EXP_WIDTH-1:0]     s_expb=0;
+   reg [EXP_WIDTH+1:0]     s_exp_10_i=0;
+   reg [2*FRAC_WIDTH+1:0]  s_fract_48_i=0;
+   reg 			   s_sign_i=0;   
    wire [FP_WIDTH-1:0] 	    s_output_o;
    wire 		    s_ine_o;
    wire 		    s_overflow;   
-   reg [FP_WIDTH-1:0] 	    s_opa_i;
-   reg [FP_WIDTH-1:0] 	    s_opb_i;
-   reg [1:0] 		    s_rmode_i;
+   reg [FP_WIDTH-1:0] 	    s_opa_i=0;
+   reg [FP_WIDTH-1:0] 	    s_opb_i=0;
+   reg [1:0] 		    s_rmode_i=0;
 
-   reg [5:0] 		    s_zeros;
+   reg [5:0] 		    s_zeros=0;
    wire 		    s_carry;   
-   reg [5:0] 		    s_shr2;
-   reg [5:0] 		    s_shl2;
-   reg [8:0] 		    s_expo1;
+   reg [5:0] 		    s_shr2=0;
+   reg [5:0] 		    s_shl2=0;
+   reg [8:0] 		    s_expo1=0;
    wire [8:0] 		    s_expo2b;
    wire [9:0] 		    s_exp_10a;
    wire [9:0] 		    s_exp_10b;
-   reg [47:0] 		    s_frac2a;
+   reg [47:0] 		    s_frac2a=0;
 
    wire 		    s_sticky, s_guard, s_round;   
    wire 		    s_roundup;   
-   reg [24:0] 		    s_frac_rnd;
+   reg [24:0] 		    s_frac_rnd=0;
    wire [24:0] 		    s_frac3;
    wire 		    s_shr3;   
-   reg [5:0] 		    s_r_zeros;
+   reg [5:0] 		    s_r_zeros=0;
    wire 		    s_lost;   
    wire 		    s_op_0;   
    wire [8:0] 		    s_expo3;

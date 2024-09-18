@@ -90,9 +90,9 @@ output				muxreg_valid;
 //
 // Internal wires and regs
 //
-reg	[width-1:0]		muxout;
-reg	[width-1:0]		muxreg;
-reg				muxreg_valid;
+reg	[width-1:0]		muxout=0;
+reg	[width-1:0]		muxreg=0;
+reg				muxreg_valid=0;
 
 //
 // Registered output from the write-back multiplexer

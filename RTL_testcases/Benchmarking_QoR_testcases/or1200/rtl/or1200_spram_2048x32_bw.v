@@ -626,7 +626,18 @@ reg     [7:0]        mem_0 [2047:0];              // RAM content
 reg     [7:0]        mem_1 [2047:0];              // RAM content
 reg     [7:0]        mem_2 [2047:0];              // RAM content
 reg     [7:0]        mem_3 [2047:0];              // RAM content
-reg     [10:0]       addr_reg;                    // RAM address register
+integer i;
+
+initial begin
+   // Loop through all the memory locations and initialize them to 0
+   for (i = 0; i < 2048; i = i + 1) begin
+      mem_0[i] = 8'b0;
+      mem_1[i] = 8'b0;
+      mem_2[i] = 8'b0;
+      mem_3[i] = 8'b0;
+   end
+end
+reg     [10:0]       addr_reg=0;                    // RAM address register
                                                                                                                                                                                                      
 //
 // Data output drivers

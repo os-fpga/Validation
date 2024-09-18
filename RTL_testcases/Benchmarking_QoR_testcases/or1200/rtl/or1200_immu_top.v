@@ -147,16 +147,16 @@ wire				itlb_done;
 wire				fault;
 wire				miss;
 wire				page_cross;
-reg	[31:0]			icpu_adr_default;
+reg	[31:0]			icpu_adr_default=0;
 wire	[31:0]			icpu_adr_boot;
-reg				icpu_adr_select;
-reg		[31:0]		icpu_adr_o;
-reg	[31:`OR1200_IMMU_PS]	icpu_vpn_r;
+reg				icpu_adr_select=0;
+reg		[31:0]		icpu_adr_o=0;
+reg	[31:`OR1200_IMMU_PS]	icpu_vpn_r=0;
 `ifdef OR1200_NO_IMMU
 `else
-reg				itlb_en_r;
-reg				dis_spr_access_frst_clk;
-reg				dis_spr_access_scnd_clk;
+reg				itlb_en_r=0;
+reg				dis_spr_access_frst_clk=0;
+reg				dis_spr_access_scnd_clk=0;
 `endif
 
 //
@@ -349,7 +349,7 @@ assign qmemimmu_ci_o = immu_en ? itlb_ci : `OR1200_IMMU_CI;
 //assign qmemimmu_adr_o = itlb_done ? {itlb_ppn, icpu_adr_i[`OR1200_IMMU_PS-1:0]} : {icpu_vpn_r, icpu_adr_i[`OR1200_IMMU_PS-1:0]}; // DL: immu_en
 assign qmemimmu_adr_o = immu_en & itlb_done ? {itlb_ppn, icpu_adr_i[`OR1200_IMMU_PS-1:2], 2'h0} : {icpu_vpn_r, icpu_adr_i[`OR1200_IMMU_PS-1:2], 2'h0}; 
 
-reg     [31:0]                  spr_dat_reg;
+reg     [31:0]                  spr_dat_reg=0;
 //
 // Output to SPRS unit
 //

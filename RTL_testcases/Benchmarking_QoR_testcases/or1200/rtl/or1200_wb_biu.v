@@ -131,50 +131,50 @@ module or1200_wb_biu(
    // Registers
    //
    wire 				wb_ack;		// normal termination
-   reg [aw-1:0] 			wb_adr_o;	// address bus outputs
-   reg 					wb_cyc_o;	// cycle output
-   reg 					wb_stb_o;	// strobe output
-   reg 					wb_we_o;	// indicates write transfer
-   reg [3:0] 				wb_sel_o;	// byte select outputs
+   reg [aw-1:0] 			wb_adr_o=0;	// address bus outputs
+   reg 					wb_cyc_o=0;	// cycle output
+   reg 					wb_stb_o=0;	// strobe output
+   reg 					wb_we_o=0;	// indicates write transfer
+   reg [3:0] 				wb_sel_o=0;	// byte select outputs
 `ifdef OR1200_WB_CAB
-   reg 					wb_cab_o;	// CAB output
+   reg 					wb_cab_o=0;	// CAB output
 `endif
 `ifdef OR1200_WB_B3
-   reg [2:0] 				wb_cti_o;	// cycle type identifier
-   reg [1:0] 				wb_bte_o;	// burst type extension
+   reg [2:0] 				wb_cti_o=0;	// cycle type identifier
+   reg [1:0] 				wb_bte_o=0;	// burst type extension
 `endif
 `ifdef OR1200_NO_DC   
-   reg [dw-1:0] 			wb_dat_o;	// output data bus
+   reg [dw-1:0] 			wb_dat_o=0;	// output data bus
 `else   
    assign wb_dat_o = biu_dat_i;    // No register on this - straight from DCRAM
 `endif
    
 `ifdef OR1200_WB_RETRY
-   reg [`OR1200_WB_RETRY-1:0] 		retry_cnt;	// Retry counter
+   reg [`OR1200_WB_RETRY-1:0] 		retry_cnt=0;	// Retry counter
 `else
    wire 				retry_cnt;
    assign retry_cnt = 1'b0;
 `endif
 `ifdef OR1200_WB_B3
-   reg [3:0] 				burst_len;	// burst counter
+   reg [3:0] 				burst_len=0;	// burst counter
 `endif
 
-   reg  				biu_stb_reg;	// WB strobe
+   reg  				biu_stb_reg=0;	// WB strobe
    wire  				biu_stb;	// WB strobe
-   reg 					wb_cyc_nxt;	// next WB cycle value
-   reg 					wb_stb_nxt;	// next WB strobe value
-   reg [2:0] 				wb_cti_nxt;	// next cycle type identifier value
+   reg 					wb_cyc_nxt=0;	// next WB cycle value
+   reg 					wb_stb_nxt=0;	// next WB strobe value
+   reg [2:0] 				wb_cti_nxt=0;	// next cycle type identifier value
 
-   reg 					wb_ack_cnt;	// WB ack toggle counter
-   reg 					wb_err_cnt;	// WB err toggle counter
-   reg 					wb_rty_cnt;	// WB rty toggle counter
-   reg 					biu_ack_cnt;	// BIU ack toggle counter
-   reg 					biu_err_cnt;	// BIU err toggle counter
-   reg 					biu_rty_cnt;	// BIU rty toggle counter
+   reg 					wb_ack_cnt=0;	// WB ack toggle counter
+   reg 					wb_err_cnt=0;	// WB err toggle counter
+   reg 					wb_rty_cnt=0;	// WB rty toggle counter
+   reg 					biu_ack_cnt=0;	// BIU ack toggle counter
+   reg 					biu_err_cnt=0;	// BIU err toggle counter
+   reg 					biu_rty_cnt=0;	// BIU rty toggle counter
    wire 				biu_rty;	// BIU rty indicator
 
-   reg [1:0] 				wb_fsm_state_cur;	// WB FSM - surrent state
-   reg [1:0] 				wb_fsm_state_nxt;	// WB FSM - next state
+   reg [1:0] 				wb_fsm_state_cur=0;	// WB FSM - surrent state
+   reg [1:0] 				wb_fsm_state_nxt=0;	// WB FSM - next state
    wire [1:0] 				wb_fsm_idle	= 2'h0;	// WB FSM state - IDLE
    wire [1:0] 				wb_fsm_trans	= 2'h1;	// WB FSM state - normal TRANSFER
    wire [1:0] 				wb_fsm_last	= 2'h2;	// EB FSM state - LAST transfer

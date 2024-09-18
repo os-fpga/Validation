@@ -142,49 +142,49 @@ output  				dc_no_writethrough;
 //
 // Internal wires and regs
 //
-reg	[`OR1200_BRANCHOP_WIDTH-1:0]		id_branch_op;
-reg	[`OR1200_BRANCHOP_WIDTH-1:0]		ex_branch_op;
-reg	[`OR1200_ALUOP_WIDTH-1:0]		alu_op;
-reg [`OR1200_ALUOP2_WIDTH-1:0]      		alu_op2;
+reg	[`OR1200_BRANCHOP_WIDTH-1:0]		id_branch_op=0;
+reg	[`OR1200_BRANCHOP_WIDTH-1:0]		ex_branch_op=0;
+reg	[`OR1200_ALUOP_WIDTH-1:0]		alu_op=0;
+reg [`OR1200_ALUOP2_WIDTH-1:0]      		alu_op2=0;
 wire					if_maci_op;
 `ifdef OR1200_MAC_IMPLEMENTED
-reg	[`OR1200_MACOP_WIDTH-1:0]		ex_mac_op;
-reg	[`OR1200_MACOP_WIDTH-1:0]		id_mac_op;
+reg	[`OR1200_MACOP_WIDTH-1:0]		ex_mac_op=0;
+reg	[`OR1200_MACOP_WIDTH-1:0]		id_mac_op=0;
 wire	[`OR1200_MACOP_WIDTH-1:0]		mac_op;
-reg					ex_macrc_op;
+reg					ex_macrc_op=0;
 `else
 wire	[`OR1200_MACOP_WIDTH-1:0]		mac_op;
 wire					ex_macrc_op;
 `endif
-reg	[`OR1200_SHROTOP_WIDTH-1:0]		shrot_op;
-reg	[31:0]				id_insn /* verilator public */;
-reg	[31:0]				ex_insn /* verilator public */;
-reg	[31:0]				wb_insn /* verilator public */;
-reg	[`OR1200_REGFILE_ADDR_WIDTH-1:0]	rf_addrw;
-reg	[`OR1200_REGFILE_ADDR_WIDTH-1:0]	wb_rfaddrw;
-reg	[`OR1200_RFWBOP_WIDTH-1:0]		rfwb_op;
-reg	[`OR1200_SEL_WIDTH-1:0]		sel_a;
-reg	[`OR1200_SEL_WIDTH-1:0]		sel_b;
-reg					sel_imm;
-reg	[`OR1200_LSUOP_WIDTH-1:0]		id_lsu_op;
-reg	[`OR1200_COMPOP_WIDTH-1:0]		comp_op;
-reg	[`OR1200_MULTICYCLE_WIDTH-1:0]		multicycle;
-reg     [`OR1200_WAIT_ON_WIDTH-1:0] 		wait_on;      
-reg 	[31:0]				id_simm;
-reg 	[31:0]				ex_simm;
-reg					sig_syscall;
-reg					sig_trap;
-reg					except_illegal;
+reg	[`OR1200_SHROTOP_WIDTH-1:0]		shrot_op=0;
+reg	[31:0]				id_insn=0 /* verilator public */;
+reg	[31:0]				ex_insn=0 /* verilator public */;
+reg	[31:0]				wb_insn=0 /* verilator public */;
+reg	[`OR1200_REGFILE_ADDR_WIDTH-1:0]	rf_addrw=0;
+reg	[`OR1200_REGFILE_ADDR_WIDTH-1:0]	wb_rfaddrw=0;
+reg	[`OR1200_RFWBOP_WIDTH-1:0]		rfwb_op=0;
+reg	[`OR1200_SEL_WIDTH-1:0]		sel_a=0;
+reg	[`OR1200_SEL_WIDTH-1:0]		sel_b=0;
+reg					sel_imm=0;
+reg	[`OR1200_LSUOP_WIDTH-1:0]		id_lsu_op=0;
+reg	[`OR1200_COMPOP_WIDTH-1:0]		comp_op=0;
+reg	[`OR1200_MULTICYCLE_WIDTH-1:0]		multicycle=0;
+reg     [`OR1200_WAIT_ON_WIDTH-1:0] 		wait_on=0;      
+reg 	[31:0]				id_simm=0;
+reg 	[31:0]				ex_simm=0;
+reg					sig_syscall=0;
+reg					sig_trap=0;
+reg					except_illegal=0;
 wire					id_void;
 wire					ex_void;
 wire                                    wb_void;
-reg                                     ex_delayslot_dsi;
-reg                                     ex_delayslot_nop;
-reg					spr_read;
-reg					spr_write;
-reg     [31:2]				ex_branch_addrtarget;
+reg                                     ex_delayslot_dsi=0;
+reg                                     ex_delayslot_nop=0;
+reg					spr_read=0;
+reg					spr_write=0;
+reg     [31:2]				ex_branch_addrtarget=0;
 `ifdef OR1200_DC_NOSTACKWRITETHROUGH
-reg 					dc_no_writethrough;
+reg 					dc_no_writethrough=0;
 `endif
    
 //

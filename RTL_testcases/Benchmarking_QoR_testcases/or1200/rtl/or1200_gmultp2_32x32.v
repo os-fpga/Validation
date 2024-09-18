@@ -70,8 +70,8 @@ input           CLK;
 input           RST;
 output  [`OR1200_WW-1:0]  P;
 
-reg     [`OR1200_WW-1:0]  p0;
-reg     [`OR1200_WW-1:0]  p1;
+reg     [`OR1200_WW-1:0]  p0=0;
+reg     [`OR1200_WW-1:0]  p1=0;
 integer 		  xi;
 integer 		  yi;
 

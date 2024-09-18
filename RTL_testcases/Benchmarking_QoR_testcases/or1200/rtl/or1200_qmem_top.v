@@ -235,9 +235,9 @@ input	[3:0]			dcqmem_tag_i;
 //
 wire				iaddr_qmem_hit;
 wire				daddr_qmem_hit;
-reg	[2:0]			state;
-reg				qmem_dack;
-reg				qmem_iack;
+reg	[2:0]			state=0;
+reg				qmem_dack=0;
+reg				qmem_iack=0;
 wire	[31:0]			qmem_di;
 wire	[31:0]			qmem_do;
 wire				qmem_en;

@@ -66,11 +66,11 @@ module or1200_fpu_pre_norm_addsub (
    input [FP_WIDTH-1:0] opa_i;
    input [FP_WIDTH-1:0] opb_i;
    // carry(1) & hidden(1) & fraction(23) & guard(1) & round(1) & sticky(1)
-   output reg [FRAC_WIDTH+4:0] fracta_28_o;
-   output reg [FRAC_WIDTH+4:0] fractb_28_o;
-   output reg [EXP_WIDTH-1:0]  exp_o;
+   output reg [FRAC_WIDTH+4:0] fracta_28_o=0;
+   output reg [FRAC_WIDTH+4:0] fractb_28_o=0;
+   output reg [EXP_WIDTH-1:0]  exp_o=0;
    
-   reg [EXP_WIDTH-1 : 0]       s_exp_o ;
+   reg [EXP_WIDTH-1 : 0]       s_exp_o=0 ;
    wire [FRAC_WIDTH+4 : 0]     s_fracta_28_o, s_fractb_28_o ;
    wire [EXP_WIDTH-1 : 0]      s_expa;
    wire [EXP_WIDTH-1 : 0]      s_expb ;
@@ -83,8 +83,8 @@ module or1200_fpu_pre_norm_addsub (
    wire [FRAC_WIDTH+4 : 0]     s_fract_sm_28;
    wire [FRAC_WIDTH+4 : 0]     s_fract_shr_28 ;
    
-   reg [EXP_WIDTH-1 : 0]       s_exp_diff ;
-   reg [5 : 0] 		       s_rzeros ;
+   reg [EXP_WIDTH-1 : 0]       s_exp_diff=0 ;
+   reg [5 : 0] 		       s_rzeros=0 ;
    wire 		       s_expa_eq_expb;
    wire 		       s_expa_gt_expb;
    wire 		       s_fracta_1;

@@ -73,8 +73,8 @@ module or1200_fpu_post_norm_addsub
    input 		  sign_i;
    input 		  fpu_op_i;
    input [1:0] 		  rmode_i;
-   output reg [FP_WIDTH-1:0] 	  output_o;
-   output reg		  ine_o;
+   output reg [FP_WIDTH-1:0] 	  output_o=0;
+   output reg		  ine_o=0;
   
    wire [FP_WIDTH-1:0] 	  s_opa_i;   
    wire [FP_WIDTH-1:0] 	  s_opb_i;
@@ -88,16 +88,16 @@ module or1200_fpu_post_norm_addsub
    wire s_overflow;
    
    wire [5:0] s_zeros;
-   reg [5:0] s_shr1;
-   reg [5:0] s_shl1;
+   reg [5:0] s_shr1=0;
+   reg [5:0] s_shl1=0;
    wire s_shr2, s_carry;
 
    wire [9:0] s_exp10;
-   reg [EXP_WIDTH:0] s_expo9_1;
+   reg [EXP_WIDTH:0] s_expo9_1=0;
    wire [EXP_WIDTH:0] s_expo9_2;
    wire [EXP_WIDTH:0] s_expo9_3;
    
-   reg [FRAC_WIDTH+4:0] s_fracto28_1;
+   reg [FRAC_WIDTH+4:0] s_fracto28_1=0;
    wire [FRAC_WIDTH+4:0] s_fracto28_2;
    wire [FRAC_WIDTH+4:0] s_fracto28_rnd;
 
@@ -129,7 +129,7 @@ module or1200_fpu_post_norm_addsub
    
    assign s_carry = s_fract_28_i[27];
 
-   reg [5:0] lzeroes;
+   reg [5:0] lzeroes=0;
    
    always @(s_fract_28_i)
      casez(s_fract_28_i[26:0])	// synopsys full_case parallel_case

@@ -120,12 +120,12 @@ input	[3:0]			dcpu_tag_i;
 //
 // Internal wires/regs
 //
-reg	[3:0]			dcpu_sel_o;
+reg	[3:0]			dcpu_sel_o=0;
 
-reg	[`OR1200_LSUOP_WIDTH-1:0] ex_lsu_op;
+reg	[`OR1200_LSUOP_WIDTH-1:0] ex_lsu_op=0;
 wire	[`OR1200_LSUEA_PRECALC:0] id_precalc_sum;
-reg	[`OR1200_LSUEA_PRECALC:0] dcpu_adr_r;
-reg				except_align;
+reg	[`OR1200_LSUEA_PRECALC:0] dcpu_adr_r=0;
+reg				except_align=0;
 
 //
 // ex_lsu_op

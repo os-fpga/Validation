@@ -151,12 +151,12 @@ module or1200_sprs(
    //
    // Internal regs & wires
    //
-   reg [`OR1200_SR_WIDTH-1:0] 		sr_reg;		// SR
-   reg 					sr_reg_bit_eph;	// SR_EPH bit
-   reg 					sr_reg_bit_eph_select;// SR_EPH select
+   reg [`OR1200_SR_WIDTH-1:0] 		sr_reg=0;		// SR
+   reg 					sr_reg_bit_eph=0;	// SR_EPH bit
+   reg 					sr_reg_bit_eph_select=0;// SR_EPH select
    wire 				sr_reg_bit_eph_muxed;// SR_EPH muxed bit
-   reg [`OR1200_SR_WIDTH-1:0] 		sr;			// SR
-   reg [width-1:0] 			to_wbmux;	// For l.mfspr
+   reg [`OR1200_SR_WIDTH-1:0] 		sr=0;			// SR
+   reg [width-1:0] 			to_wbmux=0;	// For l.mfspr
    wire 				cfgr_sel;	// Select for cfg regs
    wire 				rf_sel;		// Select for RF
    wire 				npc_sel;	// Select for NPC
@@ -168,7 +168,7 @@ module or1200_sprs(
    wire 				fpcsr_sel;	// Select for FPCSR   
    wire [31:0] 				sys_data;// Read data from system SPRs
    wire 				du_access;// Debug unit access
-   reg [31:0] 				unqualified_cs;	// Unqualified selects
+   reg [31:0] 				unqualified_cs=0;	// Unqualified selects
    wire 				ex_spr_write; // jb
    
    //

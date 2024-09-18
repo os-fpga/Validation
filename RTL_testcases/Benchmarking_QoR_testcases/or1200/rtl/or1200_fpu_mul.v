@@ -70,22 +70,22 @@ module or1200_fpu_mul
    input 		signa_i;
    input 		signb_i;
    input 		start_i;
-   output reg [2*FRAC_WIDTH+1:0] fract_o;
-   output reg 		     sign_o;
-   output reg 		     ready_o;
+   output reg [2*FRAC_WIDTH+1:0] fract_o=0;
+   output reg 		     sign_o=0;
+   output reg 		     ready_o=0;
    
    parameter t_state_waiting = 1'b0,
 	       t_state_busy = 1'b1;
 
-   reg [47:0] 		     s_fract_o;
-   reg [23:0] 		     s_fracta_i;
-   reg [23:0] 		     s_fractb_i;
-   reg 			     s_signa_i, s_signb_i;
+   reg [47:0] 		     s_fract_o=0;
+   reg [23:0] 		     s_fracta_i=0;
+   reg [23:0] 		     s_fractb_i=0;
+   reg 			     s_signa_i=0, s_signb_i=0;
    wire 		     s_sign_o;
-   reg 			     s_start_i;
-   reg 			     s_ready_o;
-   reg 			     s_state;
-   reg [4:0] 		     s_count;
+   reg 			     s_start_i=0;
+   reg 			     s_ready_o=0;
+   reg 			     s_state=0;
+   reg [4:0] 		     s_count=0;
    wire [23:0] 		     s_tem_prod;
 
    // Input Register

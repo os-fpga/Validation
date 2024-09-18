@@ -106,15 +106,15 @@ module or1200_mult_mac(
    //
    // Internal wires and regs
    //
-   reg [width-1:0] 			result;
+   reg [width-1:0] 			result=0;
 `ifdef OR1200_MULT_IMPLEMENTED
-   reg [2*width-1:0] 			mul_prod_r;
+   reg [2*width-1:0] 			mul_prod_r=0;
    wire 				alu_op_smul;   
    wire 				alu_op_umul;   
    wire 				alu_op_mul;      
  `ifdef OR1200_MULT_SERIAL
-   reg [5:0] 				serial_mul_cnt;   
-   reg 					mul_free;   
+   reg [5:0] 				serial_mul_cnt=0;   
+   reg 					mul_free=0;   
  `endif
 `else
    wire [2*width-1:0] 			mul_prod_r;
@@ -124,11 +124,11 @@ module or1200_mult_mac(
    
    wire [`OR1200_MACOP_WIDTH-1:0] 	mac_op;
 `ifdef OR1200_MAC_IMPLEMENTED
-   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r1;
-   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r2;
-   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r3;
-   reg 					mac_stall_r;
-   reg [63:0] 				mac_r;
+   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r1=0;
+   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r2=0;
+   reg [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r3=0;
+   reg 					mac_stall_r=0;
+   reg [63:0] 				mac_r=0;
 `else
    wire [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r1;
    wire [`OR1200_MACOP_WIDTH-1:0] 	mac_op_r2;
@@ -143,16 +143,16 @@ module or1200_mult_mac(
    wire 				alu_op_div;  
    wire 				alu_op_udiv;
    wire 				alu_op_sdiv;
-   reg 					div_free;
+   reg 					div_free=0;
    wire 			        div_stall;
 `ifdef OR1200_DIV_IMPLEMENTED
  `ifdef OR1200_DIV_SERIAL
-   reg [2*width-1:0] 			div_quot_r;   
+   reg [2*width-1:0] 			div_quot_r=0;   
    wire [width-1:0] 			div_tmp;
-   reg [5:0] 				div_cntr;
+   reg [5:0] 				div_cntr=0;
  `else
-   reg [width-1:0] 			div_quot_r;      
-   reg [width-1:0] 			div_quot_generic;   
+   reg [width-1:0] 			div_quot_r=0;      
+   reg [width-1:0] 			div_quot_generic=0;   
  `endif   
 `endif
 
@@ -298,7 +298,7 @@ module or1200_mult_mac(
 
 `ifdef OR1200_MAC_IMPLEMENTED
    // Signal to indicate when we should check for new MAC op
-   reg ex_freeze_r;
+   reg ex_freeze_r=0;
    
    always @(posedge clk or `OR1200_RST_EVENT rst)
      if (rst == `OR1200_RST_VALUE)

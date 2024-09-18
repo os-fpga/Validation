@@ -84,12 +84,12 @@ output	[width-1:0]		muxed_b;
 //
 // Internal wires and regs
 //
-reg	[width-1:0]		operand_a;
-reg	[width-1:0]		operand_b;
-reg	[width-1:0]		muxed_a;
-reg	[width-1:0]		muxed_b;
-reg				saved_a;
-reg				saved_b;
+reg	[width-1:0]		operand_a=0;
+reg	[width-1:0]		operand_b=0;
+reg	[width-1:0]		muxed_a=0;
+reg	[width-1:0]		muxed_b=0;
+reg				saved_a=0;
+reg				saved_b=0;
 
 //
 // Operand A register

@@ -123,19 +123,19 @@ module or1200_dc_fsm
    //
    // Internal wires and regs
    //
-   reg [31:0] 				addr_r;
-   reg [2:0] 				state;
-   reg [`OR1200_DCLS-1:0] 		cnt;
-   reg 					hitmiss_eval;
-   reg 					store;
-   reg 					load;
-   reg 					cache_inhibit;
-   reg 					cache_miss;
-   reg 					cache_dirty_needs_writeback;
-   reg                                  did_early_load_ack;
-   reg 					cache_spr_block_flush;
-   reg 					cache_spr_block_writeback;
-   reg 					cache_wb;   
+   reg [31:0] 				addr_r=0;
+   reg [2:0] 				state=0;
+   reg [`OR1200_DCLS-1:0] 		cnt=0;
+   reg 					hitmiss_eval=0;
+   reg 					store=0;
+   reg 					load=0;
+   reg 					cache_inhibit=0;
+   reg 					cache_miss=0;
+   reg 					cache_dirty_needs_writeback=0;
+   reg                                  did_early_load_ack=0;
+   reg 					cache_spr_block_flush=0;
+   reg 					cache_spr_block_writeback=0;
+   reg 					cache_wb=0;   
    wire 				load_hit_ack;
    wire 				load_miss_ack;
    wire 				load_inhibit_ack;   

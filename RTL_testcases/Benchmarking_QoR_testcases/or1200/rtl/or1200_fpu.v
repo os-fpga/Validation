@@ -143,10 +143,10 @@ module or1200_fpu(
 					fpu_comp_done;
    wire [width-1:0] 			result_arith, result_conv;
    
-   reg [`OR1200_FPUOP_WIDTH-1:0] 	fpu_op_r;   
-   reg [`OR1200_FPCSR_WIDTH-1:0] 	fpcsr_r;
+   reg [`OR1200_FPUOP_WIDTH-1:0] 	fpu_op_r=0;   
+   reg [`OR1200_FPCSR_WIDTH-1:0] 	fpcsr_r=0;
    wire 				fpu_op_valid;
-   reg 					fpu_op_valid_re;   
+   reg 					fpu_op_valid_re=0;   
    wire 				fpu_check_op;   
    wire 				inf, inv_inf_op_in,snan, snan_in,qnan, 
 					ine, overflow, underflow, zero, dbz, 
@@ -157,7 +157,7 @@ module or1200_fpu(
 					zero_conv, underflow_conv, 
 					overflow_conv;
    wire 				inv_comp;   
-   reg 					flag;
+   reg 					flag=0;
 
    
    assign spr_dat_o = 0;
@@ -307,8 +307,8 @@ module or1200_fpu(
    // Logic for detection of signaling NaN on input
    // signaling NaN: exponent is 8hff, [22] is zero, rest of fract is non-zero
    // quiet NaN: exponent is 8hff, [22] is 1
-   reg a_is_snan, b_is_snan;
-   reg a_is_qnan, b_is_qnan;
+   reg a_is_snan=0, b_is_snan=0;
+   reg a_is_qnan=0, b_is_qnan=0;
    
    always @(posedge clk)
      begin
@@ -322,7 +322,7 @@ module or1200_fpu(
 
    // Check for, add with opposite signed infinities, or subtract with 
    // same signed infinities.
-   reg a_is_inf, b_is_inf, a_b_sign_xor;
+   reg a_is_inf=0, b_is_inf=0, a_b_sign_xor=0;
    
    always @(posedge clk)
      begin
@@ -340,7 +340,7 @@ module or1200_fpu(
 			     `OR1200_FPUOP_SUB))) ;
    
    // Check if it's 0.0/0.0 to generate invalid signal (ignore sign bit)
-   reg a_is_zero, b_is_zero;
+   reg a_is_zero=0, b_is_zero=0;
    
    always @(posedge clk)
      begin
@@ -374,7 +374,7 @@ module or1200_fpu(
        );
 
    // 5-long shift reg for conversion ready counter
-   reg [6:0] fpu_conv_shr;
+   reg [6:0] fpu_conv_shr=0;
    always @(posedge clk)
      fpu_conv_shr <= {fpu_conv_shr[5:0],fpu_check_op & fpu_op_is_conv};
    assign fpu_conv_done = fpu_conv_shr[6];
@@ -393,7 +393,7 @@ module or1200_fpu(
       .inf(inf_cmp), 
       .zero(zero_cmp));
 
-   reg 	     fpu_op_valid_re_r;
+   reg 	     fpu_op_valid_re_r=0;
    always @(posedge clk)
      fpu_op_valid_re_r  <= fpu_op_valid_re;
    
