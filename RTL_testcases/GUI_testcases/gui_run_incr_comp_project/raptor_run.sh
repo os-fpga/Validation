@@ -97,9 +97,9 @@ echo "run_project ../incr_comp/incr_comp.ospr">raptor_tcl.tcl
 echo "exit 0">>raptor_tcl.tcl
 
 function compile () {
-    cd $main_path/results_dir
-    echo $PWD
-  
+    module unload synopsys/1.0
+
+    cd $main_path/results_dir  
 
     timeout+='m'
    
