@@ -10,9 +10,9 @@ design="axi_ram_wrapper"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false
+post_synth_sim=true
 post_synth_sim_hard_code=true 
-post_route_sim=false 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
@@ -195,17 +195,23 @@ IP_PATH="./$design/run_1/IPs"
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == false ] && [ "$post_route_sim" == false ] && [ "$bitstream_sim" == false ]; then
-        echo ""
-    fi
-
-	echo "analyze">>raptor_tcl.tcl
-    echo "simulate_ip $design">>raptor_tcl.tcl
+    echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "setup_lec_sim">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
+    if [ "$post_synth_sim" == true ]; then 
+        [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
+        [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
     if [ "$synth_stage" == "1" ]; then 
 		echo "" 
 	else
@@ -219,9 +225,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
-            
-            # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
-            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
+            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else
             echo ""
@@ -237,22 +241,6 @@ IP_PATH="./$design/run_1/IPs"
         else
             echo ""
         fi
-    fi
-    if [ "$post_synth_sim_hard_code" == true ]; then 
-        echo "cd $main_path/results_dir/$design/run_1/IPs/rapidsilicon/ip/$ip_name/v1_0/$design/sim" >> raptor_tcl.tcl
-        echo "exec echo \"SGT: Gate simulation for design: $design\" >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
-        echo "exec sed -i {29i\POST_SYNTH_SIM ?= 0} Makefile" >> raptor_tcl.tcl
-        echo "set sed_script \"s|VERILOG_SOURCES += ../src/\\\\*\\\\.v|ifeq (\\\$(POST_SYNTH_SIM), 0)\\\\n\tVERILOG_SOURCES += ../src/\\\\*\\\\.v\\\\nelse ifeq (\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $main_path/results_dir/$design/run_1/synth_1_1/synthesis/${design}_post_synth.v\\\\nendif|\"" >> raptor_tcl.tcl
-        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
-        echo "set sed_script \"s|(\\\$(POST_SYNTH_SIM), 1)|(\\\$(POST_SYNTH_SIM), 1)\\\\n\tVERILOG_SOURCES += $primitive_sim_path/\\\\*.v|g\"" >> raptor_tcl.tcl
-        echo "exec sed -i [list -e \$sed_script] Makefile" >> raptor_tcl.tcl
-        echo "exec sh -c {sed -i 's/\bclean\b/clear/g' Makefile}" >> raptor_tcl.tcl
-        echo "exec make clear" >> raptor_tcl.tcl
-        echo "exec make POST_SYNTH_SIM=1 MODULE_NAME=$design >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
-        echo "exec echo \"SGT: Gate simulation for design: $design had ended\" >> ../../../../../../../../../raptor.log 2>&1" >> raptor_tcl.tcl
-        echo "cd ../../../../../../../../../../../" >> raptor_tcl.tcl
-    else
-        echo ""
     fi
 
     cd results_dir
