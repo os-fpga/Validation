@@ -93,7 +93,7 @@ primitive_sim_path=$(find $library -wholename "*/rapidsilicon/genesis3/FPGA_PRIM
 [ ! -d $PWD/results_dir ] && mkdir $PWD/results_dir
 [ -d $PWD/results_dir ] && touch $PWD/results_dir/CGA_Result.json
 cd $main_path
-[ -f CGA_Result_default.json ] && cp CGA_Result_default.json ./results_dir/CGA_Result.json
+[ -f ../../../scripts/CGA_Result_default.json ] && cp ../../../scripts/CGA_Result_default.json ./results_dir/CGA_Result.json
 [ -d $PWD/results_dir ] && cd $PWD/results_dir
 
 echo "ExecStartTime: $start">results.log
