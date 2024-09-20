@@ -2,11 +2,11 @@ module GJC48 (
   input wire clk,
   input wire reset_n,
   input wire [3:0] dma_req_in,
-  output reg [3:0] dma_ack_out
+  output reg [3:0] dma_ack_out=0
 );
 
-  reg [3:0] dma_req_reg;
-  reg [3:0] dma_ack_reg;
+  reg [3:0] dma_req_reg=0;
+  wire [3:0] dma_ack_reg;
 
   // Instantiate the DMA module
   SOC_FPGA_INTF_DMA dma_inst (
