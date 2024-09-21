@@ -10,8 +10,8 @@ design="axi_async_fifo_default"
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
+post_synth_sim=true 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
@@ -193,18 +193,18 @@ IP_PATH="./$design/run_1/IPs"
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
     
-    if [ "$post_synth_sim" == false ] && [ "$post_route_sim" == false ] && [ "$bitstream_sim" == false ]; then
-        echo ""
-    fi
-
-	echo "analyze">>raptor_tcl.tcl
+    echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
     [ -z "$synthesis_type" ] && echo "" || echo "synthesis_type $synthesis_type">>raptor_tcl.tcl
     [ -z "$custom_synth_script" ] && echo "" || echo "custom_synth_script $custom_synth_script">>raptor_tcl.tcl
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
+    if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
+        echo "setup_lec_sim">>raptor_tcl.tcl 
+    else
+        echo ""
+    fi
     if [ "$post_synth_sim" == true ]; then 
-        
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
@@ -223,9 +223,7 @@ IP_PATH="./$design/run_1/IPs"
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
-            
-            # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
-            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
+            [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else
             echo ""
