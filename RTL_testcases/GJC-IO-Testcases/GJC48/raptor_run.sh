@@ -10,8 +10,8 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=true 
-post_route_sim=true 
+post_synth_sim=false 
+post_route_sim=false 
 bitstream_sim=false
 
 #raptor options
