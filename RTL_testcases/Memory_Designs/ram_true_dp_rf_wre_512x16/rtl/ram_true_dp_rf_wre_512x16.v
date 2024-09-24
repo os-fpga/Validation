@@ -2,7 +2,8 @@ module ram_true_dp_rf_wre_512x16 (clk, weA, weB,reA, reB, addrA, addrB, dinA, di
     input clk, weA, weB, reA, reB;
     input [8:0] addrA, addrB;
     input [15:0] dinA, dinB;
-    output reg [15:0] doutA, doutB;
+    output reg [15:0] doutA=0;
+    output reg [15:0] doutB=0;
     
     reg [15:0] ram [511:0];
     always @(posedge clk)
