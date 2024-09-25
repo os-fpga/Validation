@@ -1,0 +1,6 @@
+raptor_path="/nfs_scratch/scratch/FV/awais/Synthesis/OS-FPGA/Raptor/build/bin/raptor"
+my_strategy="area"
+my_option="-fsm_encoding onehot -carry auto"
+
+     
+     
