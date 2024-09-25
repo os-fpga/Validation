@@ -185,6 +185,15 @@ wire [N+2:0] stg3_sub2;
 wire [N+2:0] stg3_sub3;
 wire [N+2:0] stg3_sub4;
 
+wire h0_valid;
+wire h1_valid;
+wire h2_valid;
+wire h3_valid;
+wire h4_valid;
+wire h5_valid;
+wire h6_valid;
+wire h7_valid;
+
 fht_bfly #(N+2) u31_fht_bfly (rstn,sclk,xi_ready_d[3],stg2_sum1,stg2_sum2,stg3_sum1,stg3_sub1);
 fht_bfly #(N+2) u32_fht_bfly (rstn,sclk,xi_ready_d[3],stg2_sub1,stg2_sub2,stg3_sum2,stg3_sub2);
 fht_bfly #(N+2) u33_fht_bfly (rstn,sclk,xi_ready_d[3],stg2_sum3,mult_res1,stg3_sum3,stg3_sub3);
