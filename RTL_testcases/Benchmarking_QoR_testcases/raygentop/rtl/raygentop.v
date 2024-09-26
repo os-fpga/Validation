@@ -247,7 +247,7 @@ module delay1x3 (datain, dataout, clk);
        end 
     end 
 
-    always @(state or trigger or count)
+    always @(*)
     begin
        case (state)
           0 :
@@ -295,61 +295,121 @@ module delay1x3 (datain, dataout, clk);
     end 
  endmodule
 
+// module matmult (Ax, Ay, Az, m11, m12, m13, m21, m22, m23, m31, m32, m33, Cx, Cy, Cz, clk);
+
+//     input[16 - 1:0] Ax; 
+//     input[16 - 1:0] Ay; 
+//     input[16 - 1:0] Az; 
+//     input[16 - 1:0] m11; 
+//     input[16 - 1:0] m12; 
+
+//     input[16 - 1:0] m13; 
+//     input[16 - 1:0] m21; 
+//     input[16 - 1:0] m22; 
+//     input[16 - 1:0] m23; 
+//     input[16 - 1:0] m31; 
+//     input[16 - 1:0] m32; 
+//     input[16 - 1:0] m33; 
+//     output[16 - 1:0] Cx; 
+//     reg[16 - 1:0] Cx;
+//     output[16 - 1:0] Cy; 
+//     reg[16 - 1:0] Cy;
+//     output[16 - 1:0] Cz; 
+
+//     reg[16 - 1:0] Cz;
+//     input clk; 
+
+//     reg[16 + 16 - 1:0] am11; 
+//     reg[16 + 16 - 1:0] am12; 
+//     reg[16 + 16 - 1:0] am13; 
+//     reg[16 + 16 - 1:0] am21; 
+//     reg[16 + 16 - 1:0] am22; 
+//     reg[16 + 16 - 1:0] am23; 
+//     reg[16 + 16 - 1:0] am31; 
+//     reg[16 + 16 - 1:0] am32; 
+//     reg[16 + 16 - 1:0] am33; 
+
+
+//     always @(posedge clk)
+//     begin
+//        am11 <= Ax * m11 ; 
+//        am12 <= Ay * m12 ; 
+//        am13 <= Az * m13 ; 
+//        am21 <= Ax * m21 ; 
+//        am22 <= Ay * m22 ; 
+//        am23 <= Az * m23 ; 
+//        am31 <= Ax * m31 ; 
+//        am32 <= Ay * m32 ; 
+//        am33 <= Az * m33 ; 
+
+//        //      Cx <= (am11 + am12 + am13) (`widthA+`widthB-2 downto `widthB-1);
+//        //      Cy <= (am21 + am22 + am23) (`widthA+`widthB-2 downto `widthB-1);
+//        //      Cz <= (am31 + am32 + am33) (`widthA+`widthB-2 downto `widthB-1);
+//        Cx <= (am11[16+16-2:16-1] + am12[16+16-2:16-1] + am13[16+16-2:16-1]) ; 
+//        Cy <= (am21[16+16-2:16-1] + am22[16+16-2:16-1] + am23[16+16-2:16-1]); 
+//        Cz <= (am31[16+16-2:16-1] + am32[16+16-2:16-1] + am33[16+16-2:16-1]) ;  
+//     end 
+//  endmodule
+
 module matmult (Ax, Ay, Az, m11, m12, m13, m21, m22, m23, m31, m32, m33, Cx, Cy, Cz, clk);
 
-    input[16 - 1:0] Ax; 
-    input[16 - 1:0] Ay; 
-    input[16 - 1:0] Az; 
-    input[16 - 1:0] m11; 
-    input[16 - 1:0] m12; 
+    input[15:0] Ax; 
+    input[15:0] Ay; 
+    input[15:0] Az; 
+    input[15:0] m11; 
+    input[15:0] m12; 
 
-    input[16 - 1:0] m13; 
-    input[16 - 1:0] m21; 
-    input[16 - 1:0] m22; 
-    input[16 - 1:0] m23; 
-    input[16 - 1:0] m31; 
-    input[16 - 1:0] m32; 
-    input[16 - 1:0] m33; 
-    output[16 - 1:0] Cx; 
-    reg[16 - 1:0] Cx;
-    output[16 - 1:0] Cy; 
-    reg[16 - 1:0] Cy;
-    output[16 - 1:0] Cz; 
+    input[15:0] m13; 
+    input[15:0] m21; 
+    input[15:0] m22; 
+    input[15:0] m23; 
+    input[15:0] m31; 
+    input[15:0] m32; 
+    input[15:0] m33; 
+    output[15:0] Cx; 
+    reg[15:0] Cx;
+    output[15:0] Cy; 
+    reg[15:0] Cy;
+    output[15:0] Cz; 
 
-    reg[16 - 1:0] Cz;
+    reg[15:0] Cz;
     input clk; 
 
-    reg[16 + 16 - 1:0] am11; 
-    reg[16 + 16 - 1:0] am12; 
-    reg[16 + 16 - 1:0] am13; 
-    reg[16 + 16 - 1:0] am21; 
-    reg[16 + 16 - 1:0] am22; 
-    reg[16 + 16 - 1:0] am23; 
-    reg[16 + 16 - 1:0] am31; 
-    reg[16 + 16 - 1:0] am32; 
-    reg[16 + 16 - 1:0] am33; 
+    reg signed [31:0] am11, am12, am13;
+    reg signed [31:0] am21, am22, am23;
+    reg signed [31:0] am31, am32, am33;
+    wire signed [31:0] sumCx, sumCy, sumCz;  // Full precision sums (wires for combinational logic)
 
+    // Combinational block for matrix-vector multiplication
+    always @* begin
+        // Perform matrix-vector multiplication (keeping full 32-bit precision)
+        am11 = $signed(Ax) * $signed(m11);
+        am12 = $signed(Ay) * $signed(m12);
+        am13 = $signed(Az) * $signed(m13);
 
-    always @(posedge clk)
-    begin
-       am11 <= Ax * m11 ; 
-       am12 <= Ay * m12 ; 
-       am13 <= Az * m13 ; 
-       am21 <= Ax * m21 ; 
-       am22 <= Ay * m22 ; 
-       am23 <= Az * m23 ; 
-       am31 <= Ax * m31 ; 
-       am32 <= Ay * m32 ; 
-       am33 <= Az * m33 ; 
+        am21 = $signed(Ax) * $signed(m21);
+        am22 = $signed(Ay) * $signed(m22);
+        am23 = $signed(Az) * $signed(m23);
 
-       //      Cx <= (am11 + am12 + am13) (`widthA+`widthB-2 downto `widthB-1);
-       //      Cy <= (am21 + am22 + am23) (`widthA+`widthB-2 downto `widthB-1);
-       //      Cz <= (am31 + am32 + am33) (`widthA+`widthB-2 downto `widthB-1);
-       Cx <= (am11[16+16-2:16-1] + am12[16+16-2:16-1] + am13[16+16-2:16-1]) ; 
-       Cy <= (am21[16+16-2:16-1] + am22[16+16-2:16-1] + am23[16+16-2:16-1]); 
-       Cz <= (am31[16+16-2:16-1] + am32[16+16-2:16-1] + am33[16+16-2:16-1]) ;  
-    end 
- endmodule
+        am31 = $signed(Ax) * $signed(m31);
+        am32 = $signed(Ay) * $signed(m32);
+        am33 = $signed(Az) * $signed(m33);
+    end
+
+    // Combinational logic for summing up the products
+    assign sumCx = am11 + am12 + am13;
+    assign sumCy = am21 + am22 + am23;
+    assign sumCz = am31 + am32 + am33;
+
+    // Sequential block to register the output at the clock edge
+    always @(posedge clk) begin
+        // Truncate the result back to 16-bit and assign to the output
+        Cx <= sumCx[31:16];  // Taking the upper 16 bits
+        Cy <= sumCy[31:16];  // Taking the upper 16 bits
+        Cz <= sumCz[31:16];  // Taking the upper 16 bits
+    end
+endmodule
+
 
     
     
@@ -455,7 +515,7 @@ module rgconfigmemory (CfgAddr, CfgData, CfgData_Ready, want_CfgData, origx, ori
        end 
     end 
 
-    always @(state or CfgData_Ready)
+    always @(*)
     begin
        case (state)
           0 :
@@ -743,10 +803,7 @@ waddress <= temp_waddress;
        end 
     end 
 
-    always @(state or addr_ready or data_ready or waddress or datain or wantDir or 
-             want_read or wantwriteback or writebackdata or writebackaddr or 
-             fcount or fbpage or faddress or fbnextscanline or triID or wantshadedata or 
-             wanttexel or texeladdr)
+    always @(*)
 
     begin
        case (state)
@@ -1120,18 +1177,17 @@ waddress <= temp_waddress;
        end
        else
        begin
-          state <= next_state ; 
-
-rgData <= temp_rgData;
-rgWE <= temp_rgWE;
-rgAddrValid <= temp_rgAddrValid;
-ack <= temp_ack;
-rgAddr <= temp_rgAddr;
+         state <= next_state ; 
+         rgData <= temp_rgData;
+         rgWE <= temp_rgWE;
+         rgAddrValid <= temp_rgAddrValid;
+         ack <= temp_ack;
+         rgAddr <= temp_rgAddr;
 
        end 
     end 
 
-    always @(state or ack or as or rgDone)
+    always @(*)
     begin
 
        case (state)
@@ -1411,7 +1467,7 @@ rgAddr <= temp_rgAddr;
     assign nas0 = temp_nas0;
     assign nas1 = temp_nas1;
 
-    always @(state or go or ack or busy or dirReady or addr or count or loaded)
+    always @(*)
     begin
        case (state)
           0 :
@@ -1814,7 +1870,7 @@ hit10c <= temp_hit10c;
     end 
 
 
-    always @(state or rgResultReady or rgResultSource)
+    always @(*)
     begin
        case (state)
           0 :
@@ -2152,9 +2208,7 @@ shadedatac <= temp_shadedatac;
     end 
     assign addrout = (process01 == 1'b1) ? addrout01 : addrout10 ;
 
-    always @(state or process01 or pending10 or ack or shadedataready or id01a or 
-             id01b or id01c or id10a or id10b or id10c or selectuv or hita or 
-             hitb or hitc or shadedata or pending01 or texmap or texelready)
+    always @(*)
     begin
        case (state)
           0 :
@@ -2697,7 +2751,7 @@ shadedatac <= temp_shadedatac;
 
     reg[15:0] col16; 
 
-    always @(dataline or texelselect)
+    always @(*)
     begin
        case (texelselect)
           2'b00 :
@@ -2848,8 +2902,7 @@ shadedatac <= temp_shadedatac;
         reg[6:0] bvl; 
         reg[6:0] bwl; 
 
-        always @(selectuv or u01a or u01b or u01c or v01a or v01b or v01c or u10a or 
-                 u10b or u10c or v10a or v10b or v10c)
+        always @(*)
         begin
            case (selectuv)
               3'b000 :
@@ -3008,4 +3061,3 @@ module fifo3 (datain, writeen, dataout, shiften, globalreset, clk);
        end 
     end 
  endmodule
-
