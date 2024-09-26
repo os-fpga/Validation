@@ -1,4 +1,4 @@
-module and6#(parameter Total_Instances = 10)(input clock0,input [5:0]a,input [$clog2(Total_Instances)-1:0]id,output c);
+module and6#(parameter Total_Instances = 10)(input clock0,input [5:0]a,input [$clog2(Total_Instances-2)-1:0]id,output c);
 
 wire [0:0]c_sub_out[0:Total_Instances-1];
 reg [5:0]a_sub_in[0:Total_Instances-1];
