@@ -6,8 +6,8 @@ set_pin_loc data_i HP_1_1_0N
 
 set_pin_loc enable_buf HP_1_4_2P
 
-set_pin_loc reset_n_buf HP_1_2_1P
+set_pin_loc reset_n_buf HP_1_3_1N
 
-set_pin_loc data_o_buf[0] HP_1_3_1N
+set_pin_loc data_o_buf[0] HP_1_6_3P
 
-set_pin_loc data_o_buf[1] HP_1_4_2P
+set_pin_loc data_o_buf[1] HP_1_8_4P
