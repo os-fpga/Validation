@@ -10,8 +10,7 @@ set_pin_loc data_o_delayed_p HP_1_6_3P
 
 set_pin_loc data_o_delayed_n HP_1_7_3N
 
-# TODO:
-#set_pin_loc data_o_ref_buf HP_1_CC_39_19N
+set_pin_loc data_o_ref_buf HP_1_CC_39_19N
 
 set_pin_loc dly_tap_val_inv_buf[0] HP_1_12_6P
 
