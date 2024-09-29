@@ -1,4 +1,8 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/replace_script.sh
+
 set -e
 main_path=$PWD
 start=`date +%s`
@@ -10,8 +14,8 @@ ip_name="" #design_level
 tool_name="iverilog" 
 
 #simulation stages
-post_synth_sim=false 
-post_route_sim=false 
+post_synth_sim=true 
+post_route_sim=true 
 bitstream_sim=false
 
 #raptor options
@@ -255,6 +259,9 @@ parse_cga exit 1; }
             # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
+            echo "clear_simulation_files">>raptor_tcl.tcl
+            echo "setup_lec_sim 10">>raptor_tcl.tcl
+            echo "simulate timed_pnr icarus">>raptor_tcl.tcl
         else
             echo ""
         fi

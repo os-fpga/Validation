@@ -1,4 +1,8 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/replace_script.sh
+
 set -e
 main_path=$PWD
 start=`date +%s`
@@ -225,6 +229,9 @@ parse_cga exit 1; }
         if [ "$post_route_sim" == true ]; then 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
+            echo "clear_simulation_files">>raptor_tcl.tcl
+            echo "setup_lec_sim 10">>raptor_tcl.tcl
+            echo "simulate timed_pnr icarus">>raptor_tcl.tcl
         else
             echo ""
         fi

@@ -1,4 +1,8 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/replace_script.sh
+
 set -e
 main_path=$PWD
 start=`date +%s`
@@ -7,7 +11,7 @@ start=`date +%s`
 design="raygentop"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="iverilog" 
+tool_name="verilator" 
 
 #simulation stages
 post_synth_sim=true 
@@ -15,7 +19,7 @@ post_route_sim=true
 bitstream_sim=false
 
 #raptor options
-device="GEMINI_COMPACT_104x68"
+device="1VG28"
 
 strategy="delay" #(area, delay, mixed, none) 
 

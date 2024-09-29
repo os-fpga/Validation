@@ -1,4 +1,8 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/replace_script.sh
+
 set -e
 # XVFB='xvfb-run --auto-servernum --server-args="-screen 0, 1280x1024x24"'
 main_path=$PWD
