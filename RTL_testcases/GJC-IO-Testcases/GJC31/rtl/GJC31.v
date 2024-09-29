@@ -42,7 +42,7 @@ module GJC31 (
     PLL #(.PLL_MULT(100), .PLL_DIV(32), .PLL_POST_DIV(17)) clk_pll_gen (
         .PLL_EN(const1), // PLL Enable
         .CLK_IN(clk_pll), // Clock input
-        .CLK_OUT_DIV4(clk_i)
+        .CLK_OUT(clk_i)
         );
 
     assign dly_adj    = ~dly_inc_pulse_inv;

@@ -11,7 +11,7 @@ module queue
     input wire clk, reset,
     input wire read_cmd, write_cmd, // read and write command 
     input wire [data_width-1:0] write_data,  // write data to FIFO
-    output reg [data_width-1:0] read_data,  // read data from FIFO
+    output reg [data_width-1:0] read_data=0,  // read data from FIFO
     output wire full,  // no space to write in FIFO
     output wire empty // nothing to read from FIFO
 );
