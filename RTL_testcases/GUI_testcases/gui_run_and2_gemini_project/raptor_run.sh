@@ -1,9 +1,18 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/export_raptor_path.sh
+
 set -e
 # XVFB='xvfb-run --auto-servernum --server-args="-screen 0, 1280x1024x24"'
 main_path=$PWD
 start=`date +%s`
  
+
+
+# Update the script to modify existing Raptor synthesis options
+source $ROOT_PATH/scripts/update_raptor_options.sh
+
 function end_time(){
     end=`date +%s`
     runtime=$((end-start))

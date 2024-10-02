@@ -64,6 +64,11 @@ bitstream=$( [ "$bitstream_sim" = "true" ] && echo "enable_simulation" || echo "
 
 ################################################################
 
+
+
+# Update the script to modify existing Raptor synthesis options
+source $ROOT_PATH/scripts/update_raptor_options.sh
+
 function end_time(){
     end=`date +%s`
     runtime=$((end-start))

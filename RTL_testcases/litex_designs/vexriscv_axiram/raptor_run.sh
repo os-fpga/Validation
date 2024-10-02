@@ -1,4 +1,8 @@
 #!/bin/bash
+
+ROOT_PATH=$(git rev-parse --show-toplevel)
+source $ROOT_PATH/scripts/export_raptor_path.sh
+
 set -e
 main_path=$PWD
 start=`date +%s`
@@ -64,6 +68,11 @@ set_device_size="" #XxY Device fabric size selection
 bitstream=$( [ "$bitstream_sim" = "true" ] && echo "enable_simulation" || echo "" ) 
 
 ################################################################
+
+
+
+# Update the script to modify existing Raptor synthesis options
+source $ROOT_PATH/scripts/update_raptor_options.sh
 
 function end_time(){
     end=`date +%s`
