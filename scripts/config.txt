@@ -1,0 +1,3 @@
+# config.txt
+synth_options="-fsm_encoding onehot -carry auto"
+strategy="area"
