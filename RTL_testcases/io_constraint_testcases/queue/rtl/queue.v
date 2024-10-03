@@ -89,4 +89,11 @@ always @* begin
     end
 end
 
+integer i;
+initial begin
+  for (i = 0; i < 16; i = i + 1) begin
+    queue_reg[i] = 4'b0;  // Set each memory element to 0
+  end
+end
+
 endmodule 
