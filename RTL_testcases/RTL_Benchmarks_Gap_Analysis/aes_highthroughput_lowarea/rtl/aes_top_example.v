@@ -52,7 +52,7 @@ output			o_data_valid;
 
 //---------------------------------------------------------------------------------------
 // registered outputs 
-reg [31:0] o_data;
+reg [31:0] o_data=0;
 
 // internal signals and registers 
 reg [255:0] int_key;

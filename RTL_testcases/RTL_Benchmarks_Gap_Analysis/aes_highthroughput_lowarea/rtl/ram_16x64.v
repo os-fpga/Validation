@@ -40,4 +40,11 @@ end
 
 assign rd_data = mem[srd_addr];
 
+initial begin
+   integer i;
+   for(i=0;i<64;i=i+1) begin
+      mem[i] <= 16'b0;
+   end
+end
+
 endmodule
