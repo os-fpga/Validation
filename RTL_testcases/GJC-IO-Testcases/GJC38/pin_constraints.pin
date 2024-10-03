@@ -1,4 +1,3 @@
-
 set_pin_loc reset HP_1_20_10P
 
 set_pin_loc enable_n HP_1_CC_18_9P
