@@ -5,7 +5,7 @@
       <add_region x_low="11" y_low="3" x_high="11" y_high="3"/>
     </partition>
     <partition name="capture_partition">
-      <add_atom name_pattern="u2.dout"/>
+      <add_atom name_pattern="$f2g_tx_out_u2.dout"/>
       <add_region x_low="12" y_low="3" x_high="12" y_high="3"/>
     </partition>
   </partition_list>

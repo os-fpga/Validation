@@ -5,7 +5,7 @@
       <add_region x_low="20" y_low="3" x_high="20" y_high="3"/>
     </partition>
     <partition name="east_partition">
-      <add_atom name_pattern="u2.dout"/>
+      <add_atom name_pattern="$f2g_tx_out_u2.dout"/>
       <add_region x_low="20" y_low="2" x_high="20" y_high="2"/>
     </partition>
   </partition_list>
