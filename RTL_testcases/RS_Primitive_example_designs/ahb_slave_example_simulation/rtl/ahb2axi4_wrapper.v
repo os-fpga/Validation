@@ -229,12 +229,12 @@ assign ahb_hresp = ahb_hresp_1;
 //------------------------------------------------------------------------------
 
 ahb_to_axi4 #(
-	.IP_ID(IP_ID),
-	.IP_TYPE(IP_TYPE),
-	.IP_VERSION(IP_VERSION),
-	.addr_width(32),
-	.data_width(32),
-	.id_width(1)
+	// .IP_ID(IP_ID),
+	// .IP_TYPE(IP_TYPE),
+	// .IP_VERSION(IP_VERSION),
+	.Address_Width(32),
+	.Data_Width(32),
+	.ID_WIDTH(1)
 ) ahb_to_axi4 (
 	.ahb_haddr(ahb_haddr_1),
 	.ahb_hburst(ahb_hburst_1),

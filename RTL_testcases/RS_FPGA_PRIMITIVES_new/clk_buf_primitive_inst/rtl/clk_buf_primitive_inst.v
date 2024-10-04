@@ -5,7 +5,7 @@ module clk_buf_primitive_inst (
 );
 
 wire wire1, wire2;
-reg wire_out_clk;
+reg wire_out_clk=0;
 
 I_BUF i_buf_inst (
   .I(clock_input),
