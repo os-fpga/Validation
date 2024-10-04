@@ -2,6 +2,7 @@
 module co_sim_clk_buf_primitive_inst;
 // Clock signals
     reg clock_input;
+	reg ibuf_enable;
     wire 		clock_output	,	clock_output_netlist;
 	integer		mismatch	=	0;
 
@@ -20,6 +21,7 @@ clk_buf_primitive_inst	golden (.*);
     end
 // Initialize values to zero 
 initial	begin
+	ibuf_enable <= 1;
 	repeat (2) @ (negedge clock_input);
 
 
