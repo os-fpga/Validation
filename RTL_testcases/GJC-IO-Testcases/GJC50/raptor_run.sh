@@ -4,7 +4,7 @@ main_path=$PWD
 start=`date +%s`
  
  
-design="clk_buf_primitive_inst"
+design="GJC50"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
 tool_name="iverilog" 
@@ -15,11 +15,11 @@ post_route_sim=true
 bitstream_sim=false
 
 #raptor options
-device="GEMINI_COMPACT_104x68"
+device="GEMINI_COMPACT_22x4"
 
 strategy="delay" #(area, delay, mixed, none) 
 
-add_constraint_file="" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
+add_constraint_file="pin_constraints.pin" #Sets SDC + location constraints  Constraints: set_pin_loc, set_mode, all SDC Standard commands
 
 verific_parser="" #(on/off)
 
@@ -170,7 +170,7 @@ parse_cga exit 1; }
     cd ..
     
     echo "create_design $design">raptor_tcl.tcl 
-    echo "target_device 1VG28">>raptor_tcl.tcl 
+    echo "target_device GEMINI_COMPACT_22x4">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$ip_name" ] && echo "" || echo "configure_ip $ip_name"_v1_0" -mod_name=$design -Pdata_width=32 -Paddr_width=16 -Pid_width=32 -Pa_pip_out=0 -Pb_pip_out=0 -Pa_interleave=0 -Pb_interleave=0 -out_file ./$design.v">>raptor_tcl.tcl
@@ -192,7 +192,7 @@ parse_cga exit 1; }
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
-    
+    echo "add_constraint_file constraints.sdc">>raptor_tcl.tcl 
 
 	echo "analyze">>raptor_tcl.tcl
     [ -z "$verific_parser" ] && echo "" || echo "verific_parser $verific_parser">>raptor_tcl.tcl
@@ -201,19 +201,26 @@ parse_cga exit 1; }
     [ -z "$synth_options" ] && echo "" || echo "synth_options $synth_options">>raptor_tcl.tcl
     [ -z "$strategy" ] && echo "" || echo "synthesize $strategy">>raptor_tcl.tcl  
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
-        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
+        echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v">>raptor_tcl.tcl 
         echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
     else
         echo ""
     fi
     if [ "$post_synth_sim" == true ]; then 
+            echo "# Open the input file in read mode">>raptor_tcl.tcl 
         echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" r]">>raptor_tcl.tcl 
+        echo "# Read the file content">>raptor_tcl.tcl 
         echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+        echo "# Close the input file after reading">>raptor_tcl.tcl 
         echo "close \$input_file">>raptor_tcl.tcl 
         echo "set modified_content [string map {\"$design(\" \"${design}_post_synth(\"} \$file_content]">>raptor_tcl.tcl 
+        echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
         echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/$design\_post_synth.v\" w]">>raptor_tcl.tcl
+        echo "# Write the modified content back to the file">>raptor_tcl.tcl 
         echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+        echo "# Close the file">>raptor_tcl.tcl 
         echo "close \$output_file">>raptor_tcl.tcl 
+        echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
         [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus gate" >> raptor_tcl.tcl || echo "simulation_options compilation verilator gate" >> raptor_tcl.tcl
         [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
     else
@@ -232,23 +239,26 @@ parse_cga exit 1; }
     echo "place">>raptor_tcl.tcl  
     echo "route">>raptor_tcl.tcl  
         if [ "$post_route_sim" == true ]; then 
+            echo "# Open the input file in read mode">>raptor_tcl.tcl 
             echo "set input_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" r]">>raptor_tcl.tcl 
+            echo "# Read the file content">>raptor_tcl.tcl 
             echo "set file_content [read \$input_file]">>raptor_tcl.tcl 
+            echo "# Close the input file after reading">>raptor_tcl.tcl 
             echo "close \$input_file">>raptor_tcl.tcl 
             echo "set modified_content [string map {\"module $design(\" \"module ${design}_post_route (\"} \$file_content]">>raptor_tcl.tcl 
+            echo "# Open the file again, this time in write mode to overwrite the old content">>raptor_tcl.tcl 
             echo "set output_file [open \"$design/run_1/synth_1_1/synthesis/post_pnr_wrapper_$design\_post_synth.v\" w]">>raptor_tcl.tcl
+            echo "# Write the modified content back to the file">>raptor_tcl.tcl 
             echo "puts \$output_file \$modified_content">>raptor_tcl.tcl 
+            echo "# Close the file">>raptor_tcl.tcl 
             echo "close \$output_file">>raptor_tcl.tcl 
+            echo "puts \"Modification completed.\"">>raptor_tcl.tcl 
             # echo "exec python3 $main_path/../../../scripts/post_route_script.py $design">>raptor_tcl.tcl 
             [ "$tool_name" = "iverilog" ] && echo "simulation_options compilation icarus -DPNR=1 pnr" >> raptor_tcl.tcl || echo "simulation_options compilation verilator -DPNR=1 pnr" >> raptor_tcl.tcl
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
         else
             echo ""
         fi
-    echo "clear_simulation_files">>raptor_tcl.tcl
-    echo "setup_lec_sim">>raptor_tcl.tcl
-    echo "simulate gate icarus">>raptor_tcl.tcl
-    echo "simulate pnr icarus">>raptor_tcl.tcl
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  

@@ -397,7 +397,7 @@ assign data_width32_64 = (Data_Width == 64) ? 0 : 1;
 
 	always @(axi_rready or axi_rvalid) begin
 		if(axi_rready & axi_rvalid) begin
-			$display( $time, "Read happening rd_data =%h", buf_rdata_enb);
+			$display("Read happening rd_data =%h", buf_rdata_enb);
 		end
 	end   // Clock header logic
 
