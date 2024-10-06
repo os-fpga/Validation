@@ -85,50 +85,135 @@ reg [5:0] last_dly_sly;
     end // function
     endfunction    
 
+reg [3:0] usr_dly_adj_binary, usr_dly_ld_binary, usr_dly_ld_en_binary_or;
+integer i;
+always @(*) begin
+    usr_dly_adj_binary = 0;  // Initialize to 0
+    usr_dly_ld_en_binary_or = 0;
+    usr_dly_ld_binary = 0;
+    for (i = 0; i < 4; i = i + 1) begin
+        if (usr_dly_adj[i]) begin
+            usr_dly_adj_binary = i;
+        end
+        if (usr_dly_ld[i]) begin
+            usr_dly_ld_binary = i;
+        end
+        if (or_wire[i]) begin
+            usr_dly_ld_en_binary_or = i;
+        end
+    end
+end
+
+
 //drive control signal based upon active delay load control
 
-muxp #(.DWIDTH(1),
-       .NUM_OF_BUS(NUM_DLY)
-       )
- muxp_inst_incdec (.d(usr_dly_incdec),
-            .sel(usr_dly_adj),       // dly_adj
-            .dout(cntrl_dly_incdec)
-    );
+// muxp #(.DWIDTH(1),
+//        .NUM_OF_BUS(NUM_DLY)
+//        )
+//  muxp_inst_incdec (.d(usr_dly_incdec),
+//             .sel(usr_dly_adj),       // dly_adj
+//             .dout(cntrl_dly_incdec)
+//     );
+
+DLY_VALUE_MUX MUXP_INST_INCDEC (
+    .DLY_ADDR(usr_dly_adj_binary),
+    .DLY_TAP_VALUE(cntrl_dly_incdec),
+    .DLY_TAP0_VAL(usr_dly_incdec[0]),
+    .DLY_TAP1_VAL(usr_dly_incdec[1]),
+    .DLY_TAP2_VAL(usr_dly_incdec[2]),
+    .DLY_TAP3_VAL(usr_dly_incdec[3])
+);
     
-muxp #(.DWIDTH(1),
-       .NUM_OF_BUS(NUM_DLY)
-      )
-     muxp_inst_adj (.d(usr_dly_adj),
-                .sel(usr_dly_adj),       // dly_adj
-                .dout(cntrl_dly_adj)
-        );
-
-muxp #(.DWIDTH(1),
-       .NUM_OF_BUS(NUM_DLY)
-      )
-     muxp_inst_ld (.d(usr_dly_ld),
-                .sel(usr_dly_ld),
-                .dout(cntrl_dly_ld)
-        );
+// muxp #(.DWIDTH(1),
+//        .NUM_OF_BUS(NUM_DLY)
+//       )
+//      muxp_inst_adj (.d(usr_dly_adj),
+//                 .sel(usr_dly_adj),       // dly_adj
+//                 .dout(cntrl_dly_adj)
+//         );
 
 
-muxp #(.DWIDTH(ADDR_WIDTH),
-       .NUM_OF_BUS(NUM_DLY)
-      )
-     muxp_dly_addr (.d(dly_site_addr_bus),
-                    .sel(usr_dly_ld | usr_dly_adj),       // dly_adj || dly_ld
-                    .dout(f2g_dly_addr)
-                );
+DLY_VALUE_MUX MUXP_INST_ADJ (
+    .DLY_ADDR(usr_dly_adj_binary),
+    .DLY_TAP_VALUE(cntrl_dly_adj),
+    .DLY_TAP0_VAL(usr_dly_adj[0]),
+    .DLY_TAP1_VAL(usr_dly_adj[1]),
+    .DLY_TAP2_VAL(usr_dly_adj[2]),
+    .DLY_TAP3_VAL(usr_dly_adj[3])
+);
 
-one2x_decoder #(.DWIDTH(DLY_TAP_WIDTH),
-                .NUM_OF_OBUS(NUM_DLY)
-                )
-   one2x_decoder_inst (.din(cntrl_dly_tap_value),
-                       .sel(usr_dly_ld_en | usr_dly_adj),
-                       .dout(usr_dly_tap_value_out)
-                        );
+// muxp #(.DWIDTH(1),
+//        .NUM_OF_BUS(NUM_DLY)
+//       )
+//      muxp_inst_ld (.d(usr_dly_ld),
+//                 .sel(usr_dly_ld),
+//                 .dout(cntrl_dly_ld)
+//         );
+
+DLY_VALUE_MUX MUXP_INST_LD (
+    .DLY_ADDR(usr_dly_ld_binary),
+    .DLY_TAP_VALUE(cntrl_dly_ld),
+    .DLY_TAP0_VAL(usr_dly_ld[0]),
+    .DLY_TAP1_VAL(usr_dly_ld[1]),
+    .DLY_TAP2_VAL(usr_dly_ld[2]),
+    .DLY_TAP3_VAL(usr_dly_ld[3])
+);   
+
+
+// muxp #(.DWIDTH(ADDR_WIDTH),
+//        .NUM_OF_BUS(NUM_DLY)
+//       )
+//      muxp_dly_addr (.d(dly_site_addr_bus),
+//                     .sel(usr_dly_ld | usr_dly_adj),       // dly_adj || dly_ld
+//                     .dout(f2g_dly_addr)
+//                 );
+
+DLY_VALUE_MUX MUXP_INST_ADDR (
+    .DLY_ADDR(usr_dly_ld_binary | usr_dly_adj_binary),
+    .DLY_TAP_VALUE(f2g_dly_addr),
+    .DLY_TAP0_VAL(dly_site_addr_bus[4:0]),
+    .DLY_TAP1_VAL(dly_site_addr_bus[9:5]),
+    .DLY_TAP2_VAL(dly_site_addr_bus[14:10]),
+    .DLY_TAP3_VAL(dly_site_addr_bus[19:15])
+);  
+
+// one2x_decoder #(.DWIDTH(DLY_TAP_WIDTH),
+//                 .NUM_OF_OBUS(NUM_DLY)
+//                 )
+//    one2x_decoder_inst (.din(cntrl_dly_tap_value),
+//                        .sel(usr_dly_ld_en | usr_dly_adj),
+//                        .dout(usr_dly_tap_value_out)
+//                         );
+
+
+
+
+DLY_SEL_DCODER DECODER_INST1(
+    .DLY_ADDR(usr_dly_ld_en_binary_or[1:0]),
+    .DLY_LOAD(cntrl_dly_tap_value[2]),
+    .DLY_ADJ(cntrl_dly_tap_value[1]),
+    .DLY_INCDEC(cntrl_dly_tap_value[0]),
+    .DLY0_CNTRL(usr_dly_tap_value_out[2:0]),
+    .DLY1_CNTRL(usr_dly_tap_value_out[8:6]),
+    .DLY2_CNTRL(usr_dly_tap_value_out[14:12]),
+    .DLY3_CNTRL(usr_dly_tap_value_out[20:18])
+);
+
+
+DLY_SEL_DCODER DECODER_INST2(
+    .DLY_ADDR(usr_dly_ld_en_binary_or[3:2]),
+    .DLY_LOAD(cntrl_dly_tap_value[5]),
+    .DLY_ADJ(cntrl_dly_tap_value[4]),
+    .DLY_INCDEC(cntrl_dly_tap_value[3]),
+    .DLY0_CNTRL(usr_dly_tap_value_out[5:3]),
+    .DLY1_CNTRL(usr_dly_tap_value_out[11:9]),
+    .DLY2_CNTRL(usr_dly_tap_value_out[17:15]),
+    .DLY3_CNTRL(usr_dly_tap_value_out[23:21])
+);
                         
 assign usr_dly_ld_en = usr_rd_dly_value ^ usr_dly_ld;
+wire [4:0] or_wire;
+assign or_wire = usr_dly_ld_en | usr_dly_adj;
     
 // This generates the assign delay site address concatenated as a bus
 generate
