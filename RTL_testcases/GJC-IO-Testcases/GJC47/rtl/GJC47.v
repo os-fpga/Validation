@@ -107,49 +107,101 @@ module GJC47 #(
     CLK_BUF clock_buffer (clk_i,clk_buf_i);
 	
 	// Hardware Multiplexer for DLY_TAP_VALUE
-	muxp #(
-		.DWIDTH(DLY_TAP_WIDTH),
-        .NUM_OF_BUS(NUM_DLY)
-		)
-    muxp_inst1(
-		.d(slice),		// input [DWIDTH*NUM_OF_BUS-1:0] d,
-		.sel(1 << f2g_dly_addr_reg2),		// input [NUM_OF_BUS-1:0] sel,
-		.dout(g2f_rx_dly_tap)	// output reg [DWIDTH-1:0] dout
-		);
+	// muxp #(
+	// 	.DWIDTH(DLY_TAP_WIDTH),
+    //     .NUM_OF_BUS(NUM_DLY)
+	// 	)
+    // muxp_inst1(
+	// 	.d(slice),		// input [DWIDTH*NUM_OF_BUS-1:0] d,
+	// 	.sel(1 << f2g_dly_addr_reg2),		// input [NUM_OF_BUS-1:0] sel,
+	// 	.dout(g2f_rx_dly_tap)	// output reg [DWIDTH-1:0] dout
+	// 	);
+
+	DLY_VALUE_MUX muxp_inst1 (
+		.DLY_ADDR(f2g_dly_addr_reg2),
+		.DLY_TAP_VALUE(g2f_rx_dly_tap),
+		.DLY_TAP0_VAL(slice[5:0]),
+		.DLY_TAP1_VAL(slice[11:6]),
+		.DLY_TAP2_VAL(slice[17:12]),
+		.DLY_TAP3_VAL(slice[23:18]),
+		.DLY_TAP4_VAL(slice[29:24]),
+		.DLY_TAP5_VAL(slice[35:30]),
+		.DLY_TAP6_VAL(slice[41:36]),
+		.DLY_TAP7_VAL(slice[47:42]),
+		.DLY_TAP8_VAL(slice[53:48]),
+		.DLY_TAP9_VAL(slice[59:54]),
+		.DLY_TAP10_VAL(slice[65:60]),
+		.DLY_TAP11_VAL(slice[71:66]),
+		.DLY_TAP12_VAL(slice[77:72]),
+		.DLY_TAP13_VAL(slice[83:78]),
+		.DLY_TAP14_VAL(slice[89:84]),
+		.DLY_TAP15_VAL(slice[95:90]),
+		.DLY_TAP16_VAL(slice[101:96]),
+		.DLY_TAP17_VAL(slice[107:102]),
+		.DLY_TAP18_VAL(slice[113:108]),
+		.DLY_TAP19_VAL(slice[119:114])
+	);
 	
 	// Hardware Decider for DLY Control	
 	wire usr_dly_incdec_out, usr_dly_ld_out, usr_dly_adj_out;
 	wire [19:0] f2g_trx_dly_inc_out, f2g_trx_dly_ld_out, f2g_trx_dly_adj_out;
-	one2x_decoder #(
-		.DWIDTH(1),
-		.NUM_OF_OBUS(NUM_DLY)
-		)
-    one2x_decoder_inst1 (
-		.din ({f2g_trx_dly_inc}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
-		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
-		.dout (f2g_trx_dly_inc_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
-		);
+	// one2x_decoder #(
+	// 	.DWIDTH(1),
+	// 	.NUM_OF_OBUS(NUM_DLY)
+	// 	)
+    // one2x_decoder_inst1 (
+	// 	.din ({f2g_trx_dly_inc}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+	// 	.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+	// 	.dout (f2g_trx_dly_inc_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+	// 	);
+
+	DLY_SEL_DCODER inst1 (
+		.DLY_ADDR(f2g_dly_addr),
+		.DLY_LOAD(f2g_trx_dly_ld),
+		.DLY_ADJ(f2g_trx_dly_adj),
+		.DLY_INCDEC(f2g_trx_dly_inc),
+		.DLY0_CNTRL({f2g_trx_dly_ld_out[0], f2g_trx_dly_adj_out[0], f2g_trx_dly_inc_out[0]}),
+		.DLY1_CNTRL({f2g_trx_dly_ld_out[1], f2g_trx_dly_adj_out[1], f2g_trx_dly_inc_out[1]}),
+		.DLY2_CNTRL({f2g_trx_dly_ld_out[2], f2g_trx_dly_adj_out[2], f2g_trx_dly_inc_out[2]}),
+		.DLY3_CNTRL({f2g_trx_dly_ld_out[3], f2g_trx_dly_adj_out[3], f2g_trx_dly_inc_out[3]}),
+		.DLY4_CNTRL({f2g_trx_dly_ld_out[4], f2g_trx_dly_adj_out[4], f2g_trx_dly_inc_out[4]}),
+		.DLY5_CNTRL({f2g_trx_dly_ld_out[5], f2g_trx_dly_adj_out[5], f2g_trx_dly_inc_out[5]}),
+		.DLY6_CNTRL({f2g_trx_dly_ld_out[6], f2g_trx_dly_adj_out[6], f2g_trx_dly_inc_out[6]}),
+		.DLY7_CNTRL({f2g_trx_dly_ld_out[7], f2g_trx_dly_adj_out[7], f2g_trx_dly_inc_out[7]}),
+		.DLY8_CNTRL({f2g_trx_dly_ld_out[8], f2g_trx_dly_adj_out[8], f2g_trx_dly_inc_out[8]}),
+		.DLY9_CNTRL({f2g_trx_dly_ld_out[9], f2g_trx_dly_adj_out[9], f2g_trx_dly_inc_out[9]}),
+		.DLY10_CNTRL({f2g_trx_dly_ld_out[10], f2g_trx_dly_adj_out[10], f2g_trx_dly_inc_out[10]}),
+		.DLY11_CNTRL({f2g_trx_dly_ld_out[11], f2g_trx_dly_adj_out[11], f2g_trx_dly_inc_out[11]}),
+		.DLY12_CNTRL({f2g_trx_dly_ld_out[12], f2g_trx_dly_adj_out[12], f2g_trx_dly_inc_out[12]}),
+		.DLY13_CNTRL({f2g_trx_dly_ld_out[13], f2g_trx_dly_adj_out[13], f2g_trx_dly_inc_out[13]}),
+		.DLY14_CNTRL({f2g_trx_dly_ld_out[14], f2g_trx_dly_adj_out[14], f2g_trx_dly_inc_out[14]}),
+		.DLY15_CNTRL({f2g_trx_dly_ld_out[15], f2g_trx_dly_adj_out[15], f2g_trx_dly_inc_out[15]}),
+		.DLY16_CNTRL({f2g_trx_dly_ld_out[16], f2g_trx_dly_adj_out[16], f2g_trx_dly_inc_out[16]}),
+		.DLY17_CNTRL({f2g_trx_dly_ld_out[17], f2g_trx_dly_adj_out[17], f2g_trx_dly_inc_out[17]}),
+		.DLY18_CNTRL({f2g_trx_dly_ld_out[18], f2g_trx_dly_adj_out[18], f2g_trx_dly_inc_out[18]}),
+		.DLY19_CNTRL({f2g_trx_dly_ld_out[19], f2g_trx_dly_adj_out[19], f2g_trx_dly_inc_out[19]})
+	);
 
 
-one2x_decoder #(
-		.DWIDTH(1),
-		.NUM_OF_OBUS(NUM_DLY)
-		)
-    one2x_decoder_inst12 (
-		.din ({ f2g_trx_dly_ld}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
-		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
-		.dout (f2g_trx_dly_ld_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
-		);
+// one2x_decoder #(
+// 		.DWIDTH(1),
+// 		.NUM_OF_OBUS(NUM_DLY)
+// 		)
+//     one2x_decoder_inst12 (
+// 		.din ({ f2g_trx_dly_ld}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+// 		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+// 		.dout (f2g_trx_dly_ld_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+// 		);
 
-		one2x_decoder #(
-		.DWIDTH(1),
-		.NUM_OF_OBUS(NUM_DLY)
-		)
-    one2x_decoder_inst13 (
-		.din ({f2g_trx_dly_adj}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
-		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
-		.dout (f2g_trx_dly_adj_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
-		);
+// 		one2x_decoder #(
+// 		.DWIDTH(1),
+// 		.NUM_OF_OBUS(NUM_DLY)
+// 		)
+//     one2x_decoder_inst13 (
+// 		.din ({f2g_trx_dly_adj}),	// input [DWIDTH-1:0] din,    // Input Output Replaced with each other
+// 		.sel (1 << f2g_dly_addr),	// input [NUM_OF_OBUS-1:0] sel,      
+// 		.dout (f2g_trx_dly_adj_out)	// output reg [(DWIDTH*NUM_OF_OBUS)-1:0] dout
+// 		);
 	wire [3:0] twnt_to_fr_adj, twnt_to_fr_inc, twnt_to_fr_ld;
 
 	one_hot_to_output onehot1(
@@ -443,7 +495,8 @@ one2x_decoder #(
 			
         end
     endgenerate
-
+reg [DLY_SEL_WIDTH-1:0]  sel_dly_reg1, sel_dly_reg2, sel_dly_reg3;
+reg  [ADDR_WIDTH-1:0] f2g_dly_addr_reg1, f2g_dly_addr_reg2;
 wire [(DLY_TAP_WIDTH*20)-1:0] slice;
 slice_assignment_with_addr #(
 	.WIDTH(6)
@@ -454,8 +507,6 @@ slice_assignment_with_addr #(
 	.addr(f2g_dly_addr_reg2)
 );
 
-reg [DLY_SEL_WIDTH-1:0]  sel_dly_reg1, sel_dly_reg2, sel_dly_reg3;
-reg  [ADDR_WIDTH-1:0] f2g_dly_addr_reg1, f2g_dly_addr_reg2;
 always @(posedge clk_buf_i) begin
 	sel_dly_reg1 <= sel_dly_buf;
 	sel_dly_reg2 <= sel_dly_reg1;
