@@ -27,7 +27,6 @@ module GJC49 #(parameter WIDTH = 4) (
   wire channel_bond_sync_in_ibuf;
   wire pll_clk_d3;
   wire clk_pll_in;
-  wire out_en_ofab;
   wire clk_in_clkbuf;
 
   I_BUF i_buf_inst1 (.I(clk_in),.EN(1),.O(clk_in_ibuf));
@@ -70,13 +69,8 @@ module GJC49 #(parameter WIDTH = 4) (
 
   O_BUFT inst_o_buft (
     .I(data_out_dff),
-    .T(out_en_ofab),
+    .T(out_en),
     .O(data_out)
-  );
-
-  O_FAB o_fab_inst (
-    .I(out_en),
-    .O(out_en_ofab)
   );
 
   always @ (posedge clk_in_clkbuf or negedge reset_ibuf)
