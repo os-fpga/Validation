@@ -60,10 +60,22 @@ module IOBUF (O, IO, I, T);
     //tri0 GTS = glbl.GTS;
     tri0 GTS = 0;
 
-    or O1 (ts, GTS, T);
-    bufif0 T1 (IO, I, ts);
+    // or O1 (ts, GTS, T);
+    // bufif0 T1 (IO, I, ts);
 
-    buf B1 (O, IO);
+    // buf B1 (O, IO);
+
+    always @(*) begin
+        if (T) begin
+            force IO = I;
+        end else begin
+            release IO;
+        end
+    end
+
+    always @(*) begin
+        O = IO;
+    end
 
     initial begin
 
