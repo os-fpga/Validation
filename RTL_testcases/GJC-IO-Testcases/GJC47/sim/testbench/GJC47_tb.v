@@ -3,9 +3,9 @@
 module GJC47_tb;
 
   // Parameters
-  localparam  DELAY             = 5;
+  localparam  DELAY             = 4;
   localparam  NUM_GB_SITES      = 20;
-  localparam  DLY_LOC           = 20'b11110000000000000000;
+  localparam  DLY_LOC           = 20'b01010000000010000010;
   localparam  ADDR_WIDTH        = 5;
   localparam  DLY_TAP_WIDTH     = 6;
   localparam  NUM_DLY           = 4;
