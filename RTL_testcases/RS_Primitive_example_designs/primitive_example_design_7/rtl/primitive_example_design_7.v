@@ -19,7 +19,7 @@ module primitive_example_design_7(haddr,burst,prot,size,trans,clk,reset,read_wri
 
     wire [WIDTH-1:0] c;
     wire ready_o;
-    wire hresp;
+    wire hresp_o;
     reg hw_reg_out;
     reg [WIDTH-1:0] ram_data_in;
     wire [2:0] size_ibuf,burst_ibuf,trans_ibuf;
@@ -39,7 +39,7 @@ module primitive_example_design_7(haddr,burst,prot,size,trans,clk,reset,read_wri
         .HWWRITE(hw_reg_out),
         .HRDATA(ram_data_in),
         .HREADY(ready_o),
-        .HRESP(hresp),
+        .HRESP(hresp_o),
         .HCLK(clk)
     );
 
@@ -61,7 +61,7 @@ module primitive_example_design_7(haddr,burst,prot,size,trans,clk,reset,read_wri
     I_BUF ibuf_inst12 (.I(trans[1]),.EN(ibuf13_en),.O(trans_ibuf[1]));
     I_BUF ibuf_inst13 (.I(trans[2]),.EN(ibuf14_en),.O(trans_ibuf[2]));
 
-    register #(1) register_inst2 (.clk(clk),.d(hresp),.rst(reset),.q(hresp_w));
+    register #(1) register_inst2 (.clk(clk),.d(hresp_o),.rst(reset),.q(hresp_w));
     register #(1) register_inst3 (.clk(clk),.d(ready_o),.rst(reset),.q(ready_w));
 
     O_BUF o_buf_inst1 (.I(hresp_w),.O(hresp));
