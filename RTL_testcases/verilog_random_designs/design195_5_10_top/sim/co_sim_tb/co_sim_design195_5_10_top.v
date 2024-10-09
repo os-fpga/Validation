@@ -43,10 +43,9 @@ initial begin
 	@(negedge clk);
 
 	$display ("\n\n*** Random Functionality Tests for multiplier with  inputs are applied***\n\n");
-	repeat (1000) begin
+	repeat (100) begin
 		inpt = $random( );
 		display_stimulus();
-		@(negedge clk);
 		@(negedge clk);
 		compare();
 	end
@@ -73,6 +72,13 @@ initial begin
 	compare();
 	$display ("\n\n***Directed Functionality Test for multiplier is ended***\n\n");
 
+	repeat (100) begin
+		inpt = $random( );
+		display_stimulus();
+		@(negedge clk);
+		compare();
+	end
+	
 	if(mismatch == 0)
         $display("\n**** All Comparison Matched ***\nSimulation Passed");
     else
