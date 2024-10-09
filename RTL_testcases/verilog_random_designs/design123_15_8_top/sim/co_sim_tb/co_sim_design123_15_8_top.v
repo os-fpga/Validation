@@ -47,7 +47,7 @@ initial begin
 		inpt = $random( );
 		display_stimulus();
 		@(negedge clk);
-		@(negedge clk);
+		// @(negedge clk);
 		compare();
 	end
 	$display ("\n\n***Random Functionality Tests for multiplier with  inputs are ended***\n\n");
