@@ -105,16 +105,6 @@ always @(*) begin
 end
 
 
-//drive control signal based upon active delay load control
-
-// muxp #(.DWIDTH(1),
-//        .NUM_OF_BUS(NUM_DLY)
-//        )
-//  muxp_inst_incdec (.d(usr_dly_incdec),
-//             .sel(usr_dly_adj),       // dly_adj
-//             .dout(cntrl_dly_incdec)
-//     );
-
 DLY_VALUE_MUX MUXP_INST_INCDEC (
     .DLY_ADDR(usr_dly_adj_binary),
     .DLY_TAP_VALUE(cntrl_dly_incdec),
@@ -123,14 +113,6 @@ DLY_VALUE_MUX MUXP_INST_INCDEC (
     .DLY_TAP2_VAL(usr_dly_incdec[2]),
     .DLY_TAP3_VAL(usr_dly_incdec[3])
 );
-    
-// muxp #(.DWIDTH(1),
-//        .NUM_OF_BUS(NUM_DLY)
-//       )
-//      muxp_inst_adj (.d(usr_dly_adj),
-//                 .sel(usr_dly_adj),       // dly_adj
-//                 .dout(cntrl_dly_adj)
-//         );
 
 
 DLY_VALUE_MUX MUXP_INST_ADJ (
@@ -142,14 +124,6 @@ DLY_VALUE_MUX MUXP_INST_ADJ (
     .DLY_TAP3_VAL(usr_dly_adj[3])
 );
 
-// muxp #(.DWIDTH(1),
-//        .NUM_OF_BUS(NUM_DLY)
-//       )
-//      muxp_inst_ld (.d(usr_dly_ld),
-//                 .sel(usr_dly_ld),
-//                 .dout(cntrl_dly_ld)
-//         );
-
 DLY_VALUE_MUX MUXP_INST_LD (
     .DLY_ADDR(usr_dly_ld_binary),
     .DLY_TAP_VALUE(cntrl_dly_ld),
@@ -159,15 +133,6 @@ DLY_VALUE_MUX MUXP_INST_LD (
     .DLY_TAP3_VAL(usr_dly_ld[3])
 );   
 
-
-// muxp #(.DWIDTH(ADDR_WIDTH),
-//        .NUM_OF_BUS(NUM_DLY)
-//       )
-//      muxp_dly_addr (.d(dly_site_addr_bus),
-//                     .sel(usr_dly_ld | usr_dly_adj),       // dly_adj || dly_ld
-//                     .dout(f2g_dly_addr)
-//                 );
-
 DLY_VALUE_MUX MUXP_INST_ADDR (
     .DLY_ADDR(usr_dly_ld_binary | usr_dly_adj_binary),
     .DLY_TAP_VALUE(f2g_dly_addr),
@@ -176,17 +141,6 @@ DLY_VALUE_MUX MUXP_INST_ADDR (
     .DLY_TAP2_VAL(dly_site_addr_bus[14:10]),
     .DLY_TAP3_VAL(dly_site_addr_bus[19:15])
 );  
-
-// one2x_decoder #(.DWIDTH(DLY_TAP_WIDTH),
-//                 .NUM_OF_OBUS(NUM_DLY)
-//                 )
-//    one2x_decoder_inst (.din(cntrl_dly_tap_value),
-//                        .sel(usr_dly_ld_en | usr_dly_adj),
-//                        .dout(usr_dly_tap_value_out)
-//                         );
-
-
-
 
 DLY_SEL_DCODER DECODER_INST1(
     .DLY_ADDR(usr_dly_ld_en_binary_or[1:0]),
