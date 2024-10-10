@@ -187,7 +187,7 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/module_i2c.v">>raptor_tcl.tcl
     ##vary design to design
 
-    echo "set_top_module module_i2c">>raptor_tcl.tcl 
+    echo "set_top_module i2c">>raptor_tcl.tcl 
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
@@ -258,6 +258,10 @@ parse_cga exit 1; }
         else
             echo ""
         fi
+    echo "clear_simulation_files">>raptor_tcl.tcl 
+    echo "setup_lec_sim">>raptor_tcl.tcl  
+    [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
+    [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  

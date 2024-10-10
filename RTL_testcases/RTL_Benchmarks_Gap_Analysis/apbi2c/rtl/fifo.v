@@ -13,7 +13,7 @@
 ////
 //// Description
 ////
-//// Implementation of APB IP core according to
+//// Implementation of APB IP core accordata_ing to
 ////
 //// apbi2c_spec IP core specification document.
 ////
@@ -89,9 +89,9 @@ module fifo
 
 	reg [DWIDTH-1:0] mem [0:2**AWIDTH-1];
 	//parameter integer DEPTH = 1 << AWIDTH;
-	//wire [DWIDTH-1:0] data_ram_out;
-	//wire wr_en_ram; 
-	//wire rd_en_ram;	
+	wire [DWIDTH-1:0] data_ram_out;
+	wire wr_en_ram; 
+	wire rd_en_ram;	
 
 	reg [AWIDTH-1:0] wr_ptr;
 	reg [AWIDTH-1:0] rd_ptr;
@@ -109,7 +109,7 @@ module fifo
 		end
 		else if (wr_en && !f_full)
 		begin
-			mem[wr_ptr]<=data_in;
+			// mem[wr_ptr]<=data_in;
 			wr_ptr <= wr;
 		end
 	end
@@ -154,14 +154,13 @@ module fifo
 	assign w_counter = (rd_en && !f_empty && !wr_en)? counter - 4'd1:
 			   (wr_en && !f_full && !rd_en)? counter + 4'd1:
 			    w_counter + 4'd0;
-	//assign wr_en_ram = wr_en;
-	//assign rd_en_ram = rd_en;
-	assign data_out = mem[rd_ptr];//data_ram_out;
-/*
+	assign wr_en_ram = wr_en;
+	assign rd_en_ram = rd_en;
+	assign data_out = data_ram_out;
+
 dp_ram #(DWIDTH, AWIDTH)
 RAM_1 	(
 		.clock(clock),
-		.reset(reset),
 		.wr_en(wr_en_ram),
 		.rd_en(rd_en_ram),
 		.data_in(data_in),
@@ -169,5 +168,33 @@ RAM_1 	(
 		.data_out(data_ram_out),
 		.rd_addr(rd_ptr)
 	);
-*/
+
+endmodule
+
+module dp_ram #(parameter DWIDTH=32, parameter AWIDTH=4) (clock, wr_en, rd_en, rd_addr, wr_addr, data_in, data_out);
+    input clock, wr_en, rd_en;
+    input [AWIDTH-1:0] rd_addr, wr_addr;
+    input [DWIDTH-1:0] data_in;
+    output reg [DWIDTH-1:0] data_out;
+
+    reg [AWIDTH-1:0] rd_addr_reg;
+    reg [DWIDTH-1:0] ram [2**AWIDTH:0];
+
+    always @(posedge clock)
+    begin
+        if (!wr_en) begin
+            ram[wr_addr] <= data_in;
+        end
+        if (!rd_en) begin
+            data_out <= ram[rd_addr];
+        end
+    end
+
+	integer i;
+	initial begin
+		for (i = 0; i < 2**AWIDTH; i = i + 1) begin
+			ram[i] = {DWIDTH{1'b0}};
+		end
+	end
+
 endmodule
