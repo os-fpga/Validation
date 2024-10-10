@@ -96,7 +96,7 @@ module module_i2c#(
 		 input fifo_rx_f_full,
 		 input fifo_rx_f_empty,
 		 output reg fifo_rx_wr_en,
-		 output reg [DWIDTH-1:0] fifo_rx_data_in, 
+		 output reg [DWIDTH-1:0] fifo_rx_data_in = 'b0, 
 
 		//INTERFACE WITH REGISTER CONFIGURATION
 		 input [AWIDTH-1:0] DATA_CONFIG_REG,
