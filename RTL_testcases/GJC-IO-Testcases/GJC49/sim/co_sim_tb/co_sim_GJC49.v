@@ -11,6 +11,7 @@ module co_sim_GJC49;
     reg 		channel_bond_sync_in;
     wire 		data_out	,	data_out_netlist;
     reg 		load_word;
+	reg 		s;
 	integer		mismatch	=	0;
 
 GJC49	golden (.*);
@@ -36,19 +37,21 @@ end
 //Reset Stimulus generation
 initial begin
 	$display ("***Reset Test is applied***");
-	reset <= 0;
-	{i2, i1, channel_bond_sync_in, load_word } <= 'd0;
-	repeat (2) @(negedge clk_in);
 	reset <= 1;
+	s <= 0;
+	load_word <= 1;
+	{i2, i1, channel_bond_sync_in } <= 'd0;
+	repeat (2) @(negedge clk_in);
+	s <= 1;
 	@(negedge clk_in);
 	compare();
 	$display ("***Reset Test is ended***");
 	//Random stimulus generation
-	repeat(200) @ (negedge clk_in) begin
+	repeat(2000) @ (negedge clk_in) begin
 		i2                   <= $urandom();
 		i1                   <= $urandom();
-		channel_bond_sync_in <= $urandom();
-		load_word            <= $urandom();
+		channel_bond_sync_in <= 1;
+		load_word            <= 1;
 		compare();
 end
 
