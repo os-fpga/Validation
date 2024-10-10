@@ -10,7 +10,8 @@ module co_sim_GJC50;
     wire 		dpa_err	,	dpa_err_netlist;
     wire 		dpa_loc	,	dpa_loc_netlist;
     reg 		i1;
-    reg 		i2;
+    reg 		[3:0] i2;
+	reg 		enable;
 	integer		mismatch	=	0;
 
 GJC50	golden (.*);
@@ -30,15 +31,16 @@ end
 initial begin
 	$display ("***Reset Test is applied***");
 	reset <= 0;
-	{bitslip_adj, i1, i2 } <= 'd0;
+	{bitslip_adj, i1, i2, enable} <= 'd0;
 	repeat (2) @(negedge clk_in);
 	bitslip_adj <= 1;
 	reset <= 1;
+	enable <= 1;
 	@(negedge clk_in);
 	compare();
 	$display ("***Reset Test is ended***");
 	//Random stimulus generation
-	repeat(100) @ (negedge clk_in) begin
+	repeat(2000) @ (negedge clk_in) begin
 		i1                   <= $urandom();
 		i2                   <= $urandom();
 		compare();
@@ -47,7 +49,7 @@ end
 	// ----------- Corner Case stimulus generation -----------
 	repeat (2) @(negedge clk_in);
 	i1                     <= 1'd1;
-	i2                     <= 1'd1;
+	i2                     <= 4'd1;
 	compare();
 
 	if(mismatch == 0)
