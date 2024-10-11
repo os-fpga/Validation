@@ -1,5 +1,6 @@
 set_pin_loc clk_in HP_1_CC_18_9P
 set_pin_loc reset HP_1_2_1P
+set_pin_loc enable HP_1_0_0P
 set_pin_loc i1 HP_1_4_2P
 set_pin_loc bitslip_adj HP_1_6_3P
 set_pin_loc dpa_loc HP_1_8_4P
