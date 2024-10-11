@@ -8,5 +8,9 @@ set_pin_loc i2[0] HP_1_12_6P
 set_pin_loc i2[1] HP_1_14_7P
 set_pin_loc i2[2] HP_1_22_11P
 set_pin_loc i2[3] HP_1_24_12P
+set_pin_loc load_word HP_1_26_13P
+set_pin_loc channel_bond_sync_in HP_1_28_14P
+set_pin_loc s HP_1_30_15P
 
 set_pin_loc data_out HP_1_20_10P
+set_pin_loc CHANNEL_BOND_SYNC_OUT HP_1_32_16P
