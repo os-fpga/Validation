@@ -1,0 +1,8 @@
+set_pin_loc rst HR_1_0_0P
+set_pin_loc rts HR_1_2_1P
+set_pin_loc txd HR_1_4_2P
+set_pin_loc clkin HR_1_6_3P
+set_pin_loc cts HR_1_8_4P
+set_pin_loc txcout HR_1_10_5P
+set_pin_loc txlen HR_1_12_6P
+set_pin_loc mdo HR_1_14_7P

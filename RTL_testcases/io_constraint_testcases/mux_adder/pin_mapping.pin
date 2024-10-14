@@ -1,0 +1,18 @@
+set_pin_loc m[0] HR_1_0_0P
+set_pin_loc m[1] HR_1_2_1P
+set_pin_loc m[2] HR_1_4_2P
+set_pin_loc m[3] HR_1_6_3P
+
+set_pin_loc n[0] HR_1_8_4P
+set_pin_loc n[1] HR_1_10_5P
+set_pin_loc n[2] HR_1_12_6P
+set_pin_loc n[3] HR_1_14_7P
+
+set_pin_loc pro[0] HR_3_8_4P
+set_pin_loc pro[1] HR_3_10_5P
+set_pin_loc pro[2] HR_3_12_6P
+set_pin_loc pro[3] HR_3_14_7P
+set_pin_loc pro[4] HR_3_16_8P
+set_pin_loc pro[5] HR_3_20_10P
+set_pin_loc pro[6] HR_3_22_11P
+set_pin_loc pro[7] HR_3_24_12P
