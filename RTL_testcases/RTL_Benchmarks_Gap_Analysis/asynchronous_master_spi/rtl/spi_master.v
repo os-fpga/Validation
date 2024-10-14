@@ -254,7 +254,7 @@ begin
         charreceivedn <= ~charreceivedn;
 end
 
-assign data = (rd) ? output_buffer : {WORD_LEN{1'bz}};
+assign data = (rd) ? output_buffer : {WORD_LEN{1'b0}};
 
 assign sck = (modeint[1])? ~sckint : sckint;
 assign mosi = (ss) ? 1'b1:_mosi;
