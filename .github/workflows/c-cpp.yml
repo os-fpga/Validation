@@ -1,0 +1,26 @@
+name: Auto PR Merge
+on:
+  #pull_request:
+  workflow_dispatch:
+jobs:
+  Auto_Merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+             sparse-checkout: '.github'
+      
+      - name: Try auto approve
+        if: github.actor == 'NadeemYaseen' || github.actor == 'zhergarvi' || github.actor == 'abdulhameed-akram'
+        run: |
+              urls=$(gh pr list --json url | jq -r '.[].url')
+              for url in $urls; do
+                  echo "Approve PR: $url"
+                  gh pr review --approve "$url"
+                  gh pr merge --auto -m "$url"
+              done
+        env:
+           GITHUB_TOKEN: ${{ secrets.APPROVE_PR }}
