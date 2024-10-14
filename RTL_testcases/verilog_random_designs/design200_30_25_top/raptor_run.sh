@@ -7,7 +7,7 @@ start=`date +%s`
 design="design200_30_25_top"
 ip_name="" #design_level
 #select tool (verilator, vcs, ghdl, iverilog)
-tool_name="verilator" 
+tool_name="iverilog" 
 
 #simulation stages
 post_synth_sim=true 
