@@ -28,7 +28,7 @@ initial	begin
 		data_i <= $urandom();
 		dly_inc_pulse_inv_buf <= $urandom();
 		enable_buf <= $urandom();
-		@ (negedge clk_i_buf);
+		repeat(3)@ (negedge clk_i_buf);
 		compare();
 	end
 

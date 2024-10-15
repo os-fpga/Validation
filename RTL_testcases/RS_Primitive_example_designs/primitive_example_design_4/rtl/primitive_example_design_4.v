@@ -1,7 +1,7 @@
 module primitive_example_design_4(
     input [2:0] in,
     input clk, rst,
-    input ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,
+    input ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en,
     output [2:0] q_n,
     output [2:0] q_p
     );
@@ -10,13 +10,15 @@ module primitive_example_design_4(
     wire rst_i_buf_out;
     wire [2:0] dffre_out;
     wire clk_buf_out;
+    wire clk_buf_i;
 
-    CLK_BUF clk_buf_inst (.I(clk),.O(clk_buf_out));
+    CLK_BUF clk_buf_inst (.I(clk_buf_i),.O(clk_buf_out));
 
     O_BUF_DS obuf_ds_inst1 (.I(dffre_out[0]),.O_P(q_p[0]),.O_N(q_n[0]));
     O_BUF_DS obuf_ds_inst2 (.I(dffre_out[1]),.O_P(q_p[1]),.O_N(q_n[1]));
     O_BUF_DS obuf_ds_inst3 (.I(dffre_out[2]),.O_P(q_p[2]),.O_N(q_n[2]));
     
+    I_BUF ibuf_inst0 (.I(clk),.EN(1'b1),.O(clk_buf_i));
     I_BUF ibuf_inst1 (.I(in[0]),.EN(ibuf2_en),.O(i_buf_out[0]));
     I_BUF ibuf_inst2 (.I(in[1]),.EN(ibuf3_en),.O(i_buf_out[1]));
     I_BUF ibuf_inst3 (.I(in[2]),.EN(ibuf4_en),.O(i_buf_out[2]));
