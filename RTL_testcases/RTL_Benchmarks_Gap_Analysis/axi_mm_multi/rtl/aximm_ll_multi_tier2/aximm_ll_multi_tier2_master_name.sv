@@ -38,6 +38,8 @@ module aximm_ll_multi_tier2_master_name  (
 
 );
 
+  wire user_tx_vld;
+
   // Connect Data
 
   assign user_tx_vld                        = 1'b1                               ; // user_tx_vld is unused
