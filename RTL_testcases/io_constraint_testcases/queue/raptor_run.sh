@@ -191,7 +191,8 @@ parse_cga exit 1; }
 
     ##vary design to design
     [ -z "$add_constraint_file" ] && echo "" || echo "add_constraint_file $add_constraint_file">>raptor_tcl.tcl 
-    
+    echo "add_constraint_file constraint.sdc">>raptor_tcl.tcl 
+
     if [ "$post_synth_sim" == true ] || [ "$post_route_sim" == true ] || [ "$bitstream_sim" == true ]; then
         echo "add_simulation_file ./sim/co_sim_tb/co_sim_$design.v ./rtl/$design.v">>raptor_tcl.tcl 
         echo "set_top_testbench co_sim_$design">>raptor_tcl.tcl 
@@ -257,7 +258,8 @@ parse_cga exit 1; }
             [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
             echo "clear_simulation_files">>raptor_tcl.tcl
             echo "setup_lec_sim 10">>raptor_tcl.tcl
-            echo "simulate timed_pnr icarus">>raptor_tcl.tcl
+            echo "simulate gate icarus">>raptor_tcl.tcl
+            echo "simulate pnr icarus">>raptor_tcl.tcl
         else
             echo ""
         fi
