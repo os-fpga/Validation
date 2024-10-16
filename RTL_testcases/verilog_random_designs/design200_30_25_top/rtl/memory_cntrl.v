@@ -27,17 +27,16 @@ always@(posedge clk)
          rd_addr<=0;
          wr_en<=0;
          rd_en<=0;
+         wr_data_mem<=0;
       end
       else 
       case(state) //synopsys full_case
          s0: 
             begin
-               wr_data_mem<=0;
-               reset_mem<=0;  
                if (wr_addr==10'b1111111111) begin
                   state<=s1;
-                  wr_addr<=0;
                   wr_en<=0;
+                  reset_mem<=0;  
                end
                else
                 begin 
@@ -50,10 +49,7 @@ always@(posedge clk)
          s1:
             begin
                rd_en<=1;
-               if(rd_addr == wr_addr)
-                  rd_addr<=wr_addr+1;
-               else 
-                  rd_addr<=rd_addr+1;
+               rd_addr<=rd_addr+1;
                state<=s1;
             end
          default: state<=s0;
@@ -95,14 +91,12 @@ output reg [DATA-1:0] rd_data_out);
 reg [DATA-1:0] mem [(2**ADDR)-1:0];
 
 always@(posedge clk) begin
-   if(!rst) begin
-      if(wr_en) begin
-         mem[wr_addr] <= wr_data_in;
+   if(wr_en) begin
+      mem[wr_addr] <= wr_data_in;
       end
    end
-end
    
-always@(posedge clk) begin
+always@(posedge clk or posedge rst) begin
    if(rst) begin 
       rd_data_out<=0; end
    else begin

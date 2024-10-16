@@ -21,9 +21,9 @@ module invertion
     assign bitwise_xor = data_in[31:24] ^ data_in[23:16];
 
     // Conditional operation on the upper 16 bits
-    assign conditional_invert = (data_in[31:16] == data_in[15:0]) ? ~data_in[15:0] : data_in[31:16];
+    assign conditional_invert = (data_in[31:16] == data_in[15:0]) ? data_in[15:0] : ~data_in[31:16];
 
-    always @(posedge clk) begin
+    always @(posedge clk or posedge rst) begin
         if (rst) begin
             data_out <= 0;  // Reset the entire output vector
         end else begin

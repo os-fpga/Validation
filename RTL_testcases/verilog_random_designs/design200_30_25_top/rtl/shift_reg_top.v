@@ -7,7 +7,7 @@ module shift_reg_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     reg enable;
     wire [WIDTH-1:0] d_out;
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             enable <= 0;
         else
@@ -29,12 +29,12 @@ module shift_reg #(parameter WIDTH=32) (
     );
 //    wire d;
 //    assign d=1;
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             data_out <= 0;
         else begin
             if (en)
-                data_out <= {data_out[WIDTH-1:0],data_in[WIDTH-16:0]};
+                data_out <= {data_out[WIDTH-17:0],data_in[WIDTH-17:0]};
             else
                 data_out <= data_in;
         end

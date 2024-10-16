@@ -9,8 +9,8 @@ module full_adder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     wire cout;
     
         
-    always @ (posedge clk) begin
-        if (!rst)
+    always @ (posedge clk or posedge rst) begin
+        if (rst)
             cin <= 0;
         else
             cin <= 1;
@@ -35,7 +35,7 @@ module full_adder #(parameter WIDTH=32)(
     reg [15:0] a,b;
     reg c;
     
-    always @(posedge clk) begin
+    always @(posedge clk or posedge rst) begin
         if (rst) begin
             a<=0;
             b<=0;
