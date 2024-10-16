@@ -4,7 +4,6 @@ module co_sim_primitive_example_design_4;
   reg [2:0] in;
   reg  clk;
   reg  rst;
-  reg  ibuf1_en;
   reg  ibuf2_en;
   reg  ibuf3_en;
   reg  ibuf4_en;
@@ -14,22 +13,21 @@ module co_sim_primitive_example_design_4;
 
 	integer mismatch=0;
 
-  primitive_example_design_4 golden (.in(in),.clk(clk),.rst(rst),.ibuf1_en(ibuf1_en),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n),.q_p(q_p));
+  primitive_example_design_4 golden (.in(in),.clk(clk),.rst(rst),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n),.q_p(q_p));
   `ifdef PNR
-  primitive_example_design_4_post_route netlist (.in(in),.clk(clk),.rst(rst),.ibuf1_en(ibuf1_en),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n_netlist),.q_p(q_p_netlist));
+  primitive_example_design_4_post_route netlist (.in(in),.clk(clk),.rst(rst),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n_netlist),.q_p(q_p_netlist));
   `else
-  primitive_example_design_4_post_synth netlist (.in(in),.clk(clk),.rst(rst),.ibuf1_en(ibuf1_en),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n_netlist),.q_p(q_p_netlist));
+  primitive_example_design_4_post_synth netlist (.in(in),.clk(clk),.rst(rst),.ibuf2_en(ibuf2_en),.ibuf3_en(ibuf3_en),.ibuf4_en(ibuf4_en),.ibuf5_en(ibuf5_en),.q_n(q_n_netlist),.q_p(q_p_netlist));
   `endif
 
   always #1  clk = ! clk ;
 
   initial begin
-    {in,clk,rst,ibuf1_en,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en}<='b0;
+    {in,clk,rst,ibuf2_en,ibuf3_en,ibuf4_en,ibuf5_en}<='b0;
 
     repeat(10)@(negedge clk);
     in<=3'b111;
     rst<=1;
-    ibuf1_en<=1;
     ibuf2_en<=1;
     ibuf3_en<=1;
     ibuf4_en<=1;
