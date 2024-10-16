@@ -9,7 +9,7 @@ module paritygenerator_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     wire parity;
     
         
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             data_out <= 0;
         else
@@ -33,7 +33,7 @@ module paritygenerator #(parameter WIDTH=32)(
     
     reg [WIDTH-1:0] data_out_reg;
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             data_out <= 0;
         else

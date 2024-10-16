@@ -8,7 +8,7 @@ module single_port_ram_top #(parameter WIDTH = 32)(
 	wire [5:0] addr = data_in[6:1];
 	wire we = data_in[0];
 
-	always @ (posedge clk) begin
+	always @ (posedge clk or posedge rst) begin
 	if (rst)
 		data_out <= 0;
 	else

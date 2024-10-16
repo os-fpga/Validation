@@ -5,7 +5,7 @@ module mod_n_counter #(parameter N=256, parameter WIDTH = 32)(
     output reg [WIDTH-1:0] data_out
     );
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             data_out <= 0;
         else begin
