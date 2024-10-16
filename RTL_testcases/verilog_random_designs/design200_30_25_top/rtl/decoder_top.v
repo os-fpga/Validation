@@ -9,7 +9,7 @@ module decoder_top #(parameter WIDTH=32) (clk,rst,data_in,data_out);
     reg enable;
     wire [WIDTH-1:0] d_out;
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             enable <= 0;
         else
@@ -31,7 +31,7 @@ module decoder #(parameter WIDTH=32)(
     );
     reg [WIDTH-1:0 ] data_out_w;
     
-    always @ (posedge clk) begin
+    always @ (posedge clk or posedge rst) begin
         if (rst)
             data_out <= 0;
         else
@@ -43,14 +43,14 @@ module decoder #(parameter WIDTH=32)(
     
     always @ (data_in) begin
         case(data_in[2:0])
-            3'b000: data_out_w = 32'b11111111111111111111111111111110;
-            3'b001: data_out_w = 32'b11111111111111111111111111111101;
-            3'b010: data_out_w = 32'b11111111111111111111111111111011;
-            3'b011: data_out_w = 32'b11111111111111111111111111110111;
-            3'b100: data_out_w = 32'b11111111111111111111111111101111;
-            3'b101: data_out_w = 32'b11111111111111111111111111011111;
-            3'b110: data_out_w = 32'b11111111111111111111111110111111;
-            3'b111: data_out_w = 32'b11111111111111111111111101111111;
+            3'b000: data_out_w = 32'b10111111111110111111111111111110;
+            3'b001: data_out_w = 32'b11011111111110111111111111111101;
+            3'b010: data_out_w = 32'b11101111111110111111111111111011;
+            3'b011: data_out_w = 32'b11110111111110111111111111110111;
+            3'b100: data_out_w = 32'b11111011111110111111111111101111;
+            3'b101: data_out_w = 32'b11111101111110111111111111011111;
+            3'b110: data_out_w = 32'b11111110111110111111111110111111;
+            3'b111: data_out_w = 32'b11111111011110111111111101111111;
 
             default: data_out_w = 32'b11111111111111111111111111111111;
          endcase

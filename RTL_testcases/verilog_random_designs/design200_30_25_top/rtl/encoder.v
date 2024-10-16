@@ -8,7 +8,7 @@ output reg [WIDTH-1:0] data_out
 
 reg [WIDTH-1:0 ] data_out_wire;
 
-always@(posedge clk)
+always@(posedge clk or posedge rst)
 begin 
 if(rst)
 data_out<=0;
@@ -35,7 +35,7 @@ else
 if (data_in==32'd7000)
 data_out_wire=~32'd4000;
 else
-data_out_wire=0;
+data_out_wire=32'h6789ABCD;
 end
 
 
