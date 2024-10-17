@@ -2816,7 +2816,7 @@ end
 // Port 0 | Read: Sync  | Write: ---- | 
 reg [31:0] mem[0:5393];
 initial begin
-	$readmemh("mem.init", mem);
+	$readmemh("MEM_FILE_PATH/mem.init", mem);
 end
 reg [31:0] mem_dat0;
 always @(posedge sys_clk_1) begin
@@ -2831,7 +2831,7 @@ assign main_simsoc_dat_r = mem_dat0;
 // Port 0 | Read: Sync  | Write: Sync | Mode: Write-First | Write-Granularity: 8 
 reg [31:0] mem_1[0:874];
 initial begin
-	$readmemh("mem_1.init", mem_1);
+	$readmemh("MEM_FILE_PATH/mem_1.init", mem_1);
 end
 reg [9:0] mem_1_adr0;
 always @(posedge sys_clk_1) begin
@@ -2854,7 +2854,7 @@ assign main_ram_dat_r = mem_1[mem_1_adr0];
 // Port 0 | Read: Sync  | Write: ---- | 
 reg [7:0] mem_2[0:36];
 initial begin
-	$readmemh("mem_2.init", mem_2);
+	$readmemh("MEM_FILE_PATH/mem_2.init", mem_2);
 end
 reg [5:0] mem_2_adr0;
 always @(posedge sys_clk_1) begin
@@ -2869,8 +2869,8 @@ assign builder_csr_bankarray_dat_r = mem_2[mem_2_adr0];
 // Port 0 | Read: Sync  | Write: Sync | Mode: Read-First  | Write-Granularity: 10 
 // Port 1 | Read: Sync  | Write: ---- | 
 reg [9:0] storage[0:15];
-reg [9:0] storage_dat0;
-reg [9:0] storage_dat1;
+reg [9:0] storage_dat0=10'd0;
+reg [9:0] storage_dat1=10'd0;
 always @(posedge sys_clk_1) begin
 	if (main_uart_tx_fifo_wrport_we)
 		storage[main_uart_tx_fifo_wrport_adr] <= main_uart_tx_fifo_wrport_dat_w;
