@@ -1,0 +1,34 @@
+set_pin_loc multiplier[0] HR_1_0_0P
+set_pin_loc multiplier[1] HR_1_2_1P
+set_pin_loc multiplier[2] HR_1_4_2P
+set_pin_loc multiplier[3] HR_1_6_3P
+set_pin_loc multiplier[4] HR_1_8_4P
+set_pin_loc multiplier[5] HR_1_10_5P
+set_pin_loc multiplier[6] HR_1_12_6P
+set_pin_loc multiplier[7] HR_1_14_7P
+
+set_pin_loc multiplicand[0] HR_3_8_4P
+set_pin_loc multiplicand[1] HR_3_10_5P
+set_pin_loc multiplicand[2] HR_3_12_6P
+set_pin_loc multiplicand[3] HR_3_14_7P
+set_pin_loc multiplicand[4] HR_3_16_8P
+set_pin_loc multiplicand[5] HR_3_20_10P
+set_pin_loc multiplicand[6] HR_3_22_11P
+set_pin_loc multiplicand[7] HR_3_24_12P
+
+set_pin_loc product[0] HR_3_26_13P
+set_pin_loc product[1] HR_3_28_14P
+set_pin_loc product[2] HR_2_30_15P
+set_pin_loc product[3] HR_2_32_16P
+set_pin_loc product[4] HR_2_0_0P
+set_pin_loc product[5] HR_2_2_1P
+set_pin_loc product[6] HR_2_4_2P
+set_pin_loc product[7] HR_2_6_3P
+set_pin_loc product[8] HR_5_28_14P
+set_pin_loc product[9] HR_1_34_17P
+set_pin_loc product[10] HR_1_36_18P
+set_pin_loc product[11] HR_2_8_4P
+set_pin_loc product[12] HR_2_10_5P
+set_pin_loc product[13] HR_2_12_6P
+set_pin_loc product[14] HR_2_14_7P
+set_pin_loc product[15] HR_2_16_8P
