@@ -31,6 +31,8 @@ module axi_st_d64_nordy_master_name  (
 
 );
 
+  wire user_st_vld;
+
   // Connect Data
 
   assign user_st_vld                        = 1'b1                               ; // user_st_vld is unused
