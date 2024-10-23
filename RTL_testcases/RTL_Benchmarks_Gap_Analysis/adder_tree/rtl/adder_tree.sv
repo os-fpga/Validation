@@ -3,10 +3,10 @@
 
 // DELAY = $clog2(N)
 (* multstyle = "dsp" *) module adder_tree #(parameter
-	N = 32, DATA_WIDTH = 33, RESULT_WIDTH = ((N-1) < 2**$clog2(N)) ? DATA_WIDTH + $clog2(N) : DATA_WIDTH + $clog2(N) + 1
+	N = 32, DATA_WIDTH = (33*N), RESULT_WIDTH = ((N-1) < 2**$clog2(N)) ? DATA_WIDTH + $clog2(N) : DATA_WIDTH + $clog2(N) + 1
 )(
 	input clock, clock_ena,
-	input signed [DATA_WIDTH-1:0] data[N-1:0],
+	input signed [DATA_WIDTH-1:0] data,
 	output signed [RESULT_WIDTH-1:0] result
 );
 	generate
@@ -18,7 +18,7 @@
 				localparam RES_WIDTH = (RESULT_WIDTH > DATA_WIDTH + 1) ? DATA_WIDTH + 1 : RESULT_WIDTH;
 				localparam RESULTS = (N % 2 == 0) ? N/2 : N/2 + 1;
 				
-				wire signed [RES_WIDTH-1:0] res[RESULTS - 1:0];
+				wire signed [RES_WIDTH-1:0] res;
 				
 				add_pairs #(.N(N), .DATA_WIDTH(DATA_WIDTH), .RESULT_WIDTH(RES_WIDTH))
 					add_pairs_inst(.clock(clock), .clock_ena(clock_ena), .data(data), .result(res));
@@ -35,8 +35,8 @@ module add_pairs #(parameter
 	N = 32, DATA_WIDTH = 18, RESULT_WIDTH = DATA_WIDTH + 1, RESULTS = (N % 2 == 0) ? N/2 : N/2 + 1
 )(
 	input clock, clock_ena,
-	input signed [DATA_WIDTH-1:0] data[N - 1:0],
-	output signed [RESULT_WIDTH-1:0] result[RESULTS - 1:0]
+	input signed [DATA_WIDTH-1:0] data,
+	output signed [RESULT_WIDTH-1:0] result
 );
 	genvar i;
 	
@@ -67,7 +67,7 @@ module add #(parameter
 	input clock, clock_ena,
 	input signed [DATAA_WIDTH-1:0] dataa,
 	input signed [DATAB_WIDTH-1:0] datab,
-	output reg signed [RESULT_WIDTH-1:0] result
+	output reg signed [RESULT_WIDTH-1:0] result = 0
 );
 	always_ff @(posedge clock)
 		if (clock_ena)
