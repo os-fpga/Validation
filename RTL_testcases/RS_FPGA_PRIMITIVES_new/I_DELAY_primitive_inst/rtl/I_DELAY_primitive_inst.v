@@ -12,24 +12,27 @@ module I_DELAY_primitive_inst #(
 );
 
 reg dff;
+wire idelay_out;
 
 I_DELAY #(
   .DELAY(0)
 ) inst (
-  .I(dff), // Data Input (Connect to input port or buffer)
+  .I(in), // Data Input (Connect to input port or buffer)
   .DLY_LOAD(DLY_LOAD), // Delay load input
   .DLY_ADJ(DLY_ADJ), // Delay adjust input
   .DLY_INCDEC(DLY_INCDEC), // Delay increment / decrement input
   .DLY_TAP_VALUE(DLY_TAP_VALUE), // Delay tap value output
   .CLK_IN(CLK_IN), // Clock input
-  .O(O) 
+  .O(idelay_out) 
 );
 
-always @(posedge CLK_IN) begin
-  if (reset) 
+always @(posedge CLK_IN or negedge reset) begin
+  if (!reset) 
       dff <= 0;
   else 
-      dff <= in;
+      dff <= idelay_out;
 end
+
+assign O = dff;
 
 endmodule

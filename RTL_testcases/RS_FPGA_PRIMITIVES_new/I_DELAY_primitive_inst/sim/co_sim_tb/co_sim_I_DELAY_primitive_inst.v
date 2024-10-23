@@ -28,10 +28,10 @@ initial begin
 end
 //Reset Stimulus generation
 initial begin
-	reset <= 1;
+	reset <= 0;
 	@(negedge CLK_IN);
 	{DLY_ADJ, DLY_INCDEC, DLY_LOAD, in } <= 'd0;
-	reset <= 0;
+	reset <= 1;
 	@(negedge CLK_IN);
 	$display ("***Reset Test is applied***");
 	@(negedge CLK_IN);
