@@ -12,9 +12,6 @@ module co_sim_I_SERDES_primitive_inst;
     wire 		DPA_ERROR	,	DPA_ERROR_netlist;
     wire 		DPA_LOCK	,	DPA_LOCK_netlist;
     reg 		EN;
-    reg 		PLL_CLK;
-    reg 		PLL_LOCK;
-    reg 		RX_RST;
     reg 		data_in;
 	integer		mismatch	=	0;
 
@@ -31,17 +28,15 @@ I_SERDES_primitive_inst	golden (.*);
         CLK_IN = 1'b0;
         forever #5 CLK_IN = ~CLK_IN;
     end
-		 initial begin
-        PLL_CLK = 1'b0;
-        forever #1 PLL_CLK = ~PLL_CLK;
-    end
+
 //Reset Stimulus generation
 initial begin
-	reset <= 1;
-	@(negedge CLK_IN);
-	{BITSLIP_ADJ, EN, PLL_LOCK, RX_RST, data_in } <= 'd0;
 	reset <= 0;
 	@(negedge CLK_IN);
+	{BITSLIP_ADJ, EN, data_in } <= 'd0;
+	reset <= 1;
+	@(negedge CLK_IN);
+	EN = 1;
 	$display ("***Reset Test is applied***");
 	@(negedge CLK_IN);
 	@(negedge CLK_IN);
@@ -50,19 +45,14 @@ initial begin
 	//Random stimulus generation
 	repeat(10000) @ (negedge CLK_IN) begin
 		BITSLIP_ADJ 		 <= $random();
-		EN 		 					 <= $random();
-		PLL_LOCK 		 	   <= 1;
-		RX_RST 		 			 <= 1;
 		data_in 		 	   <= $random();
 		compare();
 end
 
 	//Random stimulus generation
+	EN = 0;
 	repeat(100) @ (negedge CLK_IN) begin
 		BITSLIP_ADJ 		 <= $random();
-		EN 		 					 <= $random();
-		PLL_LOCK 		 	   <= $random();
-		RX_RST 		 			 <= $random();
 		data_in 		 	   <= $random();
 		compare();
 end
@@ -70,8 +60,6 @@ end
 	// ----------- Corner Case stimulus generation -----------
 	BITSLIP_ADJ <= 1;
 	EN <= 1;
-	PLL_LOCK <= 1;
-	RX_RST <= 1;
 	data_in <= 1;
 	compare();
 
