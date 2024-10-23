@@ -14,6 +14,8 @@ wire [1:0] i_buf_out;
 wire rst_i_buf_out;
 wire clk_buf_out;
 wire i_clk_buf_out;
+wire oddr_in;
+wire o_buf_ds_in;
 
 I_BUF i_buf_inst (.I(clk),.EN(ibuf_oe1),.O(i_clk_buf_out));
 CLK_BUF clk_buf_inst (.I(i_clk_buf_out), .O(clk_buf_out));

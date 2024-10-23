@@ -17,9 +17,13 @@ reg [WIDTH-1:0] data_out_flop;
 reg enable, pll_lock;
 wire i1_ibuf;
 reg [WIDTH-1:0] dff_out;
+wire clk_in_ibuf;
+wire clk_in_clkbuf;
+wire pll_clk;
+wire clk_pll_in;
 
-I_BUF i_buf_inst1 (.I(clk_in),.EN(en),.O(clk_in_ibuf));
-I_BUF i_buf_inst2 (.I(i1),.EN(en),.O(i1_ibuf));
+I_BUF i_buf_inst1 (.I(clk_in),.EN(1'b1),.O(clk_in_ibuf));
+I_BUF i_buf_inst2 (.I(i1),.EN(1'b1),.O(i1_ibuf));
 CLK_BUF clk_buf_inst (.I(clk_in_ibuf), .O(clk_in_clkbuf));
 
 I_SERDES inst(
