@@ -9,16 +9,17 @@ module co_sim_primitive_example_design_6;
   reg  ibuf_oe3;
   reg  ibuf_oe4;
   reg  oddr_en;
+  wire q,q_netlist;
   wire  q_p,q_p_netlist;
   wire  q_n,q_n_netlist;
 
 	integer mismatch=0;
 
-  primitive_example_design_6 golden (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q_p(q_p),.q_n(q_n));
+  primitive_example_design_6 golden (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q(q),.q_p(q_p),.q_n(q_n));
   `ifdef PNR
-  primitive_example_design_6_post_route netlist (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q_p(q_p_netlist),.q_n(q_n_netlist));
+  primitive_example_design_6_post_route netlist (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q(q_netlist),.q_p(q_p_netlist),.q_n(q_n_netlist));
   `else
-  primitive_example_design_6_post_synth netlist (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q_p(q_p_netlist),.q_n(q_n_netlist));
+  primitive_example_design_6_post_synth netlist (.in(in),.clk(clk),. rst( rst),.ibuf_oe1(ibuf_oe1),.ibuf_oe2(ibuf_oe2),.ibuf_oe3(ibuf_oe3),.ibuf_oe4(ibuf_oe4),.oddr_en(oddr_en),.q(q_netlist),.q_p(q_p_netlist),.q_n(q_n_netlist));
   `endif
 
   always #1 clk = !clk ;
@@ -73,12 +74,12 @@ module co_sim_primitive_example_design_6;
   end
 
   task compare();
-  	if(q_n !== q_n_netlist || q_p !== q_p_netlist) begin
-    	$display("Data Mismatch. Golden q_n: %0d, Netlist q_n: %0d, Golden q_p: %0d, Netlist q_p: %0d, Time: %0t", q_n, q_n_netlist,q_p,q_p_netlist,$time);
+  	if(q_n !== q_n_netlist || q_p !== q_p_netlist || q !== q_netlist ) begin
+    	$display("Data Mismatch. Golden q_n: %0d, Netlist q_n: %0d, Golden q_p: %0d, Netlist q_p: %0d, Golden q: %0d, Netlist q: %0d, Time: %0t", q_n, q_n_netlist,q_p,q_p_netlist,q,q_netlist,$time);
     	mismatch = mismatch+1;
  	  end
   	else
-  		$display("Data Matched. Golden q_n: %0d, Netlist q_n: %0d, Golden q_p: %0d, Netlist q_p: %0d, Time: %0t", q_n, q_n_netlist,q_p,q_p_netlist,$time);
+  		$display("Data Matched. Golden q_n: %0d, Netlist q_n: %0d, Golden q_p: %0d, Netlist q_p: %0d, Golden q: %0d, Netlist q: %0d, Time: %0t", q_n, q_n_netlist,q_p,q_p_netlist,q,q_netlist,$time);
   endtask
 
   initial begin
