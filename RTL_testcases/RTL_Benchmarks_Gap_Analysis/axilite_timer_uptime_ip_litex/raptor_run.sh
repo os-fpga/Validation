@@ -259,6 +259,9 @@ parse_cga exit 1; }
         else
             echo ""
         fi
+    echo "setup_lec_sim 10 2">>raptor_tcl.tcl
+    [ "$tool_name" = "iverilog" ] && echo "simulate gate icarus">>raptor_tcl.tcl || echo "simulate gate verilator">>raptor_tcl.tcl 
+    [ "$tool_name" = "iverilog" ] && echo "simulate pnr icarus">>raptor_tcl.tcl || echo "simulate pnr verilator">>raptor_tcl.tcl 
     echo "sta">>raptor_tcl.tcl  
     echo "power">>raptor_tcl.tcl  
     echo "bitstream $bitstream">>raptor_tcl.tcl  
@@ -271,6 +274,8 @@ parse_cga exit 1; }
             echo ""
         fi
     fi
+
+    [ -f rtl/sim.v ] && sed -i -e "s|MEM_FILE_PATH|$PWD/rtl|g" rtl/sim.v
 
     cd results_dir
     echo "Device: $device">>results.log
