@@ -40,6 +40,7 @@
 module top (
   clk_0,
   clk_1,           // Unused
+  reset,
   switch,
   led,
   extra,           // extra pads
@@ -57,6 +58,7 @@ module top (
 // I/O declarations
 input clk_0;      // 48 MHz
 input clk_1;
+input reset;
 input [3:0] switch;
 input rs232_0_i;
 input rs232_1_i;
@@ -120,7 +122,7 @@ wire [2:0] convert_mode;   // [0] bypasses second converter.
                            // [2] is "autorun" for second converter
 
     // Other...
-wire reset = switch[0];  // Simply a renaming exercise
+// wire reset = switch[0];  // Simply a renaming exercise
 
 wire [7:0]  a_led;       // For displaying data on LEDs
 wire [7:0]  reg_led;     // For displaying register on LEDs
@@ -146,10 +148,10 @@ assign slow_ce = (slow_ce_timer == `SLOW_CE_TIMEOUT);
 
 // Assign values to ports
 assign rs232_1_o = rs232_1_i;  // RS232 loopback on COM1
-assign extra = 13'hzzzz;
-assign C = 16'hzzzz;
-assign D = 48'hzzzzzzzzzzzz;
-assign E = {18'hzzzzz,debug};  // Lazily concatenate debug signals to lsbs
+assign extra = 13'h0;
+assign C = 16'h0;
+assign D = 48'h0;
+assign E = {18'h0,debug};  // Lazily concatenate debug signals to lsbs
                                // of port E.  Whatever the size of the debug
                                // signals, they just "shove over" the extra
                                // "z" signals, and the synthesizer drops
@@ -277,7 +279,7 @@ binary_to_bcd #(
   (
    .clk_i(clk_0),
    .ce_i(1'b1),
-   .rst_i(rst),
+   .rst_i(reset),
    .start_i(start_pulse_bcd || start_slow_bcd),
    .dat_binary_i(binary_source),
    .dat_bcd_o(bcd_data),
@@ -295,7 +297,7 @@ bcd_to_binary #(
   (
    .clk_i(clk_0),
    .ce_i(1'b1),
-   .rst_i(rst),
+   .rst_i(reset),
    .start_i(start_pulse_bin || start_slow_bin),
    .dat_bcd_i(bcd_data),
    .dat_binary_o(bin_data),
