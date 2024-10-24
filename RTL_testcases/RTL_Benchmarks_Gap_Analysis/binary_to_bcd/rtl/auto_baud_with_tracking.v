@@ -389,7 +389,7 @@ begin
   else // must have been a clock edge
   begin
     if (~verify) target_bits <= `TEMPLATE_BITS;
-    if (verify && mid_bit_count) target_bits <= {0,(target_bits>>1)};
+    if (verify && mid_bit_count) target_bits <= {1'b0, target_bits>>1};
   end
 end
 // It is done when only the stop bit is left in the shift register.
