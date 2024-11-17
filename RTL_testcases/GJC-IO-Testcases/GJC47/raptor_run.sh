@@ -186,8 +186,6 @@ parse_cga exit 1; }
     [ -z "$ip_name" ] && echo "add_library_ext .v .sv">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/$design.v">>raptor_tcl.tcl || echo "" 
     [ -z "$ip_name" ] && echo "add_design_file ./rtl/DLY_ADDR_CNTRL.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/one2x_decoder.v">>raptor_tcl.tcl || echo "" 
-    [ -z "$ip_name" ] && echo "add_design_file ./rtl/muxp.v">>raptor_tcl.tcl || echo "" 
     ##vary design to design
     # ./rtl/$design.v 
     ##vary design to design
