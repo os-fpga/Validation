@@ -12,15 +12,15 @@ module stereovision2 (reset, tm3_clk_v0,  vidin_new_data, vidin_rgb_reg, vidin_a
    wire[63:0] tm3_sram_data_in;
 
    wire[63:0] tm3_sram_data_out;
-   reg[63:0] tm3_sram_data_xhdl0;
+   reg[63:0] tm3_sram_data_xhdl0=0;
 
-   reg[18:0] tm3_sram_addr;
+   reg[18:0] tm3_sram_addr=0;
 
-   reg[7:0] tm3_sram_we;
+   reg[7:0] tm3_sram_we=0;
 
-   reg[1:0] tm3_sram_oe;
+   reg[1:0] tm3_sram_oe=0;
    output tm3_sram_adsp; 
-   reg tm3_sram_adsp;
+   reg tm3_sram_adsp=0;
    input vidin_new_data; 
    input[7:0] vidin_rgb_reg; 
    input[18:0] vidin_addr_reg; 
@@ -36,13 +36,13 @@ module stereovision2 (reset, tm3_clk_v0,  vidin_new_data, vidin_rgb_reg, vidin_a
    output[15:0] bus_word_6_2to1; 
    wire[15:0] bus_word_6_2to1;
    output vidin_new_data_fifo; 
-   reg vidin_new_data_fifo;
+   reg vidin_new_data_fifo=0;
    output[7:0] vidin_rgb_reg_fifo_left; 
-   reg[7:0] vidin_rgb_reg_fifo_left;
+   reg[7:0] vidin_rgb_reg_fifo_left=0;
    output[7:0] vidin_rgb_reg_fifo_right; 
-   reg[7:0] vidin_rgb_reg_fifo_right;
+   reg[7:0] vidin_rgb_reg_fifo_right=0;
    output[3:0] vidin_addr_reg_2to0; 
-   reg[3:0] vidin_addr_reg_2to0;
+   reg[3:0] vidin_addr_reg_2to0=0;
    input v_nd_s1_left_2to0; 
    input v_nd_s2_left_2to0; 
    input v_nd_s4_left_2to0; 
@@ -58,36 +58,36 @@ module stereovision2 (reset, tm3_clk_v0,  vidin_new_data, vidin_rgb_reg, vidin_a
 
    wire v_nd_s1; 
    wire vidin_new_data_v_fltr; 
-   reg[9:0] horiz; 
-   reg[9:0] vert; 
-   reg[63:0] vidin_data_buf_sc_1; 
-   reg[55:0] vidin_data_buf_2_sc_1; 
-   reg[18:0] vidin_addr_buf_sc_1; 
-   reg[13:0] vidin_addr_buf_sc_1_fifo; 
+   reg[9:0] horiz=0; 
+   reg[9:0] vert=0; 
+   reg[63:0] vidin_data_buf_sc_1=0; 
+   reg[55:0] vidin_data_buf_2_sc_1=0; 
+   reg[18:0] vidin_addr_buf_sc_1=0; 
+   reg[13:0] vidin_addr_buf_sc_1_fifo=0; 
    wire[18:0] vidin_addr_reg_scld; 
-   reg video_state; 
+   reg video_state=0; 
    wire[7:0] vidin_gray_scld_1; 
-   reg[63:0] vidout_buf_fifo_1_left; 
-   reg[63:0] vidout_buf_fifo_1_right; 
-   reg[7:0] vidin_rgb_reg_tmp; 
-   reg[7:0] vidin_data_buf_fifo_sc_1_l; 
-   reg[7:0] vidin_data_buf_fifo_sc_1_r; 
-   reg[63:0] vidout_buf_fifo_2_1_left; 
-   reg[63:0] vidout_buf_fifo_2_1_right; 
+   reg[63:0] vidout_buf_fifo_1_left=0; 
+   reg[63:0] vidout_buf_fifo_1_right=0; 
+   reg[7:0] vidin_rgb_reg_tmp=0; 
+   reg[7:0] vidin_data_buf_fifo_sc_1_l=0; 
+   reg[7:0] vidin_data_buf_fifo_sc_1_r=0; 
+   reg[63:0] vidout_buf_fifo_2_1_left=0; 
+   reg[63:0] vidout_buf_fifo_2_1_right=0; 
    wire vidin_new_data_tmp; 
-   reg[18:0] vidin_addr_reg_reg; 
-   reg v_nd_s1_left; 
-   reg v_nd_s1_right; 
-   reg v_nd_s2_left; 
-   reg v_nd_s2_right; 
-   reg v_nd_s4_left; 
-   reg v_nd_s4_right; 
-   reg[7:0] v_d_reg_s1_left; 
-   reg[7:0] v_d_reg_s1_right; 
-   reg[7:0] v_d_reg_s2_left; 
-   reg[7:0] v_d_reg_s2_right; 
-   reg[7:0] v_d_reg_s4_left; 
-   reg[7:0] v_d_reg_s4_right; 
+   reg[18:0] vidin_addr_reg_reg=0; 
+   reg v_nd_s1_left=0; 
+   reg v_nd_s1_right=0; 
+   reg v_nd_s2_left=0; 
+   reg v_nd_s2_right=0; 
+   reg v_nd_s4_left=0; 
+   reg v_nd_s4_right=0; 
+   reg[7:0] v_d_reg_s1_left=0; 
+   reg[7:0] v_d_reg_s1_right=0; 
+   reg[7:0] v_d_reg_s2_left=0; 
+   reg[7:0] v_d_reg_s2_right=0; 
+   reg[7:0] v_d_reg_s4_left=0; 
+   reg[7:0] v_d_reg_s4_right=0; 
    wire[15:0] vidin_v_out_1_f1_left; 
    wire[15:0] vidin_v_out_1_f2_left; 
    wire[15:0] vidin_v_out_1_f3_left; 
@@ -136,8 +136,8 @@ module stereovision2 (reset, tm3_clk_v0,  vidin_new_data, vidin_rgb_reg, vidin_a
    wire[7:0] v_d_reg_s1_2to3_right; 
    wire[7:0] v_d_reg_s2_2to3_right; 
    wire[7:0] v_d_reg_s4_2to3_right; 
-   reg[18:0] vidin_addr_reg_2to3; 
-   reg svid_comp_switch_2to3; 
+   reg[18:0] vidin_addr_reg_2to3=0; 
+   reg svid_comp_switch_2to3=0; 
    wire[15:0] real_z_4_left; 
    wire[15:0] imag_z_4_left; 
    wire[15:0] real_p_4_left; 
@@ -464,38 +464,38 @@ module h_fltr (tm3_clk_v0, vidin_new_data, vidin_in_f1, vidin_in_f2, vidin_in_f3
    input[15:0] vidin_in_h3; 
    input[15:0] vidin_in_h4; 
    output[15:0] real_z_reg; 
-   reg[15:0] real_z_reg;
+   reg[15:0] real_z_reg=0;
    output[15:0] imag_z_reg; 
-   reg[15:0] imag_z_reg;
+   reg[15:0] imag_z_reg=0;
    output[15:0] real_p_reg; 
-   reg[15:0] real_p_reg;
+   reg[15:0] real_p_reg=0;
    output[15:0] imag_p_reg; 
-   reg[15:0] imag_p_reg;
+   reg[15:0] imag_p_reg=0;
    output[15:0] real_n_reg; 
-   reg[15:0] real_n_reg;
+   reg[15:0] real_n_reg=0;
    output[15:0] imag_n_reg; 
-   reg[15:0] imag_n_reg;
+   reg[15:0] imag_n_reg=0;
 
    wire[27:0] vidin_out_temp_f1; 
-   reg[27:0] vidin_out_reg_f1; 
+   reg[27:0] vidin_out_reg_f1=0; 
    wire my_fir_rdy_f1; 
    wire[27:0] vidin_out_temp_f2; 
-   reg[27:0] vidin_out_reg_f2; 
+   reg[27:0] vidin_out_reg_f2=0; 
    wire my_fir_rdy_f2; 
    wire[27:0] vidin_out_temp_f3; 
-   reg[27:0] vidin_out_reg_f3; 
+   reg[27:0] vidin_out_reg_f3=0; 
    wire my_fir_rdy_f3; 
    wire[27:0] vidin_out_temp_h1; 
-   reg[27:0] vidin_out_reg_h1; 
+   reg[27:0] vidin_out_reg_h1=0; 
    wire my_fir_rdy_h1; 
    wire[27:0] vidin_out_temp_h2; 
-   reg[27:0] vidin_out_reg_h2; 
+   reg[27:0] vidin_out_reg_h2=0; 
    wire my_fir_rdy_h2; 
    wire[27:0] vidin_out_temp_h3; 
-   reg[27:0] vidin_out_reg_h3; 
+   reg[27:0] vidin_out_reg_h3=0; 
    wire my_fir_rdy_h3; 
    wire[27:0] vidin_out_temp_h4; 
-   reg[27:0] vidin_out_reg_h4; 
+   reg[27:0] vidin_out_reg_h4=0; 
    wire my_fir_rdy_h4; 
    wire[28:0] sum_tmp_1; 
    wire[28:0] sum_tmp_2; 
@@ -575,40 +575,40 @@ module steer_fltr (clk, new_data, f1, f2, f3, h1, h2, h3, h4, re_z, im_z, re_p, 
    input[27:0] h3; 
    input[27:0] h4; 
    output[15:0] re_z; 
-   reg[15:0] re_z;
+   reg[15:0] re_z=0;
    output[15:0] im_z; 
-   reg[15:0] im_z;
+   reg[15:0] im_z=0;
    output[15:0] re_p; 
-   reg[15:0] re_p;
+   reg[15:0] re_p=0;
    output[15:0] im_p; 
-   reg[15:0] im_p;
+   reg[15:0] im_p=0;
    output[15:0] re_n; 
-   reg[15:0] re_n;
+   reg[15:0] re_n=0;
    output[15:0] im_n; 
-   reg[15:0] im_n;
+   reg[15:0] im_n=0;
 
-   reg[27:0] f1_reg; 
-   reg[27:0] f2_reg; 
-   reg[27:0] f3_reg; 
-   reg[27:0] h1_reg; 
-   reg[27:0] h2_reg; 
-   reg[27:0] h3_reg; 
-   reg[27:0] h4_reg; 
-   reg[28:0] re_z_tmp_1; 
-   reg[28:0] im_z_tmp_1; 
-   reg[28:0] re_p_tmp_1; 
-   reg[28:0] re_p_tmp_2; 
-   reg[28:0] re_p_tmp_3; 
-   reg[28:0] im_p_tmp_1; 
-   reg[28:0] im_p_tmp_2; 
-   reg[28:0] im_p_tmp_3; 
-   reg[28:0] im_p_tmp_4; 
-   reg[30:0] re_z_tmp; 
-   reg[30:0] im_z_tmp; 
-   reg[30:0] re_p_tmp; 
-   reg[30:0] im_p_tmp; 
-   reg[30:0] re_n_tmp; 
-   reg[30:0] im_n_tmp; 
+   reg[27:0] f1_reg=0; 
+   reg[27:0] f2_reg=0; 
+   reg[27:0] f3_reg=0; 
+   reg[27:0] h1_reg=0; 
+   reg[27:0] h2_reg=0; 
+   reg[27:0] h3_reg=0; 
+   reg[27:0] h4_reg=0; 
+   reg[28:0] re_z_tmp_1=0; 
+   reg[28:0] im_z_tmp_1=0; 
+   reg[28:0] re_p_tmp_1=0; 
+   reg[28:0] re_p_tmp_2=0; 
+   reg[28:0] re_p_tmp_3=0; 
+   reg[28:0] im_p_tmp_1=0; 
+   reg[28:0] im_p_tmp_2=0; 
+   reg[28:0] im_p_tmp_3=0; 
+   reg[28:0] im_p_tmp_4=0; 
+   reg[30:0] re_z_tmp=0; 
+   reg[30:0] im_z_tmp=0; 
+   reg[30:0] re_p_tmp=0; 
+   reg[30:0] im_p_tmp=0; 
+   reg[30:0] re_n_tmp=0; 
+   reg[30:0] im_n_tmp=0; 
 
    always @(posedge clk)
    begin
@@ -843,15 +843,15 @@ module fltr_compute_f1 (clk, din, dout);
     input clk; 
     input[55:0] din; 
     output[15:0] dout; 
-    reg[15:0] dout;
-    reg[16:0] q1; 
-    reg[16:0] q2; 
-    reg[16:0] q3; 
-    reg[16:0] q4; 
-    reg[16:0] q5; 
-    reg[16:0] q6; 
-    reg[16:0] q7; 
-    reg[19:0] d_out_tmp; 
+    reg[15:0] dout=0;
+    reg[16:0] q1=0; 
+    reg[16:0] q2=0; 
+    reg[16:0] q3=0; 
+    reg[16:0] q4=0; 
+    reg[16:0] q5=0; 
+    reg[16:0] q6=0; 
+    reg[16:0] q7=0; 
+    reg[19:0] d_out_tmp=0; 
 
     always @(posedge clk)
     begin
@@ -873,15 +873,15 @@ module fltr_compute_f2 (clk, din, dout);
     input clk; 
     input[55:0] din; 
     output[15:0] dout; 
-    reg[15:0] dout;
-    reg[16:0] q1; 
-    reg[16:0] q2; 
-    reg[16:0] q3; 
-    reg[16:0] q4; 
-    reg[16:0] q5; 
-    reg[16:0] q6; 
-    reg[16:0] q7; 
-    reg[19:0] d_out_tmp; 
+    reg[15:0] dout=0;
+    reg[16:0] q1=0; 
+    reg[16:0] q2=0; 
+    reg[16:0] q3=0; 
+    reg[16:0] q4=0; 
+    reg[16:0] q5=0; 
+    reg[16:0] q6=0; 
+    reg[16:0] q7=0; 
+    reg[19:0] d_out_tmp=0; 
 
     always @(posedge clk)
     begin
@@ -912,15 +912,15 @@ module fltr_compute_f3 (clk, din, dout);
     input clk; 
     input[55:0] din; 
     output[15:0] dout; 
-    reg[15:0] dout;
-    reg[16:0] q1; 
-    reg[16:0] q2; 
-    reg[16:0] q3; 
-    reg[16:0] q4; 
-    reg[16:0] q5; 
-    reg[16:0] q6; 
-    reg[16:0] q7; 
-    reg[19:0] d_out_tmp; 
+    reg[15:0] dout=0;
+    reg[16:0] q1=0; 
+    reg[16:0] q2=0; 
+    reg[16:0] q3=0; 
+    reg[16:0] q4=0; 
+    reg[16:0] q5=0; 
+    reg[16:0] q6=0; 
+    reg[16:0] q7=0; 
+    reg[19:0] d_out_tmp=0; 
 
     always @(posedge clk)
     begin
@@ -943,15 +943,15 @@ module fltr_compute_h1 (clk, din, dout);
     input clk; 
     input[55:0] din; 
     output[15:0] dout; 
-    reg[15:0] dout;
-    reg[16:0] q1; 
-    reg[16:0] q2; 
-    reg[16:0] q3; 
-    reg[16:0] q4; 
-    reg[16:0] q5; 
-    reg[16:0] q6; 
-    reg[16:0] q7; 
-    reg[19:0] d_out_tmp; 
+    reg[15:0] dout=0;
+    reg[16:0] q1=0; 
+    reg[16:0] q2=0; 
+    reg[16:0] q3=0; 
+    reg[16:0] q4=0; 
+    reg[16:0] q5=0; 
+    reg[16:0] q6=0; 
+    reg[16:0] q7=0; 
+    reg[19:0] d_out_tmp=0; 
 
     always @(posedge clk)
     begin
@@ -975,16 +975,16 @@ module fltr_compute_h2 (clk, din, dout);
    input clk; 
    input[55:0] din; 
    output[15:0] dout; 
-   reg[15:0] dout;
+   reg[15:0] dout=0;
 
-   reg[16:0] q1; 
-   reg[16:0] q2; 
-   reg[16:0] q3; 
-   reg[16:0] q4; 
-   reg[16:0] q5; 
-   reg[16:0] q6; 
-   reg[16:0] q7; 
-   reg[19:0] d_out_tmp; 
+   reg[16:0] q1=0; 
+   reg[16:0] q2=0; 
+   reg[16:0] q3=0; 
+   reg[16:0] q4=0; 
+   reg[16:0] q5=0; 
+   reg[16:0] q6=0; 
+   reg[16:0] q7=0; 
+   reg[19:0] d_out_tmp=0; 
 
    always @(posedge clk)
    begin
@@ -1013,16 +1013,16 @@ module fltr_compute_h3 (clk, din, dout);
    input clk; 
    input[55:0] din; 
    output[15:0] dout; 
-   reg[15:0] dout;
+   reg[15:0] dout=0;
 
-   reg[16:0] q1; 
-   reg[16:0] q2; 
-   reg[16:0] q3; 
-   reg[16:0] q4; 
-   reg[16:0] q5; 
-   reg[16:0] q6; 
-   reg[16:0] q7; 
-   reg[19:0] d_out_tmp; 
+   reg[16:0] q1=0; 
+   reg[16:0] q2=0; 
+   reg[16:0] q3=0; 
+   reg[16:0] q4=0; 
+   reg[16:0] q5=0; 
+   reg[16:0] q6=0; 
+   reg[16:0] q7=0; 
+   reg[19:0] d_out_tmp=0; 
 
    always @(posedge clk)
    begin
@@ -1048,16 +1048,16 @@ module fltr_compute_h4 (clk, din, dout);
    input clk; 
    input[55:0] din; 
    output[15:0] dout; 
-   reg[15:0] dout;
+   reg[15:0] dout=0;
 
-   reg[16:0] q1; 
-   reg[16:0] q2; 
-   reg[16:0] q3; 
-   reg[16:0] q4; 
-   reg[16:0] q5; 
-   reg[16:0] q6; 
-   reg[16:0] q7; 
-   reg[19:0] d_out_tmp; 
+   reg[16:0] q1=0; 
+   reg[16:0] q2=0; 
+   reg[16:0] q3=0; 
+   reg[16:0] q4=0; 
+   reg[16:0] q5=0; 
+   reg[16:0] q6=0; 
+   reg[16:0] q7=0; 
+   reg[19:0] d_out_tmp=0; 
 
    always @(posedge clk)
    begin
@@ -1116,10 +1116,10 @@ module fifo496 (clk, wen, din, dout);
 
 
    output[`WIDTH_4B - 1:0] dout; 
-    reg[`WIDTH_4B - 1:0] dout;
+    reg[`WIDTH_4B - 1:0] dout=0;
 
-    reg[`WIDTH_4B-1:0]buff1; 
-    reg[`WIDTH_4B-1:0]buff2; 
+    reg[`WIDTH_4B-1:0]buff1=0; 
+    reg[`WIDTH_4B-1:0]buff2=0; 
 
     always @(posedge clk)
     begin
@@ -1140,10 +1140,10 @@ module fifo316 (clk, wen, din, dout);
     input wen; 
     input[`WIDTH_4B - 1:0] din; 
     output[`WIDTH_4B - 1:0] dout; 
-    reg[`WIDTH_4B - 1:0] dout;
+    reg[`WIDTH_4B - 1:0] dout=0;
 
-    reg[`WIDTH_4B-1:0]buff1; 
-    reg[`WIDTH_4B-1:0]buff2; 
+    reg[`WIDTH_4B-1:0]buff1=0; 
+    reg[`WIDTH_4B-1:0]buff2=0; 
 
     always @(posedge clk)
     begin
@@ -1164,10 +1164,10 @@ module fifo226 (clk, wen, din, dout);
     input wen; 
     input[`WIDTH_4B - 1:0] din; 
     output[`WIDTH_4B - 1:0] dout; 
-    reg[`WIDTH_4B - 1:0] dout;
+    reg[`WIDTH_4B - 1:0] dout=0;
 
-    reg[`WIDTH_4B-1:0]buff1; 
-    reg[`WIDTH_4B-1:0]buff2; 
+    reg[`WIDTH_4B-1:0]buff1=0; 
+    reg[`WIDTH_4B-1:0]buff2=0; 
 
     always @(posedge clk)
     begin
@@ -1223,55 +1223,55 @@ module port_bus_2to1 (clk, vidin_addr_reg, svid_comp_switch, vidin_new_data_scld
    input[15:0] vidin_data_reg_scld_4_2to3_right_rn; 
    input[15:0] vidin_data_reg_scld_4_2to3_right_in; 
    output[15:0] bus_word_3; 
-   reg[15:0] bus_word_3;
+   reg[15:0] bus_word_3=0;
    output[15:0] bus_word_4; 
-   reg[15:0] bus_word_4;
+   reg[15:0] bus_word_4=0;
    output[15:0] bus_word_5; 
-   reg[15:0] bus_word_5;
+   reg[15:0] bus_word_5=0;
    output[15:0] bus_word_6; 
-   reg[15:0] bus_word_6;
+   reg[15:0] bus_word_6=0;
    output[2:0] counter_out; 
-   reg[2:0] counter_out;
+   reg[2:0] counter_out=0;
 
-   reg[15:0] bus_word_3_tmp; 
-   reg[15:0] bus_word_4_tmp; 
-   reg[15:0] bus_word_5_tmp; 
-   reg[15:0] bus_word_6_tmp; 
-   reg[18:0] vidin_addr_reg_tmp; 
-   reg svid_comp_switch_tmp; 
+   reg[15:0] bus_word_3_tmp=0; 
+   reg[15:0] bus_word_4_tmp=0; 
+   reg[15:0] bus_word_5_tmp=0; 
+   reg[15:0] bus_word_6_tmp=0; 
+   reg[18:0] vidin_addr_reg_tmp=0; 
+   reg svid_comp_switch_tmp=0; 
    wire vidin_new_data_scld_1_2to3_left_tmp; 
    wire vidin_new_data_scld_2_2to3_left_tmp; 
    wire vidin_new_data_scld_4_2to3_left_tmp; 
    wire vidin_new_data_scld_1_2to3_right_tmp; 
    wire vidin_new_data_scld_2_2to3_right_tmp; 
    wire vidin_new_data_scld_4_2to3_right_tmp; 
-   reg[3:0] counter; 
-   reg[2:0] counter_out_tmp; 
+   reg[3:0] counter=0; 
+   reg[2:0] counter_out_tmp=0; 
 
-   reg[15:0] vidin_data_reg_scld_1_2to3_left_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_left_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_left_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_right_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_right_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_right_rp_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_left_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_left_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_left_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_right_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_right_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_right_ip_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_left_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_left_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_left_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_right_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_right_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_right_rn_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_left_in_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_left_in_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_left_in_tmp; 
-   reg[15:0] vidin_data_reg_scld_1_2to3_right_in_tmp; 
-   reg[15:0] vidin_data_reg_scld_2_2to3_right_in_tmp; 
-   reg[15:0] vidin_data_reg_scld_4_2to3_right_in_tmp; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_left_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_left_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_left_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_right_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_right_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_right_rp_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_left_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_left_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_left_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_right_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_right_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_right_ip_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_left_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_left_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_left_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_right_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_right_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_right_rn_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_left_in_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_left_in_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_left_in_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_1_2to3_right_in_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_2_2to3_right_in_tmp=0; 
+   reg[15:0] vidin_data_reg_scld_4_2to3_right_in_tmp=0; 
 
    always @(posedge clk)
    begin
@@ -1459,17 +1459,17 @@ module my_fir_f1 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1515,17 +1515,17 @@ module my_fir_f2 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1575,17 +1575,17 @@ module my_fir_f3 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1634,17 +1634,17 @@ module my_fir_h1 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1689,17 +1689,17 @@ module my_fir_h2 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1748,17 +1748,17 @@ module my_fir_h3 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
@@ -1806,17 +1806,17 @@ module my_fir_h4 (clk, new_data_rdy, output_data_ready, din, dout);
     input clk; 
     input[`WIDTH_5B - 1:0] din; 
     output[28 - 1:0] dout; 
-    reg[28 - 1:0] dout;
+    reg[28 - 1:0] dout=0;
 	input new_data_rdy;
 	output output_data_ready;
-	reg output_data_ready;
+	reg output_data_ready=0;
 
-    reg[`WIDTH_5B - 1:0]n_delay_reg1;
-    reg[`WIDTH_5B - 1:0]n_delay_reg2;
-    reg[`WIDTH_5B - 1:0]n_delay_reg3;
-    reg[`WIDTH_5B - 1:0]n_delay_reg4;
-    reg[`WIDTH_5B - 1:0]n_delay_reg5;
-    reg[`WIDTH_5B - 1:0]n_delay_reg6;
+    reg[`WIDTH_5B - 1:0]n_delay_reg1=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg2=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg3=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg4=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg5=0;
+    reg[`WIDTH_5B - 1:0]n_delay_reg6=0;
 
     always @(posedge clk)
     begin
