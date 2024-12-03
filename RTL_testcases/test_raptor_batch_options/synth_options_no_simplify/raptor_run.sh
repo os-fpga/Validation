@@ -28,28 +28,34 @@ synthesis_type="" #(Yosys/QL/RS)
 custom_synth_script="" #(Uses a custom Yosys templatized script)
 
 synth_options="-no_simplify"
-                        #synth_options <option list>: RS-Yosys Plugin Options. The following defaults exist:
-                        #                               :   -effort high
-                        #                               :   -fsm_encoding binary if optimization == area else onehot
-                        #                               :   -carry auto
-                        #                               :   -clke_strategy early
-                        #       -effort <level>          : Optimization effort level (high, medium, low)
-                        #       -fsm_encoding <encoding> : FSM encoding:
-                        #       binary                 : Compact encoding - using minimum of registers to cover the N states
-                        #       onehot                 : One hot encoding - using N registers for N states
-                        #       -carry <mode>            : Carry logic inference mode:
-                        #       all                    : Infer as much as possible
-                        #       auto                   : Infer carries based on internal heuristics
-                        #       none                   : Do not infer carries
-                        #       -no_dsp                  : Do not use DSP blocks to implement multipliers and associated logic
-                        #       -no_bram                 : Do not use Block RAM to implement memory components
-                        #       -fast                    : Perform the fastest synthesis. Don't expect good QoR.
-                        #       -no_simplify             : Do not run special simplification algorithms in synthesis. 
-                        #       -clke_strategy <strategy>: Clock enable extraction strategy for FFs:
-                        #       early                  : Perform early extraction
-                        #       late                   : Perform late extraction
-                        #       -cec                     : Dump verilog after key phases and use internal equivalence checking (ABC based)
-
+                    #synth_options <option list>:
+                    #  -effort <level>            : Optimization effort level (high, medium, low)
+                    #        high                     : Most compute, generally impacting runtime (default)
+                    #        medium                   : Balanced compute
+                    #        low                      : least compute, least runtime
+                    #      -fsm_encoding <encoding>   : FSM encoding (binary, onehot)
+                    #        binary                   : Compact encoding - using minimum of registers to cover the N states
+                    #        onehot                   : One hot encoding - using N registers for N states (default)
+                    #      -carry <mode>              : Carry logic inference mode (all, auto, none)
+                    #        all                      : Infer as much as possible
+                    #        auto                     : Infer carries based on internal heuristics (default)
+                    #        none                     : Do not infer carries
+                    #      -clke_strategy <strategy>  : Clock enable extraction strategy for FFs (early, late)
+                    #        early                    : Perform early extraction (default)
+                    #        late                     : Perform late extraction
+                    #      -fast                      : Perform the fastest synthesis. QoR can be impacted
+                    #      -no_flatten                : Do not flatten design
+                    #      -no_simplify               : Do not run special simplification algorithms in synthesis
+                    #      -no_tribuf                 : Do not preserve I/O tristates
+                    #      -no_adder                  : Do not infer adders
+                    #      -inferred_io               : Automatic I/O inference (Default false for eFPGA)
+                    #      -no_inferred_io            : No automatic I/O inference (Default true for FPGA)
+                    #      -no_sat                  : Disable SAT solver
+                    #      -init_registers <int>    : Force initialization of uninitialized registers
+                    #        0                      : '0' value means initialize with '0' (Default '0' is used)
+                    #        1                      : '1' value means initialize with '1'
+                    #        2                      : '2' value means leave it uninitialized
+                    
 pin_loc_assign_method=""  #pin_loc_assign_method <Method>: Method choices:
                           #      in_define_order(Default), port order pin assignment
                           #      random , random pin assignment
